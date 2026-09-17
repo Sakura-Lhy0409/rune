@@ -50,30 +50,10 @@ public enum ToolScheduler {
     public typealias PathExtractor = @Sendable (ToolCall, ToolSpec) -> [VFSPath]
 
     /// 默认提取器：查常见键名 + 解析补丁正文
-    public static let defaultPaths: PathExtractor = { call, spec in
-        guard let obj = try? call.arguments().objectValue else { return [] }
-        var paths: [VFSPath] = []
-
-        for key in ["path", "file", "file_path", "target", "source", "destination", "to"] {
-            if let raw = obj[key]?.stringValue, let p = VFSPath.parseOrNil(raw) {
-                paths.append(p)
-            }
-        }
-        // 数组形式的路径（例如 glob 的 roots、批量操作）
-        for key in ["paths", "files", "targets"] {
-            if let arr = obj[key]?.arrayValue {
-                for item in arr {
-                    if let raw = item.stringValue, let p = VFSPath.parseOrNil(raw) {
-                        paths.append(p)
-                    }
-                }
-            }
-        }
-        // 补丁正文里的文件段（**这是最容易被漏掉的一类**）
-        if let patchText = obj["patch"]?.stringValue, let patch = try? Patch.parse(patchText) {
-            paths.append(contentsOf: patch.files.map(\.path))
-        }
-        return paths
+    ///
+    /// 注意它**不需要 ToolSpec**（真正用到的是参数本身），所以拆出了 `CallPaths` 供其他模块复用。
+    public static let defaultPaths: PathExtractor = { call, _ in
+        CallPaths.extract(from: call)
     }
 
     // MARK: 结果
@@ -250,5 +230,46 @@ public enum ToolScheduler {
     /// 路径是否重叠：相等，或一个是另一个的祖先（写目录会影响其下所有文件）
     public static func pathsOverlap(_ a: VFSPath, _ b: VFSPath) -> Bool {
         a.isWithin(b) || b.isWithin(a)
+    }
+}
+
+// MARK: - 调用路径提取
+//
+// 独立成类型（而不是只作为 `ToolScheduler` 的内部闭包）是因为**多个模块都需要它**：
+// 调度器用它做冲突检测、策略引擎用它做范围判定、审批代理用它决定"记住选择"的精确范围。
+// 三处用不同的实现会出问题——尤其审批代理：
+// **忘了传路径会让"记住选择"退化成整个工具的白名单**（比用户以为的范围大得多）。
+
+public enum CallPaths {
+
+    /// 常见路径参数键名
+    public static let pathKeys = ["path", "file", "file_path", "target", "source", "destination", "to"]
+    /// 数组形式的路径参数键名
+    public static let pathArrayKeys = ["paths", "files", "targets"]
+
+    /// 提取**全部**受影响路径（不需要 ToolSpec）
+    public static func extract(from call: ToolCall) -> [VFSPath] {
+        guard let obj = try? call.arguments().objectValue else { return [] }
+        var paths: [VFSPath] = []
+
+        for key in pathKeys {
+            if let raw = obj[key]?.stringValue, let p = VFSPath.parseOrNil(raw) {
+                paths.append(p)
+            }
+        }
+        for key in pathArrayKeys {
+            if let arr = obj[key]?.arrayValue {
+                for item in arr {
+                    if let raw = item.stringValue, let p = VFSPath.parseOrNil(raw) {
+                        paths.append(p)
+                    }
+                }
+            }
+        }
+        // 补丁正文里的文件段（**这是最容易被漏掉的一类**）
+        if let patchText = obj["patch"]?.stringValue, let patch = try? Patch.parse(patchText) {
+            paths.append(contentsOf: patch.files.map(\.path))
+        }
+        return paths
     }
 }

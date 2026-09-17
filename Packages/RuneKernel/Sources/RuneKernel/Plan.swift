@@ -77,8 +77,13 @@ public struct PlanStep: Sendable, Codable, Hashable, Identifiable {
     public let id: UUID
     public var title: String
     public var kind: StepKind
-    /// 预计用到哪些工具（**用于提前申请权限**）
+    /// 预计用到哪些工具（**用于提前批量申请权限**）
     public var toolHints: [String]
+    /// 预计会触碰哪些路径（**批量授权的精确范围**）。
+    ///
+    /// ⚠️ 没有它就只能退化成"把整个工作区都授权给它"——那是最粗的一种授权。
+    /// 有了它，用户看到的是"这一步只会写 `/workspace/src/**`"，而不是"允许它随便写"。
+    public var pathHints: [VFSPath]
     public var status: StepStatus
     public var checkpointID: UUID?
     /// 该步骤产出的制品
@@ -89,6 +94,7 @@ public struct PlanStep: Sendable, Codable, Hashable, Identifiable {
         title: String,
         kind: StepKind,
         toolHints: [String] = [],
+        pathHints: [VFSPath] = [],
         status: StepStatus = .pending,
         checkpointID: UUID? = nil,
         artifacts: [UUID] = []
@@ -97,6 +103,7 @@ public struct PlanStep: Sendable, Codable, Hashable, Identifiable {
         self.title = title
         self.kind = kind
         self.toolHints = toolHints
+        self.pathHints = pathHints
         self.status = status
         self.checkpointID = checkpointID
         self.artifacts = artifacts

@@ -102,7 +102,7 @@ public enum TrustDial: String, Sendable, Codable, Hashable, CaseIterable {
 /// 设计取舍（docs/08 §5.3）：**不能所有事都弹同一个确认框** ——
 /// 那会让用户对所有确认都无脑点"允许"，安全模型就废了。
 /// 因此按风险分级：低风险不打扰、高风险要看清、不可逆要生物识别。
-public enum ApprovalRequirement: String, Sendable, Hashable, CaseIterable {
+public enum ApprovalRequirement: String, Sendable, Codable, Hashable, CaseIterable {
     /// 不需要审批
     case none
     /// 卡片内联"允许一次"（3 秒后自动允许，可撤销）
