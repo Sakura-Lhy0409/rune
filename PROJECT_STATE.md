@@ -31,18 +31,18 @@
 | 项 | 值 |
 |---|---|
 | **更新日期** | 2026-09-17 |
-| **当前阶段** | **M0 地基** |
-| **当前里程碑** | M0-5：`PolicyEngine` 策略引擎（纯逻辑） |
-| **上一个完成的里程碑** | ✅ **M0-4：网关纯逻辑（ToolCallAssembler + JSONRepair + ProviderQuirks + 成本计算）**（212 测试全绿） |
-| **已完成里程碑** | ✅ M0-1 Kernel（85）→ ✅ M0-2 补丁引擎（122）→ ✅ M0-3 检索（172）→ ✅ M0-4 网关纯逻辑（**212**） |
+| **当前阶段** | **M0 地基（收尾）** |
+| **当前里程碑** | M0-6：**M0 出口验收**（用 cassette 回放模拟模型，跑通"自主修一个失败单测 + 中途被杀后恢复"） |
+| **上一个完成的里程碑** | ✅ **M0-5：`PolicyEngine` 策略引擎**（249 测试全绿） |
+| **已完成里程碑** | ✅ M0-1 Kernel（85）→ ✅ M0-2 补丁（122）→ ✅ M0-3 检索（172）→ ✅ M0-4 网关（212）→ ✅ **M0-5 策略引擎（249）** |
 | **阻塞项** | 无 |
-| **本机可验证范围** | ✅ 平台无关的 Swift 代码（Kernel / 补丁 / 检索 / 网关逻辑 / 策略引擎）<br>❌ iOS 专属（UI / Live Activity / Core ML / VFS 真实文件系统 / 沙箱 / GRDB）—— 需 macOS |
+| **本机可验证范围** | ✅ 平台无关的 Swift 代码（Kernel / 补丁 / 检索 / 网关 / **策略**）<br>❌ iOS 专属（UI / Live Activity / Core ML / VFS 真实文件系统 / 沙箱 / GRDB）—— 需 macOS |
 
 ### 进度条
 
 ```
 设计文档      ████████████████████ 100%
-M0 地基       █████████████████░░░  85%   ← 当前
+M0 地基       ███████████████████░  95%   ← 当前（只剩出口验收）
 M1 可用内核   ░░░░░░░░░░░░░░░░░░░░░   0%
 M2 移动体验   ░░░░░░░░░░░░░░░░░░░░░   0%
 M3 多渠道     ░░░░░░░░░░░░░░░░░░░░░   0%
@@ -109,6 +109,7 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 | 09-17 | **写权限不蕴含删除权限** | 删除的破坏性远大于写入，不能因为"能写"就"能删"。`fsWrite` 蕴含读，但不蕴含 delete；delete 必须显式授权 |
 | 09-17 | 错误模型按"**谁来处理**"分类（transient/budget/capability/approval/sandbox/model/fatal/userAbort） | 分类的唯一目的是决定：自动重试 / 暂停存检查点 / 直接拒绝 / 请求审批 / 让模型自我修正 / 引导修复 / 静默 |
 | 09-17 | 事件 payload 用 `JSONValue` 而非强类型 | **新增事件类型不需要改表结构** —— 这是事件溯源在移动端的关键工程优势（schema 演进成本极低） |
+| 09-17 | **读 `/sys` 不需要能力令牌** | `/sys` 是运行时自己暴露的元数据（版本、设备能力、限额、已授予能力清单），不是用户数据。模型需要它来判断"我还能做什么"，若也要授权就是纯粹的摩擦。**但写 `/sys` 一律拒绝。** |
 
 ---
 
@@ -148,6 +149,12 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 | C7.2 | ├ `ToolCallAssembler`（分片拼装） | 同上 | 四种协议形态；**并行 index 交错**；7 种脏情况；**绝不重复产出**；诊断可观测 |
 | C7.3 | ├ `ProviderQuirks`（渠道差异声明） | `ProviderQuirks.swift` | 协议族 / 思考链字段 / **回传策略** / 缓存风格 / 流式用量 / 坑清单（UI 可展示） |
 | C7.4 | └ `CostCalculator`（缓存经济学） | 同上 | 缓存读 0.1× / 写 1.25× / 低谷折扣 / 长上下文倍率 / **省下多少钱**（正反馈） |
+| C8 | ✅ **`PolicyEngine` 策略引擎** | `PolicyEngine.swift` | **37 项新测试**（累计 249 全绿） |
+| C8.1 | ├ `TrustDial`（信任刻度盘五档） | 同上 | 能力边界递增、**每档自带"允许做什么"说明**、人类专属 |
+| C8.2 | ├ `ApprovalRequirement`（审批分级） | 同上 | 无需/内联/一键/看细节/生物识别/生物识别+确认词；**哪些可"记住"** |
+| C8.3 | ├ `HumanOnlyZoneDetector` | 同上 | 凭据/策略/审计/信任档/哈希锚点；**任何信任档都拒绝写**；拒绝说明可执行 |
+| C8.4 | ├ `EgressGuard`（SSRF 防护） | 同上 | 私有网段（含 **169.254.169.254 云元数据**）/ scheme 白名单 / **重定向链逐跳校验** |
+| C8.5 | └ `PolicyEngine.evaluate`（六层判定） | 同上 | 人类专属区 → 信任档 → 能力令牌 → SSRF → **污点** → 风险分级审批 |
 
 ---
 
@@ -155,33 +162,31 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 
 | 项 | 状态 | 备注 |
 |---|---|---|
-| M0-5 策略引擎 | 🚧 即将开始 | 见 §7 第 1 项（M0 的最后一块纯逻辑） |
-| M0 出口验收 | ⬜ 未开始 | 需要"模拟模型"（cassette 回放），见 §7 第 3 项 |
+| M0-6 出口验收 | 🚧 即将开始 | 见 §7 第 1 项 —— **M0 的最后一步** |
+| 设计文档一致性复核 | ⬜ 未开始 | 见 §7 第 3 项 |
 
 ---
 
 ## 7. 下一步（按优先级，可直接执行）
 
-### 立即（M0-5，纯逻辑、本机可测，**M0 的最后一块纯逻辑**）
-1. **`PolicyEngine`**（放在 `RuneKernel` 内）：
-   - `ToolSpec.requirements` × `CapabilityToken.scopes` → `CapabilityDecision`（allowed / requiresApproval / denied / humanOnly）
-   - **人类专属区**判定（策略文件 / 信任档 / 凭据 / 审计日志 → 任何来源都拒绝 + 记录安全事件）
-   - **污点规则**：不可信内容派生的动作（URL / 命令 / 路径）→ 强制确认，**即使该域名已在令牌内**
-   - 审批分级（低=内联允许 / 中=一键 / 高=展示细节 / 极高=生物识别 / 不可逆=生物识别 + 确认词）
-   - 出口校验（含 SSRF 防护：私有网段、DNS 重绑定、重定向链）
+### 立即（M0-6：M0 出口验收 —— 这一步做完 M0 就结束了）
+1. **最小 Agent 循环 + cassette 回放**（放在 `RuneKernel` 或新建 `RuneCore` 的可测壳里）：
+   - 一个 `MockModelProvider`：按预设脚本产出 `ModelEvent` 序列（含工具调用、分片、脏情况）
+   - 串起已有的零件：`GrepEngine` 找文件 → `Patch` 改代码 → `PolicyEngine` 判定 → `ToolCallAssembler` 拼装
+   - **验收标准（docs/14 M0）**：在测试壳里跑通"读 → 改 → 跑测试"，并在**中途被杀后从检查点正确恢复**
+   - ⚠️ **不联网、不花钱**：全部用回放，这也正是将来 CI 的做法
+2. **检查点与三步落盘协议的纯逻辑**：把 `docs/10 §2.2` 的"先记意图 → 执行 → 再记事实"做成可测的状态机
+   （目前 `Event` 与 `Checkpoint` 类型已就位，缺的是驱动它的状态机）。
 
 ### 随后（M0 收尾）
-2. **路由策略与降级链**：任务类型 → 模型（`ProviderQuirks` 驱动）；**降级必须对用户可见**。
-3. **M0 出口验收**：在测试壳里跑通"模型自主修一个失败单测 + 中途被杀后正确恢复"。
-   ⚠️ 必须用**模拟模型（cassette 回放）**，不在 CI 里联网花钱。
-4. **设计与实现的一致性复核**：把实现中做出的新决策回写进对应设计文档
-   （已知待回写：**写权限不蕴含删除权限** → `docs/09`）。
+3. **设计与实现的一致性复核**：把实现中做出的新决策回写进设计文档
+   （已知待回写：**写权限不蕴含删除权限** → `docs/09`；**读 `/sys` 免令牌** → `docs/09`）。
 
 ### 需要 macOS 才能做（不要在 Windows 上浪费时间）
-5. `RuneStore`（GRDB + 迁移 + 哈希链落盘）—— ⚠️ FTS5 必须用 CJK 分词器或 `trigram`
-6. `RuneNet`（SSE 解析 + 断流重连 + 出口代理）
-7. `RuneBench`（VFS 真实文件系统映射 + security-scoped bookmark + 原生 CPython 集成）
-8. `RuneVM`（WasmKit 沙箱）
+4. `RuneStore`（GRDB + 迁移 + 哈希链落盘）—— ⚠️ FTS5 必须用 CJK 分词器或 `trigram`
+5. `RuneNet`（SSE 解析 + 断流重连 + 出口代理）
+6. `RuneBench`（VFS 真实文件系统映射 + security-scoped bookmark + 原生 CPython 集成）
+7. `RuneVM`（WasmKit 沙箱）
 10. 任何 SwiftUI / Live Activity / Core ML
 
 ---
@@ -253,7 +258,7 @@ D:\项目\ios平台agent\          （构建时请用 C:\Users\MSI-NB\rune-ws）
 │  └─ 附录A / 附录B          渠道事实表 / 技术选型核实表
 ├─ research/                 取证材料（465 份，非交付物）
 └─ Packages/
-   ├─ RuneKernel/            ✅ 零依赖核心（172 测试全绿）
+   ├─ RuneKernel/            ✅ 零依赖核心（**249 测试全绿**）
    │  ├─ Package.swift       （仅供 macOS 使用；本机走 rune.ps1）
    │  ├─ Sources/RuneKernel/
    │  │   ├─ JSONValue.swift      手写 JSON 解析 + 确定性序列化
@@ -270,14 +275,16 @@ D:\项目\ios平台agent\          （构建时请用 C:\Users\MSI-NB\rune-ws）
    │  │   ├─ IgnoreRules.swift    ⭐ gitignore 语义 + 两层 PathFilter
    │  │   ├─ GrepEngine.swift     ⭐ 搜索核心（预筛 / 二进制跳过 / 预算截断）
    │  │   ├─ ToolCallAssembler.swift ⭐ 流式工具调用拼装 + JSON 修复
-   │  │   └─ ProviderQuirks.swift    ⭐ 渠道差异声明 + 价格与成本计算
+   │  │   ├─ ProviderQuirks.swift    ⭐ 渠道差异声明 + 价格与成本计算
+   │  │   └─ PolicyEngine.swift      ⭐ 信任刻度盘 + 审批分级 + SSRF + 人类专属区
    │  └─ Tests/RuneKernelTests/
    │      ├─ JSONAndHashingTests.swift
    │      ├─ SecurityTests.swift
    │      ├─ RuntimeModelTests.swift
    │      ├─ PatchTests.swift         37 项补丁引擎测试
    │      ├─ SearchTests.swift        50 项检索测试
-   │      └─ GatewayTests.swift       40 项网关测试
+   │      ├─ GatewayTests.swift       40 项网关测试
+   │      └─ PolicyTests.swift        37 项策略引擎测试
    └─ Rune{Net,Store,VM,Bench,Gateway,Context,Core,Tools,MCP,UI}/   ⬜ 骨架（含实现清单）
 ```
 
@@ -293,3 +300,4 @@ D:\项目\ios平台agent\          （构建时请用 C:\Users\MSI-NB\rune-ws）
 | **M3** | 切换任意两家渠道，同一任务成功率差异 <15% |
 | **M4** | 飞行模式下完成"改函数 + 跑测试 + 写 commit"全流程 |
 | **M5** | 注入套件 0 越权 + 性能基准全达标 + 审核材料齐备 |
+
