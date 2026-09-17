@@ -1,0 +1,281 @@
+Web Distribution in the EU - Support - Apple Developer
+' />
+View in English
+Apple Developer
+Get Started
+Explore Get Started
+Overview
+Learn
+Apple Developer Program
+Stay Updated
+Latest News
+Hello Developer
+Platforms
+Explore Platforms
+Apple Platforms
+iOS
+iPadOS
+macOS
+tvOS
+visionOS
+watchOS
+App Store
+Featured
+Design
+Distribution
+Games
+Accessories
+Web
+Home
+CarPlay
+Technologies
+Explore Technologies
+Overview
+Xcode
+Swift
+SwiftUI
+Featured
+Accessibility
+AI &amp; Machine Learning
+App Intents
+Apple Intelligence
+Games
+Security
+Xcode Cloud
+Community
+Explore Community
+Overview
+Meet with Apple events
+Community events
+Developer Forums
+Open Source
+Featured
+WWDC
+Swift Student Challenge
+Developer Stories
+App Store Awards
+Apple Design Awards
+Apple Developer Centers
+Documentation
+Explore Documentation
+Documentation Library
+Technology Overviews
+Sample Code
+Human Interface Guidelines
+Videos
+Release Notes
+Featured Updates
+iOS
+iPadOS
+macOS
+watchOS
+visionOS
+tvOS
+Xcode
+Downloads
+Explore Downloads
+All Downloads
+Operating Systems
+Applications
+Design Resources
+Featured
+Xcode
+TestFlight
+Fonts
+SF Symbols
+Icon Composer
+Support
+Explore Support
+Overview
+Help Guides
+Developer Forums
+Feedback Assistant
+Contact Us
+Featured
+Account Help
+App Review Guidelines
+App Store Connect Help
+Upcoming Requirements
+Agreements and Guidelines
+System Status
+Quick Links
+Events
+News
+Forums
+Sample Code
+Videos
+&nbsp;
+-->
+Support
+Open Menu
+Close Menu
+Overview
+Guides
+Agreements and Guidelines
+Contact Us
+Web Distribution in the EU
+Web Distribution lets authorized developers distribute their iOS and iPadOS apps to users in the European Union (EU) directly from a website owned by the developer. Apple provides access to APIs that facilitate the distribution of developers’ apps from the web, integrate with system functionality, back up and restore users’ apps, and more. Apps offered through Web Distribution must meet Notarization requirements to protect platform integrity, like all iOS and iPadOS apps, and can only be installed from a website domain that the developer has registered in App Store Connect. These capabilities are available to EU users on devices running a minimum of iOS&nbsp;17.5 or iPadOS&nbsp;18.
+Using App Store Connect, developers can easily download signed binary assets and host them on their website for distribution. When installing an app, a system sheet will display information that developers have submitted to Apple for review, like the app name, developer name, app description, screenshots, and system age rating.
+Eligibility and requirements
+Distributing apps directly from a website requires responsibility for and oversight of the user experience, including the ability to manage apps and provide customer support and refunds. Apple will authorize developers after meeting specific criteria and committing to ongoing requirements that help protect users.
+If you’re interested in using Web Distribution, the Account Holder of your Apple Developer Program membership will first need to agree to the latest Apple Developer Program License Agreement. Once you’ve agreed, you can
+submit a request for access
+. To qualify, your organization must:
+Only offer apps from your developer account.
+Be responsive to communications from Apple regarding your apps distributed through Web Distribution, particularly regarding any fraudulent, malicious, or illegal behavior, or anything else that Apple believes impacts the safety, security, or privacy of users.
+Publish transparent data collection policies and offer users control over how their data is collected and used.
+Follow applicable laws of the jurisdictions where you operate (for example, the Digital Services Act, the General Data Protection Regulation, and consumer protection laws).
+Be responsible for handling governmental and other requests regarding your apps.
+Meet one of the following eligibility criteria:
+Fee waiver.
+You’re a nonprofit organization, accredited educational institution, or government entity which has been approved for an Apple Developer Program fee waiver.
+Global Business Ranking (GBR) score from Dun &amp; Bradstreet (D&amp;B) rating.
+Your organization’s GBR score from D&amp;B qualifies you for the “Low Risk” or “Below Average Risk” categories.
+Stock exchange listing.
+Your organization is publicly traded or is part of a corporate group that is publicly traded, on a stock exchange listed on the World Federation of Exchanges (WFE), or an exchange operated by Euronext.
+Venture capital funding.
+Your organization is funded by a venture capital firm listed on the Midas List, Midas List Europe, Invest Europe, or the HEC-Dow Jones Venture Capital Performance Ranking. There is no minimum funding amount required.
+Stand-by letter of credit.
+Provide Apple with a stand-by letter of credit in the amount of USD 1,000,000 (or the equivalent in local currency) from a financial institution that’s at least “BBB-” rated or equivalent by S&amp;P, Fitch, or Moody’s, and maintain that stand-by letter of credit for at least 6 months after your app is available to customers.
+Financial audit.
+Provide Apple with confirmation of a financial audit with an unqualified and unmodified opinion conducted within the last three years by an accredited accounting or assurance firm, such as one under the EU Statutory Audit Directive. Apple will not assess your financial standing or the value of your assets.
+One million first annual installs worldwide.
+Be enrolled in the Apple Developer Program in good standing for two continuous years or more, and have an app that had more than one million first annual installs worldwide on iOS and/or iPadOS in the prior calendar year.
+Transaction reporting, commissions, and taxes
+Transaction reporting.
+Developers who distribute their apps using Web Distribution are responsible for
+reporting their transactions
+of digital goods or services to Apple, including those that didn’t result in a sale.
+Commissions.
+All transactions are subject to the Core Technology Commission (CTC) of 5%. The CTC covers the following types of transactions:
+Sales of digital goods and services within apps distributed via Web Distribution.
+Sales of digital goods or services (including one-time purchases and auto-renewing subscriptions) required to download or access apps distributed via Web Distribution, including paid subscriptions to access or download app content.
+Sales when apps distributed via Web Distribution direct users to offers and promotions available outside of the app with actionable links that open in a web browser to a website for the purchase of digital goods and services. Only sales made within 7 days of the link tap are subject to this commission.
+Taxes.
+The commission applies to the total price payable by each user, less any transaction taxes. You are responsible for the collection and remittance of any applicable taxes. It is your responsibility to collect, report, and remit any required tax to the appropriate tax authorities for transactions that take place using Web Distribution.
+Transition to the unified EU terms
+You can request access for Web Distribution now. If approved, the capability will be issued to your account on October&nbsp;1, 2026.
+If you need access sooner, you can apply using the “One million first annual installs worldwide” option and agree to the Alternative Terms Addendum for Apps in the EU. Note that as Apple moves to a unified business model in the EU for all developers, the Alternative Terms Addendum is being phased out. Starting October&nbsp;1, 2026, it will be superseded by Attachment 14 of the Apple Developer Program License Agreement.
+To move to the unified EU terms before then, you’ll need to agree to the updated Apple Developer Program License Agreement. Once you do, your account will be subject to the unified EU terms starting October&nbsp;1, 2026, or the date you agree, whichever is later. If you owe Apple fees or commissions accrued under the discontinued agreement, you’ll remain responsible for paying those amounts.
+Documentation and resources
+Distributing your app from your website
+App Store Connect Help: Submit for Notarization
+Reporting tokens and transactions to Apple
+Reporting transactions for the Core Technology Commission
+Update on apps distributed in the European Union
+Submit your
+feedback
+Ask questions on the&nbsp;forums
+Contact Apple Developer&nbsp;Support
+Developer Footer
+Support
+Web Distribution in the EU
+Platforms
+Open Menu
+Close Menu
+iOS
+iPadOS
+macOS
+tvOS
+visionOS
+watchOS
+App Store
+Tools
+Open Menu
+Close Menu
+Swift
+SwiftUI
+Swift Playground
+TestFlight
+Xcode
+Xcode Cloud
+Icon Composer
+SF Symbols
+Technologies
+Open Menu
+Close Menu
+Accessibility
+Accessories
+AI & Machine Learning
+Apple Intelligence
+Audio &amp; Video
+Augmented Reality
+Business
+Design
+Distribution
+Education
+Games
+Health &amp; Fitness
+In-App Purchase
+Localization
+Maps &amp; Location
+Security
+Safari &amp; Web
+Resources
+Open Menu
+Close Menu
+Documentation
+Downloads
+Sample Code
+Videos
+Documentation Archive
+Support
+Open Menu
+Close Menu
+Help Guides & Articles
+Contact Us
+Forums
+Feedback & Bug Reporting
+System Status
+Account
+Open Menu
+Close Menu
+Apple Developer
+App Store Connect
+Certificates, IDs, &amp; Profiles
+Feedback Assistant
+Programs
+Open Menu
+Close Menu
+Apple Developer Program
+Apple Developer Enterprise Program
+App Store Small Business Program
+MFi Program
+Mini Apps Partner Program
+News Partner Program
+Video Partner Program
+Security Bounty Program
+Security Research Device Program
+Events
+Open Menu
+Close Menu
+Meet with Apple
+Apple Developer Centers
+App Store Awards
+Apple Design Awards
+Apple Developer Academies
+WWDC
+Read the
+latest news
+.
+Get the
+Apple Developer app
+.
+Follow us on
+bilibili
+,
+LinkedIn
+,
+WeChat
+, and
+YouTube
+.
+Light
+Dark
+Auto
+Copyright ©  2026
+Apple Inc.
+All rights reserved.
+Terms of Use
+Privacy Policy
+Agreements and Guidelines

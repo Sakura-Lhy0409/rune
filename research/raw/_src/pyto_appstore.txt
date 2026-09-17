@@ -1,0 +1,588 @@
+‎Pyto IDE App - App Store
+Search
+Today
+Games
+Apps
+Arcade
+Platform
+iPhone
+iPad
+Mac
+Vision
+Watch
+TV
+Pyto IDE
+Python, C/C++
+Free · In‑App Purchases · Designed for iPad
+Share
+997 Ratings
+3.7
+Age Rating
+4+
+Years
+Chart
+#48
+Developer Tools
+Developer
+Develobile S.p.A.
+Language
+EN
++ 3 More
+Size
+975.7
+MB
+iPhone, iPad, Apple Watch
+Pyto is an IDE for iPhone and iPad with a Python 3.10 Interpreter and all of the standard libraries plus more than 100 third party packages, as well as a C &amp; C++ compiler and bitcode interpreter. Includes a terminal with standard UNIX commands, a code editor with code completion, support for Shortcuts, Picture in Picture, a graphical interface builder and a debugger.
+* Full version exclusive third party modules *
+- Cython, cryptography, typed_ast, cv2, _cffi_backend, kiwisolver, matplotlib, numpy, pandas, lxml, Bio, sklearn, skimage, scipy, erfa, pywt, nacl, bcrypt, statsmodels, zmq, regex, gensim, astropy, emd, wasm3, yaml
+* Built-in UNIX commands *
+- alias, awk, cat, chflags, chmod, cksum, clang, compress, cp, curl, date, diff, dig, du, egrep, env, fgrep, find, grep, gunzip, gzip, head, host, ifconfig, link, lli, llvm-link, ln, ls, md5, mkdir, mv, nc, nslookup, open, openurl, pbcopy, pbpaste, ping, printenv, pwd, readlink, rlogin, rm, rmdir, say, scp, sed, sftp, sort, ssh, ssh-keygen, stat, sum, tail, tar, tee, telnet, touch, tr, unalias, uname, uncompress, uniq, unlink, uptime, wc, whoami, whois, wol
+Take advantage system features with the following modules:
+- pyto_ui - Build an user interface
+- widgets - Home Screen Widgets
+- file_system - iOS file system
+- notifications - Schedule notifications
+- remote_notifications - Receive remote notifications
+- background - Run code in background
+- pasteboard - Clipboard access
+- userkeys - Save values on disk
+- sound - Play sounds
+- music - Access the Apple Music library
+- photos - Accessing photos and the camera
+- location - Access user's location
+- motion - Motion sensors
+- multipeer - Peer to peer wireless connection
+- apps - Open third party apps
+- xcallback - Interact with other apps
+- sf_symbols - A list of SF Symbols names
+- watch - Complications and static user interfaces for the Apple Watch
+more
+Ratings &amp; Reviews
+3.7
+out of 5
+997 Ratings
+Great, if it worked offline.
+06/07/2022
+1ydia
+First of all, regarding the title, this app works well, but it has an odd habit of asking me to purchase it— again, even though I’ve already purchased it. I need to restore the purchase by going online, which is an issue on my ipad.Other than that, feels professional. It’s easy enough to navigate tabs (I just wish you could go up the file tree), and it lets you make projects— not just single files— and structure them. Feels almost like a desktop application! Since I have a bluetooth keyboard, works even better. The only problem I have, again, is the restore purchase issue which is annoying, especially since it happens every time I open the app.I will update this review if it’s fixed.
+Great, if it worked offline.
+06/07/2022
+1ydia
+First of all, regarding the title, this app works well, but it has an odd habit of asking me to purchase it— again, even though I’ve already purchased it. I need to restore the purchase by going online, which is an issue on my ipad.Other than that, feels professional. It’s easy enough to navigate tabs (I just wish you could go up the file tree), and it lets you make projects— not just single files— and structure them. Feels almost like a desktop application! Since I have a bluetooth keyboard, works even better. The only problem I have, again, is the restore purchase issue which is annoying, especially since it happens every time I open the app.I will update this review if it’s fixed.
+Love the app.  Bugs happen.  Where to report them?
+10/02/2019
+AI Architect
+I really like this app.  I write Python for machine learning applications for a living and having this tool on my iPhone and iPad 4 mini has become a true delight.  I've encountered a weird problem with loading csv files.  I have many csv files for testing a program, which I load one at a time.  Some load but most are viewed by Pyto as nonexistent.  I've deleted and recreated them multiple times without success.  Where do I report errors like this?Not to bring completion to the discussion but I've also been using Pythonista3.  I'm disappointed that they have far less module and library support than Pyto but I have no issue loading csv files as I need to.  Only saying I know it's not the files. Help :)The fact that Pyto seems more concerned about delivering  comprehensive functionality makes me smile for sure.  Keep it up :). I'll remain loyal !
+Developer Response
+Hi,Thanks for the review. For reporting bugs, you can do it in GitHub: https://github.com/ColdGrub1384/Pyto/issues or by sending an email to adrian@labbe.me. The problem with loading external files from a script is probably that Pyto doesn’t have permission to read them or maybe they aren’t downloaded. Are all the CSV files in the same directory? If so, go the Files app and check if the files are downloaded and open them to download the files. If they aren’t in the same directory, maybe Pyto doesn’t have permission to read the directory where some CSV files are. To fix that, open the script that will be executed, press the Settings icon at bottom, press “Current Directory” and if the current directory isn’t readable, press “Change”. You don’t really need to change it but just confirm the directory because that’s how iOS gives permission to the app to access the folder.
+Love the app.  Bugs happen.  Where to report them?
+10/02/2019
+AI Architect
+I really like this app.  I write Python for machine learning applications for a living and having this tool on my iPhone and iPad 4 mini has become a true delight.  I've encountered a weird problem with loading csv files.  I have many csv files for testing a program, which I load one at a time.  Some load but most are viewed by Pyto as nonexistent.  I've deleted and recreated them multiple times without success.  Where do I report errors like this?Not to bring completion to the discussion but I've also been using Pythonista3.  I'm disappointed that they have far less module and library support than Pyto but I have no issue loading csv files as I need to.  Only saying I know it's not the files. Help :)The fact that Pyto seems more concerned about delivering  comprehensive functionality makes me smile for sure.  Keep it up :). I'll remain loyal !
+Developer Response
+10/04/2019
+Hi,Thanks for the review. For reporting bugs, you can do it in GitHub: https://github.com/ColdGrub1384/Pyto/issues or by sending an email to adrian@labbe.me. The problem with loading external files from a script is probably that Pyto doesn’t have permission to read them or maybe they aren’t downloaded. Are all the CSV files in the same directory? If so, go the Files app and check if the files are downloaded and open them to download the files. If they aren’t in the same directory, maybe Pyto doesn’t have permission to read the directory where some CSV files are. To fix that, open the script that will be executed, press the Settings icon at bottom, press “Current Directory” and if the current directory isn’t readable, press “Change”. You don’t really need to change it but just confirm the directory because that’s how iOS gives permission to the app to access the folder.
+Crashing
+05/12/2021
+PTLion
+You can find lots of feedback online regarding Pyto crashing in many different ways. Right out of the gate, it crashed as I opened a file thru Working Copy (git), and immediately it lost knowledge about the 3~days trial and I had to accept the trial once again. A couple of files later it locked up, and I had to restart it. It now regularly crashes when a file is opened from Working Copy, sometimes the file is not opened in the Pyto editor, and sometimes Pyto crashes when executing a script.This is way too unstable for my (any?) use. And note, I don’t mind paying for the pro version, but an app, especially an editor, needs to be rock stable for practical uses, functionality is worth nothing in a constantly crashing app.Final comment: my iOS is fully up-to-date, was rebooted and I am using latest Pyto version. The app also crash in multiple ways. I don’t think this is a single minor bug fix, rather a fundamental problem that will require a ground up redesign of the app before it can stabilize.
+Crashing
+05/12/2021
+PTLion
+You can find lots of feedback online regarding Pyto crashing in many different ways. Right out of the gate, it crashed as I opened a file thru Working Copy (git), and immediately it lost knowledge about the 3~days trial and I had to accept the trial once again. A couple of files later it locked up, and I had to restart it. It now regularly crashes when a file is opened from Working Copy, sometimes the file is not opened in the Pyto editor, and sometimes Pyto crashes when executing a script.This is way too unstable for my (any?) use. And note, I don’t mind paying for the pro version, but an app, especially an editor, needs to be rock stable for practical uses, functionality is worth nothing in a constantly crashing app.Final comment: my iOS is fully up-to-date, was rebooted and I am using latest Pyto version. The app also crash in multiple ways. I don’t think this is a single minor bug fix, rather a fundamental problem that will require a ground up redesign of the app before it can stabilize.
+Good, but broken by input()
+02/17/2022
+screw nicknamesssssssssssss
+Haven’t had any issues until today. Tried using input() function, and it causes the app to freak out.Specifically, it makes the console unusable until you restart the app AND run a script that doesn’t use input(). At least, that’s what I’m experiencing.By ‘freak out’, I mean it simply returns all text I type into the console without actually doing anything. The three &gt;&gt;&gt; are missing. So if I type “test = 4”, the console will return “test = 4” without any syntax highlighting. Upon typing something like “test” or “print(test)” to check the value/output, it simply returns those exact strings I had typed into the console immediately prior — “test” or “print(test)”, respectively.Sometimes, every time I type a character into the console (not even hitting Enter/Return, literally just typing), the console will output the current working directory. Like what?I’ll give credit where credit is due — This app is overall the best I’ve found for iPad, especially with Pythonista being seemingly abandoned by bad devs. However, Pyto certainly crashes a decent amount, and weird bugs like the one I’ve mentioned make me question how robust it really is.Definitely worth a download if you need a solution for iPad, but $10 is way too much for the amount of instability it has. In its current state, I’d say $2.99 would be more fair. Not saying every app should be free of bugs, but this is sheer instability and it’s very evident. For now, I’d stick to something like Spyder if you have access to a proper laptop/PC.I commend the devs for the work they’ve done, but I must lambast the price tag and tell you that your product has some serious issues. You know how it is.
+Good, but broken by input()
+02/17/2022
+screw nicknamesssssssssssss
+Haven’t had any issues until today. Tried using input() function, and it causes the app to freak out.Specifically, it makes the console unusable until you restart the app AND run a script that doesn’t use input(). At least, that’s what I’m experiencing.By ‘freak out’, I mean it simply returns all text I type into the console without actually doing anything. The three &gt;&gt;&gt; are missing. So if I type “test = 4”, the console will return “test = 4” without any syntax highlighting. Upon typing something like “test” or “print(test)” to check the value/output, it simply returns those exact strings I had typed into the console immediately prior — “test” or “print(test)”, respectively.Sometimes, every time I type a character into the console (not even hitting Enter/Return, literally just typing), the console will output the current working directory. Like what?I’ll give credit where credit is due — This app is overall the best I’ve found for iPad, especially with Pythonista being seemingly abandoned by bad devs. However, Pyto certainly crashes a decent amount, and weird bugs like the one I’ve mentioned make me question how robust it really is.Definitely worth a download if you need a solution for iPad, but $10 is way too much for the amount of instability it has. In its current state, I’d say $2.99 would be more fair. Not saying every app should be free of bugs, but this is sheer instability and it’s very evident. For now, I’d stick to something like Spyder if you have access to a proper laptop/PC.I commend the devs for the work they’ve done, but I must lambast the price tag and tell you that your product has some serious issues. You know how it is.
+What’s New
+Version History
+This app has been updated by Apple to prepare for watchOS 27 compatibility. No new features are included.
+- Fixed template project with UI
+19.0.1
+06/09/2024
+- Updated for iOS/iPadOS 17
+- New interface builder for PytoUI
+- Shell on the code editor and multiple tabs on the full screen terminal
+- New project templates for C/C++ extensions and standalone programs
+- Other new improvements to Pyto libraries
+- Bug fixes
+19.0
+06/03/2024
+Fixed an issue showing the purchase screen for people who have purchased Pyto when it was paid upfront.&nbsp;This was caused by the revocation of a certificate bundle within the app itself.
+If you have purchased it again as an In App Purchase, please request a refund to the App Store (https://support.apple.com/en-us/HT204084), this was not intended and I am very sorry for the inconvenience.
+18.0.12
+02/21/2023
+Fixed a bug with code completion on iPhone
+18.0.11
+07/28/2022
+Bug fixes
+18.0.10
+07/22/2022
+- Added a keyboard shortcut to hide suggestions: ESC or ⌘.
+- Added a button to hide suggestions
+- Bug fixes
+18.0.9
+07/21/2022
+Fixed the terminal for users without iCloud Drive
+18.0.8
+07/08/2022
+Fixed a crash
+18.0.7
+06/29/2022
+Fixed a crash when running scripts
+18.0.6
+06/24/2022
+Fixed matplotlib
+18.0.5
+06/07/2022
+Fixed cryptography
+18.0.3
+06/03/2022
+Fixed PyPI UI
+18.0.2
+05/13/2022
+- Fixed code completion problems
+- Fixed OpenCV missing
+18.0.1
+05/05/2022
+Terminal
+--------
+The REPL and the Shell were merged into a 'Terminal' section that can run UNIX commands or the Python interpreter. These commands can also be executed with the 'subprocess' module or 'os.system'.
+The shell will no longer recognize Python modules unless an entry point was specified in 'setup.py' or 'setup.cfg', so modules like 'pip' will be recognized. To run other modules, use 'python -m'.
+Good bye to the toolbar, the input is now directly written to the console.
+Pressing an image will open it in full screen.
+Code editor
+-----------
+On iPad, the suggestions, and now doc strings, are displayed under the cursor.
+Modules
+-------
+All third party modules scripts are now included inside the app bundle and don't need to be downloaded. This makes the app's size way bigger but I think it was a bad user experience to have to download scripts again because a library was updated even if the app was also updated.
+'sharing' and 'bookmarks' were merged into a 'file_system' module.
+File browser
+------------
+The file browser displays folders in a hierarchical way.
+There is a new template for setuptools projects.
+Documentation
+-------------
+You can now download the documentation for third party libraries included with the app and build your own documentations with Sphinx.
+PyPI
+----
+There is now a complete version of pip so it should now behave like it does on any computer (with the exception of C extensions of course). That makes it possible to run 'pip install .' to install your own projects.
+The PyPI section of the app now displays installed modules and also available upgrades.
+Shortcuts
+---------
+New shortcut: Run Command
+New parameters:
+- Working directory
+- sys.stdin
+18.0
+05/01/2022
+- Improved syntax highlighting
+- Bug fixes
+17.1.1
+12/31/2021
+- An UI for debugging scripts with breakpoints
+- Moved items from the editor's toolbar to a menu accessible from the top bar
+- The REPL now uses the same colors as the editor
+- Improved the module runner
+- Included the Python documentation in app
+- Bug fixes
+17.1
+12/30/2021
+- Upgraded to Python 3.10
+- Dropped iOS / iPadOS 13 support
+- A new UI without the system file browser
+- Run scripts in Picture in Picture
+- A new UI for tracebacks
+- Edit any kind of text file
+- Better UI for finding and replacing text in the editor
+- Build cross platform UIs with Toga
+- Add files as attachments to scripts running from Shortcuts
+- New pasteboard APIs to work with any type of data
+- sys.path, sys.argv and the working directory are no longer shared between all scripts
+- shutil.get_terminal_size() now always returns the size of the correct terminal
+- Show HTML files from the editor and add Python code in a script tag
+- Bug fixes
+17.0
+12/24/2021
+Bug fixes
+16.1.3
+07/05/2021
+Bug fixes
+16.1.2
+06/21/2021
+Multiple bug fixes
+16.1.1
+06/12/2021
+- The performance of the console was greatly improved
+- Bug fixes
+16.1
+05/21/2021
+Bug fixes
+16.0.2
+03/30/2021
+- Bug fixes
+- Fixed issues with 'cryptography'
+16.0.1
+02/09/2021
+This update brings support for M1 Macs
+16.0
+01/22/2021
+- There is now a search bar in the project navigator
+- Fixed 'webbrowser.open_url'
+15.0.4
+01/16/2021
+This app has been updated by Apple to prepare for watchOS 27 compatibility. No new features are included.
+- Fixed template project with UI
+more
+Version 19.0.1
+06/09/2024
+In-App Purchases
+3-day Trial
+Try the app during 3 days
+Get
+Lite Version
+Unlock Pyto without its 3rd party libraries
+$7.99
+Full Version
+Unlock Pyto with all its 3rd party libraries
+$14.99
+App Privacy
+App Privacy
+The developer,
+Develobile S.p.A.
+, indicated that the app’s privacy practices may include handling of data as described below. This information has not been verified by Apple. For more information, see the
+developer’s privacy policy
+.
+To help you better understand the developer’s responses, see
+Privacy Definitions and Examples
+.
+Privacy practices may vary, for example, based on the features you use or your age.
+Learn More
+Data Not Collected
+The developer does not collect any data from this app.
+The developer,
+Develobile S.p.A.
+, indicated that the app’s privacy practices may include handling of data as described below. For more information, see the
+developer’s privacy policy
+.
+Data Not Collected
+The developer does not collect any data from this app.
+Privacy practices may vary, for example, based on the features you use or your age.
+Learn More
+Accessibility
+The developer has not yet indicated which accessibility features this app supports.
+Learn More
+Information
+Seller
+Develobile S.p.A.
+Size
+975.7 MB
+Category
+Developer Tools
+Compatibility
+Requires iOS 14.0 or later.
+iPhone
+Requires iOS 14.0 or later.
+iPad
+Requires iPadOS 14.0 or later.
+iPod&nbsp;touch
+Requires iOS 14.0 or later.
+Mac
+Requires macOS&nbsp;11.0 or later and a Mac with Apple&nbsp;M1&nbsp;chip or later.
+Apple Vision
+Requires visionOS 1.0 or later.
+Apple Watch
+Requires watchOS 7.0 or later.
+Languages
+English and 3 more
+English, French, German, Spanish
+Age Rating
+4+
+4+
+Learn More
+In-App Purchases
+Yes
+3-day Trial
+$0.00
+Full Version
+$14.99
+Lite Version
+$7.99
+Upgrade to Full Version
+$6.99
+Learn More
+Copyright
+© 2018-2024 Emma Labbé
+Developer Website
+Privacy Policy
+Supports
+Family Sharing
+Some in-app purchases and subscriptions may be shareable with your family group when Family Sharing is enabled.
+Learn More
+More by Develobile S.p.A.
+View
+LibTerm
+Command Line Shell
+View
+Spliteb for Safari
+Web Inspector
+View
+Deadname Eraser for Safari
+Utilities
+View
+ShortWeb
+Web automations
+View
+SeeLess - C Compiler
+LLVM IR
+You Might Also Like
+View
+Python Editor App
+Create and Run your Python 3
+View
+Kodex
+A powerful code editor
+View
+Runestone Text Editor
+Edit plain text and code
+View
+Textastic Code Editor
+Text, Coding, SFTP Client, SSH
+View
+a-Shell
+*Local* Unix terminal (&amp; ssh)
+View
+xTerminal - SSH Terminal Shell
+SSH Client, Shell Console Term
+View
+Python Coding Editor &amp; IDE App
+Compiler - Run &amp; Learn Py 3
+View
+Git client - Working Copy
+for GitHub and self-hosted
+View
+Web Inspector
+Developer Console for Safari
+View
+Code Editor - Compiler &amp; IDE
+Programming on mobile
+United States
+Español (México)
+العربية
+Русский
+简体中文
+Français (France)
+한국어
+Português (Brazil)
+Tiếng Việt
+繁體中文 (台灣)
+Select a country or region
+Africa, Middle East, and India
+See All
+Algeria
+Angola
+Armenia
+Azerbaijan
+Bahrain
+Benin
+Botswana
+Burkina Faso
+Cameroun
+Cape Verde
+Chad
+Côte d’Ivoire
+Congo, The Democratic Republic Of The
+Egypt
+Eswatini
+Gabon
+Gambia
+Ghana
+Guinea-Bissau
+India
+Iraq
+Israel
+Jordan
+Kenya
+Kuwait
+Lebanon
+Liberia
+Libya
+Madagascar
+Malawi
+Mali
+Mauritania
+Mauritius
+Morocco
+Mozambique
+Namibia
+Niger (English)
+Nigeria
+Oman
+Qatar
+Congo, Republic of
+Rwanda
+São Tomé and Príncipe
+Saudi Arabia
+Senegal
+Seychelles
+Sierra Leone
+South Africa
+Sri Lanka
+Tajikistan
+Tanzania, United Republic Of
+Tunisia
+Turkmenistan
+United Arab Emirates
+Uganda
+Yemen
+Zambia
+Zimbabwe
+Asia Pacific
+See All
+Afghanistan
+Australia
+Bhutan
+Brunei Darussalam
+Cambodia
+中国大陆
+Fiji
+香港
+Indonesia (English)
+日本
+Kazakhstan
+대한민국
+Kyrgyzstan
+Lao People's Democratic Republic
+澳門
+Malaysia (English)
+Maldives
+Micronesia, Federated States of
+Mongolia
+Myanmar
+Nauru
+Nepal
+New Zealand
+Pakistan
+Palau
+Papua New Guinea
+Philippines
+Singapore
+Solomon Islands
+台灣
+Thailand
+Tonga
+Turkmenistan
+Uzbekistan
+Vanuatu
+Vietnam
+Europe
+See All
+Albania
+Armenia
+Österreich
+Belarus
+Belgium
+Bosnia and Herzegovina
+Bulgaria
+Croatia
+Cyprus
+Czechia
+Denmark
+Estonia
+Finland
+France (Français)
+Georgia
+Deutschland
+Greece
+Hungary
+Iceland
+Ireland
+Italia
+Kosovo
+Latvia
+Lithuania
+Luxembourg (English)
+Malta
+Moldova, Republic Of
+Montenegro
+Nederland
+North Macedonia
+Norway
+Poland
+Portugal (Português)
+Romania
+Россия
+Serbia
+Slovakia
+Slovenia
+España
+Sverige
+Schweiz
+Türkiye (English)
+Ukraine
+United Kingdom
+Latin America and the Caribbean
+See All
+Anguilla
+Antigua and Barbuda
+Argentina (Español)
+Bahamas
+Barbados
+Belize
+Bermuda
+Bolivia (Español)
+Brasil
+Virgin Islands, British
+Cayman Islands
+Chile (Español)
+Colombia (Español)
+Costa Rica (Español)
+Dominica
+República Dominicana
+Ecuador (Español)
+El Salvador (Español)
+Grenada
+Guatemala (Español)
+Guyana
+Honduras (Español)
+Jamaica
+México
+Montserrat
+Nicaragua (Español)
+Panamá
+Paraguay (Español)
+Perú
+St. Kitts and Nevis
+Saint Lucia
+St. Vincent and The Grenadines
+Suriname
+Trinidad and Tobago
+Turks and Caicos
+Uruguay (English)
+Venezuela (Español)
+The United States and Canada
+See All
+Canada (English)
+Canada (Français)
+United States
+Estados Unidos (Español México)
+الولايات المتحدة
+США
+美国 (简体中文)
+États-Unis (Français France)
+미국
+Estados Unidos (Português Brasil)
+Hoa Kỳ
+美國 (繁體中文台灣)
+Copyright © 2026
+Apple Inc.
+All rights reserved.
+Internet Service Terms
+App Store &amp; Privacy
+Cookie Warning
+Support

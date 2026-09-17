@@ -1,0 +1,931 @@
+[
+ {
+ "name": ".clang-format",
+ "path": ".clang-format",
+ "sha": "742723fc8f9dfefdf569b768c4b198337e86bbd8",
+ "size": 4961,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/.clang-format?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/.clang-format",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/742723fc8f9dfefdf569b768c4b198337e86bbd8",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/.clang-format",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/.clang-format?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/742723fc8f9dfefdf569b768c4b198337e86bbd8",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/.clang-format"
+ }
+ },
+ {
+ "name": ".clang-tidy",
+ "path": ".clang-tidy",
+ "sha": "803b8b46a32f3f4afb9d67edacd2cf01a295dbfb",
+ "size": 931,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/.clang-tidy?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/.clang-tidy",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/803b8b46a32f3f4afb9d67edacd2cf01a295dbfb",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/.clang-tidy",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/.clang-tidy?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/803b8b46a32f3f4afb9d67edacd2cf01a295dbfb",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/.clang-tidy"
+ }
+ },
+ {
+ "name": ".devops",
+ "path": ".devops",
+ "sha": "e284eee2e8a79eeb4e9cffb4dcd864cddfe91a78",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/.devops?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/tree/master/.devops",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/e284eee2e8a79eeb4e9cffb4dcd864cddfe91a78",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/.devops?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/e284eee2e8a79eeb4e9cffb4dcd864cddfe91a78",
+ "html": "https://github.com/ggml-org/llama.cpp/tree/master/.devops"
+ }
+ },
+ {
+ "name": ".dockerignore",
+ "path": ".dockerignore",
+ "sha": "0b81e83bf5d4dbd826afbf6e8820ec7e632a8d74",
+ "size": 261,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/.dockerignore?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/.dockerignore",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/0b81e83bf5d4dbd826afbf6e8820ec7e632a8d74",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/.dockerignore",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/.dockerignore?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/0b81e83bf5d4dbd826afbf6e8820ec7e632a8d74",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/.dockerignore"
+ }
+ },
+ {
+ "name": ".ecrc",
+ "path": ".ecrc",
+ "sha": "0338e4faa4a247c427036ed5287df51d8f29726a",
+ "size": 164,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/.ecrc?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/.ecrc",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/0338e4faa4a247c427036ed5287df51d8f29726a",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/.ecrc",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/.ecrc?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/0338e4faa4a247c427036ed5287df51d8f29726a",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/.ecrc"
+ }
+ },
+ {
+ "name": ".editorconfig",
+ "path": ".editorconfig",
+ "sha": "5663b8fdbfc915c7990a9eae03de0f76bc28cd55",
+ "size": 1217,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/.editorconfig?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/.editorconfig",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/5663b8fdbfc915c7990a9eae03de0f76bc28cd55",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/.editorconfig",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/.editorconfig?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/5663b8fdbfc915c7990a9eae03de0f76bc28cd55",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/.editorconfig"
+ }
+ },
+ {
+ "name": ".flake8",
+ "path": ".flake8",
+ "sha": "669d231f1f63bf661bb9c380ea901a43dd97ca6f",
+ "size": 565,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/.flake8?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/.flake8",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/669d231f1f63bf661bb9c380ea901a43dd97ca6f",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/.flake8",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/.flake8?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/669d231f1f63bf661bb9c380ea901a43dd97ca6f",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/.flake8"
+ }
+ },
+ {
+ "name": ".gemini",
+ "path": ".gemini",
+ "sha": "aa0961d3416c9b9cb110cf45b65b7a2832cc7b95",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/.gemini?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/tree/master/.gemini",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/aa0961d3416c9b9cb110cf45b65b7a2832cc7b95",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/.gemini?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/aa0961d3416c9b9cb110cf45b65b7a2832cc7b95",
+ "html": "https://github.com/ggml-org/llama.cpp/tree/master/.gemini"
+ }
+ },
+ {
+ "name": ".github",
+ "path": ".github",
+ "sha": "8f3337b722cf53899d0e004986525f72372e7bc0",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/.github?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/tree/master/.github",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/8f3337b722cf53899d0e004986525f72372e7bc0",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/.github?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/8f3337b722cf53899d0e004986525f72372e7bc0",
+ "html": "https://github.com/ggml-org/llama.cpp/tree/master/.github"
+ }
+ },
+ {
+ "name": ".gitignore",
+ "path": ".gitignore",
+ "sha": "9b589615a402350efb3765177c701ef5a3d37608",
+ "size": 1713,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/.gitignore?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/.gitignore",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/9b589615a402350efb3765177c701ef5a3d37608",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/.gitignore",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/.gitignore?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/9b589615a402350efb3765177c701ef5a3d37608",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/.gitignore"
+ }
+ },
+ {
+ "name": ".gitmodules",
+ "path": ".gitmodules",
+ "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/.gitmodules?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/.gitmodules",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/.gitmodules",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/.gitmodules?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/.gitmodules"
+ }
+ },
+ {
+ "name": ".pi",
+ "path": ".pi",
+ "sha": "ce67d8f507b405d937b112de7a936ac78e005223",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/.pi?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/tree/master/.pi",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/ce67d8f507b405d937b112de7a936ac78e005223",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/.pi?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/ce67d8f507b405d937b112de7a936ac78e005223",
+ "html": "https://github.com/ggml-org/llama.cpp/tree/master/.pi"
+ }
+ },
+ {
+ "name": ".pre-commit-config.yaml",
+ "path": ".pre-commit-config.yaml",
+ "sha": "91d7916285081aa14f5b801935cb35d031f2e601",
+ "size": 447,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/.pre-commit-config.yaml?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/.pre-commit-config.yaml",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/91d7916285081aa14f5b801935cb35d031f2e601",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/.pre-commit-config.yaml",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/.pre-commit-config.yaml?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/91d7916285081aa14f5b801935cb35d031f2e601",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/.pre-commit-config.yaml"
+ }
+ },
+ {
+ "name": "AGENTS.md",
+ "path": "AGENTS.md",
+ "sha": "6d83a02f425239a1b5dab3a1c467132d49e5d5ba",
+ "size": 12170,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/AGENTS.md?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/AGENTS.md",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/6d83a02f425239a1b5dab3a1c467132d49e5d5ba",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/AGENTS.md",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/AGENTS.md?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/6d83a02f425239a1b5dab3a1c467132d49e5d5ba",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/AGENTS.md"
+ }
+ },
+ {
+ "name": "AUTHORS",
+ "path": "AUTHORS",
+ "sha": "ea17fb76e5fce07c995bddbc70bfc715ca2eff16",
+ "size": 89268,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/AUTHORS?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/ea17fb76e5fce07c995bddbc70bfc715ca2eff16",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/AUTHORS",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/AUTHORS?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/ea17fb76e5fce07c995bddbc70bfc715ca2eff16",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS"
+ }
+ },
+ {
+ "name": "CLAUDE.md",
+ "path": "CLAUDE.md",
+ "sha": "302cdeab99cfd3661740427eb97391e7b573bac1",
+ "size": 106,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/CLAUDE.md?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/CLAUDE.md",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/302cdeab99cfd3661740427eb97391e7b573bac1",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/CLAUDE.md",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/CLAUDE.md?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/302cdeab99cfd3661740427eb97391e7b573bac1",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/CLAUDE.md"
+ }
+ },
+ {
+ "name": "CMakeLists.txt",
+ "path": "CMakeLists.txt",
+ "sha": "4feaf083e04e6131febf25450da160ed9339928b",
+ "size": 10918,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/CMakeLists.txt?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/CMakeLists.txt",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/4feaf083e04e6131febf25450da160ed9339928b",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/CMakeLists.txt",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/CMakeLists.txt?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/4feaf083e04e6131febf25450da160ed9339928b",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/CMakeLists.txt"
+ }
+ },
+ {
+ "name": "CMakePresets.json",
+ "path": "CMakePresets.json",
+ "sha": "b5afeb3c0f2f9a4fe49890ab718c565962ad57ca",
+ "size": 4570,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/CMakePresets.json?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/CMakePresets.json",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/b5afeb3c0f2f9a4fe49890ab718c565962ad57ca",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/CMakePresets.json",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/CMakePresets.json?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/b5afeb3c0f2f9a4fe49890ab718c565962ad57ca",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/CMakePresets.json"
+ }
+ },
+ {
+ "name": "CODEOWNERS",
+ "path": "CODEOWNERS",
+ "sha": "0fbfcfdd12365a3b9e06444e60be9c185a93afc7",
+ "size": 6488,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/CODEOWNERS?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/CODEOWNERS",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/0fbfcfdd12365a3b9e06444e60be9c185a93afc7",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/CODEOWNERS",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/CODEOWNERS?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/0fbfcfdd12365a3b9e06444e60be9c185a93afc7",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/CODEOWNERS"
+ }
+ },
+ {
+ "name": "CONTRIBUTING.md",
+ "path": "CONTRIBUTING.md",
+ "sha": "59ec3f311b5d9de3d47db3369a9f1c779edab071",
+ "size": 12910,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/CONTRIBUTING.md?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/CONTRIBUTING.md",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/59ec3f311b5d9de3d47db3369a9f1c779edab071",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/CONTRIBUTING.md",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/CONTRIBUTING.md?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/59ec3f311b5d9de3d47db3369a9f1c779edab071",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/CONTRIBUTING.md"
+ }
+ },
+ {
+ "name": "LICENSE",
+ "path": "LICENSE",
+ "sha": "e7dca554bcb802f98408383a864404e3aa4eacca",
+ "size": 1078,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/LICENSE?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/LICENSE",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/e7dca554bcb802f98408383a864404e3aa4eacca",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/LICENSE",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/LICENSE?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/e7dca554bcb802f98408383a864404e3aa4eacca",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/LICENSE"
+ }
+ },
+ {
+ "name": "Makefile",
+ "path": "Makefile",
+ "sha": "bcbc7702059566c8e23bcaf73e12caff9b7dac8e",
+ "size": 257,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/Makefile?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/Makefile",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/bcbc7702059566c8e23bcaf73e12caff9b7dac8e",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/Makefile",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/Makefile?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/bcbc7702059566c8e23bcaf73e12caff9b7dac8e",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/Makefile"
+ }
+ },
+ {
+ "name": "README.md",
+ "path": "README.md",
+ "sha": "aae3bcd35ad9c2ba3e914750a36e125fec0b5355",
+ "size": 7351,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/README.md?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/README.md",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/aae3bcd35ad9c2ba3e914750a36e125fec0b5355",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/README.md",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/README.md?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/aae3bcd35ad9c2ba3e914750a36e125fec0b5355",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/README.md"
+ }
+ },
+ {
+ "name": "SECURITY.md",
+ "path": "SECURITY.md",
+ "sha": "bc6ed9d809a1517aa03549b260588474d24642c4",
+ "size": 7505,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/SECURITY.md?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/SECURITY.md",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/bc6ed9d809a1517aa03549b260588474d24642c4",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/SECURITY.md",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/SECURITY.md?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/bc6ed9d809a1517aa03549b260588474d24642c4",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/SECURITY.md"
+ }
+ },
+ {
+ "name": "app",
+ "path": "app",
+ "sha": "80ad72f330f3b217fff830b1e3d62eab5937456b",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/app?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/tree/master/app",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/80ad72f330f3b217fff830b1e3d62eab5937456b",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/app?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/80ad72f330f3b217fff830b1e3d62eab5937456b",
+ "html": "https://github.com/ggml-org/llama.cpp/tree/master/app"
+ }
+ },
+ {
+ "name": "benches",
+ "path": "benches",
+ "sha": "58861d776bb5e464158b99c51ccd9ce429e0716a",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/benches?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/tree/master/benches",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/58861d776bb5e464158b99c51ccd9ce429e0716a",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/benches?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/58861d776bb5e464158b99c51ccd9ce429e0716a",
+ "html": "https://github.com/ggml-org/llama.cpp/tree/master/benches"
+ }
+ },
+ {
+ "name": "build-xcframework.sh",
+ "path": "build-xcframework.sh",
+ "sha": "e2a2684cc195fe5c0c18b869b628888b47811900",
+ "size": 24900,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/build-xcframework.sh?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/build-xcframework.sh",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/e2a2684cc195fe5c0c18b869b628888b47811900",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/build-xcframework.sh",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/build-xcframework.sh?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/e2a2684cc195fe5c0c18b869b628888b47811900",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/build-xcframework.sh"
+ }
+ },
+ {
+ "name": "ci",
+ "path": "ci",
+ "sha": "b77f51277f0f02d67a8710f5cadb286665b422e0",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/ci?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/tree/master/ci",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/b77f51277f0f02d67a8710f5cadb286665b422e0",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/ci?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/b77f51277f0f02d67a8710f5cadb286665b422e0",
+ "html": "https://github.com/ggml-org/llama.cpp/tree/master/ci"
+ }
+ },
+ {
+ "name": "cmake",
+ "path": "cmake",
+ "sha": "f1fae7b0c20d1e1fda696e88f62b4109cae32d45",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/cmake?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/tree/master/cmake",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/f1fae7b0c20d1e1fda696e88f62b4109cae32d45",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/cmake?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/f1fae7b0c20d1e1fda696e88f62b4109cae32d45",
+ "html": "https://github.com/ggml-org/llama.cpp/tree/master/cmake"
+ }
+ },
+ {
+ "name": "common",
+ "path": "common",
+ "sha": "6e0bc6e42b6cd7ce00c9f5e64fae38ddba3dc54b",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/common?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/tree/master/common",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/6e0bc6e42b6cd7ce00c9f5e64fae38ddba3dc54b",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/common?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/6e0bc6e42b6cd7ce00c9f5e64fae38ddba3dc54b",
+ "html": "https://github.com/ggml-org/llama.cpp/tree/master/common"
+ }
+ },
+ {
+ "name": "conversion",
+ "path": "conversion",
+ "sha": "c271d9163465b28f1687c80e02a5e76b299cc8b2",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/conversion?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/tree/master/conversion",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/c271d9163465b28f1687c80e02a5e76b299cc8b2",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/conversion?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/c271d9163465b28f1687c80e02a5e76b299cc8b2",
+ "html": "https://github.com/ggml-org/llama.cpp/tree/master/conversion"
+ }
+ },
+ {
+ "name": "convert_hf_to_gguf.py",
+ "path": "convert_hf_to_gguf.py",
+ "sha": "e09616b190cf124e818d8a740468d4e84086015c",
+ "size": 13012,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/convert_hf_to_gguf.py?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/convert_hf_to_gguf.py",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/e09616b190cf124e818d8a740468d4e84086015c",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/convert_hf_to_gguf.py",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/convert_hf_to_gguf.py?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/e09616b190cf124e818d8a740468d4e84086015c",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/convert_hf_to_gguf.py"
+ }
+ },
+ {
+ "name": "convert_hf_to_gguf_update.py",
+ "path": "convert_hf_to_gguf_update.py",
+ "sha": "3a15a6fca34a26851a9ffa7216f1f1ac0ccd2905",
+ "size": 29039,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/convert_hf_to_gguf_update.py?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/convert_hf_to_gguf_update.py",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/3a15a6fca34a26851a9ffa7216f1f1ac0ccd2905",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/convert_hf_to_gguf_update.py",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/convert_hf_to_gguf_update.py?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/3a15a6fca34a26851a9ffa7216f1f1ac0ccd2905",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/convert_hf_to_gguf_update.py"
+ }
+ },
+ {
+ "name": "convert_llama_ggml_to_gguf.py",
+ "path": "convert_llama_ggml_to_gguf.py",
+ "sha": "52827e6690a3b706476292c580244afe37f8f894",
+ "size": 19112,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/convert_llama_ggml_to_gguf.py?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/convert_llama_ggml_to_gguf.py",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/52827e6690a3b706476292c580244afe37f8f894",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/convert_llama_ggml_to_gguf.py",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/convert_llama_ggml_to_gguf.py?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/52827e6690a3b706476292c580244afe37f8f894",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/convert_llama_ggml_to_gguf.py"
+ }
+ },
+ {
+ "name": "convert_lora_to_gguf.py",
+ "path": "convert_lora_to_gguf.py",
+ "sha": "47c09af53fb5075efd63485cc1fd389226aaa42c",
+ "size": 23200,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/convert_lora_to_gguf.py?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/convert_lora_to_gguf.py",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/47c09af53fb5075efd63485cc1fd389226aaa42c",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/convert_lora_to_gguf.py",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/convert_lora_to_gguf.py?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/47c09af53fb5075efd63485cc1fd389226aaa42c",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/convert_lora_to_gguf.py"
+ }
+ },
+ {
+ "name": "docs",
+ "path": "docs",
+ "sha": "66540a089ea828da4c4d6cb01e8a9929ecbc9217",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/docs?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/tree/master/docs",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/66540a089ea828da4c4d6cb01e8a9929ecbc9217",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/docs?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/66540a089ea828da4c4d6cb01e8a9929ecbc9217",
+ "html": "https://github.com/ggml-org/llama.cpp/tree/master/docs"
+ }
+ },
+ {
+ "name": "examples",
+ "path": "examples",
+ "sha": "0596aad268c33f880d3acd2d7fcd0ae37188c166",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/examples?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/tree/master/examples",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/0596aad268c33f880d3acd2d7fcd0ae37188c166",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/examples?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/0596aad268c33f880d3acd2d7fcd0ae37188c166",
+ "html": "https://github.com/ggml-org/llama.cpp/tree/master/examples"
+ }
+ },
+ {
+ "name": "flake.nix",
+ "path": "flake.nix",
+ "sha": "6373d3b0be3d529fccb72cd1d0d0594ea9a2bd91",
+ "size": 7246,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/flake.nix?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/flake.nix",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/6373d3b0be3d529fccb72cd1d0d0594ea9a2bd91",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/flake.nix",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/flake.nix?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/6373d3b0be3d529fccb72cd1d0d0594ea9a2bd91",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/flake.nix"
+ }
+ },
+ {
+ "name": "ggml",
+ "path": "ggml",
+ "sha": "6acda067cf3658646dc7bc7148a8009e91a82173",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/ggml?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/tree/master/ggml",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/6acda067cf3658646dc7bc7148a8009e91a82173",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/ggml?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/6acda067cf3658646dc7bc7148a8009e91a82173",
+ "html": "https://github.com/ggml-org/llama.cpp/tree/master/ggml"
+ }
+ },
+ {
+ "name": "gguf-py",
+ "path": "gguf-py",
+ "sha": "68ac67465417dcd1584bb5905f085af08b38fc2b",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/gguf-py?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/tree/master/gguf-py",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/68ac67465417dcd1584bb5905f085af08b38fc2b",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/gguf-py?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/68ac67465417dcd1584bb5905f085af08b38fc2b",
+ "html": "https://github.com/ggml-org/llama.cpp/tree/master/gguf-py"
+ }
+ },
+ {
+ "name": "grammars",
+ "path": "grammars",
+ "sha": "21cda513cd491dca43203e7abc3cdbb10a8265d5",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/grammars?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/tree/master/grammars",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/21cda513cd491dca43203e7abc3cdbb10a8265d5",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/grammars?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/21cda513cd491dca43203e7abc3cdbb10a8265d5",
+ "html": "https://github.com/ggml-org/llama.cpp/tree/master/grammars"
+ }
+ },
+ {
+ "name": "include",
+ "path": "include",
+ "sha": "688ddc70f4ba0d3fcb6ba14cae27bed59401711b",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/include?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/tree/master/include",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/688ddc70f4ba0d3fcb6ba14cae27bed59401711b",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/include?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/688ddc70f4ba0d3fcb6ba14cae27bed59401711b",
+ "html": "https://github.com/ggml-org/llama.cpp/tree/master/include"
+ }
+ },
+ {
+ "name": "licenses",
+ "path": "licenses",
+ "sha": "d63a7f876ca43495ed660281e339f5b971864896",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/licenses?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/tree/master/licenses",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/d63a7f876ca43495ed660281e339f5b971864896",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/licenses?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/d63a7f876ca43495ed660281e339f5b971864896",
+ "html": "https://github.com/ggml-org/llama.cpp/tree/master/licenses"
+ }
+ },
+ {
+ "name": "media",
+ "path": "media",
+ "sha": "7a1b2062a1c065ee4c467825527a3b74f82fdc09",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/media?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/tree/master/media",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/7a1b2062a1c065ee4c467825527a3b74f82fdc09",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/media?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/7a1b2062a1c065ee4c467825527a3b74f82fdc09",
+ "html": "https://github.com/ggml-org/llama.cpp/tree/master/media"
+ }
+ },
+ {
+ "name": "models",
+ "path": "models",
+ "sha": "8c18e7d0d6d81d050e33bb88c5df62c2eb630a10",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/models?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/tree/master/models",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/8c18e7d0d6d81d050e33bb88c5df62c2eb630a10",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/models?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/8c18e7d0d6d81d050e33bb88c5df62c2eb630a10",
+ "html": "https://github.com/ggml-org/llama.cpp/tree/master/models"
+ }
+ },
+ {
+ "name": "mypy.ini",
+ "path": "mypy.ini",
+ "sha": "e51910ca77e7fd4c8f45c1e9f1f4279028899f94",
+ "size": 163,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/mypy.ini?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/mypy.ini",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/e51910ca77e7fd4c8f45c1e9f1f4279028899f94",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/mypy.ini",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/mypy.ini?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/e51910ca77e7fd4c8f45c1e9f1f4279028899f94",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/mypy.ini"
+ }
+ },
+ {
+ "name": "pocs",
+ "path": "pocs",
+ "sha": "5a99e8b4577c476207868f17682d523d359a8338",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/pocs?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/tree/master/pocs",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/5a99e8b4577c476207868f17682d523d359a8338",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/pocs?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/5a99e8b4577c476207868f17682d523d359a8338",
+ "html": "https://github.com/ggml-org/llama.cpp/tree/master/pocs"
+ }
+ },
+ {
+ "name": "pyproject.toml",
+ "path": "pyproject.toml",
+ "sha": "0383fbc5e6d409f14c13096cf666b1dd1f65d9b6",
+ "size": 1907,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/pyproject.toml?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/pyproject.toml",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/0383fbc5e6d409f14c13096cf666b1dd1f65d9b6",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/pyproject.toml",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/pyproject.toml?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/0383fbc5e6d409f14c13096cf666b1dd1f65d9b6",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/pyproject.toml"
+ }
+ },
+ {
+ "name": "pyrightconfig.json",
+ "path": "pyrightconfig.json",
+ "sha": "14d84fdbe77558a3da956ba431806a3e2c3c9f5a",
+ "size": 696,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/pyrightconfig.json?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/pyrightconfig.json",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/14d84fdbe77558a3da956ba431806a3e2c3c9f5a",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/pyrightconfig.json",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/pyrightconfig.json?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/14d84fdbe77558a3da956ba431806a3e2c3c9f5a",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/pyrightconfig.json"
+ }
+ },
+ {
+ "name": "requirements.txt",
+ "path": "requirements.txt",
+ "sha": "f2a18d62879b4e37249b566d6d85fd9485fb20e2",
+ "size": 551,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/requirements.txt?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/requirements.txt",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/f2a18d62879b4e37249b566d6d85fd9485fb20e2",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/requirements.txt",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/requirements.txt?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/f2a18d62879b4e37249b566d6d85fd9485fb20e2",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/requirements.txt"
+ }
+ },
+ {
+ "name": "requirements",
+ "path": "requirements",
+ "sha": "497065eb63c0f8f883f1e92188d5d78256bd5e32",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/requirements?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/tree/master/requirements",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/497065eb63c0f8f883f1e92188d5d78256bd5e32",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/requirements?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/497065eb63c0f8f883f1e92188d5d78256bd5e32",
+ "html": "https://github.com/ggml-org/llama.cpp/tree/master/requirements"
+ }
+ },
+ {
+ "name": "scripts",
+ "path": "scripts",
+ "sha": "39cbfd1e5173f3a539fdcca538a48ac96a57d7e5",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/scripts?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/tree/master/scripts",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/39cbfd1e5173f3a539fdcca538a48ac96a57d7e5",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/scripts?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/39cbfd1e5173f3a539fdcca538a48ac96a57d7e5",
+ "html": "https://github.com/ggml-org/llama.cpp/tree/master/scripts"
+ }
+ },
+ {
+ "name": "skills",
+ "path": "skills",
+ "sha": "0c1d84891955360bf56771b3c11bcbecd9f1d103",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/skills?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/tree/master/skills",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/0c1d84891955360bf56771b3c11bcbecd9f1d103",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/skills?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/0c1d84891955360bf56771b3c11bcbecd9f1d103",
+ "html": "https://github.com/ggml-org/llama.cpp/tree/master/skills"
+ }
+ },
+ {
+ "name": "src",
+ "path": "src",
+ "sha": "1f8e011e1a3f6d7fc4b9e194985b7b197a283d13",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/src?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/tree/master/src",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/1f8e011e1a3f6d7fc4b9e194985b7b197a283d13",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/src?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/1f8e011e1a3f6d7fc4b9e194985b7b197a283d13",
+ "html": "https://github.com/ggml-org/llama.cpp/tree/master/src"
+ }
+ },
+ {
+ "name": "tests",
+ "path": "tests",
+ "sha": "78fe131f134d3d4ea9a699aef91a539fb5cc6e58",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/tests?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/tree/master/tests",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/78fe131f134d3d4ea9a699aef91a539fb5cc6e58",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/tests?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/78fe131f134d3d4ea9a699aef91a539fb5cc6e58",
+ "html": "https://github.com/ggml-org/llama.cpp/tree/master/tests"
+ }
+ },
+ {
+ "name": "tools",
+ "path": "tools",
+ "sha": "18c4c3b228467e142702d8749da0ff4a555ae043",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/tools?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/tree/master/tools",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/18c4c3b228467e142702d8749da0ff4a555ae043",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/tools?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/18c4c3b228467e142702d8749da0ff4a555ae043",
+ "html": "https://github.com/ggml-org/llama.cpp/tree/master/tools"
+ }
+ },
+ {
+ "name": "ty.toml",
+ "path": "ty.toml",
+ "sha": "340b0649d3342566630ccdc86d9834aafa60697b",
+ "size": 643,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/ty.toml?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/ty.toml",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/340b0649d3342566630ccdc86d9834aafa60697b",
+ "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/ty.toml",
+ "type": "file",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/ty.toml?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/blobs/340b0649d3342566630ccdc86d9834aafa60697b",
+ "html": "https://github.com/ggml-org/llama.cpp/blob/master/ty.toml"
+ }
+ },
+ {
+ "name": "vendor",
+ "path": "vendor",
+ "sha": "98fea505cd8363f50da9d28ebab123bcd8cf007e",
+ "size": 0,
+ "url": "https://api.github.com/repos/ggml-org/llama.cpp/contents/vendor?ref=master",
+ "html_url": "https://github.com/ggml-org/llama.cpp/tree/master/vendor",
+ "git_url": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/98fea505cd8363f50da9d28ebab123bcd8cf007e",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ggml-org/llama.cpp/contents/vendor?ref=master",
+ "git": "https://api.github.com/repos/ggml-org/llama.cpp/git/trees/98fea505cd8363f50da9d28ebab123bcd8cf007e",
+ "html": "https://github.com/ggml-org/llama.cpp/tree/master/vendor"
+ }
+ }
+]
+

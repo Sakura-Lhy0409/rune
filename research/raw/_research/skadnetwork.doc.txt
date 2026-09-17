@@ -1,0 +1,175 @@
+Support In-App Purchases and interactions with the App Store.
+=== StoreKit
+Overview
+Use the StoreKit framework to provide the following features and services for your apps and In-App Purchases:
+Offer and promote In-App Purchases for content and services.
+In-App Purchase
+Verify a customer’s app purchase with an App Store-signed transaction.
+App transaction
+Control the display of App Store messages in your app.
+Messages
+Request App Store reviews and ratings from your customers.
+Reviews
+Provide recommendations for third-party content that customers can purchase from the App Store.
+Recommendations
+Validate advertisement-driven app installations. See 
+ for app ad campaigns on the App Store and alternative marketplaces.
+Ad network attribution
+The StoreKit framework also provides functionality for 
+, 
+, 
+, and 
+.
+=== Related Documentation
+=== In-App Purchase
+=== App transaction
+=== Messages
+=== Reviews
+=== Recommendations
+=== Background assets extension
+=== Payment method binding
+=== Ad network attribution
+=== External Purchase
+=== External link account
+=== Deprecated
+=== Articles
+=== Structures
+Present, process, and register postbacks for in-app ads in the App Store and alternative app marketplaces.
+=== AdAttributionKit
+Support In-App Purchases through the App Store for exceptionally large catalogs of custom one-time purchases, subscriptions, and subscriptions with optional add-ons.
+=== Advanced Commerce API
+The data structure that represents an app store connect api resource.
+=== App Store Connect API
+Validate app and In-App Purchase receipts with the App Store.
+=== App Store Receipts
+Manage your customers’ App Store transactions from your server.
+=== App Store Server API
+Monitor In-App Purchase events in real time and learn of unreported external purchase tokens, with server notifications from the App Store.
+=== App Store Server Notifications
+Create and automate tests in Xcode for your app’s subscription and in-app purchase transactions, and SKAdNetwork implementations.
+=== StoreKit Test
+=== Technologies
+Support In-App Purchases and interactions with the App Store.
+=== StoreKit
+Information that represents the customer’s purchase of the app, cryptographically signed by the App Store.
+struct
+ 
+AppTransaction
+AppTransaction
+=== AppTransaction
+An instance that asks StoreKit to display an App Store message, if appropriate.
+struct
+ 
+DisplayMessageAction
+DisplayMessageAction
+=== DisplayMessageAction
+An instance for receiving and displaying App Store messages in your app.
+struct
+ 
+Message
+Message
+=== Message
+Reasons for the App Store messages.
+struct
+ 
+Reason
+Reason
+=== Message.Reason
+A binding that makes payment methods available in apps for an Apple Account.
+struct
+ 
+PaymentMethodBinding
+PaymentMethodBinding
+=== PaymentMethodBinding
+An option that customizes the behavior of an offer code redemption.
+struct
+ 
+RedeemOption
+RedeemOption
+=== RedeemOption
+An instance that tells StoreKit to request an App Store rating or review, if appropriate.
+struct
+ 
+RequestReviewAction
+RequestReviewAction
+=== RequestReviewAction
+An object that determines the current capabilities of a person’s Music library.
+class
+ 
+SKCloudServiceController
+SKCloudServiceController
+=== SKCloudServiceController
+A view controller that helps people perform setup for a cloud service, like an Apple Music subscription.
+class
+ 
+SKCloudServiceSetupViewController
+SKCloudServiceSetupViewController
+=== SKCloudServiceSetupViewController
+An application extension that uses the system implementation to schedule Apple-hosted asset-pack downloads automatically.
+SKDownloaderExtension
+=== SKDownloaderExtension
+A class that displays an overlay you can use to recommend another app or an App Clip’s corresponding full app.
+class
+ 
+SKOverlay
+SKOverlay
+=== SKOverlay
+A view controller that provides a page where customers can purchase media from the App Store.
+class
+ 
+SKStoreProductViewController
+SKStoreProductViewController
+=== SKStoreProductViewController
+An object that controls the process of requesting App Store ratings and reviews from customers.
+class
+ 
+SKStoreReviewController
+SKStoreReviewController
+=== SKStoreReviewController
+An app extension that uses the system implementation to schedule Apple-hosted asset-pack downloads automatically.
+protocol
+ 
+StoreDownloaderExtension
+StoreDownloaderExtension
+=== StoreDownloaderExtension
+Validate advertisement-driven app installations.
+=== Ad network attribution
+Enable qualifying apps to link to an external website for account creation or management.
+=== External link account
+Enable qualifying apps to offer external purchases.
+=== External Purchase
+Set up an in-app store using SwiftUI and StoreKit views.
+=== Getting started with In-App Purchase using StoreKit views
+Offer content and services in your app across Apple platforms using a Swift-based interface.
+=== In-App Purchase
+Allow users to purchase media in the App Store from within your app.
+=== Offering media for sale in your app
+Implement best practices for prompting users to review your app in the App Store.
+=== Requesting App Store reviews
+Access the app transaction to determine when a customer purchased an app and the features to which they’re entitled.
+=== Supporting business model changes by using the app transaction
+Provide subscription service for customers who redeem offer codes through the App Store or within your app.
+=== Supporting subscription offer codes in your app
+Implement an in-app store with several product types, using StoreKit views.
+=== Understanding StoreKit workflows
+=== In-App Purchase
+=== App transaction
+=== Reviews
+=== Recommendations
+=== Background assets extension
+=== Ad network attribution
+=== External Purchase
+=== External link account
+=== Deprecated
+=== Articles
+=== Related Documentation
+SKCloudServiceController
+SKCloudServiceController
+SKCloudServiceSetupViewController
+SKCloudServiceSetupViewController
+SKOverlay
+SKOverlay
+SKStoreProductViewController
+SKStoreProductViewController
+SKStoreReviewController
+SKStoreReviewController

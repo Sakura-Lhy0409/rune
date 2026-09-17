@@ -1,0 +1,559 @@
+‎Termius - Modern SSH Client App - App Store
+Search
+Today
+Games
+Apps
+Arcade
+Platform
+iPhone
+iPad
+Mac
+Vision
+Watch
+TV
+Termius - Modern SSH Client
+SFTP, Terminal, Telnet, PuTTY
+Free · In‑App Purchases
+Share
+19K Ratings
+4.7
+Age Rating
+4+
+Years
+Chart
+#11
+Developer Tools
+Developer
+Termius Corporation
+Language
+EN
+English
+Size
+236.5
+MB
+iPhone, iPad
+Termius is an SSH client and terminal, as it should be. Connect with one tap from any mobile and desktop device—no re-entering IP addresses, ports, and passwords.
+With a free Termius Starter plan, you can:
+· Connect from your mobile and desktop device with SSH, Mosh, Telnet, Port Forwarding, and SFTP.
+· Get a desktop-grade terminal experience with a virtual keyboard covering all the special keys required, or connect your Bluetooth keyboard.
+· Use gestures or shake the device while in the terminal to emulate stroking of Tab, arrows, PgUp/Down, Home, and End, etc.
+· Work in several sessions simultaneously with a multi-tab interface and split-view support.
+· Authenticate using hardware FIDO2 keys.
+· Set custom environment variables.
+· Customize your terminal themes and fonts for each connection.
+· Save your favorite and frequently used commands and shell scripts to execute them with a tap instead of typing.
+· Quickly access the unified history of your terminal commands.
+· Get the support of ECDSA and ed25519 keys and a chacha20-poly1305 cipher.
+· Ad-free.
+With the Termius Pro plan, you can also:
+· Access your connection settings and credentials from any device, anytime, with an encrypted cloud vault.
+· No limitations on the number of devices to sync.
+· Run your saved commands on multiple sessions or servers, or instantly get them autocompleted in the terminal.
+· Connect through Proxy and jump servers.
+· Integrate with AWS and DigitalOcean.
+· Protect your credentials with Touch ID or Face ID and your account with two-factor authentication.
+· Keep your keys on your machine with SSH agent forwarding.
+Termius reinvents the command line experience. We strive to make remote access for admins and engineers a more productive and enjoyable experience.
+Termius Pro Subscription is available through auto-renewable annual or monthly subscriptions (prices vary by region). It attaches to the Termius account to enable access to backup, sync, and all Pro benefits on multiple devices across all platforms supported by Termius. A subscription may be used both for personal and business purposes.
+Payment will be charged to your iTunes Account at confirmation of purchase. The subscription will renew automatically. Cancellation of a future subscription may be made up to 24 hours before the end of the trial period. The actual subscription may not be manually canceled before its termination date. Subscriptions may be managed, ​including disabling auto-renewal, in the Account Settings after purchase.
+Please review our privacy policy https://termius.com/privacy_policy.html and terms of use https://termius.com/terms_of_use.html.
+more
+Ratings &amp; Reviews
+4.7
+out of 5
+19K Ratings
+I downloaded the free version years ago
+02/09/2020
+Sigadore
+Now that I find myself in a new role, being able to use my iPad for more of my actions has become possible.  Additional changes in iPadOS which promote the substitution of an iPad for carrying around a laptop have pushed me to l see how much I can get done just using an iPad.  Part of my role is directly interacting with a handful of Cloud Based Servers.  I looked over the many choices in the Store and found I had already gotten this one.  So, I give it a fresh look.  First it is still being updated regularly.  It gets me quickly to the creation of a new Host with exactly the right questions and allows me to group hosts *with sensible defaults* including the ssh-key to be used!  I was just blown away, when I needed to construct a tunnel forwarding, that this too was part of the FREE product and EASY to describe / turn on and off.  This is now my GoTo tool when I need to bring up a fresh server or maintain and existing one.  With this much features and support for the FREE version (no timeout, etc.), it is worth kicking the tires for yourself and about time I shoot money to the author to support this great tool.
+I downloaded the free version years ago
+02/09/2020
+Sigadore
+Now that I find myself in a new role, being able to use my iPad for more of my actions has become possible.  Additional changes in iPadOS which promote the substitution of an iPad for carrying around a laptop have pushed me to l see how much I can get done just using an iPad.  Part of my role is directly interacting with a handful of Cloud Based Servers.  I looked over the many choices in the Store and found I had already gotten this one.  So, I give it a fresh look.  First it is still being updated regularly.  It gets me quickly to the creation of a new Host with exactly the right questions and allows me to group hosts *with sensible defaults* including the ssh-key to be used!  I was just blown away, when I needed to construct a tunnel forwarding, that this too was part of the FREE product and EASY to describe / turn on and off.  This is now my GoTo tool when I need to bring up a fresh server or maintain and existing one.  With this much features and support for the FREE version (no timeout, etc.), it is worth kicking the tires for yourself and about time I shoot money to the author to support this great tool.
+Replaced several other SSH/SFTP clients on PC/Mac/iOS
+06/18/2019
+User_R116
+I have been in IT for 15 years at this point and have used basically every major terminal emulator and SFTP client there is on every platform (PC/Mac/Android/iOS/Linux/Solaris/BSD/HP-unix/et al.) Paid, free, doesn't matter, I’ve shelled out the cash to buy serious SSH clients. But none have really cleaned up the whole experience as well as Termius here. I can shift between any of my systems, iPad, iPhone, Mac, PC and share the same set of devices, public key auth credentials, and scripts. Nobody does it like this, at this level of quality, in such a great looking cross-platform UI. Yes, it costs money for the subscription. SO WHAT! Do you want to have a cloud service that does all the above and gets better with time while responding to new tech? You gotta help pay the developers that make that work. Just give it a shot, the 14 day free trial thing will tell you all you need to know. For me, I have paid upwards of $700 for other systems that provide these features.... on PC/MAC... but not mobile as well. So is Termius worth a few bucks a month? Of course. Would highly recommend.
+Replaced several other SSH/SFTP clients on PC/Mac/iOS
+06/18/2019
+User_R116
+I have been in IT for 15 years at this point and have used basically every major terminal emulator and SFTP client there is on every platform (PC/Mac/Android/iOS/Linux/Solaris/BSD/HP-unix/et al.) Paid, free, doesn't matter, I’ve shelled out the cash to buy serious SSH clients. But none have really cleaned up the whole experience as well as Termius here. I can shift between any of my systems, iPad, iPhone, Mac, PC and share the same set of devices, public key auth credentials, and scripts. Nobody does it like this, at this level of quality, in such a great looking cross-platform UI. Yes, it costs money for the subscription. SO WHAT! Do you want to have a cloud service that does all the above and gets better with time while responding to new tech? You gotta help pay the developers that make that work. Just give it a shot, the 14 day free trial thing will tell you all you need to know. For me, I have paid upwards of $700 for other systems that provide these features.... on PC/MAC... but not mobile as well. So is Termius worth a few bucks a month? Of course. Would highly recommend.
+Best free SSH client on iOS
+10/19/2017
+D4nk m33m335
+This is a great SSH client, with support for saving identities, key generation, and port forwarding even in the free version. The only downside is sessions cannot stay open in the background for more than 3 minutes, but that is a limitation of iOS itself, not Termius. I also wish it advised users to use SSH instead of Telnet the first time they use it because Telnet is unencrypted and you should really avoid using it if at all possible. I use Termius for connecting to my Debian server when I don't have my computer on me and need to do something that I can't do through the Webmin interface. The port forwarding feature comes in handy when I need to do something like connect to said Webmin interface remotely or use OpenVPN in public places when it is blocked (Surprisingly, I have run into this problem before, at an airport). Overall, a great app if you have a server and don't want to carry a computer around to access it.
+Best free SSH client on iOS
+10/19/2017
+D4nk m33m335
+This is a great SSH client, with support for saving identities, key generation, and port forwarding even in the free version. The only downside is sessions cannot stay open in the background for more than 3 minutes, but that is a limitation of iOS itself, not Termius. I also wish it advised users to use SSH instead of Telnet the first time they use it because Telnet is unencrypted and you should really avoid using it if at all possible. I use Termius for connecting to my Debian server when I don't have my computer on me and need to do something that I can't do through the Webmin interface. The port forwarding feature comes in handy when I need to do something like connect to said Webmin interface remotely or use OpenVPN in public places when it is blocked (Surprisingly, I have run into this problem before, at an airport). Overall, a great app if you have a server and don't want to carry a computer around to access it.
+Great Extended Soft Keyboard
+02/02/2020
+--csc
+Cleanest look and feel too., but SFTP is locked behind a sub. model. I’d drop $59 for this in a heartbeat and consider up to $99, but even that would only get me 6 - 10 months of use under the subscription model.  I have no fewer than 6 Raspberry Pi’s running throughout my house (not enterprise business) at any given time.  Oh how sweet it is to do all I could want from my new iPad Air 3 without leaving the Lazyboy in the evenings. Well almost all. Not sftp. I don’t mind copying my Termius public key around by hand. That’s a good enterprise-pay feature. Ditto for on going Mosh dev, automated execution snippets, and so on.  Until there is a one-time purchase option for personal use, or sftp is moved out to free, I see this as a product for business users. I could not recommend this product to makers or hobbyists.  If you’re getting used to doing functional things on iOS/iPadOS now, hobbyists may as well get used to the individual quirks of something else with sftp instead, if you haven’t already tweaked your setup or copied your keys around.
+Great Extended Soft Keyboard
+02/02/2020
+--csc
+Cleanest look and feel too., but SFTP is locked behind a sub. model. I’d drop $59 for this in a heartbeat and consider up to $99, but even that would only get me 6 - 10 months of use under the subscription model.  I have no fewer than 6 Raspberry Pi’s running throughout my house (not enterprise business) at any given time.  Oh how sweet it is to do all I could want from my new iPad Air 3 without leaving the Lazyboy in the evenings. Well almost all. Not sftp. I don’t mind copying my Termius public key around by hand. That’s a good enterprise-pay feature. Ditto for on going Mosh dev, automated execution snippets, and so on.  Until there is a one-time purchase option for personal use, or sftp is moved out to free, I see this as a product for business users. I could not recommend this product to makers or hobbyists.  If you’re getting used to doing functional things on iOS/iPadOS now, hobbyists may as well get used to the individual quirks of something else with sftp instead, if you haven’t already tweaked your setup or copied your keys around.
+What’s New
+Version History
+- Added support for pasting images and files in the terminal in MOSH sessions. Paste, drag and drop, use the paperclip button, or use the system share dialog to quickly upload a file to the host.
+- Other stability improvements.
+7.8.0
+2d ago
+- Security fixes and UI improvements.
+7.7.0
+Sep 6
+- Fixed search issues on the Hosts, Snippets, and other screens.
+- Other stability improvements.
+7.6.1
+Sep 2
+- Added OSC 8 support for hyperlinks in the terminal.
+- Added "Alt+click" support in the terminal.
+- A "hide-keyboard" button can now be added to the keyboard add-on.
+- Fixed selection and copy experience when the keyboard is hidden.
+- Sync stability improvements.
+- Other stability and UI improvements.
+7.6.0
+Aug 9
+- Added support for pasting images and files in the terminal. Paste, drag and drop, or use the system share dialog to quickly upload a file to the host. The file path is then automatically pasted into the terminal.
+- Patched libssh2 for CVE-2026-55200.
+- Other stability improvements.
+7.5.0
+Jul 8
+- Added support for ANSI OSC 52 for better copy-paste experience in the terminal.
+- Improved scrolling experience in the terminal.
+- Changed the default sorting order in SFTP to be by kind.
+- Expanded hardware keyboard support.
+- Other stability improvements.
+7.4.0
+Jun 28
+- Added support for auth banners during the connection flow.
+- Fixed a bug with sorting of snippets in the side panel.
+- Fixed a bug with copying of text from nano.
+- Fixed a bug with the blank terminal screen after device rotation when using a custom keyboard.
+- Other stability improvements.
+7.3.5
+Jun 14
+- Fixed incorrect display of port forwarding rule descriptions.
+- Fixed an issue with snippets preview in the terminal.
+- Stability and security improvements.
+7.3.4
+May 6
+- Added support for ML-DSA key generation and authentication (requires server-side ML-DSA support).
+7.3.3
+Feb 23
+- Fixed a bug with copying of double-width characters from the terminal
+- Updated the icon for hosts that are set up for development with OpenCode
+- Other stability and performance improvements
+7.3.2
+Jan 25
+- SSH Certificates and Environment Variables are now free!
+- Added "linux" terminal emulation type to be consistent with Termius on other platforms.
+- Improved the spacing between the keys in the keyboard add-on.
+- SOCKS4 proxy support has been deprecated. Please migrate to SOCKS5 if you are affected by this change.
+- Fixed an issue in SFTP navigation when trying to open a restricted folder.
+- Fixed an issue in SFTP that didn't allow selecting other drives on Windows.
+- Fixed an issue when the app didn't remember the side panel state on the iPad in some rare cases.
+- Other stability improvements.
+7.3.1
+12/21/2025
+- Session logs improved. In addition to the recent session logs, you can now bookmark selected logs to save them for long-term reference and even add comments to describe what the sessions were about.
+- Changed files preview style in SFTP to full screen.
+- Fixed an issue in the key export flow when the public key is empty.
+- Fixed an issue with auto correction when editing a snippet (e.g., converting a double hyphen to an em dash).
+- Fixed an issue when the app didn't remember the side panel state on the iPad in some cases.
+- Other stability improvements.
+7.3.0
+12/09/2025
+- Introducing SSH.id — device-bound, biometric-protected SSH keys you can easily provision anywhere using your SSH.id handle
+- Added host icons for Rocky, Alma, Alpine, and Amazon Linux
+- Fixed a bug related to the Known Hosts duplication in case of short hostnames
+- Other stability and performance improvements
+7.2.0
+11/23/2025
+- Added support for CJK input in the terminal when using a hardware keyboard
+- Stability improvements and fixes
+7.1.0
+11/09/2025
+- Updated for Liquid Glass design;
+- Stability fixes and improvements;
+7.0.0
+10/19/2025
+Fixed a bug with dismissing of the connection input dialog when app goes to the background
+6.3.4
+10/13/2025
+- Improved integration with CLI coding agent. Configure Gemini, Claude Code, OpenCode, etc. on your hosts, and an AI agent will start automatically when you connect.
+- Added a new input field in the terminal. It supports speech-to-text, lets you speak to CLI coding agents, and makes prompt editing easier.
+- Added new terminal themes: Flexoki Dark and Flexoki Light.
+- Updated SSH connection to use SHA256 fingerprints instead of MD5.
+- Removed the PIN code timeout setting. The PIN code screen now appears every time you open the app.
+6.3.3
+10/08/2025
+- Fixed a bug with starting Port Forwarding rules with host chains
+- Fixed a bug with file preview cache in SFTP
+- Other stability improvements
+6.3.2
+10/01/2025
+- Added an ability to bind Shift+Tab to a volume button
+- Moved AI Widget settings to the app Settings
+- Improved SSH stability with PQC key exchange algorithms
+- Fixed a bug when the side panel state on the iPad was not saved between sessions
+- Dropped support for iOS 16
+- Other stability fixes and improvements
+6.3.1
+09/07/2025
+- New AI widget:
+• Moved the AI widget above the keyboard, allowing multiple commands to run without switching.
+• Added a history of generated commands
+• Added a snippet package with generated commands
+• Added support for providing AI context by selecting lines in the terminal output
+- Added Shift+Tab to the additional keyboard in Terminal, enabling actions for Claude Code and other AI tools
+- Added support for the mlkem768x25519-sha256 key exchange (KEX) method. This support is limited to - - OpenSSH 9.9 and later when the server is configured to use only that KEX method
+- Fixed a bug when a saved key passphrase was not applied when starting a port forwarding rule
+- Fixed keyboard language switching in the Label field on the Host form
+- Fixed missing icon for Windows hosts
+6.3.0
+08/26/2025
+- Fixed credentials inheritance in groups and hosts
+- Fixed removal of Personal Session Logs if logs are disabled
+- Stability fixes and improvements
+6.2.1
+08/12/2025
+- Added Logs feature. Terminal session logs are now automatically collected for every host. They sync across your devices and are shared with your team. You can view your logs on Desktop.
+- Stability fixes and improvements
+6.2.0
+07/20/2025
+Stability fixes and improvements
+6.1.8
+06/03/2025
+Stability fixes and improvements.
+6.1.7
+05/20/2025
+Fixed issue with Sign Up using Google or Apple
+6.1.6
+05/13/2025
+- Added support for pasting images and files in the terminal in MOSH sessions. Paste, drag and drop, use the paperclip button, or use the system share dialog to quickly upload a file to the host.
+- Other stability improvements.
+more
+Version 7.8.0
+2d ago
+App Privacy
+App Privacy
+The developer,
+Termius Corporation
+, indicated that the app’s privacy practices may include handling of data as described below. This information has not been verified by Apple. For more information, see the
+developer’s privacy policy
+.
+To help you better understand the developer’s responses, see
+Privacy Definitions and Examples
+.
+Privacy practices may vary, for example, based on the features you use or your age.
+Learn More
+Data Linked to You
+The following data, which may be collected and linked to your identity, may be used for the following purposes:
+Analytics
+Usage Data
+Product Interaction
+App Functionality
+Usage Data
+Product Interaction
+Diagnostics
+Crash Data
+The developer,
+Termius Corporation
+, indicated that the app’s privacy practices may include handling of data as described below. For more information, see the
+developer’s privacy policy
+.
+Data Linked to You
+The following data may be collected and linked to your identity:
+Usage Data
+Diagnostics
+Privacy practices may vary, for example, based on the features you use or your age.
+Learn More
+Accessibility
+The developer has not yet indicated which accessibility features this app supports.
+Learn More
+Information
+Seller
+Termius Corporation
+Size
+236.5 MB
+Category
+Developer Tools
+Compatibility
+Requires iOS 17.0 or later.
+iPhone
+Requires iOS 17.0 or later.
+iPad
+Requires iPadOS 17.0 or later.
+Apple Vision
+Requires visionOS 1.0 or later.
+Location
+This app may use your location even when it isn’t open, which can decrease device battery life.
+Languages
+English
+Age Rating
+4+
+4+
+Learn More
+In-App Purchases
+Yes
+Termius Pro Monthly
+$15.00
+Termius Pro Annual
+$119.00
+Termius Pro Monthly
+$15.00
+Termius Pro Annual
+$119.00
+Learn More
+Copyright
+© Termius Corporation
+Developer Website
+Privacy Policy
+You Might Also Like
+View
+xTerminal - SSH Terminal Shell
+SSH Client, Shell Console Term
+View
+a-Shell
+*Local* Unix terminal (&amp; ssh)
+View
+Terminal#
+SSH client
+View
+WebSSH - Sysadmin Toolbox
+SSH &amp; SFTP client since 2012!
+View
+Pyto IDE
+Python, C/C++
+View
+Runestone Text Editor
+Edit plain text and code
+View
+Web Inspector
+Developer Console for Safari
+View
+Textastic Code Editor
+Text, Coding, SFTP Client, SSH
+View
+Python Editor App
+Create and Run your Python 3
+View
+Kodex
+A powerful code editor
+United States
+Español (México)
+العربية
+Русский
+简体中文
+Français (France)
+한국어
+Português (Brazil)
+Tiếng Việt
+繁體中文 (台灣)
+Select a country or region
+Africa, Middle East, and India
+See All
+Algeria
+Angola
+Armenia
+Azerbaijan
+Bahrain
+Benin
+Botswana
+Burkina Faso
+Cameroun
+Cape Verde
+Chad
+Côte d’Ivoire
+Congo, The Democratic Republic Of The
+Egypt
+Eswatini
+Gabon
+Gambia
+Ghana
+Guinea-Bissau
+India
+Iraq
+Israel
+Jordan
+Kenya
+Kuwait
+Lebanon
+Liberia
+Libya
+Madagascar
+Malawi
+Mali
+Mauritania
+Mauritius
+Morocco
+Mozambique
+Namibia
+Niger (English)
+Nigeria
+Oman
+Qatar
+Congo, Republic of
+Rwanda
+São Tomé and Príncipe
+Saudi Arabia
+Senegal
+Seychelles
+Sierra Leone
+South Africa
+Sri Lanka
+Tajikistan
+Tanzania, United Republic Of
+Tunisia
+Turkmenistan
+United Arab Emirates
+Uganda
+Yemen
+Zambia
+Zimbabwe
+Asia Pacific
+See All
+Afghanistan
+Australia
+Bhutan
+Brunei Darussalam
+Cambodia
+中国大陆
+Fiji
+香港
+Indonesia (English)
+日本
+Kazakhstan
+대한민국
+Kyrgyzstan
+Lao People's Democratic Republic
+澳門
+Malaysia (English)
+Maldives
+Micronesia, Federated States of
+Mongolia
+Myanmar
+Nauru
+Nepal
+New Zealand
+Pakistan
+Palau
+Papua New Guinea
+Philippines
+Singapore
+Solomon Islands
+台灣
+Thailand
+Tonga
+Turkmenistan
+Uzbekistan
+Vanuatu
+Vietnam
+Europe
+See All
+Albania
+Armenia
+Österreich
+Belarus
+Belgium
+Bosnia and Herzegovina
+Bulgaria
+Croatia
+Cyprus
+Czechia
+Denmark
+Estonia
+Finland
+France (Français)
+Georgia
+Deutschland
+Greece
+Hungary
+Iceland
+Ireland
+Italia
+Kosovo
+Latvia
+Lithuania
+Luxembourg (English)
+Malta
+Moldova, Republic Of
+Montenegro
+Nederland
+North Macedonia
+Norway
+Poland
+Portugal (Português)
+Romania
+Россия
+Serbia
+Slovakia
+Slovenia
+España
+Sverige
+Schweiz
+Türkiye (English)
+Ukraine
+United Kingdom
+Latin America and the Caribbean
+See All
+Anguilla
+Antigua and Barbuda
+Argentina (Español)
+Bahamas
+Barbados
+Belize
+Bermuda
+Bolivia (Español)
+Brasil
+Virgin Islands, British
+Cayman Islands
+Chile (Español)
+Colombia (Español)
+Costa Rica (Español)
+Dominica
+República Dominicana
+Ecuador (Español)
+El Salvador (Español)
+Grenada
+Guatemala (Español)
+Guyana
+Honduras (Español)
+Jamaica
+México
+Montserrat
+Nicaragua (Español)
+Panamá
+Paraguay (Español)
+Perú
+St. Kitts and Nevis
+Saint Lucia
+St. Vincent and The Grenadines
+Suriname
+Trinidad and Tobago
+Turks and Caicos
+Uruguay (English)
+Venezuela (Español)
+The United States and Canada
+See All
+Canada (English)
+Canada (Français)
+United States
+Estados Unidos (Español México)
+الولايات المتحدة
+США
+美国 (简体中文)
+États-Unis (Français France)
+미국
+Estados Unidos (Português Brasil)
+Hoa Kỳ
+美國 (繁體中文台灣)
+Copyright © 2026
+Apple Inc.
+All rights reserved.
+Internet Service Terms
+App Store &amp; Privacy
+Cookie Warning
+Support

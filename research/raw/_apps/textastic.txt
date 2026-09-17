@@ -1,0 +1,600 @@
+‎Textastic Code Editor App - App Store
+Search
+Today
+Games
+Apps
+Arcade
+Platform
+iPhone
+iPad
+Mac
+Vision
+Watch
+TV
+Textastic Code Editor
+Text, Coding, SFTP Client, SSH
+Free · In‑App Purchases
+Share
+2.5K Ratings
+4.7
+Age Rating
+4+
+Years
+Chart
+#44
+Developer Tools
+Developer
+Alexander Blach
+Language
+EN
++ 1 More
+Size
+27.2
+MB
+iPhone, iPad
+Textastic is a comprehensive and versatile text and code editor for iPad and iPhone. It supports syntax highlighting for more than 80 programming and markup languages. Connect to SFTP, FTP, and WebDAV servers or to your Dropbox account. Use the built-in SSH terminal to work directly on your server.
+Features:
+- Syntax highlighting for more than 80 languages, including HTML, JavaScript, CSS, C++, Swift, Objective-C, Rust, XML, Markdown, PHP, Perl, Python, Ruby, Lua, YAML, JSON, SQL, shell scripts, and many more (full list available on the website)
+- Compatible with Sublime Text 3 and TextMate 1 syntax definitions and themes
+- Code completion for HTML, CSS, JavaScript, C, Objective-C, and PHP
+- SFTP (SSH), FTP, FTPS (FTP over SSL), WebDAV, and Dropbox clients
+- SSH terminal connections
+- Code formatter for HTML, CSS, JavaScript, and JSON
+- Git repositories from the Git client app Working Copy can be opened as external folders in Textastic
+- Emmet support
+- JavaScript console
+- iCloud Drive file synchronization
+- WebDAV server for easy file transfer between Textastic and your Mac or PC over Wi-Fi
+- Symbol list for quick navigation within a file
+- Full support for external keyboards, trackpads, and mice
+- Configurable keyboard shortcuts
+- Additional keys above the virtual keyboard for frequently used programming characters
+- Cursor navigation wheel for easy text selection
+- Move the cursor using swipe gestures
+- Split View and Slide Over multitasking on iPad
+- Open multiple files in tabs
+- Multiple windows on iPadOS
+- Dark Mode support
+- Support for common text encodings such as UTF-8, UTF-16, and ISO-8859-1
+- Support for different tab widths and soft tabs (spaces instead of tabs)
+- Custom fonts
+- Find and Replace, including regular expression search
+- Find in multiple files
+- File information such as character and word counts
+- Local and remote web preview for HTML and Markdown files
+Pricing:
+Textastic requires a monthly or yearly subscription or a one-time purchase. Each subscription includes a 7-day free trial with full access to all features.
+Privacy Policy: https://www.textasticapp.com/privacy.html
+Terms of Use: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+more
+Ratings &amp; Reviews
+4.7
+out of 5
+2.5K Ratings
+The Big T application FANTASTIC
+07/31/2019
+Master-and-Commander
+LOVE IT!  I am an old mainframe guy, and most of my career I used Xedit. I want to say Kedit wasFor DOS or Command Line but no GUI. So basically PC based, maybe AIX or Red Hat. Just not sure. My point is Xedit and Kedit were soraly missed.  GUI is OK but the dev. For Windows, AIX, or day Redhat stuck to what they knew. Sad. Your T-Rex editor name (I like that better than Textastic name. The other does not sing).  I was using NOTES+++ for a while, rich with function, but not intuitive. It would take an investment on time to fully understand. Plus, I really never trusted it. Nothing is Free. How to the get $$.T-isfortext or T-Rex are better names. To the point. I LIKE IT! It’s simple, intuitive, lite-weight, offers numerous function. It’s the closest to a green screen than you can get.The other editor I have is TextEdit and it looks to be very nice. But there is a learning curve and I just cannot spare the time right now. I will sit down with it sooner or later.Wish list. If you could purchase Kedit, not sure it’s avail, and integrate if making it available again would be great.2 points.     (1) you have a really good product with T-Rex (Textastic) do whatever you can to keep quality HIGH.      (2) Please Stay far away from subscription base charge back. Do not! Stay away! If you need funds to maintain or grow application, get with me and I’ll propose a model that will do just that.
+The Big T application FANTASTIC
+07/31/2019
+Master-and-Commander
+LOVE IT!  I am an old mainframe guy, and most of my career I used Xedit. I want to say Kedit wasFor DOS or Command Line but no GUI. So basically PC based, maybe AIX or Red Hat. Just not sure. My point is Xedit and Kedit were soraly missed.  GUI is OK but the dev. For Windows, AIX, or day Redhat stuck to what they knew. Sad. Your T-Rex editor name (I like that better than Textastic name. The other does not sing).  I was using NOTES+++ for a while, rich with function, but not intuitive. It would take an investment on time to fully understand. Plus, I really never trusted it. Nothing is Free. How to the get $$.T-isfortext or T-Rex are better names. To the point. I LIKE IT! It’s simple, intuitive, lite-weight, offers numerous function. It’s the closest to a green screen than you can get.The other editor I have is TextEdit and it looks to be very nice. But there is a learning curve and I just cannot spare the time right now. I will sit down with it sooner or later.Wish list. If you could purchase Kedit, not sure it’s avail, and integrate if making it available again would be great.2 points.     (1) you have a really good product with T-Rex (Textastic) do whatever you can to keep quality HIGH.      (2) Please Stay far away from subscription base charge back. Do not! Stay away! If you need funds to maintain or grow application, get with me and I’ll propose a model that will do just that.
+Makes coding simple on the iPad
+12/14/2024
+Maos
+I spent a long time looking for a good SSH client and text editor for the iPad and was resigned to using sub-par products until I found Textastic. I use it mostly with an iPad Pro, external keyboard, and mouse and it's easier to do coding via SSH on my iPad now than my desktop. I love that I can write markdown, HTML, CSS, Python, or YAML and Textastic handles them all. Even when I don't have my keyboard with me, I am not left without essential keys (hello, esc anyone?) that can be hard to find on the built-in virtual keyboard. Plus function keys!!! OMG. I even use it to write files to Obsidian (markdown) when I'm working and don't want to switch apps. Textastic is super versatile and the developer keeps on making improvements, so it's just getting better. Plus, it's not a subscription and they don't track you or invade your privacy. This is the best text editor on the iPad BAR NONE.
+Makes coding simple on the iPad
+12/14/2024
+Maos
+I spent a long time looking for a good SSH client and text editor for the iPad and was resigned to using sub-par products until I found Textastic. I use it mostly with an iPad Pro, external keyboard, and mouse and it's easier to do coding via SSH on my iPad now than my desktop. I love that I can write markdown, HTML, CSS, Python, or YAML and Textastic handles them all. Even when I don't have my keyboard with me, I am not left without essential keys (hello, esc anyone?) that can be hard to find on the built-in virtual keyboard. Plus function keys!!! OMG. I even use it to write files to Obsidian (markdown) when I'm working and don't want to switch apps. Textastic is super versatile and the developer keeps on making improvements, so it's just getting better. Plus, it's not a subscription and they don't track you or invade your privacy. This is the best text editor on the iPad BAR NONE.
+💕 it
+04/05/2025
+sharikovovov
+i love the app so much i signed up for the pro version — even though i was grandfathered in with my prev purchase. There are so many thoughtful touches in the app; i particularly like the option (available in the Apps=&gt;Textastic section of the ios Settings app) to reset open files. This allows idiots to save "oneself" (ie,myself) from some truly egregious regex mishaps. the developer also added the option to disable the annoying "Writing Tools" option from the ios context menu...AWESOME. didn't know how much i needed that. (if the search/replace field remembered ~10 of the most recent inputs, i would die of happiness)The app continues to amaze me with what it can handle; it almost never crashes (even when i blithely ignore its warning re: large files), is super zippy and just a pleasure to use. Buy it, you won't regret it!!
+Developer Response
+Thanks – your review really made my day!I’ve added your search/replace history idea to my todo list – good point.Love hearing how you’re using the little details in the app. I appreciate your support!
+💕 it
+04/05/2025
+sharikovovov
+i love the app so much i signed up for the pro version — even though i was grandfathered in with my prev purchase. There are so many thoughtful touches in the app; i particularly like the option (available in the Apps=&gt;Textastic section of the ios Settings app) to reset open files. This allows idiots to save "oneself" (ie,myself) from some truly egregious regex mishaps. the developer also added the option to disable the annoying "Writing Tools" option from the ios context menu...AWESOME. didn't know how much i needed that. (if the search/replace field remembered ~10 of the most recent inputs, i would die of happiness)The app continues to amaze me with what it can handle; it almost never crashes (even when i blithely ignore its warning re: large files), is super zippy and just a pleasure to use. Buy it, you won't regret it!!
+Developer Response
+04/07/2025
+Thanks – your review really made my day!I’ve added your search/replace history idea to my todo list – good point.Love hearing how you’re using the little details in the app. I appreciate your support!
+I do all my web development in this app
+01/15/2018
+vriley
+Yes, I have a Macbook Pro with all the latest web dev tools. But I always have my iPad with me, and I end up doing all my development with Textastic. It has its own local file structure so you can build the server folder and file structure locally and develop with relative links. You can store all the resources (graphics, images, scripts, stylesheets, etc.) in their proper places so the entire site can be uploaded as it exists on the device. My typical workflow starts with Graphic for graphic and image resources, Pixelmator to edit images to size, and Textastic for html, css, and Javascript as needed. iCloud files are synced automatically so I can pick up on any device, and upload to the web host directly from the iCloud directories. This is one of the essential apps that make the iPad so incredibly useful.
+I do all my web development in this app
+01/15/2018
+vriley
+Yes, I have a Macbook Pro with all the latest web dev tools. But I always have my iPad with me, and I end up doing all my development with Textastic. It has its own local file structure so you can build the server folder and file structure locally and develop with relative links. You can store all the resources (graphics, images, scripts, stylesheets, etc.) in their proper places so the entire site can be uploaded as it exists on the device. My typical workflow starts with Graphic for graphic and image resources, Pixelmator to edit images to size, and Textastic for html, css, and Javascript as needed. iCloud files are synced automatically so I can pick up on any device, and upload to the web host directly from the iCloud directories. This is one of the essential apps that make the iPad so incredibly useful.
+What’s New
+Version History
+- Fixed a rare issue where closing an editor tab before its file finished opening could keep file-related system resources active.
+- Fixed an issue where deleting local files could fail on future OS versions.
+10.9.8
+Sep 5
+- The list of syntax definitions is now searchable, making it faster to find a language by name or file extension.
+- Improved File Properties with an updated appearance, simplified line ending selection and clearer character encoding guidance.
+- Minor improvements to the file creation interface.
+- Fixed an issue where opening a file from another app (such as Files or Shortcuts) while Textastic was not running could create a duplicate tab instead of switching to the existing one.
+- Fixed an issue where recent changes to open files could be missing from exported, shared, or zipped files and folders. Open files within the selected folder are now automatically saved before exporting, sharing, or zipping.
+10.9.7
+Aug 11
+- Fixed an issue where some app data could persist after deleting and reinstalling the app.
+10.9.6
+Jul 29
+The WebDAV client has been reimplemented using modern APIs:
+- Now supports multiple connections to the same server with different credentials/accounts
+- Improved compatibility with WebDAV servers, including support for file modification dates on more servers
+- Fixed an issue with folders whose names contain special characters such as ()!+ on some WebDAV servers
+- More reliable uploads, downloads, and file operations
+Also improved:
+- “Show in Files App” in the context menu for files: the selected file is now highlighted in the Files app instead of only opening its parent folder
+10.9.5
+Jul 1
+- Updated OpenSSL and libcurl to the latest versions.
+10.9.4
+Apr 13
+- Create file or folder: You can now press Return to confirm creation.
+- Deleting files in “Local Files”, “iCloud”, or external iCloud Drive folders now moves them to “Recently Deleted” in the Files app, where they can be restored if needed.
+- Fixed incorrect formatting of PHP code inside script tags in PHP files.
+- Other minor improvements.
+10.9.3
+Feb 24
+- Added syntax definitions for TOML, Kotlin, and Jsonnet.
+- Improved automatic syntax detection for files like “Makefile”, “Cargo.lock”, and “Gemfile”: If no match is found by file extension, the full file name is used as a fallback.
+10.9.2
+Feb 12
+- Fixed: On iOS 18 and 26, underlines were not drawn in the code editor (for example, for links and email addresses in Markdown files).
+10.9.1
+Feb 5
+New: Export and Import Remote Connections
+You can now export (S)FTP and WebDAV connections to a JSON file, then import them on another device or keep them as a backup.
+This can be used to:
+- Move connections between devices (for example, from iPhone to iPad)
+- Create backups of your connection settings
+- Share connection setups with your team
+- Edit or create connection files manually if needed
+You can find more details in the manual under “Remote Connections” &gt; “Exporting and Importing Remote Connections”:
+https://www.textasticapp.com/v10/manual/remote_servers/export_import.html
+Other Changes:
+- Removed the Google Drive client, as previously announced
+- File &gt; Save (Cmd-S) now always saves the currently open file, even if it was not modified
+10.9
+Jan 20
+Fixed a rare issue where a view could be dismissed twice.
+10.8.7
+12/31/2025
+- On iPad, files opened via “Open With” &gt; Textastic in the Files app or “Open” in Working Copy now open as new tabs in an existing Textastic window instead of always opening a new window.
+- On iPad, window titles now update correctly after opening files.
+- The special folder icon with a gear for the #Textastic folder is now only shown for the #Textastic folder in “Local Files.”
+10.8.6
+12/18/2025
+- Added support for the “Prefer Non-Blinking Cursor” accessibility setting (located in Accessibility &gt; Motion).
+- Fixed a crash that could occur when toggling underline of text at the start of a Markdown or HTML file.
+10.8.5
+11/26/2025
+- Improved unpacking of ZIP files: ZIP archives containing only a single file or folder no longer create an additional subfolder.
+- Other minor improvements.
+10.8.4
+11/22/2025
+- Updated the libcurl library to the latest version to fix an issue when downloading empty files over SFTP on a reused connection. Previously, downloading 0-byte files over SFTP after listing a directory could result in the error message "Number of redirects hit maximum amount."
+- Web preview: On iOS 26, the debug console button now pulses when there is a new entry. On earlier iOS versions, a badge with the number of entries is shown.
+10.8.3
+10/29/2025
+- Fixed an issue on iPadOS 26 that sometimes caused the insertion point to jump to the beginning of the file when working with multiple windows and clicking in the editor with a trackpad or mouse.
+- Added a workaround for an issue where the editor would scroll to the top and immediately to the bottom when tapping at the top of the window on iPadOS 26.
+10.8.2
+10/21/2025
+- Fixed an issue with the web preview in Dark Mode where websites that didn’t set a background color appeared with a black background instead of white, resulting in black text on a black background.
+- Fixed an issue where the “…” button could be missing on iPhone after downloading the currently open file using the file transfer screen and reopening the same file.
+- Other minor improvements.
+10.8.1
+10/14/2025
+Added support for the Liquid Glass design on iOS and iPadOS 26. The interface is fully updated to match the latest system appearance.
+Includes an updated app icon and adjustments for the new iPhone Air display size.
+Other Improvements:
+- Web Preview: fixed a brief white flicker when opened in Dark Mode.
+- Improved naming of line ending types.
+- Disabled auto-pairing of single quotes in LaTeX and TeX math environments.
+- Other minor improvements and fixes.
+10.8
+10/07/2025
+- Added support for “Use Selection for Find” (Cmd-E) to quickly search for the selected text or the word at the insertion point.
+- Added full support for the new menu bar in upcoming iPadOS versions.
+- Updated some keyboard shortcuts (like “Show Sidebar”) to match system defaults. You can customize keyboard shortcuts in Settings → Keyboard Shortcuts.
+- Fixed layout issues with the on-screen keyboard on the upcoming iPadOS version.
+- Other minor improvements.
+10.7.5
+09/06/2025
+- Fixed an issue where triple-tapping empty lines at the start of a file could cause an infinite loop and eventual crash.
+- Fixed an issue where auto-indentation could interfere with dictation, causing it to stop unexpectedly.
+- Other minor improvements.
+10.7.4
+08/11/2025
+- Fixed an issue where inserting new lines while zoomed into the editor could cause parts of the editor to not be fully redrawn.
+- Other minor improvements.
+10.7.3
+07/29/2025
+- Fixed a flickering issue that could occur when scrolling with automatic word wrap disabled. (Present since the previous version.)
+- Fixed an issue where the second-to-last tab could sometimes disappear on certain iPhone models.
+10.7.2
+07/25/2025
+- Tapping the editor to bring up the on-screen keyboard now scrolls the tapped line into view if it would otherwise be hidden behind the keyboard.
+- Removed the redundant “Files” button on iPad, which always displayed the sidebar as an overlay. The sidebar now automatically appears as an overlay in portrait orientation on smaller devices and with small window sizes. You can still overlay the sidebar in landscape orientation using Ctrl-Option-Cmd-B or by swiping to the right.
+- Improved button layout on small iPad displays and with small window sizes.
+- Improved interactive window resizing on iPadOS and fixed flickering on future systems.
+- Updated the web preview chapter in the manual.
+- Updated the manual entry on how Textastic integrates with Working Copy.
+- Updated the libcurl library to the latest version.
+- Other minor improvements.
+10.7.1
+07/16/2025
+New: Code Formatting!
+You can now format HTML, CSS, JavaScript, and JSON files using the new built-in formatter based on js-beautify.
+Tap the (…) menu in the top-right corner and select “Format Code”, or press Cmd-Option-L to reformat the current file.
+The formatter is highly configurable: you can adjust line wrapping, indentation, brace style, newline handling, spacing rules, and much more under Settings → Format Code.
+Also in this update:
+- When uploading to WebDAV, Textastic now sets the “Expect: 100-continue” HTTP header to make sure a server accepts an upload before data is sent. This can prevent duplicate sending of data when the server requires re-authentication.
+- Fixed an issue when uploading files to cPanel WebDAV servers (cpdavd): that server closes the connection after each response instead of keeping it alive, which could result in a “request stream exhausted” error.
+- Moved Password Lock settings to Settings → Other: since iOS/iPadOS 18, you can touch and hold the app icon on the Home Screen and select “Require Face ID” (or Touch ID or Passcode) to lock the app. This is the preferred method since it works at the system level and also protects Textastic's local files in the Files app.
+- Other minor improvements.
+10.7
+06/24/2025
+- Fixed an issue where uploading folders to FTP/FTPS servers could fail if remote folders did not already exist.
+- Fixed a rare crash that could occur when closing certain very large files.
+10.6.4
+05/19/2025
+- Improved automatic closing of quotes: quotes are no longer closed after a backslash (e.g., when entering umlauts in LaTeX), and they are now properly closed before semicolons and commas in CSS files.
+- SSH Terminal: Added support for the Delete key (forward delete) on external keyboards.
+- Updated the HTML5 template and removed outdated HTML 4.01 and XHTML templates. The HTML5 template now matches what's Emmet inserts when typing "!" and hitting Tab.
+- HTML script tag code completion: no longer inserts the type and src attributes by default. The src attribute can be added manually or using the "script:src" Emmet abbreviation.
+10.6.3
+05/07/2025
+- Fixed a rare issue where closing an editor tab before its file finished opening could keep file-related system resources active.
+- Fixed an issue where deleting local files could fail on future OS versions.
+more
+Version 10.9.8
+Sep 5
+App Privacy
+App Privacy
+The developer,
+Alexander Blach
+, indicated that the app’s privacy practices may include handling of data as described below. This information has not been verified by Apple. For more information, see the
+developer’s privacy policy
+.
+To help you better understand the developer’s responses, see
+Privacy Definitions and Examples
+.
+Privacy practices may vary, for example, based on the features you use or your age.
+Learn More
+Data Not Collected
+The developer does not collect any data from this app.
+The developer,
+Alexander Blach
+, indicated that the app’s privacy practices may include handling of data as described below. For more information, see the
+developer’s privacy policy
+.
+Data Not Collected
+The developer does not collect any data from this app.
+Privacy practices may vary, for example, based on the features you use or your age.
+Learn More
+Accessibility
+Accessibility
+The developer,
+Alexander Blach
+, indicated that this app supports the following accessibility features to help make common tasks in the app faster and easier to complete.
+Learn More
+VoiceOver
+Navigate and explore the app using gestures, braille, and speech output.
+Voice Control
+Navigate and interact with the app using your voice to tap, swipe, type, and more.
+Larger Text
+Increase the text size in the app to 200% or more.
+Dark Interface
+Apply a dark color scheme to the screens, menus, and controls to reduce eye strain.
+Differentiate Without Color Alone
+Use shapes or text, in addition to or instead of color, to distinguish key information.
+Sufficient Contrast
+Increase or adjust the contrast between text or iconography and background.
+Reduced Motion
+Modify or reduce certain types of animation that may cause motion sickness or discomfort.
+The developer indicated that this app supports the following accessibility features.
+Learn More
+Supported Features
+VoiceOver
+Voice Control
+Larger Text
+Dark Interface
+Differentiate Without Color Alone
+Sufficient Contrast
+Reduced Motion
+Information
+Seller
+Alexander Blach
+Size
+27.2 MB
+Category
+Developer Tools
+Compatibility
+Requires iOS 16.0 or later.
+iPhone
+Requires iOS 16.0 or later.
+iPad
+Requires iPadOS 16.0 or later.
+Apple Vision
+Requires visionOS 1.0 or later.
+Languages
+English and German
+Age Rating
+4+
+4+
+Learn More
+In-App Purchases
+Yes
+Textastic Pro (Yearly)
+$19.99
+Textastic Pro (Monthly)
+$2.99
+Textastic Pro (One-Time)
+$69.99
+Learn More
+Copyright
+© 2010-2026 Alexander Blach
+Developer Website
+Privacy Policy
+Supports
+Family Sharing
+Some in-app purchases and subscriptions may be shareable with your family group when Family Sharing is enabled.
+Learn More
+More by Alexander Blach
+View
+Weather Status for Netatmo
+Station Data at a Glance
+You Might Also Like
+View
+Kodex
+A powerful code editor
+View
+Runestone Text Editor
+Edit plain text and code
+View
+a-Shell
+*Local* Unix terminal (&amp; ssh)
+View
+Pyto IDE
+Python, C/C++
+View
+Code Editor - Compiler &amp; IDE
+Programming on mobile
+View
+Git client - Working Copy
+for GitHub and self-hosted
+View
+Swifty Compiler: Swift IDE
+Code Editor &amp; Playground
+View
+Proxyman - Capture HTTPS
+Capture HTTPS from your iPhone
+View
+Web Inspector
+Developer Console for Safari
+View
+a-Shell mini
+*Local* Unix terminal (&amp; ssh)
+United States
+Español (México)
+العربية
+Русский
+简体中文
+Français (France)
+한국어
+Português (Brazil)
+Tiếng Việt
+繁體中文 (台灣)
+Select a country or region
+Africa, Middle East, and India
+See All
+Algeria
+Angola
+Armenia
+Azerbaijan
+Bahrain
+Benin
+Botswana
+Burkina Faso
+Cameroun
+Cape Verde
+Chad
+Côte d’Ivoire
+Congo, The Democratic Republic Of The
+Egypt
+Eswatini
+Gabon
+Gambia
+Ghana
+Guinea-Bissau
+India
+Iraq
+Israel
+Jordan
+Kenya
+Kuwait
+Lebanon
+Liberia
+Libya
+Madagascar
+Malawi
+Mali
+Mauritania
+Mauritius
+Morocco
+Mozambique
+Namibia
+Niger (English)
+Nigeria
+Oman
+Qatar
+Congo, Republic of
+Rwanda
+São Tomé and Príncipe
+Saudi Arabia
+Senegal
+Seychelles
+Sierra Leone
+South Africa
+Sri Lanka
+Tajikistan
+Tanzania, United Republic Of
+Tunisia
+Turkmenistan
+United Arab Emirates
+Uganda
+Yemen
+Zambia
+Zimbabwe
+Asia Pacific
+See All
+Afghanistan
+Australia
+Bhutan
+Brunei Darussalam
+Cambodia
+中国大陆
+Fiji
+香港
+Indonesia (English)
+日本
+Kazakhstan
+대한민국
+Kyrgyzstan
+Lao People's Democratic Republic
+澳門
+Malaysia (English)
+Maldives
+Micronesia, Federated States of
+Mongolia
+Myanmar
+Nauru
+Nepal
+New Zealand
+Pakistan
+Palau
+Papua New Guinea
+Philippines
+Singapore
+Solomon Islands
+台灣
+Thailand
+Tonga
+Turkmenistan
+Uzbekistan
+Vanuatu
+Vietnam
+Europe
+See All
+Albania
+Armenia
+Österreich
+Belarus
+Belgium
+Bosnia and Herzegovina
+Bulgaria
+Croatia
+Cyprus
+Czechia
+Denmark
+Estonia
+Finland
+France (Français)
+Georgia
+Deutschland
+Greece
+Hungary
+Iceland
+Ireland
+Italia
+Kosovo
+Latvia
+Lithuania
+Luxembourg (English)
+Malta
+Moldova, Republic Of
+Montenegro
+Nederland
+North Macedonia
+Norway
+Poland
+Portugal (Português)
+Romania
+Россия
+Serbia
+Slovakia
+Slovenia
+España
+Sverige
+Schweiz
+Türkiye (English)
+Ukraine
+United Kingdom
+Latin America and the Caribbean
+See All
+Anguilla
+Antigua and Barbuda
+Argentina (Español)
+Bahamas
+Barbados
+Belize
+Bermuda
+Bolivia (Español)
+Brasil
+Virgin Islands, British
+Cayman Islands
+Chile (Español)
+Colombia (Español)
+Costa Rica (Español)
+Dominica
+República Dominicana
+Ecuador (Español)
+El Salvador (Español)
+Grenada
+Guatemala (Español)
+Guyana
+Honduras (Español)
+Jamaica
+México
+Montserrat
+Nicaragua (Español)
+Panamá
+Paraguay (Español)
+Perú
+St. Kitts and Nevis
+Saint Lucia
+St. Vincent and The Grenadines
+Suriname
+Trinidad and Tobago
+Turks and Caicos
+Uruguay (English)
+Venezuela (Español)
+The United States and Canada
+See All
+Canada (English)
+Canada (Français)
+United States
+Estados Unidos (Español México)
+الولايات المتحدة
+США
+美国 (简体中文)
+États-Unis (Français France)
+미국
+Estados Unidos (Português Brasil)
+Hoa Kỳ
+美國 (繁體中文台灣)
+Copyright © 2026
+Apple Inc.
+All rights reserved.
+Internet Service Terms
+App Store &amp; Privacy
+Cookie Warning
+Support

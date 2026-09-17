@@ -1,0 +1,594 @@
+A view controller that provides access to documents or destinations outside your app’s sandbox.
+class
+ 
+UIDocumentPickerViewController
+UIDocumentPickerViewController
+=== UIDocumentPickerViewController
+@
+MainActor
+ 
+class
+ 
+UIDocumentPickerViewController
+Overview
+Use a document picker view controller to select a document to open or export, and optionally copy. Don’t copy the document if you can avoid it. The document picker operates in two modes:
+Open a document. The user selects a document. The document picker provides access to the document, and the user can edit the document in place. Optionally, you can specify that the document picker makes a copy of the document, leaving the original unchanged.
+Export a local document. The user selects a destination. The document picker moves the document, and the user can access it and edit it in place. Optionally, you can specify that the document picker makes a copy of the document, leaving the original unchanged.
+Work with external documents
+Both the open and export operations grant access to documents outside your app’s sandbox. This access gives users an unprecedented amount of flexibility when working with their documents. However, it also adds a layer of complexity to your file handling. External documents have the following additional requirements:
+The open and move operations provide security-scoped URLs for all external documents. Call the 
+ method to access or bookmark these documents, and the 
+ method to release them. If you’re using a 
+ subclass to manage your document, it automatically manages the security-scoped URL for you.
+Always use file coordinators (see 
+) to read and write to external documents.
+Always use a file presenter (see 
+) when displaying the contents of an external document.
+Don’t save URLs that the open and move operations provide. You can, however, save a bookmark to these URLs after calling 
+ to ensure you have access. Call the 
+ method and pass in the 
+ option, creating a bookmark that contains a security-scoped URL.
+For more information about working with external documents, see 
+ and 
+.
+=== Inherits From
+=== Conforms To
+=== Documents and directories
+=== Creating a document picker
+=== Getting the user-selected document
+=== Configuring a document picker
+=== Deprecated
+=== Initializers
+A protocol that an object adopts to create a bar object in your app.
+protocol
+ 
+NSTouchBarProvider
+NSTouchBarProvider
+=== NSTouchBarProvider
+A protocol that enables an object to be encoded and decoded for archiving and distribution.
+protocol
+ 
+NSCoding
+NSCoding
+=== NSCoding
+The interface an app extension uses to respond to a request from a host app.
+protocol
+ 
+NSExtensionRequestHandling
+NSExtensionRequestHandling
+=== NSExtensionRequestHandling
+An object that coordinates the reading and writing of files and directories among file presenters.
+class
+ 
+NSFileCoordinator
+NSFileCoordinator
+=== NSFileCoordinator
+The interface a file coordinator uses to inform an object presenting a file about changes to that file made elsewhere in the system.
+protocol
+ 
+NSFilePresenter
+NSFilePresenter
+=== NSFilePresenter
+Specifies that when creating a security-scoped bookmark, upon resolution, it provides a security-scoped URL allowing read/write access to a file-system resource.
+static
+ 
+var
+ 
+withSecurityScope
+: 
+NSURL
+.
+BookmarkCreationOptions
+=== withSecurityScope
+Returns a bookmark for the URL, created with specified options and resource values.
+func
+ 
+bookmarkData
+(
+options
+: 
+NSURL
+.
+BookmarkCreationOptions
+, 
+includingResourceValuesForKeys
+: [
+URLResourceKey
+]?, 
+relativeTo
+: 
+URL
+?) 
+throws
+ -> 
+Data
+=== bookmarkData(options:includingResourceValuesForKeys:relativeTo:)
+In an app that has adopted App Sandbox, makes the resource pointed to by a security-scoped URL available to the app.
+func
+ 
+startAccessingSecurityScopedResource
+() -> 
+Bool
+=== startAccessingSecurityScopedResource()
+In an app that adopts App Sandbox, revokes access to the resource pointed to by a security-scoped URL.
+func
+ 
+stopAccessingSecurityScopedResource
+()
+=== stopAccessingSecurityScopedResource()
+The group of methods that are fundamental to all Objective-C objects.
+protocol
+ 
+NSObjectProtocol
+NSObjectProtocol
+=== NSObjectProtocol
+A type whose instances can be encoded, and appropriately passed, as
+ 
+elements of a C 
+.
+protocol
+ 
+CVarArg
+CVarArg
+=== CVarArg
+A type with a customized textual representation suitable for debugging
+ 
+purposes.
+protocol
+ 
+CustomDebugStringConvertible
+CustomDebugStringConvertible
+=== CustomDebugStringConvertible
+A type with a customized textual representation.
+protocol
+ 
+CustomStringConvertible
+CustomStringConvertible
+=== CustomStringConvertible
+A type that can be compared for value equality.
+protocol
+ 
+Equatable
+Equatable
+=== Equatable
+A type that can be hashed into a 
+ to produce an integer hash value.
+protocol
+ 
+Hashable
+Hashable
+=== Hashable
+A singleton actor whose executor is equivalent to the main
+ 
+dispatch queue.
+actor
+ 
+MainActor
+MainActor
+=== MainActor
+A thread-safe type whose values can be shared across arbitrary concurrent
+ 
+contexts without introducing a risk of data races.
+protocol
+ 
+Sendable
+Sendable
+=== Sendable
+A type whose metatype can be shared across arbitrary isolation domains
+ 
+without introducing a risk of data races.
+protocol
+ 
+SendableMetatype
+SendableMetatype
+=== SendableMetatype
+=== Technologies
+Construct and manage a graphical, event-driven user interface for your iOS, iPadOS, or tvOS app.
+=== UIKit
+An interface that provides a source for shareable content to fulfill user requests to share current content.
+protocol
+ 
+UIActivityItemsConfigurationProviding
+UIActivityItemsConfigurationProviding
+=== UIActivityItemsConfigurationProviding
+A collection of methods that gives you access to the appearance proxy for a class.
+protocol
+ 
+UIAppearance
+UIAppearance
+=== UIAppearance
+A protocol that a class must adopt to allow appearance customization using the 
+ API.
+protocol
+ 
+UIAppearanceContainer
+UIAppearanceContainer
+=== UIAppearanceContainer
+A set of methods for adapting the contents of your view controllers to size and trait changes.
+protocol
+ 
+UIContentContainer
+UIContentContainer
+=== UIContentContainer
+A view controller for browsing and performing actions on documents that you store locally and in the cloud.
+class
+ 
+UIDocumentBrowserViewController
+UIDocumentBrowserViewController
+=== UIDocumentBrowserViewController
+A view controller that previews, opens, or prints files with a file format that your app can’t handle directly.
+class
+ 
+UIDocumentInteractionController
+UIDocumentInteractionController
+=== UIDocumentInteractionController
+A set of methods for tracking when the user selects a document or destination, or cancels the operation.
+protocol
+ 
+UIDocumentPickerDelegate
+UIDocumentPickerDelegate
+=== UIDocumentPickerDelegate
+Modes that define the type of file transfer operation that the document picker uses.
+enum
+ 
+UIDocumentPickerMode
+UIDocumentPickerMode
+=== UIDocumentPickerMode
+A view controller that provides access to documents or destinations outside your app’s sandbox.
+class
+ 
+UIDocumentPickerViewController
+UIDocumentPickerViewController
+=== UIDocumentPickerViewController
+A Boolean value that determines whether the user can select more than one document at a time.
+var
+ 
+allowsMultipleSelection
+: 
+Bool
+allowsMultipleSelection
+=== allowsMultipleSelection
+An object that acts as the delegate of the view controller.
+var
+ 
+delegate
+: (any 
+UIDocumentPickerDelegate
+)?
+delegate
+=== delegate
+The initial directory that the document picker displays.
+var
+ 
+directoryURL
+: 
+URL
+?
+directoryURL
+=== directoryURL
+The type of file transfer operation that the document picker uses.
+var
+ 
+documentPickerMode
+: 
+UIDocumentPickerMode
+documentPickerMode
+=== documentPickerMode
+init
+(
+URL
+: 
+URL
+, 
+inMode
+: 
+UIDocumentPickerMode
+)
+=== init(URL:inMode:)
+init
+(
+URLs
+: [
+URL
+], 
+inMode
+: 
+UIDocumentPickerMode
+)
+=== init(URLs:inMode:)
+Returns an initialized object from data in a specified unarchiver.
+init
+?(
+coder
+: 
+NSCoder
+)
+- 
+initWithCoder:
+=== init(coder:)
+Creates and returns a document picker that can open or copy the specified file types.
+init
+(
+documentTypes
+: [
+String
+], 
+in
+: 
+UIDocumentPickerMode
+)
+- 
+initWithDocumentTypes:inMode:
+=== init(documentTypes:in:)
+init
+(
+documentTypes
+: [
+String
+], 
+inMode
+: 
+UIDocumentPickerMode
+)
+=== init(documentTypes:inMode:)
+Creates and returns a document picker that can export the types of documents you specify.
+convenience
+ 
+init
+(
+forExporting
+: [
+URL
+])
+- 
+initForExportingURLs:
+=== init(forExporting:)
+Creates and returns a document picker that can export or copy the types of documents you specify.
+init
+(
+forExporting
+: [
+URL
+], 
+asCopy
+: 
+Bool
+)
+- 
+initForExportingURLs:asCopy:
+=== init(forExporting:asCopy:)
+convenience
+ 
+init
+(
+forExportingURLs
+: [
+URL
+])
+=== init(forExportingURLs:)
+init
+(
+forExportingURLs
+: [
+URL
+], 
+asCopy
+: 
+Bool
+)
+=== init(forExportingURLs:asCopy:)
+Creates and returns a document picker that can open the types of documents you specify.
+convenience
+ 
+init
+(
+forOpeningContentTypes
+: [
+UTType
+])
+- 
+initForOpeningContentTypes:
+=== init(forOpeningContentTypes:)
+Creates and returns a document picker that can open or copy the types of documents you specify.
+init
+(
+forOpeningContentTypes
+: [
+UTType
+], 
+asCopy
+: 
+Bool
+)
+- 
+initForOpeningContentTypes:asCopy:
+=== init(forOpeningContentTypes:asCopy:)
+Initializes and returns a document picker that can export or copy the specified document.
+init
+(
+url
+: 
+URL
+, 
+in
+: 
+UIDocumentPickerMode
+)
+- 
+initWithURL:inMode:
+=== init(url:in:)
+Creates and returns a document picker that can export or move the specified documents.
+init
+(
+urls
+: [
+URL
+], 
+in
+: 
+UIDocumentPickerMode
+)
+- 
+initWithURLs:inMode:
+=== init(urls:in:)
+A Boolean value that determines whether the browser always shows file extensions.
+var
+ 
+shouldShowFileExtensions
+: 
+Bool
+shouldShowFileExtensions
+=== shouldShowFileExtensions
+A view controller that manages and presents a document stored locally or in the cloud.
+class
+ 
+UIDocumentViewController
+UIDocumentViewController
+=== UIDocumentViewController
+A set of methods that define the focus behavior for a branch of the view hierarchy.
+protocol
+ 
+UIFocusEnvironment
+UIFocusEnvironment
+=== UIFocusEnvironment
+The interface that determines whether a responder object supports paste configuration.
+protocol
+ 
+UIPasteConfigurationSupporting
+UIPasteConfigurationSupporting
+=== UIPasteConfigurationSupporting
+A set of standard methods that apps can adopt to support editing.
+protocol
+ 
+UIResponderStandardEditActions
+UIResponderStandardEditActions
+=== UIResponderStandardEditActions
+Methods for adding objects to your state restoration archives.
+protocol
+ 
+UIStateRestoring
+UIStateRestoring
+=== UIStateRestoring
+A type that calls your code in reaction to changes in the trait environment.
+protocol
+ 
+UITraitChangeObservable
+UITraitChangeObservable
+=== UITraitChangeObservable
+A set of methods that makes the iOS interface environment available to your app.
+protocol
+ 
+UITraitEnvironment
+UITraitEnvironment
+=== UITraitEnvironment
+The protocol you adopt to restore an object’s state from a user activity.
+protocol
+ 
+UIUserActivityRestoring
+UIUserActivityRestoring
+=== UIUserActivityRestoring
+An object that manages a view hierarchy for your UIKit app.
+class
+ 
+UIViewController
+UIViewController
+=== UIViewController
+Give people access to their local or remote documents from within your app.
+=== Adding a document browser to your app
+Implement a custom document file format to manage user interactions with files on different cloud storage providers.
+=== Building a document browser app for custom file formats
+Provide access to on-device and cloud files by adding a document browser to your app.
+=== Building an app with a document browser
+Add unique elements to your app’s document launch scene.
+=== Customizing a document-based app’s launch experience
+Use a document picker to access the content of a directory outside your app’s container.
+=== Providing access to directories
+UIDocumentPickerViewController
+UIDocumentPickerViewController
+=== Creating a document picker
+=== Getting the user-selected document
+=== Configuring a document picker
+=== Deprecated
+=== Inherits From
+=== Documents and directories
+@interface
+ 
+UIDocumentPickerViewController
+ : 
+UIViewController
+NSTouchBarProvider
+NSCoding
+NSExtensionRequestHandling
+NSFileCoordinator
+NSFilePresenter
+NSURLBookmarkCreationWithSecurityScope
+NSURLBookmarkCreationWithSecurityScope
+- 
+bookmarkDataWithOptions:includingResourceValuesForKeys:relativeToURL:error:
+- 
+bookmarkDataWithOptions:includingResourceValuesForKeys:relativeToURL:error:
+- 
+startAccessingSecurityScopedResource
+- 
+startAccessingSecurityScopedResource
+- 
+stopAccessingSecurityScopedResource
+- 
+stopAccessingSecurityScopedResource
+NSObject
+NSObject
+UIActivityItemsConfigurationProviding
+UIActivityItemsConfigurationProviding
+UIAppearance
+UIAppearance
+UIAppearanceContainer
+UIAppearanceContainer
+UIContentContainer
+UIContentContainer
+UIDocumentBrowserViewController
+UIDocumentBrowserViewController
+UIDocumentInteractionController
+UIDocumentInteractionController
+UIDocumentPickerDelegate
+UIDocumentPickerDelegate
+UIDocumentPickerMode
+UIDocumentPickerMode
+UIDocumentPickerViewController
+UIDocumentPickerViewController
+allowsMultipleSelection
+delegate
+directoryURL
+documentPickerMode
+- 
+initWithCoder:
+- 
+initWithDocumentTypes:inMode:
+- 
+initForExportingURLs:
+- 
+initForExportingURLs:asCopy:
+- 
+initForOpeningContentTypes:
+- 
+initForOpeningContentTypes:asCopy:
+- 
+initWithURL:inMode:
+- 
+initWithURLs:inMode:
+shouldShowFileExtensions
+UIDocumentViewController
+UIDocumentViewController
+UIFocusEnvironment
+UIFocusEnvironment
+UIPasteConfigurationSupporting
+UIPasteConfigurationSupporting
+UIResponderStandardEditActions
+UIResponderStandardEditActions
+UIStateRestoring
+UIStateRestoring
+UITraitEnvironment
+UITraitEnvironment
+UIUserActivityRestoring
+UIUserActivityRestoring
+UIViewController
+UIViewController

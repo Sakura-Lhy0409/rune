@@ -1,0 +1,31 @@
+The container identifiers for the iCloud production environment.
+iCloud Container Identifiers Entitlement
+=== iCloud Container Identifiers Entitlement
+=== Details
+Discussion
+To add this entitlement to your app, enable the iCloud capability in Xcode.
+=== iCloud
+Resources located in an app, framework, or plugin bundle.
+Bundle Resources
+=== Bundle Resources
+Key-value pairs that grant an executable permission to use a service or technology.
+Entitlements
+=== Entitlements
+The container identifiers for the iCloud development environment.
+com.apple.developer.icloud-container-development-container-identifiers
+=== com.apple.developer.icloud-container-development-container-identifiers
+The development or production environment to use for the iCloud containers.
+com.apple.developer.icloud-container-environment
+=== com.apple.developer.icloud-container-environment
+The container identifiers for the iCloud production environment.
+iCloud Container Identifiers Entitlement
+=== iCloud Container Identifiers Entitlement
+The iCloud services used by the app.
+iCloud Services Entitlement
+=== iCloud Services Entitlement
+The container identifier to use for iCloud key-value storage.
+iCloud Key-Value Store Entitlement
+=== iCloud Key-Value Store Entitlement
+=== Technologies
+=== iCloud
+Entitlements

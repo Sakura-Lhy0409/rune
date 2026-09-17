@@ -1,0 +1,41 @@
+The entitlement the system requires for a continuous background task to use the GPU.
+Background GPU Access
+=== Background GPU Access
+=== Details
+=== Attributes
+Discussion
+This entitlement works with 
+, which allows your app’s critical work to complete even when the app goes into the background before the task finishes.
+To enable GPU use in the task, add this entitlement to your app by adding the Background GPU Access capability to your target in Xcode. For more information, see 
+.
+For more information about continuous background tasks, see 
+.
+=== Background tasks
+Resources located in an app, framework, or plugin bundle.
+Bundle Resources
+=== Bundle Resources
+Key-value pairs that grant an executable permission to use a service or technology.
+Entitlements
+=== Entitlements
+The entitlement the system requires for a continuous background task to use the GPU.
+Background GPU Access
+=== Background GPU Access
+An entitlement that lets a background task run inference on the Neural Engine.
+Background Inference
+=== Background Inference
+A task that starts in the foreground and can continue running in the background as needed.
+class
+ 
+BGContinuedProcessingTask
+BGContinuedProcessingTask
+=== BGContinuedProcessingTask
+Use a continuous background task to do work that can complete as needed.
+=== Performing long-running tasks on iOS and iPadOS
+Configure your target to include and customize capabilities that provide access
+ 
+to Apple’s app services.
+=== Adding capabilities to your app
+=== Technologies
+=== Background tasks
+Entitlements
+BGContinuedProcessingTask

@@ -1,0 +1,243 @@
+Updated App Review Guidelines now available - Latest News - Apple Developer
+View in English
+Apple Developer
+Get Started
+Explore Get Started
+Overview
+Learn
+Apple Developer Program
+Stay Updated
+Latest News
+Hello Developer
+Platforms
+Explore Platforms
+Apple Platforms
+iOS
+iPadOS
+macOS
+tvOS
+visionOS
+watchOS
+App Store
+Featured
+Design
+Distribution
+Games
+Accessories
+Web
+Home
+CarPlay
+Technologies
+Explore Technologies
+Overview
+Xcode
+Swift
+SwiftUI
+Featured
+Accessibility
+AI & Machine Learning
+App Intents
+Apple Intelligence
+Games
+Security
+Xcode Cloud
+Community
+Explore Community
+Overview
+Meet with Apple events
+Community events
+Developer Forums
+Open Source
+Featured
+WWDC
+Swift Student Challenge
+Developer Stories
+App Store Awards
+Apple Design Awards
+Apple Developer Centers
+Documentation
+Explore Documentation
+Documentation Library
+Technology Overviews
+Sample Code
+Human Interface Guidelines
+Videos
+Release Notes
+Featured Updates
+iOS
+iPadOS
+macOS
+watchOS
+visionOS
+tvOS
+Xcode
+Downloads
+Explore Downloads
+All Downloads
+Operating Systems
+Applications
+Design Resources
+Featured
+Xcode
+TestFlight
+Fonts
+SF Symbols
+Icon Composer
+Support
+Explore Support
+Overview
+Help Guides
+Developer Forums
+Feedback Assistant
+Contact Us
+Featured
+Account Help
+App Review Guidelines
+App Store Connect Help
+Upcoming Requirements
+Agreements and Guidelines
+System Status
+Quick Links
+Events
+News
+Forums
+Sample Code
+Videos
+-->
+News
+Open Menu
+Close Menu
+Hello Developer
+Software Releases
+Site Updates
+Upcoming Requirements
+Updated App Review Guidelines now available
+March 5, 2024
+The App Store Review Guidelines have been revised to support updated policies, upcoming features, and to provide clarification.
+The title of the document has been changed to App Review Guidelines.
+The Introduction section explains that in the European Union, developers can also distribute notarized iOS apps from alternative app marketplaces. This section provides links to further information about alternative app marketplaces and Notarization for iOS apps.
+The following guidelines have been updated:
+2.3.1: Added that a violation of this rule is grounds for an app being blocked from installing via alternative distribution.
+2.3.10: Added that developers cannot include names, icons, or imagery of other mobile platforms or alternative app marketplaces in their apps or metadata, unless there is specific, approved interactive functionality.
+3.1.3(b): Added a link to 3.1.1 to make clear that 3.1.1(a) applies, and multiplatform services apps can use the 3.1.1(a) entitlement.
+4.8 Login Services: Updated to make clear that the login service cannot collect interactions with your app for advertising purposes without consent. It also adds that another login service is not required if your app is an alternative app marketplace, or an app distributed from an alternative app marketplace, that uses a marketplace-specific login for account, download, and commerce features.
+5.1.1(viii): Added that apps that compile personal information from any source that is not directly from the user or without the user’s explicit consent, even public databases, are not permitted on alternative app marketplaces.
+5.4 and 5.5: Updated to state that apps that do not comply with these guidelines will be blocked from installing via alternative distribution.
+Bug Fix Submissions: Added that bug fixes will not be delayed for apps that are already on alternative app marketplaces, except for those related to legal or safety issues.
+View the App
+Review Guidelines
+Translations of the guidelines will be available on the
+Apple Developer website
+within one month.
+Developer Footer
+News
+Updated App Review Guidelines now available
+Platforms
+Open Menu
+Close Menu
+iOS
+iPadOS
+macOS
+tvOS
+visionOS
+watchOS
+App Store
+Tools
+Open Menu
+Close Menu
+Swift
+SwiftUI
+Swift Playground
+TestFlight
+Xcode
+Xcode Cloud
+Icon Composer
+SF Symbols
+Technologies
+Open Menu
+Close Menu
+Accessibility
+Accessories
+AI & Machine Learning
+Apple Intelligence
+Audio & Video
+Augmented Reality
+Business
+Design
+Distribution
+Education
+Games
+Health & Fitness
+In-App Purchase
+Localization
+Maps & Location
+Security
+Safari & Web
+Resources
+Open Menu
+Close Menu
+Documentation
+Downloads
+Sample Code
+Videos
+Documentation Archive
+Support
+Open Menu
+Close Menu
+Help Guides & Articles
+Contact Us
+Forums
+Feedback & Bug Reporting
+System Status
+Account
+Open Menu
+Close Menu
+Apple Developer
+App Store Connect
+Certificates, IDs, & Profiles
+Feedback Assistant
+Programs
+Open Menu
+Close Menu
+Apple Developer Program
+Apple Developer Enterprise Program
+App Store Small Business Program
+MFi Program
+Mini Apps Partner Program
+News Partner Program
+Video Partner Program
+Security Bounty Program
+Security Research Device Program
+Events
+Open Menu
+Close Menu
+Meet with Apple
+Apple Developer Centers
+App Store Awards
+Apple Design Awards
+Apple Developer Academies
+WWDC
+Read the
+latest news
+.
+Get the
+Apple Developer app
+.
+Follow us on
+bilibili
+,
+LinkedIn
+,
+WeChat
+, and
+YouTube
+.
+Light
+Dark
+Auto
+Copyright ©  2026
+Apple Inc.
+All rights reserved.
+Terms of Use
+Privacy Policy
+Agreements and Guidelines

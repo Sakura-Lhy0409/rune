@@ -1,0 +1,464 @@
+‎Geeps: AI Chat BYOK App - App Store
+Search
+Today
+Games
+Apps
+Arcade
+Platform
+iPhone
+iPad
+Mac
+Vision
+Watch
+TV
+Geeps: AI Chat BYOK
+All AI models in one app
+Free · In‑App Purchases
+Share
+1 Rating
+5.0
+Age Rating
+18+
+Years
+Category
+Developer Tools
+Developer
+Sergii Kozak
+Language
+EN
+English
+Size
+23
+MB
+iPhone, iPad, Mac, Apple Vision
+Meet Geeps 2.0: now create and edit images with OpenRouter, use built-in web tools, share content into chats, customize themes and fonts, and enjoy faster conversations!
+Why Geeps
+- Lightweight, native AI chat for iPhone, iPad and Mac
+- One app for OpenAI, Anthropic, Google, OpenRouter, and compatible APIs
+- Bring your own API keys (BYOK)
+- Pay only for provider usage instead of multiple AI subscriptions
+- Keep chats synced across devices with iCloud
+What you can do
+- Chat with the latest models as they appear in provider APIs
+- Use built-in web search and read public web pages
+- Generate and edit images with supported OpenAI and OpenRouter models
+- Generate images inline in supported conversations
+- Share URLs, text, images, and supported files directly into new chats via share sheet
+- Attach PDFs, documents, and photos to chat context
+- Save and reuse prompts with Prompt Library
+- Add custom OpenAI-compatible providers and connect to local models
+- Tune reasoning, temperature, token limits, and other supported parameters
+- Customize separate light and dark themes, chat and code fonts, provider icons, and chat width
+- Export conversations to Markdown
+Geeps Plus
+Some tools and features require a one-time Geeps Plus upgrade. Geeps Plus is not a subscription.
+Important
+An API key is required to use Geeps. If you are new to API keys, a quick setup guide is available at geeps.app.
+Privacy
+Geeps does not route chats through developer-operated servers. Chats stay on your devices and can sync through your private iCloud account. Requests go directly to the providers and tool services you configure.
+more
+Ratings &amp; Reviews
+5.0
+out of 5
+1 Ratings
+Custom Endpoints + Image Generation
+10/12/2025
+Dylan G
+Geeps is, quite simply, the first iOS app that actually gets it when it comes to working with custom AI endpoints. After years of cobbling together browser workarounds, obscure proxy setups, and unstable shortcuts, Geeps finally delivers a seamless, native experience for those of us who need fine-grained control over our AI infrastructure.Unlike other apps that force you into closed ecosystems or barely support basic API customization, Geeps handles custom endpoints with remarkable reliability. Whether you’re routing through OpenAI, Cloudflare AI Gateway, LiteLLM, or your own local instance, it just works. No crashes, no throttling surprises, no mysterious “invalid request” errors. The configuration interface is elegant and developer-friendly, but still accessible to non-technical users who simply want to plug in their key and get started.What truly sets Geeps apart, however, is that it doesn’t stop at text. It’s one of the very few iOS clients that integrates image generation alongside LLM endpoints, all without requiring external webviews or janky third-party tools. You can generate images directly within the chat interface, making it a one-stop shop for ideation, content creation, and technical experimentation.For researchers, artists, and AI tinkerers, Geeps is the missing piece: a stable, thoughtfully designed client that respects your endpoints, expands your creative possibilities, and feels at home on iOS. It’s early days, but the foundation is rock-solid…and frankly, no other app currently comes close at doing what it is supposed to do.
+Developer Response
+Thank you so much, Dylan, appreciate your review! There is still a lot of work ahead, but knowing that someone has a positive experience is very rewarding and motivating 🫶
+Custom Endpoints + Image Generation
+10/12/2025
+Dylan G
+Geeps is, quite simply, the first iOS app that actually gets it when it comes to working with custom AI endpoints. After years of cobbling together browser workarounds, obscure proxy setups, and unstable shortcuts, Geeps finally delivers a seamless, native experience for those of us who need fine-grained control over our AI infrastructure.Unlike other apps that force you into closed ecosystems or barely support basic API customization, Geeps handles custom endpoints with remarkable reliability. Whether you’re routing through OpenAI, Cloudflare AI Gateway, LiteLLM, or your own local instance, it just works. No crashes, no throttling surprises, no mysterious “invalid request” errors. The configuration interface is elegant and developer-friendly, but still accessible to non-technical users who simply want to plug in their key and get started.What truly sets Geeps apart, however, is that it doesn’t stop at text. It’s one of the very few iOS clients that integrates image generation alongside LLM endpoints, all without requiring external webviews or janky third-party tools. You can generate images directly within the chat interface, making it a one-stop shop for ideation, content creation, and technical experimentation.For researchers, artists, and AI tinkerers, Geeps is the missing piece: a stable, thoughtfully designed client that respects your endpoints, expands your creative possibilities, and feels at home on iOS. It’s early days, but the foundation is rock-solid…and frankly, no other app currently comes close at doing what it is supposed to do.
+Developer Response
+10/27/2025
+Thank you so much, Dylan, appreciate your review! There is still a lot of work ahead, but knowing that someone has a positive experience is very rewarding and motivating 🫶
+Thanks for making a great, privacy-protecting app!
+11/23/2025
+Frydaho
+This thing is great! It’s kept up-to-date, it syncs prompts and responses using iCloud, and allows me to use APIs, rather than expensive flat monthly fees, to use all of the cloud LLMs I want!Thanks for creating this!!
+Developer Response
+Thank you for taking the time to post your feedback! I really appreciate it and I'm glad the app is useful to you. I hope to keep making it even better. Feel free to also send any additional feedback or suggestions from the app.
+Thanks for making a great, privacy-protecting app!
+11/23/2025
+Frydaho
+This thing is great! It’s kept up-to-date, it syncs prompts and responses using iCloud, and allows me to use APIs, rather than expensive flat monthly fees, to use all of the cloud LLMs I want!Thanks for creating this!!
+Developer Response
+Mar 10
+Thank you for taking the time to post your feedback! I really appreciate it and I'm glad the app is useful to you. I hope to keep making it even better. Feel free to also send any additional feedback or suggestions from the app.
+What’s New
+Version History
+Geeps 2.0 is a major update with refreshed design and new features.
+- Use built-in tools to search the web and read public pages.
+- Generate and edit images with OpenRouter models and use inline image generation with supported OpenAI models
+- Share URLs, text, images, and files directly into new chats with iOS share sheet
+- Customize light and dark themes, chat fonts, code fonts, provider icons, and chat width.
+- Use a redesigned composer with clearer reasoning and tool activity.
+- Enjoy faster long conversations, improved Markdown tables, safer cancellation, and more reliable conversation deletion.
+- Generate conversation titles on-device with Apple Intelligence, when available.
+Some tools and features require a one-time Geeps Plus upgrade.
+2.0
+Aug 26
+Support for OpenAI Responses API, reasoning effort settings for OpenAI and Claude and improved web search across providers
+1.6
+Mar 10
+Added support for iOS 26 and Liquid Glass. Multiple AI providers are now available in the free version.
+1.5
+Feb 2
+Add unlimited custom AI providers, synced via iCloud. Prompt library - save favourite prompts and assign them as defaults! Other improvements and bug fixes.
+1.4
+10/26/2025
+Attach PDFs and other files to chats, create or edit images with the new GPT Image model, use web search with Claude and many other improvements!
+1.3
+05/30/2025
+You can now use web search with OpenAI and OpenRouter models.
+1.2
+04/03/2025
+- Support for multiple AI model providers - chat with Claude, Gemini, Grok, Deepseek and others
+- Multiple performance and stability improvements
+1.1
+03/14/2025
+1.0
+12/11/2024
+Geeps 2.0 is a major update with refreshed design and new features.
+- Use built-in tools to search the web and read public pages.
+- Generate and edit images with OpenRouter models and use inline image generation with supported OpenAI models
+- Share URLs, text, images, and files directly into new chats with iOS share sheet
+- Customize light and dark themes, chat fonts, code fonts, provider icons, and chat width.
+- Use a redesigned composer with clearer reasoning and tool activity.
+- Enjoy faster long conversations, improved Markdown tables, safer cancellation, and more reliable conversation deletion.
+- Generate conversation titles on-device with Apple Intelligence, when available.
+Some tools and features require a one-time Geeps Plus upgrade.
+more
+Version 2.0
+Aug 26
+App Privacy
+App Privacy
+The developer,
+Sergii Kozak
+, indicated that the app’s privacy practices may include handling of data as described below. This information has not been verified by Apple. For more information, see the
+developer’s privacy policy
+.
+To help you better understand the developer’s responses, see
+Privacy Definitions and Examples
+.
+Privacy practices may vary, for example, based on the features you use or your age.
+Learn More
+Data Not Linked to You
+The following data, which may be collected but is not linked to your identity, may be used for the following purposes:
+Analytics
+Diagnostics
+Crash Data
+App Functionality
+Purchases
+Purchase History
+Diagnostics
+Crash Data
+The developer,
+Sergii Kozak
+, indicated that the app’s privacy practices may include handling of data as described below. For more information, see the
+developer’s privacy policy
+.
+Data Not Linked to You
+The following data may be collected but it is not linked to your identity:
+Purchases
+Diagnostics
+Privacy practices may vary, for example, based on the features you use or your age.
+Learn More
+Accessibility
+The developer has not yet indicated which accessibility features this app supports.
+Learn More
+Information
+Seller
+Sergii Kozak
+Size
+23 MB
+Category
+Developer Tools
+Compatibility
+Requires iOS 18 or later.
+iPhone
+Requires iOS 18 or later.
+iPad
+Requires iPadOS 18 or later.
+Mac
+Requires macOS 15.0 or later.
+Apple Vision
+Requires visionOS 2.0 or later.
+Languages
+English
+Age Rating
+18+
+18+
+Learn More
+Infrequent
+Cartoon or Fantasy Violence
+Realistic Violence
+Profanity or Crude Humor
+Mature or Suggestive Themes
+Horror/Fear Themes
+Medical Treatment information
+Alcohol, Tobacco, Drug Use or References
+Contains
+Messaging and Chat
+User-Generated Content
+In-App Purchases
+Yes
+Geeps Plus
+$14.99
+Learn More
+Copyright
+© 2024 Sergii Kozak
+Developer Website
+Privacy Policy
+Supports
+Family Sharing
+Some in-app purchases and subscriptions may be shareable with your family group when Family Sharing is enabled.
+Learn More
+You Might Also Like
+View
+Onepilot: SSH Shell Terminal
+Client, VPS &amp; Linux servers
+View
+mimOE Studio
+Run local AI on any device
+View
+iSSH
+Developer Tools
+View
+AI Prompt Manager: Prompty
+Easy AI Chatbot Templates
+View
+RootCoder-Vibe Coding on Mobi
+AI Builds Apps &amp; Web Auto
+View
+ServerView-SSH Terminal&amp;Shell
+Remote Login for Vibe Coding
+View
+WebForge IDE
+Powerful web development IDE.
+View
+DockUI: Design For SwiftUI
+Design &amp; Paste into Xcode
+View
+MintFlow: VPN &amp; HTTPS Capture
+Routing, Inspect, Web Rewrite
+View
+FullStacked
+Code, Run, Share. Anywhere.
+United States
+Español (México)
+العربية
+Русский
+简体中文
+Français (France)
+한국어
+Português (Brazil)
+Tiếng Việt
+繁體中文 (台灣)
+Select a country or region
+Africa, Middle East, and India
+See All
+Algeria
+Angola
+Armenia
+Azerbaijan
+Bahrain
+Benin
+Botswana
+Burkina Faso
+Cameroun
+Cape Verde
+Chad
+Côte d’Ivoire
+Congo, The Democratic Republic Of The
+Egypt
+Eswatini
+Gabon
+Gambia
+Ghana
+Guinea-Bissau
+India
+Iraq
+Israel
+Jordan
+Kenya
+Kuwait
+Lebanon
+Liberia
+Libya
+Madagascar
+Malawi
+Mali
+Mauritania
+Mauritius
+Morocco
+Mozambique
+Namibia
+Niger (English)
+Nigeria
+Oman
+Qatar
+Congo, Republic of
+Rwanda
+São Tomé and Príncipe
+Saudi Arabia
+Senegal
+Seychelles
+Sierra Leone
+South Africa
+Sri Lanka
+Tajikistan
+Tanzania, United Republic Of
+Tunisia
+Turkmenistan
+United Arab Emirates
+Uganda
+Yemen
+Zambia
+Zimbabwe
+Asia Pacific
+See All
+Afghanistan
+Australia
+Bhutan
+Brunei Darussalam
+Cambodia
+中国大陆
+Fiji
+香港
+Indonesia (English)
+日本
+Kazakhstan
+대한민국
+Kyrgyzstan
+Lao People's Democratic Republic
+澳門
+Malaysia (English)
+Maldives
+Micronesia, Federated States of
+Mongolia
+Myanmar
+Nauru
+Nepal
+New Zealand
+Pakistan
+Palau
+Papua New Guinea
+Philippines
+Singapore
+Solomon Islands
+台灣
+Thailand
+Tonga
+Turkmenistan
+Uzbekistan
+Vanuatu
+Vietnam
+Europe
+See All
+Albania
+Armenia
+Österreich
+Belarus
+Belgium
+Bosnia and Herzegovina
+Bulgaria
+Croatia
+Cyprus
+Czechia
+Denmark
+Estonia
+Finland
+France (Français)
+Georgia
+Deutschland
+Greece
+Hungary
+Iceland
+Ireland
+Italia
+Kosovo
+Latvia
+Lithuania
+Luxembourg (English)
+Malta
+Moldova, Republic Of
+Montenegro
+Nederland
+North Macedonia
+Norway
+Poland
+Portugal (Português)
+Romania
+Россия
+Serbia
+Slovakia
+Slovenia
+España
+Sverige
+Schweiz
+Türkiye (English)
+Ukraine
+United Kingdom
+Latin America and the Caribbean
+See All
+Anguilla
+Antigua and Barbuda
+Argentina (Español)
+Bahamas
+Barbados
+Belize
+Bermuda
+Bolivia (Español)
+Brasil
+Virgin Islands, British
+Cayman Islands
+Chile (Español)
+Colombia (Español)
+Costa Rica (Español)
+Dominica
+República Dominicana
+Ecuador (Español)
+El Salvador (Español)
+Grenada
+Guatemala (Español)
+Guyana
+Honduras (Español)
+Jamaica
+México
+Montserrat
+Nicaragua (Español)
+Panamá
+Paraguay (Español)
+Perú
+St. Kitts and Nevis
+Saint Lucia
+St. Vincent and The Grenadines
+Suriname
+Trinidad and Tobago
+Turks and Caicos
+Uruguay (English)
+Venezuela (Español)
+The United States and Canada
+See All
+Canada (English)
+Canada (Français)
+United States
+Estados Unidos (Español México)
+الولايات المتحدة
+США
+美国 (简体中文)
+États-Unis (Français France)
+미국
+Estados Unidos (Português Brasil)
+Hoa Kỳ
+美國 (繁體中文台灣)
+Copyright © 2026
+Apple Inc.
+All rights reserved.
+Internet Service Terms
+App Store &amp; Privacy
+Cookie Warning
+Support

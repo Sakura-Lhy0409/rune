@@ -1,0 +1,35 @@
+[
+ {
+ "name": "MLXMNIST",
+ "path": "Libraries/MLXMNIST",
+ "sha": "ec216779892b9ae6bf0bc6b09707d64dde3003d6",
+ "size": 0,
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift-examples/contents/Libraries/MLXMNIST?ref=main",
+ "html_url": "https://github.com/ml-explore/mlx-swift-examples/tree/main/Libraries/MLXMNIST",
+ "git_url": "https://api.github.com/repos/ml-explore/mlx-swift-examples/git/trees/ec216779892b9ae6bf0bc6b09707d64dde3003d6",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ml-explore/mlx-swift-examples/contents/Libraries/MLXMNIST?ref=main",
+ "git": "https://api.github.com/repos/ml-explore/mlx-swift-examples/git/trees/ec216779892b9ae6bf0bc6b09707d64dde3003d6",
+ "html": "https://github.com/ml-explore/mlx-swift-examples/tree/main/Libraries/MLXMNIST"
+ }
+ },
+ {
+ "name": "StableDiffusion",
+ "path": "Libraries/StableDiffusion",
+ "sha": "885e89f81d653096df360d26f8f97ede06ccca41",
+ "size": 0,
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift-examples/contents/Libraries/StableDiffusion?ref=main",
+ "html_url": "https://github.com/ml-explore/mlx-swift-examples/tree/main/Libraries/StableDiffusion",
+ "git_url": "https://api.github.com/repos/ml-explore/mlx-swift-examples/git/trees/885e89f81d653096df360d26f8f97ede06ccca41",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ml-explore/mlx-swift-examples/contents/Libraries/StableDiffusion?ref=main",
+ "git": "https://api.github.com/repos/ml-explore/mlx-swift-examples/git/trees/885e89f81d653096df360d26f8f97ede06ccca41",
+ "html": "https://github.com/ml-explore/mlx-swift-examples/tree/main/Libraries/StableDiffusion"
+ }
+ }
+]
+

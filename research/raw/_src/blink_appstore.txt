@@ -1,0 +1,752 @@
+‎Blink Shell, Build &amp; Code App - App Store
+Search
+Today
+Games
+Apps
+Arcade
+Platform
+iPhone
+iPad
+Mac
+Vision
+Watch
+TV
+Blink Shell, Build &amp; Code
+The Pro tool for developers
+Free · In‑App Purchases
+Share
+419 Ratings
+3.1
+Age Rating
+16+
+Years
+Chart
+#65
+Developer Tools
+Developer
+Blink Shell, Inc
+Language
+EN
+English
+Size
+221.5
+MB
+iPhone, iPad
+Do Blink! Transform your iOS device into a pro-grade terminal. Blink is the first professional, desktop-grade terminal for iOS that leverages the support of Mosh and SSH. Thus, we can guarantee stable connections, crazy-fast speeds, and full configurations. It can and should be your all-day-long tool.&nbsp;
+**Start your 14-day free trial now!**
+But, Blink is much more. Now with Blink Code and Blink Build**, your entire development workflow fits in your pocket.
+What the Blink community is saying:
+“In some ways, I prefer my iPad / Blink / Digital Ocean setup to coding on my Mac“ - TheVerge
+"I have tried a number of terminals on iOS and this is really The One." - Twit.tv
+“Connections still come up when I get back to a client project after a weekend off.“ - The Sweet Setup
+“The way to use VS Code on the iPad” - programminglife.io
+What our users love the most from Blink Shell:
+- Mosh connections that even survive a device reboot.
+- Most complete SSH implementation on iOS.
+- Code command for VS Code integration.
+- Blazingly fast terminal and SFTP transfers.
+- Includes Pragmata Pro with ligatures.
+Blink Shell has a fully loaded SSH toolset:
+- SSH with PKI support: DSA, RSA, ECDSA &amp; ED25519 keys.
+- Support for Secure Enclave Keys and Certificates.
+- Port forwarding with local, remote &amp; dynamic tunnel support.
+- SOCKS5 proxy for a private VPN.
+- Agent Forwarding.
+- Complete SSH Config file support.
+- ControlMaster and pooled connections.
+- Files.app integration for SFTP remote hosts.
+- SFTP with copy-on-change.
+Blink has been the leading developer tool in the AppStore for +5 years, so there is a lot more:
+- External Display support.
+- Legendary Hardware Keyboard support, even remap shortcuts and keyboard codes.
+- Local &amp; iCloud Blink Shell folders for Files.app access across devices.
+- Host sync over iCloud.
+- Link-files from other applications and work with them in Blink.
+- Cool themes and fonts, and install your own!
+- Smart Keys on SW Keyboard to navigate with touch.
+- FaceCam command to create tutorials and streams.
+- Bell notifications.
+- Supports multiple windows and multiple tabs.
+- Network &amp; UNIX CLI tools, check our docs for more information.
+Blink Code integrates with VS Code:
+- Code on local projects, or seamlessly on remote machines.
+- Fully-loaded code editor.
+- A coding experience fitted to your device, that connects to VS Code for web, GitHub Codespaces, GitPod or your own VS Code server.
+Blink Build (Requires a $7.99/month subscription)
+Creates remote runtimes that can be accessed on all your devices. You can use Build in your day-to-day workflows whether you need to do development, DevOps or just play around with new tooling.
+Participate in our community, and don’t forget to leave us your feedback and your feature(s) requests. Enjoy!
+http://blink.sh
+http://twitter.com/blinkshell
+http://GitHub.com/blinksh
+Terms of Use: https://blink.sh/blink-gpl
+Privacy Policy: https://blink.sh/pp
+* Blink Code is not affiliated nor endorsed by Microsoft.
+** Blink Build requires a separate subscription to make use of our Virtual Machines.
+more
+Ratings &amp; Reviews
+3.1
+out of 5
+419 Ratings
+Most visually appealing, minimal SSH/Mosh client (minus the subscription model)
+01/24/2024
+heywoodlh
+This app is my favorite SSH and Mosh client. I appreciate the local Unix utilities it provides and the fact that it looks and behaves like a terminal emulator. The visual minimalism by default is excellent.My one issue is with the recurring subscription model. I would rate it five stars if there was a one-time purchase option (even if it was per device — I’d happily pay $5-10 per device I needed Blink on). It makes it hard to recommend to interested friends or colleagues when there isn’t a free option or a one-time purchase option. Thankfully, I was grandfathered into the Blink Legacy pricing (which offered a one-time purchase). Please bring one-time purchases back!
+Most visually appealing, minimal SSH/Mosh client (minus the subscription model)
+01/24/2024
+heywoodlh
+This app is my favorite SSH and Mosh client. I appreciate the local Unix utilities it provides and the fact that it looks and behaves like a terminal emulator. The visual minimalism by default is excellent.My one issue is with the recurring subscription model. I would rate it five stars if there was a one-time purchase option (even if it was per device — I’d happily pay $5-10 per device I needed Blink on). It makes it hard to recommend to interested friends or colleagues when there isn’t a free option or a one-time purchase option. Thankfully, I was grandfathered into the Blink Legacy pricing (which offered a one-time purchase). Please bring one-time purchases back!
+Free version nag-screens are a real thing
+11/14/2022
+Throwaway112022
+I like the app and what it does. And I don’t really have a problem with a yearly subscription of $20 for the full version, I am not against subscriptions per se. I am also ok with the free version being limited in some way (including by a nag-screen) - that is after all how you evaluate before purchasing. But I have to say, the way that the developers have implemented the nag-screen to upgrade is a first for me. So much so that this is the first review I have ever made in the AppStore and this nag-screen implementation has turned me off the app so much that I will not be subscribing.This may not be a problem for everyone. But saying “there is a nag-screen, no big deal” does not give the full picture. They are transparent that the nag-screen will come up “up to a max of 3x per day”. What they don’t say is that there is a timer on the nag-screen that interrupts what you are doing for a significant time: 20seconds perhaps? Worse, if you “shake your device to fill this up quicker” the timer is supposed to be shorter but there really is not way to tell if that is so. As long as it counts down clearly, 5 seconds I could live with. Maybe even 10. But the timer as it is is just too random and long - and being asked to “shake to fill” is just juvenile…If the developers do not want to limit the app in other ways (only offer a subset of features?) my suggestion is to change that timeout to allow a limited “give me 5min” holds before it is forced (I would not be happy if I had a time critical situation and being forced to pause for 20sec). And rather than a “shake” prompt, my $0.02 is to just change it into a “take a break, it is better for you anyway” count down the seconds message…
+Free version nag-screens are a real thing
+11/14/2022
+Throwaway112022
+I like the app and what it does. And I don’t really have a problem with a yearly subscription of $20 for the full version, I am not against subscriptions per se. I am also ok with the free version being limited in some way (including by a nag-screen) - that is after all how you evaluate before purchasing. But I have to say, the way that the developers have implemented the nag-screen to upgrade is a first for me. So much so that this is the first review I have ever made in the AppStore and this nag-screen implementation has turned me off the app so much that I will not be subscribing.This may not be a problem for everyone. But saying “there is a nag-screen, no big deal” does not give the full picture. They are transparent that the nag-screen will come up “up to a max of 3x per day”. What they don’t say is that there is a timer on the nag-screen that interrupts what you are doing for a significant time: 20seconds perhaps? Worse, if you “shake your device to fill this up quicker” the timer is supposed to be shorter but there really is not way to tell if that is so. As long as it counts down clearly, 5 seconds I could live with. Maybe even 10. But the timer as it is is just too random and long - and being asked to “shake to fill” is just juvenile…If the developers do not want to limit the app in other ways (only offer a subset of features?) my suggestion is to change that timeout to allow a limited “give me 5min” holds before it is forced (I would not be happy if I had a time critical situation and being forced to pause for 20sec). And rather than a “shake” prompt, my $0.02 is to just change it into a “take a break, it is better for you anyway” count down the seconds message…
+I hate that this app is good.
+12/26/2025
+AOANLA
+I have been on a months-long quest to find an acceptable terminal app that I can actually own instead of rent. Unfortunately, every other option I tried (Termius was second-best) has dealbreaking flaws of one kind or another.Blink does not. It has flaws, but no dealbreakers. It also has several excellent and very useful day-to-day features that no other terminal app I have tried manages to implement all at once, and a few really good UI ideas I've never seen in a mobile terminal before. It's *relatively* stable for a mobile terminal app, the screen drawing issues aren't *usually* bad enough to force me to close the app and start over—a low bar, but no other app consistently meets it. And it feels and works remarkably like a NORMAL TERMINAL instead of somebody's fever dream of what the Terminal of the Future should be.The business model disgusts me. The *instant* I hear of an acceptable mobile terminal with an ethical business model, I will switch. I really hope I can do that before I need to pay next year's terminal rent. Two stars.
+I hate that this app is good.
+12/26/2025
+AOANLA
+I have been on a months-long quest to find an acceptable terminal app that I can actually own instead of rent. Unfortunately, every other option I tried (Termius was second-best) has dealbreaking flaws of one kind or another.Blink does not. It has flaws, but no dealbreakers. It also has several excellent and very useful day-to-day features that no other terminal app I have tried manages to implement all at once, and a few really good UI ideas I've never seen in a mobile terminal before. It's *relatively* stable for a mobile terminal app, the screen drawing issues aren't *usually* bad enough to force me to close the app and start over—a low bar, but no other app consistently meets it. And it feels and works remarkably like a NORMAL TERMINAL instead of somebody's fever dream of what the Terminal of the Future should be.The business model disgusts me. The *instant* I hear of an acceptable mobile terminal with an ethical business model, I will switch. I really hope I can do that before I need to pay next year's terminal rent. Two stars.
+Either love it or hate it? I loved it.
+Aug 16
+IndioMaya
+Based on the ratings, it seems that users either love or hate it. I am pleased with it, as it allows me to remotely open a terminal that is connected to my remote MacBook Pro.  A terminal is not an interface for the faint-of-heart, but for more technically oriented users.  It required some work on my MacBook Pro, though it was a breeze as ClaudeCode held my hand throughout the process. With this app now I can open a ClaudeCode terminal in my iPhone, or iPad, via SSH or MOSH, and work on it as if I was directly sitting in front my Mac.  Worth $20/year in my opinion. Again: it requires some work on the Mac side. Based on the few reviews I read, seems to me, that those  complaining either did not know how to set up the Mac side correctly, and/or do not want to pay for it.  I have TailScale on my Mac, which made it easier though.
+Either love it or hate it? I loved it.
+Aug 16
+IndioMaya
+Based on the ratings, it seems that users either love or hate it. I am pleased with it, as it allows me to remotely open a terminal that is connected to my remote MacBook Pro.  A terminal is not an interface for the faint-of-heart, but for more technically oriented users.  It required some work on my MacBook Pro, though it was a breeze as ClaudeCode held my hand throughout the process. With this app now I can open a ClaudeCode terminal in my iPhone, or iPad, via SSH or MOSH, and work on it as if I was directly sitting in front my Mac.  Worth $20/year in my opinion. Again: it requires some work on the Mac side. Based on the few reviews I read, seems to me, that those  complaining either did not know how to set up the Mac side correctly, and/or do not want to pay for it.  I have TailScale on my Mac, which made it easier though.
+What’s New
+Version History
+Blink 18.7.0
+Three of Blink's core systems — the session engine, the layout manager and the appearance system — were rebuilt from the ground up. Everything should feel faster and far more predictable, and it lays the groundwork for what's coming next.
+BEFORE YOU UPDATE
+- Your running sessions will not be restored, for the first time in ten years— the session format changed. Please terminate any mosh-server processes on your remotes before updating, or you will leave them orphaned.
+NEW
+- Post-quantum SSH. Updated to LibSSH 0.12 and OpenSSL 3.0, adding support for
+post-quantum key exchange. SetEnv is now supported in SSH config and on the
+command line.
+- Fonts and themes. A new Appearance section: import fonts and themes from your device or straight from a URL, pick any monospaced font installed on your system, and assign an alternative theme that kicks in automatically in dark mode — or flip it live with the switchTheme shortcut.
+- A new Display section to separate features that pertain to layout.
+- A new session engine. Your workspace is now owned by a single engine that decides when sessions suspend, restore and stop. Day to day you may not notice a thing, and that is the point.
+- Smarter layouts. Cover, Fit and Fill were rebuilt with better math for every screen. Cover now properly covers the bottom of the terminal, Fit always respects the Status Bar, and the layout locks in place instead of being pulled around by the keyboard.
+- Pragmata updated to 903 with better symbols.
+FIXED
+- Blank terminal that needed an Enter to redraw
+- Mosh sessions occasionally needing a tab switch to resume
+- Software keyboard placement
+- Blink stealing focus back from apps running side by side
+- Paste landing on the previous terminal after opening a new window
+- Terminal font, theme and zoom silently resetting to defaults
+- Copying a selection containing wide characters returned the wrong text
+- Bookmarked folders not being reachable from the command line right after launch
+- Missing glyphs now fall back to Pragmata Pro.
+- IME colors, cursor blink saving, secondary click and drag, and an updated hterm
+- Several crashes when returning to the app
+AFTER YOU UPDATE
+Check your connections. We have been testing for months, but moving to LibSSH 0.12 and OpenSSL 3.0 touches every connection Blink makes. We will be prioritizing any Issues related to connections.
+mosh1, ssh2 and x-callback-url have been removed. The first two depended on
+libssh2 — use mosh and ssh instead. A new Commands system is on the way to
+replace x-callback-url; if that breaks a workflow you depend on, please get in
+touch.
+External displays. On A-series devices, projecting a terminal to an external
+display is now opt-in: turn it on in Settings &gt; External Display. Apple Silicon
+devices drive external displays natively and no longer can use projection.
+Full notes on https://github.com/blinksh/blink/discussions/2247
+18.7.0
+Aug 30
+Blink 18.6.3
+• Added a close button to Settings for easier dismissal.
+• Settings now clearly indicates that Blink Build isn't available during the trial.
+• Fixed copying selected text so it no longer includes the wrong characters, including with wide
+(CJK/emoji) glyphs.
+18.6.3
+Jul 14
+v18.6.2
+- HTerm's fixes to DSR5 sequences (thanks to robertmryan and kylesower) #2256.
+- Fixes IME cursor issues (thanks to oddlid, rfc1459 and sundebug)
+18.6.2
+May 11
+- On Files.app, disabled operations on bootstrap that are causing the extension to get flagged (with a symbol (!) ) on start. The functionality was not affected, but the warning symbol was causing confusion.
+18.6.1
+Apr 27
+v18.6.0
+- New Appearance settings, splitting Style and Display.
+- Files.app validation restored.
+- Fixed issue on the shell where some commands could not be found.
+- Fixed snippets creation to always default to shell type.
+- Fixed snippets not working in the local shell.
+- Fixed issue with Snippets blocking modifiers after release.
+18.6.0
+Apr 21
+V18.5.1
+- Shortcut changes take effect immediately and across all terminals (blinksh/blink#2225)
+- Arrow keys visible again on the SmartKeys bar when Cmd is pressed — was a regression (blinksh/blink#2226).
+- Default shortcuts are now cleared, not deleted, and can restore the default shortcuts value
+(blinksh/blink#2228)
+- iOS no longer auto-corrects text in config fields — iOS was mangling with smart quotes and dashes in config fields (blinksh/blink#2221).
+Made a few more changes to the Shortcuts Config UI:
+- Custom Sequence editor moved to its own dedicated view from the actions list. This simplifies the code and makes the action more clear.
+- One Blink Shortcut per action — the action picker now only shows unassigned actions.
+- Done/Cancel editing flow — incomplete key presses are discarded (new) or reverted (existing) on Cancel, only saved on Done. This follows the behavior of other configuration flows.
+Check out https://github.com/blinksh/blink/discussions/2220 for more information
+18.5.1
+Mar 30
+New Prompt Mode &amp; Snips Enhancements (1077, 2212)
+- We have a new Prompt Mode for composing AI prompts, with voice input, text controls with enhanced editing capabilities and auto-submit once you are done. You can start it from the Snip's Scratch mode and select Prompt.
+- You can now also start Snips or Scratch mode from the Smart Keys bar or with keyboard shortcuts.
+- The Pin feature on Snips persists the interface after sending. So you can work on the next command, resend again, etc...
+- Passthrough mode during editing: you can now scroll while editing Snips or creating your prompt.
+Mouse Drag (395). We implemented mouse drag trying to replicate the "mode" you usually have with the keyboard, so you can have more precise cursor positioning, for both touch and the trackpad.
+- Trackpad: Cmd+click to start drag mode, move cursor while holding Cmd, release to stop.
+- Touch: Long press to start drag mode and place the cursor, then start a drag to move cursor and release to stop.
+- Remember you can use the keyboard while you drag.
+Terminal updates &amp; Mosh Update + blink-v18.4.5
+- Support for newest Unicode characters and other extensions. Improved terminal rendering.
+- Mosh with handling of UTF8 character extension codes. This should remove the garbled output and ghost characters or lines that we have seen on editors and tools like Claude.
+Thanks to jdrouhard
+Copy/Paste Improvements
+- Fixed terminal copy no longer adds trailing EOL whitespace (2133)
+- Fixed single CJK (Chinese/Japanese/Korean) character copy selection (2136)
+- Added "Copy Raw" functionality with Cmd-Shift-C.
+Thanks to jiefeng-xu
+Lockdown Mode Fix (2137)
+- Fixed font persistence: bundled fonts now stay selected in Lockdown mode.
+- Non-bundled custom fonts still blocked as expected
+Thanks to jiefeng-xu
+UI Improvements
+- Block zoom when layout is locked. (1165)
+- New Hide keyboard button. (2105)
+- Font reset fixes to use the configure default. (1145, 1382)
+For more information, check out https://github.com/blinksh/blink/discussions/2220
+18.5.0
+Mar 22
+- Fix OSC52 to use UTF8 encoding.(#1026)
+- RevCat update - clean up RevCat cache files in Documents folder (#2199)
+- Files.app showing the (!) icon sometimes, in particular during initialization (#2200). This was not affecting the performance in any way, but the icon also would indicate something may have gone wrong. Thanks to ChickenCutlass and Prairie-guy for the heads up!
+- Fixed possible issue during Snips initialization on first app launch (#2205).
+18.4.4
+Feb 9
+Happy New Year!
+This is a set of fixes for iOS26 issues and small improvements in the app:
+- The Host password field now has a toggle to visualize the stored password. (Issue #2191)
+- SCP/SFTP command now process the source and will exit with an error if there are no files matching. (Issue #2095)
+- SCP/SFTP command now has autocompletion. (Issue #2192).
+- Blinking cursor on bottom of the screen (Issue #2152). The cursor will only appear when using IME mode or tapping the screen / starting a selection. The cursor should disappear immediately afterwards.
+- Shell Blank on return from background and other cases (Issue #2177). Not just that but the shells should be more responsive on switch, etc...
+- Space between keyboard and terminal (Issue #2181). redraws are now improved as a result of the previous issue.
+- Cmd key would get stuck after calling settings with "Cmd-,". This was a regression on 18.4. (Issue #2193)
+This was a large and tricky one. Thanks to werdnum, greirson, briann, phonedph1, alexdilley, rrgeorge, tanguy, mikebeller, brendandebeasi, kkebo, tamasarpad and everyone on TestFlight and Discord for all the help!
+18.4.3
+Jan 20
+v18.4.2
+- Add support for M5 iPad Pro.
+- Fixes on walkthrough.
+18.4.2
+11/18/2025
+v18.4.1
+- Disabled AI Writing Tools on software keyboard.
+- Fixes possible crashes due to new keyboard layouts.
+- Fixes on FileProvider and SSHClient flows from TestFlight reports.
+18.4.1
+10/10/2025
+A new big version of Blink is just a few months away -- but we didn’t want to hold back updates that improve your experience in the new iOS 26 / iPadOS 26. This release also brings support for the new iPhone 17 series and Air.
+As always, thanks to everyone for helping us with this new release!
+For full notes, please check out: https://github.com/blinksh/blink/discussions/2155
+And to be the first to hear about the new Blink, please keep an eye on our Discord, Twitter and GitHub!
+18.4.0
+09/22/2025
+v18.3.2 build 1010
+This is a continuation to the fix on v18.3.1. We discovered another corner case abusing the host and added additional constraints to generate proper shell tokens at the user and the host. Thanks again to David Leadbeater for the extra help!
+As this is a security fix, we are leaving here all the information from 18.3.1 for reference.
+This release fixes a security bug pointed by David Leadbeater! You can read all about it here: https://dgl.cx/2025/06/blink-at-a-url-handler.
+When calling SSH URLs, Blink will use the URL given by the system. The URL percentage encoded components at the Host or User may contain special control characters. Although those characters may not be allowed on host or user, the decoded characters can make it down to the shell. Blink will warn the user before executing links, but a malicious link may hide this behavior within markdown or even a QR code.
+This fixes the issue by rejecting sequences containing control characters before sending them to the terminal. Additionally, we are supporting proper SSH URI forms to connect additional parameters later on.
+18.3.2
+06/21/2025
+v18.3.1 build 1006
+This release fixes a security bug pointed by David Leadbeater! You can read all about it here: https://dgl.cx/2025/06/blink-at-a-url-handler.
+When calling SSH URLs, Blink will use the URL given by the system. The URL percentage encoded components at the Host or User may contain special control characters. Although those characters may not be allowed on host or user, the decoded characters can make it down to the shell. Blink will warn the user before executing links, but a malicious link may hide this behavior within markdown or even a QR code.
+This fixes the issue by rejecting sequences containing control characters before sending them to the terminal. Additionally, we are supporting proper SSH URI forms to connect additional parameters later on.
+Special thanks again to David Leadbeater for the help!
+18.3.1
+06/17/2025
+v18.3.0
+Build 1004
+- Bookmark fixes when a location cannot be restored by the system and the URL is deemed invalid.
+- Fixes a screen corruption on clear when using SSH or Mosh. When pressing ctrl-l or clearing the terminal some elements on the screen would persist. This seems to be a bug in WebKit. Fixes #2127. Thanks to @Sandyel89, @mtrolley and @selevko for the thorough debugging!
+18.3.0
+05/15/2025
+We have changed our offerings and packages:
+- Blink now offers a 14-day free trial out of the box.
+- Blink Classic has been upgraded to offer all the features in our Blink+ package. If you are a Blink Classic user, help us keep the momentum going by supporting the team behind your favorite terminal.
+v18.2.1
+- Fixes a bug on Restore Purchases.
+v18.2.2
+- Added checks and alerts for subscriptions purchased on different groups.
+v18.2.3
+- Fixes to Blink Classic subscription detection. And now we also allow Classic users to transition to a Blink+ again.
+v18.2.4
+- Fixes notifications during trial and Blink+Build placement.
+If you run into any issues due to changes in our paywall, please reach out to us  (support at blink.sh)
+18.2.4
+04/24/2025
+We have changed our offerings and packages:
+- Blink now offers a 14-day free trial out of the box.
+- Blink Classic has been upgraded to offer all the features in our Blink+ package. If you are a Blink Classic user, help us keep the momentum going by supporting the team behind your favorite terminal.
+v18.2.1
+- Fixes a bug on Restore Purchases.
+v18.2.2
+- Added checks and alerts for subscriptions purchased on different groups.
+v18.2.3
+- Fixes to Blink Classic subscription detection. And now we also allow Classic users to transition to a Blink+ again.
+If you run into any issues due to changes in our paywall, please reach out to us  (support at blink.sh)
+18.2.3
+04/22/2025
+We have changed our offerings and packages:
+- Blink now offers a 14-day free trial out of the box.
+- Blink Classic has been upgraded to offer all the features in our Blink+ package. If you are a Blink Classic user, help us keep the momentum going by supporting the team behind your favorite terminal.
+v18.2.1
+- Fixes a bug on Restore Purchases.
+v18.2.2
+- Added checks and alerts for subscriptions purchased on different groups. Please reach out to us if you are having any issues (support at blink.sh)
+18.2.2
+04/18/2025
+We have changed our offerings and packages:
+- Blink now offers a 14-day free trial out of the box.
+- Blink Classic has been upgraded to offer all the features in our Blink+ package. If you are a Blink Classic user, help us keep the momentum going by supporting the team behind your favorite terminal.
+v18.2.1
+- Fixes a bug on Restore Purchases.
+18.2.1
+04/17/2025
+We have changed our offerings and packages:
+- Blink now offers a 14-day free trial out of the box.
+- Blink Classic has been upgraded to offer all the features in our Blink+ package. If you are a Blink Classic user, help us keep the momentum going by supporting the team behind your favorite terminal.
+v18.2.0
+04/15/2025
+v18.1.1
+- Bookmarks now available on all plans. This substitutes the link-files command. Check out the docs for more information.
+- Fixes SFTP and SCP issues where wildcards would not work properly on source arguments.
+https://github.com/blinksh/blink/discussions/2067
+v18.1.1
+02/25/2025
+**What’s New in 18.1.0**
+This release introduces some exciting updates to Blink Shell, including a new File Provider system, bookmark support, and several important fixes. Here’s what’s new:
+### **File Provider Replicated Extension**
+The File Provider has been completely upgraded and is now the default option, automatically replacing the old integration. This new system significantly improves file management and expands what you can do with remote file systems:
+- **Files.app integration**: Access remote file systems directly from Files.app with improved progress control and automatic syncing to keep local and remote replicas consistent.
+- **Shell commands support**: With kernel-level integration, commands like `ls`, `cd`, `find`, and `vim` now work seamlessly with remote locations, making shell workflows feel as natural as working locally.
+- **Enhanced app compatibility**: Use remote file systems in other apps without requiring additional APIs.
+- **Storage Management** - The new provider also offloads storage management for downloaded files to the system, so the Blink app won't grow the storage used in your device, even when working with remote files.
+- **New capabilities**: Automatic syncing and re-downloads, support for **Veracrypt encryption**, better support for **symbolic links**, and **shortcut integrations**.
+Special thanks to pindab0ter, mhoran, abeth, 2xsaiko, aberrant, rrgeorge and those who left very useful feedback on TestFlight.
+### **Bookmarks**
+Bookmarks bring a more flexible way to navigate remote and local file systems:
+- **Quick access**: Bookmark Blink folders or file locations exposed by other apps. These symlinked directories behave like local directories within the shell.
+- **Replacing link-files**: Bookmarks streamline workflows by replacing the old `link-files` command with a simpler and more reliable approach.
+- **Easy to set up**: Add bookmarks via **Settings &gt; Bookmarks**, select a location in Files.app, and give the symlink a name. Navigate to your bookmarks directly from the shell.
+### **General Improvements and Fixes**
+- **Custom key support**: Added support for `Function keys`, `Home`, `End`, `PgUp`, and `PgDown`, along with combinations like `Alt-Home` and `Alt-End` to better match your workflows. Thanks to namatoj and Karl.
+- **SFTP validation**: Validate SFTP connections directly in **Host &gt; Files.app configuration**, making setup and troubleshooting more straightforward.
+- **ProxyJump fixes**: Fixed an issue where SSH sessions would require to use Ctrl-C before going back to the shell.
+- **Settings fixes**: Fixed issues where the Cmd key could get stuck or the software keyboard would appear unexpectedly when returning to the app.
+- **Pragmata Pro 830**: Shipping the latest version again (thanks to chipp for the heads up)
+For more details or a complete list of changes, check out `whatsnew` in the app and the changes to our Documentation. If you have questions, join us in our Discord or GitHub Discussions. Enjoy the new features, and as always, thank you to everyone who helped make this release possible!
+18.1.0
+01/27/2025
+Version 18.0.1
+- Fixes keyboard auto-repeat for accentuated characters.
+https://github.com/blinksh/blink/discussions/2023
+18.0.1
+10/07/2024
+As we typically do, with every major iOS release, we release a Blink update. This gives us a chance to fix issues between versions and pave the way to next releases. Here is what’s new in Blink 18:
+* Added support for light and dark icons on the new iOS18 home screen.
+* Adjusted UI for new iPhone 16 seres.
+- On iOS18, fixed crashes on startup and when running certain commands. Thanks to TestFlight reports.
+- On iOS18, resolved issues with unresponsive sessions when switching tabs after restoring the app from the background.
+* Updated OpenSSH and other libraries for iOS18 compatibility.
+- Fixed file overwrite problems with SCP/SFTP.s.
+For more details, visit: https://github.com/blinksh/blink/discussions/2023
+18.0.0
+09/21/2024
+Don't let the new features fool you. This update is bigger on the inside than it is on the outside, where a lot of work happened behind the scenes. We left this release in the oven for a while to squash even the weirdest bugs and misbehaviors. But most important, we couldn't have pulled it off without our Discord and TestFlight communities, who were extremely patient to test again and again even the smallest changes and details. We want to extend special thanks to Bahamat, Dave, Filipe, James, Jochen, krathen, l2dy, Nahuel, Neal, Polo, rob, rrgeorge, shlevy, Tahpo2, tanguy, travelingflwr, and many many others!
+**What's New:**
+- **Custom Mosh+17.3.0:** Our patched Mosh release includes undercurl, strikethrough, and other server-side improvements, making your sessions even more powerful. Easily update the static Mosh on remote servers with the `install-static` flag.
+- **Vim for Local Editing:** Now you can use Vim for quick local edits. And the community even built a package manager to supercharge it. Special thanks here to the previous work of Nicholas Holszchu on iOS System, as his work served as the backbone to make this work.
+- **New Interactive Commands:** We've also added `less`, `bc`, and `ping6` commands to enhance your terminal capabilities.
+- **Default Agent Configuration:** `ssh-add` now remembers your configuration between sessions, and you can configure keys and modes within Settings.
+- **Mosh with ProxyJump:** Catching up with our previous mosh client, you can now connect with ProxyJump for more flexible networking options.
+- **iPad Pro and Air Support:** Blink now fully supports the latest iPad Pro and iPad Air models.
+- **Shell Improvements** Numerous fixes have been made to improve command execution and overall system integration, like telnet, random segmentation faults after running consecutive commands, Ctrl-D handling, commands that may hang the shell, etc...
+- **Improved Arrow Key Functionality:** Arrows now work in both terminal and application modes, improving compatibility and user experience.
+- **Crash Fixes and Stability Improvements:** This release has touched practically everything. Please check out the full notes on https://github.com/blinksh/blink/discussions/1999 and do not hesitate to contact us with more questions or problems.
+As we said in the beginning, this release has a lot more than meets the eye and we are sure you will notice. And please join us on Discord, GitHub or Reddit if you haven't done so yet!
+17.3.0
+06/26/2024
+Blink 18.7.0
+Three of Blink's core systems — the session engine, the layout manager and the appearance system — were rebuilt from the ground up. Everything should feel faster and far more predictable, and it lays the groundwork for what's coming next.
+BEFORE YOU UPDATE
+- Your running sessions will not be restored, for the first time in ten years— the session format changed. Please terminate any mosh-server processes on your remotes before updating, or you will leave them orphaned.
+NEW
+- Post-quantum SSH. Updated to LibSSH 0.12 and OpenSSL 3.0, adding support for
+post-quantum key exchange. SetEnv is now supported in SSH config and on the
+command line.
+- Fonts and themes. A new Appearance section: import fonts and themes from your device or straight from a URL, pick any monospaced font installed on your system, and assign an alternative theme that kicks in automatically in dark mode — or flip it live with the switchTheme shortcut.
+- A new Display section to separate features that pertain to layout.
+- A new session engine. Your workspace is now owned by a single engine that decides when sessions suspend, restore and stop. Day to day you may not notice a thing, and that is the point.
+- Smarter layouts. Cover, Fit and Fill were rebuilt with better math for every screen. Cover now properly covers the bottom of the terminal, Fit always respects the Status Bar, and the layout locks in place instead of being pulled around by the keyboard.
+- Pragmata updated to 903 with better symbols.
+FIXED
+- Blank terminal that needed an Enter to redraw
+- Mosh sessions occasionally needing a tab switch to resume
+- Software keyboard placement
+- Blink stealing focus back from apps running side by side
+- Paste landing on the previous terminal after opening a new window
+- Terminal font, theme and zoom silently resetting to defaults
+- Copying a selection containing wide characters returned the wrong text
+- Bookmarked folders not being reachable from the command line right after launch
+- Missing glyphs now fall back to Pragmata Pro.
+- IME colors, cursor blink saving, secondary click and drag, and an updated hterm
+- Several crashes when returning to the app
+AFTER YOU UPDATE
+Check your connections. We have been testing for months, but moving to LibSSH 0.12 and OpenSSL 3.0 touches every connection Blink makes. We will be prioritizing any Issues related to connections.
+mosh1, ssh2 and x-callback-url have been removed. The first two depended on
+libssh2 — use mosh and ssh instead. A new Commands system is on the way to
+replace x-callback-url; if that breaks a workflow you depend on, please get in
+touch.
+External displays. On A-series devices, projecting a terminal to an external
+display is now opt-in: turn it on in Settings &gt; External Display. Apple Silicon
+devices drive external displays natively and no longer can use projection.
+Full notes on https://github.com/blinksh/blink/discussions/2247
+more
+Version 18.7.0
+Aug 30
+App Privacy
+App Privacy
+The developer,
+Blink Shell, Inc
+, indicated that the app’s privacy practices may include handling of data as described below. This information has not been verified by Apple. For more information, see the
+developer’s privacy policy
+.
+To help you better understand the developer’s responses, see
+Privacy Definitions and Examples
+.
+Privacy practices may vary, for example, based on the features you use or your age.
+Learn More
+Data Linked to You
+The following data, which may be collected and linked to your identity, may be used for the following purposes:
+Analytics
+Purchases
+Purchase History
+App Functionality
+Purchases
+Purchase History
+The developer,
+Blink Shell, Inc
+, indicated that the app’s privacy practices may include handling of data as described below. For more information, see the
+developer’s privacy policy
+.
+Data Linked to You
+The following data may be collected and linked to your identity:
+Purchases
+Privacy practices may vary, for example, based on the features you use or your age.
+Learn More
+Accessibility
+The developer has not yet indicated which accessibility features this app supports.
+Learn More
+Information
+Seller
+Blink Shell, Inc
+Size
+221.5 MB
+Category
+Developer Tools
+Compatibility
+Requires iOS 17.6 or later.
+iPhone
+Requires iOS 17.6 or later.
+iPad
+Requires iPadOS 17.6 or later.
+Apple Vision
+Requires visionOS 1.3 or later.
+Location
+This app may use your location even when it isn’t open, which can decrease device battery life.
+Languages
+English
+Age Rating
+16+
+16+
+Learn More
+Contains
+Unrestricted Web Access
+In-App Purchases
+Yes
+Blink+
+$19.99
+Blink+Build Basic
+$9.99
+Blink Plus
+$19.99
+Blink Shell Classic
+$0.00
+Build Basic - 50 credits/month
+$7.99
+Learn More
+Copyright
+© 2016-2026 Blink Shell Inc
+Developer Website
+Privacy Policy
+License Agreement
+Supports
+Family Sharing
+Some in-app purchases and subscriptions may be shareable with your family group when Family Sharing is enabled.
+Learn More
+You Might Also Like
+View
+Debug Anywhere
+Inspect web / DevTools
+View
+Network Sniffer
+Inspect HTTPS / Socket Request
+View
+Device Info Tool
+Hardware and software details
+View
+nRF Device Firmware Update
+Developer Tools
+View
+WebView - Tester
+Test your webpage in a WebView
+View
+Git client - Working Copy
+for GitHub and self-hosted
+View
+Swifty Compiler: Swift IDE
+Code Editor &amp; Playground
+View
+SteerCode: Vibe Coding Builder
+Vibe code. Build apps you want
+View
+Vibe Code: AI Code Generator
+AI Coding Assistant
+View
+Proxyman - Capture HTTPS
+Capture HTTPS from your iPhone
+United States
+Español (México)
+العربية
+Русский
+简体中文
+Français (France)
+한국어
+Português (Brazil)
+Tiếng Việt
+繁體中文 (台灣)
+Select a country or region
+Africa, Middle East, and India
+See All
+Algeria
+Angola
+Armenia
+Azerbaijan
+Bahrain
+Benin
+Botswana
+Burkina Faso
+Cameroun
+Cape Verde
+Chad
+Côte d’Ivoire
+Congo, The Democratic Republic Of The
+Egypt
+Eswatini
+Gabon
+Gambia
+Ghana
+Guinea-Bissau
+India
+Iraq
+Israel
+Jordan
+Kenya
+Kuwait
+Lebanon
+Liberia
+Libya
+Madagascar
+Malawi
+Mali
+Mauritania
+Mauritius
+Morocco
+Mozambique
+Namibia
+Niger (English)
+Nigeria
+Oman
+Qatar
+Congo, Republic of
+Rwanda
+São Tomé and Príncipe
+Saudi Arabia
+Senegal
+Seychelles
+Sierra Leone
+South Africa
+Sri Lanka
+Tajikistan
+Tanzania, United Republic Of
+Tunisia
+Turkmenistan
+United Arab Emirates
+Uganda
+Yemen
+Zambia
+Zimbabwe
+Asia Pacific
+See All
+Afghanistan
+Australia
+Bhutan
+Brunei Darussalam
+Cambodia
+中国大陆
+Fiji
+香港
+Indonesia (English)
+日本
+Kazakhstan
+대한민국
+Kyrgyzstan
+Lao People's Democratic Republic
+澳門
+Malaysia (English)
+Maldives
+Micronesia, Federated States of
+Mongolia
+Myanmar
+Nauru
+Nepal
+New Zealand
+Pakistan
+Palau
+Papua New Guinea
+Philippines
+Singapore
+Solomon Islands
+台灣
+Thailand
+Tonga
+Turkmenistan
+Uzbekistan
+Vanuatu
+Vietnam
+Europe
+See All
+Albania
+Armenia
+Österreich
+Belarus
+Belgium
+Bosnia and Herzegovina
+Bulgaria
+Croatia
+Cyprus
+Czechia
+Denmark
+Estonia
+Finland
+France (Français)
+Georgia
+Deutschland
+Greece
+Hungary
+Iceland
+Ireland
+Italia
+Kosovo
+Latvia
+Lithuania
+Luxembourg (English)
+Malta
+Moldova, Republic Of
+Montenegro
+Nederland
+North Macedonia
+Norway
+Poland
+Portugal (Português)
+Romania
+Россия
+Serbia
+Slovakia
+Slovenia
+España
+Sverige
+Schweiz
+Türkiye (English)
+Ukraine
+United Kingdom
+Latin America and the Caribbean
+See All
+Anguilla
+Antigua and Barbuda
+Argentina (Español)
+Bahamas
+Barbados
+Belize
+Bermuda
+Bolivia (Español)
+Brasil
+Virgin Islands, British
+Cayman Islands
+Chile (Español)
+Colombia (Español)
+Costa Rica (Español)
+Dominica
+República Dominicana
+Ecuador (Español)
+El Salvador (Español)
+Grenada
+Guatemala (Español)
+Guyana
+Honduras (Español)
+Jamaica
+México
+Montserrat
+Nicaragua (Español)
+Panamá
+Paraguay (Español)
+Perú
+St. Kitts and Nevis
+Saint Lucia
+St. Vincent and The Grenadines
+Suriname
+Trinidad and Tobago
+Turks and Caicos
+Uruguay (English)
+Venezuela (Español)
+The United States and Canada
+See All
+Canada (English)
+Canada (Français)
+United States
+Estados Unidos (Español México)
+الولايات المتحدة
+США
+美国 (简体中文)
+États-Unis (Français France)
+미국
+Estados Unidos (Português Brasil)
+Hoa Kỳ
+美國 (繁體中文台灣)
+Copyright © 2026
+Apple Inc.
+All rights reserved.
+Internet Service Terms
+App Store &amp; Privacy
+Cookie Warning
+Support

@@ -1,0 +1,511 @@
+An on-device index for your app’s searchable content.
+class
+ 
+CSSearchableIndex
+CSSearchableIndex
+=== CSSearchableIndex
+class
+ 
+CSSearchableIndex
+Overview
+A 
+ object manages an on-device index for your app’s
+ 
+searchable content. To make your app’s content searchable, create one or more
+ 
+ objects for your content and add those items to the index.
+ 
+If your app defines 
+ 
+types, you can also index those types directly or associate them with your 
+
+ 
+objects. When you execute a query, Core Spotlight searches your indexes for the requested
+ 
+information and returns the results to your code.
+Create custom 
+ objects in your production code to store your app’s content,
+ 
+instead of using the default index. Custom indexes support data protection, which allows
+ 
+you to encrypt your data and protect it from unauthorized access. Custom indexes also
+ 
+support batch operations, which allow you to index large amounts of data more efficiently
+ 
+and with less risk. For example, you can add custom state information to each batch operation
+ 
+to make it easier to restart the indexing process if your app or app extension crashes. Use the
+ 
+default index only during testing or prototyping of your features.
+Modify a 
+ object from only one thread or task at a time, and modify it
+ 
+only from your signed app or app extension. It’s a programming error to access a custom
+ 
+index from multiple threads simultaneously or from an unsigned bundle. When performing batch
+ 
+updates on an index, start each new batch operation only after calling the
+ 
+ or
+ 
+
+ 
+method of the previous batch operation.
+If your app creates 
+
+ 
+objects, set the 
+
+ 
+property of those objects to 
+ if you want them to appear in search results.
+=== Inherits From
+=== Conforms To
+=== Indexes
+=== Creating an index
+=== Determining if indexing is available
+=== Responding to index-related changes
+=== Managing items in an index
+=== Indexing app entities
+=== Batching index updates
+=== Handling drag and drop content
+=== Getting the protection class
+Add search capabilities to your app, and index your content so
+ 
+people can find it from Spotlight and Safari.
+Core Spotlight
+=== Core Spotlight
+An on-device index for your app’s searchable content.
+class
+ 
+CSSearchableIndex
+CSSearchableIndex
+=== CSSearchableIndex
+Begins a batch of updates to an index.
+func
+ 
+beginBatch
+()
+- 
+beginIndexBatch
+=== beginBatch()
+Returns the default on-device index.
+class
+ 
+func
+ 
+`default`
+() -> 
+Self
++ 
+defaultSearchableIndex
+=== default()
+Deletes all searchable items from the index.
+func
+ 
+deleteAllSearchableItems
+(
+completionHandler
+: (((any 
+Error
+)?) -> 
+Void
+)?)
+- 
+deleteAllSearchableItemsWithCompletionHandler:
+=== deleteAllSearchableItems(completionHandler:)
+Deletes entities with the specified identifiers and type from the current index.
+func
+ 
+deleteAppEntities
+<
+Entity
+>(
+identifiedBy
+: [
+Entity
+.
+ID
+], 
+ofType
+: 
+Entity
+.Type) 
+async
+ 
+throws
+=== deleteAppEntities(identifiedBy:ofType:)
+Deletes all app entities of the specified type from the current index.
+func
+ 
+deleteAppEntities
+<
+Entity
+>(
+ofType
+: 
+Entity
+.Type) 
+async
+ 
+throws
+=== deleteAppEntities(ofType:)
+Removes from the index all searchable items associated with the specified domain.
+func
+ 
+deleteSearchableItems
+(
+withDomainIdentifiers
+: [
+String
+], 
+completionHandler
+: (((any 
+Error
+)?) -> 
+Void
+)?)
+- 
+deleteSearchableItemsWithDomainIdentifiers:completionHandler:
+=== deleteSearchableItems(withDomainIdentifiers:completionHandler:)
+Removes from the index all items with the specified identifiers.
+func
+ 
+deleteSearchableItems
+(
+withIdentifiers
+: [
+String
+], 
+completionHandler
+: (((any 
+Error
+)?) -> 
+Void
+)?)
+- 
+deleteSearchableItemsWithIdentifiers:completionHandler:
+=== deleteSearchableItems(withIdentifiers:completionHandler:)
+Ends a batch of index updates and stores the specified state information.
+func
+ 
+endBatch
+(
+withClientState
+: 
+Data
+, 
+completionHandler
+: (((any 
+Error
+)?) -> 
+Void
+)?)
+- 
+endIndexBatchWithClientState:completionHandler:
+=== endBatch(withClientState:completionHandler:)
+Ends a batch of index updates and stores the specified state information.
+func
+ 
+endIndexBatch
+(
+expectedClientState
+: 
+Data
+?, 
+newClientState
+: 
+Data
+, 
+completionHandler
+: (((any 
+Error
+)?) -> 
+Void
+)?)
+- 
+endIndexBatchWithExpectedClientState:newClientState:completionHandler:
+=== endIndexBatch(expectedClientState:newClientState:completionHandler:)
+Fetches data from an external provider.
+func
+ 
+fetchData
+(
+forBundleIdentifier
+: 
+String
+, 
+itemIdentifier
+: 
+String
+, 
+contentType
+: 
+UTType
+, 
+completionHandler
+: (
+Data
+?, (any 
+Error
+)?) -> 
+Void
+)
+- 
+fetchDataForBundleIdentifier:itemIdentifier:contentType:completionHandler:
+=== fetchData(forBundleIdentifier:itemIdentifier:contentType:completionHandler:)
+Fetches the app’s most recent client state information asynchronously.
+func
+ 
+fetchLastClientState
+(
+completionHandler
+: (
+Data
+?, (any 
+Error
+)?) -> 
+Void
+)
+- 
+fetchLastClientStateWithCompletionHandler:
+=== fetchLastClientState(completionHandler:)
+Indexes one or more app entities and assigns an optional priority to them.
+func
+ 
+indexAppEntities
+([
+some
+ 
+IndexedEntity
+], 
+priority
+: 
+Int
+) 
+async
+ 
+throws
+=== indexAppEntities(_:priority:)
+The delegate object that can handle index-management tasks.
+var
+ 
+indexDelegate
+: (any 
+CSSearchableIndexDelegate
+)?
+indexDelegate
+=== indexDelegate
+Adds or updates items in the index.
+func
+ 
+indexSearchableItems
+([
+CSSearchableItem
+], 
+completionHandler
+: (((any 
+Error
+)?) -> 
+Void
+)?)
+- 
+indexSearchableItems:completionHandler:
+=== indexSearchableItems(_:completionHandler:)
+Returns an on-device index with the specified name.
+init
+(
+name
+: 
+String
+)
+- 
+initWithName:
+=== init(name:)
+Returns an on-device index with the specified name and data protection class.
+init
+(
+name
+: 
+String
+, 
+protectionClass
+: 
+FileProtectionType
+?)
+- 
+initWithName:protectionClass:
+=== init(name:protectionClass:)
+Returns a Boolean value that indicates whether indexing is available
+ 
+on the current device.
+class
+ 
+func
+ 
+isIndexingAvailable
+() -> 
+Bool
++ 
+isIndexingAvailable
+=== isIndexingAvailable()
+var
+ 
+protectionClass
+: 
+FileProtectionType
+protectionClass
+=== protectionClass
+A protocol that defines methods a delegate object or app extension uses to handle communication from the on-device index.
+protocol
+ 
+CSSearchableIndexDelegate
+CSSearchableIndexDelegate
+=== CSSearchableIndexDelegate
+class
+ 
+CSSearchableIndexDescription
+CSSearchableIndexDescription
+=== CSSearchableIndexDescription
+The details of your app-specific content that someone might search
+ 
+for on their devices.
+class
+ 
+CSSearchableItem
+CSSearchableItem
+=== CSSearchableItem
+Create a description for your app’s content and add it to a Spotlight
+ 
+index to make it searchable.
+=== Adding your app’s content to Spotlight indexes
+Summarize mail, message, and audio transcripts or assess the priority of mail and messages
+ 
+using Spotlight and Apple Intelligence.
+=== Generating summary and priority data for indexed items
+An interface for making a custom type or app-specific concept discoverable by Apple Intelligence and experiences like Siri or the Shortcuts app.
+protocol
+ 
+AppEntity
+AppEntity
+=== AppEntity
+A representation of the state of your app at a moment in time.
+class
+ 
+NSUserActivity
+NSUserActivity
+=== NSUserActivity
+A Boolean value that indicates whether to add the activity to the on-device index.
+var
+ 
+isEligibleForSearch
+: 
+Bool
+=== isEligibleForSearch
+The root class of most Objective-C class hierarchies, from which subclasses inherit a basic interface to the runtime system and the ability to behave as Objective-C objects.
+class
+ 
+NSObject
+NSObject
+=== NSObject
+The group of methods that are fundamental to all Objective-C objects.
+protocol
+ 
+NSObjectProtocol
+NSObjectProtocol
+=== NSObjectProtocol
+A type whose instances can be encoded, and appropriately passed, as
+ 
+elements of a C 
+.
+protocol
+ 
+CVarArg
+CVarArg
+=== CVarArg
+A type with a customized textual representation suitable for debugging
+ 
+purposes.
+protocol
+ 
+CustomDebugStringConvertible
+CustomDebugStringConvertible
+=== CustomDebugStringConvertible
+A type with a customized textual representation.
+protocol
+ 
+CustomStringConvertible
+CustomStringConvertible
+=== CustomStringConvertible
+A type that can be compared for value equality.
+protocol
+ 
+Equatable
+Equatable
+=== Equatable
+A type that can be hashed into a 
+ to produce an integer hash value.
+protocol
+ 
+Hashable
+Hashable
+=== Hashable
+=== Technologies
+CSSearchableIndex
+CSSearchableIndex
+=== Creating an index
+=== Determining if indexing is available
+=== Responding to index-related changes
+=== Managing items in an index
+=== Batching index updates
+=== Handling drag and drop content
+=== Getting the protection class
+=== Inherits From
+=== Indexes
+@interface
+ 
+CSSearchableIndex
+ : 
+NSObject
+CSSearchableIndex
+CSSearchableIndex
+- 
+beginIndexBatch
++ 
+defaultSearchableIndex
+- 
+deleteAllSearchableItemsWithCompletionHandler:
+- 
+deleteSearchableItemsWithDomainIdentifiers:completionHandler:
+- 
+deleteSearchableItemsWithIdentifiers:completionHandler:
+- 
+endIndexBatchWithClientState:completionHandler:
+- 
+endIndexBatchWithExpectedClientState:newClientState:completionHandler:
+- 
+fetchDataForBundleIdentifier:itemIdentifier:contentType:completionHandler:
+- 
+fetchLastClientStateWithCompletionHandler:
+indexDelegate
+- 
+indexSearchableItems:completionHandler:
+- 
+initWithName:
+- 
+initWithName:protectionClass:
++ 
+isIndexingAvailable
+protectionClass
+CSSearchableIndexDelegate
+CSSearchableIndexDelegate
+CSSearchableIndexDescription
+CSSearchableIndexDescription
+CSSearchableItem
+CSSearchableItem
+NSUserActivity
+eligibleForSearch
+eligibleForSearch
+NSObject
+NSObject
+NSObject

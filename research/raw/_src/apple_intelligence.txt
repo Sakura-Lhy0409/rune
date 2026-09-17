@@ -1,0 +1,272 @@
+Apple Intelligence - Apple Developer
+' />
+' />
+' />
+View in English
+Apple Developer
+Get Started
+Explore Get Started
+Overview
+Learn
+Apple Developer Program
+Stay Updated
+Latest News
+Hello Developer
+Platforms
+Explore Platforms
+Apple Platforms
+iOS
+iPadOS
+macOS
+tvOS
+visionOS
+watchOS
+App Store
+Featured
+Design
+Distribution
+Games
+Accessories
+Web
+Home
+CarPlay
+Technologies
+Explore Technologies
+Overview
+Xcode
+Swift
+SwiftUI
+Featured
+Accessibility
+AI &amp; Machine Learning
+App Intents
+Apple Intelligence
+Games
+Security
+Xcode Cloud
+Community
+Explore Community
+Overview
+Meet with Apple events
+Community events
+Developer Forums
+Open Source
+Featured
+WWDC
+Swift Student Challenge
+Developer Stories
+App Store Awards
+Apple Design Awards
+Apple Developer Centers
+Documentation
+Explore Documentation
+Documentation Library
+Technology Overviews
+Sample Code
+Human Interface Guidelines
+Videos
+Release Notes
+Featured Updates
+iOS
+iPadOS
+macOS
+watchOS
+visionOS
+tvOS
+Xcode
+Downloads
+Explore Downloads
+All Downloads
+Operating Systems
+Applications
+Design Resources
+Featured
+Xcode
+TestFlight
+Fonts
+SF Symbols
+Icon Composer
+Support
+Explore Support
+Overview
+Help Guides
+Developer Forums
+Feedback Assistant
+Contact Us
+Featured
+Account Help
+App Review Guidelines
+App Store Connect Help
+Upcoming Requirements
+Agreements and Guidelines
+System Status
+Quick Links
+Events
+News
+Forums
+Sample Code
+Videos
+&nbsp;
+-->
+Apple Intelligence
+Open Menu
+Close Menu
+Overview
+What’s New
+Get Started
+Resources
+Apple Intelligence
+Apple Intelligence is the personal intelligence system powered by next-generation Apple Foundation Models, bringing personal context understanding, app actions, and on-screen awareness across iPhone, iPad, Mac, Apple Watch, and Apple Vision Pro. You can integrate your app’s content and actions into Siri AI and across the system via App Intents, so users can discover and use your app’s capabilities more naturally. You can also build intelligent features directly into your apps with the Foundation Models framework, which supports multimodal prompts and any language model — including Apple Foundation Models or any provider that conforms to the Language Model protocol.
+What’s new in Apple&nbsp;Intelligence
+Dive into the latest key technologies and&nbsp;capabilities.
+New to Apple&nbsp;Intelligence development?
+Check out the Apple&nbsp;Intelligence Pathway, an easy-to-navigate collection of resources to get&nbsp;started.
+Get to know Apple&nbsp;Intelligence
+The Foundation Models framework
+The
+Foundation Models framework
+is a native Swift API that gives you direct access to Apple Foundation Models — on device and in Private Cloud Compute* — as well as any model provider with a Swift package conforming to the Language Model protocol.
+From there, multimodal prompts and on-device Vision framework tools let your app reason about images alongside text, while Dynamic Profiles let you swap models, tools, and instructions within a continuous session so your app's intelligence can adapt in real time. Then use the Evaluations framework to ensure your AI features work reliably across dynamic conditions.
+App Intents
+The
+App Intents framework
+connects your app to Apple Intelligence and Siri AI through schemas — recognizable structures built on years of language model training — that make your app's content discoverable and its capabilities available through natural language with less code.
+Entity schemas contribute your content to the Spotlight semantic index for personal context understanding, while intent schemas let people take action on that content naturally, with no specific phrases to define and no code changes needed as Siri's language understanding evolves. The View Annotations API extends this further with on-screen awareness, letting you map views to entities so people can reference and act on what's in front of them conversationally.
+Image Playground
+Image Playground
+lets people generate high-quality images in virtually any style — including photorealistic — transform their own photos using natural language descriptions, and modify images using descriptions or with touch. Images are generated on Private Cloud Compute, so photos are never stored or shared. When you use the Image Playground API, you can support these new image creation capabilities right from your apps.
+Shortcuts
+Shortcuts
+uses Apple Intelligence to assemble automations from natural language descriptions, so people can incorporate your app's capabilities into powerful multistep workflows simply by describing what they want to do. The Shortcuts app lets people automate tasks by connecting system and app actions. When you adopt App Intents, your app's actions and entities become part of that ecosystem — available alongside features like Use Model.
+Visual Intelligence
+Visual Intelligence
+lets people search for information and take action on what's in front of them — through the Camera app on iPhone, onscreen content on Mac and iPad, and objects in the world on Apple Vision Pro. Integrating your app gives people a way to view your matching content in the moment and launch directly into your app for richer detail or additional results, surfacing your app naturally across more of the system.
+Write with Siri
+You can write and edit with Siri systemwide, helping people compose, rewrite, proofread, and summarize text. If you're using any of the standard UI frameworks to render text fields, your app will automatically have this ability. Or if your app has custom text controls you can adopt
+APIs
+to integrate this into your app.
+Genmoji
+Enhance your app to let people make the perfect emoji to express themselves in the moment while using your app. Genmoji is automatically supported as stickers in your app when you use system text controls, and there are APIs for you to render them with custom text engines.
+Meet with Apple
+Sharpen your skills through
+in-person
+and online activities around the&nbsp;world.
+Explore the schedule
+Resources
+Browse tools, documentation, sample code, videos, and&nbsp;more.
+Learn more
+Developer Footer
+*If you’re enrolled in the App Store Small Business Program and your app has fewer than 2 million total first-time App Store downloads, you can access the next generation of Apple Foundation Models running on
+Private Cloud Compute
+at no cloud API cost.
+Features are subject to change. Some capabilities and services may not be available in all regions or all languages; some feature availability may vary due to local laws and&nbsp;regulations.
+Apple Intelligence
+Platforms
+Open Menu
+Close Menu
+iOS
+iPadOS
+macOS
+tvOS
+visionOS
+watchOS
+App Store
+Tools
+Open Menu
+Close Menu
+Swift
+SwiftUI
+Swift Playground
+TestFlight
+Xcode
+Xcode Cloud
+Icon Composer
+SF Symbols
+Technologies
+Open Menu
+Close Menu
+Accessibility
+Accessories
+AI & Machine Learning
+Apple Intelligence
+Audio &amp; Video
+Augmented Reality
+Business
+Design
+Distribution
+Education
+Games
+Health &amp; Fitness
+In-App Purchase
+Localization
+Maps &amp; Location
+Security
+Safari &amp; Web
+Resources
+Open Menu
+Close Menu
+Documentation
+Downloads
+Sample Code
+Videos
+Documentation Archive
+Support
+Open Menu
+Close Menu
+Help Guides & Articles
+Contact Us
+Forums
+Feedback & Bug Reporting
+System Status
+Account
+Open Menu
+Close Menu
+Apple Developer
+App Store Connect
+Certificates, IDs, &amp; Profiles
+Feedback Assistant
+Programs
+Open Menu
+Close Menu
+Apple Developer Program
+Apple Developer Enterprise Program
+App Store Small Business Program
+MFi Program
+Mini Apps Partner Program
+News Partner Program
+Video Partner Program
+Security Bounty Program
+Security Research Device Program
+Events
+Open Menu
+Close Menu
+Meet with Apple
+Apple Developer Centers
+App Store Awards
+Apple Design Awards
+Apple Developer Academies
+WWDC
+Read the
+latest news
+.
+Get the
+Apple Developer app
+.
+Follow us on
+bilibili
+,
+LinkedIn
+,
+WeChat
+, and
+YouTube
+.
+Light
+Dark
+Auto
+Copyright ©  2026
+Apple Inc.
+All rights reserved.
+Terms of Use
+Privacy Policy
+Agreements and Guidelines

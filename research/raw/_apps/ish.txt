@@ -1,0 +1,489 @@
+‎iSH Shell App - App Store
+Search
+Today
+Games
+Apps
+Arcade
+Platform
+iPhone
+iPad
+Mac
+Vision
+Watch
+TV
+iSH Shell
+Linux in your pocket
+Free · Designed for iPad. Not verified for macOS.
+Share
+1.2K Ratings
+4.7
+Age Rating
+16+
+Years
+Chart
+#17
+Developer Tools
+Developer
+Theodore Dubois
+Language
+EN
+English
+Size
+6.1
+MB
+iPhone, iPad
+A Linux-like shell on iOS. You can edit files with sed and cat, move them around, and more!
+https://github.com/ish-app/ish/
+more
+Ratings &amp; Reviews
+4.7
+out of 5
+1.2K Ratings
+Great Linux Enviorment
+12/29/2024
+Jacobd29
+This app is exactly what I needed on my iPad for coding without my mac! I’ve always wanted to be able to do light development in c/c++ and python with git support on the iPad and this app perfectly allows for this. I was able to install z shell instead of the base ash that comes with this version of linux as it better matches mac. Everything I wanted to install in the environment was able to be installed (though like mentioned, I only really wanted to be able to do minimal work on projects while away from my desktop). Like some others mentioned, it can be slow at times and have keyboard inputs freeze where you have to restart the app. Also, I wish there was additional themes for the app and native support of multiple windows. Overall this has been the best linux environment I have used on my iPad and would highly recommend this to any developer!
+Great Linux Enviorment
+12/29/2024
+Jacobd29
+This app is exactly what I needed on my iPad for coding without my mac! I’ve always wanted to be able to do light development in c/c++ and python with git support on the iPad and this app perfectly allows for this. I was able to install z shell instead of the base ash that comes with this version of linux as it better matches mac. Everything I wanted to install in the environment was able to be installed (though like mentioned, I only really wanted to be able to do minimal work on projects while away from my desktop). Like some others mentioned, it can be slow at times and have keyboard inputs freeze where you have to restart the app. Also, I wish there was additional themes for the app and native support of multiple windows. Overall this has been the best linux environment I have used on my iPad and would highly recommend this to any developer!
+Excellent utility, if slow
+12/16/2021
+Lavioso371
+Before I get into what I like, I'll mention my main dislikes. The most noticeable is speed: because it's JIT-like, you can tell that the performance is slower than native (for example, taking a few seconds to open an ssh key). Additionally, while many apps that I use (gcc, python, node, to name a few) work, not everything will work out of the box (for example, ip addr doesn't behave).Despite these limitations, I would still give this app 5 stars: it just significantly improves the utility of my device. I mainly use it as an ssh/mosh box, but I can also do some basic programming locally. For fun, I even got a VNC server to run! Even as a basic tool for SSH, I can easily just use my own keys and I don't see noticeable delay once the connection is established. There's probably more interesting things I could do with it given the support of APK.
+Excellent utility, if slow
+12/16/2021
+Lavioso371
+Before I get into what I like, I'll mention my main dislikes. The most noticeable is speed: because it's JIT-like, you can tell that the performance is slower than native (for example, taking a few seconds to open an ssh key). Additionally, while many apps that I use (gcc, python, node, to name a few) work, not everything will work out of the box (for example, ip addr doesn't behave).Despite these limitations, I would still give this app 5 stars: it just significantly improves the utility of my device. I mainly use it as an ssh/mosh box, but I can also do some basic programming locally. For fun, I even got a VNC server to run! Even as a basic tool for SSH, I can easily just use my own keys and I don't see noticeable delay once the connection is established. There's probably more interesting things I could do with it given the support of APK.
+Excellent Port of Alpine Linux
+11/27/2020
+Google's Project Zero
+I’ve been around since the project started and have followed the beta til now. The work involved in the creation of this app and the community standing behind it amazing and deserves credit for porting this over to iOS. Many man hours were put in by Theodore himself and others such as the creator UTM and other contributors that have given valuable insight to the community and have pushed the limitations of iSH in order to present a full features Alpine Linux experience right here on your iOS device which is no small feat. This application allows much freedom over file s creation, editing, and even movement of files and folders laterally to other application folders. It’s worth the download even if you just want to place games in the terminal or ssh into your devices. Enjoy! Project Zer0
+Excellent Port of Alpine Linux
+11/27/2020
+Google's Project Zero
+I’ve been around since the project started and have followed the beta til now. The work involved in the creation of this app and the community standing behind it amazing and deserves credit for porting this over to iOS. Many man hours were put in by Theodore himself and others such as the creator UTM and other contributors that have given valuable insight to the community and have pushed the limitations of iSH in order to present a full features Alpine Linux experience right here on your iOS device which is no small feat. This application allows much freedom over file s creation, editing, and even movement of files and folders laterally to other application folders. It’s worth the download even if you just want to place games in the terminal or ssh into your devices. Enjoy! Project Zer0
+Great Linux app so far
+11/10/2020
+DJAllegretto
+This is a great app, and it has great potential. I've done some research on the web, and apparently there was supposed to be in APK package manager for this app under Alpine Linux. When I try to install APK packages, it says, "Ash, APK, not found". I was trying to compile Emacs from the source, but it requires the GNU make package which this app doesn't come with preinstalled. Other than that though, this is a great step forward to having Linux in your pocket. Though it's limited and sandboxed, and can't necessarily run directly on iOS hardware, this is something awesome too see. One thing I particularly like is the voiceover accessibility support. I was able to connect an external keyboard and start working with Linux on my iOS device. The only thing that could be improved is that it's a little slow when you're typing commands, but this is still an awesome app. I am looking forward to future development.
+Developer Response
+The latest version (iSH 1.1) includes APK. See go.ish.app/get-apk for how to activate it.
+Great Linux app so far
+11/10/2020
+DJAllegretto
+This is a great app, and it has great potential. I've done some research on the web, and apparently there was supposed to be in APK package manager for this app under Alpine Linux. When I try to install APK packages, it says, "Ash, APK, not found". I was trying to compile Emacs from the source, but it requires the GNU make package which this app doesn't come with preinstalled. Other than that though, this is a great step forward to having Linux in your pocket. Though it's limited and sandboxed, and can't necessarily run directly on iOS hardware, this is something awesome too see. One thing I particularly like is the voiceover accessibility support. I was able to connect an external keyboard and start working with Linux on my iOS device. The only thing that could be improved is that it's a little slow when you're typing commands, but this is still an awesome app. I am looking forward to future development.
+Developer Response
+12/10/2020
+The latest version (iSH 1.1) includes APK. See go.ish.app/get-apk for how to activate it.
+What’s New
+Version History
+Fixed bugs:
+- Make better diagnostics work in the file provider too, to diagnose Files app issues
+1.3.2
+05/21/2023
+Fixed bugs:
+- Send better diagnostics to me through Apple when a crash happens
+- Dump stack in dmesg output for segmentation fault and illegal instruction errors
+- Include file timestamps in filesystem exports and imports
+- Fix crash when renaming a theme
+- Fix timer error on startup of Vim 9
+- Fix deadlock on exit of Vim 9
+- Fix startup of newer versions of htop
+1.3.1
+05/08/2023
+New stuff:
+- iSH now supports custom themes
+- Preferences are now exposed via procfs
+- Some more app icon choices
+- Hyperlinks created by OSC 8 are underlined instead of invisible
+Fixed bugs:
+- Forward SO_RCVTIMEO, SO_SNDTIMEO in setsockopts to support snac
+- Add about four dozen SIMD instructions to improve support for nodejs and Rust
+- Fix bottom keyboard inset for iPad, Stage Manager, and devices with no home button
+- Implement /proc/pid/task to fix recent versions of GDB
+- Fix VoiceOver focus stealing keyboard focus on iOS 15+
+- Resolve an issue with xadd causing git clones to hang
+- Trigger segfault on unaligned cmpxchg8b, which iSH does not support
+- Fix a race condition that causes some output to be lost
+- Fix toolbar button sizing
+1.3
+04/24/2023
+New stuff:
+- Updated to Alpine 3.14. If a red badge appears on the settings button, tap and follow the prompts to migrate your repositories.
+- Improvements to font measurement in the terminal
+- Implemented pmaxub (thanks @akemimadoka on GitHub)
+- Comment added to /etc/apk/repositories explaining what it is
+Fixed bugs:
+- Removed file provider cleanup timer, reducing the amount of time iSH spends in the background doing nothing
+- Infinite loop in sigtimedwait
+1.2.3
+12/20/2021
+New stuff:
+- Added an option to hide the status bar
+- Updated Alpine repositories to the latest as of 2021-06-25
+Fixed bugs:
+- Significantly improve launch performance
+1.2.2
+07/01/2021
+Fixed bugs:
+- Any text containing non-ASCII characters would disappear on iOS 14.5 or later
+New stuff:
+- Updated Alpine repositories to the latest as of 2021-05-29
+1.2.1
+06/01/2021
+iSH now uses its own infrastructure for APK downloads instead of on-demand resources, making downloads more reliable and user-friendly.
+1.2
+04/26/2021
+New stuff:
+- Updated Alpine repositories
+- Added some more icons
+- Can use fonts installed via profile on iOS 14
+Fixed bugs:
+- Crash when running `ps` many times in parallel (thanks @emkey1)
+- Titles missing in some settings pages
+- OOM when too much is outputted to the terminal (fixed by slowing down terminal output)
+1.1.1
+12/24/2020
+New stuff:
+- apk has been added. You can use it install Alpine packages! If you're updating from an earlier version, you'll need to manually activate it it: https://go.ish.app/get-apk
+Fixed bugs:
+- Unable to cd to /proc/pid/fd in the shell
+1.1
+12/09/2020
+Fixed bugs:
+- Crash when entering recovery mode
+- Other KVO-related crashes
+- Incorrect syntax for multiple DNS search domains in resolv.conf (thanks @mitchblank)
+- Broken seek in procfs, causing many things dependent on it to hang
+- Directory traversal in filesystem renaming
+1.0.3
+11/15/2020
+- Fixes for some of the top crashes since launch
+- Upside-down orientation is disabled to match other apps on notchless iPhones
+1.0.2
+11/12/2020
+Fixed bugs:
+- Status bar being invisible when the device is in dark mode and the terminal has a light background
+1.0.1
+10/25/2020
+1.0
+10/22/2020
+Fixed bugs:
+- Make better diagnostics work in the file provider too, to diagnose Files app issues
+more
+Version 1.3.2
+05/21/2023
+App Privacy
+App Privacy
+The developer,
+Theodore Dubois
+, indicated that the app’s privacy practices may include handling of data as described below. This information has not been verified by Apple. For more information, see the
+developer’s privacy policy
+.
+To help you better understand the developer’s responses, see
+Privacy Definitions and Examples
+.
+Privacy practices may vary, for example, based on the features you use or your age.
+Learn More
+Data Not Collected
+The developer does not collect any data from this app.
+The developer,
+Theodore Dubois
+, indicated that the app’s privacy practices may include handling of data as described below. For more information, see the
+developer’s privacy policy
+.
+Data Not Collected
+The developer does not collect any data from this app.
+Privacy practices may vary, for example, based on the features you use or your age.
+Learn More
+Accessibility
+The developer has not yet indicated which accessibility features this app supports.
+Learn More
+Information
+Seller
+Theodore Dubois
+Size
+6.1 MB
+Category
+Developer Tools
+Compatibility
+Requires iOS 11.0 or later.
+iPhone
+Requires iOS 11.0 or later.
+iPad
+Requires iPadOS 11.0 or later.
+iPod&nbsp;touch
+Requires iOS 11.0 or later.
+Mac
+Requires macOS&nbsp;11.0 or later and a Mac with Apple&nbsp;M1&nbsp;chip or later.
+Apple Vision
+Requires visionOS 1.0 or later.
+Location
+This app may use your location even when it isn’t open, which can decrease device battery life.
+Languages
+English
+Age Rating
+16+
+16+
+Learn More
+Contains
+Unrestricted Web Access
+Copyright
+© Theodore Dubois and contributors
+Developer Website
+Privacy Policy
+License Agreement
+More by Theodore Dubois
+View
+Modulus Calculator
+Utilities
+View
+nasin sitelen Wakalito
+o sitelen kepeken tenpo lili a
+You Might Also Like
+View
+a-Shell
+*Local* Unix terminal (&amp; ssh)
+View
+xTerminal - SSH Terminal Shell
+SSH Client, Shell Console Term
+View
+Termius - Modern SSH Client
+SFTP, Terminal, Telnet, PuTTY
+View
+Terminal#
+SSH client
+View
+Userscripts
+User Script and Style Manager
+View
+Pyto IDE
+Python, C/C++
+View
+Runestone Text Editor
+Edit plain text and code
+View
+Textastic Code Editor
+Text, Coding, SFTP Client, SSH
+View
+Kodex
+A powerful code editor
+View
+Web Inspector
+Developer Console for Safari
+United States
+Español (México)
+العربية
+Русский
+简体中文
+Français (France)
+한국어
+Português (Brazil)
+Tiếng Việt
+繁體中文 (台灣)
+Select a country or region
+Africa, Middle East, and India
+See All
+Algeria
+Angola
+Armenia
+Azerbaijan
+Bahrain
+Benin
+Botswana
+Burkina Faso
+Cameroun
+Cape Verde
+Chad
+Côte d’Ivoire
+Congo, The Democratic Republic Of The
+Egypt
+Eswatini
+Gabon
+Gambia
+Ghana
+Guinea-Bissau
+India
+Iraq
+Israel
+Jordan
+Kenya
+Kuwait
+Lebanon
+Liberia
+Libya
+Madagascar
+Malawi
+Mali
+Mauritania
+Mauritius
+Morocco
+Mozambique
+Namibia
+Niger (English)
+Nigeria
+Oman
+Qatar
+Congo, Republic of
+Rwanda
+São Tomé and Príncipe
+Saudi Arabia
+Senegal
+Seychelles
+Sierra Leone
+South Africa
+Sri Lanka
+Tajikistan
+Tanzania, United Republic Of
+Tunisia
+Turkmenistan
+United Arab Emirates
+Uganda
+Yemen
+Zambia
+Zimbabwe
+Asia Pacific
+See All
+Afghanistan
+Australia
+Bhutan
+Brunei Darussalam
+Cambodia
+中国大陆
+Fiji
+香港
+Indonesia (English)
+日本
+Kazakhstan
+대한민국
+Kyrgyzstan
+Lao People's Democratic Republic
+澳門
+Malaysia (English)
+Maldives
+Micronesia, Federated States of
+Mongolia
+Myanmar
+Nauru
+Nepal
+New Zealand
+Pakistan
+Palau
+Papua New Guinea
+Philippines
+Singapore
+Solomon Islands
+台灣
+Thailand
+Tonga
+Turkmenistan
+Uzbekistan
+Vanuatu
+Vietnam
+Europe
+See All
+Albania
+Armenia
+Österreich
+Belarus
+Belgium
+Bosnia and Herzegovina
+Bulgaria
+Croatia
+Cyprus
+Czechia
+Denmark
+Estonia
+Finland
+France (Français)
+Georgia
+Deutschland
+Greece
+Hungary
+Iceland
+Ireland
+Italia
+Kosovo
+Latvia
+Lithuania
+Luxembourg (English)
+Malta
+Moldova, Republic Of
+Montenegro
+Nederland
+North Macedonia
+Norway
+Poland
+Portugal (Português)
+Romania
+Россия
+Serbia
+Slovakia
+Slovenia
+España
+Sverige
+Schweiz
+Türkiye (English)
+Ukraine
+United Kingdom
+Latin America and the Caribbean
+See All
+Anguilla
+Antigua and Barbuda
+Argentina (Español)
+Bahamas
+Barbados
+Belize
+Bermuda
+Bolivia (Español)
+Brasil
+Virgin Islands, British
+Cayman Islands
+Chile (Español)
+Colombia (Español)
+Costa Rica (Español)
+Dominica
+República Dominicana
+Ecuador (Español)
+El Salvador (Español)
+Grenada
+Guatemala (Español)
+Guyana
+Honduras (Español)
+Jamaica
+México
+Montserrat
+Nicaragua (Español)
+Panamá
+Paraguay (Español)
+Perú
+St. Kitts and Nevis
+Saint Lucia
+St. Vincent and The Grenadines
+Suriname
+Trinidad and Tobago
+Turks and Caicos
+Uruguay (English)
+Venezuela (Español)
+The United States and Canada
+See All
+Canada (English)
+Canada (Français)
+United States
+Estados Unidos (Español México)
+الولايات المتحدة
+США
+美国 (简体中文)
+États-Unis (Français France)
+미국
+Estados Unidos (Português Brasil)
+Hoa Kỳ
+美國 (繁體中文台灣)
+Copyright © 2026
+Apple Inc.
+All rights reserved.
+Internet Service Terms
+App Store &amp; Privacy
+Cookie Warning
+Support

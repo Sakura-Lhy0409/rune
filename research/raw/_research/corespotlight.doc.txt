@@ -1,0 +1,284 @@
+Add search capabilities to your app, and index your content so
+ 
+people can find it from Spotlight and Safari.
+Core Spotlight
+=== Core Spotlight
+Overview
+Help people access activities and items within your app by adding
+ 
+details about those items to a Core Spotlight index. The framework provides
+ 
+APIs to add your content to an index, and search for items in that index. You
+ 
+decide what content makes sense to index, but typically you index anything
+ 
+that someone might look for in your app. For example, you might index photos,
+ 
+contacts, the items someone purchased, or data they see in your interface.
+ 
+You can then use Core Spotlight to search for your indexed content and display
+ 
+those results in your app.
+Spotlight File Import extensions don’t provide functionality in macOS. To make custom files available to Spotlight in macOS, create a Spotlight importer plugin. For more information, refer to 
+.
+Your app is responsible for indexing your app’s content and maintaining
+ 
+those indexes. You can index content when your app runs, or provide an app
+ 
+extension to index content when the system requests it. You can index any
+ 
+content your app manages, including files and other content that your app
+ 
+isn’t currently displaying. The indexes you create using Core Spotlight remain
+ 
+on device, and are private to the owner of the device. Devices don’t share
+ 
+indexed data with Apple, or synchronize that data with the person’s other devices.
+In addition to indexing content, iOS provides additional strategies for
+ 
+making your app’s content searchable:
+Use the search-related properties of 
+ to add items to the on-device index, with the option to identify the items as eligible for public indexing. Learn more about 
+ in 
+.
+Use web markup to index content on your web server in Apple’s server-side index, which makes the data available to all iOS users in Spotlight and Safari search results. For more information, see 
+ in 
+.
+=== Essentials
+=== Searchable items
+=== Indexes
+=== Foundation models support
+=== Spotlight app extensions
+=== Queries
+=== Errors
+=== Version
+=== Structures
+Add search capabilities to your app, and index your content so
+ 
+people can find it from Spotlight and Safari.
+Core Spotlight
+=== Core Spotlight
+CORESPOTLIGHT_EXPORT
+=== CORESPOTLIGHT_EXPORT
+A key associated with a custom attribute for a searchable item.
+class
+ 
+CSCustomAttributeKey
+CSCustomAttributeKey
+=== CSCustomAttributeKey
+An object that provides searchable attributes for file types that the app supports.
+class
+ 
+CSImportExtension
+CSImportExtension
+=== CSImportExtension
+Index errors returned by Core Spotlight.
+struct
+ 
+CSIndexError
+CSIndexError
+=== CSIndexError
+An interface that implements an index-maintenance app extension.
+class
+ 
+CSIndexExtensionRequestHandler
+CSIndexExtensionRequestHandler
+=== CSIndexExtensionRequestHandler
+An object that displays localized text in search results related to your app.
+class
+ 
+CSLocalizedString
+CSLocalizedString
+=== CSLocalizedString
+An object that represents a person in the context of search results.
+class
+ 
+CSPerson
+CSPerson
+=== CSPerson
+A type you use to programmatically search the indexed app content.
+class
+ 
+CSSearchQuery
+CSSearchQuery
+=== CSSearchQuery
+The behavior configuration to use for a search query.
+class
+ 
+CSSearchQueryContext
+CSSearchQueryContext
+=== CSSearchQueryContext
+Search query errors returned by Core Spotlight.
+struct
+ 
+CSSearchQueryError
+CSSearchQueryError
+=== CSSearchQueryError
+An on-device index for your app’s searchable content.
+class
+ 
+CSSearchableIndex
+CSSearchableIndex
+=== CSSearchableIndex
+A protocol that defines methods a delegate object or app extension uses to handle communication from the on-device index.
+protocol
+ 
+CSSearchableIndexDelegate
+CSSearchableIndexDelegate
+=== CSSearchableIndexDelegate
+class
+ 
+CSSearchableIndexDescription
+CSSearchableIndexDescription
+=== CSSearchableIndexDescription
+The details of your app-specific content that someone might search
+ 
+for on their devices.
+class
+ 
+CSSearchableItem
+CSSearchableItem
+=== CSSearchableItem
+The detailed metadata for a searchable item.
+class
+ 
+CSSearchableItemAttributeSet
+CSSearchableItemAttributeSet
+=== CSSearchableItemAttributeSet
+The kind of suggestion to use in a query.
+class
+ 
+CSSuggestion
+CSSuggestion
+=== CSSuggestion
+CSSuggestionHighlightAttributeName
+=== CSSuggestionHighlightAttributeName
+A type you use to initiate searches from your interface and
+ 
+offer suggested text completions.
+class
+ 
+CSUserQuery
+CSUserQuery
+=== CSUserQuery
+The configuration details to apply to a user query.
+class
+ 
+CSUserQueryContext
+CSUserQueryContext
+=== CSUserQueryContext
+CS_AVAILABLE
+=== CS_AVAILABLE
+CS_CLASS_AVAILABLE
+=== CS_CLASS_AVAILABLE
+CS_DEPRECATED
+=== CS_DEPRECATED
+CS_TVOS_UNAVAILABLE
+=== CS_TVOS_UNAVAILABLE
+The API version number for Core Spotlight.
+var
+ 
+CoreSpotlightAPIVersion
+: 
+Int32
+CoreSpotlightAPIVersion
+=== CoreSpotlightAPIVersion
+The project version number for Core Spotlight.
+CoreSpotlightVersionNumber
+=== CoreSpotlightVersionNumber
+The project version string for Core Spotlight.
+CoreSpotlightVersionString
+=== CoreSpotlightVersionString
+A Swift value type representing a Spotlight search result.
+struct
+ 
+SearchableItem
+SearchableItem
+=== SearchableItem
+Make your app’s indexed content available to the system’s Foundation models as additional
+ 
+context to use when answering prompts.
+=== Spotlight search tool
+Create a description for your app’s content and add it to a Spotlight
+ 
+index to make it searchable.
+=== Adding your app’s content to Spotlight indexes
+Add a search interface to your app to execute Spotlight queries
+ 
+and offer suggested text completions.
+=== Building a search interface for your app
+Index error codes and error domain.
+=== CSIndex Errors
+Search query error codes and error domain.
+=== CSSearchQuery Errors
+Summarize mail, message, and audio transcripts or assess the priority of mail and messages
+ 
+using Spotlight and Apple Intelligence.
+=== Generating summary and priority data for indexed items
+Create an app extension to maintain your app’s indexes and regenerate
+ 
+them as needed.
+=== Regenerating your app’s indexes on demand
+Search for app-specific content and refine search results using
+ 
+predicates and filters.
+=== Searching for information in your app
+A representation of the state of your app at a moment in time.
+class
+ 
+NSUserActivity
+NSUserActivity
+=== NSUserActivity
+Learn about important changes to Core Spotlight.
+=== Core Spotlight updates
+=== Technologies
+=== Spotlight Importer Programming Guide
+Spotlight Importer Programming Guide
+=== Index Activities and Navigation Points
+Index Activities and Navigation Points
+=== Mark Up Web Content
+Mark Up Web Content
+=== App Search Programming Guide
+App Search Programming Guide
+=== Essentials
+=== Searchable items
+=== Indexes
+=== Foundation models support
+=== Spotlight app extensions
+=== Queries
+=== Errors
+=== Version
+=== Variables
+=== Macros
+CSCustomAttributeKey
+CSCustomAttributeKey
+CSImportExtension
+CSImportExtension
+CSIndexExtensionRequestHandler
+CSIndexExtensionRequestHandler
+CSLocalizedString
+CSLocalizedString
+CSPerson
+CSPerson
+CSSearchQuery
+CSSearchQuery
+CSSearchQueryContext
+CSSearchQueryContext
+CSSearchableIndex
+CSSearchableIndex
+CSSearchableIndexDelegate
+CSSearchableIndexDelegate
+CSSearchableIndexDescription
+CSSearchableIndexDescription
+CSSearchableItem
+CSSearchableItem
+CSSearchableItemAttributeSet
+CSSearchableItemAttributeSet
+CSSuggestion
+CSSuggestion
+CSUserQuery
+CSUserQuery
+CSUserQueryContext
+CSUserQueryContext
+CoreSpotlightAPIVersion
+NSUserActivity

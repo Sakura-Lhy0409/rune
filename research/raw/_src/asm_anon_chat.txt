@@ -1,0 +1,88 @@
+Apple updates App Review Guidelines for random/anonymous chat apps
+☰
+App Store Marketing
+×
+Search
+Home
+Guides
+All posts
+Whitepapers
+Weekly data blast
+Store Charts
+About
+Contact
+RSS feed
+APPlyzer
+ConsultMyApp
+Topics
+ASO
+Apple Ads
+Google App Campaigns
+Paid UA
+Retention &amp; CRM
+Store Creatives
+App UX
+Measurement
+Policy
+Localization
+AI
+Seasonality
+App Distribution
+Home
+Guides
+News
+Whitepapers
+Store Charts
+About
+Contact
+ASO
+Apple Ads
+Google App Campaigns
+Paid UA / DSPs / Social
+Retention &amp; CRM
+Store Creatives
+App UX
+Privacy &amp; Attribution
+Policy
+AI &amp; Automation
+Feb 12, 2026
+Apple updates App Review Guidelines for random/anonymous chat apps
+Apple clarified that random/anonymous chat apps fall under Guideline 1.2 (UGC). Here’s what that means operationally.
+Original announcement (source):
+Apple Developer News -
+“Updated App Review Guidelines now available”
+(Feb 6, 2026)
+https://developer.apple.com/news/?id=d75yllv4
+What changed
+Apple updated the App Review Guidelines to clarify that apps with
+random or anonymous chat
+are subject to
+Guideline 1.2 (User-Generated Content)
+.
+Why this matters
+If your app has anonymous / random chat, expect scrutiny around:
+moderation and safety features
+reporting + blocking flows
+abuse handling
+policies and enforcement
+Even if “chat” isn’t the core product, adding a chat feature can move you into a stricter review lane.
+Read the official update:
+https://developer.apple.com/news/?id=d75yllv4
+Editor: App Store Marketing Editorial Team
+Insights informed by practitioner experience and data from ConsultMyApp and APPlyzer.
+Want help with ASO?
+If you want this implemented for your app, check out our services - or run your workflow in APPlyzer.
+consultmyapp.com
+APPlyzer.com
+App Store Marketing
+&copy; 2026 - Practical organic (ASO), paid acquisition, retention and engagement strategies for the modern mobile marketer.
+Blog
+Contact
+Privacy
+Cookies & analytics
+We use analytics to understand what’s useful and improve the site.
+You can accept or decline. See our
+privacy policy
+.
+Decline
+Accept

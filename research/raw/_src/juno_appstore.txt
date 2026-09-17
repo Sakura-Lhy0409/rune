@@ -1,0 +1,768 @@
+‎Python IDE &amp; Jupyter – Juno App - App Store
+Search
+Today
+Games
+Apps
+Arcade
+Platform
+iPhone
+iPad
+Mac
+Vision
+Watch
+TV
+Python IDE &amp; Jupyter – Juno
+Code editor, notebooks &amp; AI
+Free · In‑App Purchases
+Share
+1.1K Ratings
+4.6
+Age Rating
+4+
+Years
+Chart
+#124
+Developer Tools
+Developer
+Rational Matter
+Language
+EN
++ 7 More
+Size
+693.5
+MB
+iPhone, iPad
+Juno 4 is here — Python 3.13, an AI coding assistant, projects, a REPL, and native iOS APIs. Editing is free, running code is free to try — Pro is a one-time purchase.
+Zero-setup Python IDE that runs your code offline, an AI coding assistant, and a developer toolbox — in a first-class citizen app for iPad and iPhone.
+Juno is designed to cover all your Python coding needs, supporting both Python scripts (.py) and Jupyter notebooks (.ipynb) — a document format focused on applying Python to data analysis and computational science.
+FREE FEATURES
+- Navigate and manage files and folders, quickly preview documents and media
+- Browse and edit Jupyter notebooks in a powerful, customizable notebook editor with beautifully rendered previews — editing is free
+- Write and edit code sources, scripts, JSON, XML, and other text-based formats — one versatile editor for code and text alike, with syntax highlighting
+- Add quick access bookmarks for file system locations outside the app's sandbox, or simply open documents in place
+PRO FEATURES
+Only one thing in Juno is Pro: running code. Even that is free to try — a generous trial allowance lets you run notebooks, scripts, projects, and the REPL before you buy. After the trial, running code unlocks with a one-time Pro purchase — not a subscription.
+- Run Jupyter notebooks, Python scripts, and whole projects locally with the built-in Python 3.13 interpreter and a full suite of up-to-date, preinstalled scientific and data packages — entirely offline
+- Explore interactively in a Python REPL — open a standalone prompt, or drop into it after running a script or project to keep exploring what it defined
+- Search the variables, functions, and imports in your session with the Object Inspector — no need to print each one
+- Open any folder as a project: file tree, multiple editor tabs, run any script, with a coding assistant aware of the whole project
+- Keep side outputs — Preview, Browser, Console, Object Inspector — open as side-by-side tabs in an output sidebar
+- View local web servers and HTML your code produces in a built-in browser with developer debug tools
+- Long-running scripts and Jupyter sessions keep going in the background
+- Automate with Shortcuts and Siri: App Intents run a Python file, run Python code, or open a file — pass arguments and files, capture output, and chain actions
+- Leverage powerful data analysis, machine learning and developer tools: NumPy, pandas, Matplotlib, SciPy, Scikit-learn, OpenCV, LXML, and more
+- Enjoy painless package management: install any pure Python package with an intuitive package manager
+AI CODING ASSISTANT
+The assistant runs on your key, not ours: add your OpenAI, Anthropic, or Gemini API key, and requests go straight from your device to your provider. You control what you spend and share — Juno never takes a cut.
+PYTHON MEETS iOS
+Reach native iOS APIs straight from Python with the built-in juno modules: clipboard, Keychain, device info, location, motion sensors, contacts, reminders, photos, sound, notifications, sharing, and Bluetooth. Show native alerts and pickers, present full-screen image, video, and web previews, or call into UIKit, Foundation, and any Objective-C framework via the Objective-C bridge.
+PYTHON SCRIPTS
+Python scripts are plain-text Python source code files with a .py extension. Juno lets you work on these with snappy, intelligent code completion, a console with full terminal emulator support, and a built-in media viewer for code-generated images, plots, web apps, and more — executed by the embedded Python interpreter, locally on your iPhone or iPad and completely offline.
+JUPYTER NOTEBOOKS
+A Jupyter notebook is a versatile document format that stores live code, markdown text, plots, images, and LaTeX equations in a single .ipynb file. Notebooks keep a record of every input and output of an interactive session, embedding rich output (HTML, images, video, plots) right in the document — a perfect playground for data analysis, machine learning, and computational science, and Juno makes working with them a breeze!
+more
+Ratings &amp; Reviews
+4.6
+out of 5
+1.1K Ratings
+A powerful tool for iOS
+05/26/2023
+Wald76
+My main Jupyter environment is Anaconda on my Mac. I use GitHub to sync about 30 notebooks and their associated Python source files over to Juno (both on my iPad and on my iPhone) so I can give impromptu demos and make small changes and improvements no matter where I am. Over time Juno has matured and grown fairly robust. I’m especially glad that Python 3.10 support came out in May 2023.Alex Staravoitau responded quickly when I reported a configuration glitch in the new Python 3.10 release (the Bokeh plotting library required a different version of jinja2). He gave me a temporary workaround and within a couple of days got a corrected version out to the App Store.Juno is probably my most favorite app. It’s been extraordinarily useful. A strong five stars!
+A powerful tool for iOS
+05/26/2023
+Wald76
+My main Jupyter environment is Anaconda on my Mac. I use GitHub to sync about 30 notebooks and their associated Python source files over to Juno (both on my iPad and on my iPhone) so I can give impromptu demos and make small changes and improvements no matter where I am. Over time Juno has matured and grown fairly robust. I’m especially glad that Python 3.10 support came out in May 2023.Alex Staravoitau responded quickly when I reported a configuration glitch in the new Python 3.10 release (the Bokeh plotting library required a different version of jinja2). He gave me a temporary workaround and within a couple of days got a corrected version out to the App Store.Juno is probably my most favorite app. It’s been extraordinarily useful. A strong five stars!
+Work likes Jupyter Notebook; makes it easy to use Python on the iPad
+05/30/2021
+CookieElle
+I am a Bioinformatician and I use Jupyter Notebook and Python as part of my workflow. Every now and then I like to take a break from using my computer, and simply use my iPad Pro to write Python scripts. I really like this app as it suits this purpose. Juno works like Jupyter Notebook, with the markdown style, python console, and even the functional keys of “B”, “A”, “M”, when adding a new line below, above, and markdown that makes Jupyter Notebook easy to use. I haven’t had any issues with delays, crashes, or bugs. It works great, and to take things a step further, I would really like to see R included as a language for this app. There is definitely a need for it.
+Work likes Jupyter Notebook; makes it easy to use Python on the iPad
+05/30/2021
+CookieElle
+I am a Bioinformatician and I use Jupyter Notebook and Python as part of my workflow. Every now and then I like to take a break from using my computer, and simply use my iPad Pro to write Python scripts. I really like this app as it suits this purpose. Juno works like Jupyter Notebook, with the markdown style, python console, and even the functional keys of “B”, “A”, “M”, when adding a new line below, above, and markdown that makes Jupyter Notebook easy to use. I haven’t had any issues with delays, crashes, or bugs. It works great, and to take things a step further, I would really like to see R included as a language for this app. There is definitely a need for it.
+My Everyday Jupyter Notebook Client for Drug Discovery Research
+11/04/2025
+outkrow
+I work as a scientist at a large pharmaceutical company in Boston and this app has been my daily driver for analyzing data on my iPad as well as my Vision Pro for the last few years.  It’s truly been a productivity game changer.  Instead of lugging my MacBook Pro into the lab, or to a meeting, I can bring my iPad to document my experiments. I also use Juno on my Vision Pro during my long train commute which is amazing.  Thanks for developing this app!
+My Everyday Jupyter Notebook Client for Drug Discovery Research
+11/04/2025
+outkrow
+I work as a scientist at a large pharmaceutical company in Boston and this app has been my daily driver for analyzing data on my iPad as well as my Vision Pro for the last few years.  It’s truly been a productivity game changer.  Instead of lugging my MacBook Pro into the lab, or to a meeting, I can bring my iPad to document my experiments. I also use Juno on my Vision Pro during my long train commute which is amazing.  Thanks for developing this app!
+Couldn’t tell how bad it was until after paying; do not buy
+03/13/2025
+iAdjunct
+This is not an IDE, this is a notebook. I was able to open a directory from Working Copy… but the GUI is pretty bad. You can browse around the files pretty easily, but you have to “Open Python Source” to edit and/or run the script. This takes you to a new screen. If you want to switch to another file (since any program worth its salt is more than one file) you have to use a separate tab to open a file browser, go to the file, then “Open Python Source” in that too - which brings up a popup dialog which you have to interact with before it REPLACES the open file. To go back, you have to do that all over again. Furthermore, if your app uses asyncio and it has an exception which leaves the loop running, you have NO WAY to stop it other than quitting the app. This was a complete waste of $25.
+Developer Response
+👋 An update: Juno 4 added projects (among a bunch of other things). Open a directory (including from Working Copy) and its files open in tabs; switching is a tap, no dialog, nothing gets replaced. The editor and console were rebuilt around it. Since Juno is a one-time purchase, this is a free update on what you already paid. Background persistence and interpreter handling have been completely reworked, and if you can still wedge an asyncio loop that Stop won't break, please send me a minimal example at feedback@juno.sh.
+Couldn’t tell how bad it was until after paying; do not buy
+03/13/2025
+iAdjunct
+This is not an IDE, this is a notebook. I was able to open a directory from Working Copy… but the GUI is pretty bad. You can browse around the files pretty easily, but you have to “Open Python Source” to edit and/or run the script. This takes you to a new screen. If you want to switch to another file (since any program worth its salt is more than one file) you have to use a separate tab to open a file browser, go to the file, then “Open Python Source” in that too - which brings up a popup dialog which you have to interact with before it REPLACES the open file. To go back, you have to do that all over again. Furthermore, if your app uses asyncio and it has an exception which leaves the loop running, you have NO WAY to stop it other than quitting the app. This was a complete waste of $25.
+Developer Response
+Aug 27
+👋 An update: Juno 4 added projects (among a bunch of other things). Open a directory (including from Working Copy) and its files open in tabs; switching is a tap, no dialog, nothing gets replaced. The editor and console were rebuilt around it. Since Juno is a one-time purchase, this is a free update on what you already paid. Background persistence and interpreter handling have been completely reworked, and if you can still wedge an asyncio loop that Stop won't break, please send me a minimal example at feedback@juno.sh.
+What’s New
+Version History
+What's New in Juno 4.2.5:
+This update fixes a range of bugs in the package manager, along with a number of smaller fixes and polish. It also adds new models to the AI catalog.
+Here's everything new in Juno 4.2:
+THE PACKAGE MANAGER, REWORKED
+– Install a package and Juno works out everything else it needs, shows you the plan, and installs the whole set.
+– Point it at a project's requirements.txt and it does the same for every package the project needs.
+– Package pages are rebuilt around the project's README, its versions, and what's installed on your device.
+– Browse popular packages, see when updates are available, and tidy up dependencies left behind when you uninstall.
+MORE AI PROVIDERS
+– Use OpenRouter, DeepSeek, Together, or Groq, or point Juno at any OpenAI-compatible endpoint — including a model server running on your own network.
+– Some providers now let you sign in with your account instead of pasting an API key, and Juno shows how much of its allowance is left.
+– New models throughout the catalog, with context and account limits shown right in the composer.
+UPDATED ENVIRONMENT
+– pandas 3.0, NumPy 2.4.6, scikit-learn 1.9, SciPy 1.18, and lxml 6.1.1 lead a refresh of the bundled packages.
+MORE
+– Juno launches faster when you have a lot of packages installed.
+– A range of stability fixes, including crashes in the code editor, with the iPad keyboard, and when shutting down a kernel.
+4.2.5
+Sep 4
+What's New in Juno 4.2.4:
+This update fixes a range of crashes and stability issues, along with a number of smaller interface fixes and polish.
+Here's everything new in Juno 4.2:
+THE PACKAGE MANAGER, REWORKED
+– Install a package and Juno works out everything else it needs, shows you the plan, and installs the whole set.
+– Point it at a project's requirements.txt and it does the same for every package the project needs.
+– Package pages are rebuilt around the project's README, its versions, and what's installed on your device.
+– Browse popular packages, see when updates are available, and tidy up dependencies left behind when you uninstall.
+MORE AI PROVIDERS
+– Use OpenRouter, DeepSeek, Together, or Groq, or point Juno at any OpenAI-compatible endpoint — including a model server running on your own network.
+– Some providers now let you sign in with your account instead of pasting an API key, and Juno shows how much of its allowance is left.
+– New models throughout the catalog, with context and account limits shown right in the composer.
+UPDATED ENVIRONMENT
+– pandas 3.0, NumPy 2.4.6, scikit-learn 1.9, SciPy 1.18, and lxml 6.1.1 lead a refresh of the bundled packages.
+MORE
+– Juno launches faster when you have a lot of packages installed.
+– A range of stability fixes, including crashes in the code editor, with the iPad keyboard, and when shutting down a kernel.
+4.2.4
+Sep 3
+What's New in Juno 4.2.3:
+This update fixes a range of crashes and stability issues, along with a number of smaller interface fixes and polish.
+Here's everything new in Juno 4.2:
+THE PACKAGE MANAGER, REWORKED
+– Install a package and Juno works out everything else it needs, shows you the plan, and installs the whole set.
+– Point it at a project's requirements.txt and it does the same for every package the project needs.
+– Package pages are rebuilt around the project's README, its versions, and what's installed on your device.
+– Browse popular packages, see when updates are available, and tidy up dependencies left behind when you uninstall.
+MORE AI PROVIDERS
+– Use OpenRouter, DeepSeek, Together, or Groq, or point Juno at any OpenAI-compatible endpoint — including a model server running on your own network.
+– Some providers now let you sign in with your account instead of pasting an API key, and Juno shows how much of its allowance is left.
+– New models throughout the catalog, with context and account limits shown right in the composer.
+UPDATED ENVIRONMENT
+– pandas 3.0, NumPy 2.4.6, scikit-learn 1.9, SciPy 1.18, and lxml 6.1.1 lead a refresh of the bundled packages.
+MORE
+– Juno launches faster when you have a lot of packages installed.
+– A range of stability fixes, including crashes in the code editor, with the iPad keyboard, and when shutting down a kernel.
+4.2.3
+Aug 28
+What's New in Juno 4.2:
+THE PACKAGE MANAGER, REWORKED
+– Install a package and Juno works out everything else it needs, shows you the plan, and installs the whole set.
+– Point it at a project's requirements.txt and it does the same for every package the project needs.
+– Package pages are rebuilt around the project's README, its versions, and what's installed on your device.
+– Browse popular packages, see when updates are available, and tidy up dependencies left behind when you uninstall.
+MORE AI PROVIDERS
+– Use OpenRouter, DeepSeek, Together, or Groq, or point Juno at any OpenAI-compatible endpoint — including a model server running on your own network.
+– Some providers now let you sign in with your account instead of pasting an API key, and Juno shows how much of its allowance is left.
+– New models throughout the catalog, with context and account limits shown right in the composer.
+UPDATED ENVIRONMENT
+– pandas 3.0, NumPy 2.4.6, scikit-learn 1.9, SciPy 1.18, and lxml 6.1.1 lead a refresh of the bundled packages.
+MORE
+– Juno launches faster when you have a lot of packages installed.
+– A range of stability fixes, including crashes in the code editor, with the iPad keyboard, and when shutting down a kernel.
+4.2.2
+Aug 23
+What's New in Juno 4.1.5:
+This update fixes a range of crashes and stability issues, along with a number of smaller interface fixes and polish.
+Juno 4 is our biggest update yet — here's everything new.
+CODING ASSISTANT
+– Code alongside an AI assistant in your notebooks and scripts. Bring your own OpenAI, Anthropic, or Gemini API key and stay in full control of your data and usage.
+PYTHON 3.13
+– The built-in environment now runs Python 3.13, with every bundled package — NumPy, pandas, SciPy, Matplotlib, OpenCV, and more — updated along with it.
+NEW WAYS TO RUN
+– Python REPL: run code interactively at a prompt — standalone, or drop in after running a script or project.
+– Project mode: open a folder as a project with a file tree, multiple editor tabs, and a project-aware assistant.
+– Object Inspector: browse the variables, functions, and imports defined in your session.
+– Output sidebar: keep previews, the console, a browser, and the inspector side by side.
+PYTHON MEETS iOS
+– New juno modules reach the clipboard, Keychain, device info, location, motion, contacts, reminders, photos, sound, notifications, sharing, and Bluetooth — plus native dialogs, full-screen previews, and an Objective-C bridge.
+– Run Python files and code from Shortcuts and Siri, and keep long-running scripts and sessions going in the background.
+MORE
+– A built-in browser for local web servers and HTML, with view-source and console-log forwarding.
+– One editor for code and text, with syntax highlighting and the coding assistant for both.
+– Faster package search, collapsible cells, auto-scrolling notebooks, a customizable keyboard toolbar, redesigned settings, and a wide range of fixes and polish.
+Editing notebooks and files is now free. Running code is a Pro feature — and you can try it, and every other Pro feature, free before you buy.
+4.1.5
+Aug 17
+What's New in Juno 4.1.4:
+HTML files now open in a live web view: pages run their JavaScript and load their own stylesheets, images, and scripts. This update also fixes installing certain packages from source, moving files in the project tree, and a range of stability issues.
+Juno 4 is our biggest update yet — here's everything new.
+CODING ASSISTANT
+– Code alongside an AI assistant in your notebooks and scripts. Bring your own OpenAI, Anthropic, or Gemini API key and stay in full control of your data and usage.
+PYTHON 3.13
+– The built-in environment now runs Python 3.13, with every bundled package — NumPy, pandas, SciPy, Matplotlib, OpenCV, and more — updated along with it.
+NEW WAYS TO RUN
+– Python REPL: run code interactively at a prompt — standalone, or drop in after running a script or project.
+– Project mode: open a folder as a project with a file tree, multiple editor tabs, and a project-aware assistant.
+– Object Inspector: browse the variables, functions, and imports defined in your session.
+– Output sidebar: keep previews, the console, a browser, and the inspector side by side.
+PYTHON MEETS iOS
+– New juno modules reach the clipboard, Keychain, device info, location, motion, contacts, reminders, photos, sound, notifications, sharing, and Bluetooth — plus native dialogs, full-screen previews, and an Objective-C bridge.
+– Run Python files and code from Shortcuts and Siri, and keep long-running scripts and sessions going in the background.
+MORE
+– A built-in browser for local web servers and HTML, with view-source and console-log forwarding.
+– One editor for code and text, with syntax highlighting and the coding assistant for both.
+– Faster package search, collapsible cells, auto-scrolling notebooks, a customizable keyboard toolbar, redesigned settings, and a wide range of fixes and polish.
+Editing notebooks and files is now free. Running code is a Pro feature — and you can try it, and every other Pro feature, free before you buy.
+4.1.4
+Jul 30
+What's New in Juno 4.1.3:
+This update includes under-the-hood fixes and improves overall stability.
+Juno 4 is our biggest update yet — here's everything new.
+CODING ASSISTANT
+– Code alongside an AI assistant in your notebooks and scripts. Bring your own OpenAI, Anthropic, or Gemini API key and stay in full control of your data and usage.
+PYTHON 3.13
+– The built-in environment now runs Python 3.13, with every bundled package — NumPy, pandas, SciPy, Matplotlib, OpenCV, and more — updated along with it.
+NEW WAYS TO RUN
+– Python REPL: run code interactively at a prompt — standalone, or drop in after running a script or project.
+– Project mode: open a folder as a project with a file tree, multiple editor tabs, and a project-aware assistant.
+– Object Inspector: browse the variables, functions, and imports defined in your session.
+– Output sidebar: keep previews, the console, a browser, and the inspector side by side.
+PYTHON MEETS iOS
+– New juno modules reach the clipboard, Keychain, device info, location, motion, contacts, reminders, photos, sound, notifications, sharing, and Bluetooth — plus native dialogs, full-screen previews, and an Objective-C bridge.
+– Run Python files and code from Shortcuts and Siri, and keep long-running scripts and sessions going in the background.
+MORE
+– A built-in browser for local web servers and HTML, with view-source and console-log forwarding.
+– One editor for code and text, with syntax highlighting and the coding assistant for both.
+– Faster package search, collapsible cells, auto-scrolling notebooks, a customizable keyboard toolbar, redesigned settings, and a wide range of fixes and polish.
+Editing notebooks and files is now free. Running code is a Pro feature — and you can try it, and every other Pro feature, free before you buy.
+4.1.3
+Jul 23
+What's New in Juno 4.1.2:
+This update fixes several crashes and improves overall stability.
+Juno 4 is our biggest update yet — here's everything new.
+CODING ASSISTANT
+– Code alongside an AI assistant in your notebooks and scripts. Bring your own OpenAI, Anthropic, or Gemini API key and stay in full control of your data and usage.
+PYTHON 3.13
+– The built-in environment now runs Python 3.13, with every bundled package — NumPy, pandas, SciPy, Matplotlib, OpenCV, and more — updated along with it.
+NEW WAYS TO RUN
+– Python REPL: run code interactively at a prompt — standalone, or drop in after running a script or project.
+– Project mode: open a folder as a project with a file tree, multiple editor tabs, and a project-aware assistant.
+– Object Inspector: browse the variables, functions, and imports defined in your session.
+– Output sidebar: keep previews, the console, a browser, and the inspector side by side.
+PYTHON MEETS iOS
+– New juno modules reach the clipboard, Keychain, device info, location, motion, contacts, reminders, photos, sound, notifications, sharing, and Bluetooth — plus native dialogs, full-screen previews, and an Objective-C bridge.
+– Run Python files and code from Shortcuts and Siri, and keep long-running scripts and sessions going in the background.
+MORE
+– A built-in browser for local web servers and HTML, with view-source and console-log forwarding.
+– One editor for code and text, with syntax highlighting and the coding assistant for both.
+– Faster package search, collapsible cells, auto-scrolling notebooks, a customizable keyboard toolbar, redesigned settings, and a wide range of fixes and polish.
+Editing notebooks and files is now free. Running code is a Pro feature — and you can try it, and every other Pro feature, free before you buy.
+4.1.2
+Jul 19
+What's New in Juno 4:
+This update also makes installing packages more reliable: packages that bundle extra data files now install correctly, and you can find a package by its import name — like sklearn, cv2, or PIL.
+Juno 4 is our biggest update yet — here's everything new.
+CODING ASSISTANT
+– Code alongside an AI assistant in your notebooks and scripts. Bring your own OpenAI, Anthropic, or Gemini API key and stay in full control of your data and usage.
+PYTHON 3.13
+– The built-in environment now runs Python 3.13, with every bundled package — NumPy, pandas, SciPy, Matplotlib, OpenCV, and more — updated along with it.
+NEW WAYS TO RUN
+– Python REPL: run code interactively at a prompt — standalone, or drop in after running a script or project.
+– Project mode: open a folder as a project with a file tree, multiple editor tabs, and a project-aware assistant.
+– Object Inspector: browse the variables, functions, and imports defined in your session.
+– Output sidebar: keep previews, the console, a browser, and the inspector side by side.
+PYTHON MEETS iOS
+– New juno modules reach the clipboard, Keychain, device info, location, motion, contacts, reminders, photos, sound, notifications, sharing, and Bluetooth — plus native dialogs, full-screen previews, and an Objective-C bridge.
+– Run Python files and code from Shortcuts and Siri, and keep long-running scripts and sessions going in the background.
+MORE
+– A built-in browser for local web servers and HTML, with view-source and console-log forwarding.
+– One editor for code and text, with syntax highlighting and the coding assistant for both.
+– Faster package search, collapsible cells, auto-scrolling notebooks, a customizable keyboard toolbar, redesigned settings, and a wide range of fixes and polish.
+Editing notebooks and files is now free. Running code is a Pro feature — and you can try it, and every other Pro feature, free before you buy.
+4.1.1
+Jul 17
+What's New in 4.1:
+Juno 4 is our biggest update yet — here's everything new.
+CODING ASSISTANT
+– Code alongside an AI assistant in your notebooks and scripts. Bring your own OpenAI, Anthropic, or Gemini API key and stay in full control of your data and usage.
+PYTHON 3.13
+– The built-in environment now runs Python 3.13, with every bundled package — NumPy, pandas, SciPy, Matplotlib, OpenCV, and more — updated along with it.
+NEW WAYS TO RUN
+– Python REPL: run code interactively at a prompt — standalone, or drop in after running a script or project.
+– Project mode: open a folder as a project with a file tree, multiple editor tabs, and a project-aware assistant.
+– Object Inspector: browse the variables, functions, and imports defined in your session.
+– Output sidebar: keep previews, the console, a browser, and the inspector side by side.
+PYTHON MEETS iOS
+– New juno modules reach the clipboard, Keychain, device info, location, motion, contacts, reminders, photos, sound, notifications, sharing, and Bluetooth — plus native dialogs, full-screen previews, and an Objective-C bridge.
+– Run Python files and code from Shortcuts and Siri, and keep long-running scripts and sessions going in the background.
+MORE
+– A built-in browser for local web servers and HTML, with view-source and console-log forwarding.
+– One editor for code and text, with syntax highlighting and the coding assistant for both.
+– Faster package search, collapsible cells, auto-scrolling notebooks, a customizable keyboard toolbar, redesigned settings, and a wide range of fixes and polish.
+Editing notebooks and files is now free. Running code is a Pro feature — and you can try it, and every other Pro feature, free before you buy.
+4.1.0
+Jul 14
+What's New in 3.10:
+– The Python source editor now supports resizable sidebars on iPad.
+– Improved kernel management and reliability.
+– Fixed crashes and bugs related to notebook previews.
+– Fixed issues with bookmarks and file locations in iCloud.
+3.10.0
+Mar 29
+What’s New in 3.9:
+– Added a new way to try out Pro features before upgrading.
+– Fixed several crashes and bugs when executing code, along with a few layout issues.
+3.9.0
+Jan 18
+What’s New in 3.8:
+– Shortcuts support: create Shortcuts that run Python code or .py scripts in Juno—pass arguments and files, capture output, and chain actions.
+– Text editor: edit source code, scripts, JSON, XML and other text-based formats in a built-in plain text editor without upgrading to Juno Pro.
+– Fixed several crashes and bugs when executing code, as well as a few layout issues in the app.
+3.8.2
+11/16/2025
+What’s New in 3.7:
+– App localisations: Juno now supports German, French, Spanish, Russian, Japanese, and Simplified Chinese.
+– Added support for CJK and Cyrillic fonts in Matplotlib.
+– Fixed several crashes and minor layout issues.
+3.7.0
+08/15/2025
+What’s New in 3.6:
+– Added the curl_cffi package, fixing recent releases of yfinance.
+– Improved keyboard navigation in the Python source editor.
+– The ‘webbrowser’ module now allows opening links in both the in-app and default system browser (using the ‘new’ parameter).
+– Fixed several crashes and addressed a few minor UI and layout issues in the app.
+3.6.0
+07/07/2025
+What’s New in 3.5:
+– New packages: astropy, jiter (improves compatibility with recent OpenAI package releases).
+– Unpins the bokeh package, which can now be installed or upgraded in the package manager.
+– Fixes several crashes and errors originating from scipy.
+– Fixes a crash related to code completion.
+– Addresses several minor UI and layout issues in the app.
+3.5.0
+03/22/2025
+What’s New in 3.4:
+– Adds OpenCV package.
+– Fixes several crashes related to code completion in the Python source editor.
+– Resolves an issue where certain file types sometimes wouldn’t appear in the file browser.
+– Fixes an issue where unit tests in Python source files weren’t detected.
+– Addresses several minor UI and layout issues in the package manager.
+3.4.0
+12/30/2024
+What's new in 3.3:
+– Improves package manager compatibility, adding support for certain packages that previously failed to install (e.g., PyTensor).
+– Fixes several crashes in the Python runtime.
+– Fixes handling of line endings in the Python source editor, which could sometimes cause broken comment toggling.
+– Adds hardware keyboard shortcuts in the Python source editor (hold the ⌘ Command key to view all available shortcuts).
+– Applies various UI touch-ups and improvements throughout the app.
+3.3.0
+09/29/2024
+What's new in 3.2:
+– Adds orjson, optree, ml_dtypes and psutil packages.
+– Optimises runtime resources, so Juno now takes up less device storage and installs more quickly.
+– Improves handling of console output when running Python scripts.
+– Fixes several crashes in the Python runtime.
+3.2.0
+07/28/2024
+What's new in 3.1:
+- Adds pytables, numexpr and peewee.
+- Resolves dependencies for upgrading yfinance.
+- Fixes notebook JSON getting minified on save.
+- Fixes the app crashing in some cases after restoring device from backup.
+- Fixes several crashes in Python runtime and lxml.
+- Fixes a couple of minor UI issues.
+3.1.0
+05/30/2024
+What's new in 3.0.1:
+- Fixes multiple windows support;
+- Fixes several minor UI issues.
+Juno 3.0 marks a significant milestone in Python coding experience on iPad and iPhone! We've expanded beyond the Jupyter environment to include a full-fledged Python IDE — it’s specifically designed to make working with .py sources on your iOS devices intuitive and seamless, with as few compromises as possible. This first release already packs a bunch:
+- A fast and versatile code editor;
+- Snappy, intelligent code completion;
+- A console with full terminal emulator support;
+- A built-in media viewer for code outputs, perfect for displaying Pillow-generated images, Matplotlib plots, Bokeh and Flask web apps, and more.
+Juno 3.0 also brings a whole new file navigation experience with rich document previews, featuring beautifully rendered Jupyter notebooks, syntax highlighting for source code and text-based formats, and Quick Look for most popular document types and media. Add quick access bookmarks for any file system location, or just open any document in place for preview and editing.
+Juno 3.0 adds several new packages too, including pyarrow and h5py for HDF5 support.
+3.0.1
+03/19/2024
+Juno 3.0 marks a significant milestone in Python coding experience on iPad and iPhone! We've expanded beyond the Jupyter environment to include a full-fledged Python IDE — it’s specifically designed to make working with .py sources on your iOS devices intuitive and seamless, with as few compromises as possible. This first release already packs a bunch:
+- A fast and versatile code editor;
+- Snappy, intelligent code completion;
+- A console with full terminal emulator support;
+- A built-in media viewer for code outputs, perfect for displaying Pillow-generated images, Matplotlib plots, Bokeh and Flask web apps, and more.
+Juno 3.0 also brings a whole new file navigation experience with rich document previews, featuring beautifully rendered Jupyter notebooks, syntax highlighting for source code and text-based formats, and Quick Look for most popular document types and media. Add quick access bookmarks for any file system location, or just open any document in place for preview and editing.
+Juno 3.0 adds several new packages too, including pyarrow and h5py for HDF5 support.
+3.0.0
+03/13/2024
+What's new in Juno 2.1.8:
+- Fixed a crash that could occur when the app got suspended in the background;
+- Resolved several crashes and memory issues related to the lxml library.
+2.1.8
+12/08/2023
+What's new in Juno 2.1.7:
+- Added new packages: immutables, frozendict, and pydantic;
+- Updated lxml to version 4.9.3;
+- Fixed an issue where the kernel was not getting interrupted when requested;
+- Fixed several issues around restoring interpreter session and handling package metadata.
+2.1.7
+10/22/2023
+What's new in Juno 2.1.6:
+- Fixes an error when importing certain Bokeh submodules;
+- Fixes several errors related to installing pure Python packages with optional native extensions.
+What's new in Juno 2.1:
+- Python upgraded to 3.10 and pinned packages updated to their latest releases;
+- New packages: 'openai' (for accessing OpenAI APIs), 'tiktoken' (tokenization for OpenAI models), and their dependencies (including 'aiohttp', 'yarl', 'frozenlist', 'multidict', and more);
+- Better performance: Improved background app persistence, faster kernel start-ups, and reduced notebook loading times;
+- Easier package management: Now you can delete and upgrade many pre-installed packages (some will remain pinned, e.g. packages that Juno uses internally);
+- Streamlined navigation: Swipe from the left screen edge in the notebook editor to reveal the working directory navigator on iPhone (you can configure default presentation style in settings);
+- A whole bunch of fixes for crashes and bugs, as well as many less prominent enhancements and general quality of life improvements.
+2.1.6
+05/24/2023
+What's New in Juno 4.2.5:
+This update fixes a range of bugs in the package manager, along with a number of smaller fixes and polish. It also adds new models to the AI catalog.
+Here's everything new in Juno 4.2:
+THE PACKAGE MANAGER, REWORKED
+– Install a package and Juno works out everything else it needs, shows you the plan, and installs the whole set.
+– Point it at a project's requirements.txt and it does the same for every package the project needs.
+– Package pages are rebuilt around the project's README, its versions, and what's installed on your device.
+– Browse popular packages, see when updates are available, and tidy up dependencies left behind when you uninstall.
+MORE AI PROVIDERS
+– Use OpenRouter, DeepSeek, Together, or Groq, or point Juno at any OpenAI-compatible endpoint — including a model server running on your own network.
+– Some providers now let you sign in with your account instead of pasting an API key, and Juno shows how much of its allowance is left.
+– New models throughout the catalog, with context and account limits shown right in the composer.
+UPDATED ENVIRONMENT
+– pandas 3.0, NumPy 2.4.6, scikit-learn 1.9, SciPy 1.18, and lxml 6.1.1 lead a refresh of the bundled packages.
+MORE
+– Juno launches faster when you have a lot of packages installed.
+– A range of stability fixes, including crashes in the code editor, with the iPad keyboard, and when shutting down a kernel.
+more
+Version 4.2.5
+Sep 4
+App Privacy
+App Privacy
+The developer,
+Rational Matter
+, indicated that the app’s privacy practices may include handling of data as described below. This information has not been verified by Apple. For more information, see the
+developer’s privacy policy
+.
+To help you better understand the developer’s responses, see
+Privacy Definitions and Examples
+.
+Privacy practices may vary, for example, based on the features you use or your age.
+Learn More
+Data Not Linked to You
+The following data, which may be collected but is not linked to your identity, may be used for the following purposes:
+App Functionality
+Usage Data
+Other Usage Data
+Diagnostics
+Crash Data
+The developer,
+Rational Matter
+, indicated that the app’s privacy practices may include handling of data as described below. For more information, see the
+developer’s privacy policy
+.
+Data Not Linked to You
+The following data may be collected but it is not linked to your identity:
+Usage Data
+Diagnostics
+Privacy practices may vary, for example, based on the features you use or your age.
+Learn More
+Accessibility
+The developer has not yet indicated which accessibility features this app supports.
+Learn More
+Information
+Seller
+Rational Matter Ltd
+Size
+693.5 MB
+Category
+Developer Tools
+Compatibility
+Requires iOS 17.0 or later.
+iPhone
+Requires iOS 17.0 or later.
+iPad
+Requires iPadOS 17.0 or later.
+Apple Vision
+Requires visionOS 1.0 or later.
+Languages
+English and 7 more
+English, French, German, Japanese, Russian, Simplified Chinese, Spanish, Traditional Chinese
+Age Rating
+4+
+4+
+Learn More
+In-App Purchases
+Yes
+Juno Pro Unlock
+$39.99
+Learn More
+Copyright
+© 2026 Rational Matter Ltd
+Developer Website
+Privacy Policy
+Supports
+Family Sharing
+Some in-app purchases and subscriptions may be shareable with your family group when Family Sharing is enabled.
+Learn More
+More by Rational Matter
+View
+Learn to Code – Tinkerstellar
+Offline Python Tutorials
+View
+Juno Connect: Jupyter Client
+Cloud Coding/Programming IDE
+You Might Also Like
+View
+Carnets - Jupyter
+A standalone Jupyter notebook
+View
+Python Coding
+Python IDE
+View
+Python Editor App
+Create and Run your Python 3
+View
+Pyto IDE
+Python, C/C++
+View
+CodeSnack IDE
+AI-Powered Coding On-the-Go
+View
+Node.js Lab
+Node.js offline &amp; Git Client
+View
+Codex Claude - Website Builder
+Web IDE &amp; AI App Builder
+View
+Breadpad - SPICE Simulator
+Electronic circuit breadboard
+View
+Python Coding Editor &amp; IDE App
+Compiler - Run &amp; Learn Py 3
+View
+eNES: NES &amp; SNES Retro Emu
+NES &amp; SNES Games with TAS
+United States
+Español (México)
+العربية
+Русский
+简体中文
+Français (France)
+한국어
+Português (Brazil)
+Tiếng Việt
+繁體中文 (台灣)
+Select a country or region
+Africa, Middle East, and India
+See All
+Algeria
+Angola
+Armenia
+Azerbaijan
+Bahrain
+Benin
+Botswana
+Burkina Faso
+Cameroun
+Cape Verde
+Chad
+Côte d’Ivoire
+Congo, The Democratic Republic Of The
+Egypt
+Eswatini
+Gabon
+Gambia
+Ghana
+Guinea-Bissau
+India
+Iraq
+Israel
+Jordan
+Kenya
+Kuwait
+Lebanon
+Liberia
+Libya
+Madagascar
+Malawi
+Mali
+Mauritania
+Mauritius
+Morocco
+Mozambique
+Namibia
+Niger (English)
+Nigeria
+Oman
+Qatar
+Congo, Republic of
+Rwanda
+São Tomé and Príncipe
+Saudi Arabia
+Senegal
+Seychelles
+Sierra Leone
+South Africa
+Sri Lanka
+Tajikistan
+Tanzania, United Republic Of
+Tunisia
+Turkmenistan
+United Arab Emirates
+Uganda
+Yemen
+Zambia
+Zimbabwe
+Asia Pacific
+See All
+Afghanistan
+Australia
+Bhutan
+Brunei Darussalam
+Cambodia
+中国大陆
+Fiji
+香港
+Indonesia (English)
+日本
+Kazakhstan
+대한민국
+Kyrgyzstan
+Lao People's Democratic Republic
+澳門
+Malaysia (English)
+Maldives
+Micronesia, Federated States of
+Mongolia
+Myanmar
+Nauru
+Nepal
+New Zealand
+Pakistan
+Palau
+Papua New Guinea
+Philippines
+Singapore
+Solomon Islands
+台灣
+Thailand
+Tonga
+Turkmenistan
+Uzbekistan
+Vanuatu
+Vietnam
+Europe
+See All
+Albania
+Armenia
+Österreich
+Belarus
+Belgium
+Bosnia and Herzegovina
+Bulgaria
+Croatia
+Cyprus
+Czechia
+Denmark
+Estonia
+Finland
+France (Français)
+Georgia
+Deutschland
+Greece
+Hungary
+Iceland
+Ireland
+Italia
+Kosovo
+Latvia
+Lithuania
+Luxembourg (English)
+Malta
+Moldova, Republic Of
+Montenegro
+Nederland
+North Macedonia
+Norway
+Poland
+Portugal (Português)
+Romania
+Россия
+Serbia
+Slovakia
+Slovenia
+España
+Sverige
+Schweiz
+Türkiye (English)
+Ukraine
+United Kingdom
+Latin America and the Caribbean
+See All
+Anguilla
+Antigua and Barbuda
+Argentina (Español)
+Bahamas
+Barbados
+Belize
+Bermuda
+Bolivia (Español)
+Brasil
+Virgin Islands, British
+Cayman Islands
+Chile (Español)
+Colombia (Español)
+Costa Rica (Español)
+Dominica
+República Dominicana
+Ecuador (Español)
+El Salvador (Español)
+Grenada
+Guatemala (Español)
+Guyana
+Honduras (Español)
+Jamaica
+México
+Montserrat
+Nicaragua (Español)
+Panamá
+Paraguay (Español)
+Perú
+St. Kitts and Nevis
+Saint Lucia
+St. Vincent and The Grenadines
+Suriname
+Trinidad and Tobago
+Turks and Caicos
+Uruguay (English)
+Venezuela (Español)
+The United States and Canada
+See All
+Canada (English)
+Canada (Français)
+United States
+Estados Unidos (Español México)
+الولايات المتحدة
+США
+美国 (简体中文)
+États-Unis (Français France)
+미국
+Estados Unidos (Português Brasil)
+Hoa Kỳ
+美國 (繁體中文台灣)
+Copyright © 2026
+Apple Inc.
+All rights reserved.
+Internet Service Terms
+App Store &amp; Privacy
+Cookie Warning
+Support

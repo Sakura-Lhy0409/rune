@@ -1,0 +1,525 @@
+‎Carnets - Jupyter App - App Store
+Search
+Today
+Games
+Apps
+Arcade
+Platform
+iPhone
+iPad
+Mac
+Vision
+Watch
+TV
+Carnets - Jupyter
+A standalone Jupyter notebook
+Free · Designed for iPad. Not verified for macOS.
+Share
+318 Ratings
+4.6
+Age Rating
+16+
+Years
+Chart
+#101
+Developer Tools
+Developer
+Nicolas Holzschuch
+Language
+EN
+English
+Size
+1.5
+GB
+iPhone, iPad
+Jupyter Notebooks (with Jupyterlab): write Python code, run it, check the result, interactively. Everything is running locally on your iPad or iPhone.
+Jupyter notebooks are a powerful tool used in education and research. You can write small snippets of Python code and observe the result on screen, combine with paragraphs of text, using Markdown.
+Carnets provides a complete, stand-alone, implementation of Jupyter notebooks. Everything runs on your device, using the embedded Python interpreter; you do not need an internet connection.&nbsp;You can chose between Jupyter notebooks and the more advance Jupyterlab using Settings.
+Numpy, Sympy, Matplotlib, Pandas, lxml, bokeh, nbextensions (including ipywidgets) and many other packages are pre-installed. To see the full list of installed packages, type "%pip list" in a code window. You can add more packages using "%pip install packageName", but only if they are pure Python.
+If you need scipy, seaborn or scikit-learn, please use our other App, "Carnets - Jupyter (with scipy)".
+You can share your notebooks with other apps and also open notebooks or directories managed by other apps.
+Partial list of installed packages: astropy, babel, bokeh, cryptography, cvxopt, Fiona, geopandas, geopy, lxml, matplotlib, numpy, openCV, pandas, pillow, pyFFTW, pyproj, rasterio, regex, shapely, sympy, wordcloud.
+more
+Ratings &amp; Reviews
+4.6
+out of 5
+318 Ratings
+Love this app!  You should charge good money for it!
+10/23/2019
+John in MA
+This is a fabulous Jupiter implementation and allows me to do development on the road when not connected to the server on my corporate network.  My only complaint: Full file access only appears to work from the Carnets app  folder.  If I go to a Working Copy folder (ideal for git access) I can only open ipynb files, and modules, data files, etc. don’t load.  If I copy a Working Copy folder into the Carnets folder, everything works perfectly.  Would love to see this issue fixed, then I’d give you 6 stars (if Apple would allow it).
+Love this app!  You should charge good money for it!
+10/23/2019
+John in MA
+This is a fabulous Jupiter implementation and allows me to do development on the road when not connected to the server on my corporate network.  My only complaint: Full file access only appears to work from the Carnets app  folder.  If I go to a Working Copy folder (ideal for git access) I can only open ipynb files, and modules, data files, etc. don’t load.  If I copy a Working Copy folder into the Carnets folder, everything works perfectly.  Would love to see this issue fixed, then I’d give you 6 stars (if Apple would allow it).
+Absolutely awesome
+09/01/2019
+Eric051098
+I have been hoping for local Jupyter notebooks on the iPad for a long time, thank for creating this.  I am going to disagree with other reviewers and say don’t worry about remote for now, Juno and Working Copy have that solved.  Keep working on making offline local Notebooks better, that is the problem only you are solving.  And please charge for the app, I really want you to keep making this better and will gladly pay.
+Absolutely awesome
+09/01/2019
+Eric051098
+I have been hoping for local Jupyter notebooks on the iPad for a long time, thank for creating this.  I am going to disagree with other reviewers and say don’t worry about remote for now, Juno and Working Copy have that solved.  Keep working on making offline local Notebooks better, that is the problem only you are solving.  And please charge for the app, I really want you to keep making this better and will gladly pay.
+Awesome app! Problem with turtle package though . . .
+04/27/2022
+Techess1185
+This app is fantastic!! I definitely recommend it. It is definitely  helping with learning Python. Though every time I try to draw something with turtle package, it says it couldn’t find it. It always says there’s something wrong with import turtle. Will you please look into this?
+Developer Response
+I'm afraid that turtle relies on Tcl/Tk, which are currently not available for iOS.
+Awesome app! Problem with turtle package though . . .
+04/27/2022
+Techess1185
+This app is fantastic!! I definitely recommend it. It is definitely  helping with learning Python. Though every time I try to draw something with turtle package, it says it couldn’t find it. It always says there’s something wrong with import turtle. Will you please look into this?
+Developer Response
+05/02/2022
+I'm afraid that turtle relies on Tcl/Tk, which are currently not available for iOS.
+Great App, except ONE issue
+06/01/2021
+Åayam
+I really wish there was an option to fill in the ipad screen. When using landscape mode, there is considerable space to left and right that aren't being used, this combined with text being small (without any option to resize), makes it feel cramped. Really wish there was a mode where it would be more zoomed in (so no wasted blank space on left/right side), possibly where some of the meny bar item up avove slide away, so more of the coding canvas fills the screen.Since ipads are smaller than laptops, this would make such a big difference. Also, add a donate button in the app if you can. Its free, so its great, but i would honesly donate 10 bucks if i could, many more probably would too.
+Great App, except ONE issue
+06/01/2021
+Åayam
+I really wish there was an option to fill in the ipad screen. When using landscape mode, there is considerable space to left and right that aren't being used, this combined with text being small (without any option to resize), makes it feel cramped. Really wish there was a mode where it would be more zoomed in (so no wasted blank space on left/right side), possibly where some of the meny bar item up avove slide away, so more of the coding canvas fills the screen.Since ipads are smaller than laptops, this would make such a big difference. Also, add a donate button in the app if you can. Its free, so its great, but i would honesly donate 10 bucks if i could, many more probably would too.
+What’s New
+Version History
+- bug fixes for brackets on external non-US keyboards
+- bug fixes for kiwisolver and ctypes
+1.9.1
+11/26/2025
+- Reduced battery and CPU consumption; this should fix the overheating issues.
+- Updated Python to version 3.13
+- updated all major packages to the latest version (numpy, matplotlib, ...)
+- better user interface on small devices (iPhones, or small windows on iPads)
+- multiple bug fixes.
+1.9.0
+11/04/2025
+Do not show an alert about iCloud access if the user does not have an iCloud account.
+1.8.4
+04/29/2024
+- fixed a major issue with iCloud drive access.
+1.8.3
+03/10/2024
+- fixed issues with Matplotlib
+- fixed issues with iCloud access
+- fixed issue with "File -&gt; New"
+- makes sure notebooks are saved when you go back to the file browser.
+1.8.2
+02/08/2024
+- fixed issues with Matplotlib
+- fixed issues with iCloud access
+- makes sure notebooks are saved when you go back to the file browser.
+1.8.1
+01/30/2024
+- Updated to Notebooks v7: better user interface, more translations, better stability, fewer issues.
+- Updated packages to their latest version.
+- New "home" button : gets you straight back to the file browser.
+1.8.0
+10/19/2023
+- new module: lzma
+- new keyboard shortcuts for forward one page / backward one page (shift-command-[  / shift-command-])
+1.7.9
+05/15/2023
+- Carnets now works with plotly
+1.7.8
+03/25/2023
+- fixed an issue with Dark mode and Notebooks or NbClassic
+1.7.7
+02/07/2023
+- fixes issues with on-screen user interaction
+- updated Python version to 3.11
+- updated packages to their latest version
+- fixed several issues with "Download as..."
+- fixed issues with Matplotlib and fonts
+- Notebook and NbClassic now share the same JavaScript code
+- Many bug fixes, including a bug introduced with 1.7.4 and Pandas.
+1.7.6
+12/11/2022
+- updated Python version to 3.11
+- updated packages to their latest version
+- fixed several issues with "Download as..."
+- fixed issues with Matplotlib and fonts
+- Notebook and NbClassic now share the same JavaScript code
+- Many bug fixes, including a bug introduced with 1.7.4 and Pandas.
+1.7.5
+12/10/2022
+- updated Python version to 3.11
+- updated packages to their latest version
+- fixed several issues with "Download as..."
+- fixed issues with Matplotlib and fonts
+- Notebook and NbClassic now share the same JavaScript code
+- Many bug fixes
+1.7.4
+12/09/2022
+- updated packages to their most recent version. This solves the issue with .describe() in pandas.
+- numpy 1.24, matplotlib 3.5.2, pandas 1.4.2, astropy 5.1...
+1.7.2
+07/01/2022
+- fixes the crash issue on iOS 14
+- better contrast for the toolbar at the bottom when using external keyboard
+- fixes an issue with "download as" for notebook and nbclassic (jupyterlab &amp; retrolab were not affected)
+- better information when using virtual environments
+- always reset jupyterlab, to avoid issues
+- updated jupyter-server to the latest version
+- several fixes to make Carnets more robust
+1.7.1
+04/10/2022
+- better at opening files in other apps directories, with explicit warning if Carnets does not have access to the directory.
+- you can chose your notebook style: classical notebook, nbclassic or retrolab (soon to be notebook v7). Pick the style you want using the Settings app, it will be active at the next app restart.
+- retrolab is better for small screens, has more translations available and lets you chose dark or light theme independently of the iOS dark or light mode.
+- from retrolab, you can switch to jupyterlab if you want. Jupyterlab works better if you have an external mouse.
+- fixes a bug with virtual environments
+1.7.0
+03/22/2022
+- fixes an issue with virtual environments
+1.6.6
+02/19/2022
+- fixes a bug with virtual environments.
+1.6.5
+02/17/2022
+- fixes a bug with "%pip install" that affected some pure Python packages.
+1.6.4
+02/16/2022
+- virtual environments for Python. Create with  "!python -m venv newEnvironment", activate with "%run newEnvironment/bin/activate.py", deactivate with "%run newEnvironment/bin/deactivate.py". Virtual environments are limited to user-installed packages, and are only activated for the current notebook.
+- added ffmpeg as an external command, for use with OpenCV.
+- Command + return on external keyboards now executes the current cell without moving the insertion point (as opposed to Option + return, which executes the current cell and create a new cell below).
+1.6.3
+02/06/2022
+- fixed a bug with astropy
+- updated Python version to 3.9.8
+- improved file management, display an alert when we can't save a file
+- updated packages to their latest version: matplotlib 3.4.0, numpy 1.22, pandas 1.3.4, astropy 5.0...
+1.6.2
+12/10/2021
+- new python modules: OpenCV, geopandas, shapely...
+- adds several keyboard shortcuts
+1.6.1
+11/04/2021
+Fixes the issue with carriage return on external keyboards and iOS 15.
+1.6.0
+10/14/2021
+New Python modules: nltk, regex, wordcloud, cvxopt, pyFFTW.
+1.5.8
+05/24/2021
+- fixed an issue with the cell_filter nbextension.
+- fixed a crash that happened if the kernel was restarted too many times.
+1.5.7
+03/17/2021
+- bug fixes for brackets on external non-US keyboards
+- bug fixes for kiwisolver and ctypes
+more
+Version 1.9.1
+11/26/2025
+App Privacy
+App Privacy
+The developer,
+Nicolas Holzschuch
+, indicated that the app’s privacy practices may include handling of data as described below. This information has not been verified by Apple. For more information, see the
+developer’s privacy policy
+.
+To help you better understand the developer’s responses, see
+Privacy Definitions and Examples
+.
+Privacy practices may vary, for example, based on the features you use or your age.
+Learn More
+Data Not Collected
+The developer does not collect any data from this app.
+The developer,
+Nicolas Holzschuch
+, indicated that the app’s privacy practices may include handling of data as described below. For more information, see the
+developer’s privacy policy
+.
+Data Not Collected
+The developer does not collect any data from this app.
+Privacy practices may vary, for example, based on the features you use or your age.
+Learn More
+Accessibility
+The developer has not yet indicated which accessibility features this app supports.
+Learn More
+Information
+Seller
+Nicolas Holzschuch
+Size
+1.5 GB
+Category
+Developer Tools
+Compatibility
+Requires iOS 14.0 or later.
+iPhone
+Requires iOS 14.0 or later.
+iPad
+Requires iPadOS 14.0 or later.
+iPod&nbsp;touch
+Requires iOS 14.0 or later.
+Mac
+Requires macOS&nbsp;11.0 or later and a Mac with Apple&nbsp;M1&nbsp;chip or later.
+Apple Vision
+Requires visionOS 1.0 or later.
+Languages
+English
+Age Rating
+16+
+16+
+Learn More
+Contains
+Unrestricted Web Access
+Copyright
+© Nicolas Holzschuch
+Developer Website
+Privacy Policy
+More by Nicolas Holzschuch
+View
+a-Shell
+*Local* Unix terminal (&amp; ssh)
+View
+a-Shell mini
+*Local* Unix terminal (&amp; ssh)
+View
+Carnets - Jupyter (with scipy)
+Jupyter notebooks, with scipy
+You Might Also Like
+View
+Python IDE &amp; Jupyter – Juno
+Code editor, notebooks &amp; AI
+View
+Pyto IDE
+Python, C/C++
+View
+Python Coding
+Python IDE
+View
+Node.js Lab
+Node.js offline &amp; Git Client
+View
+CodeSnack IDE
+AI-Powered Coding On-the-Go
+View
+Codex Claude - Website Builder
+Web IDE &amp; AI App Builder
+View
+eNES: NES &amp; SNES Retro Emu
+NES &amp; SNES Games with TAS
+View
+Klipper | OctoPrint - Obico
+3D Printing - Printer Control
+View
+Happy: Codex &amp; Claude Code App
+Codex &amp; Claude Code on the go
+View
+Breadpad - SPICE Simulator
+Electronic circuit breadboard
+United States
+Español (México)
+العربية
+Русский
+简体中文
+Français (France)
+한국어
+Português (Brazil)
+Tiếng Việt
+繁體中文 (台灣)
+Select a country or region
+Africa, Middle East, and India
+See All
+Algeria
+Angola
+Armenia
+Azerbaijan
+Bahrain
+Benin
+Botswana
+Burkina Faso
+Cameroun
+Cape Verde
+Chad
+Côte d’Ivoire
+Congo, The Democratic Republic Of The
+Egypt
+Eswatini
+Gabon
+Gambia
+Ghana
+Guinea-Bissau
+India
+Iraq
+Israel
+Jordan
+Kenya
+Kuwait
+Lebanon
+Liberia
+Libya
+Madagascar
+Malawi
+Mali
+Mauritania
+Mauritius
+Morocco
+Mozambique
+Namibia
+Niger (English)
+Nigeria
+Oman
+Qatar
+Congo, Republic of
+Rwanda
+São Tomé and Príncipe
+Saudi Arabia
+Senegal
+Seychelles
+Sierra Leone
+South Africa
+Sri Lanka
+Tajikistan
+Tanzania, United Republic Of
+Tunisia
+Turkmenistan
+United Arab Emirates
+Uganda
+Yemen
+Zambia
+Zimbabwe
+Asia Pacific
+See All
+Afghanistan
+Australia
+Bhutan
+Brunei Darussalam
+Cambodia
+中国大陆
+Fiji
+香港
+Indonesia (English)
+日本
+Kazakhstan
+대한민국
+Kyrgyzstan
+Lao People's Democratic Republic
+澳門
+Malaysia (English)
+Maldives
+Micronesia, Federated States of
+Mongolia
+Myanmar
+Nauru
+Nepal
+New Zealand
+Pakistan
+Palau
+Papua New Guinea
+Philippines
+Singapore
+Solomon Islands
+台灣
+Thailand
+Tonga
+Turkmenistan
+Uzbekistan
+Vanuatu
+Vietnam
+Europe
+See All
+Albania
+Armenia
+Österreich
+Belarus
+Belgium
+Bosnia and Herzegovina
+Bulgaria
+Croatia
+Cyprus
+Czechia
+Denmark
+Estonia
+Finland
+France (Français)
+Georgia
+Deutschland
+Greece
+Hungary
+Iceland
+Ireland
+Italia
+Kosovo
+Latvia
+Lithuania
+Luxembourg (English)
+Malta
+Moldova, Republic Of
+Montenegro
+Nederland
+North Macedonia
+Norway
+Poland
+Portugal (Português)
+Romania
+Россия
+Serbia
+Slovakia
+Slovenia
+España
+Sverige
+Schweiz
+Türkiye (English)
+Ukraine
+United Kingdom
+Latin America and the Caribbean
+See All
+Anguilla
+Antigua and Barbuda
+Argentina (Español)
+Bahamas
+Barbados
+Belize
+Bermuda
+Bolivia (Español)
+Brasil
+Virgin Islands, British
+Cayman Islands
+Chile (Español)
+Colombia (Español)
+Costa Rica (Español)
+Dominica
+República Dominicana
+Ecuador (Español)
+El Salvador (Español)
+Grenada
+Guatemala (Español)
+Guyana
+Honduras (Español)
+Jamaica
+México
+Montserrat
+Nicaragua (Español)
+Panamá
+Paraguay (Español)
+Perú
+St. Kitts and Nevis
+Saint Lucia
+St. Vincent and The Grenadines
+Suriname
+Trinidad and Tobago
+Turks and Caicos
+Uruguay (English)
+Venezuela (Español)
+The United States and Canada
+See All
+Canada (English)
+Canada (Français)
+United States
+Estados Unidos (Español México)
+الولايات المتحدة
+США
+美国 (简体中文)
+États-Unis (Français France)
+미국
+Estados Unidos (Português Brasil)
+Hoa Kỳ
+美國 (繁體中文台灣)
+Copyright © 2026
+Apple Inc.
+All rights reserved.
+Internet Service Terms
+App Store &amp; Privacy
+Cookie Warning
+Support

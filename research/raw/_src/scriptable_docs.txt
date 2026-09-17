@@ -1,0 +1,112 @@
+Scriptable Docs - Scriptable Docs
+Skip to content
+Scriptable Docs
+Scriptable Docs
+Initializing search
+Scriptable Docs
+Scriptable Docs
+Scriptable Docs
+Table of contents
+JavaScript Environment
+Learning JavaScript
+Community
+Alert
+args
+Calendar
+CalendarEvent
+CallbackURL
+Color
+config
+console
+Contact
+ContactsContainer
+ContactsGroup
+Data
+DateFormatter
+DatePicker
+Device
+Dictation
+DocumentPicker
+DrawContext
+FileManager
+Font
+Image
+importModule
+Keychain
+LinearGradient
+ListWidget
+Location
+Mail
+Message
+module
+Notification
+Pasteboard
+Path
+Photos
+Point
+QuickLook
+Rect
+RecurrenceRule
+RelativeDateTimeFormatter
+Reminder
+Request
+Safari
+Script
+SFSymbol
+ShareSheet
+Size
+Speech
+TextField
+Timer
+UITable
+UITableCell
+UITableRow
+URLScheme
+UUID
+WebView
+WidgetDate
+WidgetImage
+WidgetSpacer
+WidgetStack
+WidgetText
+XMLParser
+Table of contents
+JavaScript Environment
+Learning JavaScript
+Community
+Scriptable Docs
+The website contains documentation for
+Scriptable
+, an app that lets you automate iOS using JavaScript.
+JavaScript Environment
+&para;
+Scriptable uses Apple's
+JavaScriptCore
+, which supports
+ECMAScript 6
+.
+Learning JavaScript
+&para;
+If you're just getting started with JavaScript, you may want to take a look at Codecademy's
+Intro to Programming in JavaScript
+. For a quick reference to JavaScripts features, you may refer to W3Schools'
+JavaScript Tutorial
+.
+Note that some guides and tutorials will assume that you're running JavaScript in a browser and therefore have access to browser specific objects, such as a document. Scriptable does not run JavaScript in a browser and therefore such objects do not exist.
+Community
+&para;
+The forum is a great place to get help, share your scripts and get inspiration for new scripts. The forum is located at
+talk.automators.fm
+. Thanks to
+Automators
+for hosting the forum!
+© 2023 Simon B. Støvring. All rights reserved.
+Press Kit
+&nbsp;
+Privacy Policy
+&nbsp;
+Contact
+powered by
+MkDocs
+and
+Material for MkDocs

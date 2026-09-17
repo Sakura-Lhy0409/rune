@@ -1,0 +1,334 @@
+ 
+The three hard constraints of an iOS keyboard extension - DEV Community 
+Skip to content 
+Navigation menu 
+Search 
+Powered by Algolia
+ Search 
+Log in
+Create account
+DEV Community
+Close 
+Add reaction
+Like
+Unicorn
+Exploding Head
+Raised Hands
+Fire
+Jump to Comments
+Save
+Boost
+Pick as gem 
+More... 
+Copy link 
+ Copy link 
+Copied to Clipboard
+Share to X
+Share to LinkedIn
+Share to Facebook
+Share to Mastodon
+Share Post via... 
+Report Abuse 
+TBDS 
+Posted on Aug 9 
+• 
+ Edited on Aug 11 
+• 
+ Originally published at douhouse.com 
+The three hard constraints of an iOS keyboard extension
+# ios 
+ # swift 
+ # uikit 
+ # performance 
+A custom keyboard on iOS looks like a small UIKit app. It is not. It is a
+UIInputViewController living inside an extension process with rules that no
+normal app has to obey, and the three that actually shape the code are:
+a memory ceiling in the tens of megabytes, enforced by silent termination;
+a sandbox that is off by default ( Allow Full Access ), which removes
+networking, location, the system pasteboard — and, less obviously, a
+ reliably writable App Group container;
+a feedback path (sound + haptics) that must be produced without an audio
+session, inside the same tight budget, on the keystroke path.
+Everything below is from a shipping keyboard extension. The numbers are device
+measurements, not estimates, and several of them are numbers that proved an
+earlier hypothesis wrong.
+Constraint 1: the memory ceiling, and why you cannot debug it normally
+The ceiling for a keyboard extension is somewhere around 60MB of phys_footprint .
+What makes it hard is not the size — it is the failure mode. When you cross it,
+jetsam kills the extension: no crash log, no signal, no exception. iOS just
+switches the user back to the previously used keyboard. From the user's side, "the
+keyboard quit by itself, mid-sentence". From your side, there is nothing to read
+afterwards.
+Worse, it depends on how much memory the rest of the phone is using, so it is
+intermittent and cannot be reproduced on demand.
+Why the obvious approach fails
+The obvious approach is to guess. You look at the app, decide the biggest thing is
+probably the dictionary, shrink it, ship, and ask the person holding the phone.
+That loop is a day long and it was wrong repeatedly — first the word index was
+blamed, then the pinyin table, while the device sat at 55MB with a peak of 68.
+The second obvious approach — write diagnostics to a file in the App Group — fails
+for a reason specific to extensions: writes to a shared container from a keyboard
+extension are unreliable and fail silently without Full Access. The log would be
+missing exactly when it mattered. Unified logging survives the process being
+killed, so it is the only thing that reports the last measurement before a kill:
+enum MemoryProbe { 
+ private static let log = Logger ( subsystem : "com.douchaojun.kibo" , category : "mem" ) 
+/// Resident footprint in megabytes — the same number jetsam measures 
+ /// (`phys_footprint`: dirty plus compressed pages). 
+ static func footprintMB () -> Double { 
+ var info = task_vm_info_data_t () 
+ var count = mach_msg_type_number_t ( MemoryLayout < task_vm_info_data_t >. size 
+ / MemoryLayout < natural_t >. size ) 
+ let result = withUnsafeMutablePointer ( to : & info ) { 
+ $0 . withMemoryRebound ( to : integer_t . self , capacity : Int ( count )) { 
+ task_info ( mach_task_self_ , task_flavor_t ( TASK_VM_INFO ), $0 , & count ) 
+ } 
+ } 
+ guard result == KERN_SUCCESS else { return 0 } 
+ return Double ( info . phys_footprint ) / 1024 / 1024 
+ } 
+ } 
+Enter fullscreen mode 
+Exit fullscreen mode 
+That number alone is not enough. A fresh keyboard read 63MB on device while a
+cold process read 10MB, memory warnings fired, every cache was dropped, and the
+number did not move. Two very different explanations fit that: the process really
+holds 63MB of live objects, or it holds a little inside a lot of pages malloc took
+from the kernel and never returned. Those have opposite fixes — find what is
+retained, versus stop making the large transient allocations that grew the heap. So
+live allocations get measured separately, by summing every malloc zone's
+size_in_use via malloc_get_all_zones + malloc_zone_statistics , and compared
+against the footprint.
+What actually works
+Two structural findings came out of instrumenting instead of guessing.
+Dirty heap is the thing being charged; mapped files are nearly free. The word
+list was a Swift string literal parsed into arrays and dictionaries on the first
+keystroke — in front of the user, and every byte of it dirty heap. Replacing it
+with a memory-mapped binary file, sorted by word so a prefix is a contiguous range,
+moved the pages to clean, file-backed memory the kernel can drop and re-read:
+init ?( url : URL ) { 
+ guard let mapped = try ? Data ( contentsOf : url , options : [ . mappedIfSafe ]) else { return nil } 
+ guard mapped . count >= Self . headerSize else { return nil } 
+ self . data = mapped 
+ guard Array ( mapped [ 0 ..< 4 ]) == Self . magic else { return nil } 
+ // ... header offsets validated once here, so the per-query path can read 
+ // without re-checking: a bounds test on the hot path would cost more than 
+ // the search itself. 
+ } 
+Enter fullscreen mode 
+Exit fullscreen mode 
+Note the init? : a truncated or foreign file must degrade to "no suggestions",
+never to a crashed keyboard. Baseline went from 52MB to 27MB .
+UIInputViewController never releases its view. This is the one that cost
+days. An empty subclass with an empty view survives every cycle in a leak harness
+while a plain UIViewController survives none. A device probe reported exactly one
+live controller, which seemed to exonerate the controller — but both facts are true
+at once: iOS builds a new controller for each host app the keyboard appears in ,
+releases the old one (hence the count of one), and keeps every one of their views.
+Checkpoints inside viewDidLoad , which only run for a fresh controller, read
+70MB . A brand-new keyboard was being built on top of everything its
+predecessors left behind, and no cache purge touches it, because a retained view is
+not a cache. Fifty key buttons with a gradient, a glow layer and a rasterised
+shadow each is about 3MB — exactly the per-cycle delta the device reported.
+The fix is to empty the view in deinit , deferred one main-queue turn rather than
+done inside dealloc . Doing the same teardown in viewWillDisappear is wrong: the
+same controller is hidden and re-shown many times, so that version pays a rebuild
+every time and feeds UIKit's own unpurgeable caches.
+Failure modes worth naming
+Threads. The probe's mark() appended to a static Swift array from the main
+thread and from a background composer warm-up. Two threads mutating one array
+corrupts the buffer and the process dies later, elsewhere, with no exception —
+occasional, never in the same place. Everything mutable sits behind an NSLock 
+now. A lock costs nothing at a few dozen marks per session.
+Threads, again. A warm-up dispatched to DispatchQueue.global() on every
+language switch: the global queue answers blocked tasks by spawning threads, the
+tables are static let so all but the first caller block on one initialiser, and
+half a megabyte of stack each against a ~60MB ceiling adds up fast. One serial
+queue, each language warmed at most once.
+Control groups. A leak test for a keyboard must cycle one controller and
+include an empty- UIInputViewController baseline. Without the control the numbers
+mean nothing — an earlier probe set vc.view.frame in every stage including the
+baseline, which itself loads the view and runs viewDidLoad .
+Constraint 2: Full Access is off, and that is the correct default
+iOS shows a genuinely frightening warning when you enable Full Access, and most
+users decline. Design for declined.
+With it off, an extension has no network, no location, and no system pasteboard.
+The keyboard's copy/paste buttons therefore cannot silently do nothing:
+/// The system pasteboard is only reachable with Full Access. If it's off we 
+ /// say so rather than doing nothing. 
+ private func requireFullAccessForClipboard () -> Bool { 
+ if hasFullAccess { return true } 
+ showToast ( "Turn on Full Access for copy & paste" ) 
+ return false 
+ } 
+Enter fullscreen mode 
+Exit fullscreen mode 
+The non-obvious cost is storage. An extension is not guaranteed a writable App
+Group container without Full Access. This produced a bug that looked nothing like
+a permissions problem: switch language, dismiss the keyboard, come back — back to
+English. The extension's write went nowhere, silently. The fix is to mirror the
+choice into the writer's own defaults, stamp both records, and let the newer one
+win, so a change made in the container app still beats a stale mirror in the
+extension and vice versa:
+static var activeLanguage : KeyboardLanguage { 
+ get { 
+ let enabled = languageIDs 
+ let shared = record ( from : defaults ) 
+ let local = record ( from : localDefaults ) 
+ let candidates = ( shared . stamp >= local . stamp ? [ shared , local ] : [ local , shared ]) 
+ for candidate in candidates where enabled . contains ( candidate . id ) { 
+ return KeyboardLanguages . language ( id : candidate . id ) 
+ } 
+ return KeyboardLanguages . language ( id : enabled [ 0 ]) 
+ } 
+ set { 
+ let stamp = Date () . timeIntervalSince1970 
+ for store in [ defaults , localDefaults ] { 
+ store . set ( newValue . id , forKey : Key . activeLanguageID ) 
+ store . set ( stamp , forKey : Key . activeLanguageStamp ) 
+ } 
+ } 
+ } 
+Enter fullscreen mode 
+Exit fullscreen mode 
+A feature that genuinely needs the permission (location, for instance) should
+explain itself rather than sit dead. A locked control that hands back nothing is
+worse than a control that says why.
+Constraint 3: sound and haptics without an audio session
+You want a key click. The obvious implementation is AVAudioPlayer , because it has
+a volume property. That is the wrong lever, and the bug it produces is invisible
+from inside a keyboard: AVAudioPlayer and AudioServicesPlaySystemSound go to
+different audio buses . System sounds follow the ringer; AVAudioPlayer follows
+media playback. With media volume low — common — every volume below maximum is
+inaudible while 100% works. It also needs an audio session, so it is silent again
+whenever activation fails, and it keeps decoded buffers alive in a process with a
+hard ceiling.
+AudioServicesPlaySystemSound needs no audio session and no Full Access, and it
+respects the silent switch like Apple's own click. It also has no volume control at
+all. So volume is implemented by scaling the sample's PCM once, writing it to a
+temp file, and registering that as another system sound — same bus, same ringer
+volume, no session, no decoded buffers:
+private static func writeScaledCopy ( of url : URL , gain : Float , named name : String ) -> URL ? { 
+ let destination = FileManager . default . temporaryDirectory 
+ . appendingPathComponent ( "kibo- \( name ) .wav" ) 
+ if FileManager . default . fileExists ( atPath : destination . path ) { 
+ try ? FileManager . default . removeItem ( at : destination ) 
+ } 
+ guard let input = try ? AVAudioFile ( forReading : url ) else { return nil } 
+ let format = input . processingFormat 
+ let frames = AVAudioFrameCount ( input . length ) 
+ guard frames > 0 , 
+ let buffer = AVAudioPCMBuffer ( pcmFormat : format , frameCapacity : frames ), 
+ ( try ? input . read ( into : buffer )) != nil , 
+ let channels = buffer . floatChannelData else { return nil } 
+for channel in 0 ..< Int ( format . channelCount ) { 
+ let samples = channels [ channel ] 
+ for frame in 0 ..< Int ( buffer . frameLength ) { samples [ frame ] *= gain } 
+ } 
+guard let output = try ? AVAudioFile ( forWriting : destination , 
+ settings : input . fileFormat . settings ) else { return nil } 
+ guard ( try ? output . write ( from : buffer )) != nil else { return nil } 
+ return destination 
+ } 
+Enter fullscreen mode 
+Exit fullscreen mode 
+Constraint 1 comes straight back here. Volume is rounded into four buckets so a
+slider drag cannot generate a hundred temp files, only the style currently in use
+is kept registered, and AudioServices sound ids are a system resource that must
+be disposed explicitly — dropping the dictionary entry alone leaks them:
+if loadedStyle != nil { 
+ for ( _ , list ) in ids { for id in list { AudioServicesDisposeSystemSoundID ( id ) } } 
+ ids = [:]; urls = [:]; purge () 
+ } 
+Enter fullscreen mode 
+Exit fullscreen mode 
+Every failure path in that code falls back to the sample at full volume, on
+purpose: a click at the wrong volume is a far smaller bug than silence, which is
+what the previous implementation degraded to.
+Haptics are cheap by comparison — UIImpactFeedbackGenerator needs no permission —
+but they belong on the same path as the sound and the visual press effect. When
+the suggestion bar didn't call the shared feedback function, chips read as taps that
+failed to register, because they're reached by the same finger in the same gesture.
+The latency budget
+One frame is 16.7ms and the whole suggestion pipeline lives inside it.
+Data.copyBytes on a memory-mapped Data is not a pointer read — it goes
+through Data 's range and bridging machinery, and reading four fields per entry
+that way cost more than the binary search over them. One withUnsafeBytes +
+loadUnaligned halved the worst case: a long misspelling with no completion, which
+runs the full correction scan, went 15.81ms → 11.5ms; a short prefix went 0.31ms →
+0.12ms. Assert p95 per keystroke against 16.7ms, not total elapsed over 1000
+queries — a total hides where the time went.
+Costs and boundaries
+You will not get a crash report for the failure that matters most. Budget for
+building instrumentation you can read off a device, and for the fact that the
+overlay must be compiled out of release builds — a persisted debug flag will
+otherwise draw debug text over a reviewer's keyboard.
+Nothing here reproduces in the simulator's memory behaviour, and unit tests only
+help if you write them as budget guards: an index costing more than a set number
+of megabytes, or five language switches that accumulate, should fail the build.
+The Full Access default cascades into storage, not just features. Assume any
+shared-container write can silently vanish and design a merge.
+The audio bus distinction has no compiler help and no runtime error. It is only
+visible on a device with the media volume turned down.
+These constraints and their fixes come from Kibo, a custom iPhone keyboard whose UI
+is English-only.
+Top comments (0) 
+Subscribe 
+Personal 
+ Trusted User 
+Create template
+Templates let you quickly answer FAQs or store snippets for re-use.
+Submit 
+ Preview 
+ Dismiss 
+Code of Conduct 
+ • 
+ Report abuse 
+Are you sure you want to hide this comment? It will become hidden in your post, but will still be visible via the comment's permalink .
+Hide child comments as well
+Confirm
+For further actions, you may consider blocking this person and/or reporting abuse 
+TBDS
+Follow 
+Joined
+Aug 9, 2026 
+More from TBDS 
+Filling a region by writing four bytes: region-id PNGs and an SkSL lookup shader
+# graphics 
+ # reactnative 
+ # shaders 
+ # performance 
+Chalk that looks like chalk: depositing particles instead of stroking paths
+# metal 
+ # ios 
+ # graphics 
+ # rendering 
+On-device speech recognition on iOS: the honest boundaries
+# ios 
+ # swift 
+ # speech 
+ # privacy 
+DEV Community — A space to discuss and keep up software development and manage your software career
+Home
+DEV Challenges
+DEV++
+Videos
+DEV Education Tracks
+DEV Help
+Advertise on DEV
+Organization Accounts
+DEV Showcase
+About
+Contact
+Free Postgres Database
+DEV Shop
+MLH
+Code of Conduct
+Privacy Policy
+Terms of Use
+Built on Forem — the open source software that powers DEV and other inclusive communities.
+Made with love and Ruby on Rails . DEV Community © 2016 - 2026.
+We're a place where coders share, stay up-to-date and grow their careers.
+Log in
+Create account
+

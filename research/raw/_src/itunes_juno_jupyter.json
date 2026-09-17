@@ -1,0 +1,12 @@
+
+
+
+{
+ "resultCount":1,
+ "results": [
+{"wrapperType":"track", "kind":"song", "artistId":313033699, "collectionId":1462583343, "trackId":1462583347, "artistName":"Rollaway", "collectionName":"Modern Epic - EP", "trackName":"Sugar Hollow", "collectionCensoredName":"Modern Epic - EP", "trackCensoredName":"Sugar Hollow", "artistViewUrl":"https://music.apple.com/us/artist/rollaway/313033699?uo=4", "collectionViewUrl":"https://music.apple.com/us/album/sugar-hollow/1462583343?i=1462583347&uo=4", "trackViewUrl":"https://music.apple.com/us/album/sugar-hollow/1462583343?i=1462583347&uo=4", 
+"previewUrl":"https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview113/v4/4e/0d/3d/4e0d3db0-b03a-dcd9-4589-8e2f753a604b/mzaf_5295256814071028638.plus.aac.p.m4a", "artworkUrl30":"https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/bf/73/06/bf73063e-b0ff-2313-6591-11d9734a712d/194171116339.jpg/30x30bb.jpg", "artworkUrl60":"https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/bf/73/06/bf73063e-b0ff-2313-6591-11d9734a712d/194171116339.jpg/60x60bb.jpg", "artworkUrl100":"https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/bf/73/06/bf73063e-b0ff-2313-6591-11d9734a712d/194171116339.jpg/100x100bb.jpg", "collectionPrice":3.96, "trackPrice":0.99, "releaseDate":"2019-05-24T12:00:00Z", "collectionExplicitness":"notExplicit", "trackExplicitness":"notExplicit", "discCount":1, "discNumber":1, "trackCount":4, "trackNumber":4, "trackTimeMillis":322787, "country":"USA", "currency":"USD", "primaryGenreName":"Rock", "isStreamable":true}]
+}
+
+
+

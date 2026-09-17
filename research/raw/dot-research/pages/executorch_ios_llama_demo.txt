@@ -1,0 +1,306 @@
+
+
+Learn
+
+Get Started 
+ 
+Run PyTorch locally or get started quickly with one of the supported cloud platforms
+
+Tutorials 
+ 
+Whats new in PyTorch tutorials
+
+Learn the Basics 
+ 
+Familiarize yourself with PyTorch concepts and modules
+
+PyTorch Recipes 
+ 
+Bite-size, ready-to-deploy PyTorch code examples
+
+Intro to PyTorch - YouTube Series 
+ 
+Master PyTorch basics with our engaging YouTube tutorial series
+
+Ecosystem
+
+Tools 
+ 
+Learn about the tools and frameworks in the PyTorch Ecosystem
+
+Community 
+ 
+Join the PyTorch developer community to contribute, learn, and get your questions answered
+
+Forums 
+ 
+A place to discuss PyTorch code, issues, install, research
+
+Developer Resources 
+ 
+Find resources and get questions answered
+
+Contributor Awards - 2023 
+ 
+Award winners announced at this year's PyTorch Conference
+
+Edge
+
+About PyTorch Edge 
+ 
+Build innovative and privacy-aware AI experiences for edge devices
+
+ExecuTorch 
+ 
+End-to-end solution for enabling on-device inference capabilities across mobile and edge devices
+
+Docs
+
+PyTorch 
+ 
+Explore the documentation for comprehensive guidance on how to use PyTorch
+
+PyTorch Domains 
+ 
+Read the PyTorch Domains documentation to learn more about domain-specific libraries
+
+Blogs & News 
+
+PyTorch Blog 
+ 
+Catch up on the latest technical news and happenings
+
+Community Blog 
+ 
+Stories from the PyTorch ecosystem
+
+Videos 
+ 
+Learn about the latest PyTorch tutorials, new, and more 
+
+Community Stories 
+ 
+Learn how our community solves real, everyday machine learning problems with PyTorch
+
+Events 
+ 
+Find events, webinars, and podcasts
+
+About
+
+PyTorch Foundation 
+ 
+Learn more about the PyTorch Foundation
+
+Governing Board 
+
+Become a Member
+
+Table of Contents 
+
+Docs
+ 
+ >
+
+ExecuTorch Llama iOS Demo App
+
+Shortcuts
+
+ExecuTorch Llama iOS Demo App ¶ 
+
+We’re excited to share that the newly revamped iOS demo app is live and includes many new updates to provide a more intuitive and smoother user experience with a chat use case! The primary goal of this app is to showcase how easily ExecuTorch can be integrated into an iOS demo app and how to exercise the many features ExecuTorch and Llama models have to offer.
+
+This app serves as a valuable resource to inspire your creativity and provide foundational code that you can customize and adapt for your particular use case.
+
+Please dive in and start exploring our demo app today! We look forward to any feedback and are excited to see your innovative ideas.
+
+Key Concepts ¶ 
+
+From this demo app, you will learn many key concepts such as:
+
+How to prepare Llama models, build the ExecuTorch library, and perform model inference across delegates
+
+Expose the ExecuTorch library via Swift Package Manager
+
+Familiarity with current ExecuTorch app-facing capabilities
+
+The goal is for you to see the type of support ExecuTorch provides and feel comfortable with leveraging it for your use cases.
+
+Supported Models ¶ 
+
+As a whole, the models that this app supports are (varies by delegate):
+
+Llama 3.1 8B
+
+Llama 3 8B
+
+Llama 2 7B
+
+Llava 1.5 (only XNNPACK)
+
+Building the application ¶ 
+
+First it’s important to note that currently ExecuTorch provides support across several delegates. Once you identify the delegate of your choice, select the README link to get a complete end-to-end instructions for environment set-up to export the models to build ExecuTorch libraries and apps to run on device:
+
+Delegate
+
+Resource
+
+XNNPACK (CPU-based library)
+
+link 
+
+MPS (Metal Performance Shader)
+
+link 
+
+How to Use the App ¶ 
+
+This section will provide the main steps to use the app, along with a code snippet of the ExecuTorch API.
+
+Swift Package Manager ¶ 
+
+ExecuTorch runtime is distributed as a Swift package providing some .xcframework as prebuilt binary targets.
+Xcode will download and cache the package on the first run, which will take some time.
+
+Note: If you’re running into any issues related to package dependencies, quit Xcode entirely, delete the whole executorch repo, clean the caches by running the command below in terminal and clone the repo again.
+
+rm - rf \
+ ~/ Library / org . swift . swiftpm \
+ ~/ Library / Caches / org . swift . swiftpm \
+ ~/ Library / Caches / com . apple . dt . Xcode \
+ ~/ Library / Developer / Xcode / DerivedData 
+
+Link your binary with the ExecuTorch runtime and any backends or kernels used by the exported ML model. It is recommended to link the core runtime to the components that use ExecuTorch directly, and link kernels and backends against the main app target.
+
+Note: To access logs, link against the Debug build of the ExecuTorch runtime, i.e., the executorch_debug framework. For optimal performance, always link against the Release version of the deliverables (those without the _debug suffix), which have all logging overhead removed.
+
+For more details integrating and Running ExecuTorch on Apple Platforms, checkout this link .
+
+XCode ¶ 
+
+Open XCode and select “Open an existing project” to open examples/demo-apps/apple_ios/LLama .
+
+Ensure that the ExecuTorch package dependencies are installed correctly, then select which ExecuTorch framework should link against which target.
+
+Run the app. This builds and launches the app on the phone.
+
+In app UI pick a model and tokenizer to use, type a prompt and tap the arrow buton
+
+Copy the model to Simulator ¶ 
+
+Drag&drop the model and tokenizer files onto the Simulator window and save them somewhere inside the iLLaMA folder.
+
+Pick the files in the app dialog, type a prompt and click the arrow-up button.
+
+Copy the model to Device ¶ 
+
+Wire-connect the device and open the contents in Finder.
+
+Navigate to the Files tab and drag&drop the model and tokenizer files onto the iLLaMA folder.
+
+Wait until the files are copied.
+
+If the app successfully run on your device, you should see something like below:
+
+For Llava 1.5 models, you can select and image (via image/camera selector button) before typing prompt and send button.
+
+Reporting Issues ¶ 
+
+If you encountered any bugs or issues following this tutorial please file a bug/issue here on Github .
+
+ExecuTorch Llama iOS Demo App 
+
+Key Concepts 
+
+Supported Models 
+
+Building the application 
+
+How to Use the App 
+
+Swift Package Manager 
+
+XCode 
+
+Copy the model to Simulator 
+
+Copy the model to Device 
+
+Reporting Issues 
+
+Docs
+
+Access comprehensive developer documentation for PyTorch
+
+ View Docs 
+
+Tutorials
+
+Get in-depth tutorials for beginners and advanced developers
+
+ View Tutorials 
+
+Resources
+
+Find development resources and get your questions answered
+
+ View Resources 
+
+To analyze traffic and optimize your experience, we serve cookies on this site. By clicking or navigating, you agree to allow our usage of cookies. As the current maintainers of this site, Facebook’s Cookies Policy applies. Learn more, including about available controls: Cookies Policy .
+
+Learn 
+
+Get Started 
+
+Tutorials 
+
+Learn the Basics 
+
+PyTorch Recipes 
+
+Introduction to PyTorch - YouTube Series 
+
+Ecosystem 
+
+Tools 
+
+Community 
+
+Forums 
+
+Developer Resources 
+
+Contributor Awards - 2023 
+
+Edge 
+
+About PyTorch Edge 
+
+ExecuTorch 
+
+Docs 
+
+PyTorch 
+
+PyTorch Domains 
+
+Blog & News 
+
+PyTorch Blog 
+
+Community Blog 
+
+Videos 
+
+Community Stories 
+
+Events 
+
+About 
+
+PyTorch Foundation 
+
+Governing Board 
+
+

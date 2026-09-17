@@ -1,0 +1,10 @@
+https://developer.apple.com/tutorials/data/documentation/bundleresources/entitlements/com_apple_developer_kernel_increased-memory-limit.json | apple_entitlement_memlimit
+https://developer.apple.com/tutorials/data/documentation/xcode/identifying-high-memory-use-with-jetsam-event-reports.json | apple_jetsam_reports
+https://raw.githubusercontent.com/meta-llama/llama-models/main/models/llama3_2/LICENSE | license_llama32
+https://apple.github.io/coremltools/docs-guides/source/stateful-models.html | coremltools_stateful
+https://raw.githubusercontent.com/mlc-ai/mlc-llm/main/docs/deploy/ios.rst | mlcllm_ios2
+https://raw.githubusercontent.com/microsoft/onnxruntime-genai/main/README.md | ortgenai_readme2
+https://raw.githubusercontent.com/pytorch/executorch/main/README.md | executorch_readme2
+https://raw.githubusercontent.com/apple/coremltools/main/coremltools/models/state.py | coremltools_state_py
+https://developer.apple.com/tutorials/data/documentation/foundationmodels/tool.json | apple_tool2
+https://raw.githubusercontent.com/pixelfolio/WWDC26-Transcripts/main/wwdc2026-242%20-%20Build%20agentic%20app%20experiences%20with%20the%20Foundation%20Models%20framework.md | wwdc26_242b

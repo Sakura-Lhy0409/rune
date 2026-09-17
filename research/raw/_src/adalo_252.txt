@@ -1,0 +1,321 @@
+Apple Tightens App Store Rules for AI-Built Apps (2026)
+Product
+Product
+iPhone App Builder
+Android App Builder
+Web App Builder
+AI App Builder
+App Store Publishing
+Google Sheets to App
+Excel to App
+Airtable to App
+Shopify to App
+Enterprise
+&rarr;
+Adalo Blue
+Solutions
+App Types
+AI App Builder
+Booking App Builder
+Business App Builder
+Church App Builder
+CRM App Builder
+Dating App Builder
+Delivery App Builder
+eCommerce App Builder
+Education App Builder
+Event App Builder
+Fitness App Builder
+Grocery App Builder
+Healthcare App Builder
+Internal Tools Builder
+Inventory App Builder
+Marketplace App Builder
+Real Estate App Builder
+Restaurant App Builder
+Social Media App Builder
+For Teams & Companies
+Businesses & Organizations
+Freelancers & Agencies
+Startup Founders
+Enterprise
+&rarr;
+Adalo Blue
+Learn
+Adalo App Academy
+Blog
+Our Story
+Wall of Love
+All Resources
+Pricing
+Hire an Expert
+Features
+USER MANAGEMENT
+Account Settings
+Browse and Manage Users
+User Profile
+User Admin Dashboard
+TASK MANAGEMENT
+Assign and Manage Tasks
+Appointment Booking
+Workout Assignment
+BROWSING AND LISTINGS
+Browse Classes
+Browse Dates
+Browse Home Listings
+Class Purchase
+Classes Admin Dashboard
+CONTENT AND MEDIA
+Announcements
+Image Carousel
+Social Media Feed
+COMMUNICATION
+Group Messaging
+User Chat
+Agree and Sign
+INTEGRATIONS & PLATFORM
+External Collections
+Zapier
+Xano
+IAPHub
+Publishing
+Responsive Design
+Component Marketplace
+Support
+Help Docs
+Community Forum
+Adalo App Academy
+Submit a Ticket
+Roadmap
+-->
+Log In
+Build Free
+Search
+Product
+Product
+iPhone App Builder
+Android App Builder
+Web App Builder
+AI App Builder
+App Store Publishing
+Google Sheets to App
+Excel to App
+Airtable to App
+Shopify to App
+Enterprise
+&rarr;
+Adalo Blue
+Solutions
+AI App Builder
+Booking App Builder
+Business App Builder
+Church App Builder
+CRM App Builder
+Dating App Builder
+Delivery App Builder
+eCommerce App Builder
+Education App Builder
+Event App Builder
+Fitness App Builder
+Grocery App Builder
+Healthcare App Builder
+Internal Tools Builder
+Inventory App Builder
+Marketplace App Builder
+Real Estate App Builder
+Restaurant App Builder
+Social Media App Builder
+Businesses & Organizations
+Freelancers & Agencies
+Startup Founders
+Enterprise
+Hire an Expert!
+Learn
+Adalo App Academy
+Blog
+Our Story
+Wall of Love
+All Resources
+Support
+Help Docs
+Community Forum
+Adalo App Academy
+Submit a Ticket
+Features
+Account Settings
+Browse and Manage Users
+User Profile
+User Admin Dashboard
+Assign and Manage Tasks
+Appointment Booking
+Workout Assignment
+Browse Classes
+Browse Dates
+Browse Home Listings
+Class Purchase
+Classes Admin Dashboard
+Announcements
+Image Carousel
+Social Media Feed
+Group Messaging
+User Chat
+Agree and Sign
+External Collections
+Zapier
+Xano
+IAPHub
+Publishing
+Responsive Design
+Component Marketplace
+Pricing
+Hire an Expert
+Log In
+Build Free
+Blog Home
+>
+Business Guides
+UPDATED APR 01, 2026
+Apple Tightens App Store Rules for AI-Built Apps (2026)
+The Adalo Team
+Table of Contents
+Build Your App – With No Code
+The fastest way to Google and Apple App stores.
+Start now
+When looking for an AI-powered way to build an app for the Apple App Store, the platform you choose now matters more than ever. Apple's recent enforcement of its App Store guidelines has drawn a clear line between tools that produce compliant native apps and tools whose architecture doesn't meet Apple's standards.
+Key Takeaways
+Apple blocked Replit and Vibecode
+from releasing App Store updates in March 2026, citing Guideline 2.5.2
+The guideline prohibits apps from downloading, installing, or executing code that introduces or changes features or functionality
+Prompt-to-app builders
+(Lovable, Bolt, Base44, v0) are web-only and cannot submit to the App Store at all
+Pre-AI no-code builders
+like Adalo compile true native iOS and Android apps that are architecturally compliant with Apple's guidelines
+This is an architectural issue — how apps are constructed — not a blanket ban on AI assistance in development
+See also:
+Best Free Mobile App Builders
+·
+9 Best No-Code App Builders
+·
+iPhone App Builder
+What Apple Did
+In March 2026,
+Forbes reported
+that Apple quietly blocked apps from Replit and Vibecode from releasing updates to the App Store.
+MacRumors
+and
+AppleInsider
+provided additional detail: Apple cited
+Guideline 2.5.2
+, the long-standing rule prohibiting apps from executing code that alters their own functionality.
+Specifically, Apple objected to:
+In-app code execution
+— these platforms display AI-generated apps using embedded web views within the original app, which Apple considers a violation of the rule against executing code that changes functionality
+Building for Apple platforms
+— some features supported creation of software specifically for Apple devices within the app itself
+Apple maintained this isn't specifically targeting vibe coding — it's enforcing existing guidelines uniformly. Vibecode was expected to remove functionality allowing creation of apps for Apple platforms, and both platforms must open generated content in external browsers rather than in-app web views.
+Why This Matters for App Builders
+The distinction Apple is drawing is architectural, not ideological. The question isn't "was AI used to build this app?" — it's "does this app's architecture comply with how Apple expects apps to be constructed?"
+Prompt-to-app builders
+(Lovable, Bolt, Base44, v0) are unaffected by this specific enforcement because they can't submit to the App Store in the first place. They produce web applications — React, Next.js, Vite — not native iOS binaries. The entire prompt-to-app tier scored 1-2 out of 10 on App Distribution in the
+App Builder Guides' State of App Building report
+.
+Vibe coding tools
+like Replit that do attempt App Store publishing are now facing scrutiny around how their apps are structured — specifically the in-app web view approach.
+Pre-AI no-code builders
+that compile native code — Adalo compiles native iOS (IPA) and Android (APK) builds, not web wrappers — are architecturally aligned with Apple's expectations. The app you publish through Adalo is a self-contained native binary, not a web view executing remote code. This is an architectural issue that pre-AI no-code tools solved for from the beginning.
+The Community Response
+On Reddit's
+r/vibecoding
+, experienced developers drew an important distinction: Apple is doing two things simultaneously — blocking platform apps that violate Guideline 2.5.2, and potentially increasing scrutiny of poorly-built AI-generated submissions. A developer with 10 years of App Store experience noted: "if your app is high quality and doesn't violate any of Apple's policies, it will still be approved."
+The takeaway: AI-assisted development isn't the problem. How the app is constructed is.
+What This Means Going Forward
+For anyone building an app intended for the Apple App Store:
+Choose a platform that produces native builds
+— not web wrappers, not in-app web views. Adalo, FlutterFlow, and Thunkable all compile native iOS code.
+Understand the difference between AI-assisted building and AI-generated code
+— using AI to help you build within a no-code platform (like Ada, Adalo's AI builder) produces the same compliant native output. Using a vibe coding tool that generates code you then need to separately package for the App Store is where compliance risk increases.
+Quality matters more than method
+— Apple's review process evaluates the final product. A well-built app made with AI assistance will pass review. A poorly-built app with security vulnerabilities, inverted authentication logic, or wrapper architectures won't — regardless of how it was built.
+The
+best free mobile app builders
+comparison covers which platforms can actually publish to the App Store, with honest assessments of each.
+This is a developing story. We'll update this post as Apple clarifies its enforcement scope.
+Start Building With An App Template
+Build your app fast with one of our pre-made app templates
+Begin Building with no code
+Related Content
+Vibe Coding vs No-Code App Builders: Which Actually Ships to the App Store?
+Vibe Coding vs No-Code App Builders: Which Actually Ships to the App Store?
+February 20, 2026
+Compare vibe coding tools like Lovable and Bolt.new with no-code platforms like Adalo. Which approach ships real apps to the App Store faster?
+37 No-Code Market Growth Statistics Every App Builder Must Know in 2026
+July 26, 2025
+No-code app development hits its stride in 2025—65% of apps are now built without coding, delivering 362% ROI and 90% faster launch times
+How To Get a Vibe-Coded App To The App Store
+January 13, 2026
+A concise 4-step guide to publish a vibe-coded app: prepare accounts and assets, meet Apple review rules, build with Adalo, submit and updat
+Spreadsheet-to-App Market: What Changed in 2026
+April 20, 2026
+The low-code market hits $65B, vibe coding stumbles at the 80/20 wall, and visual no-code with AI assist emerges as the sweet spot for app builders.
+Product
+iPhone App Builder
+Android App Builder
+Web App Builder
+AI App Builder
+App Store Publishing
+Enterprise
+Pricing
+Compare
+All Builders
+Vs Bubble
+Vs FlutterFlow
+Vs Glide
+Vs Thunkable
+Vs Lovable
+Vs Appy Pie
+Solutions
+For Businesses
+For Freelancers
+For Startups
+Use Cases
+Company
+About
+Blog
+Privacy Policy
+LLMs
+Resources
+Help Documentation
+Adalo App Academy
+Adalo Community Forum
+Adalo Experts
+App Cost Calculator
+Support
+Component Development
+#MadeinAdalo
+Adalo Status
+Explore Features
+User Management
+Account Settings
+Browse and Manage Users
+User Profile and Account Settings
+User Admin Dashboard
+Browsing and Listings
+Class Purchase and Management
+Browse Classes
+Browse Dates
+Browse Home Listings
+Classes Admin Dashboard
+Task Management
+Assign and Manage Tasks
+Workout Assignment
+Content and Media
+Announcement and Notifications
+Image Carousel
+Social Media Feed
+Messaging
+Group Messaging
+User Chat
+Documents and Listings
+Agree and Sign Documents
+External Collections Integration
+Privacy Policy & Terms and Conditions

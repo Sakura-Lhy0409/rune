@@ -1,0 +1,42 @@
+# AltStore
+
+## AltStore
+
+- [AltStore Docs](https://faq.altstore.io/readme.md)
+- [What is AltStore PAL?](https://faq.altstore.io/altstore-pal/what-is-altstore-pal.md)
+- [Sources](https://faq.altstore.io/altstore-pal/sources.md)
+- [Updating AltStore PAL](https://faq.altstore.io/altstore-pal/updating-altstore-pal.md)
+- [Day One Promo](https://faq.altstore.io/altstore-pal/day-one-promo.md)
+- [Troubleshooting](https://faq.altstore.io/altstore-pal/troubleshooting.md)
+- [How to Install (Windows)](https://faq.altstore.io/altstore-classic/how-to-install-altstore-windows.md): This page will help guide you through the process of installing AltStore onto your iOS device using a Windows computer. Soon you will be able to start sideloading apps!
+- [How to Install (macOS)](https://faq.altstore.io/altstore-classic/how-to-install-altstore-macos.md): This page will help guide you through the process of installing AltStore onto your iPhone or iPad using a macOS computer. Soon you will be able to start sideloading apps!
+- [Enable Mail Plug-in](https://faq.altstore.io/altstore-classic/how-to-install-altstore-macos/enable-mail-plug-in.md)
+- [Getting Started](https://faq.altstore.io/altstore-classic/your-altstore.md)
+- [AltServer](https://faq.altstore.io/altstore-classic/altserver.md)
+- [Remote AltServers](https://faq.altstore.io/altstore-classic/remote-altservers.md)
+- [App IDs](https://faq.altstore.io/altstore-classic/app-ids.md)
+- [Activating Apps](https://faq.altstore.io/altstore-classic/activating-apps.md)
+- [Enabling JIT](https://faq.altstore.io/altstore-classic/enabling-jit.md)
+- [AltJIT](https://faq.altstore.io/altstore-classic/enabling-jit/altjit.md)
+- [Trusted Sources](https://faq.altstore.io/altstore-classic/trusted-sources.md)
+- [MacDirtyCow](https://faq.altstore.io/altstore-classic/macdirtycow.md): Follow these instructions to remove the 3-app limit using the MacDirtyCow exploit
+- [Error Codes](https://faq.altstore.io/altstore-classic/error-codes.md): This page includes a list of various error codes you may receive while using AltStore.
+- [Troubleshooting Guide](https://faq.altstore.io/altstore-classic/troubleshooting-guide.md): Having problems with AltStore or AltServer? Try some of these troubleshooting tips!
+- [Make a Source](https://faq.altstore.io/developers/make-a-source.md)
+- [Distribute with AltStore PAL](https://faq.altstore.io/developers/distribute-with-altstore-pal.md)
+- [“Download on AltStore” Badge](https://faq.altstore.io/developers/download-on-altstore-badge.md)
+- [App Guidelines](https://faq.altstore.io/developers/app-guidelines.md)
+- [REST API](https://faq.altstore.io/developers/rest-api.md): Use this to register your Developer ID with AltStore PAL, as well as to process and download ADPs for your notarized apps.
+- [Updating Apps](https://faq.altstore.io/developers/updating-apps.md): Learn how to issue app updates
+- [Patreon Integration](https://faq.altstore.io/developers/patreon-integration.md): Use AltStore's built-in Patreon integration to easily distribute apps to your Patrons.
+- [AltSource CLI (Beta)](https://faq.altstore.io/developers/altsource-cli-beta.md)
+- [AltStore PAL](https://faq.altstore.io/release-notes/altstore-pal.md)
+- [AltStore Classic](https://faq.altstore.io/release-notes/altstore.md)
+- [AltServer](https://faq.altstore.io/release-notes/altserver.md)
+- [Beta Apps](https://faq.altstore.io/patreon/beta-access.md): By joining our Patreon, you can download beta versions of our apps like Delta and Clip, which include features that are currently in development, and are only available to those who have joined.
+- [Discord](https://faq.altstore.io/patreon/discord.md)
+- [Friend Zone](https://faq.altstore.io/patreon/patron-credits-page.md)
+- [Team](https://faq.altstore.io/about-us/team.md)
+- [Press Kit](https://faq.altstore.io/about-us/press-kit.md): To contact us for media inquiries, please email press@altstore.io
+- [Videos](https://faq.altstore.io/about-us/videos.md): Here you can find videos of people using AltStore to do fun things!
+

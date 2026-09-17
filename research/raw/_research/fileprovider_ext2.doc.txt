@@ -1,0 +1,392 @@
+A File Provider extension in which the system replicates the contents on disk.
+protocol
+ 
+NSFileProviderReplicatedExtension
+NSFileProviderReplicatedExtension
+=== NSFileProviderReplicatedExtension
+protocol
+ 
+NSFileProviderReplicatedExtension
+ : 
+NSFileProviderEnumerating
+=== Inherits From
+=== File Provider protocols
+=== Creating and Removing File Providers
+=== Accessing Remote Content
+=== Managing Items
+=== Tracking Materialized Items
+=== Tracking Pending Items
+=== Importing Domains
+The group of methods that are fundamental to all Objective-C objects.
+protocol
+ 
+NSObjectProtocol
+NSObjectProtocol
+=== NSObjectProtocol
+=== Technologies
+An extension other apps use to access files and folders managed by your app and synced with a remote storage.
+File Provider
+=== File Provider
+Options for creating items.
+struct
+ 
+NSFileProviderCreateItemOptions
+NSFileProviderCreateItemOptions
+=== NSFileProviderCreateItemOptions
+Support for custom actions.
+protocol
+ 
+NSFileProviderCustomAction
+NSFileProviderCustomAction
+=== NSFileProviderCustomAction
+Options for deleting items.
+struct
+ 
+NSFileProviderDeleteItemOptions
+NSFileProviderDeleteItemOptions
+=== NSFileProviderDeleteItemOptions
+Support for enumerating the file provider’s contents.
+protocol
+ 
+NSFileProviderEnumerating
+NSFileProviderEnumerating
+=== NSFileProviderEnumerating
+An identifier for custom actions.
+struct
+ 
+NSFileProviderExtensionActionIdentifier
+NSFileProviderExtensionActionIdentifier
+=== NSFileProviderExtensionActionIdentifier
+Support for fetching changes to the item’s content.
+protocol
+ 
+NSFileProviderIncrementalContentFetching
+NSFileProviderIncrementalContentFetching
+=== NSFileProviderIncrementalContentFetching
+Options for modifying items.
+struct
+ 
+NSFileProviderModifyItemOptions
+NSFileProviderModifyItemOptions
+=== NSFileProviderModifyItemOptions
+Support for fetching part of a file’s content.
+protocol
+ 
+NSFileProviderPartialContentFetching
+NSFileProviderPartialContentFetching
+=== NSFileProviderPartialContentFetching
+A protocol for enumerating pending items.
+protocol
+ 
+NSFileProviderPendingSetEnumerator
+NSFileProviderPendingSetEnumerator
+=== NSFileProviderPendingSetEnumerator
+A File Provider extension in which the system replicates the contents on disk.
+protocol
+ 
+NSFileProviderReplicatedExtension
+NSFileProviderReplicatedExtension
+=== NSFileProviderReplicatedExtension
+Tells the file provider to create or import an item based on a template.
+func
+ 
+createItem
+(
+basedOn
+: 
+NSFileProviderItem
+, 
+fields
+: 
+NSFileProviderItemFields
+, 
+contents
+: 
+URL
+?, 
+options
+: 
+NSFileProviderCreateItemOptions
+, 
+request
+: 
+NSFileProviderRequest
+, 
+completionHandler
+: (
+NSFileProviderItem
+?, 
+NSFileProviderItemFields
+, 
+Bool
+, (any 
+Error
+)?) -> 
+Void
+) -> 
+Progress
+- 
+createItemBasedOnTemplate:fields:contents:options:request:completionHandler:
+=== createItem(basedOn:fields:contents:options:request:completionHandler:)
+Tells the file provider to delete an item forever.
+func
+ 
+deleteItem
+(
+identifier
+: 
+NSFileProviderItemIdentifier
+, 
+baseVersion
+: 
+NSFileProviderItemVersion
+, 
+options
+: 
+NSFileProviderDeleteItemOptions
+, 
+request
+: 
+NSFileProviderRequest
+, 
+completionHandler
+: ((any 
+Error
+)?) -> 
+Void
+) -> 
+Progress
+- 
+deleteItemWithIdentifier:baseVersion:options:request:completionHandler:
+=== deleteItem(identifier:baseVersion:options:request:completionHandler:)
+Tells the file provider to download the requested item from remote storage.
+func
+ 
+fetchContents
+(
+for
+: 
+NSFileProviderItemIdentifier
+, 
+version
+: 
+NSFileProviderItemVersion
+?, 
+request
+: 
+NSFileProviderRequest
+, 
+completionHandler
+: (
+URL
+?, 
+NSFileProviderItem
+?, (any 
+Error
+)?) -> 
+Void
+) -> 
+Progress
+- 
+fetchContentsForItemWithIdentifier:version:request:completionHandler:
+=== fetchContents(for:version:request:completionHandler:)
+Tells the File Provider extension that the system finished importing items.
+func
+ 
+importDidFinish
+(
+completionHandler
+: () -> 
+Void
+)
+- 
+importDidFinishWithCompletionHandler:
+=== importDidFinish(completionHandler:)
+Creates an instance of the file provider for the specified domain.
+init
+(
+domain
+: 
+NSFileProviderDomain
+)
+- 
+initWithDomain:
+=== init(domain:)
+Tells the file provider to perform any necessary cleanup so that the system can deallocate it.
+func
+ 
+invalidate
+()
+- 
+invalidate
+=== invalidate()
+Asks the file provider for the metadata of the provided item.
+func
+ 
+item
+(
+for
+: 
+NSFileProviderItemIdentifier
+, 
+request
+: 
+NSFileProviderRequest
+, 
+completionHandler
+: (
+NSFileProviderItem
+?, (any 
+Error
+)?) -> 
+Void
+) -> 
+Progress
+- 
+itemForIdentifier:request:completionHandler:
+=== item(for:request:completionHandler:)
+Tells the file provider that the set of materialized items changed.
+func
+ 
+materializedItemsDidChange
+(
+completionHandler
+: () -> 
+Void
+)
+- 
+materializedItemsDidChangeWithCompletionHandler:
+=== materializedItemsDidChange(completionHandler:)
+Tells the file provider that an item’s content or metadata changed.
+func
+ 
+modifyItem
+(
+NSFileProviderItem
+, 
+baseVersion
+: 
+NSFileProviderItemVersion
+, 
+changedFields
+: 
+NSFileProviderItemFields
+, 
+contents
+: 
+URL
+?, 
+options
+: 
+NSFileProviderModifyItemOptions
+, 
+request
+: 
+NSFileProviderRequest
+, 
+completionHandler
+: (
+NSFileProviderItem
+?, 
+NSFileProviderItemFields
+, 
+Bool
+, (any 
+Error
+)?) -> 
+Void
+) -> 
+Progress
+- 
+modifyItem:baseVersion:changedFields:contents:options:request:completionHandler:
+=== modifyItem(_:baseVersion:changedFields:contents:options:request:completionHandler:)
+Tells the file provider extension that the set of pending items has changed.
+func
+ 
+pendingItemsDidChange
+(
+completionHandler
+: () -> 
+Void
+)
+- 
+pendingItemsDidChangeWithCompletionHandler:
+=== pendingItemsDidChange(completionHandler:)
+Support for providing a custom service source.
+protocol
+ 
+NSFileProviderServicing
+NSFileProviderServicing
+=== NSFileProviderServicing
+Support for item thumbnails.
+protocol
+ 
+NSFileProviderThumbnailing
+NSFileProviderThumbnailing
+=== NSFileProviderThumbnailing
+Send push notifications to a device to signal changes from your server.
+=== Using push notifications to signal changes
+NSFileProviderReplicatedExtension
+NSFileProviderReplicatedExtension
+=== Creating and Removing File Providers
+=== Accessing Remote Content
+=== Managing Items
+=== Tracking Materialized Items
+=== Tracking Pending Items
+=== Importing Domains
+=== Inherits From
+=== File Provider protocols
+@protocol
+ 
+NSFileProviderReplicatedExtension
+ <
+NSObject
+, 
+NSFileProviderEnumerating
+>
+NSObject
+NSObject
+NSFileProviderCreateItemOptions
+NSFileProviderCreateItemOptions
+NSFileProviderCustomAction
+NSFileProviderCustomAction
+NSFileProviderDeleteItemOptions
+NSFileProviderDeleteItemOptions
+NSFileProviderEnumerating
+NSFileProviderEnumerating
+NSFileProviderExtensionActionIdentifier
+NSFileProviderExtensionActionIdentifier
+NSFileProviderIncrementalContentFetching
+NSFileProviderIncrementalContentFetching
+NSFileProviderModifyItemOptions
+NSFileProviderModifyItemOptions
+NSFileProviderPartialContentFetching
+NSFileProviderPartialContentFetching
+NSFileProviderPendingSetEnumerator
+NSFileProviderPendingSetEnumerator
+NSFileProviderReplicatedExtension
+NSFileProviderReplicatedExtension
+- 
+createItemBasedOnTemplate:fields:contents:options:request:completionHandler:
+- 
+deleteItemWithIdentifier:baseVersion:options:request:completionHandler:
+- 
+fetchContentsForItemWithIdentifier:version:request:completionHandler:
+- 
+importDidFinishWithCompletionHandler:
+- 
+initWithDomain:
+- 
+invalidate
+- 
+itemForIdentifier:request:completionHandler:
+- 
+materializedItemsDidChangeWithCompletionHandler:
+- 
+modifyItem:baseVersion:changedFields:contents:options:request:completionHandler:
+- 
+pendingItemsDidChangeWithCompletionHandler:
+NSFileProviderServicing
+NSFileProviderServicing
+NSFileProviderThumbnailing
+NSFileProviderThumbnailing

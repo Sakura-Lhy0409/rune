@@ -1,0 +1,164 @@
+ 
+Skip to content 
+Powered by Algolia
+Log in
+Create account
+DEV Community
+Add reaction
+Like
+Unicorn
+Exploding Head
+Raised Hands
+Fire
+Jump to Comments
+Save
+Boost
+Pick as gem 
+Copy link 
+Copied to Clipboard
+Share to X
+Share to LinkedIn
+Share to Facebook
+Share to Mastodon
+Share Post via... 
+Report Abuse 
+Daisuke Majima (MLBoy) 
+Posted on Jun 2 
+• 
+ Originally published at qiita.com 
+On-device LLM on iPhone: which runtime is fastest? MLX vs llama.cpp vs LiteRT-LM vs CoreML
+# ios 
+ # machinelearning 
+ # llm 
+ # swift 
+I want to run an LLM on iPhone. 
+But there are several runtimes and it's not obvious which to pick. 
+And I couldn't find many head-to-head benchmarks.
+Runtime
+In a nutshell
+MLX 
+Apple charging into the on-device-LLM scene and pushing hard.
+llama.cpp 
+The mature, battle-tested community standard for local LLMs.
+LiteRT-LM 
+Gemma-4 only, but Google's heavyweight, finally deployed.
+CoreML-LLM 
+Lets you use the Apple Neural Engine, which the GPU/Metal-dominated LLM world tends to overlook. I built it — can it even compete...?
+Fine, let's just do it. On an iPhone 17 Pro (A19 Pro), I ran the same model on four on-device inference runtimes and measured decode speed and memory.
+The conclusion:
+"For local LLMs on iPhone, MLX by default." 
+"For Gemma 4 specifically, LiteRT-LM is unbeatable." 
+Conclusion first
+Decode speed :
+Qwen 3.5 2B is fastest on MLX (61 tok/s).
+Gemma 4 E2B is a decisive win for LiteRT-LM (55 tok/s).
+Memory :
+CoreML / ANE (Apple Neural Engine) wins by a landslide. It runs Qwen 3.5 2B in just 241 MB (about 1/5 of MLX). Slowest on speed, though. Nice effort, CoreML.
+Use-case recommendations at the end.
+Test conditions
+Item
+Detail
+Device
+iPhone 17 Pro (A19 Pro / iOS 26.4.2)
+Runtimes
+MLX Swift / llama.cpp / LiteRT-LM / CoreML(ANE)
+Models
+Gemma 4 E2B, Qwen 3.5 2B (both ~4-bit)
+Task
+short-chat (128-token generation)
+Aggregation
+median of 3 cold runs
+Metrics
+decode tok/s (higher = better), peak memory MB (lower = better)
+Result 1: decode speed (tok/s, higher is better)
+Runtime
+Gemma 4 E2B
+Qwen 3.5 2B
+🔴 LiteRT-LM
+55.4 🏆
+— (Gemma only)
+🟣 MLX-Swift
+47.5
+61.2 🏆
+🔵 llama.cpp
+37.8
+39.1
+🟠 CoreML/ANE
+33.4
+27.9
+For Gemma 4 E2B, LiteRT-LM dominates. It's Google's on-device runtime, running Gemma in its own .litertlm (INT4 QAT) format on the GPU — first-party model × first-party runtime optimization paying off. The Swift API was in development for ages; nice work, whoever shipped it.
+Meanwhile for Qwen 3.5 2B, MLX is fastest (61 tok/s). Apple is clearly competing seriously on local LLMs. (LiteRT-LM's catalog is Gemma-only ( .litertlm ), so it doesn't compete on Qwen.)
+Result 2: peak memory (MB, lower is better)
+Runtime
+Gemma 4 E2B
+Qwen 3.5 2B
+🔴 LiteRT-LM
+641 🏆
+—
+🟣 MLX-Swift
+2,900
+1,279
+🔵 llama.cpp
+3,156
+1,479
+🟠 CoreML/ANE
+1,187
+241 🏆
+CoreML / ANE wins by a landslide — Qwen 3.5 2B in just 241 MB . That comes from a chunked-MLKV approach (CoreML-LLM's Qwen35MLKVGenerator ) that chunks the weights and KV cache onto the ANE — about 1/5 of MLX (1,279) and llama.cpp (1,479).
+If you want to run a 2B-class model on a memory-constrained iPhone, or avoid fighting your app and other features for memory, the ANE is a very strong option.
+Fairness notes
+CoreML/ANE : the ANE is designed for memory/power over throughput. The first load triggers ANE compilation, so load time is longer. Decode is approximated by number of generated pieces (≈ tokens).
+LiteRT-LM : there's no max-output-tokens API, so it generates until EOS (≈ 458-token full response); the others cut off at 128. But decode is a rate , so the comparison still holds. Numbers come from LiteRT-LM's own benchmark counter ( getBenchmarkInfo ).
+All are ~4-bit, but the quantization schemes differ slightly per runtime (MLX 4bit / GGUF Q4_K_M / LiteRT INT4-QAT / CoreML INT4-palettized / INT8).
+Recommendations by use case
+Just fast, general-purpose, lots of models → MLX Swift. Fastest on Qwen, easy from Swift, and mlx-community has tons of models. The first choice for local LLMs on Apple devices.
+Gemma as fast as possible → LiteRT-LM. For the Gemma family, strongest on both speed and memory. Can't beat it.
+Memory first (any device / coexisting with other features) → CoreML / ANE. 241 MB is exceptional. If you can tolerate the speed, it's the strongest for low memory and power.
+Portability / run anywhere → llama.cpp. GGUF assets and every platform. Not flashy, but solid.
+Method and reproducibility
+Every run was executed headlessly from a Mac via devicectl (no on-device tapping); models were side-loaded from the Mac. The raw result JSONL and charts are in the repo. One line = "1 runtime × 1 model × 1 device" — PRs welcome:
+👉 https://github.com/john-rocky/apple-silicon-llm-bench 
+I'll write a separate article on the behind-the-scenes of full measurement automation and the build fights (git-LFS / SwiftPM unsafe-flags / @preconcurrency , etc.).
+Summary
+On-device LLM on iPhone: "MLX / LiteRT-LM for speed, CoreML/ANE for memory." 
+Hope it helps your local-LLM development!
+Originally published in Japanese on Qiita . I do mobile AI / CoreML / ARKit development and write about it. GitHub / X 
+Top comments (0) 
+Subscribe 
+Personal 
+ Trusted User 
+Create template
+Templates let you quickly answer FAQs or store snippets for re-use.
+Submit 
+ Preview 
+ Dismiss 
+Some comments may only be visible to logged-in visitors. Sign in to view all comments.
+Are you sure you want to hide this comment? It will become hidden in your post, but will still be visible via the comment's permalink .
+Hide child comments as well
+Confirm
+For further actions, you may consider blocking this person and/or reporting abuse 
+Daisuke Majima (MLBoy)
+Follow 
+On-device AI. Core AI model zoo (60+ models) · devicemark iPhone LLM leaderboard · author of "The Art of Core AI" → github.com/john-rocky
+Joined
+Jun 2, 2026 
+More from Daisuke Majima (MLBoy) 
+LiteRT vs TensorFlow Lite: what changed, plus the old-name new-name cheat sheet
+# litert 
+ # tensorflowlite 
+ # android 
+ # machinelearning 
+iPhone on-device LLM: the GPU wins the sprint, the Neural Engine wins the marathon
+# machinelearning 
+ # ios 
+ # apple 
+ # llm 
+Filling object detection's last mile: peaceofcake (D-FINE & RF-DETR, Apache 2.0)
+# python 
+ # machinelearning 
+ # computervision 
+ # opensource 
+We're a place where coders share, stay up-to-date and grow their careers.
+Log in
+Create account
+

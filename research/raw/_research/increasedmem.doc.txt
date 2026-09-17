@@ -1,0 +1,30 @@
+A Boolean value that indicates whether core features of your app may perform better with a higher memory limit on supported devices.
+com.apple.developer.kernel.increased-memory-limit
+=== com.apple.developer.kernel.increased-memory-limit
+=== Details
+Discussion
+Add this entitlement to your app to inform the system that some of your app’s core features may perform better by exceeding the default app memory limit on supported devices. If you use this entitlement, make sure your app still behaves correctly if additional memory isn’t available.
+
+ 
+An increased memory limit is only available on some device models. Call the 
+ function to determine the amount of memory available. Higher memory use can affect system performance.
+=== Memory
+Resources located in an app, framework, or plugin bundle.
+Bundle Resources
+=== Bundle Resources
+Key-value pairs that grant an executable permission to use a service or technology.
+Entitlements
+=== Entitlements
+A Boolean value that indicates whether the app may access an extended address space.
+Extended Virtual Addressing Entitlement
+=== Extended Virtual Addressing Entitlement
+A Boolean value that indicates whether core features of your app may perform better with a higher memory limit on supported devices.
+com.apple.developer.kernel.increased-memory-limit
+=== com.apple.developer.kernel.increased-memory-limit
+Determines the amount of memory available to the current app.
+os_proc_available_memory
+os_proc_available_memory
+=== os_proc_available_memory
+=== Technologies
+=== Memory
+Entitlements

@@ -1,0 +1,75 @@
+=== TERM: Pythonista  (results=6) ===
+Pythonista 3                   | id=1085978097 | seller=Ole Zorn | ver=3.4 | upd=2023/4/27 19:31:27
+Python Coding Editor & IDE App | id=6444399635 | seller=Cloudbit d.o.o. | ver=1.12.15 | upd=2026/9/3 18:31:42
+Pyto IDE                       | id=1436650069 | seller=Develobile S.p.A. | ver=19.0.1 | upd=2024/6/9 14:11:52
+Python Coding                  | id=6738411328 | seller=婉媚 邵 | ver=3.1.3 | upd=2026/7/5 20:27:02
+Python Editor App              | id=1672453872 | seller=Andromeda Corp Limited | ver=26.0.14 | upd=2026/5/16 13:51:50
+Mimo: Learn Coding/Programming | id=1133960732 | seller=Mimo GmbH | ver=12.27.0 | upd=2026/9/14 7:31:37
+
+=== TERM: Working Copy git  (results=4) ===
+Git client - Working Copy      | id=896694807 | seller=Anders Borum | ver=7.0.1 | upd=2026/9/13 16:44:28
+GitHub                         | id=1477376905 | seller=GitHub | ver=1.276.0 | upd=2026/9/10 9:13:43
+Source Files: Git Storage      | id=6450856155 | seller=Anders Borum ApS | ver=2026.35 | upd=2026/9/13 8:49:02
+Clone - Git client advanced    | id=1037881290 | seller=Dan Leehr L.L.C. | ver=1.4.0 | upd=2020/8/3 1:38:33
+
+=== TERM: Termius SSH  (results=5) ===
+Termius - Modern SSH Client    | id=549039908 | seller=Termius Corporation | ver=7.8.0 | upd=2026/9/15 5:24:42
+xTerminal - SSH Terminal Shell | id=1544728400 | seller=婉媚 邵 | ver=4.0.1 | upd=2026/3/23 22:43:19
+PocketTerm SSH                 | id=6793454786 | seller=雄 肖 | ver=1.0 | upd=2026/8/6 14:14:14
+Easy SSH                       | id=6742807404 | seller=Argsment Limited | ver=1.16 | upd=2026/7/19 17:30:31
+Terminal & SSH                 | id=1558156247 | seller=Pavlo Kravchenko | ver=1.2.6 | upd=2024/3/27 16:20:44
+
+=== TERM: Textastic  (results=6) ===
+Textastic Code Editor          | id=1049254261 | seller=Alexander Blach | ver=10.9.8 | upd=2026/9/5 20:19:19
+Koder Code Editor              | id=1447489375 | seller=Reny Mustika | ver=4.2.2 | upd=2022/4/19 17:39:08
+Runestone Text Editor          | id=1548193893 | seller=Simon Stovring | ver=1.6.2 | upd=2026/9/10 18:38:07
+Kodex                          | id=1038574481 | seller=Bruno Philipe Resende Silva | ver=1.4.2 | upd=2024/4/1 20:38:40
+Text Editor.                   | id=1483790257 | seller=TAPUNIVERSE LLC | ver=2.0.1 | upd=2026/8/21 2:47:48
+iEditor – Text Code Editor     | id=562162723 | seller=ComcSoft Corporation | ver=7.0 | upd=2025/10/29 6:31:05
+
+=== TERM: Runestone code editor  (results=5) ===
+Runestone Text Editor          | id=1548193893 | seller=Simon Stovring | ver=1.6.2 | upd=2026/9/10 18:38:07
+Koder Code Editor              | id=1447489375 | seller=Reny Mustika | ver=4.2.2 | upd=2022/4/19 17:39:08
+GoCoEdit - Code & Text Editor  | id=869346854 | seller=Christoph Gogolin | ver=24.0 | upd=2026/7/7 14:08:16
+iEditor – Text Code Editor     | id=562162723 | seller=ComcSoft Corporation | ver=7.0 | upd=2025/10/29 6:31:05
+Python Editor App              | id=1672453872 | seller=Andromeda Corp Limited | ver=26.0.14 | upd=2026/5/16 13:51:50
+
+=== TERM: Carnets Jupyter  (results=6) ===
+Carnets - Jupyter              | id=1450994949 | seller=Nicolas Holzschuch | ver=1.9.1 | upd=2025/11/26 9:03:04
+Carnets - Jupyter (with scipy) | id=1559497253 | seller=Nicolas Holzschuch | ver=1.9.1 | upd=2025/11/26 9:04:55
+Python IDE & Jupyter – Juno    | id=1462586500 | seller=Rational Matter Ltd | ver=4.2.5 | upd=2026/9/4 22:30:36
+Pyto IDE                       | id=1436650069 | seller=Develobile S.p.A. | ver=19.0.1 | upd=2024/6/9 14:11:52
+Learn Python Coding Offline    | id=1489863294 | seller=Shahbaz Khan | ver=4.0.7 | upd=2026/8/15 18:27:39
+CodeSnack IDE                  | id=1397424959 | seller=Mobibean, LLC | ver=6.0.0 | upd=2026/7/21 15:39:39
+
+=== TERM: Juno Jupyter notebook  (results=5) ===
+Python IDE & Jupyter – Juno    | id=1462586500 | seller=Rational Matter Ltd | ver=4.2.5 | upd=2026/9/4 22:30:36
+Carnets - Jupyter              | id=1450994949 | seller=Nicolas Holzschuch | ver=1.9.1 | upd=2025/11/26 9:03:04
+Gemini Notebook                | id=6737527615 | seller=Google LLC | ver=1.57.7 | upd=2026/9/11 10:05:38
+Jupyter Notebook - JuCode      | id=6753707203 | seller=Devang Samirbhai Shah | ver=2.5 | upd=2026/9/12 22:03:41
+Juno Connect: Jupyter Client   | id=1315744137 | seller=Rational Matter Ltd | ver=1.6.13 | upd=2022/9/18 13:15:18
+
+=== TERM: a-Shell mini  (results=6) ===
+a-Shell mini                   | id=1543537943 | seller=Nicolas Holzschuch | ver=2.2.1 | upd=2026/9/12 7:10:44
+a-Shell                        | id=1473805438 | seller=Nicolas Holzschuch | ver=2.2.1 | upd=2026/9/12 7:15:42
+Scriptable                     | id=1405459188 | seller=Simon Stovring | ver=1.7.19 | upd=2024/9/30 10:29:59
+Shell Racing                   | id=1458482004 | seller=BrandBase B.V. | ver=5.0.7 | upd=2026/3/2 9:26:47
+Minikin                        | id=1592375702 | seller=Custom Color 3D Printing Inc | ver=2.14.764 | upd=2026/7/1 14:33:17
+YouTube                        | id=544007664 | seller=Google LLC | ver=21.37.04 | upd=2026/9/13 16:07:05
+
+=== TERM: iSH Shell Linux  (results=5) ===
+iSH Shell                      | id=1436902243 | seller=Theodore Dubois | ver=1.3.2 | upd=2023/5/21 11:28:26
+xTerminal - SSH Terminal Shell | id=1544728400 | seller=婉媚 邵 | ver=4.0.1 | upd=2026/3/23 22:43:19
+Termius - Modern SSH Client    | id=549039908 | seller=Termius Corporation | ver=7.8.0 | upd=2026/9/15 5:24:42
+Learn Linux Step by Step       | id=6747142409 | seller=ALG Software Lab SIA | ver=2.4 | upd=2026/7/24 14:56:58
+Commands for Linux Terminal    | id=1356504527 | seller=雷 戴 | ver=1.5.7 | upd=2026/7/21 15:41:33
+
+=== TERM: Blink Shell  (results=6) ===
+Blink Shell, Build & Code      | id=1594898306 | seller=Blink Shell, Inc | ver=18.7.0 | upd=2026/8/30 17:22:22
+Termius - Modern SSH Client    | id=549039908 | seller=Termius Corporation | ver=7.8.0 | upd=2026/9/15 5:24:42
+iSH Shell                      | id=1436902243 | seller=Theodore Dubois | ver=1.3.2 | upd=2023/5/21 11:28:26
+Moshi: herdr/tmux on SSH/MOSH  | id=6757859949 | seller=Moshi Tech Limited | ver=3.14.3 | upd=2026/9/16 3:51:59
+a-Shell                        | id=1473805438 | seller=Nicolas Holzschuch | ver=2.2.1 | upd=2026/9/12 7:15:42
+SSH Client - Secure ShellFish  | id=1336634154 | seller=Anders Borum | ver=2026.30 | upd=2026/9/11 21:48:53
+
+

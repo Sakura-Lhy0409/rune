@@ -1,0 +1,99 @@
+Why Vibe-Coded Apps Get Rejected From the App Store | AcceptMyApp
+AcceptMy.
+App
+App Store guides
+Vibe Coding
+Why vibe-coded apps actually get rejected (it's not what you think)
+It's not an "AI apps get extra scrutiny" problem. It's that fast-generated apps tend to share the same handful of gaps, and App Review has seen enough of them to recognize the pattern immediately.
+Guideline 4.2
+Guideline 4.2.6
+2 min read
+Updated August 2026
+Official Apple source
+Generated template look
+Differentiated, real product
+It's rarely about the code — it's about the product
+Apple's review guidelines don't mention AI tools. What gets flagged is what those tools tend to produce under time pressure: a single working flow, generic branding, and none of the account, privacy, or depth work that a slower build would naturally include.
+Reviewers see enough app-generator and template output that a thin, undifferentiated app reads as exactly that within seconds — regardless of how it was actually built.
+The four rejections that show up over and over
+Guideline 4.2 (Minimum Functionality): the app does one shallow thing and stops. This is the single most common rejection for fast-generated apps.
+Guideline 4.2.6 (Commercial templates and app generators): the app structurally resembles hundreds of others from the same builder or scaffold, with no meaningful customization — a pattern Apple's review systems can detect across accounts.
+Guideline 5.1.1(v) (Account deletion): AI-scaffolded auth (Firebase, Supabase, Clerk, etc.) almost never includes an in-app account deletion flow by default, and it's an easy miss when you didn't write the auth code yourself.
+Guideline 2.1 (App Completeness): review notes are empty or generic because the whole build-to-submit cycle happened fast, and nobody wrote instructions for a reviewer who's never seen the app before.
+The webview trap
+A specific pattern among AI-built apps: the "app" is a generated web app (React, Next.js) wrapped for iOS with a tool like Capacitor, with no native functionality added. That reads as a website in a frame, which is close to an automatic 4.2 rejection — see the dedicated guide on wrapping a web app for iOS if this is your setup.
+How to actually avoid this
+Treat the AI-generated build as a fast first draft, not a finished submission. Budget real time after generation for account deletion, privacy declarations, and adding at least one thing a generic prompt wouldn't produce on its own.
+Before submitting, ask the honest version of the 4.2 question: if a reviewer opened this next to ten other apps built with the same tool this week, what would make this one look different?
+Next step
+Find out if your app reads as generic before Apple tells you
+Sign in to AcceptMyApp for an AI pre-submission check that flags thin-functionality and template risk — the exact pattern behind most AI-generated app rejections.
+Get started
+First analysis is free
+Related resources
+Guideline 4.2
+App Store Rejected for Minimum Functionality? Here's Why
+A Guideline 4.2 minimum functionality rejection means Apple sees your app as too thin, a repackaged website, or template-generated. Here's what actually clears the bar.
+Guideline 4.2.6
+App Store Guideline 4.2.6 Explained: Commercial templates and app generators
+App Store Guideline 4.2.6 explained for iOS developers: Commercial templates and app generators, common rejection risks, fix checklist, and reviewer reply guidance.
+Vibe Coding
+The Vibe Coder's App Store Submission Checklist
+A pre-submission checklist for AI-generated iOS apps, focused on the specific gaps AI coding tools leave behind: hardcoded secrets, missing account deletion, and thin functionality.
+AcceptMyApp
+App Store AI Review Assistant. Helping iOS developers navigate Apple's review process with confidence.
+Product
+Get started
+Roadmap
+What's new
+Keyword Popularity Checker
+Free
+Legal
+Privacy Policy
+Terms of Use
+Free Tools
+Free · New
+Keyword Popularity Checker
+Free Apple Ads search-term popularity scores for any App Store keyword and country.
+Apple Fee Calculator
+Keyword Popularity Checker
+Metadata Character Counter
+Info.plist Validator
+Screenshot Size Validator
+iOS App Idea Generator
+iOS App Idea Validator
+iOS App Idea Roaster
+iOS App Icon Resizer
+Privacy Manifest Validator
+Deep Link &amp; URL Scheme Builder
+Smart App Banner Generator
+Associated Domains Validator
+AASA File Validator
+Bundle ID Validator
+iOS Color Palette Generator
+Version &amp; Build Number Helper
+.strings &amp; .xcstrings Validator
+Localization Coverage Checker
+TestFlight Notes Formatter
+Metadata Diff
+App Privacy Label Builder
+App Icon Asset Catalog Generator
+Keyword Field Optimizer
+App Description Writer
+Subtitle &amp; Keyword Generator
+Permission Usage String Generator
+Rejection Reason Decoder
+Reviewer Reply Generator
+App Name Brainstormer
+Universal Link Path Matcher
+StoreKit JWS Decoder
+Resources
+App Store guides
+Guideline explainers
+Rejection guides
+iOS App Ideas
+Apple Review Guidelines
+Contact:
+contact@acceptmy.app
+2026 AcceptMyApp. All rights reserved.
+AcceptMyApp requires JavaScript to run. Please enable JavaScript in your browser.

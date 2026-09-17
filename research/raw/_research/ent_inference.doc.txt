@@ -1,0 +1,32 @@
+An entitlement that lets a background task run inference on the Neural Engine.
+Background Inference
+=== Background Inference
+=== Details
+=== Attributes
+Discussion
+This entitlement works with 
+, which lets your app’s critical inference work finish on the Neural Engine even when your app moves to the background before the task completes.
+The system also requires the entitlement for any Neural Engine access while your app is in the background, regardless of whether it’s running a continued background task. You can perform inference with Core AI, Core ML, or Metal Performance Shaders Graph.
+=== Background tasks
+Resources located in an app, framework, or plugin bundle.
+Bundle Resources
+=== Bundle Resources
+Key-value pairs that grant an executable permission to use a service or technology.
+Entitlements
+=== Entitlements
+The entitlement the system requires for a continuous background task to use the GPU.
+Background GPU Access
+=== Background GPU Access
+An entitlement that lets a background task run inference on the Neural Engine.
+Background Inference
+=== Background Inference
+A task that starts in the foreground and can continue running in the background as needed.
+class
+ 
+BGContinuedProcessingTask
+BGContinuedProcessingTask
+=== BGContinuedProcessingTask
+=== Technologies
+=== Background tasks
+Entitlements
+BGContinuedProcessingTask

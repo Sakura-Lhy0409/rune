@@ -1,0 +1,305 @@
+Evaluate JavaScript programs from within an app, and support JavaScript scripting of your app.
+=== JavaScriptCore
+Overview
+The JavaScriptCore framework provides the ability to evaluate JavaScript programs from within Swift, Objective-C, and C-based apps. You can use also use JavaScriptCore to insert custom objects into the JavaScript environment.
+=== Execution Environment
+=== JavaScript Code
+=== Native Code
+=== C API
+=== Reference
+=== Variables
+=== Functions
+=== Enumerations
+=== Technologies
+Evaluate JavaScript programs from within an app, and support JavaScript scripting of your app.
+=== JavaScriptCore
+func
+ 
+JSBigIntCreateWithDouble
+(
+JSContextRef
+, 
+Double
+, 
+UnsafeMutablePointer
+<
+JSValueRef
+?>?) -> 
+JSValueRef
+JSBigIntCreateWithDouble
+=== JSBigIntCreateWithDouble(_:_:_:)
+func
+ 
+JSBigIntCreateWithInt64
+(
+JSContextRef
+, 
+Int64
+, 
+UnsafeMutablePointer
+<
+JSValueRef
+?>?) -> 
+JSValueRef
+JSBigIntCreateWithInt64
+=== JSBigIntCreateWithInt64(_:_:_:)
+func
+ 
+JSBigIntCreateWithString
+(
+JSContextRef
+, 
+JSStringRef
+, 
+UnsafeMutablePointer
+<
+JSValueRef
+?>?) -> 
+JSValueRef
+JSBigIntCreateWithString
+=== JSBigIntCreateWithString(_:_:_:)
+func
+ 
+JSBigIntCreateWithUInt64
+(
+JSContextRef
+, 
+UInt64
+, 
+UnsafeMutablePointer
+<
+JSValueRef
+?>?) -> 
+JSValueRef
+JSBigIntCreateWithUInt64
+=== JSBigIntCreateWithUInt64(_:_:_:)
+JSC_ASSUME_NONNULL_BEGIN
+=== JSC_ASSUME_NONNULL_BEGIN
+JSC_ASSUME_NONNULL_END
+=== JSC_ASSUME_NONNULL_END
+JSC_CF_ENUM
+=== JSC_CF_ENUM
+JSC_NONNULL
+=== JSC_NONNULL
+JSC_NULLABLE
+=== JSC_NULLABLE
+JSC_NULL_UNSPECIFIED
+=== JSC_NULL_UNSPECIFIED
+A JavaScript execution environment.
+class
+ 
+JSContext
+JSContext
+=== JSContext
+The protocol for exporting Objective-C objects to JavaScript.
+protocol
+ 
+JSExport
+JSExport
+=== JSExport
+A JavaScript value with conditional retain behavior to provide automatic memory management.
+class
+ 
+JSManagedValue
+JSManagedValue
+=== JSManagedValue
+enum
+ 
+JSRelationCondition
+JSRelationCondition
+=== JSRelationCondition
+A JavaScript value.
+class
+ 
+JSValue
+JSValue
+=== JSValue
+func
+ 
+JSValueCompare
+(
+JSContextRef
+, 
+JSValueRef
+, 
+JSValueRef
+, 
+UnsafeMutablePointer
+<
+JSValueRef
+?>?) -> 
+JSRelationCondition
+JSValueCompare
+=== JSValueCompare(_:_:_:_:)
+func
+ 
+JSValueCompareDouble
+(
+JSContextRef
+, 
+JSValueRef
+, 
+Double
+, 
+UnsafeMutablePointer
+<
+JSValueRef
+?>?) -> 
+JSRelationCondition
+JSValueCompareDouble
+=== JSValueCompareDouble(_:_:_:_:)
+func
+ 
+JSValueCompareInt64
+(
+JSContextRef
+, 
+JSValueRef
+, 
+Int64
+, 
+UnsafeMutablePointer
+<
+JSValueRef
+?>?) -> 
+JSRelationCondition
+JSValueCompareInt64
+=== JSValueCompareInt64(_:_:_:_:)
+func
+ 
+JSValueCompareUInt64
+(
+JSContextRef
+, 
+JSValueRef
+, 
+UInt64
+, 
+UnsafeMutablePointer
+<
+JSValueRef
+?>?) -> 
+JSRelationCondition
+JSValueCompareUInt64
+=== JSValueCompareUInt64(_:_:_:_:)
+func
+ 
+JSValueIsBigInt
+(
+JSContextRef
+, 
+JSValueRef
+) -> 
+Bool
+JSValueIsBigInt
+=== JSValueIsBigInt(_:_:)
+func
+ 
+JSValueToInt32
+(
+JSContextRef
+, 
+JSValueRef
+, 
+UnsafeMutablePointer
+<
+JSValueRef
+?>?) -> 
+Int32
+JSValueToInt32
+=== JSValueToInt32(_:_:_:)
+func
+ 
+JSValueToInt64
+(
+JSContextRef
+, 
+JSValueRef
+, 
+UnsafeMutablePointer
+<
+JSValueRef
+?>?) -> 
+Int64
+JSValueToInt64
+=== JSValueToInt64(_:_:_:)
+func
+ 
+JSValueToUInt32
+(
+JSContextRef
+, 
+JSValueRef
+, 
+UnsafeMutablePointer
+<
+JSValueRef
+?>?) -> 
+UInt32
+JSValueToUInt32
+=== JSValueToUInt32(_:_:_:)
+func
+ 
+JSValueToUInt64
+(
+JSContextRef
+, 
+JSValueRef
+, 
+UnsafeMutablePointer
+<
+JSValueRef
+?>?) -> 
+UInt64
+JSValueToUInt64
+=== JSValueToUInt64(_:_:_:)
+A self-contained environment for JavaScript execution.
+class
+ 
+JSVirtualMachine
+JSVirtualMachine
+=== JSVirtualMachine
+Browse the alternative C-based APIs for JavaScriptCore.
+=== C JavaScriptCore API
+=== JavaScriptCore Constants
+var
+ 
+kJSTypeBigInt
+: 
+JSType
+kJSTypeBigInt
+=== kJSTypeBigInt
+=== Execution Environment
+=== JavaScript Code
+=== Native Code
+=== C API
+=== Reference
+=== Functions
+=== Macros
+=== Enumerations
+JSBigIntCreateWithDouble
+JSBigIntCreateWithInt64
+JSBigIntCreateWithString
+JSBigIntCreateWithUInt64
+JSContext
+JSContext
+JSExport
+JSExport
+JSManagedValue
+JSManagedValue
+JSRelationCondition
+JSRelationCondition
+JSValue
+JSValue
+JSValueCompare
+JSValueCompareDouble
+JSValueCompareInt64
+JSValueCompareUInt64
+JSValueIsBigInt
+JSValueToInt32
+JSValueToInt64
+JSValueToUInt32
+JSValueToUInt64
+JSVirtualMachine
+JSVirtualMachine
+kJSTypeBigInt

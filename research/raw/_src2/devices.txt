@@ -1,0 +1,554 @@
+Devices overview - Devices - Account - Help - Apple Developer
+' />
+' />
+View in English
+Apple Developer
+Get Started
+Explore Get Started
+Overview
+Learn
+Apple Developer Program
+Stay Updated
+Latest News
+Hello Developer
+Platforms
+Explore Platforms
+Apple Platforms
+iOS
+iPadOS
+macOS
+tvOS
+visionOS
+watchOS
+App Store
+Featured
+Design
+Distribution
+Games
+Accessories
+Web
+Home
+CarPlay
+Technologies
+Explore Technologies
+Overview
+Xcode
+Swift
+SwiftUI
+Featured
+Accessibility
+AI &amp; Machine Learning
+App Intents
+Apple Intelligence
+Games
+Security
+Xcode Cloud
+Community
+Explore Community
+Overview
+Meet with Apple events
+Community events
+Developer Forums
+Open Source
+Featured
+WWDC
+Swift Student Challenge
+Developer Stories
+App Store Awards
+Apple Design Awards
+Apple Developer Centers
+Documentation
+Explore Documentation
+Documentation Library
+Technology Overviews
+Sample Code
+Human Interface Guidelines
+Videos
+Release Notes
+Featured Updates
+iOS
+iPadOS
+macOS
+watchOS
+visionOS
+tvOS
+Xcode
+Downloads
+Explore Downloads
+All Downloads
+Operating Systems
+Applications
+Design Resources
+Featured
+Xcode
+TestFlight
+Fonts
+SF Symbols
+Icon Composer
+Support
+Explore Support
+Overview
+Help Guides
+Developer Forums
+Feedback Assistant
+Contact Us
+Featured
+Account Help
+App Review Guidelines
+App Store Connect Help
+Upcoming Requirements
+Agreements and Guidelines
+System Status
+Quick Links
+Events
+News
+Forums
+Sample Code
+Videos
+&nbsp;
+-->
+Search
+Search Reset
+Release notes
+Release notes
+Developer account overview
+Basics
+Account landing page
+Basics
+Developer profile
+Basics
+Programs overview
+Membership
+Program enrollment
+Membership
+Enrolling in the app
+Membership
+Identity verification
+Membership
+D-U-N-S
+Membership
+Fee waivers
+Membership
+Renewal
+Membership
+Updating your account information
+Membership
+Sign in to your developer account
+Access
+Invite team members
+Access
+Automatic Signing Controls
+Access
+Roles and access
+Access
+Change team member roles
+Access
+Delete team members
+Access
+Leave a team
+Access
+Transfer the Account Holder role
+Access
+Resolving access issues
+Access
+Certificates overview
+Certificates
+Cloud-managed certificates
+Certificates
+Developer ID certificates
+Certificates
+Create enterprise distribution certificates
+Certificates
+Create app license delivery certificates
+Certificates
+Create WatchKit services certificates
+Certificates
+Create VoIP services certificates
+Certificates
+Create a certificate signing request
+Certificates
+Revoke a certificate
+Certificates
+MDM Vendor CSR Signing Certificate
+Certificates
+WWDR intermediate certificates
+Certificates
+Create a private key to access a service
+Keys
+Get a key identifier
+Keys
+Revoke, edit, and download keys
+Keys
+Enterprise Program API
+Keys
+Register an App ID
+Identifiers
+Register an App ID for App&nbsp;Clips
+Identifiers
+Register a Services ID
+Identifiers
+Enable app services
+Identifiers
+Enable app capabilities
+Identifiers
+Delete an App ID
+Identifiers
+Register an app group
+Identifiers
+Create an iCloud container
+Identifiers
+Capabilities overview
+Capabilities
+Capability requests
+Capabilities
+Configure Apple&nbsp;Pay
+Capabilities
+Configure Apple&nbsp;Pay on the web
+Capabilities
+Create a DeviceCheck private key
+Capabilities
+Create a ClassKit Catalog key
+Capabilities
+Create a Maps identifier and private key
+Capabilities
+Create a media identifier and private key
+Capabilities
+Communicate with APNs using authentication tokens
+Capabilities
+Communicate with APNs using a TLS certificate
+Capabilities
+Send push notifications from your web server
+Capabilities
+About Sign in with Apple
+Capabilities
+Enabling server-to-server notifications
+Capabilities
+Group apps for Sign in with Apple
+Capabilities
+Create a Sign in with Apple private key
+Capabilities
+Configure Sign in with Apple for the web
+Capabilities
+Configure private email relay service
+Capabilities
+Create Wallet identifiers and certificates
+Capabilities
+Create a Mac version of an iPad app
+Capabilities
+Create a services identifier and private key for WeatherKit
+Capabilities
+Create order type identifiers and certificates
+Capabilities
+ShazamKit
+Services
+MusicKit
+Services
+WeatherKit
+Services
+Account and organizational data sharing
+Service Configurations
+Apple Music Feed
+Service Configurations
+Configure the Apps and Books for Organizations API
+Service Configurations
+iWork Document Exporting
+Service Configurations
+Maps tokens
+Service Configurations
+Devices overview
+Devices
+Register a single device
+Devices
+Register multiple devices
+Devices
+Disable or enable a device
+Devices
+Removing devices for membership expiration
+Devices
+Provisioning profile updates
+Provisioning Profiles
+Create a development provisioning profile
+Provisioning Profiles
+Create an ad hoc provisioning profile (iOS, tvOS, watchOS)
+Provisioning Profiles
+Create an App&nbsp;Store&nbsp;Connect provisioning profile
+Provisioning Profiles
+Create a DriverKit development provisioning profile
+Provisioning Profiles
+Edit, download, or delete provisioning profiles
+Provisioning Profiles
+Revoking privileges
+Reference
+Supported capabilities (iOS)
+Reference
+Supported capabilities (macOS)
+Reference
+Supported capabilities (tvOS)
+Reference
+Supported capabilities (visionOS)
+Reference
+Supported capabilities (watchOS)
+Reference
+Provisioning with capabilities
+Reference
+Capability and entitlement updates
+Reference
+Device registration updates
+Reference
+No results
+If you have any questions about membership, your account, or App Store Connect, please review developer support.
+Account Help
+Account
+/
+Devices
+/
+Devices overview
+Filter
+⌘K
+Release notes
+Basics
+Developer account overview
+Account landing page
+Developer profile
+Membership
+Programs overview
+Program enrollment
+Enrolling in the app
+Identity verification
+D-U-N-S
+Fee waivers
+Renewal
+Updating your account information
+Access
+Sign in to your developer account
+Invite team members
+Automatic Signing Controls
+Roles and access
+Change team member roles
+Delete team members
+Leave a team
+Transfer the Account Holder role
+Resolving access issues
+Certificates
+Certificates overview
+Cloud-managed certificates
+Developer ID certificates
+Create enterprise distribution certificates
+Create app license delivery certificates
+Create WatchKit services certificates
+Create VoIP services certificates
+Create a certificate signing request
+Revoke a certificate
+MDM Vendor CSR Signing Certificate
+WWDR intermediate certificates
+Keys
+Create a private key to access a service
+Get a key identifier
+Revoke, edit, and download keys
+Enterprise Program API
+Identifiers
+Register an App ID
+Register an App ID for App&nbsp;Clips
+Register a Services ID
+Enable app services
+Enable app capabilities
+Delete an App ID
+Register an app group
+Create an iCloud container
+Capabilities
+Capabilities overview
+Capability requests
+Configure Apple&nbsp;Pay
+Configure Apple&nbsp;Pay on the web
+Create a DeviceCheck private key
+Create a ClassKit Catalog key
+Create a Maps identifier and private key
+Create a media identifier and private key
+Communicate with APNs using authentication tokens
+Communicate with APNs using a TLS certificate
+Send push notifications from your web server
+About Sign in with Apple
+Enabling server-to-server notifications
+Group apps for Sign in with Apple
+Create a Sign in with Apple private key
+Configure Sign in with Apple for the web
+Configure private email relay service
+Create Wallet identifiers and certificates
+Create a Mac version of an iPad app
+Create a services identifier and private key for WeatherKit
+Create order type identifiers and certificates
+Services
+ShazamKit
+MusicKit
+WeatherKit
+Service Configurations
+Account and organizational data sharing
+Apple Music Feed
+Configure the Apps and Books for Organizations API
+iWork Document Exporting
+Maps tokens
+Devices
+Devices overview
+Register a single device
+Register multiple devices
+Disable or enable a device
+Removing devices for membership expiration
+Provisioning Profiles
+Provisioning profile updates
+Create a development provisioning profile
+Create an ad hoc provisioning profile (iOS, tvOS, watchOS)
+Create an App&nbsp;Store&nbsp;Connect provisioning profile
+Create a DriverKit development provisioning profile
+Edit, download, or delete provisioning profiles
+Reference
+Revoking privileges
+Supported capabilities (iOS)
+Supported capabilities (macOS)
+Supported capabilities (tvOS)
+Supported capabilities (visionOS)
+Supported capabilities (watchOS)
+Provisioning with capabilities
+Capability and entitlement updates
+Device registration updates
+Filter
+⌘K
+Devices
+Devices overview
+By registering an Apple device in your developer account, you can install your app directly on the device using Ad&nbsp;Hoc distribution. You can
+register devices
+automatically with Xcode or manually through Certificates, Identifiers & Profiles. Members of the Apple&nbsp;Developer Program and Apple&nbsp;Developer Enterprise&nbsp;Program can register up to 100 of the following devices, per product family, per membership year:
+Apple TV
+Apple Vision Pro
+Apple Watch
+iPad
+iPhone
+iPod touch
+Mac
+Disabling devices
+You may
+disable a device
+on your list during the year, but doing so won’t increase your number of available devices. When resetting your list, make sure to remove all devices you no longer use for development and testing before adding any new devices.
+Restoring your device list
+At the start of your new membership year, Account Holders, Admins, and App Managers will be presented with the option to
+remove listed devices
+and restore the available device count to 100 when first signing in to Certificates, Identifiers &amp; Profiles. You can remove specific devices, remove all devices to restore your available device count to 100 per product family, or continue without removing any devices. Once you complete this process, new devices can be added.
+Membership expiration
+Thirty days before membership expiration, you’ll have the option to download a copy of your registered test device list and/or opt in to have all devices removed immediately upon expiration if you don’t plan to renew membership. If you don’t opt in, all devices will be removed automatically 180 days after membership expiration.
+Submit your
+feedback
+Ask questions on the&nbsp;forums
+Contact Apple Developer&nbsp;Support
+Developer Footer
+Help
+Account
+Devices
+Devices overview
+Platforms
+Open Menu
+Close Menu
+iOS
+iPadOS
+macOS
+tvOS
+visionOS
+watchOS
+App Store
+Tools
+Open Menu
+Close Menu
+Swift
+SwiftUI
+Swift Playground
+TestFlight
+Xcode
+Xcode Cloud
+Icon Composer
+SF Symbols
+Technologies
+Open Menu
+Close Menu
+Accessibility
+Accessories
+AI & Machine Learning
+Apple Intelligence
+Audio &amp; Video
+Augmented Reality
+Business
+Design
+Distribution
+Education
+Games
+Health &amp; Fitness
+In-App Purchase
+Localization
+Maps &amp; Location
+Security
+Safari &amp; Web
+Resources
+Open Menu
+Close Menu
+Documentation
+Downloads
+Sample Code
+Videos
+Documentation Archive
+Support
+Open Menu
+Close Menu
+Help Guides & Articles
+Contact Us
+Forums
+Feedback & Bug Reporting
+System Status
+Account
+Open Menu
+Close Menu
+Apple Developer
+App Store Connect
+Certificates, IDs, &amp; Profiles
+Feedback Assistant
+Programs
+Open Menu
+Close Menu
+Apple Developer Program
+Apple Developer Enterprise Program
+App Store Small Business Program
+MFi Program
+Mini Apps Partner Program
+News Partner Program
+Video Partner Program
+Security Bounty Program
+Security Research Device Program
+Events
+Open Menu
+Close Menu
+Meet with Apple
+Apple Developer Centers
+App Store Awards
+Apple Design Awards
+Apple Developer Academies
+WWDC
+Read the
+latest news
+.
+Get the
+Apple Developer app
+.
+Follow us on
+bilibili
+,
+LinkedIn
+,
+WeChat
+, and
+YouTube
+.
+Light
+Dark
+Auto
+Copyright ©  2026
+Apple Inc.
+All rights reserved.
+Terms of Use
+Privacy Policy
+Agreements and Guidelines

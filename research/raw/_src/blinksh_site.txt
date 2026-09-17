@@ -1,0 +1,462 @@
+Blink Shell is a professional, desktop grade terminal for iOS. With Mosh &amp; SSH clients for iOS, local UNIX tools, lightning fast and fully customizable. The best terminal for iOS and iPadOS.
+THE PRO TERMINAL
+FOR iOS and iPadOS
+Blink Shell, Build &amp; Code is the power tool designed to keep up with you. Always on, blazing fast and fitted specifically to your devices.
+Blink gives you the freedom to develop your own way. Anywhere.
+Try it free on the App Store
+Get 2 weeks free. Then just $19.99/year.
+/**
+Join us in our Community
+&lt;Github&gt;
+&lt;Twitter&gt;
+&lt;Discord&gt;
+&lt;Youtube&gt;
+&lt;Reddit&gt;
+**/
+Read our Documentation.
+See our latest Announcements.
+FEATURES
+Mosh, SSH and CLI tools
+PKI and Agent
+SFTP &amp; Files.app
+Sync your devices
+Lightning fast
+Customize all things
+External keyboard
+Open Source
+ALWAYS ON
+Mosh was built for constant mobile connectivity. You can flawlessly jump from home, to the train, and then to the office thanks to Mosh.
+Blink is rock-solid connected all the way.
+And don&#x27;t be afraid to put your device to sleep, when you wake it up later, your connections will be intact.
+Lag can make or break an experience. Mosh precludes network lag by performing intelligent local echo.
+You can type as if you were in your local machine
+.
+It feels like magic.
+All About Mosh
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+/**
+Press
+&amp;
+Blogs
+&lt;TheVerge&gt;
+In some ways, I prefer my iPad / Blink / Digital Ocean setup to coding on my Mac.
+&lt;Twit.tv&gt;
+I have tried a number of terminals on iOS and this is really The One.
+&lt;The Sweet Setup&gt;
+Connections still come up when I get back to a client project after a weekend off.
+&lt;Fatih Arslan&gt;
+Is this magic? I don’t know but it really feels like magic.
+BLINK CODE. YOUR NEW SUPERPOWER.
+A coding experience fitted to your device, that connects to Microsoft Visual Studio Code for web, GitHub Codespaces, GitPod or your own VS Code server.
+Work on local projects, or seamlessly on remote machines thanks to Blink Files.
+First class iOS experience, with software and hardware keyboard, and the full edge-to-edge experience.
+Blink Code is not affiliated with nor endorsed by Microsoft.
+DESKTOP GRADE
+Blink was built as the tool we wanted to use all day. We were tired of User Interfaces being on our way, and of connections that couldn’t even last for 5 minutes.
+Blink puts you in a command line from the start, so you know what to do.
+Supports Ed25519, ECDSA and RSA keys. It is built on top of
+libssh
+and
+libssh2
+.
+Including
+tunnels
+(-L),
+proxycommand
+and
+ssh-agent
+.
+Learn more about SSH in Blink
+...with Unix base tools
+Go beyond just remote connections from your local device. Manage and edit files from the command line, check on your network or download files.
+We just make it better and better on each release.
+vim
+cat, grep, wc, cd, setenv, ls, touch, cp, rm, ln, mv, mkdir, rmdir, df, du
+chksum, chflags, chgrp, stat, readlink
+tar, gzip, gunzip
+dig, host, nslookup, ssh, mosh, nc, ping, ping6, rlogin and udptunnel
+curl, scp, sftp
+You can call commands individually. There is redirection (&quot;
+&gt;
+&quot;, &quot;
+&lt;&quot;
+,
+&quot;&amp;&gt;&quot;
+...).
+Learn more about builtin commands
+Emacs or Vim like Pro
+Blink embraces Bluetooth-coupled keyboards with gusto. Some like Caps as Esc on Vim, others Cmd as Ctrl on Emacs.
+Blink champions them all
+. During your always-on sessions, you are in your zone.
+Customize your Keyboard
+Your Terminal, Your Way
+We know how important it is for your long work sessions to have the color theme and font you feel comfortable looking at all day.
+You can rock your terminal and roll your own themes and fonts beyond our included ones.
+And yes, we include Pragmata Pro by default!
+Themes Gallery
+Bright Lights
+40m
+41m
+42m
+43m
+44m
+45m
+46m
+47m
+m
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+1m
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+30m
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+..
+WWDC 2016
+40m
+41m
+42m
+43m
+44m
+45m
+46m
+47m
+m
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+1m
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+30m
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+..
+Flat
+40m
+41m
+42m
+43m
+44m
+45m
+46m
+47m
+m
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+1m
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+30m
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+gYw
+..
+Pragmata Pro
+a b c d e f g h i j k l m n ñ o p q r s t u v w x y z
+DejaVu Sans Mono
+Fira Code
+Iosevka
+JetBrains Mono
+Pragmata Pro Mono
+i
+Roboto Mono
+Source Code Pro
+Fonts Gallery
+AIR TERMINALS
+We promise, you will end up liking the simplicity of Blink + iOS so much that you will want to take it to the Big Screen.
+Create a distractions-free workstation
+. Connect your iPad Pro to a 4K display and get a full resolution, crystal clear terminal.
+Giving a demo on your next presentation? Blink can be displayed on a
+remote Apple TV
+too!
+COME ON IN, WE ARE OPEN
+Collaborate in Blink’s development. And don&#x27;t forget to join us in your preferred social network for questions, ideas and giving feedback.
+★ Check us on GitHub ★
+FOLLOW US ON
+…/
+HAVE QUESTIONS
+?
+@blinkshell
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+/**
+Our community
+&lt;GitHub&gt;
+&lt;Discord&gt;
+&lt;Twitter&gt;
+&lt;Youtube&gt;
+&lt;Reddit&gt;
+© 2016-2025 Blink Shell is developed by The Blink Shell Project.
+&lt;hello@blink.sh&gt;
+**/
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+/**
+Mosh
+Mosh was written by Keith Winstein, along with Anders Kaseorg, Quentin Smith, Richard Tibbetts, Keegan McAllister, and John Hood. You can find more info on
+mosh.org
+libssh
+libssh is a multiplatform C library implementing the SSHv2 protocol on client and server side. More information on
+libssh.org
+libssh2
+libssh2 is a client-side C library implementing the SSH2 protocol. See details on
+libssh2.org
+**/

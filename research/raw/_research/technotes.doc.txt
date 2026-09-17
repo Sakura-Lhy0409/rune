@@ -1,0 +1,196 @@
+Learn about specific development topics through these in-depth technical articles.
+=== Technotes
+Overview
+Technotes are focused, timely documents from Apple Developer Technical Support. They explore a wide range of development topics and provide guidance for developers creating apps and accessories for all of Apple’s platforms.
+=== Latest
+=== Technologies
+Get started with iOS 15’s new HTTP/3 support.
+=== TN3102: HTTP/3 in your app
+Troubleshooting guide for implementing Apple Pay on the Web.
+=== TN3103: Apple Pay on the Web troubleshooting guide
+Configure pieces of an AVCaptureSession to capture video in Apple ProRes.
+=== TN3104: Recording video in Apple ProRes
+Configure the device’s status bar style to work well with your app’s user interface.
+=== TN3105: Customizing the UIKit status bar style
+Adopt UINavigationBarAppearance for a navigation bar background color that’s consistent on iOS 13 through 18.
+=== TN3106: Customizing the appearance of UINavigationBar
+Diagnose errors received by the Sign in with Apple client, or its server infrastructure,
+ 
+by identifying the underlying causes of common error codes and explore their potential solutions.
+=== TN3107: Resolving Sign in with Apple response errors
+Learn how to navigate to the interface file of a Swift implementation file.
+=== TN3108: Viewing the interface of your Swift code
+Handle common issues that arise while archiving apps.
+=== TN3109: Resolving common archiving issues
+Identify common configurations that cause a generic Xcode archive.
+=== TN3110: Resolving generic Xcode archive issue
+Explore the various Wi-Fi APIs available on iOS and their expected use cases.
+=== TN3111: iOS Wi-Fi API overview
+Use an anonymous XPC listener to simplify your XPC testing and debugging.
+=== TN3113: Testing and debugging XPC code with an anonymous listener
+Learn about the conditions under which an iOS app will be relaunched by Bluetooth State Restoration.
+=== TN3115: Bluetooth State Restoration app relaunch rules
+Update your app’s architecture build settings to support building macOS, iOS, watchOS, and tvOS apps on Apple silicon.
+=== TN3117: Resolving architecture build errors on Apple silicon
+Understand why your app’s launch screen is not displayed or updated.
+=== TN3118: Debugging your app’s launch screen
+Learn the expected use cases for Network Extension packet tunnel providers, and
+ 
+about use cases that are not supported.
+=== TN3120: Expected use cases for Network Extension packet tunnel providers
+Learn how to choose the best output pixel format for your app.
+=== TN3121: Selecting a pixel format for an AVCaptureVideoDataOutput
+Identify common configurations that cause unsuccessful receipt validation with
+ 
+the App Store.
+=== TN3122: Receipt validation with the App Store fails with a non-zero error code
+Learn strategies and techniques for refactoring a single storyboard into multiple storyboards.
+=== TN3123: Refactoring your storyboard
+Learn techniques to help debug any coordinate space issue.
+=== TN3124: Debugging coordinate space issues
+Learn how provisioning profiles enable third-party code to run on Apple platforms.
+=== TN3125: Inside Code Signing: Provisioning Profiles
+Look inside a code signature to see how it uses hashes to protect the code’s executable pages, resources, and metadata from tampering.
+=== TN3126: Inside Code Signing: Hashes
+Explore how macOS uses code signing requirements to reason about code identity.
+=== TN3127: Inside Code Signing: Requirements
+Use the share sheet or group activity sharing controller to start SharePlay directly from your app without an existing FaceTime call.
+=== TN3128: Starting SharePlay without an existing FaceTime call
+Review common causes for failing Xcode Cloud builds that originate from helper tools running in a misconfigured build environment.
+=== TN3129: Resolving build errors from helper tools in Xcode Cloud and other build environments
+Test your apps against EventKit API changes in macOS Ventura 13.
+=== TN3130: Changes to EventKit in macOS Ventura 13
+Test your apps against EventKit and EventKitUI API changes in iOS 16.
+=== TN3132: Changes to EventKit and EventKitUI in iOS 16
+Distribute a Metal renderer in a Swift package.
+=== TN3133: Packaging a Metal renderer
+Explore the platforms, packaging, OS versions, and device configurations for Network Extension provider deployment.
+=== TN3134: Network Extension provider deployment
+Learn about the supported use cases for low-level networking on watchOS.
+=== TN3135: Low-level networking on watchOS
+Use AVAudioConverter to perform sample rate conversions between PCM audio buffers.
+=== TN3136: AVAudioConverter - performing sample rate conversions
+Learn how the keychain on macOS differs from other Apple platforms.
+=== TN3137: On Mac keychain APIs and implementations
+Ensure that your app’s local receipt validation is compatible with intermediate certificates that require using the SHA-256 algorithm.
+=== TN3138: Handling App Store receipt signing certificate changes
+Learn about the usage and requirements of “Ambient Viewing Environment” metadata with HLG and / or Dolby Vision™ Profile 8.4 playback.
+=== TN3145: HDR video metadata
+Migrate your notarization workflows to 
+ from the deprecated 
+.
+=== TN3147: Migrating to the latest notarization tool
+Learn how to fetch and process the most recent changes to the Contacts database.
+=== TN3149: Fetching Contacts change history events
+Understand dataless files and how to minimize the performance impact as the system materializes them.
+=== TN3150: Getting ready for dataless files
+Learn which networking API is best for you.
+=== TN3151: Choosing the right networking API
+Follow these guidelines to update your app to use the new Calendar access levels.
+=== TN3152: Migrating to the latest Calendar access levels
+Test your existing apps against EventKit API latest changes.
+=== TN3153: Adopting API changes for EventKit in iOS 17, macOS 14, and watchOS 10
+Use navigation split view to enable two and three column navigation in your SwiftUI app while maintaining compatibility with earlier OS versions.
+=== TN3154: Adopting SwiftUI navigation split view
+Investigate why your universal links are opening in a web browser instead of your app.
+=== TN3155: Debugging universal links
+Learn best practices for creating rich text and image previews for display in the Messages app.
+=== TN3156: Create rich previews for Messages
+Update your watchOS app project to adopt SwiftUI, WidgetKit, and other modern features.
+=== TN3157: Updating your watchOS project for SwiftUI and WidgetKit
+Identify software preventing Xcode 15 from connecting to Apple devices, and modify your configuration to allow these connections.
+=== TN3158: Resolving Xcode 15 device connection issues
+Migrate existing Sign in with Apple user identifiers and private email relay addresses
+ 
+by exchanging transfer identifiers from one developer team to another
+ 
+with the user migration info endpoint.
+=== TN3159: Migrating Sign in with Apple users for an app transfer
+Learn how code signing uses certificates to identify code authors.
+=== TN3161: Inside Code Signing: Certificates
+Learn how to identify and handle CloudKit throttles.
+=== TN3162: Understanding CloudKit throttles
+Explore the details inside the synchronization of 
+ by capturing and analyzing a sysdiagnose.
+=== TN3163: Understanding the synchronization of NSPersistentCloudKitContainer
+Identify and resolve synchronization issues when working with 
+.
+=== TN3164: Debugging the synchronization of NSPersistentCloudKitContainer
+Plan your migration from Packet Filter to Network Extension.
+=== TN3165: Packet Filter is not API
+Learn how to configure your App Clip to prevent it from being unavailable in the App Store.
+=== TN3168: Making your App Clip available in the App Store
+Diagnose errors due to invalid Apple Pay merchant identifier configurations by
+ 
+identifying the underlying causes of common errors and explore their
+ 
+potential solutions.
+=== TN3173: Troubleshooting issues with your Apple Pay merchant identifier configuration
+Diagnose errors received while presenting the Apple Pay payment sheet on
+ 
+your website by identifying the underlying causes of common errors and explore
+ 
+their potential solutions.
+=== TN3174: Diagnosing issues with the Apple Pay payment sheet on your website
+Diagnose common errors received while displaying the Apple Pay button on your
+ 
+website by identifying the underlying causes, and explore potential solutions.
+=== TN3175: Diagnosing issues with displaying the Apple Pay button on your website
+Diagnose errors that occur when processing Apple Pay payments,
+ 
+identify common causes, and explore potential solutions.
+=== TN3176: Troubleshooting Apple Pay payment processing issues
+Learn how alternate groups collect audio tracks, and how to choose which audio track to use in your app.
+=== TN3177: Understanding alternate audio track groups in movie files
+Ensure that every Mach-O image has a UUID, and that every distinct Mach-O image has its own unique UUID.
+=== TN3178: Checking for and resolving build UUID problems
+Learn how local network privacy affects your software.
+=== TN3179: Understanding local network privacy
+Migrate from version 2 to version 1 of App Store Server Notifications using the Modify an App endpoint.
+=== TN3180: Reverting to App Store Server Notifications V1
+Identify common configurations that cause unsuccessful privacy manifest validation with the App Store.
+=== TN3181: Debugging an invalid privacy manifest
+Declare the tracking domains you use in your app or third-party SDK in a privacy manifest.
+=== TN3182: Adding privacy tracking keys to your privacy manifest
+Declare the APIs that can potentially fingerprint devices in your app or third-party SDK in a privacy manifest.
+=== TN3183: Adding required reason API entries to your privacy manifest
+Declare the data your app or third-party SDK collects in a privacy manifest.
+=== TN3184: Adding data collection details to your privacy manifest
+Inspect your active StoreKit configuration file for unexpected configurations.
+=== TN3185: Troubleshooting In-App Purchases availability in Xcode
+Identify common configurations that make your In-App Purchases unavailable in the sandbox environment.
+=== TN3186: Troubleshooting In-App Purchases availability in the sandbox
+Update your app to receive scene-based life-cycle events and manage your user interface using scene objects and methods.
+=== TN3187: Migrating to the UIKit scene-based life cycle
+Verify your In-App Purchases are approved and available for sale in the App Store.
+=== TN3188: Troubleshooting In-App Purchases availability in the App Store
+Identify iOS Mail background traffic and manage its impact on your IMAP server.
+=== TN3189: Managing Mail background traffic load
+Learn the best techniques for designing devices that conform to the USB Audio Device Class specifications.
+=== TN3190: USB audio device design considerations
+Learn which extensions to the RFC 3501 IMAP protocol are supported by Mail for iOS, iPadOS, and visionOS.
+=== TN3191: IMAP extensions supported by Mail for iOS, iPadOS, and visionOS
+Support iPad multitasking and dynamic resizing while updating your
+ 
+app to remove the deprecated full-screen compatibility mode.
+=== TN3192: Migrating your iPad app from the deprecated UIRequiresFullScreen key
+Learn how to budget for the context window limit of Apple’s on-device foundation model and handle the error when reaching the limit.
+=== TN3193: Managing the on-device foundation model’s context window
+Learn the best techniques for managing Sign in with Apple user sessions
+ 
+and responding to account deletion requests.
+=== TN3194: Handling account deletions and revoking tokens for Sign in with Apple
+Learn how to use RDMA over Thunderbolt to enable low-latency communication between clusters of Mac computers.
+=== TN3205: Low-latency communication with RDMA over Thunderbolt
+Learn how to create, manage, and rotate Apple Pay certificates to maintain uninterrupted payment processing.
+=== TN3206: Updating Apple Pay certificates
+Understand the launch screen requirement for App Store submission starting in iOS 27 and iPadOS 27.
+=== TN3208: Preparing your app’s launch screen to meet App Store requirements
+Test your app and improve compatibility with iPhone Mirroring.
+=== TN3210: Optimizing your app for iPhone Mirroring
+Update existing code for two foundational changes in SwiftUI built with Xcode 27.
+=== TN3211: Resolving SwiftUI source incompatibilities for State and ContentBuilder
+Use gesture recognizers to handle Sidecar touch input and update your event-handling code for macOS 27.
+=== TN3212: Adopting gesture recognizers for Sidecar touch support
+Learn how to migrate your Multipeer Connectivity app to Network framework.
+=== TN3213: Moving from Multipeer Connectivity to Network framework

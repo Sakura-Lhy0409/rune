@@ -1,0 +1,99 @@
+[
+ {
+ "name": "LLMBasic",
+ "path": "Applications/LLMBasic",
+ "sha": "18e12f2be730c973fea5b87a6bbca493c5908c83",
+ "size": 0,
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift-examples/contents/Applications/LLMBasic?ref=main",
+ "html_url": "https://github.com/ml-explore/mlx-swift-examples/tree/main/Applications/LLMBasic",
+ "git_url": "https://api.github.com/repos/ml-explore/mlx-swift-examples/git/trees/18e12f2be730c973fea5b87a6bbca493c5908c83",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ml-explore/mlx-swift-examples/contents/Applications/LLMBasic?ref=main",
+ "git": "https://api.github.com/repos/ml-explore/mlx-swift-examples/git/trees/18e12f2be730c973fea5b87a6bbca493c5908c83",
+ "html": "https://github.com/ml-explore/mlx-swift-examples/tree/main/Applications/LLMBasic"
+ }
+ },
+ {
+ "name": "LLMEval",
+ "path": "Applications/LLMEval",
+ "sha": "ac2cd5fd56bfab468307644667e48f2ec4c5dfb5",
+ "size": 0,
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift-examples/contents/Applications/LLMEval?ref=main",
+ "html_url": "https://github.com/ml-explore/mlx-swift-examples/tree/main/Applications/LLMEval",
+ "git_url": "https://api.github.com/repos/ml-explore/mlx-swift-examples/git/trees/ac2cd5fd56bfab468307644667e48f2ec4c5dfb5",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ml-explore/mlx-swift-examples/contents/Applications/LLMEval?ref=main",
+ "git": "https://api.github.com/repos/ml-explore/mlx-swift-examples/git/trees/ac2cd5fd56bfab468307644667e48f2ec4c5dfb5",
+ "html": "https://github.com/ml-explore/mlx-swift-examples/tree/main/Applications/LLMEval"
+ }
+ },
+ {
+ "name": "LoRATrainingExample",
+ "path": "Applications/LoRATrainingExample",
+ "sha": "64cfd8110c3b477717680e6deed582fb35bf0daa",
+ "size": 0,
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift-examples/contents/Applications/LoRATrainingExample?ref=main",
+ "html_url": "https://github.com/ml-explore/mlx-swift-examples/tree/main/Applications/LoRATrainingExample",
+ "git_url": "https://api.github.com/repos/ml-explore/mlx-swift-examples/git/trees/64cfd8110c3b477717680e6deed582fb35bf0daa",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ml-explore/mlx-swift-examples/contents/Applications/LoRATrainingExample?ref=main",
+ "git": "https://api.github.com/repos/ml-explore/mlx-swift-examples/git/trees/64cfd8110c3b477717680e6deed582fb35bf0daa",
+ "html": "https://github.com/ml-explore/mlx-swift-examples/tree/main/Applications/LoRATrainingExample"
+ }
+ },
+ {
+ "name": "MLXChatExample",
+ "path": "Applications/MLXChatExample",
+ "sha": "d43eb5fe7d41416c2a3ba3ad357b2eab59e5767c",
+ "size": 0,
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift-examples/contents/Applications/MLXChatExample?ref=main",
+ "html_url": "https://github.com/ml-explore/mlx-swift-examples/tree/main/Applications/MLXChatExample",
+ "git_url": "https://api.github.com/repos/ml-explore/mlx-swift-examples/git/trees/d43eb5fe7d41416c2a3ba3ad357b2eab59e5767c",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ml-explore/mlx-swift-examples/contents/Applications/MLXChatExample?ref=main",
+ "git": "https://api.github.com/repos/ml-explore/mlx-swift-examples/git/trees/d43eb5fe7d41416c2a3ba3ad357b2eab59e5767c",
+ "html": "https://github.com/ml-explore/mlx-swift-examples/tree/main/Applications/MLXChatExample"
+ }
+ },
+ {
+ "name": "MNISTTrainer",
+ "path": "Applications/MNISTTrainer",
+ "sha": "717c2f8a218b130872b0824372145547fa7f7b5e",
+ "size": 0,
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift-examples/contents/Applications/MNISTTrainer?ref=main",
+ "html_url": "https://github.com/ml-explore/mlx-swift-examples/tree/main/Applications/MNISTTrainer",
+ "git_url": "https://api.github.com/repos/ml-explore/mlx-swift-examples/git/trees/717c2f8a218b130872b0824372145547fa7f7b5e",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ml-explore/mlx-swift-examples/contents/Applications/MNISTTrainer?ref=main",
+ "git": "https://api.github.com/repos/ml-explore/mlx-swift-examples/git/trees/717c2f8a218b130872b0824372145547fa7f7b5e",
+ "html": "https://github.com/ml-explore/mlx-swift-examples/tree/main/Applications/MNISTTrainer"
+ }
+ },
+ {
+ "name": "StableDiffusionExample",
+ "path": "Applications/StableDiffusionExample",
+ "sha": "9164cc946de0ce080252250dadcca6d6d6ae7619",
+ "size": 0,
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift-examples/contents/Applications/StableDiffusionExample?ref=main",
+ "html_url": "https://github.com/ml-explore/mlx-swift-examples/tree/main/Applications/StableDiffusionExample",
+ "git_url": "https://api.github.com/repos/ml-explore/mlx-swift-examples/git/trees/9164cc946de0ce080252250dadcca6d6d6ae7619",
+ "download_url": null,
+ "type": "dir",
+ "_links": {
+ "self": "https://api.github.com/repos/ml-explore/mlx-swift-examples/contents/Applications/StableDiffusionExample?ref=main",
+ "git": "https://api.github.com/repos/ml-explore/mlx-swift-examples/git/trees/9164cc946de0ce080252250dadcca6d6d6ae7619",
+ "html": "https://github.com/ml-explore/mlx-swift-examples/tree/main/Applications/StableDiffusionExample"
+ }
+ }
+]
+

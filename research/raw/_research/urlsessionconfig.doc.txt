@@ -1,0 +1,640 @@
+A configuration object that defines behavior and policies for a URL session.
+class
+ 
+URLSessionConfiguration
+URLSessionConfiguration
+=== URLSessionConfiguration
+class
+ 
+URLSessionConfiguration
+Overview
+An 
+ object defines the behavior and policies to use when uploading and downloading data using an 
+ object. When uploading or downloading data, creating a configuration object is always the first step you must take. You use this object to configure the timeout values, caching policies, connection requirements, and other types of information that you intend to use with your 
+ object.
+It is important to configure your 
+ object appropriately before using it to initialize a session object. Session objects make a copy of the configuration settings you provide and use those settings to configure the session. Once configured, the session object ignores any changes you make to the 
+ object. If you need to modify your transfer policies, you must update the session configuration object and use it to create a new 
+ object.
+
+ 
+In some cases, the policies defined in this configuration may be overridden by policies specified by an 
+ object provided for a task. Any policy specified on the request object is respected unless the session’s policy is more restrictive. For example, if the session configuration specifies that cellular networking should not be allowed, the 
+ object cannot request cellular networking.
+For more information about using configuration objects to create sessions, see 
+.
+Types of session configurations
+The behavior and capabilities of a URL session are largely determined by the kind of configuration used to create the session.
+The singleton shared session (which has no configuration object) is for basic requests. It’s not as customizable as sessions that you create, but it serves as a good starting point if you have very limited requirements. You access this session by calling the shared class method. See that method’s discussion for more information about its limitations.
+Default sessions behave much like the shared session (unless you customize them further), but let you obtain data incrementally using a delegate. You can create a default session configuration by calling the default method on the URLSessionConfiguration class.
+Ephemeral sessions are similar to default sessions, but they don’t write caches, cookies, or credentials to disk. You can create an ephemeral session configuration by calling the ephemeral method on the URLSessionConfiguration class.
+Background sessions let you perform uploads and downloads of content in the background while your app isn’t running. You can create a background session configuration by calling the backgroundSessionConfiguration(_:) method on the URLSessionConfiguration class.
+=== Inherits From
+=== Conforms To
+=== Creating a session
+=== Creating a session configuration object
+=== Setting general properties
+=== Setting cookie policies
+=== Setting security policies
+=== Setting caching policies
+=== Supporting background transfers
+=== Supporting custom protocols
+=== Supporting Multipath TCP
+=== Setting HTTP policy and proxy properties
+=== Supporting connectivity changes
+=== Supporting limited modes
+=== Deprecated methods
+=== Instance Properties
+A Boolean value indicating whether your app may use Multipath protocols to seamlessly transition between Wi-Fi and cellular networks.
+com.apple.developer.networking.multipath
+=== Multipath Entitlement
+The root class of most Objective-C class hierarchies, from which subclasses inherit a basic interface to the runtime system and the ability to behave as Objective-C objects.
+class
+ 
+NSObject
+NSObject
+=== NSObject
+The group of methods that are fundamental to all Objective-C objects.
+protocol
+ 
+NSObjectProtocol
+NSObjectProtocol
+=== NSObjectProtocol
+A type whose instances can be encoded, and appropriately passed, as
+ 
+elements of a C 
+.
+protocol
+ 
+CVarArg
+CVarArg
+=== CVarArg
+A type with a customized textual representation suitable for debugging
+ 
+purposes.
+protocol
+ 
+CustomDebugStringConvertible
+CustomDebugStringConvertible
+=== CustomDebugStringConvertible
+A type with a customized textual representation.
+protocol
+ 
+CustomStringConvertible
+CustomStringConvertible
+=== CustomStringConvertible
+A type that can be compared for value equality.
+protocol
+ 
+Equatable
+Equatable
+=== Equatable
+A type that can be hashed into a 
+ to produce an integer hash value.
+protocol
+ 
+Hashable
+Hashable
+=== Hashable
+A thread-safe type whose values can be shared across arbitrary concurrent
+ 
+contexts without introducing a risk of data races.
+protocol
+ 
+Sendable
+Sendable
+=== Sendable
+A type whose metatype can be shared across arbitrary isolation domains
+ 
+without introducing a risk of data races.
+protocol
+ 
+SendableMetatype
+SendableMetatype
+=== SendableMetatype
+=== Technologies
+Access essential data types, collections, and operating-system services to define the base layer of functionality for your app.
+=== Foundation
+A representation of an HTTP cookie.
+class
+ 
+HTTPCookie
+HTTPCookie
+=== HTTPCookie
+A protocol that objects adopt to provide functional copies of themselves.
+protocol
+ 
+NSCopying
+NSCopying
+=== NSCopying
+A URL load request that is independent of protocol or URL scheme.
+class
+ 
+NSURLRequest
+NSURLRequest
+=== NSURLRequest
+An array of proxy configuration objects containing information about the proxies to use within this session.
+proxyConfigurations
+=== proxyConfigurations
+An abstract class that handles the loading of protocol-specific URL data.
+class
+ 
+URLProtocol
+URLProtocol
+=== URLProtocol
+An object that coordinates a group of related, network data transfer tasks.
+class
+ 
+URLSession
+URLSession
+=== URLSession
+A copy of the configuration object for this session.
+var
+ 
+configuration
+: 
+URLSessionConfiguration
+configuration
+=== configuration
+Creates a session with the specified session configuration.
+init
+(
+configuration
+: 
+URLSessionConfiguration
+)
++ 
+sessionWithConfiguration:
+=== init(configuration:)
+Creates a session with the specified session configuration, delegate, and operation queue.
+init
+(
+configuration
+: 
+URLSessionConfiguration
+, 
+delegate
+: (any 
+URLSessionDelegate
+)?, 
+delegateQueue
+: 
+OperationQueue
+?)
++ 
+sessionWithConfiguration:delegate:delegateQueue:
+=== init(configuration:delegate:delegateQueue:)
+A configuration object that defines behavior and policies for a URL session.
+class
+ 
+URLSessionConfiguration
+URLSessionConfiguration
+=== URLSessionConfiguration
+Constants that specify the type of service that Multipath TCP uses.
+enum
+ 
+MultipathServiceType
+MultipathServiceType
+=== URLSessionConfiguration.MultipathServiceType
+A Boolean value that determines whether connections should be made over a cellular network.
+var
+ 
+allowsCellularAccess
+: 
+Bool
+allowsCellularAccess
+=== allowsCellularAccess
+A Boolean value that indicates whether connections may use the network when the user has specified Low Data Mode.
+var
+ 
+allowsConstrainedNetworkAccess
+: 
+Bool
+allowsConstrainedNetworkAccess
+=== allowsConstrainedNetworkAccess
+A Boolean value that indicates whether connections may use a network interface that the system considers expensive.
+var
+ 
+allowsExpensiveNetworkAccess
+: 
+Bool
+allowsExpensiveNetworkAccess
+=== allowsExpensiveNetworkAccess
+var
+ 
+allowsUltraConstrainedNetworkAccess
+: 
+Bool
+allowsUltraConstrainedNetworkAccess
+=== allowsUltraConstrainedNetworkAccess
+Creates a session configuration object that allows HTTP and HTTPS uploads or downloads to be performed in the background.
+class
+ 
+func
+ 
+background
+(
+withIdentifier
+: 
+String
+) -> 
+URLSessionConfiguration
++ 
+backgroundSessionConfigurationWithIdentifier:
+=== background(withIdentifier:)
+Returns a session configuration object that allows HTTP and HTTPS uploads or downloads to be performed in the background.
+class
+ 
+func
+ 
+backgroundSessionConfiguration
+(
+String
+) -> 
+URLSessionConfiguration
++ 
+backgroundSessionConfiguration:
+=== backgroundSessionConfiguration(_:)
+A dictionary containing information about the proxy to use within this session.
+var
+ 
+connectionProxyDictionary
+: [
+AnyHashable
+ : 
+Any
+]?
+connectionProxyDictionary
+=== connectionProxyDictionary
+A default session configuration object.
+class
+ 
+var
+ 
+`default`
+: 
+URLSessionConfiguration
+defaultSessionConfiguration
+=== default
+var
+ 
+enablesEarlyData
+: 
+Bool
+enablesEarlyData
+=== enablesEarlyData
+A session configuration that uses no persistent storage for caches, cookies, or credentials.
+class
+ 
+var
+ 
+ephemeral
+: 
+URLSessionConfiguration
+ephemeralSessionConfiguration
+=== ephemeral
+A dictionary of additional headers to send with requests.
+var
+ 
+httpAdditionalHeaders
+: [
+AnyHashable
+ : 
+Any
+]?
+HTTPAdditionalHeaders
+=== httpAdditionalHeaders
+A policy constant that determines when cookies should be accepted.
+var
+ 
+httpCookieAcceptPolicy
+: 
+HTTPCookie
+.
+AcceptPolicy
+HTTPCookieAcceptPolicy
+=== httpCookieAcceptPolicy
+The cookie store for storing cookies within this session.
+var
+ 
+httpCookieStorage
+: 
+HTTPCookieStorage
+?
+HTTPCookieStorage
+=== httpCookieStorage
+The maximum number of simultaneous HTTP/1.1 connections to make to a given host.
+var
+ 
+httpMaximumConnectionsPerHost
+: 
+Int
+HTTPMaximumConnectionsPerHost
+=== httpMaximumConnectionsPerHost
+A Boolean value that determines whether requests should contain cookies from the cookie store.
+var
+ 
+httpShouldSetCookies
+: 
+Bool
+HTTPShouldSetCookies
+=== httpShouldSetCookies
+A Boolean value that determines whether the session should use HTTP pipelining.
+var
+ 
+httpShouldUsePipelining
+: 
+Bool
+HTTPShouldUsePipelining
+=== httpShouldUsePipelining
+The background session identifier of the configuration object.
+var
+ 
+identifier
+: 
+String
+?
+identifier
+=== identifier
+Creates an empty session configuration.
+init
+()
+- 
+init
+=== init()
+A Boolean value that determines whether background tasks can be scheduled at the discretion of the system for optimal performance.
+var
+ 
+isDiscretionary
+: 
+Bool
+discretionary
+=== isDiscretionary
+A service type that specifies the Multipath TCP connection policy for transmitting data over Wi-Fi and cellular interfaces.
+var
+ 
+multipathServiceType
+: 
+URLSessionConfiguration
+.
+MultipathServiceType
+multipathServiceType
+=== multipathServiceType
+The type of network service for all tasks within network sessions to enable Cellular Network Slicing.
+var
+ 
+networkServiceType
+: 
+NSURLRequest
+.
+NetworkServiceType
+networkServiceType
+=== networkServiceType
+Creates an empty session configuration.
+class
+ 
+func
+ 
+new
+() -> 
+Self
++ 
+new
+=== new()
+An array of extra protocol subclasses that handle requests in a session.
+var
+ 
+protocolClasses
+: [
+AnyClass
+]?
+protocolClasses
+=== protocolClasses
+An array of proxy configuration objects containing information about the proxies to use within this session.
+var
+ 
+proxyConfigurations
+: [
+ProxyConfiguration
+]
+=== proxyConfigurations
+A predefined constant that determines when to return a response from the cache.
+var
+ 
+requestCachePolicy
+: 
+NSURLRequest
+.
+CachePolicy
+requestCachePolicy
+=== requestCachePolicy
+var
+ 
+requiresDNSSECValidation
+: 
+Bool
+requiresDNSSECValidation
+=== requiresDNSSECValidation
+A Boolean value that indicates whether the app should be resumed or launched in the background when transfers finish.
+var
+ 
+sessionSendsLaunchEvents
+: 
+Bool
+sessionSendsLaunchEvents
+=== sessionSendsLaunchEvents
+The identifier for the shared container into which files in background URL sessions should be downloaded.
+var
+ 
+sharedContainerIdentifier
+: 
+String
+?
+sharedContainerIdentifier
+=== sharedContainerIdentifier
+A Boolean value that indicates whether TCP connections should be kept open when the app moves to the background.
+var
+ 
+shouldUseExtendedBackgroundIdleMode
+: 
+Bool
+shouldUseExtendedBackgroundIdleMode
+=== shouldUseExtendedBackgroundIdleMode
+The timeout interval to use when waiting for additional data.
+var
+ 
+timeoutIntervalForRequest
+: 
+TimeInterval
+timeoutIntervalForRequest
+=== timeoutIntervalForRequest
+The maximum amount of time that a resource request should be allowed to take.
+var
+ 
+timeoutIntervalForResource
+: 
+TimeInterval
+timeoutIntervalForResource
+=== timeoutIntervalForResource
+The maximum TLS protocol version that the client should request when making connections in this session.
+var
+ 
+tlsMaximumSupportedProtocol
+: 
+SSLProtocol
+TLSMaximumSupportedProtocol
+=== tlsMaximumSupportedProtocol
+The maximum TLS protocol version that the client should request when making connections in this session.
+var
+ 
+tlsMaximumSupportedProtocolVersion
+: 
+tls_protocol_version_t
+TLSMaximumSupportedProtocolVersion
+=== tlsMaximumSupportedProtocolVersion
+The minimum TLS protocol to accept during protocol negotiation.
+var
+ 
+tlsMinimumSupportedProtocol
+: 
+SSLProtocol
+TLSMinimumSupportedProtocol
+=== tlsMinimumSupportedProtocol
+The minimum TLS protocol version that the client should accept when making connections in this session.
+var
+ 
+tlsMinimumSupportedProtocolVersion
+: 
+tls_protocol_version_t
+TLSMinimumSupportedProtocolVersion
+=== tlsMinimumSupportedProtocolVersion
+The URL cache for providing cached responses to requests within the session.
+var
+ 
+urlCache
+: 
+URLCache
+?
+URLCache
+=== urlCache
+A credential store that provides credentials for authentication.
+var
+ 
+urlCredentialStorage
+: 
+URLCredentialStorage
+?
+URLCredentialStorage
+=== urlCredentialStorage
+var
+ 
+usesClassicLoadingMode
+: 
+Bool
+usesClassicLoadingMode
+=== usesClassicLoadingMode
+A Boolean value that indicates whether the session should wait for connectivity to become available, or fail immediately.
+var
+ 
+waitsForConnectivity
+: 
+Bool
+waitsForConnectivity
+=== waitsForConnectivity
+Control how URL requests make use of previously cached data.
+=== Accessing cached data
+Create tasks that download files while your app is inactive.
+=== Downloading files in the background
+Receive data directly into memory by creating a data task from a URL session.
+=== Fetching website data into memory
+Use the available radios in iOS devices to improve your app’s network reliability and performance.
+=== Improving network reliability using Multipath TCP
+Send a stream of data to a server.
+=== Uploading streams of data
+NSURLSessionConfiguration
+NSURLSessionConfiguration
+=== Creating a session configuration object
+=== Setting general properties
+=== Setting cookie policies
+=== Setting security policies
+=== Setting caching policies
+=== Supporting background transfers
+=== Supporting custom protocols
+=== Supporting Multipath TCP
+=== Setting HTTP policy and proxy properties
+=== Supporting connectivity changes
+=== Supporting limited modes
+=== Deprecated methods
+=== Instance Properties
+=== Inherits From
+=== Conforms To
+=== Creating a session
+@interface
+ 
+NSURLSessionConfiguration
+ : 
+NSObject
+NSObject
+NSObject
+NSObject
+NSHTTPCookie
+NSHTTPCookie
+NSCopying
+NSCopying
+NSURLRequest
+NSURLRequest
+NSURLProtocol
+NSURLProtocol
+NSURLSession
+NSURLSession
+configuration
++ 
+sessionWithConfiguration:
++ 
+sessionWithConfiguration:delegate:delegateQueue:
+NSURLSessionConfiguration
+NSURLSessionConfiguration
+NSURLSessionMultipathServiceType
+NSURLSessionMultipathServiceType
+allowsCellularAccess
+allowsConstrainedNetworkAccess
+allowsExpensiveNetworkAccess
+allowsUltraConstrainedNetworkAccess
++ 
+backgroundSessionConfigurationWithIdentifier:
++ 
+backgroundSessionConfiguration:
+connectionProxyDictionary
+defaultSessionConfiguration
+enablesEarlyData
+ephemeralSessionConfiguration
+HTTPAdditionalHeaders
+HTTPCookieAcceptPolicy
+HTTPCookieStorage
+HTTPMaximumConnectionsPerHost
+HTTPShouldSetCookies
+HTTPShouldUsePipelining
+identifier
+- 
+init
+discretionary
+multipathServiceType
+networkServiceType
++ 
+new
+protocolClasses
+requestCachePolicy
+requiresDNSSECValidation
+sessionSendsLaunchEvents
+sharedContainerIdentifier
+shouldUseExtendedBackgroundIdleMode
+timeoutIntervalForRequest
+timeoutIntervalForResource
+TLSMaximumSupportedProtocol
+TLSMaximumSupportedProtocolVersion
+TLSMinimumSupportedProtocol
+TLSMinimumSupportedProtocolVersion
+URLCache
+URLCredentialStorage
+usesClassicLoadingMode
+waitsForConnectivity

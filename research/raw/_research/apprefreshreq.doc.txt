@@ -1,0 +1,132 @@
+A request to launch your app in the background to execute a short refresh task.
+class
+ 
+BGAppRefreshTaskRequest
+BGAppRefreshTaskRequest
+=== BGAppRefreshTaskRequest
+class
+ 
+BGAppRefreshTaskRequest
+=== Inherits From
+=== Conforms To
+=== Task requests
+=== Initializing a refresh task request
+Support background processing in your app by wrapping your app’s most critical work in framework-provided tasks.
+Background Tasks
+=== Background Tasks
+A request to launch your app in the background to execute a short refresh task.
+class
+ 
+BGAppRefreshTaskRequest
+BGAppRefreshTaskRequest
+=== BGAppRefreshTaskRequest
+Return a new refresh task request for the specified identifier.
+init
+(
+identifier
+: 
+String
+)
+- 
+initWithIdentifier:
+=== init(identifier:)
+A request for a workload that the system continues processing even if a person backgrounds the app.
+class
+ 
+BGContinuedProcessingTaskRequest
+BGContinuedProcessingTaskRequest
+=== BGContinuedProcessingTaskRequest
+A request to launch your app in the background to execute processing for a health research study in which a user participates.
+class
+ 
+BGHealthResearchTaskRequest
+BGHealthResearchTaskRequest
+=== BGHealthResearchTaskRequest
+A request to launch your app in the background to execute a processing task that can take minutes to complete.
+class
+ 
+BGProcessingTaskRequest
+BGProcessingTaskRequest
+=== BGProcessingTaskRequest
+An abstract class for representing task requests.
+class
+ 
+BGTaskRequest
+BGTaskRequest
+=== BGTaskRequest
+Select the best method of scheduling background runtime for your app.
+=== Choosing Background Strategies for Your App
+A protocol that objects adopt to provide functional copies of themselves.
+protocol
+ 
+NSCopying
+NSCopying
+=== NSCopying
+The group of methods that are fundamental to all Objective-C objects.
+protocol
+ 
+NSObjectProtocol
+NSObjectProtocol
+=== NSObjectProtocol
+A type whose instances can be encoded, and appropriately passed, as
+ 
+elements of a C 
+.
+protocol
+ 
+CVarArg
+CVarArg
+=== CVarArg
+A type with a customized textual representation suitable for debugging
+ 
+purposes.
+protocol
+ 
+CustomDebugStringConvertible
+CustomDebugStringConvertible
+=== CustomDebugStringConvertible
+A type with a customized textual representation.
+protocol
+ 
+CustomStringConvertible
+CustomStringConvertible
+=== CustomStringConvertible
+A type that can be compared for value equality.
+protocol
+ 
+Equatable
+Equatable
+=== Equatable
+A type that can be hashed into a 
+ to produce an integer hash value.
+protocol
+ 
+Hashable
+Hashable
+=== Hashable
+=== Technologies
+BGAppRefreshTaskRequest
+BGAppRefreshTaskRequest
+=== Initializing a refresh task request
+=== Inherits From
+=== Task requests
+@interface
+ 
+BGAppRefreshTaskRequest
+ : 
+BGTaskRequest
+BGAppRefreshTaskRequest
+BGAppRefreshTaskRequest
+- 
+initWithIdentifier:
+BGContinuedProcessingTaskRequest
+BGContinuedProcessingTaskRequest
+BGHealthResearchTaskRequest
+BGHealthResearchTaskRequest
+BGProcessingTaskRequest
+BGProcessingTaskRequest
+BGTaskRequest
+BGTaskRequest
+NSCopying
+NSObject
+NSObject

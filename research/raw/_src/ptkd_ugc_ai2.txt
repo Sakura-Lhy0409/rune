@@ -1,0 +1,195 @@
+— uniquely replaced by Helmet per-route at prerender, or at
+runtime when the SPA hydrates. Other meta tags (description, og:*, twitter:*,
+canonical, robots) are provided per-route by SEOHead/Helmet; we don't repeat
+them here because vite-prerender-plugin would append rather than replace them. -->
+Where do Report and Block buttons go in an AI chat app? | PTKD Journal
+PTKD
+Sign in
+Start free scan
+Home
+/
+Journal
+/
+Where do Report and Block buttons go in an AI chat app?
+App Store
+Where do Report and Block buttons go in an AI chat app?
+Quick summary
+Updated
+May 2026
+Apple&#x27;s Guideline 1.2 expects four safeguards in an AI chat app: an in-app filter, a per-message Report action, a per-counterparty Block action, and a published support address. The February 6, 2026 update brought random or anonymous chat inside the same rule, and reviewers test by long-pressing a recent model reply and looking in the action sheet for Report. Placement decides whether the binary passes.
+Written by
+Laurens Dauchy
+Verified author
+Founder, PTKD
+Published
+May 17, 2026
+·
+8
+min read
+If App Review just flagged your AI chat app under Guideline 1.2 and the rejection note says required UGC precautions are missing, the question is usually narrower than the rule sounds. Where exactly do Report and Block belong in the screens you already shipped, and what does a reviewer tap to find them?
+Short answer
+Apple expects a Report action on every individual model reply, a Block action on every counterparty (another user in group chat, or the persona itself in pure model chat), a content filter that runs inside the app before output reaches the screen, and a working support address surfaced both in App Store Connect and inside the binary. Placement, not policy, is what reviewers test. They long-press a recent message and look in the action sheet.
+What you should know
+Report attaches to messages, not conversations.
+Reviewers tap a specific model reply and expect a Report option in the action sheet or three-dot menu next to that message.
+Block applies per counterparty.
+In multi-user threads block the other user; in pure model-only chat block the persona or end the session permanently from the persona settings screen.
+Filtering belongs in the app, not just upstream.
+The OpenAI or Anthropic safety filter sits behind the API and does not satisfy 1.2; the binary itself needs to refuse certain content visibly.
+Support contact is metadata plus surface.
+The address listed in App Store Connect under App Information has to receive real mail, and a Help or About screen in the app needs to expose the same address.
+The February 6, 2026 update closed the AI loophole.
+Random or anonymous chat is now explicitly inside Guideline 1.2, and reviewers apply the same checks regardless of whether the counterparty is human or model.
+Why are Report and Block both mandatory under Guideline 1.2?
+Guideline 1.2
+lists four required elements for any app with user-generated content: filtering, reporting, blocking, and a published contact. The text does not rank them. Missing any one of the four is enough for a rejection. Reporting and blocking sit next to each other in the list because they answer two different questions a user can have. Reporting answers, this message is harmful, please review it. Blocking answers, I do not want any more contact from this party. A reviewer who finds one without the other will still mark the safeguard incomplete.
+The
+February 6, 2026 update
+added one sentence: random or anonymous chat is now subject to Guideline 1.2. The update did not change the four-safeguard list. It changed which apps fall under the list. AI chat apps were sometimes accepted before that update on the reading that the conversation was one-to-one with a model. That reading no longer holds. The February clarification makes reviewers apply the same UGC checks regardless of whether the counterparty is human or model.
+Patterns reported on the Apple Developer Forums between February and April 2026 show that the most common rejection note for AI chat under Guideline 1.2 reads, missing required UGC precautions: no content filtering, no user-blocking, no rapid response to reports. The two action affordances are the part reviewers test directly on the device.
+Where should the Report action live on a chat message?
+The Report action belongs on each individual message, not at the conversation level. Reviewers test by tapping a recent reply and looking for the option in the action sheet, the three-dot menu, or whatever interactive surface the message bubble exposes.
+On SwiftUI, the standard implementation is a
+contextMenu
+modifier on the message view with a Report button alongside Copy and any other per-message actions. On UIKit, the equivalent is a
+UIContextMenuInteraction
+on the message cell. React Native apps usually attach a long-press handler that opens a bottom sheet with the same options. The framework matters less than the gesture: the reviewer expects long-press on a message bubble to reveal Report somewhere visible.
+A frequent mistake is to put a single Report button at the top of the conversation screen. From the reviewer&#39;s view that fails 1.2. Each reply is a separate piece of content, and the reviewer needs to flag a specific reply, not the whole thread. A conversation-level button cannot do that without an extra step the action sheet covers in one tap.
+For builders who want an outside read on whether the Report and Block surfaces are placed where a reviewer will actually look before resubmitting, PTKD.com (
+https://ptkd.com
+) is one of the platforms focused on pre-submission scanning aligned with OWASP MASVS for AI-coded mobile apps.
+What does Block actually mean when the counterparty is a model?
+Block has the cleanest meaning in multi-user threads: the user picks another user&#39;s profile and severs the channel between them. In pure AI chat the counterparty is a model, and the 1.2 requirement still applies. The action still belongs in the app.
+Three patterns have passed App Review during 2026:
+Pattern
+Where the action lives
+What it does on tap
+Persona block
+Settings or About screen for the AI persona
+Ends current session and prevents the same persona from being chosen again until unblocked
+Mute persona
+Action sheet on a recent message
+Stops new messages from that persona for the rest of the session, survives relaunch
+End session permanently
+Conversation header
+Wipes the thread and disables that conversation; a new conversation requires an explicit user action
+Whichever pattern an app picks, the reviewer is looking for two things: an action that exists in the app under a clearly named affordance, and a result the user can verify. A toggle that hides messages locally while the persona keeps sending more is not a block. The counterparty has to actually stop.
+In multi-user AI chat, where prompts from one user can surface in another user&#39;s session, the block has to behave like a normal social block. It covers both the human users and any AI-generated messages produced from the blocked user&#39;s prompts.
+How should the in-app filter work alongside model-side safety?
+Model-side safety from OpenAI, Anthropic, Google, or any other provider is not the filter Guideline 1.2 asks about. The provider filter sits upstream of the binary and is invisible to a reviewer running the app on a test device. The 1.2 filter has to live inside the app and has to operate on user-submitted prompts and on any stored or re-broadcast model output.
+A workable internal floor is the platform interaction baseline in
+OWASP MASVS
+and the matching test cases in OWASP MASTG. The relevant tests cover input validation on user-submitted text, treatment of stored content before display, and refusal of categories of content the app does not handle. None of this is App Review specific, and the same logic applies on Google Play.
+For the App Review test, two things help. First, the filter has to refuse content visibly: a polite refusal message the reviewer can see on the screen is the simplest proof that the filter ran. Second, the categories should match the App Review Guidelines text on the
+user-generated content section
+, which names pornography, threats, harassment, and the other items the rule covers.
+How does the support address tie into reviewer testing?
+Published contact information is the fourth safeguard and is the easiest one to get wrong because it lives in two places: App Store Connect metadata under App Information, and a visible Support or Help screen inside the app. Both have to point to an address that receives mail.
+Apple&#39;s guideline says timely responses to concerns and does not put a number on it. Twenty-four hours is the cadence developers report in the Resolution Center and is the figure most third-party checklists use. Treat it as a practical floor rather than a documented rule. The address still has to be actively monitored.
+A founder running an AI chat app from a personal email is fine. A generic alias that nobody reads will catch a follow-up rejection the next time a 1.2 report goes unanswered, and the second 1.2 rejection is harder to resolve because the reviewer has on-record evidence that the published address is dormant.
+What does a Resolution Center reply look like when Report and Block are already shipped?
+If the four safeguards already live in the binary and the reviewer missed them, a short Resolution Center reply is usually enough. The structure that works:
+Name the rejection guideline (Guideline 1.2 User Generated Content).
+Point to the exact screen and gesture: Report appears on the action sheet of every model reply, accessible by long-press on the message bubble.
+Attach two screenshots: one showing the message in the conversation, and one showing the action sheet with the Report option visible.
+Point to the support address inside the app and confirm it is monitored.
+Confirm the EULA arrangement: either the
+Apple Standard EULA
+, whose section 9 already prohibits objectionable content, or a custom EULA that repeats the prohibition.
+A new build is only required when a safeguard is genuinely absent. EULA metadata fixes happen in App Store Connect without a binary upload, which makes them the fastest 1.2 fix on record.
+What to watch out for
+A few patterns trip up AI chat apps in particular under Guideline 1.2.
+Putting Report at the conversation level rather than the message level. The single-button approach reads as a placeholder, and reviewers in 2026 have been rejecting on it consistently.
+Treating the persona block as cosmetic. If the persona keeps sending messages after the block is tapped, the action fails the test, and the rejection note will quote it back to you.
+Relying on the model provider&#39;s safety filter. The provider filter is invisible to App Review and does not count toward the 1.2 requirement, regardless of how well it works in production.
+Leaving the App Store Connect support address pointing at a deprecated inbox. The first 1.2 rejection is sometimes resolvable; the second one, triggered by an unanswered support email, is not.
+Quoting a custom EULA that lacks the objectionable-content clause. The fix is metadata-only, but it has to be done in the right field under App Information.
+Hiding the Report option behind two taps. The action sheet is the expected surface. A separate Help screen with a form is acceptable as a follow-up but does not replace the per-message Report.
+Key takeaways
+Place Report on every message and Block on every counterparty before submitting. The four-safeguard list is binary: missing one fails the gate.
+For pure AI chat, the persona-block pattern is the cleanest match to the 1.2 expectation and has passed App Review consistently during 2026.
+An in-app filter is required even when the model provider already filters output. Apple cannot see the upstream filter from the test device.
+The 24-hour support response is community practice, not Apple policy, but the address listed in App Store Connect has to be active and monitored.
+Some builders run an external pre-submission scan to confirm the four safeguards map cleanly to the OWASP MASVS surface before resubmitting; PTKD.com offers that kind of automated review for AI-coded apps.
+#
+guideline-1-2
+#
+ugc
+#
+ai-chat
+#
+report-button
+#
+block-button
+#
+app-store
+#
+swiftui
+#
+moderation
+Frequently asked questions
+Where does the Report button go for an AI-only chat app?
+On each individual model reply, exposed through long-press or a three-dot menu. Reviewers usually long-press a recent message and read the action sheet. A single Report button at the conversation level is the most common reason for a repeat Guideline 1.2 rejection because each reply is treated as a separate piece of content and needs its own affordance, not a shared one at the top of the screen.
+What does Block do if there is no other user, just the model?
+It still has to exist as an action the user can take to stop further contact. In practice that means a persona-level block on the settings or about screen, a mute that survives a relaunch, or a session-end action that prevents the same model thread from resuming. Apple has accepted persona-level blocks in 2026 review notes when the action sheet wording is clear and the effect is visible.
+Do I need server-side moderation if the model already filters its outputs?
+For Guideline 1.2, yes. The model provider safety filter sits upstream of the binary and is not visible to a reviewer testing the app on a device. The app needs its own filter that catches user-submitted prompts before they are stored, shared, or re-broadcast inside the app. The OWASP MASTG input-validation tests give a reasonable internal floor.
+Can I add Report and Block in a new build without resubmitting screenshots?
+Adding new actions inside the action sheet does not change the screenshots if your originals already showed the message bubbles. New screens for blocked-user lists or the support contact section may need fresh metadata in App Store Connect. The faster path is usually to reuse existing screens and surface the moderation actions through long-press menus on each message bubble.
+Does Apple need a custom EULA, or can I rely on the standard one?
+The Apple Standard EULA from the legal site is enough. Section 9 already prohibits objectionable content. If you uploaded a custom EULA in App Store Connect, that document has to repeat the prohibition explicitly. A surprising number of Guideline 1.2 rejection messages target a custom EULA missing the objectionable-content clause, not the moderation buttons themselves.
+About the author
+Laurens Dauchy
+Founder, PTKD
+Laurens Dauchy is the founder of PTKD, a mobile app security scanner used by indie developers and AI-coded app teams. He writes about mobile security, OWASP MASVS, and the threat model behind no-code and AI-generated apps.
+Keep reading
+Journal · App Store
+Why is my AI chat app rejected under Guideline 1.2 UGC?
+Apple expects AI chat apps to ship the same UGC safeguards as social apps: report buttons on every reply, blocking, filtering, and contact info.
+8 min read
+Journal · App Store
+App Store age ratings in 2026: the 2025 overhaul explained
+Apple&#x27;s 2025 overhaul added 13+, 16+, and 18+ bands and made a new questionnaire mandatory. The deadline has passed, so in 2026 incomplete apps are blocked. Here is the detail.
+7 min read
+Journal · App Store
+Fake apps and brand impersonation in app stores
+Someone can publish a fake app with your name and icon to trick your users. It harms your brand even if your app is fine. Here is how to detect, report, and fight it.
+7 min read
+Journal · App Store
+Why does 5.1.1(v) hit AI apps with Sign in with Apple?
+What Guideline 5.1.1(v) really requires when your AI-coded app uses Sign in with Apple or Google, and how to ship a fix that passes review.
+8 min read
+Scan your app in minutes
+Upload an APK, AAB, or IPA. PTKD returns an OWASP-aligned report with copy-paste fixes.
+Try PTKD free
+PTKD
+Made for vibe coders who want to ship secure apps without the complexity.
+Twitter
+GitHub
+Discord
+Product
+Features
+Pricing
+Integrations
+API
+Why PTKD
+Docs
+Getting Started
+CI/CD Setup
+API Reference
+Examples
+How It Works
+Popular topics
+Journal
+Android app security
+iOS vulnerability check
+Mobile security
+AI-coded app safety
+All topics →
+Company
+Blog
+Privacy
+Terms
+© 2026
+PTKD
+. All rights reserved.

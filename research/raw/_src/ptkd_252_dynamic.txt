@@ -1,0 +1,148 @@
+— uniquely replaced by Helmet per-route at prerender, or at
+runtime when the SPA hydrates. Other meta tags (description, og:*, twitter:*,
+canonical, robots) are provided per-route by SEOHead/Helmet; we don't repeat
+them here because vite-prerender-plugin would append rather than replace them. -->
+How do I fix an App Store Guideline 2.5.2 rejection? | PTKD Journal
+PTKD
+Sign in
+Start free scan
+Home
+/
+Journal
+/
+How do I fix an App Store Guideline 2.5.2 rejection?
+App Store
+How do I fix an App Store Guideline 2.5.2 rejection?
+Quick summary
+Updated
+May 2026
+Guideline 2.5.2 requires your app to be self-contained: it may not download, install, or execute code that introduces or changes features. Over-the-air updates of JavaScript and assets through CodePush or EAS Update are allowed, because they revise existing functionality without changing the app&#x27;s primary purpose. What triggers a rejection is dynamic code that adds features, such as fetching and running remote scripts or an eval of server-supplied code. The fix is to remove the arbitrary code path, keep OTA within JS and assets, and resubmit a new build.
+Written by
+Laurens Dauchy
+Verified author
+Founder, PTKD
+Published
+May 23, 2026
+·
+8
+min read
+A Guideline 2.5.2 rejection reads as if Apple thinks your app is downloading code to rewrite itself, and for most apps the fix is narrower than it sounds. The rule is about self-contained bundles, and the line it draws sits between updating what your app already does and downloading new functionality. Here is where that line is and how to get back across it.
+Short answer
+Guideline 2.5.2 requires your app to be self-contained, so it may not download, install, or execute code that introduces or changes its features. Per
+Apple&#39;s App Review Guidelines
+, over-the-air updates of JavaScript and assets are allowed when they revise existing functionality without changing the app&#39;s primary purpose, which is why frameworks like CodePush and EAS Update can pass. What trips the rule is dynamic code that adds features, such as fetching and running remote scripts or an eval of server-supplied code. The fix is to remove that path, keep any OTA inside JS and assets, and resubmit a new build.
+What you should know
+The rule is self-containment
+: your bundle may not download or execute code that adds or changes features.
+OTA of JS and assets is allowed
+: updating existing functionality through CodePush or EAS Update is within the rules.
+Primary purpose is the test
+: downloaded interpreted code must not change what the app is for.
+An eval of remote code is the classic trigger
+: fetching and running server-supplied code adds functionality and violates 2.5.2.
+The fix needs a new build
+: removing a dynamic-code path is a code change, so you rebuild and resubmit.
+What does Guideline 2.5.2 actually prohibit?
+It prohibits an app from downloading, installing, or executing code that introduces or changes its features or functionality, including other apps. Apple&#39;s wording is that apps should be self-contained in their bundles and may not read or write outside the designated container area, nor download or run code that changes features. The one narrow exception is for educational apps that teach coding, where the downloaded code is viewable and editable by the user and used for nothing else. For a normal app the safe reading is simple: the functionality you ship is the functionality App Review approved, and you cannot add to it from a server afterward.
+Is an over-the-air update like CodePush or EAS Update allowed?
+Yes, within limits. The Apple Developer Program License Agreement, in section 3.3.2, allows interpreted code to be downloaded as long as it does not change the app&#39;s primary purpose by adding features inconsistent with its advertised purpose, does not create a store for other code, and does not bypass signing, the sandbox, or other security. Updating your JavaScript bundle and assets through
+EAS Update
+or CodePush fits inside that allowance, because you are revising existing behavior rather than shipping a new app. The limit is real: an OTA channel that turns a flashlight app into a chat app, or that downloads a native binary, is the kind of change that crosses the line.
+Why would an AI-built app trip 2.5.2?
+Because generated code sometimes reaches for the quickest dynamic pattern. An AI-built app might fetch a snippet of JavaScript from your backend and run it with eval to render a screen, load a remote script into a WebView that adds a feature, or include a hot-update library wired to pull arbitrary bundles. Each of these is a server-to-app code path that App Review treats as downloading executable code. The reviewer does not need to watch it run; a static reference to a remote-bundle download method in the binary can be enough to cite 2.5.2. That is the gap between code that works in a demo and code that survives review.
+How do you fix a Guideline 2.5.2 rejection?
+Find the dynamic-code path, remove it, and ship a self-contained build. The order that works:
+Identify what Apple flagged: read the rejection, then search your code for eval, Function constructors, remote-bundle download calls, and WebView loads of remote scripts.
+Decide whether each is needed: a remote eval that renders UI should become real in-bundle code, and a misconfigured hot-update import you do not use should be removed entirely.
+Keep legitimate OTA inside the rules: if you use CodePush or EAS Update, confirm it only updates JS and assets for your existing features, not new functionality.
+Rebuild and resubmit: removing a code path changes the binary, so you upload a new build and it re-enters review.
+Reply with specifics: tell the reviewer which dynamic path you removed, so the same concern is easy to clear.
+What to watch out for
+Remote configuration is fine; remote code is not. Toggling a feature that already exists in the approved binary with a server flag is allowed, because you are not adding functionality, only switching what is already there. The trap is a library that can download and execute new code even if you never trigger it, because the capability itself can draw the citation. AI-built apps are prone to this when a generated integration loads remote scripts. A pre-submission scan such as PTKD.com (
+https://ptkd.com
+) reads the compiled APK, AAB, or IPA for dynamic-code patterns like remote-bundle loading and eval against OWASP MASVS, so you find a hidden code path before App Review does. The honest limit is that no scan can read intent, so pair it with a look at every place your app talks to your own backend.
+What to take away
+Guideline 2.5.2 requires a self-contained app; you cannot download or execute code that adds or changes features after approval.
+Over-the-air updates of JavaScript and assets through CodePush or EAS Update are allowed, as long as they do not change the app&#39;s primary purpose.
+The common trigger is dynamic code that adds functionality, such as an eval of remote scripts, which is a code change and needs a new build to remove.
+Scan the binary for hidden dynamic-code paths with a pre-submission scan such as PTKD.com before resubmitting, so a leftover eval or remote-bundle call does not draw the same rejection twice.
+#
+guideline-2-5-2
+#
+app-store-rejection
+#
+dynamic-code
+#
+codepush
+#
+eas-update
+#
+over-the-air-updates
+#
+ios
+Frequently asked questions
+What does Guideline 2.5.2 prohibit?
+It requires apps to be self-contained in their bundles and prohibits downloading, installing, or executing code that introduces or changes the app&#x27;s features or functionality. There is a narrow exception for educational apps that teach coding, where the downloaded code is viewable and editable by the user. For a normal app, the functionality you ship is the functionality App Review approved, and you cannot add to it from a server afterward.
+Is CodePush or EAS Update against Guideline 2.5.2?
+No, when used within the limits. The Developer Program License Agreement allows interpreted code, such as a JavaScript bundle and assets, to be updated over the air as long as it does not change the app&#x27;s primary purpose, create a store for other code, or bypass security. CodePush and EAS Update fit when they revise existing features. They cross the line if an update adds functionality the approved app did not have.
+Can I use remote config or feature flags?
+Yes. Toggling a feature that already exists in the approved binary with a server-side flag is allowed, because you are switching behavior that is already there rather than downloading new code. The distinction Apple draws is between configuring shipped functionality and adding functionality from a server. Remote configuration of existing features is fine; downloading executable code that adds features is not.
+I removed CodePush but still got rejected under 2.5.2, why?
+There is likely another dynamic-code path. App Review can cite 2.5.2 for any remote code execution, including an eval of server-supplied JavaScript, a WebView that loads a remote script adding a feature, or a leftover hot-update import still referenced in the binary. Search your code for eval, Function constructors, and remote-bundle download calls, remove the ones that add functionality, and resubmit.
+Does fixing a 2.5.2 rejection require a new build?
+Yes. Removing a dynamic-code path changes the binary, so you rebuild and upload a new build, and the submission returns to review. A metadata reply cannot resolve 2.5.2 because the issue is code inside the app. Batch the change with any other binary fixes so you restart review only once, and tell the reviewer which path you removed.
+About the author
+Laurens Dauchy
+Founder, PTKD
+Laurens Dauchy is the founder of PTKD, a mobile app security scanner used by indie developers and AI-coded app teams. He writes about mobile security, OWASP MASVS, and the threat model behind no-code and AI-generated apps.
+Keep reading
+Journal · App Store
+Guideline 4.3(a): is it a UI issue or a concept issue?
+A 4.3(a) spam rejection can mean your UI looks templated or your concept is too common. Here is how to tell which, because the fix is different.
+8 min read
+Journal · App Store
+How to bypass App Store review (and why it fails)
+You can&#x27;t bypass App Store review for public apps, and the techniques people try risk account termination. Here is why, and the legitimate faster paths.
+8 min read
+Journal · App Store
+How do I add AdMob to a Replit app without rejection?
+AdMob triggers iOS privacy requirements an AI agent usually skips: a Privacy Manifest, ATT, App Privacy disclosure, and SKAdNetwork IDs. Here is the checklist.
+8 min read
+Journal · App Store
+How do I fix an App Store Guideline 4.8 login rejection?
+Guideline 4.8 requires an equivalent privacy-friendly login when you offer Google or Facebook sign-in. Here is what counts, who is exempt, and how to fix it.
+8 min read
+Scan your app in minutes
+Upload an APK, AAB, or IPA. PTKD returns an OWASP-aligned report with copy-paste fixes.
+Try PTKD free
+PTKD
+Made for vibe coders who want to ship secure apps without the complexity.
+Twitter
+GitHub
+Discord
+Product
+Features
+Pricing
+Integrations
+API
+Why PTKD
+Docs
+Getting Started
+CI/CD Setup
+API Reference
+Examples
+How It Works
+Popular topics
+Journal
+Android app security
+iOS vulnerability check
+Mobile security
+AI-coded app safety
+All topics →
+Company
+Blog
+Privacy
+Terms
+© 2026
+PTKD
+. All rights reserved.

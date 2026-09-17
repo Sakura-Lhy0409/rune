@@ -1,0 +1,127 @@
+Support background processing in your app by wrapping your app’s most critical work in framework-provided tasks.
+Background Tasks
+=== Background Tasks
+Overview
+Use this framework to keep your app content up to date and run tasks requiring minutes to complete even if your app is in the background. Longer tasks can leverage external power, network connectivity, and the GPU on supported devices.
+To launch your app in the background and perform necessary work, register launch handlers for framework-provided tasks and schedule the tasks as needed.
+Your app can also use a framework-provided task to execute critical jobs in the foreground and complete them in the background if a person backgrounds your app before the job completes.
+=== Essentials
+=== Background tasks
+=== Foreground tasks with background support
+=== Task requests
+=== Development and testing
+Support background processing in your app by wrapping your app’s most critical work in framework-provided tasks.
+Background Tasks
+=== Background Tasks
+An object representing a short task typically used to refresh content that’s run while the app is in the background.
+class
+ 
+BGAppRefreshTask
+BGAppRefreshTask
+=== BGAppRefreshTask
+A request to launch your app in the background to execute a short refresh task.
+class
+ 
+BGAppRefreshTaskRequest
+BGAppRefreshTaskRequest
+=== BGAppRefreshTaskRequest
+A task that starts in the foreground and can continue running in the background as needed.
+class
+ 
+BGContinuedProcessingTask
+BGContinuedProcessingTask
+=== BGContinuedProcessingTask
+A request for a workload that the system continues processing even if a person backgrounds the app.
+class
+ 
+BGContinuedProcessingTaskRequest
+BGContinuedProcessingTaskRequest
+=== BGContinuedProcessingTaskRequest
+A time-consuming, necessary processing task that runs while the app is in the background to prepare data essential to a health research study.
+class
+ 
+BGHealthResearchTask
+BGHealthResearchTask
+=== BGHealthResearchTask
+A request to launch your app in the background to execute processing for a health research study in which a user participates.
+class
+ 
+BGHealthResearchTaskRequest
+BGHealthResearchTaskRequest
+=== BGHealthResearchTaskRequest
+A time-consuming processing task that runs while the app is in the background.
+class
+ 
+BGProcessingTask
+BGProcessingTask
+=== BGProcessingTask
+A request to launch your app in the background to execute a processing task that can take minutes to complete.
+class
+ 
+BGProcessingTaskRequest
+BGProcessingTaskRequest
+=== BGProcessingTaskRequest
+An abstract class for the framework’s tasks.
+class
+ 
+BGTask
+BGTask
+=== BGTask
+An abstract class for representing task requests.
+class
+ 
+BGTaskRequest
+BGTaskRequest
+=== BGTaskRequest
+A class for scheduling tasks that add background support to your app’s most critical work.
+class
+ 
+BGTaskScheduler
+BGTaskScheduler
+=== BGTaskScheduler
+BG_EXTERN
+=== BG_EXTERN
+Select the best method of scheduling background runtime for your app.
+=== Choosing Background Strategies for Your App
+Use a continuous background task to do work that can complete as needed.
+=== Performing long-running tasks on iOS and iPadOS
+Use scheduled background tasks for refreshing your app content and for performing maintenance.
+=== Refreshing and Maintaining Your App Using Background Tasks
+Use the debugger during development to start tasks and to terminate them before completion.
+=== Starting and Terminating Tasks During Development
+The entitlement the system requires for a continuous background task to use the GPU.
+com.apple.developer.background-tasks.continued-processing.gpu
+=== Background GPU Access
+Configure your app to perform tasks in the background to make efficient use of processing time and power.
+=== Using background tasks to update your app
+Learn about important changes in Background Tasks.
+=== Background Tasks updates
+=== Technologies
+=== Essentials
+=== Background tasks
+=== Foreground tasks with background support
+=== Task requests
+=== Development and testing
+=== Macros
+BGAppRefreshTask
+BGAppRefreshTask
+BGAppRefreshTaskRequest
+BGAppRefreshTaskRequest
+BGContinuedProcessingTask
+BGContinuedProcessingTask
+BGContinuedProcessingTaskRequest
+BGContinuedProcessingTaskRequest
+BGHealthResearchTask
+BGHealthResearchTask
+BGHealthResearchTaskRequest
+BGHealthResearchTaskRequest
+BGProcessingTask
+BGProcessingTask
+BGProcessingTaskRequest
+BGProcessingTaskRequest
+BGTask
+BGTask
+BGTaskRequest
+BGTaskRequest
+BGTaskScheduler
+BGTaskScheduler

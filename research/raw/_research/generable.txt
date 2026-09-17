@@ -1,0 +1,270 @@
+A type that the model uses when responding to prompts.
+protocol
+ 
+Generable
+Generable
+=== Generable
+protocol
+ 
+Generable
+ : 
+ConvertibleFromGeneratedContent
+, 
+ConvertibleToGeneratedContent
+Overview
+Annotate your Swift structure or enumeration with the 
+ macro to
+ 
+allow the model to respond to prompts by generating an instance of your type.
+ 
+Use the 
+ macro to provide natural language descriptions of your
+ 
+properties, and programmatically control the values that the model can generate.
+[CODE] @Generable | struct SearchSuggestions { |     @Guide(description: "A list of suggested search terms.", .count(4)) |     var searchTerms: [SearchTerm] |     @Generable |     struct SearchTerm { |         // Use a generation identifier for data structures the framework generates. |         var id: GenerationID |         @Guide(description: "A two- or three- word search term, like 'Beautiful sunsets'.") |         var searchTerm: String |     } | }
+For every 
+ type in a request, the framework converts its type and
+ 
+format information to a JSON schema and provides it to the model. This contributes
+ 
+to the available context window size. If the 
+ exceeds
+ 
+the available context size, it throws 
+.
+ 
+To reduce the size of your generable type:
+Reduce the complexity of your 
+ type by evaluating whether properties
+ 
+are necessary to complete the task.
+Give your properties short and clear names.
+Use 
+ on properties only when it improves response quality.
+Add a 
+ with 
+ to
+ 
+reduce token usage.
+If the 
+ type includes properties with clear names the model may have
+ 
+all it needs to generate your type, eliminating the need of 
+.
+ 
+For more information on managing the context window size, see
+ 
+.
+=== Inherits From
+=== Conforming Types
+=== Structured output
+=== Creating a Generable type
+=== Creating a guide
+=== Getting the schema
+=== Converting to partially generated
+A type whose metatype can be shared across arbitrary isolation domains
+ 
+without introducing a risk of data races.
+protocol
+ 
+SendableMetatype
+SendableMetatype
+=== SendableMetatype
+=== Technologies
+Perform tasks with models that specialize in language understanding, structured output, and tool calling.
+Foundation Models
+=== Foundation Models
+A type that can be initialized from generated content.
+protocol
+ 
+ConvertibleFromGeneratedContent
+ConvertibleFromGeneratedContent
+=== ConvertibleFromGeneratedContent
+A type that can be converted to generated content.
+protocol
+ 
+ConvertibleToGeneratedContent
+ConvertibleToGeneratedContent
+=== ConvertibleToGeneratedContent
+The dynamic counterpart to the generation schema type that you use to construct schemas at runtime.
+struct
+ 
+DynamicGenerationSchema
+DynamicGenerationSchema
+=== DynamicGenerationSchema
+A type that the model uses when responding to prompts.
+protocol
+ 
+Generable
+Generable
+=== Generable
+macro
+ 
+Generable
+(
+description
+: 
+String
+?)
+=== Generable(description:)
+macro
+ 
+Generable
+(
+description
+: 
+String
+?, 
+representNilExplicitlyInGeneratedContent
+: 
+Bool
+)
+=== Generable(description:representNilExplicitlyInGeneratedContent:)
+macro
+ 
+Generable
+(
+name
+: 
+String
+, 
+description
+: 
+String
+?, 
+representNilExplicitlyInGeneratedContent
+: 
+Bool
+)
+=== Generable(name:description:representNilExplicitlyInGeneratedContent:)
+A representation of partially generated content
+associatedtype
+ 
+PartiallyGenerated
+ : 
+ConvertibleFromGeneratedContent
+ = 
+Self
+=== PartiallyGenerated
+Returns the partially generated representation of the current instance.
+func
+ 
+asPartiallyGenerated
+() -> 
+Self
+.
+PartiallyGenerated
+=== asPartiallyGenerated()
+An instance of the generation schema.
+static
+ 
+var
+ 
+generationSchema
+: 
+GenerationSchema
+=== generationSchema
+A type that represents structured, generated content.
+struct
+ 
+GeneratedContent
+GeneratedContent
+=== GeneratedContent
+Guides that control how values are generated.
+struct
+ 
+GenerationGuide
+GenerationGuide
+=== GenerationGuide
+Enforces a maximum number of elements in the array.
+static
+ 
+func
+ 
+maximumCount
+<
+Element
+>(
+Int
+) -> 
+GenerationGuide
+<[
+Element
+]>
+=== maximumCount(_:)
+A type that describes the properties of an object and any guides
+ 
+on their values.
+struct
+ 
+GenerationSchema
+GenerationSchema
+=== GenerationSchema
+macro
+ 
+Guide
+(
+description
+: 
+String
+)
+=== Guide(description:)
+macro
+ 
+Guide
+(
+description
+:
+_
+:)
+=== Guide(description:_:)
+A reference to an image in a session’s transcript.
+struct
+ 
+ImageReference
+ImageReference
+=== ImageReference
+A type that can be represented as instructions.
+protocol
+ 
+InstructionsRepresentable
+InstructionsRepresentable
+=== InstructionsRepresentable
+The session’s transcript exceeded the model’s context size.
+case
+ 
+contextSizeExceeded
+(
+LanguageModelError
+.
+ContextSizeExceeded
+)
+=== LanguageModelError.contextSizeExceeded(_:)
+An object that represents a session that interacts with a language model.
+class
+ 
+LanguageModelSession
+LanguageModelSession
+=== LanguageModelSession
+A type whose value can represent a prompt.
+protocol
+ 
+PromptRepresentable
+PromptRepresentable
+=== PromptRepresentable
+Analyze and extract information from images by combining them with descriptive text prompts.
+=== Analyzing images with multimodal prompting
+Measure how prompts, responses, and tool calls affect token consumption and
+ 
+response times in Instruments.
+=== Analyzing the runtime performance of your Foundation Models app
+Identify topics, actions, objects, and emotions in input text with a content tagging model.
+=== Categorizing and organizing data with content tags
+Create robust apps by describing output you want programmatically.
+=== Generating Swift data structures with guided generation
+Optimize your app’s token usage when prompting a model with the Foundation Models
+ 
+framework.
+=== Managing the context window
+Tailor your prompts to get effective results from an on-device model.
+=== Prompting an on-device foundation model

@@ -1,0 +1,12 @@
+
+
+
+{
+ "resultCount":1,
+ "results": [
+{"wrapperType":"track", "kind":"song", "artistId":1546935105, "collectionId":1549105179, "trackId":1549105180, "artistName":"Made For You Music", "collectionName":"Blair and the Journey to the Land of Imagination", "trackName":"Blair and the Imagination Parade", "collectionCensoredName":"Blair and the Journey to the Land of Imagination", "trackCensoredName":"Blair and the Imagination Parade", "artistViewUrl":"https://music.apple.com/us/artist/made-for-you-music/1546935105?uo=4", "collectionViewUrl":"https://music.apple.com/us/album/blair-and-the-imagination-parade/1549105179?i=1549105180&uo=4", "trackViewUrl":"https://music.apple.com/us/album/blair-and-the-imagination-parade/1549105179?i=1549105180&uo=4", 
+"previewUrl":"https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview114/v4/ac/46/e8/ac46e84e-ef69-85fa-7ef9-3bfad229bdb1/mzaf_2310039546007764063.plus.aac.p.m4a", "artworkUrl30":"https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/ec/2a/95/ec2a9534-cda4-d9e0-73b1-05b0be7764e7/artwork.jpg/30x30bb.jpg", "artworkUrl60":"https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/ec/2a/95/ec2a9534-cda4-d9e0-73b1-05b0be7764e7/artwork.jpg/60x60bb.jpg", "artworkUrl100":"https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/ec/2a/95/ec2a9534-cda4-d9e0-73b1-05b0be7764e7/artwork.jpg/100x100bb.jpg", "collectionPrice":9.90, "trackPrice":0.99, "releaseDate":"2021-01-13T12:00:00Z", "collectionExplicitness":"notExplicit", "trackExplicitness":"notExplicit", "discCount":1, "discNumber":1, "trackCount":10, "trackNumber":1, "trackTimeMillis":113816, "country":"USA", "currency":"USD", "primaryGenreName":"Children's Music", "isStreamable":true}]
+}
+
+
+

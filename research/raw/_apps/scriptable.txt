@@ -1,0 +1,537 @@
+‎Scriptable App - App Store
+Search
+Today
+Games
+Apps
+Arcade
+Platform
+iPhone
+iPad
+Mac
+Vision
+Watch
+TV
+Scriptable
+Automation using JavaScript
+Free · In‑App Purchases
+Share
+3.9K Ratings
+4.7
+Age Rating
+16+
+Years
+Chart
+#15
+Developer Tools
+Developer
+Simon B. Støvring
+Language
+EN
++ 18 More
+Size
+28.9
+MB
+iPhone, iPad
+Scriptable is an automation tool that enables you to write scripts that integrates with native features of iOS such as files, calendars, reminders, documents and much more.
+An extensive support for widgets enables you to write your own widgets using JavaScript and run the scripts on your Home Screen. Your widgets can show any data and be customised to look just the way you want.
+With Siri Shortcuts you can present images, tables and more in Siri as well as making Siri read out loud a text when you run a script from a Siri Shortcut.
+There's a growing gallery of scripts to get you started with Scriptable.
+Here’s a few examples of scripts you can create:
+- Ask Siri whether a web service is down.
+- Create a widget that shows data from your weather station.
+- Postpone the next event in your calendar half an hour.
+- Check what is currently on TV.
+- Manage a list of movies you would like to watch.
+- Upload files to an image optimizer and store a URL to the optimized image.
+- Receive a notification with the weather report every morning.
+- Create todos with prefilled data in your favorite todo app using URL schemes.
+Features include:
+- Write and run JavaScript.
+- Auto complete of variable names, functions, keywords and properties as you type.
+- Access lots of native iOS features from your JavaScript code, including managing files, calendars, reminders, contacts, photos, location, pasteboard, web views and more.
+- Create your own widgets. Your scripts run on the Home Screen without needing to open the app.
+- Siri Shortcuts enabling you to present images, tables, websites, HTML and more in Siri as well as making Siri read out loud a text.
+- Support for input and output parameters in Siri Shortcuts.
+- Easily schedule rich notifications to run your scripts periodically.
+- Work with files and directories from third party apps using File Bookmarks.
+- Synchronise scripts to all of your devices using iCloud Drive.
+- Scripts are stored as plain JavaScript files and can be browsed using the Files app.
+- Assign one of over 800 glyphs and a color to a script to easily identify it in your directory of scripts.
+- Run scripts directly on your Lock Screen and Home Screen using widgets.
+- Run a script by 3D touching the app icon.
+- Run a script from a share sheet and process the inputs.
+- Schedule notifications and run a script directly from a notification.
+- URL schemes enabling you to run scripts from other apps.
+- Support for x-callback-url enabling advanced integration with other apps that support x-callback-url.
+- Export and share scripts.
+- Example scripts helping you get started creating your own scripts.
+- Extensive documentation for all the native APIs you can use in your scripts. Available offline in the app and online on docs.scriptable.app.
+- View the documentation in a separate window on iPad.
+- Support for dark mode.
+- Customise the editor to your liking.
+more
+Ratings &amp; Reviews
+4.7
+out of 5
+3.9K Ratings
+Best iOS interface I’ve ever seen
+03/31/2019
+DangerDude1122
+Theirs is truly no app that can compare to the sheer number of ways to interact with iOS on Scriptable. I was skeptical at first with this app because theirs so many useless apps for programing on the App Store and this one is 1000% better than the best I’ve seen. Seriously this app doesn’t cost a dime and I’ve been using it for the past couple of days and not ONE ad has opened, its amazing! Not to mention the possibilities with this app you can create timed notifications check sites. And best of all you can basically add Siri functions to your phone. Nothing else truly compares to this app if I could I would give it more than 5 stars.
+Best iOS interface I’ve ever seen
+03/31/2019
+DangerDude1122
+Theirs is truly no app that can compare to the sheer number of ways to interact with iOS on Scriptable. I was skeptical at first with this app because theirs so many useless apps for programing on the App Store and this one is 1000% better than the best I’ve seen. Seriously this app doesn’t cost a dime and I’ve been using it for the past couple of days and not ONE ad has opened, its amazing! Not to mention the possibilities with this app you can create timed notifications check sites. And best of all you can basically add Siri functions to your phone. Nothing else truly compares to this app if I could I would give it more than 5 stars.
+Should Be An Editor’s Choice App
+08/04/2022
+Retired App Dev
+Scriptable is by far one of the best apps I’ve ever downloaded. As a website developer, using JavaScript to program iOS shortcuts is like a dream come true. With the no ads and no premium subscription, it’s an app that I would definitely recommend to anyone with a background in programming.With that being said, I do have a few bugs and feature requests for the developer. The features include:- Word wrap toggle: on iPhone, it’s a pain to have to enter landscape mode just to make sure all the indentations are as they should be. A word wrap toggle would be a big help.- Theme choices: we should have the option to use a different theme for light/dark mode (for example: one dark pro, etc)- TypeScript support: this is pretty self-explanatoryAnd the bug:- Accessing Contact and ContactsContainer in a widget results in a blank widget. However, this does seem to work if you preview the widget in-app using present.
+Should Be An Editor’s Choice App
+08/04/2022
+Retired App Dev
+Scriptable is by far one of the best apps I’ve ever downloaded. As a website developer, using JavaScript to program iOS shortcuts is like a dream come true. With the no ads and no premium subscription, it’s an app that I would definitely recommend to anyone with a background in programming.With that being said, I do have a few bugs and feature requests for the developer. The features include:- Word wrap toggle: on iPhone, it’s a pain to have to enter landscape mode just to make sure all the indentations are as they should be. A word wrap toggle would be a big help.- Theme choices: we should have the option to use a different theme for light/dark mode (for example: one dark pro, etc)- TypeScript support: this is pretty self-explanatoryAnd the bug:- Accessing Contact and ContactsContainer in a widget results in a blank widget. However, this does seem to work if you preview the widget in-app using present.
+I’m finally comfortable doing iOS automation
+10/08/2022
+John in Paris
+I’ve been meaning to try Scriptable for a long time, and finally gave it a spin today. It’s SO MUCH better than using Shortcuts’ scripting language!Not only did I get my “upcoming birthdays” script working the way that I wanted it to, I was able to fix a date range bug in JS that I couldn’t figure out how to do in Shortcuts. Plus, as a bonus, now I’ve got a widget using my script that works with parameters.All this after noodling around for just part of the afternoon. Thanks so much for Scriptable.
+I’m finally comfortable doing iOS automation
+10/08/2022
+John in Paris
+I’ve been meaning to try Scriptable for a long time, and finally gave it a spin today. It’s SO MUCH better than using Shortcuts’ scripting language!Not only did I get my “upcoming birthdays” script working the way that I wanted it to, I was able to fix a date range bug in JS that I couldn’t figure out how to do in Shortcuts. Plus, as a bonus, now I’ve got a widget using my script that works with parameters.All this after noodling around for just part of the afternoon. Thanks so much for Scriptable.
+Browser
+04/22/2023
+WokaWokaWoka
+Great app; but the built in web browser has an issue: Web content is displayed under the notch and status bar. I have a scriptable action that sometimes requires me to view a web page (to log in and out) and the site's menus are at the top. It's impossible to use the menu at the top. I've only had partial success rotating my phone to access the menu. Please fix! 🙏
+Browser
+04/22/2023
+WokaWokaWoka
+Great app; but the built in web browser has an issue: Web content is displayed under the notch and status bar. I have a scriptable action that sometimes requires me to view a web page (to log in and out) and the site's menus are at the top. It's impossible to use the menu at the top. I've only had partial success rotating my phone to access the menu. Please fix! 🙏
+What’s New
+Version History
+Fixes an issue where background images were not shown in tintable widgets on iOS 18.
+1.7.19
+09/30/2024
+- The app icon is now tintable on iOS 18.
+- Fixes an issue where widgets did not render correctly when the Home Screen was tinted on iOS 18.
+1.7.18
+09/28/2024
+Fixes a few minor bugs.
+1.7.17
+09/22/2024
+The date in Contact.birthday will now fallback to using the current year when no year is set.
+1.7.16
+02/15/2024
+Dates in Contact.dates will now fallback to using the current year when no year is set. Additionally, the object returned by Contact.dates contains the date components used to construct the date, which can be used to detect cases where no year is available.
+1.7.15
+02/15/2024
+- Adds Data.fromBytes() to create a data object from an array of bytes.
+- Fixes an issue where the documentation for parameters and return values was not visible.
+1.7.14
+01/04/2024
+Fixes issue where background colors were sometimes not rendered in widgets.
+1.7.13
+11/03/2023
+Improves stability of widgets on iOS 17.
+1.7.12
+11/02/2023
+Fixes issues with checking for authorization when using specific APIs and improves error messages.
+1.7.11
+10/10/2023
+Fixes issues with checking for authorization when using specific APIs.
+1.7.10
+10/04/2023
+Fixes an issue where authorizing to access the calendar would fail.
+1.7.9
+09/30/2023
+Fixes an issue where widgets could not find the selected script.
+1.7.8
+09/25/2023
+Fixes an issue introduced in 1.7.6 that caused widgets to render incorrectly.
+1.7.7
+09/24/2023
+Improves compatibility with iOS 17.
+1.7.6
+09/24/2023
+- Settings has a slightly refreshed look.
+- Fixes an issue where the Contact API returned an error on newer versions of iOS.
+1.7.5
+04/24/2023
+- Fixes an issue where links would not work in widgets on iOS 15.
+- Fixes an issue where widgets with large background images would not be rendered.
+1.7.4
+11/18/2022
+This update fixes an issue where widgets would sometimes not be rendered on iOS 16.
+1.7.3
+11/15/2022
+- Widgets would not show a background when running on iOS 15.
+- The Find &amp; Replace button would sometimes not be shown in the keyboard toolbar when running on an iPad.
+1.7.2
+11/13/2022
+This update fixes an issue where the log would sometimes not be visible.
+1.7.1
+11/10/2022
+- Adds support for building Lock Screen widgets. Available when running on iOS 16.
+- Adds find/replace to the editor. Available when running on iOS 16.
+- Replaces the old editor with one built on top of Runestone.
+- Adds setting to disable line wrapping to allow horizontal scrolling in the editor.
+- Adds settings to show tabs, spaces, and line breaks in the editor.
+- Adds a toolbar above the keyboard for shifting text, toggling comments, and for easy access to often used symbols.
+- The Shift Left button in the toolbar above the keyboard now works as expected.
+- Presenting the calendar event editor no longer causes the app to hang when immediately presenting an alert after the event has been created.
+1.7
+11/09/2022
+This update fixes an issue where scripts would sometimes not run when launched from the Home screen. If you're still seeing issues with this, please remove the script from your Home screen and add it again.
+1.6.12
+12/02/2021
+Fixes an issue where functions defined in web views by Scriptable would sometimes not be called. This affected scripts that evaluated JavaScript in a web view and completed the evaluation by invoking the global completion() function.
+1.6.11
+10/03/2021
+Fixes an issue where multicolored SF Symbols did not work correctly on iOS 15.
+1.6.10
+10/02/2021
+Widget previews should work correctly on all devices now. In order to be better prepared for future devices the error handling has been improved.devices. In those cases the widget preview will be slightly inaccurate with a message detailing this.
+1.6.9
+09/30/2021
+This update fixes an issue where widget previews did not work when Display Zoom was enabled under Display &amp; brightness in the Settings app.
+1.6.8
+09/29/2021
+Fixes an issue where background images were not shown in tintable widgets on iOS 18.
+more
+Version 1.7.19
+09/30/2024
+App Privacy
+App Privacy
+The developer,
+Simon B. Støvring
+, indicated that the app’s privacy practices may include handling of data as described below. This information has not been verified by Apple. For more information, see the
+developer’s privacy policy
+.
+To help you better understand the developer’s responses, see
+Privacy Definitions and Examples
+.
+Privacy practices may vary, for example, based on the features you use or your age.
+Learn More
+Data Not Collected
+The developer does not collect any data from this app.
+The developer,
+Simon B. Støvring
+, indicated that the app’s privacy practices may include handling of data as described below. For more information, see the
+developer’s privacy policy
+.
+Data Not Collected
+The developer does not collect any data from this app.
+Privacy practices may vary, for example, based on the features you use or your age.
+Learn More
+Accessibility
+The developer has not yet indicated which accessibility features this app supports.
+Learn More
+Information
+Seller
+Simon Stovring
+Size
+28.9 MB
+Category
+Developer Tools
+Compatibility
+Requires iOS 15.5 or later.
+iPhone
+Requires iOS 15.5 or later.
+iPad
+Requires iPadOS 15.5 or later.
+iPod&nbsp;touch
+Requires iOS 15.5 or later.
+Apple Vision
+Requires visionOS 1.0 or later.
+Languages
+English and 18 more
+English, Arabic, Danish, Dutch, Finnish, German, Hebrew, Italian, Japanese, Korean, Malay, Norwegian Bokmål, Portuguese, Russian, Simplified Chinese, Spanish, Swedish, Thai, Turkish
+Age Rating
+16+
+16+
+Learn More
+Contains
+Unrestricted Web Access
+In-App Purchases
+Yes
+Large Tip
+$4.99
+Small Tip
+$0.99
+Medium Tip
+$2.99
+Learn More
+Copyright
+© 2020 Simon B. Støvring
+Developer Website
+Privacy Policy
+More by Simon B. Støvring
+View
+Runestone Text Editor
+Edit plain text and code
+View
+Jayson
+JSON editor with Shortcuts
+View
+Data Jar
+Data Store for Shortcuts
+View
+Festivitas
+Festive lights in widgets
+View
+brrr • send push notifications
+Send pushes via webhooks
+View
+Re: Toot
+Quote posts for Mastodon
+View
+Stroke Counter for Golf
+Track strokes on your wrist
+View
+Sticky Draw
+Create your own stickers
+You Might Also Like
+View
+a-Shell mini
+*Local* Unix terminal (&amp; ssh)
+View
+Pyto IDE
+Python, C/C++
+View
+Resolutioner
+Calculate or scale resolutions
+View
+Kodex
+A powerful code editor
+View
+a-Shell
+*Local* Unix terminal (&amp; ssh)
+View
+Userscripts
+User Script and Style Manager
+View
+Textastic Code Editor
+Text, Coding, SFTP Client, SSH
+View
+Code Editor - Compiler &amp; IDE
+Programming on mobile
+View
+xTerminal - SSH Terminal Shell
+SSH Client, Shell Console Term
+View
+Python Editor App
+Create and Run your Python 3
+United States
+Español (México)
+العربية
+Русский
+简体中文
+Français (France)
+한국어
+Português (Brazil)
+Tiếng Việt
+繁體中文 (台灣)
+Select a country or region
+Africa, Middle East, and India
+See All
+Algeria
+Angola
+Armenia
+Azerbaijan
+Bahrain
+Benin
+Botswana
+Burkina Faso
+Cameroun
+Cape Verde
+Chad
+Côte d’Ivoire
+Congo, The Democratic Republic Of The
+Egypt
+Eswatini
+Gabon
+Gambia
+Ghana
+Guinea-Bissau
+India
+Iraq
+Israel
+Jordan
+Kenya
+Kuwait
+Lebanon
+Liberia
+Libya
+Madagascar
+Malawi
+Mali
+Mauritania
+Mauritius
+Morocco
+Mozambique
+Namibia
+Niger (English)
+Nigeria
+Oman
+Qatar
+Congo, Republic of
+Rwanda
+São Tomé and Príncipe
+Saudi Arabia
+Senegal
+Seychelles
+Sierra Leone
+South Africa
+Sri Lanka
+Tajikistan
+Tanzania, United Republic Of
+Tunisia
+Turkmenistan
+United Arab Emirates
+Uganda
+Yemen
+Zambia
+Zimbabwe
+Asia Pacific
+See All
+Afghanistan
+Australia
+Bhutan
+Brunei Darussalam
+Cambodia
+中国大陆
+Fiji
+香港
+Indonesia (English)
+日本
+Kazakhstan
+대한민국
+Kyrgyzstan
+Lao People's Democratic Republic
+澳門
+Malaysia (English)
+Maldives
+Micronesia, Federated States of
+Mongolia
+Myanmar
+Nauru
+Nepal
+New Zealand
+Pakistan
+Palau
+Papua New Guinea
+Philippines
+Singapore
+Solomon Islands
+台灣
+Thailand
+Tonga
+Turkmenistan
+Uzbekistan
+Vanuatu
+Vietnam
+Europe
+See All
+Albania
+Armenia
+Österreich
+Belarus
+Belgium
+Bosnia and Herzegovina
+Bulgaria
+Croatia
+Cyprus
+Czechia
+Denmark
+Estonia
+Finland
+France (Français)
+Georgia
+Deutschland
+Greece
+Hungary
+Iceland
+Ireland
+Italia
+Kosovo
+Latvia
+Lithuania
+Luxembourg (English)
+Malta
+Moldova, Republic Of
+Montenegro
+Nederland
+North Macedonia
+Norway
+Poland
+Portugal (Português)
+Romania
+Россия
+Serbia
+Slovakia
+Slovenia
+España
+Sverige
+Schweiz
+Türkiye (English)
+Ukraine
+United Kingdom
+Latin America and the Caribbean
+See All
+Anguilla
+Antigua and Barbuda
+Argentina (Español)
+Bahamas
+Barbados
+Belize
+Bermuda
+Bolivia (Español)
+Brasil
+Virgin Islands, British
+Cayman Islands
+Chile (Español)
+Colombia (Español)
+Costa Rica (Español)
+Dominica
+República Dominicana
+Ecuador (Español)
+El Salvador (Español)
+Grenada
+Guatemala (Español)
+Guyana
+Honduras (Español)
+Jamaica
+México
+Montserrat
+Nicaragua (Español)
+Panamá
+Paraguay (Español)
+Perú
+St. Kitts and Nevis
+Saint Lucia
+St. Vincent and The Grenadines
+Suriname
+Trinidad and Tobago
+Turks and Caicos
+Uruguay (English)
+Venezuela (Español)
+The United States and Canada
+See All
+Canada (English)
+Canada (Français)
+United States
+Estados Unidos (Español México)
+الولايات المتحدة
+США
+美国 (简体中文)
+États-Unis (Français France)
+미국
+Estados Unidos (Português Brasil)
+Hoa Kỳ
+美國 (繁體中文台灣)
+Copyright © 2026
+Apple Inc.
+All rights reserved.
+Internet Service Terms
+App Store &amp; Privacy
+Cookie Warning
+Support

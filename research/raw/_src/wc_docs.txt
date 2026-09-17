@@ -1,0 +1,180 @@
+Working Copy, Git on iOS
+Working Copy
+the powerful Git client for
+iOS
+that clones, edits, commits,
+pushes &amp;
+more
+.
+Sign-Up
+Working Copy for Mac is getting ready for release.
+Sign up for the launch email.
+Interested in beta version
+Cancel
+Sign Up
+Working Copy
+clones a Git repository which can then be edited
+with Textastic, previewed and committed. Next the Files app is used to open a Playground from Git.
+Git Shortcuts
+Use
+Shortcuts
+and
+x-callback-url
+for automation.
+GPT Assistance
+Code
+Agent
+&amp;
+commit suggestions
+.
+Respects your data with opt-in.
+iOS 16 capable
+Title menus and fully resizable windows in Stage Manager.
+-->
+Search repositories
+Navigate by
+querying
+filenames, symbols or text occurrences.
+Hosting Services
+Lists
+your repositories on GitHub &amp;
+many
+other services.
+Signed Commits
+Take part in secure workflows by
+signing
+commits.
+Resolve Tool
+Fix merge &amp; rebase
+conflicts
+with speed and safety.
+Signed Commits
+Take part in secure workflows by
+GPG signing
+commits.
+-->
+Large File Storage
+Use Git LFS to efficiently handle videos and other
+huge assets.
+Web IDE
+HTML
+Preview
+with Javascript console.
+Work Offline
+Clone
+repositories making them fully
+available even when offline.
+Become a tester
+Working Copy is in rapid development.
+Get
+the beta.
+Submit
+Your email address is used to send you a invitation through Apple TestFlight and
+will not be used for anything else.
+-->
+Read the
+users’ guide
+or the
+newsletter
+and get in touch
+on
+Mastodon
+or by
+email
+.
+afriendlypotato:
+Great value
+I just bought pro for the second time to pick up a few extra features. The last time I paid for Working Copy was in 2019, and it’s been continually updated and maintained that whole time.
+This guy is the real deal: you buy the app and use it for as long as you want, and if he makes more features you like you can buy pro again to get them. It’s a sustainable business model that doesn’t make me worry if I’m using it enough to justify a subscription.
+As for the app itself, having functional git on my phone is just great. If there’s an emergency or I need to dip into a project to fix something, I know I can get it done because it’s not just a cut-down mobile experience.
+Lygre421:
+Amazing mobile git client
+I’ve used this app for years with its Pro features unlocked near the beginning.
+Eventually some pro features are not unlocked with my original purchase,
+but all of the important ones are which I greatly appreciate. Just want to mention
+again how useful I find this app.
+Federico Viticci:
+Working on the iPad
+For the past two months, we've been using GitHub and Working Copy to
+share, edit, and commit changes to Markdown files; combined with Split View and document providers on iOS,
+this setup fits my workflow quite nicely.
+pixelthing:
+In a class of one
+Probably not just the best all-round git client on iOS, but the best part of your
+development toolchain of any type on iOS.
+Jason Tate:
+Incredible
+Truly one of my must have apps. The first time you use it and see what you can do on iOS now is a jaw dropping moment.
+Tohuw:
+An Astoundingly Good Git Client
+This app is an excellent Git client, and I don't mean just excellent for iOS.
+It's interface is relatively intuitive,
+my only minor complaint being that it took me a few moments to figure out that tapping the remote
+name is where to go to fetch and such. I'm sure the help covers that, but I like to see if an app
+can successfully be navigated by intuition alone – the classic Apple test. Committing and pushing works
+flawlessly, gracefully handling conflicts and merges.
+It's a joy to use. I'd buy an OS X version if one existed;
+this is a Git UI as it should be. It's remarkable that I can fully work with files, send them to other
+iOS apps to work on there, then send them back to Working Copy seamlessly, even if I'm working on
+multiple versions of the same file.
+In an era of barely-tested, poorly thought-out apps,
+this is a stellar exception of a well-designed product with distinct marks of a great QA process. Well done!
+Anthony Colangelo:
+Mission-critical software on iOS
+Absolutely incredibly well-built app that I can’t live without.
+For everything from writing, to coding, to deploying changes via a remote repo,
+Working Copy is a must-have app.
+ThinGrip:
+Excellent!
+This app is excellent, and the support from the developer is superb!
+Plavaacek:
+Best Git client!
+I use it daily to review new code in GitHub Enterprise repositories.
+The best feature for me is that I can use it offline without a need to be connected to the VPN.
+Viewing of files is easier than on GitHub thanks to better syntax highlighting.
+snhubba:
+THANK YOU
+Just thank you. I used to see my iOS devices as incapable of anything other than "emergency" edits (usually directly on a server).
+Not anymore. I can make large contributions to projects, write new features, and with the right complimentary setup,
+get near realtime feedback on my code through a test server after making a commit. So cool.
+Papiex:
+Fantastyczna
+Robi robotę
+Jonathan.Muth:
+It's Git in your pocket.
+Working Copy makes keeping track of your Git repositories a breeze.
+The app is so well designed that I prefer it over the GitHub's web-interface when familiarizing myself with a new code-base.
+And let me tell you: It works extremely well in bed as well.
+Alas: Working Copy now contains my evening lecture in addition to all the source code I would not want to go missing.
+An all around great app.
+z4ndr3i:
+Manage Git and GitHub Repos
+For those of us who don't work exclusively with GitHub this is just awesome.
+feoh:
+I have been dreaming of this app for years!
+I have been yearning for a way to commit and push to Github for years.
+The app id's solid and lets me use whatever editor I want to create my content.
+My mobile development and blogging dreams have come true!
+uxjulia:
+Finally!
+This app is EXACTLY what I've been looking for. I can easily connect to my bitbucket account,
+clone repos, commit and push changes right from my phone using third party apps that are already a part of my workflow.
+I use this with Textastic and Ulysses to post to and tweak my Jekyll blog from my iPhone and iPad, wherever I may be.
+Lift the Camel:
+Great Git App!
+This app is perfect for accessing your Git repositories on the go! It allows me to add my iPhone and iPad into my daily workflow.
+ci0:
+Perfect
+If Apple were to write a git client, it would look like this. Well done.
+meclizine50mg:
+iOS Great job, and Thank you
+Working Copy + Bitbucket repository cloning + Textastic! This significantly improves my coding
+lifestyle: I can relax with my iPad anywhere and even work on non-interface parts of iOS projects
+without screwing up version management by relying on DropBox or iCloud filesaving. So far everything is working smoothly,
+probably because the developer is an active user of this app himself.
+llllllooollllll:
+Einfach GENIAL!!!
+Bin wirklich sehr begeistert, als Programmierer kann ich geleistetes Arbeit nur loben, weiter so.
+Privacy
+Refunds
+Terms of Use

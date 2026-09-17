@@ -1,0 +1,151 @@
+A task that starts in the foreground and can continue running in the background as needed.
+class
+ 
+BGContinuedProcessingTask
+BGContinuedProcessingTask
+=== BGContinuedProcessingTask
+class
+ 
+BGContinuedProcessingTask
+Overview
+This task works with 
+.
+The system displays the progress of this task in a Live Activity and a person can cancel it through the interface if they wish.
+The system can terminate a continuous background task abruptly depending on run-time conditions, for example, under resource constraints. Your implementation needs to report progress using the 
+ protocol that this task conforms to. The system prioritizes the termination of tasks that reflect minimal or no progress, when resources become constrained.
+For more information on Continuous Background Task requests, see 
+.
+=== Inherits From
+=== Conforms To
+=== Foreground tasks with background support
+=== Titling the task
+Support background processing in your app by wrapping your app’s most critical work in framework-provided tasks.
+Background Tasks
+=== Background Tasks
+A task that starts in the foreground and can continue running in the background as needed.
+class
+ 
+BGContinuedProcessingTask
+BGContinuedProcessingTask
+=== BGContinuedProcessingTask
+The localized subtitle displayed to a person.
+var
+ 
+subtitle
+: 
+String
+subtitle
+=== subtitle
+The localized title displayed to a person.
+var
+ 
+title
+: 
+String
+title
+=== title
+Update the task title and subtitle that the system displays to a person.
+func
+ 
+updateTitle
+(
+String
+, 
+subtitle
+: 
+String
+)
+- 
+updateTitle:subtitle:
+=== updateTitle(_:subtitle:)
+A request for a workload that the system continues processing even if a person backgrounds the app.
+class
+ 
+BGContinuedProcessingTaskRequest
+BGContinuedProcessingTaskRequest
+=== BGContinuedProcessingTaskRequest
+An abstract class for the framework’s tasks.
+class
+ 
+BGTask
+BGTask
+=== BGTask
+Use a continuous background task to do work that can complete as needed.
+=== Performing long-running tasks on iOS and iPadOS
+The entitlement the system requires for a continuous background task to use the GPU.
+com.apple.developer.background-tasks.continued-processing.gpu
+=== Background GPU Access
+An interface for objects that report progress using a single progress instance.
+protocol
+ 
+ProgressReporting
+ProgressReporting
+=== ProgressReporting
+The group of methods that are fundamental to all Objective-C objects.
+protocol
+ 
+NSObjectProtocol
+NSObjectProtocol
+=== NSObjectProtocol
+A type whose instances can be encoded, and appropriately passed, as
+ 
+elements of a C 
+.
+protocol
+ 
+CVarArg
+CVarArg
+=== CVarArg
+A type with a customized textual representation suitable for debugging
+ 
+purposes.
+protocol
+ 
+CustomDebugStringConvertible
+CustomDebugStringConvertible
+=== CustomDebugStringConvertible
+A type with a customized textual representation.
+protocol
+ 
+CustomStringConvertible
+CustomStringConvertible
+=== CustomStringConvertible
+A type that can be compared for value equality.
+protocol
+ 
+Equatable
+Equatable
+=== Equatable
+A type that can be hashed into a 
+ to produce an integer hash value.
+protocol
+ 
+Hashable
+Hashable
+=== Hashable
+=== Technologies
+BGContinuedProcessingTask
+BGContinuedProcessingTask
+=== Titling the task
+=== Inherits From
+=== Conforms To
+=== Foreground tasks with background support
+@interface
+ 
+BGContinuedProcessingTask
+ : 
+BGTask
+BGContinuedProcessingTask
+BGContinuedProcessingTask
+subtitle
+title
+- 
+updateTitle:subtitle:
+BGContinuedProcessingTaskRequest
+BGContinuedProcessingTaskRequest
+BGTask
+BGTask
+NSProgressReporting
+NSProgressReporting
+NSObject
+NSObject

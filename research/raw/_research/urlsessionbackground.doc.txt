@@ -1,0 +1,156 @@
+Creates a session configuration object that allows HTTP and HTTPS uploads or downloads to be performed in the background.
+class
+ 
+func
+ 
+background
+(
+withIdentifier
+: 
+String
+) -> 
+URLSessionConfiguration
++ 
+backgroundSessionConfigurationWithIdentifier:
+=== background(withIdentifier:)
+class
+ 
+func
+ 
+background
+(
+withIdentifier
+ 
+identifier
+: 
+String
+) -> 
+URLSessionConfiguration
+The unique identifier for the configuration object. This parameter must not be 
+ or an empty string.
+Return Value
+A configuration object that causes the system to perform upload and download tasks in a separate process.
+Discussion
+Use this method to initialize a configuration object suitable for transferring data files while the app runs in the background. A session configured with this object hands control of the transfers over to the system, which handles the transfers in a separate process. In iOS, this configuration makes it possible for transfers to continue even when the app itself is suspended or terminated.
+If an iOS app is terminated by the system and relaunched, the app can use the same 
+ to create a new configuration object and session and to retrieve the status of transfers that were in progress at the time of termination. This behavior applies only for normal termination of the app by the system. If the user terminates the app from the multitasking screen, the system cancels all of the session’s background transfers. In addition, the system does not automatically relaunch apps that were force quit by the user. The user must explicitly relaunch the app before transfers can begin again.
+You can configure an background session to schedule transfers at the discretion of the system for optimal performance using the 
+ property. When transferring large amounts of data, you are encouraged to set the value of this property to 
+. For an example of using the background configuration, see 
+.
+=== Creating a session configuration object
+A Unicode string value that is a collection of characters.
+struct
+ 
+String
+String
+=== String
+A true value.
+true
+=== true
+=== Technologies
+Access essential data types, collections, and operating-system services to define the base layer of functionality for your app.
+=== Foundation
+A static, plain-text Unicode string object.
+class
+ 
+NSString
+NSString
+=== NSString
+A configuration object that defines behavior and policies for a URL session.
+class
+ 
+URLSessionConfiguration
+URLSessionConfiguration
+=== URLSessionConfiguration
+Creates a session configuration object that allows HTTP and HTTPS uploads or downloads to be performed in the background.
+class
+ 
+func
+ 
+background
+(
+withIdentifier
+: 
+String
+) -> 
+URLSessionConfiguration
++ 
+backgroundSessionConfigurationWithIdentifier:
+=== background(withIdentifier:)
+A default session configuration object.
+class
+ 
+var
+ 
+`default`
+: 
+URLSessionConfiguration
+defaultSessionConfiguration
+=== default
+A session configuration that uses no persistent storage for caches, cookies, or credentials.
+class
+ 
+var
+ 
+ephemeral
+: 
+URLSessionConfiguration
+ephemeralSessionConfiguration
+=== ephemeral
+Creates an empty session configuration.
+init
+()
+- 
+init
+=== init()
+A Boolean value that determines whether background tasks can be scheduled at the discretion of the system for optimal performance.
+var
+ 
+isDiscretionary
+: 
+Bool
+discretionary
+=== isDiscretionary
+Creates an empty session configuration.
+class
+ 
+func
+ 
+new
+() -> 
+Self
++ 
+new
+=== new()
+Create tasks that download files while your app is inactive.
+=== Downloading files in the background
++ 
+backgroundSessionConfigurationWithIdentifier:
+=== Creating a session configuration object
++ (
+NSURLSessionConfiguration
+ *) 
+backgroundSessionConfigurationWithIdentifier:
+(
+NSString
+ *) 
+identifier
+;
+The unique identifier for the configuration object. This parameter must not be 
+ or an empty string.
+Return Value
+A configuration object that causes the system to perform upload and download tasks in a separate process.
+NSString
+NSString
+NSURLSessionConfiguration
+NSURLSessionConfiguration
++ 
+backgroundSessionConfigurationWithIdentifier:
+defaultSessionConfiguration
+ephemeralSessionConfiguration
+- 
+init
+discretionary
++ 
+new

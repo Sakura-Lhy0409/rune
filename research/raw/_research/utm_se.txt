@@ -1,0 +1,34 @@
+ 
+UTM 
+UTM
+FAQ 
+Gallery 
+User Guide 
+Install 
+UTM
+Run virtual machines on iOS
+Emulate any Processor
+30+ processors supported by qemu including x86_64, ARM64, and RISC-V
+Run any Operating System
+Windows, Linux, and more natively and securely on iOS within an App
+Fast Emulation
+Para-virtualization with SPICE and JIT compilation with TCG
+High Compatibility
+iOS 11+ supported. Works on iPhone and iPad. No jailbreak needed for iOS 11-13
+Free and Open Source
+UTM and its dependencies are all free and open source
+Easy to Use
+Configure and customize your VM in a native UI
+Console Mode
+Run headless server VMs in a native terminal
+Sharing
+Shared directory, clipboard, and port forwarding
+Multiple Inputs
+Support external keyboards, mouse, touchpads, Apple Pencil, and controllers
+FAQ 
+Gallery 
+User Guide 
+Install 
+License 
+Privacy Policy 
+

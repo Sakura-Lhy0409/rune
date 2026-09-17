@@ -1,0 +1,519 @@
+The details of your app-specific content that someone might search
+ 
+for on their devices.
+class
+ 
+CSSearchableItem
+CSSearchableItem
+=== CSSearchableItem
+class
+ 
+CSSearchableItem
+Overview
+A 
+ uniquely identifies a part of your app’s
+ 
+content, and provides the metadata that Spotlight indexes and uses
+ 
+to find that content later. As part of indexing your app’s content,
+ 
+you create searchable items and fill them with details about your
+ 
+app’s content and where to find it. After indexing the content, you
+ 
+can then execute queries using the Core Spotlight APIs to find the
+ 
+items you indexed. People can also use the system’s Spotlight search
+ 
+interface to find your app’s content.
+When you create or update content in your app, create a 
+
+ 
+for that content if you want it to be searchable. A searchable item
+ 
+contains identification strings you use to locate that item in your
+ 
+content and a 
+ object with details about
+ 
+the item. For the metadata, you typically want to provide values for
+ 
+the 
+, 
+,
+ 
+and 
+ attributes at a minimum.
+ 
+If you’re indexing a file on disk, provide a value for the 
+
+ 
+attribute. Fill in as many other attributes as makes sense for the content
+ 
+you’re indexing.
+After creating a searchable item, index it using a 
+
+ 
+object. As you update your app’s content, update your 
+
+ 
+objects for that content and index them right away. If you delete content,
+ 
+similarly delete the searchable items from the index. Keeping your app’s
+ 
+indexes current ensures that searches return valid information. For more
+ 
+information on indexing your content, see 
+.
+=== Inherits From
+=== Conforms To
+=== Searchable items
+=== Getting a searchable item
+=== Setting attributes on a searchable item
+=== Continuing a search or activity
+=== Comparing items
+=== Associating an entity with an item
+Add search capabilities to your app, and index your content so
+ 
+people can find it from Spotlight and Safari.
+Core Spotlight
+=== Core Spotlight
+A key associated with a custom attribute for a searchable item.
+class
+ 
+CSCustomAttributeKey
+CSCustomAttributeKey
+=== CSCustomAttributeKey
+An object that displays localized text in search results related to your app.
+class
+ 
+CSLocalizedString
+CSLocalizedString
+=== CSLocalizedString
+An object that represents a person in the context of search results.
+class
+ 
+CSPerson
+CSPerson
+=== CSPerson
+Indicates that the activity type to continue is a search or query.
+let
+ 
+CSQueryContinuationActionType
+: 
+String
+CSQueryContinuationActionType
+=== CSQueryContinuationActionType
+Provides the key for the current query in the info dictionary of the user activity object.
+let
+ 
+CSSearchQueryString
+: 
+String
+CSSearchQueryString
+=== CSSearchQueryString
+An on-device index for your app’s searchable content.
+class
+ 
+CSSearchableIndex
+CSSearchableIndex
+=== CSSearchableIndex
+The details of your app-specific content that someone might search
+ 
+for on their devices.
+class
+ 
+CSSearchableItem
+CSSearchableItem
+=== CSSearchableItem
+The options to generate summarization or prioritization information for a searchable item.
+struct
+ 
+UpdateListenerOptions
+UpdateListenerOptions
+=== CSSearchableItem.UpdateListenerOptions
+Associates an app entity with this searchable item. Resolves deferred properties before association.
+func
+ 
+associateAppEntity
+(
+some
+ 
+IndexedEntity
+, 
+priority
+: 
+Int
+) 
+async
+=== associateAppEntity(_:priority:)
+Associates an app entity with this searchable item.
+func
+ 
+associateAppEntity
+(
+some
+ 
+IndexedEntity
+, 
+priority
+: 
+Int
+)
+=== associateAppEntity(_:priority:)
+The set of attributes that contain metadata associated with the item in a 
+ object.
+var
+ 
+attributeSet
+: 
+CSSearchableItemAttributeSet
+attributeSet
+=== attributeSet
+Compares two items by rank and returns the result.
+func
+ 
+compare
+(
+byRank
+: 
+CSSearchableItem
+) -> 
+ComparisonResult
+- 
+compareByRank:
+=== compare(byRank:)
+An optional identifier that represents the domain or owner of the item.
+var
+ 
+domainIdentifier
+: 
+String
+?
+domainIdentifier
+=== domainIdentifier
+The date after which the searchable item should no longer exist.
+var
+ 
+expirationDate
+: 
+Date
+!
+expirationDate
+=== expirationDate
+Initializes a new searchable item with the relevant fields populated from the provided app entity.
+ 
+Resolves deferred properties before indexing.
+convenience
+ 
+init
+(
+appEntity
+: 
+some
+ 
+IndexedEntity
+) 
+async
+=== init(appEntity:)
+Initializes a new searchable item with the relevant fields populated from the provided app entity.
+convenience
+ 
+init
+(
+appEntity
+: 
+some
+ 
+IndexedEntity
+)
+=== init(appEntity:)
+Initializes a new searchable item with the relevant fields populated from the provided app entity.
+convenience
+ 
+init
+<
+Entity
+>(
+appEntity
+: 
+Entity
+, 
+priority
+: 
+Int
+)
+=== init(appEntity:priority:)
+Initializes a new searchable item with the relevant fields populated from the provided app entity.
+ 
+Resolves deferred properties before indexing.
+convenience
+ 
+init
+<
+Entity
+>(
+appEntity
+: 
+Entity
+, 
+priority
+: 
+Int
+) 
+async
+=== init(appEntity:priority:)
+init
+?(
+coder
+: 
+NSCoder
+)
+=== init(coder:)
+Returns a searchable item associated with the specified identifier, domain identifier, and attribute set.
+init
+(
+uniqueIdentifier
+: 
+String
+?, 
+domainIdentifier
+: 
+String
+?, 
+attributeSet
+: 
+CSSearchableItemAttributeSet
+)
+- 
+initWithUniqueIdentifier:domainIdentifier:attributeSet:
+=== init(uniqueIdentifier:domainIdentifier:attributeSet:)
+A Boolean value that indicates whether to treat the item as an
+ 
+update instead of a new item.
+var
+ 
+isUpdate
+: 
+Bool
+isUpdate
+=== isUpdate
+The identifier of the related indexed entity for this searchable item.
+var
+ 
+relatedAppEntityIdentifier
+: 
+EntityIdentifier
+?
+=== relatedAppEntityIdentifier
+The value that uniquely identifies the searchable item within your app.
+var
+ 
+uniqueIdentifier
+: 
+String
+uniqueIdentifier
+=== uniqueIdentifier
+The types of notifications to request from Spotlight.
+var
+ 
+updateListenerOptions
+: 
+CSSearchableItem
+.
+UpdateListenerOptions
+updateListenerOptions
+=== updateListenerOptions
+Indicates that the activity type to continue is related to a searchable item.
+let
+ 
+CSSearchableItemActionType
+: 
+String
+CSSearchableItemActionType
+=== CSSearchableItemActionType
+The key you use to access a searchable item in a user activity object.
+let
+ 
+CSSearchableItemActivityIdentifier
+: 
+String
+CSSearchableItemActivityIdentifier
+=== CSSearchableItemActivityIdentifier
+The detailed metadata for a searchable item.
+class
+ 
+CSSearchableItemAttributeSet
+CSSearchableItemAttributeSet
+=== CSSearchableItemAttributeSet
+The uniform type identifier (UTI) of the item.
+var
+ 
+contentType
+: 
+String
+?
+contentType
+=== contentType
+The file URL of the content to index.
+var
+ 
+contentURL
+: 
+URL
+?
+contentURL
+=== contentURL
+A localized string that contains the name of the item, suitable to display in the user interface.
+var
+ 
+displayName
+: 
+String
+?
+displayName
+=== displayName
+The title of the item.
+var
+ 
+title
+: 
+String
+?
+title
+=== title
+Create a description for your app’s content and add it to a Spotlight
+ 
+index to make it searchable.
+=== Adding your app’s content to Spotlight indexes
+Summarize mail, message, and audio transcripts or assess the priority of mail and messages
+ 
+using Spotlight and Apple Intelligence.
+=== Generating summary and priority data for indexed items
+Make the content you index for Spotlight available to Foundation models to help
+ 
+generate responses to prompts.
+=== Making your indexed content available to Foundation Models
+Search for app-specific content and refine search results using
+ 
+predicates and filters.
+=== Searching for information in your app
+A protocol that enables an object to be encoded and decoded for archiving and distribution.
+protocol
+ 
+NSCoding
+NSCoding
+=== NSCoding
+A protocol that objects adopt to provide functional copies of themselves.
+protocol
+ 
+NSCopying
+NSCopying
+=== NSCopying
+A protocol that enables encoding and decoding in a manner that is robust against object substitution attacks.
+protocol
+ 
+NSSecureCoding
+NSSecureCoding
+=== NSSecureCoding
+The root class of most Objective-C class hierarchies, from which subclasses inherit a basic interface to the runtime system and the ability to behave as Objective-C objects.
+class
+ 
+NSObject
+NSObject
+=== NSObject
+The group of methods that are fundamental to all Objective-C objects.
+protocol
+ 
+NSObjectProtocol
+NSObjectProtocol
+=== NSObjectProtocol
+A type whose instances can be encoded, and appropriately passed, as
+ 
+elements of a C 
+.
+protocol
+ 
+CVarArg
+CVarArg
+=== CVarArg
+A type with a customized textual representation suitable for debugging
+ 
+purposes.
+protocol
+ 
+CustomDebugStringConvertible
+CustomDebugStringConvertible
+=== CustomDebugStringConvertible
+A type with a customized textual representation.
+protocol
+ 
+CustomStringConvertible
+CustomStringConvertible
+=== CustomStringConvertible
+A type that can be compared for value equality.
+protocol
+ 
+Equatable
+Equatable
+=== Equatable
+A type that can be hashed into a 
+ to produce an integer hash value.
+protocol
+ 
+Hashable
+Hashable
+=== Hashable
+=== Technologies
+CSSearchableItem
+CSSearchableItem
+=== Getting a searchable item
+=== Setting attributes on a searchable item
+=== Continuing a search or activity
+=== Comparing items
+=== Inherits From
+=== Conforms To
+=== Searchable items
+@interface
+ 
+CSSearchableItem
+ : 
+NSObject
+CSCustomAttributeKey
+CSCustomAttributeKey
+CSLocalizedString
+CSLocalizedString
+CSPerson
+CSPerson
+CSQueryContinuationActionType
+CSSearchQueryString
+CSSearchableIndex
+CSSearchableIndex
+CSSearchableItem
+CSSearchableItem
+CSSearchableItemUpdateListenerOptions
+CSSearchableItemUpdateListenerOptions
+attributeSet
+- 
+compareByRank:
+domainIdentifier
+expirationDate
+- 
+initWithUniqueIdentifier:domainIdentifier:attributeSet:
+isUpdate
+uniqueIdentifier
+updateListenerOptions
+CSSearchableItemActionType
+CSSearchableItemActivityIdentifier
+CSSearchableItemAttributeSet
+CSSearchableItemAttributeSet
+contentType
+contentURL
+displayName
+title
+NSCoding
+NSCopying
+NSSecureCoding
+NSObject
+NSObject
+NSObject

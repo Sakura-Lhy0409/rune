@@ -1,0 +1,494 @@
+ 
+WWDC26 - Videos - Apple Developer 
+View in English 
+Apple Developer 
+Get Started 
+Explore Get Started
+Overview 
+Learn 
+Apple Developer Program 
+Stay Updated
+Latest News 
+Hello Developer 
+Platforms 
+Explore Platforms
+Apple Platforms 
+iOS 
+iPadOS 
+macOS 
+tvOS 
+visionOS 
+watchOS 
+App Store 
+Featured
+Design 
+Distribution 
+Games 
+Accessories 
+Web 
+Home 
+CarPlay 
+Technologies 
+Explore Technologies
+Overview 
+Xcode 
+Swift 
+SwiftUI 
+Featured
+Accessibility 
+AI & Machine Learning 
+App Intents 
+Apple Intelligence 
+Games 
+Security 
+Xcode Cloud 
+Community 
+Explore Community
+Overview 
+Meet with Apple events 
+Community events 
+Developer Forums 
+Open Source 
+Featured
+WWDC 
+Swift Student Challenge 
+Developer Stories 
+App Store Awards 
+Apple Design Awards 
+Apple Developer Centers 
+Documentation 
+Explore Documentation
+Documentation Library 
+Technology Overviews 
+Sample Code 
+Human Interface Guidelines 
+Videos 
+Release Notes
+Featured Updates 
+iOS 
+iPadOS 
+macOS 
+watchOS 
+visionOS 
+tvOS 
+Xcode 
+Downloads 
+Explore Downloads
+All Downloads 
+Operating Systems 
+Applications 
+Design Resources 
+Featured
+Xcode 
+TestFlight 
+Fonts 
+SF Symbols 
+Icon Composer 
+Support 
+Explore Support
+Overview 
+Help Guides 
+Developer Forums 
+Feedback Assistant 
+Contact Us 
+Featured
+Account Help 
+App Review Guidelines 
+App Store Connect Help 
+Upcoming Requirements 
+Agreements and Guidelines 
+System Status 
+Quick Links
+Events 
+News 
+Forums 
+Sample Code 
+Videos 
+-->
+Videos 
+Open Menu 
+Close Menu 
+Collections 
+All Videos 
+About 
+WWDC26
+Filter by keywords 
+No filters applied 
+Clear filters 
+Filter videos
+76:14 
+Keynote
+76:14 
+Keynote (ASL)
+61:38 
+Platforms State of the Union
+61:38 
+Platforms State of the Union (ASL)
+4:32 
+WWDC26 Platforms State of the Union Recap
+1:24 
+Get ready for WWDC26
+1:31 
+Announcing Apple’s next big step for Siri and iPhone
+17:45 
+Best practices for integrating visual intelligence in your app
+20:41 
+Bring an LLM provider to the Foundation Models framework
+27:54 
+Bringing Cyberpunk 2077 to Mac
+25:20 
+Build a responsive camera app that launches quickly
+21:43 
+Build agentic app experiences with the Foundation Models framework
+16:36 
+Build AI-powered scripts with the fm CLI and Python SDK
+27:23 
+Build intelligent Siri experiences with App Schemas
+16:23 
+Build live production tools for Apple Immersive Video
+32:35 
+Build next-generation experiences with visionOS 27
+24:25 
+Build real-time apps and services with gRPC and Swift
+22:16 
+Build real-time neural rendering pipelines with Metal
+10:58 
+Build with the new Apple Foundation Model on Private Cloud Compute
+13:49 
+Build, deliver, and automate with Xcode Cloud
+22:35 
+Code-along: Add persistence with SwiftData
+15:21 
+Code-along: Build powerful drag and drop in SwiftUI
+24:20 
+Code-along: Make your app available to Siri
+25:16 
+Collaborate on structured 3D models in visionOS
+17:26 
+Communicate your brand identity on iOS
+17:55 
+Compose advanced graphics effects with SwiftUI
+15:04 
+Craft clear names for features and labels in your app
+14:11 
+Create high-quality images using Image Playground
+17:18 
+Create live communication experiences
+21:28 
+Create robust evaluations for agentic apps
+18:11 
+Create UI prototypes using agents in Xcode
+26:42 
+Create web extensions for Safari
+14:20 
+Debug and profile agentic app experiences with Instruments
+12:15 
+Deliver workout insights with HealthKit workout zones
+15:58 
+Design immersive environments for visionOS apps and the spatial web
+16:17 
+Design intuitive search experiences
+18:53 
+Design no-code games with Reality Composer Pro 3
+11:07 
+Discover container machines
+11:00 
+Discover generated subtitles and subtitle styles
+18:02 
+Discover new capabilities in the App Intents framework
+14:45 
+Discover the Spatial Preview framework
+14:33 
+Discover USDKit and what’s new in OpenUSD
+29:21 
+Dive into Core AI model authoring and optimization
+21:10 
+Dive into lazy stacks and scrolling with SwiftUI
+23:46 
+Elevate your app’s text experience with TextKit
+16:28 
+Enhance RAW image processing with Core Image
+20:00 
+Enhance the accessibility of your reading app
+8:14 
+Enhance your presence on the App Store
+20:29 
+Expand the capabilities of your Virtualization app
+24:08 
+Explore advanced App Intents features for Siri and Apple Intelligence
+23:51 
+Explore advances in RealityKit
+22:06 
+Explore distributed inference and training with MLX
+14:05 
+Explore enhancements to visionOS object tracking
+19:09 
+Explore immersive website environments in visionOS
+14:31 
+Explore numerical computing in Swift with MLX
+15:10 
+Explore Retention Messaging in App Store Connect
+22:02 
+Extend Reality Composer Pro 3 functionality with Xcode
+21:01 
+Find and fix performance issues in your Metal games
+8:12 
+Find your accessory with Bluetooth Channel Sounding
+15:52 
+Get started with the HTML Model Element
+17:09 
+Get the most out of Device Hub
+17:58 
+Implement high resolution photo capture
+26:41 
+Improve your prompts by hill-climbing with Evaluations
+21:06 
+Integrate MusicKit into your app
+23:44 
+Integrate on-device AI models into your app using Core AI
+16:44 
+Iterate your spatial scenes faster with Reality Composer Pro 3
+10:25 
+Learn CSS Grid Lanes
+15:16 
+Live Activities essentials
+16:25 
+LLM search using Core Spotlight
+24:23 
+Make your game great with touch
+20:43 
+Meet Core AI
+25:46 
+Meet the Evaluations framework
+16:40 
+Meet the Music Understanding framework
+17:43 
+Meet the new MetricKit
+12:36 
+Meet the Now Playing framework
+13:57 
+Meet Trust Insights
+21:25 
+Migrate to Swift Testing
+18:01 
+Modernize your AppKit app
+16:03 
+Modernize your UIKit app
+7:56 
+Offer subscriptions to groups and organizations
+16:13 
+Optimize custom machine learning operations with Metal tensors
+10:08 
+Prepare your tvOS apps for Dynamic Type
+17:16 
+Principles of great design
+26:43 
+Profile, fix, and verify: Improve app responsiveness with Instruments
+15:10 
+Read between the strokes with PencilKit
+9:30 
+Rediscover the HTML select element
+16:25 
+Refine accessibility for custom controls
+16:20 
+Rev up your CarPlay app
+13:37 
+Run local agentic AI on the Mac using MLX
+25:12 
+Secure your app: mitigate risks to agentic features
+20:02 
+Secure your apps with App Attest
+28:00 
+Speedrun your game port with agentic coding
+21:52 
+Supercharge your spatial workflows with Reality Composer Pro 3
+17:44 
+Support the Center Stage front camera in your iOS app
+14:52 
+Translate your app using agents in Xcode
+9:59 
+Unlock in-game content with StoreKit and Background Assets
+7:39 
+Unwrap PaperKit
+14:22 
+Use foveated streaming to bring immersive content to visionOS
+14:03 
+Use SwiftUI with AppKit and UIKit
+25:57 
+Validate your App Intents adoption with AppIntentsTesting
+13:26 
+What’s new in Apple In-App Purchase
+14:01 
+What’s new in assessment on macOS
+15:46 
+What’s new in image understanding
+23:02 
+What’s new in managing Apple devices
+11:02 
+What’s new in Shortcuts
+32:45 
+What’s new in Swift
+12:53 
+What’s new in SwiftData
+28:15 
+What’s new in SwiftUI
+21:13 
+What’s new in the Foundation Models framework
+15:49 
+What’s new in Wallet
+16:32 
+What’s new in WebKit for Safari 27
+28:00 
+What’s new in Xcode 27
+20:20 
+WidgetKit foundations
+24:03 
+Xcode, agents, and you
+5:52 
+Dub Dub Daily: Day 2
+61:10 
+SwiftUI for Beginners Group Lab
+61:05 
+Power and Performance Group Lab
+61:17 
+Swift Group Lab
+63:26 
+visionOS Group Lab
+60:41 
+Accessibility Technologies Group Lab
+62:29 
+Coding Intelligence, Machine Learning & AI Group Lab
+6:07 
+Dub Dub Daily: Day 3
+60:58 
+SwiftUI Group Lab
+61:39 
+Icon Composer for Beginners Group Lab
+59:40 
+Camera and Photo Technologies Group Lab
+61:48 
+Privacy and Security Group Lab
+64:27 
+Safari and Web Technologies Group Lab
+6:37 
+Dub Dub Daily: Day 4
+63:55 
+Apple Intelligence Group Lab
+62:02 
+Coding Intelligence for Beginners Group Lab
+61:43 
+Xcode Tips and Tricks Group Lab
+60:15 
+watchOS Group Lab
+62:05 
+App Store Connect Group Lab
+62:45 
+SwiftUI Group Lab 
+7:40 
+Dub Dub Daily: Day 5
+62:41 
+Machine Learning & AI Group Lab
+61:30 
+SwiftData Group Lab
+87:52 
+Inside Apple Intelligence and Xcode: Special Presentation
+No video found.
+Developer Footer
+Videos 
+WWDC26
+Platforms
+Open Menu 
+ Close Menu 
+iOS 
+iPadOS 
+macOS 
+tvOS 
+visionOS 
+watchOS 
+App Store 
+Tools
+Open Menu 
+ Close Menu 
+Swift 
+SwiftUI 
+Swift Playground 
+TestFlight 
+Xcode 
+Xcode Cloud 
+Icon Composer 
+SF Symbols 
+Technologies
+Open Menu 
+ Close Menu 
+Accessibility 
+Accessories 
+AI & Machine Learning 
+Apple Intelligence 
+Audio & Video 
+Augmented Reality 
+Business 
+Design 
+Distribution 
+Education 
+Games 
+Health & Fitness 
+In-App Purchase 
+Localization 
+Maps & Location 
+Security 
+Safari & Web 
+Resources
+Open Menu 
+ Close Menu 
+Documentation 
+Downloads 
+Sample Code 
+Videos 
+Documentation Archive 
+Support
+Open Menu 
+ Close Menu 
+Help Guides & Articles 
+Contact Us 
+Forums 
+Feedback & Bug Reporting 
+System Status 
+Account
+Open Menu 
+ Close Menu 
+Apple Developer 
+App Store Connect 
+Certificates, IDs, & Profiles 
+Feedback Assistant 
+Programs
+Open Menu 
+ Close Menu 
+Apple Developer Program 
+Apple Developer Enterprise Program 
+App Store Small Business Program 
+MFi Program 
+Mini Apps Partner Program 
+News Partner Program 
+Video Partner Program 
+Security Bounty Program 
+Security Research Device Program 
+Events
+Open Menu 
+ Close Menu 
+Meet with Apple 
+Apple Developer Centers 
+App Store Awards 
+Apple Design Awards 
+Apple Developer Academies 
+WWDC 
+Read the latest news .
+ Get the Apple Developer app .
+ Follow us on bilibili , LinkedIn , WeChat , and YouTube .
+Light
+Dark
+Auto
+Copyright © 2026 Apple Inc. All rights reserved.
+Terms of Use 
+ Privacy Policy 
+ Agreements and Guidelines 
+

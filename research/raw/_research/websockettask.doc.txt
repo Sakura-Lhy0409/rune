@@ -1,0 +1,383 @@
+A URL session task that communicates over the WebSockets protocol standard.
+class
+ 
+URLSessionWebSocketTask
+URLSessionWebSocketTask
+=== URLSessionWebSocketTask
+class
+ 
+URLSessionWebSocketTask
+Overview
+ is a concrete subclass of 
+ that provides a message-oriented transport protocol over TCP and TLS in the form of WebSocket framing. It follows the WebSocket Protocol defined in 
+.
+You create a 
+ with either a 
+ or 
+ URL. When creating the task, you can also provide a list of protocols to advertise during the handshake phase. Once the handshake completes, your app receives notifications through the session’s 
+.
+You send data with 
+ and receive data with 
+. The task performs reads and writes asynchronously, and allows you to send and receive messages that contain both binary frames and UTF-8 encoded text frames. The task enqueues any reads or writes you perform prior to the handshake’s completion, and executes them after the handshake completes.
+ supports redirection and authentication like other types of tasks do, using the methods in 
+. The WebSocket task calls the redirection and authentication delegate methods prior to completing the handshake. The WebSocket task also supports cookies, by storing cookies to the session configuration’s 
+, and attaches cookies to outgoing HTTP handshake requests.
+
+ 
+watchOS supports 
+ for specific use cases. For more details, see 
+.
+=== Inherits From
+=== Conforms To
+=== Adding WebSocket tasks to a session
+=== Sending and receiving data
+=== Sending ping frames
+=== Closing the connection
+=== Instance Methods
+The group of methods that are fundamental to all Objective-C objects.
+protocol
+ 
+NSObjectProtocol
+NSObjectProtocol
+=== NSObjectProtocol
+A type whose instances can be encoded, and appropriately passed, as
+ 
+elements of a C 
+.
+protocol
+ 
+CVarArg
+CVarArg
+=== CVarArg
+A type with a customized textual representation suitable for debugging
+ 
+purposes.
+protocol
+ 
+CustomDebugStringConvertible
+CustomDebugStringConvertible
+=== CustomDebugStringConvertible
+A type with a customized textual representation.
+protocol
+ 
+CustomStringConvertible
+CustomStringConvertible
+=== CustomStringConvertible
+A type that can be compared for value equality.
+protocol
+ 
+Equatable
+Equatable
+=== Equatable
+A type that can be hashed into a 
+ to produce an integer hash value.
+protocol
+ 
+Hashable
+Hashable
+=== Hashable
+A thread-safe type whose values can be shared across arbitrary concurrent
+ 
+contexts without introducing a risk of data races.
+protocol
+ 
+Sendable
+Sendable
+=== Sendable
+A type whose metatype can be shared across arbitrary isolation domains
+ 
+without introducing a risk of data races.
+protocol
+ 
+SendableMetatype
+SendableMetatype
+=== SendableMetatype
+Learn about the supported use cases for low-level networking on watchOS.
+=== TN3135: Low-level networking on watchOS
+=== Technologies
+Access essential data types, collections, and operating-system services to define the base layer of functionality for your app.
+=== Foundation
+A protocol that objects adopt to provide functional copies of themselves.
+protocol
+ 
+NSCopying
+NSCopying
+=== NSCopying
+NSURLSessionWebSocketMessage
+=== NSURLSessionWebSocketMessage
+An enumeration of the types of messages sent and received.
+NSURLSessionWebSocketMessageType
+=== NSURLSessionWebSocketMessageType
+Reads a WebSocket message once all the frames of the message are available.
+- 
+receiveMessageWithCompletionHandler:
+=== receiveMessageWithCompletionHandler:
+Sends a WebSocket message, receiving the result in a completion handler.
+- 
+sendMessage:completionHandler:
+=== sendMessage:completionHandler:
+An interface for objects that report progress using a single progress instance.
+protocol
+ 
+ProgressReporting
+ProgressReporting
+=== ProgressReporting
+The delegate assigned when this object was created.
+var
+ 
+delegate
+: (any 
+URLSessionDelegate
+)?
+delegate
+=== delegate
+Creates a WebSocket task for the provided URL.
+func
+ 
+webSocketTask
+(
+with
+: 
+URL
+) -> 
+URLSessionWebSocketTask
+- 
+webSocketTaskWithURL:
+=== webSocketTask(with:)
+Creates a WebSocket task for the provided URL request.
+func
+ 
+webSocketTask
+(
+with
+: 
+URLRequest
+) -> 
+URLSessionWebSocketTask
+- 
+webSocketTaskWithRequest:
+=== webSocketTask(with:)
+Creates a WebSocket task given a URL and an array of protocols.
+func
+ 
+webSocketTask
+(
+with
+: 
+URL
+, 
+protocols
+: [
+String
+]) -> 
+URLSessionWebSocketTask
+- 
+webSocketTaskWithURL:protocols:
+=== webSocketTask(with:protocols:)
+The cookie store for storing cookies within this session.
+var
+ 
+httpCookieStorage
+: 
+HTTPCookieStorage
+?
+HTTPCookieStorage
+=== httpCookieStorage
+A task, like downloading a specific resource, performed in a URL session.
+class
+ 
+URLSessionTask
+URLSessionTask
+=== URLSessionTask
+A protocol that defines methods that URL session instances call on their delegates to handle task-level events.
+protocol
+ 
+URLSessionTaskDelegate
+URLSessionTaskDelegate
+=== URLSessionTaskDelegate
+A protocol that defines methods that URL session instances call on their delegates to handle task-level events specific to WebSocket tasks.
+protocol
+ 
+URLSessionWebSocketDelegate
+URLSessionWebSocketDelegate
+=== URLSessionWebSocketDelegate
+A URL session task that communicates over the WebSockets protocol standard.
+class
+ 
+URLSessionWebSocketTask
+URLSessionWebSocketTask
+=== URLSessionWebSocketTask
+A code that indicates why a WebSocket connection closed.
+enum
+ 
+CloseCode
+CloseCode
+=== URLSessionWebSocketTask.CloseCode
+An enumeration of the types of messages sent and received.
+enum
+ 
+Message
+Message
+=== URLSessionWebSocketTask.Message
+Sends a close frame with the given close code and optional close reason.
+func
+ 
+cancel
+(
+with
+: 
+URLSessionWebSocketTask
+.
+CloseCode
+, 
+reason
+: 
+Data
+?)
+- 
+cancelWithCloseCode:reason:
+=== cancel(with:reason:)
+A code that indicates the reason a connection closed.
+var
+ 
+closeCode
+: 
+URLSessionWebSocketTask
+.
+CloseCode
+closeCode
+=== closeCode
+A block of data that provides further information about why a connection closed.
+var
+ 
+closeReason
+: 
+Data
+?
+closeReason
+=== closeReason
+The maximum number of bytes to buffer before the receive call fails with an error.
+var
+ 
+maximumMessageSize
+: 
+Int
+maximumMessageSize
+=== maximumMessageSize
+func
+ 
+receive
+() 
+async
+ 
+throws
+ -> 
+URLSessionWebSocketTask
+.
+Message
+=== receive()
+Reads a WebSocket message once all the frames of the message are available.
+func
+ 
+receive
+(
+completionHandler
+: (
+Result
+<
+URLSessionWebSocketTask
+.
+Message
+, any 
+Error
+>) -> 
+Void
+)
+=== receive(completionHandler:)
+func
+ 
+send
+(
+URLSessionWebSocketTask
+.
+Message
+) 
+async
+ 
+throws
+=== send(_:)
+Sends a WebSocket message, receiving the result in a completion handler.
+func
+ 
+send
+(
+URLSessionWebSocketTask
+.
+Message
+, 
+completionHandler
+: ((any 
+Error
+)?) -> 
+Void
+)
+=== send(_:completionHandler:)
+Sends a ping frame from the client side, with a closure to receive the pong from the server endpoint.
+func
+ 
+sendPing
+(
+pongReceiveHandler
+: ((any 
+Error
+)?) -> 
+Void
+)
+- 
+sendPingWithPongReceiveHandler:
+=== sendPing(pongReceiveHandler:)
+=== RFC 6455
+RFC 6455
+NSURLSessionWebSocketTask
+NSURLSessionWebSocketTask
+=== Sending and receiving data
+=== Sending ping frames
+=== Closing the connection
+=== Inherits From
+=== Adding WebSocket tasks to a session
+@interface
+ 
+NSURLSessionWebSocketTask
+ : 
+NSURLSessionTask
+NSObject
+NSObject
+NSCopying
+NSCopying
+NSProgressReporting
+NSProgressReporting
+delegate
+- 
+webSocketTaskWithURL:
+- 
+webSocketTaskWithRequest:
+- 
+webSocketTaskWithURL:protocols:
+HTTPCookieStorage
+NSURLSessionTask
+NSURLSessionTask
+NSURLSessionTaskDelegate
+NSURLSessionTaskDelegate
+NSURLSessionWebSocketDelegate
+NSURLSessionWebSocketDelegate
+NSURLSessionWebSocketTask
+NSURLSessionWebSocketTask
+NSURLSessionWebSocketCloseCode
+NSURLSessionWebSocketCloseCode
+- 
+cancelWithCloseCode:reason:
+closeCode
+closeReason
+maximumMessageSize
+- 
+sendPingWithPongReceiveHandler:

@@ -1,0 +1,62 @@
+Share live updates from your app as Live Activities on iPhone, iPad, Apple Watch, and the Mac.
+=== ActivityKit
+Overview
+With the ActivityKit framework, you can start a Live Activity to share live updates from your app. Live Activities offer a rich, interactive, and highly glanceable way for people to keep track of an event or activity over several hours, especially for apps that push the limit of notifications to provide updated information. For example, a sports app might start a Live Activity that makes live information available at a glance for the duration of a game.
+A Live Activity appears in highly visible contexts:
+On iPad and iPhone, it appears on the Lock Screen, in the Dynamic Island, and on the Home Screen.
+On Apple Watch, it appears in the Smart Stack.
+On Mac, it appears in the Menu bar.
+In CarPlay, it appears on the Home Screen.
+In addition to viewing real-time information, people perform essential functionality without launching your app using buttons or toggles included in a Live Activity layout or tap the Live Activity to launch the app to a scene that matches the activity’s content.
+In your app, use ActivityKit to configure, start, update, and end the Live Activity, and create the user interface of your Live Activities with a widget extension, 
+, and 
+. By using SwiftUI and WidgetKit, you can share code between widgets and Live Activities or develop them in tandem.
+However, Live Activities use a different mechanism to receive updates compared to widgets. Instead of using a timeline mechanism, Live Activities receive updated data from your app with ActivityKit and from your server with ActivityKit push notifications, and you can start Live Activities with ActivityKit push notifications.
+visionOS doesn’t support Live Activities. Requests to start a Live Activity from a compatible iPad or iPhone app fail.
+=== Essentials
+=== Starting a Live Activity
+=== User interface
+=== Widget ecosystem
+Share live updates from your app as Live Activities on iPhone, iPad, Apple Watch, and the Mac.
+=== ActivityKit
+The object you use to start, update, and end a Live Activity.
+class
+ 
+Activity
+Activity
+=== Activity
+Describe the interface elements of your widgets and Live Activities to help people understand what they represent.
+=== Adding accessible descriptions to widgets and Live Activities
+Create reusable custom views and layouts that support each Live Activity presentation.
+=== Creating custom views for Live Activities
+Display up-to-date data and offer quick interactions in the Dynamic Island, on the Lock Screen, in CarPlay, and on a paired Mac or Apple Watch.
+=== Displaying live data with Live Activities
+Use deep links to enable people to open your app’s scene that matches the data of you Live Activity.
+=== Launching your app from a Live Activity
+Use ActivityKit to receive push tokens and to remotely start, update, and end your Live Activity with ActivityKit notifications.
+=== Starting and updating Live Activities with ActivityKit push notifications
+A Boolean value that indicates whether an app supports Live Activities.
+NSSupportsLiveActivities
+=== NSSupportsLiveActivities
+A Boolean value that indicates whether an app can update its Live Activities frequently.
+NSSupportsLiveActivitiesFrequentUpdates
+=== NSSupportsLiveActivitiesFrequentUpdates
+Declare the user interface and behavior for your app on every platform.
+=== SwiftUI
+Learn about important changes in ActivityKit.
+=== ActivityKit updates
+Extend the reach of your app by creating widgets, watch complications, Live Activities, and controls.
+=== WidgetKit
+Use SwiftUI animations to indicate data updates in your widgets and Live Activities.
+=== Animating data updates in widgets and Live Activities
+Display your app’s content in a convenient, informative widget on various devices.
+=== Creating a widget extension
+Implement glanceable views with WidgetKit and SwiftUI.
+=== Creating views for widgets, Live Activities, and watch complications
+Explore features, tasks, related frameworks, and constraints as you make a plan to implement widgets, controls, watch complications, and Live Activities.
+=== Developing a WidgetKit strategy
+Add deep links to your widgets and Live Activities that enable people to open a specific scene in your app.
+=== Linking to specific app scenes from your widget or Live Activity
+Offer Live Activities, controls, animate data updates, and add interactivity to widgets.
+=== Emoji Rangers: Supporting Live Activities, interactivity, and animations
+=== Technologies

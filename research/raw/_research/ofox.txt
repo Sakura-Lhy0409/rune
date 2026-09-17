@@ -1,0 +1,114 @@
+ Apple's Third-Generation Foundation Models: A Developer's Read on WWDC 2026 
+ Blog Blog Docs Models Pricing English 简体中文 English Русский 日本語 한국어 
+Get Started 
+ Published Jun 9, 2026 
+ Apple's Third-Generation Foundation Models: A Developer's Read on WWDC 2026
+ Apple's AFM 3 at WWDC 2026: five models, a 20B sparse on-device LLM, and Private Cloud Compute on NVIDIA GPUs. What is verified, what is spin.
+ apple foundation-models wwdc on-device-ai siri 
+ Ofox 10 min read 
+OFOX · BEST VALUE Discounted AI Models Up to 80% off 
+ Direct official access · curated models · discounted rates
+ GPT -80% Gemini -50% Seedance -50% GLM -30% Doubao -20% 
+ See all discounts → TL;DR — Apple shipped its third generation of foundation models on June 8, 2026, alongside a rebranded “Siri AI.” Five models. The headline is a 20-billion-parameter sparse on-device model (AFM 3 Core Advanced) that activates only 1–4B parameters per prompt using a technique Apple Research calls Instruction-Following Pruning. The other headline — quieter, more consequential for developers — is that Apple’s most capable cloud model, AFM 3 Cloud Pro , runs on NVIDIA GPUs hosted in Google Cloud , and is refined using outputs from Google’s Gemini frontier models. Apple says the resulting model is theirs; Apple executives are careful to distinguish “trained using” Gemini from “is” Gemini. The Foundation Models framework, which exposes the on-device model to any Swift app, now accepts images. None of it works in the EU on iPhone/iPad or in mainland China at launch.
+The Five-Model Lineup
+Apple’s research post names five distinct models. The naming is more disciplined than 2024’s “AFM-on-device / AFM-server” pair, and it tracks how Apple wants you to think about the stack: two tiers on-device, three in Private Cloud Compute.
+Model Where it runs Size Active params Job 
+ AFM 3 Core On-device 3B (dense) 3B Lightweight text, routing, fast NLU 
+ AFM 3 Core Advanced On-device 20B (sparse) 1–4B per prompt New Siri / dictation / TTS; image understanding 
+ AFM 3 Cloud Private Cloud Compute undisclosed — Main cloud text / image-understanding model 
+ ADM 3 Cloud Private Cloud Compute undisclosed — Image generation (Image Playground, Reframe, Extend, Cleanup) 
+ AFM 3 Cloud Pro NVIDIA GPUs in Google Cloud (Private Cloud Compute extension) undisclosed — Complex reasoning, agentic tool use 
+Apple has not published parameter counts for any of the three cloud models. The on-device models are the only ones with disclosed sizes.
+The 20B Sparse Model and Why It Matters
+The most technically interesting model is AFM 3 Core Advanced. It’s a 20-billion-parameter model that fits — and runs — on a phone, by never activating more than ~4B parameters at once.
+The trick is Instruction-Following Pruning (IFP) , originally published by Apple Research in a January 2025 paper . The idea: rather than treating sparsity as a static structural decision (set at training), let a small predictor read the prompt and dynamically choose which rows and columns of the feed-forward-network matrices to activate for that request. The paper’s headline result: their 3B activated model outperformed the 3B dense baseline by 5–8 absolute points on math and coding, while matching the performance of a 9B dense model . So the same active compute footprint as a 3B dense model bought roughly 9B-class quality.
+What changes for the production model is the memory story: Apple stores the full model in flash (NAND), keeps a small set of “always-active shared experts” in DRAM, and pages routed experts into DRAM only when the predictor selects them. That’s how 20B fits in an on-device model footprint without melting battery.
+The blunt way to read this: Apple just gave the iPhone the first production-scale dynamic-sparse LLM that ships to consumers . It’s not a mixture-of-experts model in the classic sense (no learned router selecting K-of-N experts per token), but it’s a cousin — and the deployment hardening is a first.
+What Apple does not claim: it does not benchmark AFM 3 Core Advanced against GPT-5.5 , Claude Opus 4.8 , Gemini 3.1 Pro, Qwen 3.7, or Llama 4. Every comparison is against Apple’s own 2025 baseline. Treat the eval numbers below as evidence of generational progress, not as a competitive ranking.
+What Apple’s Human Evaluations Actually Show
+Apple’s evaluation methodology is side-by-side blind human preference vs. the previous AFM generation . The numbers, verbatim from the research post:
+Eval New model preference 2025 baseline preference 
+ Text (AFM 3 Core, on-device) 45.6% 23.3% 
+ Text (AFM 3 Cloud) 64.7% 8.7% 
+ Image understanding (AFM 3 Core) >61% — 
+ Image understanding (AFM 3 Cloud) 37.8% 9.6% 
+ Dictation overall quality (AFM 3 Core Advanced) 44.7% 17.6% 
+Cloud Pro adds +10% relative preference over Cloud on text, +14% on math, and +14% on image understanding.
+Mean Opinion Score for the new on-device TTS:
+Voice Current TTS AFM 3 Core Advanced 
+ General 3.87 4.15 
+ Conversational 3.82 4.24 
+Two caveats matter when you cite these:
+No third-party benchmarks . No MMLU, no SWE-bench, no GPQA. Apple’s published numbers are preferences against the 2025 baseline only.
+Side-by-side preference is loose for technical work . It captures “did the human like this answer better,” which is informative for chat, weaker for code or reasoning.
+The Gemini Question: What’s Verified
+The Apple–Google partnership produced two parallel storylines that have been hard to reconcile in coverage. Here’s what each Apple executive actually said:
+“The amount of the Google Assistant we use is none.” — Craig Federighi , SVP Software Engineering ( 9to5Mac )
+“All of these are custom builds for Apple Silicon, trained using proprietary data, and refined using outputs from Gemini frontier models.” — Amar Subramanya , Apple AI VP ( CNBC )
+Reconciled: Apple is not running Gemini in production for Apple Intelligence. Apple is using Gemini’s outputs as part of post-training (distillation-style refinement). For AFM 3 Cloud Pro specifically, multiple reports describe a deeper Google involvement — Gemini-derived training infrastructure, Apple-owned pre-training and post-training, NVIDIA inference. Apple has not contradicted that account but has chosen not to volunteer it on stage.
+The honest summary: Gemini is a teacher signal, not the runtime model. That’s a real and growing pattern in 2026 — frontier labs train teacher models, downstream players distill — and Apple is the largest distribution channel to publicly adopt it.
+Private Cloud Compute, Now on NVIDIA in Google’s Datacenter
+Apple’s Private Cloud Compute (PCC) launched in 2024 with a striking security architecture: Apple Silicon servers running attested, code-audited builds, with cryptographic guarantees that user data is unreachable even by Apple. The 2026 extension is the surprise: PCC now also runs on NVIDIA GPUs hosted inside Google Cloud , while Apple says the same data-handling guarantees still apply.
+Two related details worth flagging:
+Why Google’s datacenter? Reporting suggests Apple tried to run the new Cloud Pro model on its own PCC hardware first, and the model was too slow. NVIDIA capacity on Google Cloud was the path that shipped.
+Why none of this in the keynote? Apple’s keynote mentions NVIDIA, not Google. Google appears only in the research post and in executive interviews afterward. The brand story Apple wants you to hear is “Apple models, NVIDIA hardware, Apple privacy.” The full supply chain is more entangled.
+For builders evaluating Apple’s privacy claim, the engineering substance is the cryptographic attestation chain, not the geographic location of the GPUs. The substrate moving to NVIDIA-in-GCP doesn’t break that — but it does mean the trust model now spans more vendors than the 2024 version.
+The Foundation Models Framework: What 2026 Adds
+This is the under-covered part of the announcement, and the one most directly relevant to developers.
+The Foundation Models framework was introduced in 2025 as a Swift API that gives any third-party app direct access to Apple’s ~3B on-device model — no API key, no network, no per-token cost. The 2026 update adds image input : developers can now pass images alongside text into the on-device model, enabling on-device visual tasks (caption a photo, extract structured data from a receipt, classify a UI element) without any cloud round-trip.
+What the framework is good at:
+Structured output (typed Swift values, not just text)
+Tool calling / function calling 
+Privacy-sensitive embedded intelligence (notes summarization, on-device search, smart suggestions)
+Offline reliability (no network dependency)
+What it is not good at, by design:
+General-knowledge Q&A (it’s not a chatbot back-end)
+Anything that requires fresh world knowledge
+Workloads that need frontier-tier reasoning, long context, or multi-step agentic tool use
+For an iOS app shipping in fall 2026, the realistic pattern is a hybrid: use the Foundation Models framework for fast, free, offline work; fall back to a cloud model for everything else. That fallback is where multi-provider gateways (including ofox.ai ) get useful — you want OpenAI/Anthropic/Google/Qwen/DeepSeek behind one API so you can change providers without reshipping the app.
+Who Can’t Use This at Launch
+The geography is unusually restrictive even by Apple AI standards:
+🇪🇺 EU : Siri AI is not available on iPhone or iPad at launch. Mac, Apple Watch, and Vision Pro are included. Apple cites DMA compliance work.
+🇨🇳 Mainland China : All of Apple Intelligence, including Siri AI, is unavailable pending regulatory approval.
+Hardware floor : iPhone 16 family, iPhone 15 Pro / 15 Pro Max, iPad mini with A17 Pro, M1-or-later iPads, M1-or-later Macs, Apple Vision Pro. On Apple Watch, watchOS 27 runs on Series 10, Series 11, Ultra 2, Ultra 3, and SE 3 — and Watch-side Apple Intelligence additionally requires pairing with an iPhone 15 Pro / Pro Max or newer.
+Launch cadence : Siri AI starts as a beta later in 2026 in English, with the 32 supported locales rolling in over time. The locales span English (US, UK, Australia, India), PFIGSCJK (Portuguese, French, Italian, German, Spanish, Chinese, Japanese, Korean), DNNSTV (Danish, Dutch, Norwegian, Swedish, Turkish, Vietnamese), and AFIHHMPRTU (Arabic, Finnish, Indonesian, Hebrew, Hindi, Malay, Polish, Russian, Thai, Ukrainian).
+The EU/China gap means Apple Intelligence is now formally a partial product across geographies — the same hardware does materially different things depending on Apple ID region, and developer documentation will need to fork on capability availability.
+What This Actually Changes for Builders
+Three things to take away if you’re shipping AI features in late 2026:
+On-device LLMs cross a usability threshold. A 20B sparse model on a phone, with image input, free for app developers, is enough to handle a meaningful slice of in-app AI tasks — structured extraction, classification, embedded summarization, tool routing. Apps that previously paid for cloud calls to do this can stop.
+Frontier work still belongs in the cloud. Cloud Pro exists for a reason. Long context, agentic loops, frontier reasoning, vision-language across many images — all still cheaper, more capable, or both via a cloud LLM. The build decision is now “what can’t run on-device” rather than “how big a model do I need.”
+Multi-provider sourcing is the safer default. Apple now ships an on-device model partly distilled from Gemini, running cloud workloads on NVIDIA-in-GCP. Vendor coupling at the model layer is no longer optional even for Apple. If you’re building a cross-platform product, picking a single model vendor at the application layer is the bet that’s getting harder to justify.
+The throughline: Apple just made on-device LLMs a baseline capability on iOS. The interesting work moves up the stack — to deciding when to use it, when to route past it, and how to do that without locking your app to any one vendor.
+References
+Apple Machine Learning Research — Introducing the Third Generation of Apple’s Foundation Models (model lineup, IFP, eval numbers verbatim)
+Apple Newsroom — Apple unveils next generation of Apple Intelligence, Siri AI, and more (hardware list, language list, region availability)
+9to5Mac — Federighi details Apple’s collaboration with Google for Siri AI (Federighi “amount of Google Assistant we use is none” quote)
+CNBC — Apple partnering with Google and Nvidia for most advanced AI model (Subramanya quote, NVIDIA-in-GCP arrangement)
+AppleInsider — Apple’s new foundation models don’t contain a drop of Gemini (independent read on the Gemini relationship)
+MacRumors — Siri AI not available in EU/China initially (region restrictions)
+arXiv 2501.02086 — Instruction-Following Pruning for Large Language Models (IFP technique, original Apple paper)
+MarkTechPost — Apple Researchers Introduce IFPruning (third-party IFP explainer)
+Frequently Asked Questions
+ What are the five Apple foundation models announced at WWDC 2026? AFM 3 Core (3B dense, on-device), AFM 3 Core Advanced (20B sparse on-device, activating 1–4B at a time), AFM 3 Cloud (Private Cloud Compute text model), ADM 3 Cloud (Private Cloud Compute image generation), and AFM 3 Cloud Pro (Apple's most capable model, running on NVIDIA GPUs hosted in Google Cloud). 
+ Is Apple Intelligence powered by Google Gemini? Partly, but not the way the headlines suggest. Apple uses outputs from Gemini frontier models to refine its own proprietary foundation models — a distillation-style relationship. Craig Federighi said on WWDC day: 'The amount of the Google Assistant we use is none.' Apple AI VP Amar Subramanya said the models are 'custom builds for Apple Silicon, trained using proprietary data, and refined using outputs from Gemini frontier models.' 
+ What is Instruction-Following Pruning (IFP)? IFP is a sparse-activation technique Apple Research published in January 2025 and shipped in production with AFM 3 Core Advanced. For each prompt, a lightweight predictor selects which feed-forward-network rows and columns to activate, so a 20B-parameter model only spends compute on 1–4B parameters per request. The full model lives in flash; only the selected experts get loaded into DRAM. 
+ Where can I actually use Apple's new Siri AI and Apple Intelligence? Siri AI rolls out as a beta later in 2026, English first, with 32 locales supported over time. Not in the EU on iPhone/iPad initially (DMA compliance work pending; Mac/Watch/Vision Pro are included). Not in mainland China pending regulatory approval. Hardware floor: iPhone 16 family, iPhone 15 Pro/Pro Max, M1-or-later iPads and Macs, Vision Pro. On Apple Watch, watchOS 27 ships on Series 10/11, Ultra 2/3, and SE 3 — and Watch-side Apple Intelligence requires pairing with an iPhone 15 Pro or newer. 
+ What's new in the Foundation Models framework for developers? The Swift framework now accepts image input alongside text, so on-device models can do vision-grounded tasks. Calls stay on-device, free, and offline-capable. It's positioned for structured output, tool calling, and embedded intelligence inside apps — not as a chatbot back-end. For tasks that exceed the on-device floor, the practical pattern is still: try on-device first, fall back to a cloud model. 
+On this page
+100+ AI models
+ GPT, Claude, Gemini — one API, built-in fallback
+ Get API Key → 
+Related Articles
+ Codex keeps testing but never finishes: what to change
+ Sep 16, 2026 
+ Use GPT Image 2.5 for UI mockups with consistent text
+ Sep 16, 2026 
+ OpenRouter requests time out: find where the request stops
+ Sep 16, 2026 
+← All posts 
+ One-stop AI API aggregation platform 
+ Products Docs Models Pricing Get API Key 
+ Blog All Posts About RSS 
+ Trust & Security Trust Center Security & Data Subprocessors System Status 
+© 2026 NICE TALK PTE. LTD. Terms of Service Privacy Policy 
+

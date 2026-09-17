@@ -1,0 +1,943 @@
+---
+title: "Bring an LLM provider to the Foundation Models framework - WWDC26 - Videos - Apple Developer"
+session: "339"
+event: "WWDC 2026"
+category: "wwdc"
+url: "https://developer.apple.com/videos/play/wwdc2026/339/"
+description: "Extend the Foundation Models framework by implementing a LanguageModelExecutor for new models. Explore how to interface with the..."
+language: "en"
+fetched: "1775407794.9043472"
+---
+
+# Bring an LLM provider to the Foundation Models framework - WWDC26 - Videos - Apple Developer
+
+Extend the Foundation Models framework by implementing a LanguageModelExecutor for new models. Explore how to interface with the...
+
+**Session:** 339 
+**Event:** WWDC 2026 
+**URL:** https://developer.apple.com/videos/play/wwdc2026/339/ 
+
+---
+
+## Transcript
+
+**[00:00:07.284]** Hi there!
+
+**[00:00:08.151]** I'm Christopher Webb,
+
+**[00:00:09.179]** an engineer on the Machine Learning Research team,
+
+**[00:00:11.445]** and I'm excited to talk to you
+
+**[00:00:13.145]** about a new way to use the Foundation Models framework.
+
+**[00:00:16.203]** We previously introduced the Foundation Models framework
+
+**[00:00:18.745]** to give you access to Apple's on-device language model.
+
+**[00:00:22.012]** And now, we're opening up the framework to work with nearly any LLM,
+
+**[00:00:26.145]** local or serverbased.
+
+**[00:00:28.145]** This allows anyone, from large companies to individual developers,
+
+**[00:00:31.955]** to easily build their own model-integration on top of the framework.
+
+**[00:00:36.793]** The on-device System Language Model has been rebuilt from the ground up:
+
+**[00:00:40.579]** it's smarter,
+
+**[00:00:41.779]** better at instruction following,
+
+**[00:00:43.445]** and accepts images directly in your prompts.
+
+**[00:00:46.269]** Beyond the system model,
+
+**[00:00:47.579]** we've added three more options.
+
+**[00:00:49.567]** Private Cloud Compute brings you the model behind many Apple Intelligence features:
+
+**[00:00:54.286]** now with reasoning,
+
+**[00:00:55.812]** a 32K token context window,
+
+**[00:00:58.745]** and the privacy guarantees you'd expect.
+
+**[00:01:02.397]** Core AI lets you run local models efficiently
+
+**[00:01:05.479]** and take advantage of the ANE.
+
+**[00:01:08.079]** And MLX unlocks the thousands of models available
+
+**[00:01:11.174]** via the MLX-Community on Hugging Face.
+
+**[00:01:15.063]** And because these are built on top of a brand new public protocol,
+
+**[00:01:18.446]** developers can bring frontier AI models
+
+**[00:01:20.861]** into their apps using the same framework.
+
+**[00:01:23.445]** Anthropic and Google will soon extend
+
+**[00:01:26.368]** the Foundation Models framework with Swift packages of their own,
+
+**[00:01:29.679]** making state-of-the-art Claude and Gemini models
+
+**[00:01:32.512]** available to all Swift developers.
+
+**[00:01:35.492]** Which ever model you use,
+
+**[00:01:37.045]** Apple's, yours, or the community's,
+
+**[00:01:39.679]** you call them the same way,
+
+**[00:01:41.313]** because every model conforms to the Language Model protocol.
+
+**[00:01:45.046]** For app developers,
+
+**[00:01:46.153]** I'll show you how to call any of these models
+
+**[00:01:48.345]** through the same familiar API.
+
+**[00:01:50.429]** For model providers,
+
+**[00:01:51.812]** I'll walk you through how to create a Language Model package of your own.
+
+**[00:01:55.834]** But first, let me show you a preview of how easy it is to use.
+
+**[00:02:00.537]** Here's our on-device Foundation Model.
+
+**[00:02:02.745]** Create it,
+
+**[00:02:03.592]** pass it into a session,
+
+**[00:02:05.079]** and call the respond function.
+
+**[00:02:06.912]** And there are even more model options.
+
+**[00:02:09.794]** If you need more horsepower,
+
+**[00:02:11.279]** try Private Cloud Compute.
+
+**[00:02:12.912]** Just swap the model.
+
+**[00:02:14.873]** If you want to ship your own model,
+
+**[00:02:16.612]** just point CoreAI at your resources.
+
+**[00:02:19.967]** And if you want to try the latest open source models,
+
+**[00:02:23.112]** simply pass in a model ID,
+
+**[00:02:25.045]** and let the framework handle the rest.
+
+**[00:02:28.147]** And using a model built on top of the Language Model protocol
+
+**[00:02:31.379]** means you get access to all kinds of great Foundation Models features,
+
+**[00:02:34.712]** like Dynamic Profiles.
+
+**[00:02:37.287]** For an overview of everything we’re adding,
+
+**[00:02:39.345]** check out "What’s new in the Foundation Models framework".
+
+**[00:02:44.724]** The reason it’s possible to swap out models so easily
+
+**[00:02:47.612]** is that every LanguageModel honors the same protocol,
+
+**[00:02:51.109]** the System Language Model,
+
+**[00:02:52.405]** PCC,
+
+**[00:02:53.522]** Core AI,
+
+**[00:02:54.512]** MLX,
+
+**[00:02:55.546]** and those built by the community.
+
+**[00:02:57.873]** If you're a model provider,
+
+**[00:02:59.045]** you should join the fun!
+
+**[00:03:00.312]** Let me show you how.
+
+**[00:03:02.281]** There are four steps to bring your model into the framework.
+
+**[00:03:05.412]** We’ll start with packaging.
+
+**[00:03:07.212]** A well-crafted Swift package makes it easy for developers to get started.
+
+**[00:03:11.993]** Then you implement the protocol
+
+**[00:03:13.912]** by defining the types that describe your model
+
+**[00:03:16.310]** and the EXECutor that runs it.
+
+**[00:03:19.024]** Next, we’ll talk about how to implement
+
+**[00:03:21.075]** authentication for server-based models,
+
+**[00:03:23.279]** including some best practices.
+
+**[00:03:25.625]** And finally, customization.
+
+**[00:03:27.645]** If you need to tailor
+
+**[00:03:28.641]** the protocol’s building blocks to meet your needs,
+
+**[00:03:30.912]** you can do that.
+
+**[00:03:31.845]** From attaching response metadata,
+
+**[00:03:33.845]** all the way to defining entirely new modalities.
+
+**[00:03:37.429]** First up, packaging.
+
+**[00:03:39.656]** We recommend using Swift package manager
+
+**[00:03:41.882]** so that developers can simply add your package
+
+**[00:03:44.145]** as a dependency of their app.
+
+**[00:03:46.065]** We'll cover how to set up Package.swift,
+
+**[00:03:48.412]** and how to publish a release.
+
+**[00:03:51.187]** An important consideration
+
+**[00:03:52.779]** is which platforms you'll want to support.
+
+**[00:03:55.248]** Foundation Models supports iOS,
+
+**[00:03:57.512]** macOS,
+
+**[00:03:58.712]** visionOS,
+
+**[00:03:59.745]** and watchOS,
+
+**[00:04:00.979]** allowing developers to create a variety of experiences.
+
+**[00:04:04.045]** We recommend you try to do the same.
+
+**[00:04:06.939]** And because the Foundation Models framework
+
+**[00:04:08.912]** is being released as open source,
+
+**[00:04:10.779]** your package could also be useful to developers
+
+**[00:04:13.479]** who deploy Swift on their servers,
+
+**[00:04:15.445]** so consider supporting Linux too.
+
+**[00:04:18.214]** Third, your dependencies.
+
+**[00:04:20.287]** Every dependency translates to bytes
+
+**[00:04:22.579]** that a developer ships to their users.
+
+**[00:04:24.888]** Carefully consider what dependencies are linked by your package.
+
+**[00:04:29.708]** Publishing your package is as easy as creating a git tag.
+
+**[00:04:33.231]** Swift Package Manager is decentralized,
+
+**[00:04:35.645]** so your repo URL is your distribution channel.
+
+**[00:04:38.912]** Developers can paste the URL
+
+**[00:04:41.045]** into Xcode and start integrating your model
+
+**[00:04:43.412]** into their apps.
+
+**[00:04:44.927]** For more, see "Creating Swift Packages”.
+
+**[00:04:48.506]** With the package in place,
+
+**[00:04:49.912]** we move on to the protocol.
+
+**[00:04:51.416]** The protocol is the bridge between your model,
+
+**[00:04:53.745]** and the Foundation Models framework.
+
+**[00:04:56.308]** The protocol has two key pieces.
+
+**[00:04:58.704]** The first is LanguageModel.
+
+**[00:05:00.412]** It describes the model to the framework.
+
+**[00:05:02.903]** It declares what the model can do,
+
+**[00:05:04.729]** through capabilities,
+
+**[00:05:05.945]** and provides the configuration the framework needs
+
+**[00:05:08.780]** to set up the model's EXECutor.
+
+**[00:05:12.827]** The second piece is LanguageModelExecutor where the work happens.
+
+**[00:05:16.835]** It has an initializer that takes a Configuration,
+
+**[00:05:19.845]** a prewarm function for preparing resources
+
+**[00:05:22.409]** ahead of the first request,
+
+**[00:05:24.304]** and a respond function
+
+**[00:05:25.612]** that streams generation back to the session.
+
+**[00:05:29.904]** The Configuration is what links the two types:
+
+**[00:05:32.612]** the Model provides it,
+
+**[00:05:33.808]** and the framework uses it to construct the EXECutor.
+
+**[00:05:36.991]** Now you've seen the protocol in code,
+
+**[00:05:38.879]** let's build an intuition for how the model's configuration
+
+**[00:05:42.129]** links it to the EXECutor.
+
+**[00:05:44.793]** Each session holds an EXECutor store.
+
+**[00:05:48.161]** When Model1 arrives,
+
+**[00:05:49.611]** the framework checks the store using the model's configuration,
+
+**[00:05:53.012]** but there's no matching EXECutor.
+
+**[00:05:55.676]** So, the LanguageModelSession creates a new EXECutor and stores it.
+
+**[00:06:01.435]** Model2 produces the same configuration,
+
+**[00:06:04.179]** and because Configuration is Hashable,
+
+**[00:06:06.412]** the framework knows it matches,
+
+**[00:06:07.986]** and resolves to the same EXECutor.
+
+**[00:06:10.583]** The configuration is the lookup key, not the model.
+
+**[00:06:14.645]** Model3 produces a different configuration,
+
+**[00:06:17.145]** so it gets its own EXECutor.
+
+**[00:06:19.075]** Each unique configuration maps to exactly one EXECutor in the store.
+
+**[00:06:25.059]** So what does this look like in your code?
+
+**[00:06:27.512]** Here's a LanguageModel implementation.
+
+**[00:06:29.446]** It declares its capabilities
+
+**[00:06:31.546]** and returns the configuration the framework uses to find its EXECutor.
+
+**[00:06:37.306]** The Executor is where the real work lives,
+
+**[00:06:39.712]** loading weights,
+
+**[00:06:40.786]** managing resources,
+
+**[00:06:42.179]** and streaming tokens back to the session.
+
+**[00:06:44.793]** The framework constructs it from a configuration your model provides,
+
+**[00:06:48.625]** then hands the model in on every request.
+
+**[00:06:52.048]** That split is what keeps your Model trivial to construct.
+
+**[00:06:56.333]** When the session deallocates, the store goes with it.
+
+**[00:06:58.996]** Every stored EXECutor gets released,
+
+**[00:07:01.045]** your deinit runs,
+
+**[00:07:02.379]** weights are freed,
+
+**[00:07:03.379]** and connections closed,
+
+**[00:07:04.912]** all automatically.
+
+**[00:07:06.464]** You don't write any of that teardown code yourself.
+
+**[00:07:09.710]** Within that lifecycle,
+
+**[00:07:10.891]** your EXECutor has one more function: prewarm.
+
+**[00:07:14.199]** Before a request arrives,
+
+**[00:07:15.666]** the developer can ask the framework to prewarm.
+
+**[00:07:17.974]** It's your chance to do expensive setup ahead of time,
+
+**[00:07:20.812]** like loading weights, opening connections,
+
+**[00:07:22.970]** or anything that would otherwise slow down that first response.
+
+**[00:07:26.145]** Let's look at how to use it.
+
+**[00:07:28.730]** One approach is to put that setup in a private helper
+
+**[00:07:31.731]** that loads the weights once and caches them.
+
+**[00:07:34.512]** prewarm calls the helper eagerly,
+
+**[00:07:36.512]** so the weights are ready before the first request arrives.
+
+**[00:07:39.494]** But prewarm isn't guaranteed to run.
+
+**[00:07:43.020]** Either way, weights load exactly once,
+
+**[00:07:45.712]** and if your EXECutor has no expensive setup,
+
+**[00:07:48.179]** like a server-backed model,
+
+**[00:07:49.612]** prewarm can simply be a no-op.
+
+**[00:07:52.524]** Once your respond function is called,
+
+**[00:07:54.342]** your EXECutor goes to work.
+
+**[00:07:56.190]** It converts the transcript of the conversation
+
+**[00:07:58.379]** into the format your model expects.
+
+**[00:08:00.712]** It applies the options the developer has set
+
+**[00:08:03.269]** and it streams generation events to the session.
+
+**[00:08:07.241]** From the developer's side,
+
+**[00:08:09.199]** the session is the entire interaction surface.
+
+**[00:08:11.479]** They initialize the model,
+
+**[00:08:12.945]** create the session,
+
+**[00:08:14.179]** call respond, and wait.
+
+**[00:08:16.316]** Your EXECutor and the rest of your package,
+
+**[00:08:18.646]** all of that lives behind the session, out of sight.
+
+**[00:08:21.555]** The developer never sees that machinery,
+
+**[00:08:23.845]** but here's what's happening behind the scenes.
+
+**[00:08:26.758]** The framework hands you transcript entries,
+
+**[00:08:29.500]** but your inference engine can only process its native types.
+
+**[00:08:33.664]** So your EXECutor sits in the middle,
+
+**[00:08:36.533]** translates the entries into messages your inference engine understands,
+
+**[00:08:40.912]** and passes them along for inference.
+
+**[00:08:44.111]** When your inference engine answers,
+
+**[00:08:46.312]** the same translation runs in reverse:
+
+**[00:08:48.779]** your messages back to transcript entries, streamed to the session.
+
+**[00:08:53.917]** For now, let's focus on the transcripts
+
+**[00:08:56.288]** that flow in and out of the EXECutor.
+
+**[00:09:00.097]** A transcript is the conversation so far,
+
+**[00:09:02.479]** expressed as a sequence of entries.
+
+**[00:09:04.941]** Each entry plays a role.
+
+**[00:09:06.746]** Instructions, set by the developer,
+
+**[00:09:09.792]** prompts, from the user,
+
+**[00:09:12.109]** tool calls your model made,
+
+**[00:09:13.624]** and the outputs they returned,
+
+**[00:09:15.479]** and the responses your model has produced.
+
+**[00:09:19.749]** Zooming back out:
+
+**[00:09:20.712]** your EXECutor's job is to turn each transcript entry
+
+**[00:09:24.013]** into a message your inference engine knows how to read.
+
+**[00:09:27.755]** So, what's inside a transcript?
+
+**[00:09:30.390]** Foundation Models defines these six entry types.
+
+**[00:09:34.124]** Your model defines its own roles.
+
+**[00:09:36.345]** Your EXECutor's job is to map between the two,
+
+**[00:09:39.045]** no matter the shape your model takes.
+
+**[00:09:42.031]** In this example, instructions, prompt, and response
+
+**[00:09:45.745]** map to system, user, and assistant.
+
+**[00:09:48.530]** Here, tool calls, tool outputs,
+
+**[00:09:51.045]** and reasoning all map to assistant too.
+
+**[00:09:53.873]** They're part of what the model did during its turn,
+
+**[00:09:56.445]** and since this model doesn't have dedicated roles for these,
+
+**[00:09:59.412]** we just map them to assistant.
+
+**[00:10:01.786]** If your model does define something like a dedicated tool role,
+
+**[00:10:05.545]** you can route there instead.
+
+**[00:10:07.833]** Either way, your EXECutor stays in control.
+
+**[00:10:11.012]** Your EXECutor reads the conversation.
+
+**[00:10:13.545]** But every request carries more than history,
+
+**[00:10:16.279]** it carries the developer's intent for how the model should respond,
+
+**[00:10:19.907]** expressed through two additional properties.
+
+**[00:10:23.712]** Every request object can include ContextOptions
+
+**[00:10:26.812]** and GenerationOptions.
+
+**[00:10:28.379]** ContextOptions control what goes into the prompt,
+
+**[00:10:31.079]** like the reasoning level you want the model to use,
+
+**[00:10:33.579]** or a response schema.
+
+**[00:10:35.486]** GenerationOptions control the decoder loop:
+
+**[00:10:37.912]** sampling strategy,
+
+**[00:10:39.212]** temperature,
+
+**[00:10:40.090]** and maximum response length.
+
+**[00:10:42.830]** Here's what that looks like inside respond.
+
+**[00:10:45.501]** Both types of options come in on the request,
+
+**[00:10:48.587]** your EXECutor pulls them out
+
+**[00:10:50.256]** and passes them along when calling the model.
+
+**[00:10:53.017]** So that's everything coming in:
+
+**[00:10:54.445]** transcript, options, all parsed.
+
+**[00:10:57.307]** Now for the half your developer sees: the response.
+
+**[00:11:00.643]** On the response side, there are a few things to send:
+
+**[00:11:03.479]** the text your inference engine generates,
+
+**[00:11:05.645]** any tool calls or reasoning,
+
+**[00:11:07.545]** and the metadata that travels with them.
+
+**[00:11:09.645]** They all go out as events on the channel.
+
+**[00:11:12.793]** Each chunk that the inference engine emits,
+
+**[00:11:15.445]** a token or tool-call fragment, becomes an event.
+
+**[00:11:18.814]** A textDelta, a toolCallDelta, and so on.
+
+**[00:11:22.201]** The framework writes them to the transcript.
+
+**[00:11:24.875]** Foundation Models exposes both one-shot and streaming responses,
+
+**[00:11:28.545]** but the implementation is always streaming;
+
+**[00:11:30.845]** the one-shot API just collects the deltas internally.
+
+**[00:11:35.129]** So far we've looked at this from your model's side,
+
+**[00:11:37.745]** events going out as the model produces them.
+
+**[00:11:40.660]** But put yourself in the developer's seat for a moment.
+
+**[00:11:42.973]** They've called respond and they're waiting.
+
+**[00:11:45.089]** What do they need first?
+
+**[00:11:47.573]** Here's your EXECutor's side of the handshake with the developer.
+
+**[00:11:50.754]** There's a deliberate order to it.
+
+**[00:11:52.885]** First, a metadata update,
+
+**[00:11:54.546]** model and request IDs the developer can use for logging and debugging.
+
+**[00:11:59.540]** Then a usage update,
+
+**[00:12:00.945]** prompt token counts for accounting.
+
+**[00:12:03.149]** Sending these upfront means the developer isn't waiting through the whole stream
+
+**[00:12:06.512]** to learn what each request costs.
+
+**[00:12:09.261]** Finally, for each token your model produces,
+
+**[00:12:12.212]** send a text delta the moment it arrives.
+
+**[00:12:14.612]** The framework streams those deltas to the session as they arrive,
+
+**[00:12:18.311]** so users see the response appear word-by-word instead of all at once.
+
+**[00:12:22.696]** Earlier we saw how the framework caches EXECutors by configuration.
+
+**[00:12:26.924]** If your integration is stateful,
+
+**[00:12:29.045]** holding a KV cache or persistent session between calls,
+
+**[00:12:32.312]** that caching is what lets you minimize network churn and avoid redoing work.
+
+**[00:12:37.422]** Now let's look at how to design yours to take advantage of that,
+
+**[00:12:40.645]** and how your EXECutor can preserve work across calls.
+
+**[00:12:44.517]** Your EXECutor receives the full transcript on every call to respond.
+
+**[00:12:48.759]** Here's what you processed last time,
+
+**[00:12:50.435]** an instruction,
+
+**[00:12:51.479]** a prompt,
+
+**[00:12:52.379]** and the response you generated.
+
+**[00:12:55.126]** When the next call comes in
+
+**[00:12:56.645]** you compare the new transcript to the one you saved from last time.
+
+**[00:13:00.781]** In most cases,
+
+**[00:13:02.258]** new entries have simply been appended,
+
+**[00:13:04.545]** a new prompt after the last response.
+
+**[00:13:07.735]** When that's the case,
+
+**[00:13:08.879]** you can preserve your existing state
+
+**[00:13:10.679]** and only process what's new.
+
+**[00:13:13.290]** But sometimes your comparison finds that entries have been removed or modified,
+
+**[00:13:17.612]** for example, when the developer trims older entries to save context.
+
+**[00:13:22.070]** When that happens,
+
+**[00:13:23.080]** you'll need to invalidate back to where the transcripts diverge.
+
+**[00:13:26.164]** The framework gives you the full transcript on every call.
+
+**[00:13:29.172]** Your EXECutor decides what counts as a match,
+
+**[00:13:31.451]** and how to handle any changes.
+
+**[00:13:33.392]** Sometimes your model can't do exactly what the developer asked.
+
+**[00:13:37.191]** When that happens, your EXECutor has two choices: approximate or throw.
+
+**[00:13:42.318]** Be flexible where you can, and honor the developer's intent.
+
+**[00:13:46.074]** But sometimes there's no honest approximation.
+
+**[00:13:48.848]** If a developer sets a token limit,
+
+**[00:13:50.760]** but also specifies a schema with required fields,
+
+**[00:13:53.812]** there might not be a way to satisfy both.
+
+**[00:13:56.045]** So you throw.
+
+**[00:13:57.779]** Foundation Models ships LanguageModelError for exactly these cases:
+
+**[00:14:02.513]** context window overflows, rate limits, refusals, and more.
+
+**[00:14:07.344]** Throw one of these,
+
+**[00:14:08.479]** and any developer who's used the framework
+
+**[00:14:10.545]** already knows how to handle it.
+
+**[00:14:13.483]** When the built-in LanguageModelError cases don't cover your situation,
+
+**[00:14:17.098]** define your own error type.
+
+**[00:14:19.155]** Some failures only make sense in the context of your service:
+
+**[00:14:22.445]** your subscription tiers, your features, your account states.
+
+**[00:14:26.689]** A purpose-built case name carries the intent,
+
+**[00:14:29.145]** so a developer catching it knows exactly what happened.
+
+**[00:14:32.520]** Custom errors are powerful, and sometimes you need them.
+
+**[00:14:35.596]** But each one is a new case developers must learn,
+
+**[00:14:38.245]** catch, and handle in their app.
+
+**[00:14:40.144]** Try to use a built-in LanguageModelError when it fits,
+
+**[00:14:43.046]** and save the custom ones for failures only your service can produce.
+
+**[00:14:46.949]** We've finished implementing the protocol requirements.
+
+**[00:14:50.025]** Let's discuss how to handle authentication next.
+
+**[00:14:53.528]** Your job as a package author is to make it easy for developers to do the right thing.
+
+**[00:14:58.179]** If your initializer takes an API key as a string,
+
+**[00:15:01.280]** developers will be tempted to take the path of least resistance.
+
+**[00:15:04.743]** Instead, help developers do the right thing
+
+**[00:15:07.132]** by offering a token provider or sign in flow.
+
+**[00:15:10.104]** And if your package fetches access tokens on behalf of developers,
+
+**[00:15:14.363]** make sure to persist them securely using Keychain.
+
+**[00:15:17.962]** Credential handling is half the story.
+
+**[00:15:20.341]** Device at-test-ation is the other half.
+
+**[00:15:22.815]** If you're shipping a cloud-based LanguageModel package,
+
+**[00:15:25.729]** this is worth a deep look.
+
+**[00:15:27.571]** This related session walks through verifying the device,
+
+**[00:15:30.879]** catching tampered builds,
+
+**[00:15:32.679]** signing payloads,
+
+**[00:15:33.945]** and using Apple's fraud signal to keep bad traffic off your service.
+
+**[00:15:38.308]** Check it out in "Secure your apps with App Attest".
+
+**[00:15:41.874]** You've packaged your model,
+
+**[00:15:43.345]** implemented the protocol,
+
+**[00:15:44.590]** and handled authentication.
+
+**[00:15:46.313]** That means you've got a solid package for your LanguageModel,
+
+**[00:15:49.246]** with all the fundamentals covered.
+
+**[00:15:51.203]** Now it's time to differentiate.
+
+**[00:15:53.454]** The protocol gives you room to shape LanguageModelSession
+
+**[00:15:56.545]** around the abilities only your model offers.
+
+**[00:15:59.769]** Response metadata is a lightweight option
+
+**[00:16:02.145]** to attach additional information to your responses,
+
+**[00:16:04.980]** and give developers clear ways to access it.
+
+**[00:16:08.538]** You can attach your own custom metadata to the response.
+
+**[00:16:11.688]** Here, after streaming completes,
+
+**[00:16:13.779]** our EXECutor sends tokensPerSecond
+
+**[00:16:16.045]** and timeToFirstToken through the channel.
+
+**[00:16:19.026]** We recommend providing utilities or documentation
+
+**[00:16:21.679]** that make it easy for developers to work with your metadata;
+
+**[00:16:24.645]** clear keys,
+
+**[00:16:25.745]** typed accessors,
+
+**[00:16:26.745]** whatever makes sense.
+
+**[00:16:28.512]** Underneath, metadata is just a dictionary.
+
+**[00:16:31.317]** It can contain strings, numbers, and other built-in types.
+
+**[00:16:35.192]** But in some cases, you may need something more flexible.
+
+**[00:16:39.671]** Custom segments are the answer.
+
+**[00:16:41.934]** You'll define a new segment type,
+
+**[00:16:43.979]** receive it in your EXECutor,
+
+**[00:16:45.645]** and stream results back through the same channel,
+
+**[00:16:48.066]** and the developer never has to leave LanguageModelSession to use them.
+
+**[00:16:52.232]** Custom segment types let you extend the protocol.
+
+**[00:16:55.403]** When a new modality comes along,
+
+**[00:16:57.145]** audio, video, whatever's next,
+
+**[00:16:59.479]** developers have a typed, structured way to send that data to your model.
+
+**[00:17:03.785]** Here's how it works.
+
+**[00:17:05.387]** First, you'll define a type that conforms to custom segment.
+
+**[00:17:09.459]** Because custom segments are required to be PromptRepresentable,
+
+**[00:17:13.112]** developers can pass it directly in their prompts,
+
+**[00:17:15.712]** just like text.
+
+**[00:17:17.582]** In your EXECutor, you'll receive this as a customSegment in the transcript,
+
+**[00:17:21.879]** alongside the text entries you're already handling.
+
+**[00:17:25.184]** When your model responds,
+
+**[00:17:26.545]** you emit the result back through the channel
+
+**[00:17:28.745]** as a custom segment update.
+
+**[00:17:31.055]** The segment ID controls whether you're adding a new segment,
+
+**[00:17:33.979]** or updating one you've already started streaming.
+
+**[00:17:36.972]** This gives you full control over how results stream into the app.
+
+**[00:17:41.184]** With custom segments in hand,
+
+**[00:17:42.712]** there's one more thing worth calling out:
+
+**[00:17:44.412]** a recommendation for server-side tools.
+
+**[00:17:47.768]** Server-side tools are capabilities your model runs on its own,
+
+**[00:17:51.579]** like web search,
+
+**[00:17:52.703]** code execution,
+
+**[00:17:53.879]** or image generation.
+
+**[00:17:55.735]** The model invokes them,
+
+**[00:17:57.212]** the server runs them,
+
+**[00:17:58.579]** and your EXECutor watches the results stream in.
+
+**[00:18:02.082]** We'll walk through three levels of detail,
+
+**[00:18:04.279]** each surfacing more of the tool's work,
+
+**[00:18:06.607]** using web search as an example.
+
+**[00:18:09.582]** Server-side tools are named, typed values on your model.
+
+**[00:18:13.449]** The developer constructs the model with the tools they want,
+
+**[00:18:16.126]** and your EXECutor receives them through the model on every request,
+
+**[00:18:19.712]** the same way it receives every other capability the model declares.
+
+**[00:18:24.556]** First, the simplest pattern:
+
+**[00:18:26.612]** run the tool privately and stream only the answer back.
+
+**[00:18:30.412]** The tool grounds the model's response,
+
+**[00:18:33.112]** but its work stays inside your EXECutor.
+
+**[00:18:37.213]** Each text delta you append gets streamed into the transcript by the framework,
+
+**[00:18:41.845]** with no trace of the tool that produced it.
+
+**[00:18:44.925]** In addition to grounding the answer on the tool's output,
+
+**[00:18:47.964]** you can also attach additional metadata to the response.
+
+**[00:18:52.120]** When a text delta carries metadata,
+
+**[00:18:54.345]** like a citation,
+
+**[00:18:56.065]** forward both to the channel,
+
+**[00:18:58.104]** and the framework attaches the metadata to the text segment in the transcript.
+
+**[00:19:03.479]** And finally, you can choose to surface the tool's work itself.
+
+**[00:19:07.534]** With custom segments,
+
+**[00:19:08.781]** you forward the tool's structured output to the channel,
+
+**[00:19:11.945]** alongside the text and any metadata,
+
+**[00:19:14.657]** giving apps everything the model produced along the way.
+
+**[00:19:18.859]** Through one channel, the events you forward,
+
+**[00:19:21.145]** the metadata you attach,
+
+**[00:19:22.779]** and the custom segments you design,
+
+**[00:19:24.679]** server-side tools shape what apps using your package
+
+**[00:19:27.912]** can show their users.
+
+**[00:19:30.077]** There's one more thing to keep in mind:
+
+**[00:19:31.979]** whether you're choosing a package or shipping one,
+
+**[00:19:34.445]** make sure everyone in the chain understands
+
+**[00:19:36.479]** the privacy implications of the model behind it.
+
+**[00:19:39.538]** On-device and cloud-based models have very different privacy characteristics,
+
+**[00:19:43.793]** and your users deserve to know which they're getting.
+
+**[00:19:47.168]** You've seen how to bring your model to the framework.
+
+**[00:19:49.826]** These sessions show what developers will build with it.
+
+**[00:19:53.203]** Check out "Integrate On-Device AI Models into Your App Using Core AI"
+
+**[00:19:58.512]** for bundling local models directly into an app.
+
+**[00:20:01.966]** "Build with the new Apple Foundation Model on Private Cloud Compute"
+
+**[00:20:05.475]** goes deep on serverscale inference with Apple's privacy guarantees.
+
+**[00:20:09.824]** And "Build agentic app experiences with the Foundation Models framework"
+
+**[00:20:13.479]** shows how developers use dynamic profiles
+
+**[00:20:16.345]** to build multi-step,
+
+**[00:20:17.845]** tool-using workflows
+
+**[00:20:19.079]** on top of models like yours.
+
+**[00:20:21.898]** We're excited about what's ahead.
+
+**[00:20:23.909]** We hope to see a thriving ecosystem of LanguageModel packages,
+
+**[00:20:27.213]** giving Swift developers the freedom to choose
+
+**[00:20:29.277]** the model that's right for their app.
+
+**[00:20:31.058]** We can't wait to see what you build.
+

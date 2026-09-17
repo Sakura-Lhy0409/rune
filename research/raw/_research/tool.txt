@@ -1,0 +1,197 @@
+A tool that a model can call to gather information at runtime or perform side effects.
+protocol
+ 
+Tool
+Tool
+=== Tool
+protocol
+ 
+Tool
+<
+Arguments
+, 
+Output
+> : 
+Sendable
+Overview
+Tool calling gives the model the ability to call your code to incorporate
+ 
+up-to-date information like recent events and data from your app. A tool
+ 
+includes a name and a description that the framework puts in the prompt to let
+ 
+the model decide when and how often to call your tool.
+A 
+ defines a 
+ method that takes arguments that conforms to
+ 
+, and returns an output of any type that conforms to
+ 
+, allowing the model to understand and reason about in subsequent
+ 
+interactions. Typically, 
+ is a 
+ or any 
+ types.
+[CODE] struct FindContacts: Tool { |     let name = "findContacts" |     let description = "Finds a specific number of contacts" |  |     @Generable |     struct Arguments { |         @Guide(description: "The number of contacts to get", .range(1...10)) |         let count: Int |     } |  |     func call(arguments: Arguments) async throws -> [String] { |         var contacts: [CNContact] = [] |         // Fetch a number of contacts using the arguments. |         let formattedContacts = contacts.map { |             "\($0.givenName) \($0.familyName)" |         } |         return formattedContacts |     } | }
+Tools must conform to 
+ 
+so the framework can run them concurrently. If the model needs to pass the output
+ 
+of one tool as the input to another, it executes back-to-back tool calls.
+You control the life cycle of your tool, so you can track the state of it between
+ 
+calls to the model. For example, you might store a list of database records that
+ 
+you don’t want to reuse between tool calls.
+Prompting the model with tools contributes to the available context window size.
+ 
+When you provide a tool in your generation request, the framework puts the tool
+ 
+definitions — name, description, parameter information — in the prompt so the
+ 
+model can decide when and how often to call the tool. After calling your tool,
+ 
+the framework returns the tool’s output back to the model for further processing.
+ 
+For more information on managing the context window size, see 
+.
+=== Inherits From
+=== Tools
+=== Calling a tool
+=== Inspecting a tool
+A thread-safe type whose values can be shared across arbitrary concurrent
+ 
+contexts without introducing a risk of data races.
+protocol
+ 
+Sendable
+Sendable
+=== Sendable
+A type whose metatype can be shared across arbitrary isolation domains
+ 
+without introducing a risk of data races.
+protocol
+ 
+SendableMetatype
+SendableMetatype
+=== SendableMetatype
+=== Technologies
+Perform tasks with models that specialize in language understanding, structured output, and tool calling.
+Foundation Models
+=== Foundation Models
+A type that can be initialized from generated content.
+protocol
+ 
+ConvertibleFromGeneratedContent
+ConvertibleFromGeneratedContent
+=== ConvertibleFromGeneratedContent
+A type that the model uses when responding to prompts.
+protocol
+ 
+Generable
+Generable
+=== Generable
+A type whose value can represent a prompt.
+protocol
+ 
+PromptRepresentable
+PromptRepresentable
+=== PromptRepresentable
+A tool that a model can call to gather information at runtime or perform side effects.
+protocol
+ 
+Tool
+Tool
+=== Tool
+The arguments that this tool should accept.
+associatedtype
+ 
+Arguments
+ : 
+ConvertibleFromGeneratedContent
+=== Arguments
+The output that this tool produces for the language model to reason about in subsequent
+ 
+interactions.
+associatedtype
+ 
+Output
+ : 
+PromptRepresentable
+=== Output
+A property wrapper that provides access to a session property from within a tool.
+typealias
+ 
+SessionProperty
+SessionProperty
+=== Tool.SessionProperty
+Performs the tool’s action when a language model wants to use this tool.
+func
+ 
+call
+(
+arguments
+: 
+Self
+.
+Arguments
+) 
+async
+ 
+throws
+ -> 
+Self
+.
+Output
+=== call(arguments:)
+A natural language description of when and how to use the tool.
+var
+ 
+description
+: 
+String
+=== description
+A Boolean value that indicates whether the framework includes this tool’s definition
+ 
+in the session’s instructions.
+var
+ 
+includesSchemaInInstructions
+: 
+Bool
+=== includesSchemaInInstructions
+A unique name for the tool.
+var
+ 
+name
+: 
+String
+=== name
+A schema for the parameters this tool accepts.
+var
+ 
+parameters
+: 
+GenerationSchema
+=== parameters
+Identify topics, actions, objects, and emotions in input text with a content tagging model.
+=== Categorizing and organizing data with content tags
+Adapt sessions dynamically at runtime by loading instructions and tools based
+ 
+on the state of your app.
+=== Composing dynamic sessions with instructions and profiles
+Build tools that enable the model to perform tasks that are specific to your use case.
+=== Expanding generation with tool calling
+Make gameplay more lively with AI generated dialog and encounters personalized to the player.
+=== Generate dynamic game content with guided generation and tools
+Enhance the experience in your app by prompting an on-device large language model.
+=== Generating content and performing tasks with Foundation Models
+Optimize your app’s token usage when prompting a model with the Foundation Models
+ 
+framework.
+=== Managing the context window
+Prevent repeated token processing by preserving the cached state across turns.
+=== Optimizing key-value caching in language model sessions
+Send requests on device to an open source model you export with Core AI to get a consistent API experience.
+=== Running a Core AI model in a Foundation Models session

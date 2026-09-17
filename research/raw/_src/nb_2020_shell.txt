@@ -1,0 +1,155 @@
+Unix shell app for iOS threatened with removal, but Apple backtracks on decision - Notebookcheck News
+&#9660;
+&nbsp;
+Reviews
+News
+Videos
+Benchmarks / Tech
+Buyers Guide
+Magazine
+Library
+Search
+Jobs
+...
+Deutsch
+English
+Español
+Français
+Italiano
+Nederlands
+Polski
+Português
+Русский
+Türkçe
+Svenska
+Chinese
+Magyar
+Unix shell app for iOS threatened with removal, but Apple backtracks on decision
+iSH is a Unix shell for iOS. (Image via iSH)
+An app that allows iOS users to run a Unix shell on their iDevice was under threat of removal from the App Store. However, Apple apparently reversed its decision, allowing the app to stay up. This could open the door for more scripting and shell apps to hit the App Store in the future.
+Sam Medley
+,
+Published
+11/10/2020
+&#x1F1EB;&#x1F1F7;
+&#x1F1EA;&#x1F1F8;
+...
+&#x1F1F5;&#x1F1F9;
+Apple
+iOS
+iPhone
+iPad Pro
+Linux / Unix
+Smartphone
+Software
+4
+Reviews
+&nbsp;&nbsp;&nbsp;
+&larr;
+exclude selected types
+&nbsp;&nbsp;&nbsp;
+&larr;
+exclude selected tags
+An iOS app that enables a Unix shell, dubbed “iSH Shell,” a hit with developers and power users soon after late October release. However, the app looked certain to die a quick death thanks to Apple’s App Store rules. But thanks to a seeming turnaround from the Cupertino Colossus, iSH (and other shell apps) will be allowed to stay on the App Store.
+The app in question (iSH) allows users to use a Unix shell in iOS. Similar to the Terminal in Linux, iSH allows users to input Unix-specific commands to modify their iDevice. This opens a new world to developers and users, greatly expanding options for how they can use iOS.
+However, iSH
+tweeted
+on Sunday afternoon that they received a notification from Apple that stated the app would be removed from the App Store on Monday, November 9.
+Apple
+contacted
+the developers of iSH later that day to apologize and rescind their decision to kill the app. As of press time, iSH is still available on Apple’s official App Store.
+The reversal comes as a response to an appeal from the iSH team. The developers cited section 2.5.2 of the App Store’s guidelines. This guideline states that apps must be “self-contained in their bundles and may not read or write data outside the designated container area.” Additionally, apps may not execute code that changes or adds features of the app or other apps.
+The developers behind iSH did not elaborate on why iSH does not violate this section of the App Store guidelines or the exact reasons why Apple accepted their appeal. However, iSH insinuated that this decision may help other scripting and shell apps stay on the App Store.
+Regardless, this decision is a win for consumers, particularly power users. iSH allows users better control over their iDevice and enables neat features like adding Python and text editors (e.g. Nano or Vim) to iOS.
+You can download iSH at the
+App Store
+.
+Source(s)
+iSH on Twitter
+Related Articles
+The new iOS update adds AirPods Max support, SMS receipt failure fix and 25fps recording
+12/14/2020
+Founder of Cydia, the jailbroken iOS app store, files suit against Apple for anti-competitive behavior
+12/11/2020
+Apple's new Intel 16-inch MacBook Pro and AirTags slated for release in 2-3 weeks with up to five Apple Silicon devices due within a year
+11/13/2020
+Apple will not unveil a new iPhone SE in 1H 2021
+11/11/2020
+Apple M1 Macs don't support eGPUs, while the new MacBook Air is offered with a less powerful 7-core GPU M1 variant
+11/11/2020
+Apple reputedly set to bring low-power LTPO OLED screens to the iPhone 13 Pro and iPhone 13 Pro Max
+11/10/2020
+Apple criticised for poor iPhone 12 mini battery life in early tests
+11/09/2020
+Apple releases the iPhone 12 Mini and Pro Max variants amidst a wireless-charging controversy
+11/06/2020
+Four new iPhone models will launch in 2021 with improved ultra-wide-angle optics due for the iPhone 13 Pro and iPhone 13 Pro Max
+11/06/2020
+Apple iPhone 12 Pro flexes its muscles in Samsung Galaxy Note 20 Ultra speed comparison
+11/06/2020
+A14X Bionic gets alleged benchmark, outperforms the Intel Core i9-9880H
+11/06/2020
+Pro1-X: XDA Developers collaborates to create the world's first Lineage OS and Ubuntu Touch smartphone
+10/27/2020
+With Apple allegedly prioritizing battery life and 5G on the iPhone 12, iPhones might only get 120 Hz displays next year
+10/12/2020
+Apple skips iOS 14.1 for some reason, seeds the iOS 14.2 and iPadOS 14.2 developer betas: Shazam integration in the control centre  tops the feature list
+09/18/2020
+Apple said to have dropped 120 Hz display for iPhone 12 Pro models ahead of production
+09/12/2020
+Show more articles
+4
+News
+&nbsp;&nbsp;&nbsp;
+&larr;
+exclude selected types
+&nbsp;&nbsp;&nbsp;
+&larr;
+exclude selected tags
+static version
+load dynamic
+Loading Comments
+Comment on this article
+⟨
+Previous article
+Sony&#039;s first-ever drone is set to launch in early 2021
+Next article
+Huawei Mate X2 edges closer to release with certification of its 66 W fast-charging system
+⟩
+Add as a preferred source on Google
+Sam Medley
+- Senior Tech Writer
+- 1523 articles published on Notebookcheck
+since 2016
+I've been a computer geek my entire life. After graduating college with a degree in Mathematics, I worked in finance and banking a few years before taking a job as a database administrator. I started working with Notebookcheck in October of 2016 and have enjoyed writing news and reviews. I've also written for other outlets including UltrabookReview and GeeksWorldWide, focusing on consumer guidance and video gaming. My areas of interest include the business side of technology, retro gaming, Linux, and innovative gadgets. When I'm not writing on electronics or tinkering with a device, I'm either outside with my family, enjoying a decade-old video game, or playing drums or piano.
+contact me via:
+Bluesky
+,
+LinkedIn
+>
+Expert reviews and news on laptops, smartphones and tech innovations
+>
+News
+>
+News Archive
+>
+Newsarchive 2020 11
+>  Unix shell app for iOS threatened with removal, but Apple backtracks on decision
+Sam Medley,&nbsp;2020-11-10&nbsp;(Update:&nbsp;2020-11-10)
+10
+&nbsp;&nbsp;&nbsp;
+&larr;
+exclude selected types
+&nbsp;&nbsp;&nbsp;
+&larr;
+exclude selected tags
+Contact & Imprint
+|
+Team
+|
+Data Privacy Declaration
+|
+Cookie Settings
+|&nbsp;15.09.2026 04:21
+* If you buy something via one of our affiliate links, Notebookcheck may earn a commission. Thank you for your support!
+S15.9.26 04:21:19

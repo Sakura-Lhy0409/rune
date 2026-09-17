@@ -1,0 +1,187 @@
+An interface that allows you to include an entity in your app’s Spotlight index.
+protocol
+ 
+IndexedEntity
+IndexedEntity
+=== IndexedEntity
+protocol
+ 
+IndexedEntity
+ : 
+AppEntity
+Overview
+Adopt this protocol in app entities you want to include in your app’s Spotlight index.
+ 
+Adding entities to Spotlight makes them discoverable by Apple Intelligence, and also
+ 
+serves as the first step in letting Spotlight launch your app and display items that
+ 
+appear in search results. Use the properties of this protocol to configure additional
+ 
+Spotlight metadata to accompany your app entity in the index.
+For more information about adding entities to your app’s Spotlight index, see 
+.
+=== Inherits From
+=== App entity types
+=== Specifying entity-related attributes
+=== Hiding an entity from search results
+Make content and actions discoverable by Apple Intelligence and support system experiences like Siri, Spotlight, Shortcuts, and widgets.
+App Intents
+=== App Intents
+An interface for making a custom type or app-specific concept discoverable by Apple Intelligence and experiences like Siri or the Shortcuts app.
+protocol
+ 
+AppEntity
+AppEntity
+=== AppEntity
+A protocol that provides nominal type identity and metadata for union values.
+protocol
+ 
+AppUnionValue
+AppUnionValue
+=== AppUnionValue
+A protocol for the cases enumeration of an 
+.
+protocol
+ 
+AppUnionValueCasesProviding
+AppUnionValueCasesProviding
+=== AppUnionValueCasesProviding
+An interface that describes conceptual types you use in app intents.
+protocol
+ 
+AppValue
+AppValue
+=== AppValue
+An interface for providing a dynamic visual representation of a specific type and instances of that type.
+protocol
+ 
+DisplayRepresentable
+DisplayRepresentable
+=== DisplayRepresentable
+An entity that refers to a document or other file.
+protocol
+ 
+FileEntity
+FileEntity
+=== FileEntity
+An interface that allows you to include an entity in your app’s Spotlight index.
+protocol
+ 
+IndexedEntity
+IndexedEntity
+=== IndexedEntity
+A custom attribute set that you include with your entity to improve search accuracy.
+var
+ 
+attributeSet
+: 
+CSSearchableItemAttributeSet
+=== attributeSet
+The default set of attributes to include with your app entity in the Spotlight index.
+var
+ 
+defaultAttributeSet
+: 
+CSSearchableItemAttributeSet
+=== defaultAttributeSet
+A Boolean value that indicates whether Spotlight prevents the inclusion of the entity
+ 
+in the index.
+var
+ 
+hideInSpotlight
+: 
+Bool
+=== hideInSpotlight
+An interface for providing the visual representation for an instance of a specific type.
+protocol
+ 
+InstanceDisplayRepresentable
+InstanceDisplayRepresentable
+=== InstanceDisplayRepresentable
+A type that provides the system with ownership and sharing context for an app entity.
+protocol
+ 
+OwnershipProvidingEntity
+OwnershipProvidingEntity
+=== OwnershipProvidingEntity
+Defines a string that uniquely identifies a type. This is useful for maintaining the identity
+ 
+of a type, even when its type name is changed.
+protocol
+ 
+PersistentlyIdentifiable
+PersistentlyIdentifiable
+=== PersistentlyIdentifiable
+An interface that indicates your entity has an identifier that’s consistent across devices.
+protocol
+ 
+SyncableEntity
+SyncableEntity
+=== SyncableEntity
+A type that represents a transient model object which exposes its interface to App Intents via
+ 
+properties. Note that 
+ types are not meant to be queried.
+protocol
+ 
+TransientAppEntity
+TransientAppEntity
+=== TransientAppEntity
+An interface for providing the visual representation of a specific type.
+protocol
+ 
+TypeDisplayRepresentable
+TypeDisplayRepresentable
+=== TypeDisplayRepresentable
+macro
+ 
+UnionValue
+()
+=== UnionValue()
+An entity that will only ever have one value, such as global settings.
+protocol
+ 
+UniqueAppEntity
+UniqueAppEntity
+=== UniqueAppEntity
+Provide the system with information about the types your app uses to model its
+ 
+data so that your intents can use those types as parameters.
+=== Defining app entities for your custom data types
+Update your app entity types to support Spotlight indexing, and donate entities to
+ 
+make them findable in searches.
+=== Making app entities available in Spotlight
+A type that provides an out-of-process localizable description.
+protocol
+ 
+CustomLocalizedStringResourceConvertible
+CustomLocalizedStringResourceConvertible
+=== CustomLocalizedStringResourceConvertible
+A class of types whose instances hold the value of an entity with stable
+ 
+identity.
+protocol
+ 
+Identifiable
+Identifiable
+=== Identifiable
+A thread-safe type whose values can be shared across arbitrary concurrent
+ 
+contexts without introducing a risk of data races.
+protocol
+ 
+Sendable
+Sendable
+=== Sendable
+A type whose metatype can be shared across arbitrary isolation domains
+ 
+without introducing a risk of data races.
+protocol
+ 
+SendableMetatype
+SendableMetatype
+=== SendableMetatype
+=== Technologies

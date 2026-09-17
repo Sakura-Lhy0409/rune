@@ -1,0 +1,438 @@
+Retrieves the contents of a URL based on the specified URL request and delivers an asynchronous sequence of bytes.
+func
+ 
+bytes
+(
+for
+: 
+URLRequest
+, 
+delegate
+: (any 
+URLSessionTaskDelegate
+)?) 
+async
+ 
+throws
+ -> (
+URLSession
+.
+AsyncBytes
+, 
+URLResponse
+)
+=== bytes(for:delegate:)
+func
+ 
+bytes
+(
+for
+ 
+request
+: 
+URLRequest
+, 
+delegate
+: (any 
+URLSessionTaskDelegate
+)? = nil) 
+async
+ 
+throws
+ -> (
+URLSession
+.
+AsyncBytes
+, 
+URLResponse
+)
+A URL request object that provides request-specific information such as the URL, cache policy, request type, and body data or body stream.
+A delegate that receives life cycle and authentication challenge callbacks as the transfer progresses.
+Return Value
+An asynchronously-delivered tuple that contains a 
+ sequence to iterate over, and a 
+.
+Discussion
+Use this method when you want to process the bytes while the transfer is underway. You can use a 
+-
+-
+ loop to handle each byte. For textual data, use the 
+ properties 
+, 
+, or 
+ to receive the content as asynchronous sequences of those types.
+To wait until the session finishes transferring data and receive it in a single 
+ instance, use 
+.
+=== Performing asynchronous transfers
+A non-blocking sequence of 
+ created by decoding the elements of 
+ as UTF8.
+var
+ 
+characters
+: 
+AsyncCharacterSequence
+<
+Self
+>
+=== characters
+A non-blocking sequence of newline-separated 
+ created by decoding the elements of 
+ as UTF8.
+var
+ 
+lines
+: 
+AsyncLineSequence
+<
+Self
+>
+=== lines
+A non-blocking sequence of 
+ created by decoding the elements of 
+ as UTF8.
+var
+ 
+unicodeScalars
+: 
+AsyncUnicodeScalarSequence
+<
+Self
+>
+=== unicodeScalars
+=== Technologies
+Access essential data types, collections, and operating-system services to define the base layer of functionality for your app.
+=== Foundation
+A byte buffer in memory.
+struct
+ 
+Data
+Data
+=== Data
+A URL load request that is independent of protocol or URL scheme.
+struct
+ 
+URLRequest
+URLRequest
+=== URLRequest
+The metadata associated with the response to a URL load request, independent of protocol and URL scheme.
+class
+ 
+URLResponse
+URLResponse
+=== URLResponse
+An object that coordinates a group of related, network data transfer tasks.
+class
+ 
+URLSession
+URLSession
+=== URLSession
+An asynchronous sequence of bytes.
+struct
+ 
+AsyncBytes
+AsyncBytes
+=== URLSession.AsyncBytes
+Retrieves the contents of a URL based on the specified URL request and delivers an asynchronous sequence of bytes.
+func
+ 
+bytes
+(
+for
+: 
+URLRequest
+, 
+delegate
+: (any 
+URLSessionTaskDelegate
+)?) 
+async
+ 
+throws
+ -> (
+URLSession
+.
+AsyncBytes
+, 
+URLResponse
+)
+=== bytes(for:delegate:)
+Retrieves the contents of a given URL and delivers an asynchronous sequence of bytes.
+func
+ 
+bytes
+(
+from
+: 
+URL
+, 
+delegate
+: (any 
+URLSessionTaskDelegate
+)?) 
+async
+ 
+throws
+ -> (
+URLSession
+.
+AsyncBytes
+, 
+URLResponse
+)
+=== bytes(from:delegate:)
+Convenience method to load data using a URLRequest, creates and resumes a URLSessionDataTask internally.
+func
+ 
+data
+(
+for
+: 
+URLRequest
+) 
+async
+ 
+throws
+ -> (
+Data
+, 
+URLResponse
+)
+=== data(for:)
+Downloads the contents of a URL based on the specified URL request and delivers the data asynchronously.
+func
+ 
+data
+(
+for
+: 
+URLRequest
+, 
+delegate
+: (any 
+URLSessionTaskDelegate
+)?) 
+async
+ 
+throws
+ -> (
+Data
+, 
+URLResponse
+)
+=== data(for:delegate:)
+Convenience method to load data using a URL, creates and resumes a URLSessionDataTask internally.
+func
+ 
+data
+(
+from
+: 
+URL
+) 
+async
+ 
+throws
+ -> (
+Data
+, 
+URLResponse
+)
+=== data(from:)
+Retrieves the contents of a URL and delivers the data asynchronously.
+func
+ 
+data
+(
+from
+: 
+URL
+, 
+delegate
+: (any 
+URLSessionTaskDelegate
+)?) 
+async
+ 
+throws
+ -> (
+Data
+, 
+URLResponse
+)
+=== data(from:delegate:)
+Retrieves the contents of a URL based on the specified URL request and delivers the URL of the saved file asynchronously.
+func
+ 
+download
+(
+for
+: 
+URLRequest
+, 
+delegate
+: (any 
+URLSessionTaskDelegate
+)?) 
+async
+ 
+throws
+ -> (
+URL
+, 
+URLResponse
+)
+=== download(for:delegate:)
+Retrieves the contents of a URL and delivers the URL of the saved file asynchronously.
+func
+ 
+download
+(
+from
+: 
+URL
+, 
+delegate
+: (any 
+URLSessionTaskDelegate
+)?) 
+async
+ 
+throws
+ -> (
+URL
+, 
+URLResponse
+)
+=== download(from:delegate:)
+Resumes a previously-paused download and delivers the URL of the saved file asynchronously.
+func
+ 
+download
+(
+resumeFrom
+: 
+Data
+, 
+delegate
+: (any 
+URLSessionTaskDelegate
+)?) 
+async
+ 
+throws
+ -> (
+URL
+, 
+URLResponse
+)
+=== download(resumeFrom:delegate:)
+Convenience method to upload data using a URLRequest, creates and resumes a URLSessionUploadTask internally.
+func
+ 
+upload
+(
+for
+: 
+URLRequest
+, 
+from
+: 
+Data
+) 
+async
+ 
+throws
+ -> (
+Data
+, 
+URLResponse
+)
+=== upload(for:from:)
+Uploads data to a URL based on the specified URL request and delivers the result asynchronously.
+func
+ 
+upload
+(
+for
+: 
+URLRequest
+, 
+from
+: 
+Data
+, 
+delegate
+: (any 
+URLSessionTaskDelegate
+)?) 
+async
+ 
+throws
+ -> (
+Data
+, 
+URLResponse
+)
+=== upload(for:from:delegate:)
+Convenience method to upload data using a URLRequest, creates and resumes a URLSessionUploadTask internally.
+func
+ 
+upload
+(
+for
+: 
+URLRequest
+, 
+fromFile
+: 
+URL
+) 
+async
+ 
+throws
+ -> (
+Data
+, 
+URLResponse
+)
+=== upload(for:fromFile:)
+Uploads data to a URL and delivers the result asynchronously.
+func
+ 
+upload
+(
+for
+: 
+URLRequest
+, 
+fromFile
+: 
+URL
+, 
+delegate
+: (any 
+URLSessionTaskDelegate
+)?) 
+async
+ 
+throws
+ -> (
+Data
+, 
+URLResponse
+)
+=== upload(for:fromFile:delegate:)
+A protocol that defines methods that URL session instances call on their delegates to handle task-level events.
+protocol
+ 
+URLSessionTaskDelegate
+URLSessionTaskDelegate
+=== URLSessionTaskDelegate
+NSURLResponse
+NSURLResponse
+NSURLSession
+NSURLSession
+NSURLSessionTaskDelegate
+NSURLSessionTaskDelegate

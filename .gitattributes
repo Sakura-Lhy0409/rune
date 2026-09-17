@@ -1,0 +1,24 @@
+# 统一换行风格，避免 Windows/macOS 协作出问题。
+#
+# 背景：本仓库同时在 Windows（开发/测试核心逻辑）与 macOS（构建 iOS）上开发。
+# 如果让 Git 自动转换换行：
+#   * 补丁引擎（TextPatch.swift）的 CRLF/LF 保真测试会在不同机器上得到不同输入
+#   * 我们**故意**用 CRLF 夹具测试"CRLF 文件改完仍是 CRLF"，自动转换会让它失去意义
+# 因此：仓库内一律 LF；二进制与测试夹具显式声明。
+
+* text=auto eol=lf
+
+# 明确二进制（不做任何转换）
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.pdf  binary
+*.zip  binary
+*.gguf binary
+*.safetensors binary
+*.aimodel binary
+
+# 注意：research/ 下的取证材料包含网页抓取原文，可能混有 CRLF / 非 UTF-8 字节。
+# 它们只是证据，不参与构建，因此禁止 Git 碰它们。
+research/** -text -diff

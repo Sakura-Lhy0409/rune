@@ -1,0 +1,495 @@
+The interface a file coordinator uses to inform an object presenting a file about changes to that file made elsewhere in the system.
+protocol
+ 
+NSFilePresenter
+NSFilePresenter
+=== NSFilePresenter
+protocol
+ 
+NSFilePresenter
+ : 
+NSObjectProtocol
+Overview
+Objects that allow the user to view or edit the content of files or directories should adopt the 
+ protocol. You use file presenters in conjunction with an 
+ object to coordinate access to a file or directory among the objects of your application and between your application and other processes. When changes to an item occur, the system notifies objects that adopt this protocol and gives them a chance to respond appropriately.
+Use the methods of this protocol to respond to actions about to be taken on the presented file or directory. When another object or process uses a file coordinator to begin reading or writing a file or directory, the file coordinator notifies all presented objects interested in the item first. It notifies the presenter objects by invoking one of the methods defined by this protocol on that object. The actual invocation of that method occurs on the operation queue in the 
+ property. Your file presenter must provide this queue. If your queue supports the concurrent execution of operations, the methods of your presenter object must be thread-safe and able to run in multiple queues simultaneously.
+You can use file presenters to coordinate access to a file or directory among your application’s objects. If another process uses a file coordinator for the same file or directory, your presenter objects are similarly notified whenever the other process makes its changes. Your presenter objects are not notified about changes made directly using low-level read and write calls to the file. Only changes that go through a file coordinator result in notifications.
+For information about how to use file presenters with a file coordinator object, see 
+.
+File Presenters and iOS
+If your app enters the background with an active file presenter, any other processes that perform a coordinated read or write on the presented file can deadlock. To prevent this situation, call the coordinator’s 
+ type method to remove the file presenter in the 
+ method or in response to a 
+ notification. Call 
+ to add the file presenter again in the 
+ method or in response to a 
+ notification.
+
+ 
+The 
+ class automatically removes itself when your app goes to the background. It automatically adds itself again when your app returns to the foreground.
+=== Inherits From
+=== Coordinated file access
+=== Accessing File Presenter Attributes
+=== Relinquishing Managed Files
+=== Handling Changes to Files
+=== Responding to Version Changes
+=== Handling Changes to a Presented Directory
+=== Ubiquity Change Notifications
+=== Instance Methods
+The group of methods that are fundamental to all Objective-C objects.
+protocol
+ 
+NSObjectProtocol
+NSObjectProtocol
+=== NSObjectProtocol
+A notification that posts when the app enters the background.
+class
+ 
+let
+ 
+didEnterBackgroundNotification
+: 
+NSNotification
+.
+Name
+=== didEnterBackgroundNotification
+A notification that posts shortly before your app’s UI transitions to the foreground.
+class
+ 
+let
+ 
+willEnterForegroundNotification
+: 
+NSNotification
+.
+Name
+=== willEnterForegroundNotification
+Tells the delegate that the app is now in the background.
+func
+ 
+applicationDidEnterBackground
+(
+UIApplication
+)
+=== applicationDidEnterBackground(_:)
+Tells the delegate that the app is about to enter the foreground.
+func
+ 
+applicationWillEnterForeground
+(
+UIApplication
+)
+=== applicationWillEnterForeground(_:)
+An abstract base class for managing discrete portions of your app’s data.
+class
+ 
+UIDocument
+UIDocument
+=== UIDocument
+=== Technologies
+Access essential data types, collections, and operating-system services to define the base layer of functionality for your app.
+=== Foundation
+The details of a coordinated-read or coordinated-write operation.
+class
+ 
+NSFileAccessIntent
+NSFileAccessIntent
+=== NSFileAccessIntent
+An object that coordinates the reading and writing of files and directories among file presenters.
+class
+ 
+NSFileCoordinator
+NSFileCoordinator
+=== NSFileCoordinator
+Registers the specified file presenter object so that it can receive notifications.
+class
+ 
+func
+ 
+addFilePresenter
+(any 
+NSFilePresenter
+)
++ 
+addFilePresenter:
+=== addFilePresenter(_:)
+Unregisters the specified file presenter object.
+class
+ 
+func
+ 
+removeFilePresenter
+(any 
+NSFilePresenter
+)
++ 
+removeFilePresenter:
+=== removeFilePresenter(_:)
+The interface a file coordinator uses to inform an object presenting a file about changes to that file made elsewhere in the system.
+protocol
+ 
+NSFilePresenter
+NSFilePresenter
+=== NSFilePresenter
+Tells your object that its presented item is about to be deleted.
+func
+ 
+accommodatePresentedItemDeletion
+(
+completionHandler
+: ((any 
+Error
+)?) -> 
+Void
+)
+- 
+accommodatePresentedItemDeletionWithCompletionHandler:
+=== accommodatePresentedItemDeletion(completionHandler:)
+Given that something in the system is waiting to evict the presented file or directory, do whatever it takes to ensure that the eviction will succeed and that the receiver’s application will behave properly when the eviction has happened, and then invoke the completion handler. This must include calling +[NSFileCoordinator removeFilePresenter:]. You may instead prevent eviction by passing the completion handler a meaningful error.
+func
+ 
+accommodatePresentedItemEviction
+(
+completionHandler
+: ((any 
+Error
+)?) -> 
+Void
+)
+- 
+accommodatePresentedItemEvictionWithCompletionHandler:
+=== accommodatePresentedItemEviction(completionHandler:)
+Tells the delegate that some entity wants to delete an item that is inside of a presented directory.
+func
+ 
+accommodatePresentedSubitemDeletion
+(
+at
+: 
+URL
+, 
+completionHandler
+: ((any 
+Error
+)?) -> 
+Void
+)
+- 
+accommodatePresentedSubitemDeletionAtURL:completionHandler:
+=== accommodatePresentedSubitemDeletion(at:completionHandler:)
+A list of ubiquity attributes used to generate and send notifications whenever an attribute in the list changes.
+var
+ 
+observedPresentedItemUbiquityAttributes
+: 
+Set
+<
+URLResourceKey
+>
+observedPresentedItemUbiquityAttributes
+=== observedPresentedItemUbiquityAttributes
+Tells your object that the presented item’s contents or attributes changed.
+func
+ 
+presentedItemDidChange
+()
+- 
+presentedItemDidChange
+=== presentedItemDidChange()
+Tells your object that the file or file package’s ubiquity attributes have changed.
+func
+ 
+presentedItemDidChangeUbiquityAttributes
+(
+Set
+<
+URLResourceKey
+>)
+- 
+presentedItemDidChangeUbiquityAttributes:
+=== presentedItemDidChangeUbiquityAttributes(_:)
+Tells the delegate that a new version of the file or file package was added.
+func
+ 
+presentedItemDidGain
+(
+NSFileVersion
+)
+- 
+presentedItemDidGainVersion:
+=== presentedItemDidGain(_:)
+Tells the delegate that a version of the file or file package was removed.
+func
+ 
+presentedItemDidLose
+(
+NSFileVersion
+)
+- 
+presentedItemDidLoseVersion:
+=== presentedItemDidLose(_:)
+Tells your object that the presented item moved or was renamed.
+func
+ 
+presentedItemDidMove
+(
+to
+: 
+URL
+)
+- 
+presentedItemDidMoveToURL:
+=== presentedItemDidMove(to:)
+Tells the delegate that some other entity resolved a version conflict for the presenter’s file or file package.
+func
+ 
+presentedItemDidResolveConflict
+(
+NSFileVersion
+)
+- 
+presentedItemDidResolveConflictVersion:
+=== presentedItemDidResolveConflict(_:)
+The operation queue in which to execute presenter-related messages.
+var
+ 
+presentedItemOperationQueue
+: 
+OperationQueue
+presentedItemOperationQueue
+=== presentedItemOperationQueue
+The URL of the presented file or directory.
+var
+ 
+presentedItemURL
+: 
+URL
+?
+presentedItemURL
+=== presentedItemURL
+Tells the delegate that the item inside the presented directory gained a new version.
+func
+ 
+presentedSubitem
+(
+at
+: 
+URL
+, 
+didGain
+: 
+NSFileVersion
+)
+- 
+presentedSubitemAtURL:didGainVersion:
+=== presentedSubitem(at:didGain:)
+Tells the delegate that the item inside the presented directory lost an existing version.
+func
+ 
+presentedSubitem
+(
+at
+: 
+URL
+, 
+didLose
+: 
+NSFileVersion
+)
+- 
+presentedSubitemAtURL:didLoseVersion:
+=== presentedSubitem(at:didLose:)
+Tells the delegate that an item in the presented directory moved to a new location.
+func
+ 
+presentedSubitem
+(
+at
+: 
+URL
+, 
+didMoveTo
+: 
+URL
+)
+- 
+presentedSubitemAtURL:didMoveToURL:
+=== presentedSubitem(at:didMoveTo:)
+Tells the delegate that the item inside the presented directory had a version conflict resolved by an outside entity.
+func
+ 
+presentedSubitem
+(
+at
+: 
+URL
+, 
+didResolve
+: 
+NSFileVersion
+)
+- 
+presentedSubitemAtURL:didResolveConflictVersion:
+=== presentedSubitem(at:didResolve:)
+Tells the delegate that an item was added to the presented directory.
+func
+ 
+presentedSubitemDidAppear
+(
+at
+: 
+URL
+)
+- 
+presentedSubitemDidAppearAtURL:
+=== presentedSubitemDidAppear(at:)
+Tells the delegate that the contents or attributes of the specified item changed.
+func
+ 
+presentedSubitemDidChange
+(
+at
+: 
+URL
+)
+- 
+presentedSubitemDidChangeAtURL:
+=== presentedSubitemDidChange(at:)
+The URL of a secondary item’s primary presented file or directory.
+var
+ 
+primaryPresentedItemURL
+: 
+URL
+?
+primaryPresentedItemURL
+=== primaryPresentedItemURL
+Notifies your object that another object or process wants to read the presented file or directory.
+func
+ 
+relinquishPresentedItem
+(
+toReader
+: ((() -> 
+Void
+)?) -> 
+Void
+)
+- 
+relinquishPresentedItemToReader:
+=== relinquishPresentedItem(toReader:)
+Notifies your object that another object or process wants to write to the presented file or directory.
+func
+ 
+relinquishPresentedItem
+(
+toWriter
+: ((() -> 
+Void
+)?) -> 
+Void
+)
+- 
+relinquishPresentedItemToWriter:
+=== relinquishPresentedItem(toWriter:)
+Tells your object to save any unsaved changes for the presented item.
+func
+ 
+savePresentedItemChanges
+(
+completionHandler
+: ((any 
+Error
+)?) -> 
+Void
+)
+- 
+savePresentedItemChangesWithCompletionHandler:
+=== savePresentedItemChanges(completionHandler:)
+Prevent data loss and app crashes by interacting with the file system in a coordinated, asynchronous manner and by avoiding unnecessary disk I/O.
+=== Improving performance and stability when accessing the file system
+NSFilePresenter
+NSFilePresenter
+=== Accessing File Presenter Attributes
+=== Relinquishing Managed Files
+=== Handling Changes to Files
+=== Responding to Version Changes
+=== Handling Changes to a Presented Directory
+=== Ubiquity Change Notifications
+=== Instance Methods
+=== Inherits From
+=== Coordinated file access
+@protocol
+ 
+NSFilePresenter
+ <
+NSObject
+>
+NSObject
+NSObject
+UIApplicationDidEnterBackgroundNotification
+UIApplicationDidEnterBackgroundNotification
+UIApplicationWillEnterForegroundNotification
+UIApplicationWillEnterForegroundNotification
+- 
+applicationDidEnterBackground:
+- 
+applicationDidEnterBackground:
+- 
+applicationWillEnterForeground:
+- 
+applicationWillEnterForeground:
+UIDocument
+NSFileAccessIntent
+NSFileAccessIntent
+NSFileCoordinator
+NSFileCoordinator
++ 
+addFilePresenter:
++ 
+removeFilePresenter:
+NSFilePresenter
+NSFilePresenter
+- 
+accommodatePresentedItemDeletionWithCompletionHandler:
+- 
+accommodatePresentedItemEvictionWithCompletionHandler:
+- 
+accommodatePresentedSubitemDeletionAtURL:completionHandler:
+observedPresentedItemUbiquityAttributes
+- 
+presentedItemDidChange
+- 
+presentedItemDidChangeUbiquityAttributes:
+- 
+presentedItemDidGainVersion:
+- 
+presentedItemDidLoseVersion:
+- 
+presentedItemDidMoveToURL:
+- 
+presentedItemDidResolveConflictVersion:
+presentedItemOperationQueue
+presentedItemURL
+- 
+presentedSubitemAtURL:didGainVersion:
+- 
+presentedSubitemAtURL:didLoseVersion:
+- 
+presentedSubitemAtURL:didMoveToURL:
+- 
+presentedSubitemAtURL:didResolveConflictVersion:
+- 
+presentedSubitemDidAppearAtURL:
+- 
+presentedSubitemDidChangeAtURL:
+primaryPresentedItemURL
+- 
+relinquishPresentedItemToReader:
+- 
+relinquishPresentedItemToWriter:
+- 
+savePresentedItemChangesWithCompletionHandler:

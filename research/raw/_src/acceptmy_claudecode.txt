@@ -1,0 +1,101 @@
+Submit a Claude Code App to the App Store (4.2 Checklist) | AcceptMyApp
+AcceptMy.
+App
+App Store guides
+Vibe Coding
+Can you submit an app built with Claude Code to the App Store?
+Yes. Apple's review guidelines don't ask how an app was written, and there's no rule against AI-assisted development. What actually determines approval is the same thing it's always been: does the finished app meet the guidelines. Here's what that means in practice for something built largely by Claude Code.
+2 min read
+Updated August 2026
+Claude Code
+Xcode project
+TestFlight
+App Store
+Apple doesn't review your tooling, it reviews your app
+There is no guideline that flags or penalizes AI-assisted or AI-generated code specifically. App Review evaluates the submitted binary and metadata against the same guidelines regardless of whether a human typed every line or an agent wrote most of it.
+Where AI-assisted apps do run into trouble is indirect: Claude Code (like any fast code generator) makes it easy to ship a working app before you've thought about privacy, account deletion, or depth of functionality — the things reviewers actually check.
+What to verify before you submit, specifically for a Claude Code build
+Check what auth and backend scaffolding Claude Code set up by default — many generated stacks include account creation without a matching account deletion flow, which is a guaranteed rejection if left as-is.
+Check for hardcoded secrets. Agentic coding sessions sometimes inline an API key or service credential directly into client code to get something working quickly; confirm nothing sensitive shipped in the binary.
+Check the generated Info.plist and any permission usage strings — generated placeholder text like "This app needs access to your camera" reads as vague to a reviewer and is worth rewriting to state the specific, real reason.
+The real risk: functionality depth, not authorship
+Guideline 4.2 (Minimum Functionality) and 4.2.6 (Commercial templates and app generators) are where AI-built apps most often get flagged — not because Claude Code was involved, but because a fast build-out session tends to produce a single clear flow without the saved state, personalization, or native integration that separates a real product from a demo.
+Before submitting, ask honestly: does this app do something meaningfully useful beyond what the first working version did? If Claude Code got you to a working prototype fast, that's the right moment to spend real time on depth, not to submit immediately.
+Ownership and originality
+Make sure any generated branding, icon, or UI style is actually yours to use — Claude Code can generate placeholder assets quickly, and it's worth swapping anything that looks like a stock template before it reads as generic or, worse, resembles an existing app closely enough to trigger a copycat concern.
+You're responsible for the submitted app regardless of how it was built — App Store Connect agreements and content ownership requirements apply the same way they always have.
+Before you submit
+Run through a real pre-submission pass: privacy manifest present, account deletion works, permission strings are specific, screenshots match the shipped build, and the app offers more than a single shallow action.
+None of this is about proving the app was "hand-coded" — it's the same bar every iOS submission has to clear, AI-assisted or not.
+Next step
+Get a second opinion before App Review does
+Sign in to AcceptMyApp and run an AI pre-submission check on your Claude Code build — catch the privacy, account, and functionality gaps that generated apps commonly miss.
+Get started
+First analysis is free
+Related resources
+Vibe Coding
+Submitting a Vibe-Coded iOS App to the App Store: The Full Process
+A prompt-generated app doesn't submit itself. Here's the real process for getting a vibe-coded iOS app — built with Claude, Cursor, or any AI tool — through App Store review.
+Vibe Coding
+The Vibe Coder's App Store Submission Checklist
+A pre-submission checklist for AI-generated iOS apps, focused on the specific gaps AI coding tools leave behind: hardcoded secrets, missing account deletion, and thin functionality.
+Free tool
+Privacy Manifest Validator
+Validate your PrivacyInfo.xcprivacy: required-reason APIs, tracking flags &amp; domains.
+AcceptMyApp
+App Store AI Review Assistant. Helping iOS developers navigate Apple's review process with confidence.
+Product
+Get started
+Roadmap
+What's new
+Keyword Popularity Checker
+Free
+Legal
+Privacy Policy
+Terms of Use
+Free Tools
+Free · New
+Keyword Popularity Checker
+Free Apple Ads search-term popularity scores for any App Store keyword and country.
+Apple Fee Calculator
+Keyword Popularity Checker
+Metadata Character Counter
+Info.plist Validator
+Screenshot Size Validator
+iOS App Idea Generator
+iOS App Idea Validator
+iOS App Idea Roaster
+iOS App Icon Resizer
+Privacy Manifest Validator
+Deep Link &amp; URL Scheme Builder
+Smart App Banner Generator
+Associated Domains Validator
+AASA File Validator
+Bundle ID Validator
+iOS Color Palette Generator
+Version &amp; Build Number Helper
+.strings &amp; .xcstrings Validator
+Localization Coverage Checker
+TestFlight Notes Formatter
+Metadata Diff
+App Privacy Label Builder
+App Icon Asset Catalog Generator
+Keyword Field Optimizer
+App Description Writer
+Subtitle &amp; Keyword Generator
+Permission Usage String Generator
+Rejection Reason Decoder
+Reviewer Reply Generator
+App Name Brainstormer
+Universal Link Path Matcher
+StoreKit JWS Decoder
+Resources
+App Store guides
+Guideline explainers
+Rejection guides
+iOS App Ideas
+Apple Review Guidelines
+Contact:
+contact@acceptmy.app
+2026 AcceptMyApp. All rights reserved.
+AcceptMyApp requires JavaScript to run. Please enable JavaScript in your browser.

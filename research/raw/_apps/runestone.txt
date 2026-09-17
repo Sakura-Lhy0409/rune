@@ -1,0 +1,534 @@
+‎Runestone Text Editor App - App Store
+Search
+Today
+Games
+Apps
+Arcade
+Platform
+iPhone
+iPad
+Mac
+Vision
+Watch
+TV
+Runestone Text Editor
+Edit plain text and code
+Free · In‑App Purchases
+Share
+2K Ratings
+4.7
+Age Rating
+4+
+Years
+Chart
+#42
+Developer Tools
+Developer
+Simon B. Støvring
+Language
+EN
+English
+Size
+67.6
+MB
+iPhone, iPad, Apple Vision
+A plain text editor with syntax highlighting, line numbers, search and replace, page guide, and much more. It's like TextEdit but more powerful and optimised for iPhone and iPad.
+Runestone is made by a single person with a love for text editors and a vision of building the most lightweight text editor for iPhone and iPad that still has the core features for editing code.
+Features:
+- Syntax highlighting of many languages including HTML, JavaScript, JSON, Markdown, Swift, Python, PHP, YAML, and many more.
+- Select one of the twelve standard themes including popular themes like Tomorrow, Dracula, Solarized, and One Dark Pro.
+- Innovative find and replace for searching and modifying text while still viewing your file.
+- Choose font and font size, including support for custom fonts imported using another third-party app.
+- Show the line and column the cursor is located on.
+- Uses the standard document browser for an experience similar to the Files app.
+- Quickly navigate to a specific line.
+- Automatically close opening brackets and quotes.
+- Multiple windows on the iPad.
+- Format code using Prettier.js. Supported languages include CSS,HTML, JavaScript, JSON, PHP and more.
+- Choose text encoding between popular encodings like UTF-8, UTF-16, ISO Latin 1, and many more.
+- Enable or disable autocorrection, autocapitalization, and smart punctuation.
+- Set default file extension of new files.
+- Open files in Runestone from the Share Sheet.
+- Print documents.
+Premium features:
+- Choose between eight app icons.
+- Show line numbers.
+- Highlight the selected line.
+- Increase line height and letter spacing.
+- Disable line wrapping to allow horizontal scrolling.
+- Show tabs, spaces, and line breaks using a selected symbol.
+- Enable page guide at a specific column to easily tell when lines are getting too long.
+- Add vertical and horizontal overscroll.
+- Remember the selected language per file.
+- Save file extensions and filenames that should always be treated as plain text files.
+- Enable soft tabs and choose the width of the tab character.
+- Specify whether pressing the tab key should insert a tab or indent the line.
+- Adjust the scaling of Markdown headings and disable highlighting of code blocks in Markdown.
+Runestone was built on the open-source framework with the same name. Find more information on the Runestone framework at&nbsp;github.com/simonbs/runestone
+more
+Ratings &amp; Reviews
+4.7
+out of 5
+2K Ratings
+I wrote this review in Runestone
+05/06/2022
+Slaxx99
+A good text editor is like a freshly sharpened chef’s knife. It just FEELS good to use, and it makes you happy. You know what a dull knife feels like and you can appreciate the perfect slicing motion you get from using the right tool for the job. Runestone is the right tool for text editing. It’s gorgeous, powerful enough to tackle editing huge files, and simple enough to jot down some quick notes or whip up a blog post for your static site. Combine this app with a git client, an SSH client, and you can manage your home software stack on the go. Finally, there’s not enough space here to say nice things about the developer, so I’ll leave it at - he’s incredibly thoughtful and responsive. If you have feedback on the app, hit him up on Twitter. Thanks Simon, for dedicating so much time to making this amazing app!!
+I wrote this review in Runestone
+05/06/2022
+Slaxx99
+A good text editor is like a freshly sharpened chef’s knife. It just FEELS good to use, and it makes you happy. You know what a dull knife feels like and you can appreciate the perfect slicing motion you get from using the right tool for the job. Runestone is the right tool for text editing. It’s gorgeous, powerful enough to tackle editing huge files, and simple enough to jot down some quick notes or whip up a blog post for your static site. Combine this app with a git client, an SSH client, and you can manage your home software stack on the go. Finally, there’s not enough space here to say nice things about the developer, so I’ll leave it at - he’s incredibly thoughtful and responsive. If you have feedback on the app, hit him up on Twitter. Thanks Simon, for dedicating so much time to making this amazing app!!
+App is Sluggish Under iPadOS 18
+12/14/2024
+JCollins2048
+I used to really like this editor.  I've been using the free version for a few months now, and it's a nice, cozy, "no frills" alternative to Apple Notes.  It's the closest thing to having NotePad++ on my machine as I can get, and I've been enjoying the features I do use.  However, I recently updated to iPadOS 18 and, since then, the app has been kind of laggy and sluggish.Prior to getting iPadOS 18, the app would open quietly and go straight to the file selection menu.  Now, however, it opens to this screen with a blown-up icon scrolling vertically upward, hangs there and lags my iPad for a couple of seconds, and then opens the file selection menu on the bottom half of the screen rather than the entire screen.  This makes me not want to use this particular app, anymore, since I can no longer quickly hop in, jot something down, and hop out.I have no real complaints beyond that.  It crashes on occasion when deleting, undoing, or redoing… but that's more acceptable than this new startup sequence.  I really dislike it that much.
+App is Sluggish Under iPadOS 18
+12/14/2024
+JCollins2048
+I used to really like this editor.  I've been using the free version for a few months now, and it's a nice, cozy, "no frills" alternative to Apple Notes.  It's the closest thing to having NotePad++ on my machine as I can get, and I've been enjoying the features I do use.  However, I recently updated to iPadOS 18 and, since then, the app has been kind of laggy and sluggish.Prior to getting iPadOS 18, the app would open quietly and go straight to the file selection menu.  Now, however, it opens to this screen with a blown-up icon scrolling vertically upward, hangs there and lags my iPad for a couple of seconds, and then opens the file selection menu on the bottom half of the screen rather than the entire screen.  This makes me not want to use this particular app, anymore, since I can no longer quickly hop in, jot something down, and hop out.I have no real complaints beyond that.  It crashes on occasion when deleting, undoing, or redoing… but that's more acceptable than this new startup sequence.  I really dislike it that much.
+Best Text Editor
+06/14/2022
+dhdeckard
+I’ve tried so many text editors from Coda for iOS to Koder to Textastic. They’ve all been “ok”, but the problem I kept coming down to was the syntax highlighting. I’m a web developer and I use Atom on Mac every single day. I discovered this app and the syntax highlighting looked pretty good, but then I found where you can create your own theme and I immediately bought Premium and got to work replicating Atoms theme I use. I got it 90% of the way there and I’m in love. I’ve wanted this for years. THANK YOU.If I could ask for anything it would be tabs for multiple files open at once and maybe a tree view on the left to browse files and folder structure, but other than that I LOVE IT.
+Best Text Editor
+06/14/2022
+dhdeckard
+I’ve tried so many text editors from Coda for iOS to Koder to Textastic. They’ve all been “ok”, but the problem I kept coming down to was the syntax highlighting. I’m a web developer and I use Atom on Mac every single day. I discovered this app and the syntax highlighting looked pretty good, but then I found where you can create your own theme and I immediately bought Premium and got to work replicating Atoms theme I use. I got it 90% of the way there and I’m in love. I’ve wanted this for years. THANK YOU.If I could ask for anything it would be tabs for multiple files open at once and maybe a tree view on the left to browse files and folder structure, but other than that I LOVE IT.
+Outstanding Editor
+03/28/2024
+WhiplashZamboniMan
+If you are a VoiceOver user like I am and on iOS 17.4.1, there is one small problem when punctuation is set to anything but all under VoiceOver, verbosity. When walking through a text file line by line, VoiceOver fails to include the last character of every line whether or not the last character is punctuation. Setting verbosity for punctuation to all correctly identifies every character on the line.This editor is quick! A few of the others I've tested that are supposed to work with VoiceOver are so slow they are completely useless. I'm using this editor to write LaTeX documents and it works very well.
+Outstanding Editor
+03/28/2024
+WhiplashZamboniMan
+If you are a VoiceOver user like I am and on iOS 17.4.1, there is one small problem when punctuation is set to anything but all under VoiceOver, verbosity. When walking through a text file line by line, VoiceOver fails to include the last character of every line whether or not the last character is punctuation. Setting verbosity for punctuation to all correctly identifies every character on the line.This editor is quick! A few of the others I've tested that are supposed to work with VoiceOver are so slow they are completely useless. I'm using this editor to write LaTeX documents and it works very well.
+What’s New
+Version History
+Brings small optimizations for iOS 27.
+1.6.2
+6d ago
+Fixes an issue where the "Always Open" option in the Unsupported File Type dialog would be disabled even after purchasing Premium.
+1.6.1
+09/15/2025
+Brings a fresh new design for devices on the latest iOS and iPadOS and keeps the app running smoothly.
+1.6
+09/10/2025
+Replaces the Tintable app icon with a Dynamic app icon. The new Dynamic app icon adjusts accordingly to match the appearance of your Home Screen.
+1.5.2
+10/01/2024
+Fixes a performance issue introduced in the document browser in version 1.5.
+1.5.1
+09/30/2024
+- Introduces a new launch experience for iOS 18.
+- Enables quick access to creating temporary files from the new launch experience.
+- Adds the Tintable app icon, suitable for tinting on the Home Screen on iOS 18.
+1.5.0
+09/27/2024
+Fixes an issue where text selection could start behaving incorrectly after navigating between word boundaries using a hardware keyboard.
+1.4.8
+02/23/2024
+Highlighting inline LaTeX in Markdown documents is now disabled by default. This can be enabled again in Languages settings.
+1.4.7
+02/16/2024
+Bug fixes and smaller improvements.
+1.4.6
+02/12/2024
+- Redesigns the App Icon settings.
+- Improves the behavior of several toolbar items on the iPad.
+- Automatic language detection based on file extensions is now case-insensitive.
+- Improves navigation in font picker on iOS 17.
+- The text showing the cursor position now scales correctly.
+1.4.5
+02/05/2024
+Fixes an issue where highlighted search results could be covered by the Find &amp; Replace panel.
+1.3.21
+09/25/2023
+Fixes an issue where the caret would not appear until the second time the text view was selected when running the app on iOS 17.
+1.3.20
+09/24/2023
+Fixes an issue where renaming a file would show the old filename and cause the editor to become unresponsive.
+1.3.19
+03/20/2023
+Fixes an issue where the app would sometimes crash when editing documents with nested languages.
+1.3.18
+03/16/2023
+- Improves the text layout by trimming leading whitespace on line fragments. This closely matches the text layout of the standard text editors on iOS.
+- Fixes an issue where invisible character symbols would sometimes be placed incorrectly.
+1.3.17
+02/13/2023
+Fixes issues working with files containing Windows-style line breaks.
+1.3.16
+01/16/2023
+- Adds setting to set the minimum width of the gutter containing line numbers. Find the new setting in the Lines settings.
+- Fixes an issue where Markdown was not correctly highlighted.
+1.3.15
+01/14/2023
+This update contains fixes for some minor issues.
+1.3.14
+01/03/2023
+- Adds support for highlighting SQL.
+- Fixes an issue where code blocks in Markdown were not highlighted.
+1.3.13
+12/19/2022
+Fixes an issue where the header in the editor would sometimes display incorrectly after rotating the iPad.
+1.3.12
+11/18/2022
+Fixes an issue where the placement of the caret was not updated correctly after deleting a word using Option+Backspace.
+1.3.11
+11/09/2022
+- Adds support for syntax highlighting Haskell files.
+- Fixes an issue where entering marked text did not work properly. This bug would, for example, affect users writing in Chinese.
+- Fixes an issue where adding a comment to the end of a Swift file would sometimes cause the app to hang infinitely.
+1.3.10
+11/07/2022
+Improves support for writing text in Korean, and other languages that use combined glyphs.
+1.3.9
+11/02/2022
+Adds a customizable toolbar to the editor. The new toolbar is available on iPads running iPadOS 16.1 or later.
+1.3.8
+10/24/2022
+- Sometimes the position of the caret was not updated after pasting text.
+- Fixes a few issues that would cause the app to crash.
+1.3.7
+10/17/2022
+Brings small optimizations for iOS 27.
+more
+Version 1.6.2
+6d ago
+In-App Purchases
+Premium
+Get the most out of Runestone with Premium.
+$9.99
+App Privacy
+App Privacy
+The developer,
+Simon B. Støvring
+, indicated that the app’s privacy practices may include handling of data as described below. This information has not been verified by Apple. For more information, see the
+developer’s privacy policy
+.
+To help you better understand the developer’s responses, see
+Privacy Definitions and Examples
+.
+Privacy practices may vary, for example, based on the features you use or your age.
+Learn More
+Data Not Collected
+The developer does not collect any data from this app.
+The developer,
+Simon B. Støvring
+, indicated that the app’s privacy practices may include handling of data as described below. For more information, see the
+developer’s privacy policy
+.
+Data Not Collected
+The developer does not collect any data from this app.
+Privacy practices may vary, for example, based on the features you use or your age.
+Learn More
+Accessibility
+The developer has not yet indicated which accessibility features this app supports.
+Learn More
+Information
+Seller
+Simon Stovring
+Size
+67.6 MB
+Category
+Developer Tools
+Compatibility
+Requires iOS 15.0 or later.
+iPhone
+Requires iOS 15.0 or later.
+iPad
+Requires iPadOS 15.0 or later.
+iPod&nbsp;touch
+Requires iOS 15.0 or later.
+Apple Vision
+Requires visionOS 2.0 or later.
+Languages
+English
+Age Rating
+4+
+4+
+Learn More
+In-App Purchases
+Yes
+Premium
+$9.99
+Learn More
+Copyright
+© 2026 Simon B. Støvring
+Developer Website
+Privacy Policy
+Supports
+Family Sharing
+Some in-app purchases and subscriptions may be shareable with your family group when Family Sharing is enabled.
+Learn More
+More by Simon B. Støvring
+View
+Scriptable
+Automation using JavaScript
+View
+Jayson
+JSON editor with Shortcuts
+View
+Data Jar
+Data Store for Shortcuts
+View
+Festivitas
+Festive lights in widgets
+View
+brrr • send push notifications
+Send pushes via webhooks
+View
+Re: Toot
+Quote posts for Mastodon
+View
+Stroke Counter for Golf
+Track strokes on your wrist
+View
+Sticky Draw
+Create your own stickers
+You Might Also Like
+View
+Textastic Code Editor
+Text, Coding, SFTP Client, SSH
+View
+Kodex
+A powerful code editor
+View
+a-Shell
+*Local* Unix terminal (&amp; ssh)
+View
+Pyto IDE
+Python, C/C++
+View
+Git client - Working Copy
+for GitHub and self-hosted
+View
+Code Editor - Compiler &amp; IDE
+Programming on mobile
+View
+a-Shell mini
+*Local* Unix terminal (&amp; ssh)
+View
+Web Inspector
+Developer Console for Safari
+View
+xTerminal - SSH Terminal Shell
+SSH Client, Shell Console Term
+View
+Swifty Compiler: Swift IDE
+Code Editor &amp; Playground
+United States
+Español (México)
+العربية
+Русский
+简体中文
+Français (France)
+한국어
+Português (Brazil)
+Tiếng Việt
+繁體中文 (台灣)
+Select a country or region
+Africa, Middle East, and India
+See All
+Algeria
+Angola
+Armenia
+Azerbaijan
+Bahrain
+Benin
+Botswana
+Burkina Faso
+Cameroun
+Cape Verde
+Chad
+Côte d’Ivoire
+Congo, The Democratic Republic Of The
+Egypt
+Eswatini
+Gabon
+Gambia
+Ghana
+Guinea-Bissau
+India
+Iraq
+Israel
+Jordan
+Kenya
+Kuwait
+Lebanon
+Liberia
+Libya
+Madagascar
+Malawi
+Mali
+Mauritania
+Mauritius
+Morocco
+Mozambique
+Namibia
+Niger (English)
+Nigeria
+Oman
+Qatar
+Congo, Republic of
+Rwanda
+São Tomé and Príncipe
+Saudi Arabia
+Senegal
+Seychelles
+Sierra Leone
+South Africa
+Sri Lanka
+Tajikistan
+Tanzania, United Republic Of
+Tunisia
+Turkmenistan
+United Arab Emirates
+Uganda
+Yemen
+Zambia
+Zimbabwe
+Asia Pacific
+See All
+Afghanistan
+Australia
+Bhutan
+Brunei Darussalam
+Cambodia
+中国大陆
+Fiji
+香港
+Indonesia (English)
+日本
+Kazakhstan
+대한민국
+Kyrgyzstan
+Lao People's Democratic Republic
+澳門
+Malaysia (English)
+Maldives
+Micronesia, Federated States of
+Mongolia
+Myanmar
+Nauru
+Nepal
+New Zealand
+Pakistan
+Palau
+Papua New Guinea
+Philippines
+Singapore
+Solomon Islands
+台灣
+Thailand
+Tonga
+Turkmenistan
+Uzbekistan
+Vanuatu
+Vietnam
+Europe
+See All
+Albania
+Armenia
+Österreich
+Belarus
+Belgium
+Bosnia and Herzegovina
+Bulgaria
+Croatia
+Cyprus
+Czechia
+Denmark
+Estonia
+Finland
+France (Français)
+Georgia
+Deutschland
+Greece
+Hungary
+Iceland
+Ireland
+Italia
+Kosovo
+Latvia
+Lithuania
+Luxembourg (English)
+Malta
+Moldova, Republic Of
+Montenegro
+Nederland
+North Macedonia
+Norway
+Poland
+Portugal (Português)
+Romania
+Россия
+Serbia
+Slovakia
+Slovenia
+España
+Sverige
+Schweiz
+Türkiye (English)
+Ukraine
+United Kingdom
+Latin America and the Caribbean
+See All
+Anguilla
+Antigua and Barbuda
+Argentina (Español)
+Bahamas
+Barbados
+Belize
+Bermuda
+Bolivia (Español)
+Brasil
+Virgin Islands, British
+Cayman Islands
+Chile (Español)
+Colombia (Español)
+Costa Rica (Español)
+Dominica
+República Dominicana
+Ecuador (Español)
+El Salvador (Español)
+Grenada
+Guatemala (Español)
+Guyana
+Honduras (Español)
+Jamaica
+México
+Montserrat
+Nicaragua (Español)
+Panamá
+Paraguay (Español)
+Perú
+St. Kitts and Nevis
+Saint Lucia
+St. Vincent and The Grenadines
+Suriname
+Trinidad and Tobago
+Turks and Caicos
+Uruguay (English)
+Venezuela (Español)
+The United States and Canada
+See All
+Canada (English)
+Canada (Français)
+United States
+Estados Unidos (Español México)
+الولايات المتحدة
+США
+美国 (简体中文)
+États-Unis (Français France)
+미국
+Estados Unidos (Português Brasil)
+Hoa Kỳ
+美國 (繁體中文台灣)
+Copyright © 2026
+Apple Inc.
+All rights reserved.
+Internet Service Terms
+App Store &amp; Privacy
+Cookie Warning
+Support

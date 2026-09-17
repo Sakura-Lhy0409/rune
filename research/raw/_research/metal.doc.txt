@@ -1,0 +1,281 @@
+Render advanced 3D graphics and compute data in parallel with graphics processors.
+Metal
+=== Metal
+Overview
+The Metal framework gives your app direct access to a device’s graphics processing unit (GPU). With Metal, apps can leverage a GPU to quickly render complex scenes and run computational tasks in parallel. For example, apps in these categories use Metal to maximize their performance:
+Games that render sophisticated 2D or 3D environments
+Video processing apps, like Final Cut Pro
+Scientific research apps that analyze and process large datasets
+Fully immersive visionOS apps
+Metal works hand-in-hand with other frameworks that supplement its capability. For example, 
+ upscales your renderings in less time than rendering them natively, and 
+ simplifies the tasks that display your Metal content onscreen. The 
+ framework provides a large library of optimized compute and rendering shaders that take advantage of each GPU’s unique hardware. In visionOS, create fully immersive stereoscopic content with the help of the 
+ framework.
+Many high-level Apple frameworks leverage the performance of Metal, including 
+, 
+, and 
+. These high-level frameworks implement the GPU programming details for you. However, you can typically get better performance by writing your own custom Metal and shader code. See the 
+ for shader implementation details.
+=== Related Documentation
+Begin with the Metal fundamentals.
+=== Essentials
+Discover graphics techniques and Metal features through sample code projects.
+=== Samples
+Start with a Metal device instance to begin working with the GPU it represents.
+=== GPU devices
+Send work to a GPU by issuing commands and configuring the pipeline states for those commands.
+=== Command encoders
+Store data in buffers and textures, and optionally manage the underlying GPU memory yourself.
+=== Resources
+Compile and organize shaders, the GPU functions that run on a Metal device’s execution units.
+=== Shader compilation and libraries
+Display standard or high-dynamic-range content on a device’s display with
+ 
+ or
+ 
+, in standard or high dynamic range.
+=== Presentation
+Identify and fix issues with your app’s Metal API calls, shader code, resources, and performance during development by using Metal Debugger.
+=== Developer tools
+Take advantage of the unique architecture of Apple silicon GPUs.
+=== Apple silicon
+=== Reference
+=== Classes
+=== Protocols
+=== Structures
+=== Variables
+=== Enumerations
+Create a version of your Metal app that runs on both Apple silicon and Intel-based
+ 
+Mac computers.
+=== Porting your Metal code to Apple silicon
+Take control of the drawing environment and render your own content using Metal.
+=== Compositor Services
+Use built-in or custom filters to process still and video images.
+=== Core Image
+Boost your Metal app’s performance by upscaling lower-resolution content to save GPU time.
+=== MetalFX
+Build Metal apps quicker and easier using a common set of utility classes.
+=== MetalKit
+Optimize graphics and compute performance with kernels that are fine-tuned for the unique characteristics of each Metal GPU family.
+=== Metal Performance Shaders
+Render, compose, and animate visual elements.
+=== Core Animation
+Simulate and render 3D content for use in your augmented reality apps.
+=== RealityKit
+Add high-performance 2D content with smooth animations to your app, or create a game with a high-level set of 2D game-based tools.
+=== SpriteKit
+Debug and profile your Metal workload with a GPU trace.
+=== Metal debugger
+Locate and fix issues related to your app’s use of the Metal API and GPU functions.
+=== Metal developer workflows
+=== Technologies
+Render advanced 3D graphics and compute data in parallel with graphics processors.
+Metal
+=== Metal
+enum
+ 
+MTLContentionRelief
+MTLContentionRelief
+=== MTLContentionRelief
+struct
+ 
+MTLDeviceError
+MTLDeviceError
+=== MTLDeviceError
+Enumeration of kinds of errors that methods on MTLDevice can produce.
+enum
+ 
+Code
+Code
+=== MTLDeviceError.Code
+let
+ 
+MTLDeviceErrorDomain
+: 
+String
+MTLDeviceErrorDomain
+=== MTLDeviceErrorDomain
+enum
+ 
+MTLFloatingPointConversionRoundingMode
+MTLFloatingPointConversionRoundingMode
+=== MTLFloatingPointConversionRoundingMode
+enum
+ 
+MTLForwardProgressUsage
+MTLForwardProgressUsage
+=== MTLForwardProgressUsage
+A type that represents the configuration and storage of an auxiliary plane in a multi-plane tensor.
+protocol
+ 
+MTLTensorAuxiliaryPlane
+MTLTensorAuxiliaryPlane
+=== MTLTensorAuxiliaryPlane
+A configuration for an auxiliary plane in a multi-plane tensor.
+class
+ 
+MTLTensorAuxiliaryPlaneDescriptor
+MTLTensorAuxiliaryPlaneDescriptor
+=== MTLTensorAuxiliaryPlaneDescriptor
+A map of auxiliary plane descriptors keyed by plane type.
+class
+ 
+MTLTensorAuxiliaryPlaneDescriptorMap
+MTLTensorAuxiliaryPlaneDescriptorMap
+=== MTLTensorAuxiliaryPlaneDescriptorMap
+An auxiliary plane that a shader’s tensor argument requires.
+class
+ 
+MTLTensorAuxiliaryPlaneType
+MTLTensorAuxiliaryPlaneType
+=== MTLTensorAuxiliaryPlaneType
+An object that associates each plane of a tensor with a buffer and byte offset for buffer-backed tensor creation.
+class
+ 
+MTLTensorBufferAttachments
+MTLTensorBufferAttachments
+=== MTLTensorBufferAttachments
+The possible tensor plane types.
+enum
+ 
+MTLTensorPlaneType
+MTLTensorPlaneType
+=== MTLTensorPlaneType
+Make text legible on all devices the player chooses to run your game on.
+=== Adapting your game interface for smaller screens
+Encode a block information transfer pass to adjust and copy data to and from GPU resources, such as buffers and textures.
+=== Blit passes
+Create and manage untyped data your app uses to exchange information with its shader functions.
+=== Buffers
+Invoke a Metal frame capture from your app, then save the resulting GPU trace to a file or view it in Xcode.
+=== Capturing Metal commands programmatically
+Encode a compute pass that runs computations in parallel on a thread grid, processing and manipulating Metal resource data on multiple cores of a GPU.
+=== Compute passes
+Prototype and test your Metal apps in Simulator.
+=== Developing Metal apps that run in Simulator
+Render a colorful, rotating 2D triangle by running draw commands with a render pipeline on a GPU.
+=== Drawing a triangle with Metal 4
+Retrieve runtime data from a GPU device by sampling one or more of its counters.
+=== GPU counters and counter sample buffers
+Find any available GPU, submit work to it with command buffers, suspend work, and coordinate between multiple GPUs.
+=== GPU devices and work submission
+Take advantage of high dynamic range to present more vibrant colors in your apps and games.
+=== HDR content
+Fix performance glitches and develop default settings for smooth experiences on Apple platforms using the powerful suite of Metal development tools.
+=== Improving your game’s graphics performance and settings
+Store draw commands in Metal buffers and run them at a later time on the GPU, either once or repeatedly.
+=== Indirect command encoding
+Print debugging messages that a shader generates using shader logging.
+=== Logging shader debug messages
+Add machine learning model inference to your Metal app’s GPU workflow.
+=== Machine learning passes
+Set up a window and view for optimally displaying your Metal content.
+=== Managing your game window for Metal in macOS
+Set up a window that handles dynamically resizing your Metal content.
+=== Managing your Metal app window in iPadOS
+Take control of your app’s GPU memory management by creating a large memory allocation for various buffers, textures, and other resources.
+=== Memory heaps
+=== Metal constants
+=== Metal data types
+Create capture managers and capture scopes, and review a GPU device’s log after it runs a command buffer.
+=== Metal debugging types
+=== Metal enumerations
+=== Metal functions
+=== Metal macros
+Explore the complete set of Metal samples.
+=== Metal sample code library
+=== Metal structures
+=== Metal variables
+Show the output from a GPU’s rendering pass to the user in your app.
+=== Onscreen presentation
+Use Metal to find GPUs and perform calculations on them.
+=== Performing calculations on a GPU
+Build a representation of your scene’s geometry using triangles and bounding volumes to quickly trace rays through the scene.
+=== Ray tracing with acceleration structures
+Encode a render pass to draw graphics into an image.
+=== Render passes
+Control the common attributes of all Metal memory resources, including buffers and textures,
+ 
+and how to configure their underlying memory.
+=== Resource fundamentals
+Load assets in your games and apps quickly by running a dedicated input/output queue alongside your GPU tasks.
+=== Resource loading
+Prevent multiple commands that can access the same resources simultaneously by
+ 
+coordinating those reads and writes with barriers, fences, or events.
+=== Resource synchronization
+Manage and load your app’s Metal shaders.
+=== Shader libraries
+Configure alternative render paths in your Metal app to enable running your app in Simulator.
+=== Supporting Simulator in a Metal app
+Learn about characteristic Apple GPU features, including imageblocks, tile shaders, and raster order groups.
+=== Tailor your apps for Apple GPUs and tile-based deferred rendering
+Create and manage typed data your app uses to exchange information with its shader functions.
+=== Textures
+Discover the features and functionality in the Metal 4 foundational APIs.
+=== Understanding the Metal 4 core API
+Create pipelines for different levels of detail from a common shader source.
+=== Using function specialization to build pipeline variants
+Create a MetalKit view and a render pass to draw the view’s contents.
+=== Using Metal to draw a view’s contents
+Control when and how you compile an app’s shaders.
+=== Using the Metal 4 compilation API
+Define utility functions once for multiple address spaces, and share types with your app’s main code.
+=== Writing reusable GPU functions with generic pointers
+=== Metal Best Practices Guide
+Metal Best Practices Guide
+=== Metal Programming Guide
+Metal Programming Guide
+=== Metal Shading Language Specification
+Metal Shading Language Specification
+Begin with the Metal fundamentals.
+=== Essentials
+Discover graphics techniques and Metal features through sample code projects.
+=== Samples
+Start with a Metal device instance to begin working with the GPU it represents.
+=== GPU devices
+Send work to a GPU by issuing commands and configuring the pipeline states for those commands.
+=== Command encoders
+Store data in buffers and textures, and optionally manage the underlying GPU memory yourself.
+=== Resources
+Compile and organize shaders, the GPU functions that run on a Metal device’s execution units.
+=== Shader compilation and libraries
+Display standard or high-dynamic-range content on a device’s display with
+ 
+ or
+ 
+, in standard or high dynamic range.
+=== Presentation
+Identify and fix issues with your app’s Metal API calls, shader code, resources, and performance during development by using Metal Debugger.
+=== Developer tools
+Take advantage of the unique architecture of Apple silicon GPUs.
+=== Apple silicon
+=== Reference
+=== Classes
+=== Protocols
+=== Variables
+=== Enumerations
+=== Related Documentation
+MTLContentionRelief
+MTLContentionRelief
+MTLDeviceError
+MTLDeviceError
+MTLDeviceErrorDomain
+MTLFloatingPointConversionRoundingMode
+MTLFloatingPointConversionRoundingMode
+MTLForwardProgressUsage
+MTLForwardProgressUsage
+MTLTensorAuxiliaryPlane
+MTLTensorAuxiliaryPlane
+MTLTensorAuxiliaryPlaneDescriptor
+MTLTensorAuxiliaryPlaneDescriptor
+MTLTensorAuxiliaryPlaneDescriptorMap
+MTLTensorAuxiliaryPlaneDescriptorMap
+MTLTensorAuxiliaryPlaneType
+MTLTensorAuxiliaryPlaneType
+MTLTensorBufferAttachments
+MTLTensorBufferAttachments
+MTLTensorPlaneType
+MTLTensorPlaneType

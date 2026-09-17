@@ -1,0 +1,150 @@
+The maximum amount of time remaining for the app to run in the background.
+var
+ 
+backgroundTimeRemaining
+: 
+TimeInterval
+backgroundTimeRemaining
+=== backgroundTimeRemaining
+nonisolated
+ 
+var
+ 
+backgroundTimeRemaining
+: 
+TimeInterval
+ { 
+get
+ }
+Discussion
+The value is valid only after the app enters the background and has started at least one task using 
+ in the foreground.
+System conditions may end background execution earlier, either by calling the expiration handler, or by terminating the app.
+This method can be safely called on a non-main thread.
+=== Managing background tasks
+A number of seconds.
+typealias
+ 
+TimeInterval
+TimeInterval
+=== TimeInterval
+=== Technologies
+Construct and manage a graphical, event-driven user interface for your iOS, iPadOS, or tvOS app.
+=== UIKit
+The centralized point of control and coordination for apps running in iOS.
+class
+ 
+UIApplication
+UIApplication
+=== UIApplication
+Indicates whether the app can refresh content when running in the background.
+var
+ 
+backgroundRefreshStatus
+: 
+UIBackgroundRefreshStatus
+backgroundRefreshStatus
+=== backgroundRefreshStatus
+A notification that posts when the app’s status for downloading content in the background changes.
+class
+ 
+let
+ 
+backgroundRefreshStatusDidChangeNotification
+: 
+NSNotification
+.
+Name
+UIApplicationBackgroundRefreshStatusDidChangeNotification
+=== backgroundRefreshStatusDidChangeNotification
+The maximum amount of time remaining for the app to run in the background.
+var
+ 
+backgroundTimeRemaining
+: 
+TimeInterval
+backgroundTimeRemaining
+=== backgroundTimeRemaining
+Marks the start of a task that should continue if the app enters the background.
+func
+ 
+beginBackgroundTask
+(
+expirationHandler
+: (() -> 
+Void
+)?) -> 
+UIBackgroundTaskIdentifier
+- 
+beginBackgroundTaskWithExpirationHandler:
+=== beginBackgroundTask(expirationHandler:)
+Marks the start of a task with a custom name that should continue if the app enters the background.
+func
+ 
+beginBackgroundTask
+(
+withName
+: 
+String
+?, 
+expirationHandler
+: (() -> 
+Void
+)?) -> 
+UIBackgroundTaskIdentifier
+- 
+beginBackgroundTaskWithName:expirationHandler:
+=== beginBackgroundTask(withName:expirationHandler:)
+Marks the end of a specific long-running background task.
+func
+ 
+endBackgroundTask
+(
+UIBackgroundTaskIdentifier
+)
+- 
+endBackgroundTask:
+=== endBackgroundTask(_:)
+Constants that indicate whether background execution is enabled for the app.
+enum
+ 
+UIBackgroundRefreshStatus
+UIBackgroundRefreshStatus
+=== UIBackgroundRefreshStatus
+A unique token that identifies a request to run in the background.
+struct
+ 
+UIBackgroundTaskIdentifier
+UIBackgroundTaskIdentifier
+=== UIBackgroundTaskIdentifier
+Ensure that critical tasks finish when your app moves to the background.
+=== Extending your app’s background execution time
+backgroundTimeRemaining
+=== Managing background tasks
+@property
+ (
+nonatomic
+, 
+readonly
+) 
+NSTimeInterval
+ 
+backgroundTimeRemaining
+;
+NSTimeInterval
+NSTimeInterval
+UIApplication
+UIApplication
+backgroundRefreshStatus
+UIApplicationBackgroundRefreshStatusDidChangeNotification
+backgroundTimeRemaining
+- 
+beginBackgroundTaskWithExpirationHandler:
+- 
+beginBackgroundTaskWithName:expirationHandler:
+- 
+endBackgroundTask:
+UIBackgroundRefreshStatus
+UIBackgroundRefreshStatus
+UIBackgroundTaskIdentifier
+UIBackgroundTaskIdentifier

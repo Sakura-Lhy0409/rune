@@ -1,0 +1,652 @@
+‎Git client - Working Copy App - App Store
+Search
+Today
+Games
+Apps
+Arcade
+Platform
+iPhone
+iPad
+Mac
+Vision
+Watch
+TV
+Git client - Working Copy
+for GitHub and self-hosted
+Free · In‑App Purchases
+Share
+3.8K Ratings
+4.8
+Age Rating
+4+
+Years
+Chart
+#59
+Developer Tools
+Developer
+Anders Borum
+Language
+EN
++ 4 More
+Size
+97
+MB
+iPhone, iPad
+Access Git repositories on the go. Clone, edit, commit and push while allowing other apps access to repositories.
+Git is a important part of our work-life and iOS can take part in this. The ability to commit even when offline has added utility on a device that moves in and out of network coverage. Cloning repositories gets you a local copy on your iOS device with commits for all branches. You can browse the content from within the app and make changes. Other applications supporting the Files app, WebDAV or x-callback-url has access to these files. Changes made can be committed and the commits can in turn be pushed back to the remote.
+The idea of doing significant programming on iOS might seem far fetched when you are used to a large screen, a physical keyboard and a full IDE. But just as it turned out that not every email is serious prose, then not everything that goes on in Git is significant programming. Sometimes you just want to update a TODO file or make adjustments to your Jekyll site. Sometimes you just need to add a file the designer sent after hours.
+If you ever make reminders about small things to do with the code-base, then you should give Working Copy a try. You will spend less time moving stuff around and you will get much better commit messages when you write them for fixes that are still fresh in your mind. You won't be leaving your computer behind any time soon, but sometimes it is faster to just fix things with the device in your hand.
+When you do need to perform real work on iOS, Working Copy is a powerful tool. Editor has syntax highlighting for more than 50 programming languages and a built-in color picker. Preview images, Markdown and HTML files with a Javascript console pointing to errors in your code. Create new branches and merge or rebase them back, with a brilliant merge-tool for handling conflicts. If you need to automate your work there are Working Copy actions in the Shortcuts app for most operations.
+Even if you never edit a line of code on iOS, Working Copy is a great companion for reviewing and discussing code. Repositories are cross indexed and with powerful fuzzy search you can quickly jump from a symbol to the declaration or reverse from the declaration to all usages. A graph of your commits lets you zoom out for a overview of the commit tree or zoom in for specifics about each commit, with speed and beauty you won’t find in desktop Git applications. Review the changes your files have gone through with a diff viewer that is great for text and images. There is even hex-dump mode for that obscure occasion.
+Working Copy is a free download but you need to unlock pro features such as the ability to push commits and manage more than 5 repositories. There is no venture capital, large company or ads funding development and your support through in-app purchase directly sustains development. Try out pro features with a 10 day free trial.
+When you pay to unlock you get permanent access to all pro features at the time of purchase as well as any added the next year. When 12 months have passed you keep all existing pro features but any new ones introduced are locked until you renew your unlock.
+more
+Ratings &amp; Reviews
+4.8
+out of 5
+3.8K Ratings
+Take my money!
+11/20/2021
+Woojamon
+Literally within the first 10 minutes of using this app I wanted to give this man my money. And I did. I was able to connect to my github account with ease and even create a PGP key in a few taps and I don’t even know what the heck a PGP key is except that it verifies my identity on github somehow when I push changes. I originally was looking for a markdown editor with source control capabilities and this app fits the bill. I was able to create some markdown and reference image files elsewhere in the repository and it all worked, and it even has a nifty markdown preview capability. I opened a second instance of the app side by side on my ipad and had one instance in editor mode and the other in preview mode, and although it’s not a live update, as soon as I tapped “Done” though the instance in preview mode reflected the changes immediately, which I more than I had hoped for from an app that wasn’t trying to be a markdown editor! I could still edit the markdown on the first instance too just by tapping on the text area again. EDIT: I just noticed that the markdown preview refreshed about every 5 seconds or so, so even though it’s still not a live update, the auto refresh updates the preview fast enough! Even if you don’t download the app just send the man your money anyways; he totally deserves it.
+Take my money!
+11/20/2021
+Woojamon
+Literally within the first 10 minutes of using this app I wanted to give this man my money. And I did. I was able to connect to my github account with ease and even create a PGP key in a few taps and I don’t even know what the heck a PGP key is except that it verifies my identity on github somehow when I push changes. I originally was looking for a markdown editor with source control capabilities and this app fits the bill. I was able to create some markdown and reference image files elsewhere in the repository and it all worked, and it even has a nifty markdown preview capability. I opened a second instance of the app side by side on my ipad and had one instance in editor mode and the other in preview mode, and although it’s not a live update, as soon as I tapped “Done” though the instance in preview mode reflected the changes immediately, which I more than I had hoped for from an app that wasn’t trying to be a markdown editor! I could still edit the markdown on the first instance too just by tapping on the text area again. EDIT: I just noticed that the markdown preview refreshed about every 5 seconds or so, so even though it’s still not a live update, the auto refresh updates the preview fast enough! Even if you don’t download the app just send the man your money anyways; he totally deserves it.
+good but why have push pro only?
+11/29/2018
+Sean D. Hunt
+I find it stupid that pushing is a pro only feature. Because of that this app becomes useless after the trial forcing me back to the even more useless git2go because I cant zip up a repository that I cloned on my phone and transferred to my laptop to make changes and commited on to push it on my phone as the laptop has no internet as the wifi driver in 1803 and the latest windows insiders keeps disconnecting me. This is why I got this app to replace that trash app but with push being pro it makes this one trash too. Sorry but if you want people want to be able to use it without them being forced to buy pro or people like me who cannot get a job because of my mental stability and so I do open source to pass time. Please take this into consideration. I love the fact of gpg signing too something git2go does not have. Although I would like it if I could press some rebase button on a commit that asks me if I want to squash it into the previous commit and possibly ones after it or fixup the previous one using only the currently opened one to basically amend the one before it. Other than that keep up the good work. :wink: Even I would like to help with making this app if it itself was also open source.
+Developer Response
+I need to make push a pro feature to make the people seriously using the app pay for it. It can support the salary of one developer (me) and I work full time to improve it.This is frustrating when it's too expensive, but the alternative would not be better for you. I wouldn't have been able to spend much time developing a free app as it would be done after completing my paying day job and the result would not be close to the quality that Working Copy is now.I'm working on ways to amend, squash and split commits.
+good but why have push pro only?
+11/29/2018
+Sean D. Hunt
+I find it stupid that pushing is a pro only feature. Because of that this app becomes useless after the trial forcing me back to the even more useless git2go because I cant zip up a repository that I cloned on my phone and transferred to my laptop to make changes and commited on to push it on my phone as the laptop has no internet as the wifi driver in 1803 and the latest windows insiders keeps disconnecting me. This is why I got this app to replace that trash app but with push being pro it makes this one trash too. Sorry but if you want people want to be able to use it without them being forced to buy pro or people like me who cannot get a job because of my mental stability and so I do open source to pass time. Please take this into consideration. I love the fact of gpg signing too something git2go does not have. Although I would like it if I could press some rebase button on a commit that asks me if I want to squash it into the previous commit and possibly ones after it or fixup the previous one using only the currently opened one to basically amend the one before it. Other than that keep up the good work. :wink: Even I would like to help with making this app if it itself was also open source.
+Developer Response
+11/30/2018
+I need to make push a pro feature to make the people seriously using the app pay for it. It can support the salary of one developer (me) and I work full time to improve it.This is frustrating when it's too expensive, but the alternative would not be better for you. I wouldn't have been able to spend much time developing a free app as it would be done after completing my paying day job and the result would not be close to the quality that Working Copy is now.I'm working on ways to amend, squash and split commits.
+Fantastic app by a fantastic developer that is definitely deserving of your support
+09/16/2022
+Rando8989
+I’ll preface by saying that I am not a developer, just a hobbyist. I really don’t use git a ton aside from cloning repositories for self hosted apps on my raspberry pi or digital ocean server etc. In fact, I use this developer’s other app, secure shellfish (also a fantastic app- best ssh client for iOS hands down), for all of that. That being said, I have a good understanding of how git works and an appreciation for well developed apps. This one is outstanding. Both of this developer’s apps continue to amaze me with their ability to seemingly push the limits of what’s possible with iOS. I don’t think any other apps integrate so seamlessly with the iOS files app and are as feature rich as secure shellfish and working copy. The UIs are also extremely visually pleasing. Although I can do everything (and more) that I need just from the free version, I felt compelled to pay for the pro features. As another reviewer said, give this guy your money. He definitely deserves it.
+Fantastic app by a fantastic developer that is definitely deserving of your support
+09/16/2022
+Rando8989
+I’ll preface by saying that I am not a developer, just a hobbyist. I really don’t use git a ton aside from cloning repositories for self hosted apps on my raspberry pi or digital ocean server etc. In fact, I use this developer’s other app, secure shellfish (also a fantastic app- best ssh client for iOS hands down), for all of that. That being said, I have a good understanding of how git works and an appreciation for well developed apps. This one is outstanding. Both of this developer’s apps continue to amaze me with their ability to seemingly push the limits of what’s possible with iOS. I don’t think any other apps integrate so seamlessly with the iOS files app and are as feature rich as secure shellfish and working copy. The UIs are also extremely visually pleasing. Although I can do everything (and more) that I need just from the free version, I felt compelled to pay for the pro features. As another reviewer said, give this guy your money. He definitely deserves it.
+What Can I Do For Everyone Else Always?
+03/20/2018
+Seattle Rex
+I'm just a little burned out on the App Store shenanigans lately. I've lost count of the number of "Pro" upgrades of purchased which are now "free" and covered with ads.  I'm tired of plunking down cash for expensive programs that, months later, switch to a subscription model, taking my cash and flushing it in the process.  I'm tired of paying for apps, only to find them still filled with Ads.  Maybe I'm just having a bad run, but the App Store truly feels like a scammer's bazaar these days.  There are pick-pockets everywhere.  I don't really lump the Working Copy folks into the group ... because they at least make a quality product and seem to put real effort into it.  This is why I paid for a "permanent" Pro upgrade 14 months ago.  And just paid $8 again for another "permanent" Pro upgrade. Like many other things, "permanent" doesn't mean what I thought it did. I'm sure it it's worth it, and I'm glad to support them, I just feel a little burned out and a little "over-used".  I bought last Christmas and it just doesn't feel that long ago to get hit up again.  I feel like I get rolled like a drunken sailor every time I log into the app store these days.  I really like the app though. Nice work, guys.
+Developer Response
+Hi Rex, I understand that it can feel a bit much with many apps asking you to pay again and again. The upgrade mechanism in Working Copy is made to be fully voluntary. You can delay upgrading if the added pro features are not enticing and you can decide never to upgrade and the pro features you already have will stick around forever. The app will still be updated with bug-fixes and non-pro features without you having to pay again. If you can accept a delay in when you get the latest pro features every other year  you could even delay purchasing the upgrade, such that you only upgrade every 24 months keeping down the costs.
+What Can I Do For Everyone Else Always?
+03/20/2018
+Seattle Rex
+I'm just a little burned out on the App Store shenanigans lately. I've lost count of the number of "Pro" upgrades of purchased which are now "free" and covered with ads.  I'm tired of plunking down cash for expensive programs that, months later, switch to a subscription model, taking my cash and flushing it in the process.  I'm tired of paying for apps, only to find them still filled with Ads.  Maybe I'm just having a bad run, but the App Store truly feels like a scammer's bazaar these days.  There are pick-pockets everywhere.  I don't really lump the Working Copy folks into the group ... because they at least make a quality product and seem to put real effort into it.  This is why I paid for a "permanent" Pro upgrade 14 months ago.  And just paid $8 again for another "permanent" Pro upgrade. Like many other things, "permanent" doesn't mean what I thought it did. I'm sure it it's worth it, and I'm glad to support them, I just feel a little burned out and a little "over-used".  I bought last Christmas and it just doesn't feel that long ago to get hit up again.  I feel like I get rolled like a drunken sailor every time I log into the app store these days.  I really like the app though. Nice work, guys.
+Developer Response
+04/26/2018
+Hi Rex, I understand that it can feel a bit much with many apps asking you to pay again and again. The upgrade mechanism in Working Copy is made to be fully voluntary. You can delay upgrading if the added pro features are not enticing and you can decide never to upgrade and the pro features you already have will stick around forever. The app will still be updated with bug-fixes and non-pro features without you having to pay again. If you can accept a delay in when you get the latest pro features every other year  you could even delay purchasing the upgrade, such that you only upgrade every 24 months keeping down the costs.
+What’s New
+Version History
+Improvements to Auto-Sync logging, notifications and the ability to keep syncing after the device has been locked.
+Includes latest improvements to 7.0.0
+Repository Agent can now run on Apple's Private Cloud Compute, using a larger model than the one on your device while keeping your code inside Apple's privacy guarantees. It needs no API key and no subscription, and appears in the service menu on devices with Apple Intelligence running the latest version of iOS. When the daily allowance runs out, Working Copy offers to continue with whichever AI service you have set up.
+Fetch, Pull, Push and Sync actions for Shortcuts are no longer cut short when they take a while. A slow transfer keeps running with progress and a Stop button, so pushing a large repository from an automation finishes instead of stopping halfway, and the Fetch button on the widget works the same way. This needs the latest version of iOS.
+7.0.1
+3d ago
+Repository Agent can now run on Apple's Private Cloud Compute, using a larger model than the one on your device while keeping your code inside Apple's privacy guarantees. It needs no API key and no subscription, and appears in the service menu on devices with Apple Intelligence running the latest version of iOS. When the daily allowance runs out, Working Copy offers to continue with whichever AI service you have set up.
+Fetch, Pull, Push and Sync actions for Shortcuts are no longer cut short when they take a while. A slow transfer keeps running with progress and a Stop button, so pushing a large repository from an automation finishes instead of stopping halfway, and the Fetch button on the widget works the same way. This needs the latest version of iOS.
+7.0.0
+4d ago
+Markdown previews support custom styling. Pick Styling in the preview mode menu to edit the stylesheet in the built-in editor, and the preview updates as you type. Colors and fonts keep following your theme and text size, Revert goes back to the built-in styling, and a stylesheet can be shared with others or imported from a file. This is part of the same pro unlock as editor themes, available to everyone who purchased or upgraded after May 2024.
+Consider sharing your custom preview style in the r/WorkingCopy subreddit so I can include the best ones in a future update.
+Committing a directory with thousands of changed files is much faster and now shows progress while files are staged.
+Auto-Sync can tell you when it has synced. Turn on Notify After Sync to get a single notification for each sync that committed, pulled or pushed something, and stay silent when there was nothing to do.
+Support for SSH keys on YubiKeys and other security keys. Create one from the SSH Keys screen, and the private part never leaves the security key. This is part of the pro unlock for Secure Enclave keys, available to everyone who purchased or upgraded on December 14, 2024 or later.
+Astro components get syntax highlighting.
+6.9.6
+Sep 10
+Auto-Sync keeps a repository and its remote in sync automatically. Enable it from the button above the Remotes section on the repository screen, and Working Copy commits your changes, pulls and pushes when changes are detected while the app is running. The commit message can be a fixed one of your choosing or suggested by AI, and everything Auto-Sync does for a repository is collected in a single log. Merge conflicts pause syncing with a notification until you resolve them inside the app.
+Auto-Sync requires the pro unlock because it pushes, with AI suggested messages available to users that purchased or upgraded after March 2022.
+Turn on Sync in Background to keep Auto-Sync checking efficiently for local and remote changes while you use other apps. You can also trigger syncing from automations with the new Sync Repository action for Shortcuts, for example whenever you open or close Obsidian.
+Linked repositories now show their repository icon in the repository list.
+Fixed issue where picking a repository icon from an image with a built-in thumbnail could make the icon solid black.
+6.9.5
+Sep 3
+Improvements when setting up a linked repository inside a ShellFish location.
+Ask the Repository Agent to review your changes and it now reads the actual diff. It can also show what a single commit changed or compare two commits.
+Git LFS works with servers that ask for HTTP Digest authentication. Fetching and pushing large files previously failed against servers that refuse Basic authentication.
+libgit2 has been upgraded to 1.9.7.
+6.9.4
+Aug 24
+Improved error messages when unable to reach Git servers on the local network making it easy to grant Working Copy LAN access in system settings.
+AI text completion, commit message suggestions and the Repository Agent work again with Anthropic and pick better default models across all three providers. OpenAI text completion moves to gpt-5.4-mini, as gpt-3.5-turbo-instruct retires in September with nothing to replace it.
+Detecting the kind of hosting provider at a typed-in address is much faster, completing as soon as the result is certain instead of waiting up to a minute for the slowest check.
+Signing in to a hosting service that asks for HTTP Digest authentication now works, and repository size is shown when picking a repository to clone from a Gitea server.
+Working Copy no longer offers to fork on BitBucket, as Atlassian removed forking between workspaces.
+libgit2 has been upgraded to 1.9.6.
+6.9.3
+Aug 12
+Sign in with a ChatGPT Plus or Pro account to power AI text completion, commit message suggestions and the Repository Agent, without a separate OpenAI API key. OpenAI changed how ChatGPT subscriptions reach its models, and Working Copy now connects the way OpenAI's own Codex tools do, so signing in with ChatGPT works again. Tap the key icon next to the API Key field to sign in, and a suitable model is chosen for you that you can change at any time.
+Fetch, Pull, Push and Commit are available as App Shortcuts. Say "Pull in Working Copy" to Siri, or run them from Spotlight and the Shortcuts app without any setup. They act on the repository shown on screen, or the one you last had open, and ask which repository when none is open. The Commit action asks what the commit message should be when none is given.
+Fixed a crash in the Repository Agent that could occur after sending a message while text in the input field was still selected.
+Includes enhancements from latest versions:
+Annotate PDF files right from Working Copy. Draw freehand with Apple Pencil or your finger, or select text and choose Annotate from the menu to highlight, strike through, underline or add a note. Notes appear as numbered markers you tap to read, edit or delete. Annotations are saved into the PDF in the standard format, so they stay visible in Preview, Acrobat and other apps. This is a pro feature available to anyone who purchased or upgraded their pro unlock within the last year.
+Ask Repository Agent to browse files, search content, read and modify files, commit, pull and push. It works with external LLM services including OpenAI, Anthropic, Google and Ollama using your own API keys. Configure in AI Settings where AI features are opt-in per repository to avoid leaking sensitive information.
+Repositories have icons auto-detected from project images and remote avatars. Tap the icon on the Status &amp; Configuration screen to customize with another file from the repository, clipboard contents, photos library, or image files.
+6.9.2
+Jul 14
+Annotate PDF files right from Working Copy. Draw freehand with Apple Pencil or your finger, or select text and choose Annotate from the menu to highlight, strike through, underline or add a note. Notes appear as numbered markers you tap to read, edit or delete. Annotations are saved into the PDF in the standard format, so they stay visible in Preview, Acrobat and other apps. This is a pro feature available to anyone who purchased or upgraded their pro unlock within the last year.
+Repository search supports negative terms. Put a minus before a word to exclude files that match it, or wrap a word in quotes to search for that literal text. A new Refine Search menu, in a file's context menu and in editor search, lets you exclude a folder or file type, or require a particular file type.
+Fixes an issue where large .sql files would be seen as binary when certain third-party apps are installed on the device.
+Includes enhancements from latest versions:
+New Change Author pro feature switches a commit between your configured identities, optionally also rewriting matching ancestors on the branch.
+Ask Repository Agent to browse files, search content, read and modify files, commit, pull and push. It works with external LLM services including OpenAI, Anthropic, Google and Ollama using your own API keys. Configure in AI Settings where AI features are opt-in per repository to avoid leaking sensitive information.
+Repositories have icons auto-detected from project images and remote avatars. Tap the icon on the Status &amp; Configuration screen to customize with another file from the repository, clipboard contents, photos library, or image files.
+6.9.1
+Jul 1
+Massive improvements to localization.
+GPG commit signing now works with ECDSA keys and is smarter about subkeys.
+Includes enhancements from latest versions:
+New Change Author pro feature switches a commit between your configured identities, optionally also rewriting matching ancestors on the branch.
+Ask Repository Agent to browse files, search content, read and modify files, commit, pull and push. It works with external LLM services including OpenAI, Anthropic, Google and Ollama using your own API keys. Configure in AI Settings where AI features are opt-in per repository to avoid leaking sensitive information.
+Repositories have icons auto-detected from project images and remote avatars. Tap the icon on the Status &amp; Configuration screen to customize with another file from the repository, clipboard contents, photos library, or image files.
+6.9.0
+Jun 23
+CSV files color each column with one of five rotating colors, so you can tell which value belongs to which column when long rows wrap onto the next line.
+Commit graph has been made easier to use.
+Includes enhancements from latest versions:
+New Change Author pro feature switches a commit between your configured identities, optionally also rewriting matching ancestors on the branch.
+Ask Repository Agent to browse files, search content, read and modify files, commit, pull and push. It works with external LLM services including OpenAI, Anthropic, Google and Ollama using your own API keys. Configure in AI Settings where AI features are opt-in per repository to avoid leaking sensitive information.
+Repositories have icons auto-detected from project images and remote avatars. Tap the icon on the Status &amp; Configuration screen to customize with another file from the repository, clipboard contents, photos library, or image files.
+6.8.8
+Jun 13
+Improvements to partial staging.
+Manually picking Markdown, HTML, JavaScript, org-mode or AsciiDoc for a file with a non-matching extension offers the matching Preview mode.
+Forgejo instances are recognised as such. Previously they would work but be identified as Gitea.
+There is Undo button above on-screen keyboard when editing on iPad with Redo hidden inside long-tap context menu.
+Includes enhancements from latest versions:
+New Change Author pro feature switches a commit between your configured identities, optionally also rewriting matching ancestors on the branch.
+Ask Repository Agent to browse files, search content, read and modify files, commit, pull and push. It works with external LLM services including OpenAI, Anthropic, Google and Ollama using your own API keys. Configure in AI Settings where AI features are opt-in per repository to avoid leaking sensitive information.
+Repositories have icons auto-detected from project images and remote avatars. Tap the icon on the Status &amp; Configuration screen to customize with another file from the repository, clipboard contents, photos library, or image files.
+6.8.7
+May 27
+Syntax highlighting themes have more detailed color controls for types, members, namespaces, operators and preprocessor directives and theme editor has been refined.
+Code diffs allow horisontal scrolling when word wrap is disabled inside commit details.
+Includes enhancements from latest versions:
+New Change Author pro feature switches a commit between your configured identities, optionally also rewriting matching ancestors on the branch.
+Ask Repository Agent to browse files, search content, read and modify files, commit, pull and push. It works with the on-device Apple Intelligence model on iOS 26 with suitable hardware or with external LLM services including OpenAI, Anthropic, Google and Ollama using your own API keys. Configure in AI Settings where AI features are opt-in per repository to avoid leaking sensitive information.
+Repositories have icons auto-detected from project images and remote avatars. Tap the icon on the Status &amp; Configuration screen to customize with another file from the repository, clipboard contents, photos library, or image files.
+Switch away from Working Copy during Git operations and have them continue in the background. Clone, Fetch, Pull &amp; Push operations show progress as Live Activities. This requires iOS 26.
+AI commit message suggestions can use your own API keys or service such as your self-hosted Ollama model instead of the Working Copy service. Configure this in AI Configuration &gt; Commit Messages where you pick service, model and customize prompts.
+6.8.6
+May 17
+New Change Author pro feature switches a commit between your configured identities, optionally also rewriting matching ancestors on the branch.
+Save a commit author as a contact from the commit detail title menu.
+Working Copy is localized to Chinese.
+BitBucket support upgraded for CHANGE-2770 deprecating cross-workspace APIs.
+Includes enhancements from latest versions:
+Ask Repository Agent to browse files, search content, read and modify files, commit, pull and push. It works with the on-device Apple Intelligence model on iOS 26 with suitable hardware or with external LLM services including OpenAI, Anthropic, Google and Ollama using your own API keys. Configure in AI Settings where AI features are opt-in per repository to avoid leaking sensitive information.
+Repositories have icons auto-detected from project images and remote avatars. Tap the icon on the Status &amp; Configuration screen to customize with another file from the repository, clipboard contents, photos library, or image files.
+Switch away from Working Copy during Git operations and have them continue in the background. Clone, Fetch, Pull &amp; Push operations show progress as Live Activities. This requires iOS 26.
+AI commit message suggestions can use your own API keys or service such as your self-hosted Ollama model instead of the Working Copy service. Configure this in AI Configuration &gt; Commit Messages where you pick service, model and customize prompts.
+6.8.5
+Apr 29
+Cycle between recent prompts in Repository Agent with up/down arrows on external keyboard.
+Exporting PDF while in Preview mode captures the rendered preview instead of the editor text.
+Includes enhancements from latest versions:
+Ask Repository Agent to browse files, search content, read and modify files, commit, pull and push. It works with the on-device Apple Intelligence model on iOS 26 with suitable hardware or with external LLM services including OpenAI, Anthropic, Google and Ollama using your own API keys. Configure in AI Settings where AI features are opt-in per repository to avoid leaking sensitive information.
+Repositories have icons auto-detected from project images and remote avatars. Tap the icon on the Status &amp; Configuration screen to customize with another file from the repository, clipboard contents, photos library, or image files.
+Switch away from Working Copy during Git operations and have them continue in the background. Clone, Fetch, Pull &amp; Push operations show progress as Live Activities. This requires iOS 26.
+AI commit message suggestions can use your own API keys or service such as your self-hosted Ollama model instead of the Working Copy service. Configure this in AI Configuration &gt; Commit Messages where you pick service, model and customize prompts.
+6.8.3
+Apr 24
+Adjustments to GitLab token refresh logic.
+Improvements when linking existing repository to external folder.
+Includes enhancements from latest versions:
+Ask Repository Agent to browse files, search content, read and modify files, commit, pull and push. It works with the on-device Apple Intelligence model on iOS 26 with suitable hardware or with external LLM services including OpenAI, Anthropic, Google and Ollama using your own API keys. Configure in AI Settings where AI features are opt-in per repository to avoid leaking sensitive information.
+Repositories have icons auto-detected from project images and remote avatars. Tap the icon on the Status &amp; Configuration screen to customize with another file from the repository, clipboard contents, photos library, or image files.
+Switch away from Working Copy during Git operations and have them continue in the background. Clone, Fetch, Pull &amp; Push operations show progress as Live Activities. This requires iOS 26.
+AI commit message suggestions can use your own API keys or service such as your self-hosted Ollama model instead of the Working Copy service. Configure this in AI Configuration &gt; Commit Messages where you pick service, model and customize prompts.
+6.8.2
+Apr 15
+On iPadOS, long-press the drag bar at the top of the Repository Agent panel to open it in its own window or switch back to a panel.
+Fix squash producing unnecessary merge conflicts.
+Commit lists display and sort by author date instead of committer date.
+Includes enhancements from latest versions
+Ask Repository Agent to browse files, search content, read and modify files, commit, pull and push. It works with the on-device Apple Intelligence model on iOS 26 with suitable hardware or with external LLM services including OpenAI, Anthropic, Google and Ollama using your own API keys. Configure in AI Settings where AI features are opt-in per repository to avoid leaking sensitive information.
+Repositories have icons auto-detected from project images and remote avatars. Tap the icon on the Status &amp; Configuration screen to customize with another file from the repository, clipboard contents, photos library, or image files.
+Switch away from Working Copy during Git operations and have them continue in the background. Clone, Fetch, Pull &amp; Push operations show progress as Live Activities. This requires iOS 26.
+AI commit message suggestions can use your own API keys or service such as your self-hosted Ollama model instead of the Working Copy service. Configure this in AI Configuration &gt; Commit Messages where you pick service, model and customize prompts.
+6.8.1
+Apr 6
+Ask Repository Agent to browse files, search content, read and modify files, commit, pull and push. It works with the on-device Apple Intelligence model on iOS 26 with suitable hardware or with external LLM services including OpenAI, Anthropic, Google and Ollama using your own API keys. Configure in AI Settings where AI features are opt-in per repository to avoid leaking sensitive information.
+Start Repository Agent from the Mode popup menu, the title menu on the Status &amp; Configuration screen, or with ⇧⌘A. Enable voice output to have responses read aloud.
+Includes enhancements from latest versions
+Repositories have icons auto-detected from project images and remote avatars. Tap the icon on the Status &amp; Configuration screen to customize with another file from the repository, clipboard contents, photos library, or image files.
+Switch away from Working Copy during Git operations and have them continue in the background. Clone, Fetch, Pull &amp; Push operations show progress as Live Activities. This requires iOS 26.
+Create and use SSH keys on Secure Enclave for Git authentication and commit+tag signing. Each use requires either Face or Touch ID and there is no way to export private keys, but otherwise they work just like regular SSH keys. This is a pro feature available to anyone who purchased or upgraded their pro unlock on December 15, 2024 or later.
+AI commit message suggestions can use your own API keys or service such as your self-hosted Ollama model instead of the Working Copy service. Configure this in AI Configuration &gt; Commit Messages where you pick service, model and customize prompts.
+6.8.0
+Mar 30
+Configure custom http/https headers inside Settings &gt; HTTP Customization which also contains authentication cookies.
+Includes enhancements from latest versions
+Repositories have icons auto-detected from project images and remote avatars. Tap the icon on the Status &amp; Configuration screen to customize with another file from the repository, clipboard contents, photos library, or image files.
+Switch away from Working Copy during Git operations and have them continue in the background. Clone, Fetch, Pull &amp; Push operations show progress as Live Activities. This requires iOS 26.
+Create and use SSH keys on Secure Enclave for Git authentication and commit+tag signing. Each use requires either Face or Touch ID and there is no way to export private keys, but otherwise they work just like regular SSH keys. This is a pro feature available to anyone who purchased or upgraded their pro unlock on December 15, 2024 or later.
+AI commit message suggestions can use your own API keys or service such as your self-hosted Ollama model instead of the Working Copy service. Configure this in AI Configuration &gt; Commit Messages where you pick service, model and customize prompts.
+6.7.7
+Mar 26
+AI commit message suggestions can use your own API keys or service such as your self-hosted Ollama model instead of the Working Copy service. Configure this in AI Configuration &gt; Commit Messages where you pick service, model and customize prompts.
+Fix double line spacing in PDF export of files with Windows (CRLF) line endings.
+Includes enhancements from latest versions
+Repositories have icons auto-detected from project images and remote avatars. Tap the icon on the Status &amp; Configuration screen to customize with another file from the repository, clipboard contents, photos library, or image files.
+Switch away from Working Copy during Git operations and have them continue in the background. Clone, Fetch, Pull &amp; Push operations show progress as Live Activities. This requires iOS 26.
+Create and use SSH keys on Secure Enclave for Git authentication and commit+tag signing. Each use requires either Face or Touch ID and there is no way to export private keys, but otherwise they work just like regular SSH keys. This is a pro feature available to anyone who purchased or upgraded their pro unlock on December 15, 2024 or later.
+6.7.6
+Mar 23
+Repositories have icons auto-detected from project images and remote avatars. Tap the icon on the Status &amp; Configuration screen to customize with another file from the repository, clipboard contents, photos library, or image files.
+Working Copy is localized to Danish and German.
+Repositories can be reordered by drag-and-drop.
+Directory filtering can hide entries starting with .
+Apex syntax highlighting with SOQL support.
+Includes enhancements from latest versions
+Switch away from Working Copy during Git operations and have them continue in the background. Clone, Fetch, Pull &amp; Push operations show progress as Live Activities. This requires iOS 26.
+Create and use SSH keys on Secure Enclave for Git authentication and commit+tag signing. Each use requires either Face or Touch ID and there is no way to export private keys, but otherwise they work just like regular SSH keys. This is a pro feature available to anyone who purchased or upgraded their pro unlock on December 15, 2024 or later.
+Support for signing tags with GPG or SSH keys.
+Tag Commit action for Shortcuts app.
+6.7.5
+Mar 6
+Long-press a file in commit details to share that version, revert to it, or revert to the version just before that commit. You can still drag files out from this list.
+OpenSSL upgraded to 3.5.5.
+Fixed error messages sometimes disappearing too quickly on the Repository Status &amp; Configuration screen.
+Includes enhancements from latest versions
+Switch away from Working Copy during Git operations and have them continue in the background. Clone, Fetch, Pull &amp; Push operations show progress as Live Activities. This requires iOS 26.
+Create and use SSH keys on Secure Enclave for Git authentication and commit+tag signing. Each use requires either Face or Touch ID and there is no way to export private keys, but otherwise they work just like regular SSH keys. This is a pro feature available to anyone who purchased or upgraded their pro unlock on December 15, 2024 or later.
+Support for signing tags with GPG or SSH keys.
+Tag Commit action for Shortcuts app.
+6.7.2
+Feb 20
+Improvements to logic that decides when to use on-device language model for filename suggestions.
+SSH detail screen has mechanism to sign user provided data as this is sometimes required to prove key ownership.
+Fix crash that could happen when opening files.
+Includes enhancements from latest versions
+Switch away from Working Copy during Git operations and have them continue in the background. Clone, Fetch, Pull &amp; Push operations show progress as Live Activities. This requires iOS 26.
+Create and use SSH keys on Secure Enclave for Git authentication and commit+tag signing. Each use requires either Face or Touch ID and there is no way to export private keys, but otherwise they work just like regular SSH keys. This is a pro feature available to anyone who purchased or upgraded their pro unlock on December 15, 2024 or later.
+Support for signing tags with GPG or SSH keys.
+Tag Commit action for Shortcuts app.
+6.7.1
+Feb 4
+Improved logging for Git transfers with the ability to enable verbose logging above the list of logs for very detailed logging.
+Nicer syntax highlighting for Markdown.
+Includes enhancements from latest versions
+Switch away from Working Copy during Git operations and have them continue in the background. Clone, Fetch, Pull &amp; Push operations show progress as Live Activities. This requires iOS 26.
+Create and use SSH keys on Secure Enclave for Git authentication and commit+tag signing. Each use requires either Face or Touch ID and there is no way to export private keys, but otherwise they work just like regular SSH keys. This is a pro feature available to anyone who purchased or upgraded their pro unlock on December 15, 2024 or later.
+Support for signing tags with GPG or SSH keys.
+Tag Commit action for Shortcuts app.
+6.7.0
+Jan 30
+Improvements to SSH Command and SSH Upload.
+Includes enhancements from latest versions
+Switch away from Working Copy during Git operations and have them continue in the background. Clone, Fetch, Pull &amp; Push operations show progress as Live Activities. This requires iOS 26.
+Create and use SSH keys on Secure Enclave for Git authentication and commit+tag signing. Each use requires either Face or Touch ID and there is no way to export private keys, but otherwise they work just like regular SSH keys. This is a pro feature available to anyone who purchased or upgraded their pro unlock on December 15, 2024 or later.
+Support for signing tags with GPG or SSH keys.
+Tag Commit action for Shortcuts app.
+6.6.9
+Jan 23
+Text size when looking at Changes for files and commits can be configured independently of editor text size.
+Fix error when pulling down to Fetch All where multiple Secure Enclave authentications are tried.
+Includes enhancements from latest versions
+Switch away from Working Copy during Git operations and have them continue in the background. Clone, Fetch, Pull &amp; Push operations show progress as Live Activities. This requires iOS 26.
+Create and use SSH keys on Secure Enclave for Git authentication and commit+tag signing. Each use requires either Face or Touch ID and there is no way to export private keys, but otherwise they work just like regular SSH keys. This is a pro feature available to anyone who purchased or upgraded their pro unlock on December 15, 2024 or later.
+Support for signing tags with GPG or SSH keys.
+Tag Commit action for Shortcuts app.
+6.6.8
+Jan 4
+Improvements to Auto-Sync logging, notifications and the ability to keep syncing after the device has been locked.
+Includes latest improvements to 7.0.0
+Repository Agent can now run on Apple's Private Cloud Compute, using a larger model than the one on your device while keeping your code inside Apple's privacy guarantees. It needs no API key and no subscription, and appears in the service menu on devices with Apple Intelligence running the latest version of iOS. When the daily allowance runs out, Working Copy offers to continue with whichever AI service you have set up.
+Fetch, Pull, Push and Sync actions for Shortcuts are no longer cut short when they take a while. A slow transfer keeps running with progress and a Stop button, so pushing a large repository from an automation finishes instead of stopping halfway, and the Fetch button on the widget works the same way. This needs the latest version of iOS.
+more
+Version 7.0.1
+3d ago
+In-App Purchases
+Working Copy Pro Unlock
+Push to remote and all other pro features.
+$35.99
+App Privacy
+App Privacy
+The developer,
+Anders Borum
+, indicated that the app’s privacy practices may include handling of data as described below. This information has not been verified by Apple. For more information, see the
+developer’s privacy policy
+.
+To help you better understand the developer’s responses, see
+Privacy Definitions and Examples
+.
+Privacy practices may vary, for example, based on the features you use or your age.
+Learn More
+Data Not Linked to You
+The following data, which may be collected but is not linked to your identity, may be used for the following purposes:
+Analytics
+Usage Data
+Product Interaction
+The developer,
+Anders Borum
+, indicated that the app’s privacy practices may include handling of data as described below. For more information, see the
+developer’s privacy policy
+.
+Data Not Linked to You
+The following data may be collected but it is not linked to your identity:
+Usage Data
+Privacy practices may vary, for example, based on the features you use or your age.
+Learn More
+Accessibility
+The developer has not yet indicated which accessibility features this app supports.
+Learn More
+Information
+Seller
+Anders Borum
+Size
+97 MB
+Category
+Developer Tools
+Compatibility
+Requires iOS 18.2 or later.
+iPhone
+Requires iOS 18.2 or later.
+iPad
+Requires iPadOS 18.2 or later.
+Apple Vision
+Requires visionOS 2.2 or later.
+Location
+This app may use your location even when it isn’t open, which can decrease device battery life.
+Languages
+English and 4 more
+English, Danish, German, Simplified Chinese, Traditional Chinese
+Age Rating
+4+
+4+
+Learn More
+In-App Purchases
+Yes
+Working Copy Pro Unlock
+$35.99
+Pro Unlock trial
+$0.00
+Pro Unlock trial (2025)
+$0.00
+Pro Unlock trial (2023)
+$0.00
+Pro Unlock trial (2024)
+$0.00
+Support Development
+$1.99
+Pro Upgrade (2022)
+$17.99
+Pro Upgrade (2023)
+$17.99
+Pro Upgrade (2024)
+$17.99
+Pro Upgrade
+$17.99
+Learn More
+Copyright
+© 2014-2026 Anders Borum
+Developer Website
+Privacy Policy
+Supports
+Family Sharing
+Some in-app purchases and subscriptions may be shareable with your family group when Family Sharing is enabled.
+Learn More
+More by Anders Borum
+View
+SSH Client - Secure ShellFish
+Terminal, Files &amp; Finder
+You Might Also Like
+View
+Swifty Compiler: Swift IDE
+Code Editor &amp; Playground
+View
+Runestone Text Editor
+Edit plain text and code
+View
+Textastic Code Editor
+Text, Coding, SFTP Client, SSH
+View
+Kodex
+A powerful code editor
+View
+Rev for Vercel
+Vercel Mobile
+View
+Device Info Tool
+Hardware and software details
+View
+Blink Shell, Build &amp; Code
+The Pro tool for developers
+View
+Network Sniffer
+Inspect HTTPS / Socket Request
+View
+SteerCode: Vibe Coding Builder
+Vibe code. Build apps you want
+View
+Code Editor - Compiler &amp; IDE
+Programming on mobile
+United States
+Español (México)
+العربية
+Русский
+简体中文
+Français (France)
+한국어
+Português (Brazil)
+Tiếng Việt
+繁體中文 (台灣)
+Select a country or region
+Africa, Middle East, and India
+See All
+Algeria
+Angola
+Armenia
+Azerbaijan
+Bahrain
+Benin
+Botswana
+Burkina Faso
+Cameroun
+Cape Verde
+Chad
+Côte d’Ivoire
+Congo, The Democratic Republic Of The
+Egypt
+Eswatini
+Gabon
+Gambia
+Ghana
+Guinea-Bissau
+India
+Iraq
+Israel
+Jordan
+Kenya
+Kuwait
+Lebanon
+Liberia
+Libya
+Madagascar
+Malawi
+Mali
+Mauritania
+Mauritius
+Morocco
+Mozambique
+Namibia
+Niger (English)
+Nigeria
+Oman
+Qatar
+Congo, Republic of
+Rwanda
+São Tomé and Príncipe
+Saudi Arabia
+Senegal
+Seychelles
+Sierra Leone
+South Africa
+Sri Lanka
+Tajikistan
+Tanzania, United Republic Of
+Tunisia
+Turkmenistan
+United Arab Emirates
+Uganda
+Yemen
+Zambia
+Zimbabwe
+Asia Pacific
+See All
+Afghanistan
+Australia
+Bhutan
+Brunei Darussalam
+Cambodia
+中国大陆
+Fiji
+香港
+Indonesia (English)
+日本
+Kazakhstan
+대한민국
+Kyrgyzstan
+Lao People's Democratic Republic
+澳門
+Malaysia (English)
+Maldives
+Micronesia, Federated States of
+Mongolia
+Myanmar
+Nauru
+Nepal
+New Zealand
+Pakistan
+Palau
+Papua New Guinea
+Philippines
+Singapore
+Solomon Islands
+台灣
+Thailand
+Tonga
+Turkmenistan
+Uzbekistan
+Vanuatu
+Vietnam
+Europe
+See All
+Albania
+Armenia
+Österreich
+Belarus
+Belgium
+Bosnia and Herzegovina
+Bulgaria
+Croatia
+Cyprus
+Czechia
+Denmark
+Estonia
+Finland
+France (Français)
+Georgia
+Deutschland
+Greece
+Hungary
+Iceland
+Ireland
+Italia
+Kosovo
+Latvia
+Lithuania
+Luxembourg (English)
+Malta
+Moldova, Republic Of
+Montenegro
+Nederland
+North Macedonia
+Norway
+Poland
+Portugal (Português)
+Romania
+Россия
+Serbia
+Slovakia
+Slovenia
+España
+Sverige
+Schweiz
+Türkiye (English)
+Ukraine
+United Kingdom
+Latin America and the Caribbean
+See All
+Anguilla
+Antigua and Barbuda
+Argentina (Español)
+Bahamas
+Barbados
+Belize
+Bermuda
+Bolivia (Español)
+Brasil
+Virgin Islands, British
+Cayman Islands
+Chile (Español)
+Colombia (Español)
+Costa Rica (Español)
+Dominica
+República Dominicana
+Ecuador (Español)
+El Salvador (Español)
+Grenada
+Guatemala (Español)
+Guyana
+Honduras (Español)
+Jamaica
+México
+Montserrat
+Nicaragua (Español)
+Panamá
+Paraguay (Español)
+Perú
+St. Kitts and Nevis
+Saint Lucia
+St. Vincent and The Grenadines
+Suriname
+Trinidad and Tobago
+Turks and Caicos
+Uruguay (English)
+Venezuela (Español)
+The United States and Canada
+See All
+Canada (English)
+Canada (Français)
+United States
+Estados Unidos (Español México)
+الولايات المتحدة
+США
+美国 (简体中文)
+États-Unis (Français France)
+미국
+Estados Unidos (Português Brasil)
+Hoa Kỳ
+美國 (繁體中文台灣)
+Copyright © 2026
+Apple Inc.
+All rights reserved.
+Internet Service Terms
+App Store &amp; Privacy
+Cookie Warning
+Support

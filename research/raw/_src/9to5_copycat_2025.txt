@@ -1,0 +1,166 @@
+Apple&#039;s new App Review Guidelines crack down on copycat apps - 9to5Mac
+Skip to main content
+Toggle main menu
+9to5Mac Logo
+Go to the 9to5Mac home page
+Switch site
+9to5Toys
+9to5Google Logo
+9to5Google
+Electrek
+Drone DJ Logo
+DroneDJ
+Space Explored
+About
+Privacy
+Toggle social menu
+Toggle dark mode
+Search for:
+Submit
+Toggle search form
+Forums
+Store
+Podcasts
+Apple@Work
+Happy Hour
+9to5Mac Daily
+Overtime
+iPhone
+iPhone
+Mac
+Mac
+MacBook Pro
+MacBook Air
+iMac
+Mac mini
+Mac Studio
+Mac Pro
+iPad
+iPad Pro
+iPad Air
+iPad mini
+iPad
+iPadOS
+Watch
+Apple Watch
+Apple Watch Ultra
+Apple Health
+Apple Watch SE
+Vision
+Vision Pro
+visionOS
+Music and TV
+Apple Music
+AirPods
+HomePod
+Apple TV
+Guides
+Reviews
+How Tos
+AAPL
+Apple Store
+Apple Arcade
+Apple Card
+Apple Silicon
+Apple One
+Apple Fitness+
+CarPlay
+Siri
+HomeKit
+Toggle dark mode
+App Store
+Apple tightens App Review Guidelines to crack down on copycat apps
+Marcus Mendes
+&nbsp;|&nbsp;Nov 13 2025 - 1:12 pm PT
+4 Comments
+Apple has updated its App Review Guidelines with multiple new rules, including one targeting the misleading use of other developers’ branding. Here are the details.
+‘Come up with your own ideas’
+From time to time, Apple updates its App Review Guidelines to respond to changes in the market, whether they’re good or bad.
+In general, Apple adds a few rules, removes others, and clarifies some of them to make its intentions more straightforward.
+Today, Apple made a total of
+nine changes
+to its App Review Guidelines, with one addition particularly aimed at developers who try to piggyback on the success of other apps:
+4.1 Copycats
+(c) You cannot use another developer’s icon, brand, or product name in your app’s icon or name, without approval from the developer.
+Today’s update adds to two prior rules under that Apple had in place to curb copycats:
+(a) Come up with your own ideas. We know you have them, so make yours come to life. Don’t simply copy the latest popular app on the App Store, or make some minor changes to another app’s name or UI and pass it off as your own. In addition to risking an intellectual property infringement claim, it makes the App Store harder to navigate and just isn’t fair to your fellow developers.
+(b)Submitting apps which impersonate other apps or services is considered a violation of the Developer Code of Conduct and may result in removal from the Apple Developer Program. (Applies to Notarization of iOS apps in the EU)
+Just recently, the App Store was
+inundated with Sora 2 clones and copycats
+, mere days after the release of OpenAI’s official app.
+Apple moved quickly to either remove or ensure that these copycat apps reverted to their original names and icons, but the situation highlighted this as one of the longest-standing issues for the App Store.
+With today’s update, Apple shows that it intends to keep on strengthening its anti-copycat policies, but whether that will be enough to meaningfully reduce such knock-offs remains to be seen.
+What else changed?
+Here’s the full log of the App Store Guideline updates Apple released today:
+1.2.1(a): This new guideline specifies that creator apps must provide a way for users to identify content that exceeds the app’s age rating, and use an age restriction mechanism based on verified or declared age to limit access by underage users.
+2.5.10: This language has been deleted (“Apps should not be submitted with empty ad banners or test advertisements.”).
+3.2.2(ix): Clarified that loan apps may not charge a maximum APR higher than 36%, including costs and fees, and may not require repayment in full in 60 days or less.
+4.1(c): This new guideline specifies that you cannot use another developer’s icon, brand, or product name in your app’s icon or name, without approval from the developer.
+4.7: Clarifies that HTML5 and JavaScript mini apps and mini games are in scope of the guideline.
+4.7.2: Clarifies that apps offering software not embedded in the binary may not extend or expose native platform APIs or technologies to the software without prior permission from Apple.
+4.7.5: Clarifies that apps offering software not embedded in the binary must provide a way for users to identify content that exceeds the app’s age rating, and use an age restriction mechanism based on verified or declared age to limit access by underage users.
+5.1.1(ix): Adds crypto exchanges to the list of apps that provide services in highly regulated fields.
+5.1.2(i): Clarifies that you must clearly disclose where personal data will be shared with third parties, including with third-party AI, and obtain explicit permission before doing so.
+For the full App Review Guidelines article,
+follow this link
+.
+Accessory deals on Amazon
+Apple AirTag 4 Pack
+Beats USB-C to USB-C Woven Short Cable
+Logitech MX Master 4
+AirPods Pro 3
+Wireless CarPlay adapter
+iPhone Air Ultraslim Magsafe Power Bank
+FTC: We use income earning auto affiliate links.
+More.
+You’re reading 9to5Mac — experts who break news about Apple and its surrounding ecosystem, day after day. Be sure to check out
+our homepage
+for all the latest news, and follow 9to5Mac on
+Twitter
+,
+Facebook
+, and
+LinkedIn
+to stay in the loop. Don’t know where to start? Check out our
+exclusive stories
+,
+reviews
+,
+how-tos
+, and
+subscribe to our YouTube channel
+Featured
+from
+9to5Mac
+9to5Mac Logo
+iPhone 18 Pro review: More of a great thing
+Chance Miller
+Sep 16 2026
+Apple explains how the iPhone 18 Pro’s new Reference Image camera mode works
+Marcus Mendes
+Sep 15 2026
+Apple Watch adds an all-new Readiness app, here&#8217;s how it works
+Zac Hall
+Sep 15 2026
+iPhone Duo could be very hard to get at launch, per report
+Ryan Christoffel
+Sep 15 2026
+Podcast
+Check out 9to5Mac on YouTube for more Apple news:
+Comments
+Expand
+Close
+comments
+Expand
+Close
+comments
+Guides
+App Store
+Author
+Marcus Mendes
+https://www.threads.com/mvcmendes
+Marcus Mendes is a Brazilian tech podcaster and journalist who has been closely following Apple since the mid-2000s.
+He began covering Apple news in Brazilian media in 2012 and later broadened his focus to the wider tech industry, hosting a daily podcast for seven years.
+Close
+Previous
+Next

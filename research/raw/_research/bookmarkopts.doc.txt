@@ -1,0 +1,120 @@
+An alias for bookmark creation options.
+typealias
+ 
+BookmarkCreationOptions
+BookmarkCreationOptions
+=== URL.BookmarkCreationOptions
+typealias
+ 
+BookmarkCreationOptions
+ = 
+NSURL
+.
+BookmarkCreationOptions
+=== Creating bookmarks
+=== Technologies
+Access essential data types, collections, and operating-system services to define the base layer of functionality for your app.
+=== Foundation
+An object that represents the location of a resource, such as an item on a remote server or the path to a local file.
+class
+ 
+NSURL
+NSURL
+=== NSURL
+Options used when creating bookmark data.
+struct
+ 
+BookmarkCreationOptions
+BookmarkCreationOptions
+=== NSURL.BookmarkCreationOptions
+A value that identifies the location of a resource, such as an item on a remote server or the path to a local file.
+struct
+ 
+URL
+URL
+=== URL
+An alias for bookmark creation options.
+typealias
+ 
+BookmarkCreationOptions
+BookmarkCreationOptions
+=== URL.BookmarkCreationOptions
+Returns bookmark data for the URL, created with specified options and resource values.
+func
+ 
+bookmarkData
+(
+options
+: 
+URL
+.
+BookmarkCreationOptions
+, 
+includingResourceValuesForKeys
+: 
+Set
+<
+URLResourceKey
+>?, 
+relativeTo
+: 
+URL
+?) 
+throws
+ -> 
+Data
+=== bookmarkData(options:includingResourceValuesForKeys:relativeTo:)
+Initializes and returns bookmark data derived from an alias file pointed to by a specified URL.
+static
+ 
+func
+ 
+bookmarkData
+(
+withContentsOf
+: 
+URL
+) 
+throws
+ -> 
+Data
+=== bookmarkData(withContentsOf:)
+Returns the resource values for properties identified by a specified array of keys contained in specified bookmark data.
+static
+ 
+func
+ 
+resourceValues
+(
+forKeys
+: 
+Set
+<
+URLResourceKey
+>, 
+fromBookmarkData
+: 
+Data
+) -> 
+URLResourceValues
+?
+=== resourceValues(forKeys:fromBookmarkData:)
+Creates an alias file on disk at a specified location with specified bookmark data.
+static
+ 
+func
+ 
+writeBookmarkData
+(
+Data
+, 
+to
+: 
+URL
+) 
+throws
+=== writeBookmarkData(_:to:)
+NSURL
+NSURL
+NSURLBookmarkCreationOptions
+NSURLBookmarkCreationOptions

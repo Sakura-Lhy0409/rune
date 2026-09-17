@@ -1,0 +1,430 @@
+struct
+ 
+AppSchema
+AppSchema
+=== AppSchema
+struct
+ 
+AppSchema
+=== Conforms To
+=== Schema types
+=== Protocols
+=== Structures
+=== Initializers
+Make content and actions discoverable by Apple Intelligence and support system experiences like Siri, Spotlight, Shortcuts, and widgets.
+App Intents
+=== App Intents
+struct
+ 
+AppSchema
+AppSchema
+=== AppSchema
+Assistant schema conformance for app intents that offer support for the side button on iPhone in Japan.
+protocol
+ 
+AssistantIntent
+AssistantIntent
+=== AppSchema.AssistantIntent
+Identifies entity schemas in the audio domain.
+protocol
+ 
+AudioEntity
+AudioEntity
+=== AppSchema.AudioEntity
+Identifies enum schemas in the audio domain.
+protocol
+ 
+AudioEnum
+AudioEnum
+=== AppSchema.AudioEnum
+Identifies intent schemas in the audio domain.
+protocol
+ 
+AudioIntent
+AudioIntent
+=== AppSchema.AudioIntent
+Identifies entity schemas in the books domain.
+protocol
+ 
+BooksEntity
+BooksEntity
+=== AppSchema.BooksEntity
+Identifies enum schemas in the books domain.
+protocol
+ 
+BooksEnum
+BooksEnum
+=== AppSchema.BooksEnum
+Identifies intent schemas in the books domain.
+protocol
+ 
+BooksIntent
+BooksIntent
+=== AppSchema.BooksIntent
+Identifies entity schemas in the browser domain.
+protocol
+ 
+BrowserEntity
+BrowserEntity
+=== AppSchema.BrowserEntity
+Identifies enum schemas in the browser domain.
+protocol
+ 
+BrowserEnum
+BrowserEnum
+=== AppSchema.BrowserEnum
+Identifies intent schemas in the browser domain.
+protocol
+ 
+BrowserIntent
+BrowserIntent
+=== AppSchema.BrowserIntent
+Identifies entity schemas in the calendar domain.
+protocol
+ 
+CalendarEntity
+CalendarEntity
+=== AppSchema.CalendarEntity
+Identifies enum schemas in the calendar domain.
+protocol
+ 
+CalendarEnum
+CalendarEnum
+=== AppSchema.CalendarEnum
+Identifies intent schemas in the calendar domain.
+protocol
+ 
+CalendarIntent
+CalendarIntent
+=== AppSchema.CalendarIntent
+Identifies enum schemas in the camera domain.
+protocol
+ 
+CameraEnum
+CameraEnum
+=== AppSchema.CameraEnum
+Identifies intent schemas in the camera domain.
+protocol
+ 
+CameraIntent
+CameraIntent
+=== AppSchema.CameraIntent
+Identifies entity schemas in the clock domain.
+protocol
+ 
+ClockEntity
+ClockEntity
+=== AppSchema.ClockEntity
+Identifies enum schemas in the clock domain.
+protocol
+ 
+ClockEnum
+ClockEnum
+=== AppSchema.ClockEnum
+Identifies intent schemas in the clock domain.
+protocol
+ 
+ClockIntent
+ClockIntent
+=== AppSchema.ClockIntent
+struct
+ 
+Entity
+Entity
+=== AppSchema.Entity
+struct
+ 
+Enum
+Enum
+=== AppSchema.Enum
+Identifies entity schemas in the files domain.
+protocol
+ 
+FilesEntity
+FilesEntity
+=== AppSchema.FilesEntity
+Identifies intent schemas in the files domain.
+protocol
+ 
+FilesIntent
+FilesIntent
+=== AppSchema.FilesIntent
+struct
+ 
+Intent
+Intent
+=== AppSchema.Intent
+Identifies entity schemas in the journal domain.
+protocol
+ 
+JournalEntity
+JournalEntity
+=== AppSchema.JournalEntity
+Identifies intent schemas in the journal domain.
+protocol
+ 
+JournalIntent
+JournalIntent
+=== AppSchema.JournalIntent
+protocol
+ 
+Kind
+Kind
+=== AppSchema.Kind
+Identifies entity schemas in the mail domain.
+protocol
+ 
+MailEntity
+MailEntity
+=== AppSchema.MailEntity
+Identifies enum schemas in the mail domain.
+protocol
+ 
+MailEnum
+MailEnum
+=== AppSchema.MailEnum
+Identifies intent schemas in the mail domain.
+protocol
+ 
+MailIntent
+MailIntent
+=== AppSchema.MailIntent
+Identifies entity schemas in the maps domain.
+protocol
+ 
+MapsEntity
+MapsEntity
+=== AppSchema.MapsEntity
+Identifies enum schemas in the maps domain.
+protocol
+ 
+MapsEnum
+MapsEnum
+=== AppSchema.MapsEnum
+Identifies intent schemas in the maps domain.
+protocol
+ 
+MapsIntent
+MapsIntent
+=== AppSchema.MapsIntent
+Identifies entity schemas in the messages domain.
+protocol
+ 
+MessagesEntity
+MessagesEntity
+=== AppSchema.MessagesEntity
+Identifies enum schemas in the messages domain.
+protocol
+ 
+MessagesEnum
+MessagesEnum
+=== AppSchema.MessagesEnum
+Identifies intent schemas in the messages domain.
+protocol
+ 
+MessagesIntent
+MessagesIntent
+=== AppSchema.MessagesIntent
+Identifies entity schemas in the notes domain.
+protocol
+ 
+NotesEntity
+NotesEntity
+=== AppSchema.NotesEntity
+Identifies intent schemas in the notes domain.
+protocol
+ 
+NotesIntent
+NotesIntent
+=== AppSchema.NotesIntent
+Identifies entity schemas in the phone domain.
+protocol
+ 
+PhoneEntity
+PhoneEntity
+=== AppSchema.PhoneEntity
+Identifies enum schemas in the phone domain.
+protocol
+ 
+PhoneEnum
+PhoneEnum
+=== AppSchema.PhoneEnum
+Identifies intent schemas in the phone domain.
+protocol
+ 
+PhoneIntent
+PhoneIntent
+=== AppSchema.PhoneIntent
+Identifies entity schemas in the photos domain.
+protocol
+ 
+PhotosEntity
+PhotosEntity
+=== AppSchema.PhotosEntity
+Identifies enum schemas in the photos domain.
+protocol
+ 
+PhotosEnum
+PhotosEnum
+=== AppSchema.PhotosEnum
+Identifies intent schemas in the photos domain.
+protocol
+ 
+PhotosIntent
+PhotosIntent
+=== AppSchema.PhotosIntent
+Identifies entity schemas in the presentation domain.
+protocol
+ 
+PresentationEntity
+PresentationEntity
+=== AppSchema.PresentationEntity
+Identifies intent schemas in the presentation domain.
+protocol
+ 
+PresentationIntent
+PresentationIntent
+=== AppSchema.PresentationIntent
+Identifies entity schemas in the reader domain.
+protocol
+ 
+ReaderEntity
+ReaderEntity
+=== AppSchema.ReaderEntity
+Identifies enum schemas in the reader domain.
+protocol
+ 
+ReaderEnum
+ReaderEnum
+=== AppSchema.ReaderEnum
+Identifies intent schemas in the reader domain.
+protocol
+ 
+ReaderIntent
+ReaderIntent
+=== AppSchema.ReaderIntent
+Identifies entity schemas in the reminders domain.
+protocol
+ 
+RemindersEntity
+RemindersEntity
+=== AppSchema.RemindersEntity
+Identifies enum schemas in the reminders domain.
+protocol
+ 
+RemindersEnum
+RemindersEnum
+=== AppSchema.RemindersEnum
+Identifies intent schemas in the reminders domain.
+protocol
+ 
+RemindersIntent
+RemindersIntent
+=== AppSchema.RemindersIntent
+Identifies entity schemas in the spreadsheet domain.
+protocol
+ 
+SpreadsheetEntity
+SpreadsheetEntity
+=== AppSchema.SpreadsheetEntity
+Identifies intent schemas in the spreadsheet domain.
+protocol
+ 
+SpreadsheetIntent
+SpreadsheetIntent
+=== AppSchema.SpreadsheetIntent
+Identifies intent schemas in the system domain.
+protocol
+ 
+SystemIntent
+SystemIntent
+=== AppSchema.SystemIntent
+Identifies intent schemas in the visual intelligence domain.
+protocol
+ 
+VisualIntelligenceIntent
+VisualIntelligenceIntent
+=== AppSchema.VisualIntelligenceIntent
+Identifies entity schemas in the whiteboard domain.
+protocol
+ 
+WhiteboardEntity
+WhiteboardEntity
+=== AppSchema.WhiteboardEntity
+Identifies enum schemas in the whiteboard domain.
+protocol
+ 
+WhiteboardEnum
+WhiteboardEnum
+=== AppSchema.WhiteboardEnum
+Identifies intent schemas in the whiteboard domain.
+protocol
+ 
+WhiteboardIntent
+WhiteboardIntent
+=== AppSchema.WhiteboardIntent
+Identifies entity schemas in the word processor domain.
+protocol
+ 
+WordProcessorEntity
+WordProcessorEntity
+=== AppSchema.WordProcessorEntity
+Identifies intent schemas in the word processor domain.
+protocol
+ 
+WordProcessorIntent
+WordProcessorIntent
+=== AppSchema.WordProcessorIntent
+init
+(
+some
+ 
+AppSchemaIntent
+)
+=== init(_:)
+init
+(
+some
+ 
+AppSchemaEnum
+)
+=== init(_:)
+init
+(
+some
+ 
+AppSchemaEntity
+)
+=== init(_:)
+protocol
+ 
+AppSchemaEntity
+AppSchemaEntity
+=== AppSchemaEntity
+protocol
+ 
+AppSchemaEnum
+AppSchemaEnum
+=== AppSchemaEnum
+protocol
+ 
+AppSchemaIntent
+AppSchemaIntent
+=== AppSchemaIntent
+A thread-safe type whose values can be shared across arbitrary concurrent
+ 
+contexts without introducing a risk of data races.
+protocol
+ 
+Sendable
+Sendable
+=== Sendable
+A type whose metatype can be shared across arbitrary isolation domains
+ 
+without introducing a risk of data races.
+protocol
+ 
+SendableMetatype
+SendableMetatype
+=== SendableMetatype
+=== Technologies

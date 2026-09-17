@@ -1,0 +1,1056 @@
+An object that represents a session that interacts with a language model.
+class
+ 
+LanguageModelSession
+LanguageModelSession
+=== LanguageModelSession
+final
+ 
+class
+ 
+LanguageModelSession
+Overview
+A session is a single context that you use to generate content with, and maintains state between
+ 
+requests. You can reuse the existing instance or create a new one each time you call the model. When
+ 
+you create a session you can provide instructions that tell the model what its role is and
+ 
+provide guidance on how to respond.
+[CODE] let session = LanguageModelSession(instructions: """ |     You are a motivational workout coach that provides quotes to inspire \ |     and motivate athletes. |     """ | ) | let prompt = "Generate a motivational quote for my next workout." | let response = try await session.respond(to: prompt)
+The framework records each call to the model in a 
+ that includes all prompts and
+ 
+responses. If your session exceeds the available context size, it throws
+ 
+. For more information on managing
+ 
+the context window size, see 
+.
+Use Instruments to analyze token consumption while your app is running and to look for
+ 
+opportunities to improve performance, like with 
+. For more
+ 
+information on Instruments, see
+ 
+.
+=== Conforms To
+=== Sessions and prompts
+=== Creating a session
+=== Creating a session with a dynamic profile
+=== Preloading the model
+=== Accessing session properties
+=== Inspecting the accumulated usage
+=== Configuring the transcript error handling policy
+=== Generating a response
+=== Generating a response with metadata
+=== Streaming a response
+=== Streaming a response with metadata
+=== Accessing the transcript
+=== Generating feedback
+=== Session properties
+=== Errors
+A type that emits notifications to observers when underlying data changes.
+protocol
+ 
+Observable
+Observable
+=== Observable
+A type whose values can be implicitly or explicitly copied.
+protocol
+ 
+Copyable
+Copyable
+=== Copyable
+A type whose values can persist beyond their immediate local scope.
+protocol
+ 
+Escapable
+Escapable
+=== Escapable
+A thread-safe type whose values can be shared across arbitrary concurrent
+ 
+contexts without introducing a risk of data races.
+protocol
+ 
+Sendable
+Sendable
+=== Sendable
+A type whose metatype can be shared across arbitrary isolation domains
+ 
+without introducing a risk of data races.
+protocol
+ 
+SendableMetatype
+SendableMetatype
+=== SendableMetatype
+=== Technologies
+Perform tasks with models that specialize in language understanding, structured output, and tool calling.
+Foundation Models
+=== Foundation Models
+Options that configure details that should appear in the prompt.
+struct
+ 
+ContextOptions
+ContextOptions
+=== ContextOptions
+Options that control how the model generates its response to a prompt.
+struct
+ 
+GenerationOptions
+GenerationOptions
+=== GenerationOptions
+Details you provide that define the model’s intended behavior on prompts.
+struct
+ 
+Instructions
+Instructions
+=== Instructions
+The session’s transcript exceeded the model’s context size.
+case
+ 
+contextSizeExceeded
+(
+LanguageModelError
+.
+ContextSizeExceeded
+)
+=== LanguageModelError.contextSizeExceeded(_:)
+Feedback appropriate for logging or attaching to Feedback Assistant.
+struct
+ 
+LanguageModelFeedback
+LanguageModelFeedback
+=== LanguageModelFeedback
+An object that represents a session that interacts with a language model.
+class
+ 
+LanguageModelSession
+LanguageModelSession
+=== LanguageModelSession
+A type-erased dynamic profile.
+struct
+ 
+AnyDynamicProfile
+AnyDynamicProfile
+=== LanguageModelSession.AnyDynamicProfile
+A dynamic profile that resolves to one of two profiles, depending on a condition.
+struct
+ 
+ConditionalDynamicProfile
+ConditionalDynamicProfile
+=== LanguageModelSession.ConditionalDynamicProfile
+A dynamic profile that contains one or more profiles.
+protocol
+ 
+DynamicProfile
+DynamicProfile
+=== LanguageModelSession.DynamicProfile
+A type that represents a dynamic profile builder.
+struct
+ 
+DynamicProfileBuilder
+DynamicProfileBuilder
+=== LanguageModelSession.DynamicProfileBuilder
+A protocol for creating reusable wrappers around dynamic profile content.
+protocol
+ 
+DynamicProfileModifier
+DynamicProfileModifier
+=== LanguageModelSession.DynamicProfileModifier
+A type that represents the dynamic profile a modifier applies to.
+struct
+ 
+DynamicProfileModifierContent
+DynamicProfileModifierContent
+=== LanguageModelSession.DynamicProfileModifierContent
+A failure caused by incorrect use of a language model session.
+enum
+ 
+Error
+Error
+=== LanguageModelSession.Error
+An error that may occur while generating a response.
+enum
+ 
+GenerationError
+GenerationError
+=== LanguageModelSession.GenerationError
+A dynamic profile with a modifier applied to it.
+struct
+ 
+ModifiedDynamicProfile
+ModifiedDynamicProfile
+=== LanguageModelSession.ModifiedDynamicProfile
+A profile that contains dynamic instructions.
+struct
+ 
+Profile
+Profile
+=== LanguageModelSession.Profile
+A structure that stores the output of a response call.
+struct
+ 
+Response
+Response
+=== LanguageModelSession.Response
+An async sequence of snapshots of partially generated content.
+struct
+ 
+ResponseStream
+ResponseStream
+=== LanguageModelSession.ResponseStream
+A property wrapper that provides access to properties from within profiles, dynamic
+ 
+instructions, and tools.
+struct
+ 
+SessionProperty
+SessionProperty
+=== LanguageModelSession.SessionProperty
+An error that occurs while a language model is calling a tool.
+struct
+ 
+ToolCallError
+ToolCallError
+=== LanguageModelSession.ToolCallError
+Information about how many tokens were used by a response.
+struct
+ 
+Usage
+Usage
+=== LanguageModelSession.Usage
+Creates a session with dynamic instructions.
+convenience
+ 
+init
+(
+model
+: 
+some
+ 
+LanguageModel
+, 
+dynamicInstructions
+: 
+sending
+ 
+some
+ 
+DynamicInstructions
+, 
+history
+: 
+some
+ 
+Collection
+<
+Transcript
+.
+Entry
+>)
+=== init(model:dynamicInstructions:history:)
+Creates a session in a blank slate state with an instructions builder.
+convenience
+(
+model
+:
+tools
+:
+instructions
+:)
+=== init(model:tools:instructions:)
+Creates a session by rehydrating from a transcript.
+convenience
+(
+model
+:
+tools
+:
+transcript
+:)
+=== init(model:tools:transcript:)
+Creates a session with a profile.
+convenience
+ 
+init
+(
+profile
+: 
+sending
+ 
+some
+ 
+LanguageModelSession
+.
+DynamicProfile
+, 
+history
+: 
+some
+ 
+Collection
+<
+Transcript
+.
+Entry
+>)
+=== init(profile:history:)
+A Boolean value that indicates whether a response is being generated.
+var
+ 
+isResponding
+: 
+Bool
+=== isResponding
+Logs and serializes a feedback attachment that can be submitted to Apple.
+func
+ 
+logFeedbackAttachment
+(
+sentiment
+: 
+LanguageModelFeedback
+.
+Sentiment
+?, 
+issues
+: [
+LanguageModelFeedback
+.
+Issue
+], 
+desiredOutput
+: 
+Transcript
+.
+Entry
+?) -> 
+Data
+=== logFeedbackAttachment(sentiment:issues:desiredOutput:)
+Logs and serializes a feedback attachment that includes the content you expected.
+func
+ 
+logFeedbackAttachment
+(
+sentiment
+: 
+LanguageModelFeedback
+.
+Sentiment
+?, 
+issues
+: [
+LanguageModelFeedback
+.
+Issue
+], 
+desiredResponseContent
+: (any 
+ConvertibleToGeneratedContent
+)?) -> 
+Data
+=== logFeedbackAttachment(sentiment:issues:desiredResponseContent:)
+Logs and serializes a feedback attachment that includes the response text you expected.
+func
+ 
+logFeedbackAttachment
+(
+sentiment
+: 
+LanguageModelFeedback
+.
+Sentiment
+?, 
+issues
+: [
+LanguageModelFeedback
+.
+Issue
+], 
+desiredResponseText
+: 
+String
+?) -> 
+Data
+=== logFeedbackAttachment(sentiment:issues:desiredResponseText:)
+Loads the resources required for this session into memory ahead of a request.
+func
+ 
+prewarm
+(
+promptPrefix
+: 
+Prompt
+?)
+=== prewarm(promptPrefix:)
+The values of the session’s managed properties.
+var
+ 
+properties
+: 
+SessionPropertyValues
+=== properties
+Produces a generable object as a response to a prompt.
+func
+ 
+respond
+<
+Content
+>(
+generating
+: 
+Content
+.Type, 
+includeSchemaInPrompt
+: 
+Bool
+, 
+options
+: 
+GenerationOptions
+, 
+prompt
+: () 
+throws
+ -> 
+Prompt
+) 
+async
+ 
+throws
+ -> 
+LanguageModelSession
+.
+Response
+<
+Content
+>
+=== respond(generating:includeSchemaInPrompt:options:prompt:)
+Produces a generable object as a response to a prompt.
+func
+ 
+respond
+<
+Content
+>(
+generating
+: 
+Content
+.Type, 
+options
+: 
+GenerationOptions
+, 
+contextOptions
+: 
+ContextOptions
+, 
+metadata
+: [
+String
+ : any 
+ConvertibleToGeneratedContent
+], 
+prompt
+: () 
+throws
+ -> 
+Prompt
+) 
+async
+ 
+throws
+ -> 
+LanguageModelSession
+.
+Response
+<
+Content
+>
+=== respond(generating:options:contextOptions:metadata:prompt:)
+Produces a response to a prompt.
+func
+ 
+respond
+(
+options
+: 
+GenerationOptions
+, 
+contextOptions
+: 
+ContextOptions
+, 
+metadata
+: [
+String
+ : any 
+ConvertibleToGeneratedContent
+], 
+prompt
+: () 
+throws
+ -> 
+Prompt
+) 
+async
+ 
+throws
+ -> 
+LanguageModelSession
+.
+Response
+<
+String
+>
+=== respond(options:contextOptions:metadata:prompt:)
+Produces a response to a prompt.
+func
+ 
+respond
+(
+options
+: 
+GenerationOptions
+, 
+prompt
+: () 
+throws
+ -> 
+Prompt
+) 
+async
+ 
+throws
+ -> 
+LanguageModelSession
+.
+Response
+<
+String
+>
+=== respond(options:prompt:)
+Produces a generated content type as a response to a prompt and schema.
+func
+ 
+respond
+(
+schema
+: 
+GenerationSchema
+, 
+includeSchemaInPrompt
+: 
+Bool
+, 
+options
+: 
+GenerationOptions
+, 
+prompt
+: () 
+throws
+ -> 
+Prompt
+) 
+async
+ 
+throws
+ -> 
+LanguageModelSession
+.
+Response
+<
+GeneratedContent
+>
+=== respond(schema:includeSchemaInPrompt:options:prompt:)
+Produces a generated content type as a response to a prompt and schema.
+func
+ 
+respond
+(
+schema
+: 
+GenerationSchema
+, 
+options
+: 
+GenerationOptions
+, 
+contextOptions
+: 
+ContextOptions
+, 
+metadata
+: [
+String
+ : any 
+ConvertibleToGeneratedContent
+], 
+prompt
+: () 
+throws
+ -> 
+Prompt
+) 
+async
+ 
+throws
+ -> 
+LanguageModelSession
+.
+Response
+<
+GeneratedContent
+>
+=== respond(schema:options:contextOptions:metadata:prompt:)
+Produces a generable object as a response to a prompt.
+func
+ 
+respond
+(
+to
+:
+generating
+:
+includeSchemaInPrompt
+:
+options
+:)
+=== respond(to:generating:includeSchemaInPrompt:options:)
+Produces a generable object as a response to a prompt.
+func
+ 
+respond
+(
+to
+:
+generating
+:
+options
+:
+contextOptions
+:
+metadata
+:)
+=== respond(to:generating:options:contextOptions:metadata:)
+Produces a response to a prompt.
+func
+ 
+respond
+(
+to
+:
+options
+:)
+=== respond(to:options:)
+Produces a response to a prompt.
+func
+ 
+respond
+(
+to
+:
+options
+:
+contextOptions
+:
+metadata
+:)
+=== respond(to:options:contextOptions:metadata:)
+Produces a generated content type as a response to a prompt and schema.
+func
+ 
+respond
+(
+to
+:
+schema
+:
+includeSchemaInPrompt
+:
+options
+:)
+=== respond(to:schema:includeSchemaInPrompt:options:)
+Produces a generated content type as a response to a prompt and schema.
+func
+ 
+respond
+(
+to
+:
+schema
+:
+options
+:
+contextOptions
+:
+metadata
+:)
+=== respond(to:schema:options:contextOptions:metadata:)
+Produces a response stream to a prompt.
+func
+ 
+streamResponse
+<
+Content
+>(
+generating
+: 
+Content
+.Type, 
+includeSchemaInPrompt
+: 
+Bool
+, 
+options
+: 
+GenerationOptions
+, 
+prompt
+: () 
+throws
+ -> 
+Prompt
+) 
+rethrows
+ -> sending 
+LanguageModelSession
+.
+ResponseStream
+<
+Content
+>
+=== streamResponse(generating:includeSchemaInPrompt:options:prompt:)
+Produces a response stream to a prompt.
+func
+ 
+streamResponse
+<
+Content
+>(
+generating
+: 
+Content
+.Type, 
+options
+: 
+GenerationOptions
+, 
+contextOptions
+: 
+ContextOptions
+, 
+metadata
+: [
+String
+ : any 
+ConvertibleToGeneratedContent
+], 
+prompt
+: () 
+throws
+ -> 
+Prompt
+) 
+rethrows
+ -> sending 
+LanguageModelSession
+.
+ResponseStream
+<
+Content
+>
+=== streamResponse(generating:options:contextOptions:metadata:prompt:)
+Produces a response stream to a prompt.
+func
+ 
+streamResponse
+(
+options
+: 
+GenerationOptions
+, 
+contextOptions
+: 
+ContextOptions
+, 
+metadata
+: [
+String
+ : any 
+ConvertibleToGeneratedContent
+], 
+prompt
+: () 
+throws
+ -> 
+Prompt
+) 
+rethrows
+ -> sending 
+LanguageModelSession
+.
+ResponseStream
+<
+String
+>
+=== streamResponse(options:contextOptions:metadata:prompt:)
+Produces a response stream to a prompt.
+func
+ 
+streamResponse
+(
+options
+: 
+GenerationOptions
+, 
+prompt
+: () 
+throws
+ -> 
+Prompt
+) 
+rethrows
+ -> sending 
+LanguageModelSession
+.
+ResponseStream
+<
+String
+>
+=== streamResponse(options:prompt:)
+Produces a response stream to a prompt and schema.
+func
+ 
+streamResponse
+(
+schema
+: 
+GenerationSchema
+, 
+includeSchemaInPrompt
+: 
+Bool
+, 
+options
+: 
+GenerationOptions
+, 
+prompt
+: () 
+throws
+ -> 
+Prompt
+) 
+rethrows
+ -> sending 
+LanguageModelSession
+.
+ResponseStream
+<
+GeneratedContent
+>
+=== streamResponse(schema:includeSchemaInPrompt:options:prompt:)
+Produces a response stream to a prompt and schema.
+func
+ 
+streamResponse
+(
+schema
+: 
+GenerationSchema
+, 
+options
+: 
+GenerationOptions
+, 
+contextOptions
+: 
+ContextOptions
+, 
+metadata
+: [
+String
+ : any 
+ConvertibleToGeneratedContent
+], 
+prompt
+: () 
+throws
+ -> 
+Prompt
+) 
+rethrows
+ -> sending 
+LanguageModelSession
+.
+ResponseStream
+<
+GeneratedContent
+>
+=== streamResponse(schema:options:contextOptions:metadata:prompt:)
+Produces a response stream to a prompt.
+func
+ 
+streamResponse
+(
+to
+:
+generating
+:
+includeSchemaInPrompt
+:
+options
+:)
+=== streamResponse(to:generating:includeSchemaInPrompt:options:)
+Produces a response stream to a prompt.
+func
+ 
+streamResponse
+(
+to
+:
+generating
+:
+options
+:
+contextOptions
+:
+metadata
+:)
+=== streamResponse(to:generating:options:contextOptions:metadata:)
+Produces a response stream to a prompt.
+func
+ 
+streamResponse
+(
+to
+:
+options
+:)
+=== streamResponse(to:options:)
+Produces a response stream to a prompt.
+func
+ 
+streamResponse
+(
+to
+:
+options
+:
+contextOptions
+:
+metadata
+:)
+=== streamResponse(to:options:contextOptions:metadata:)
+Produces a response stream to a prompt and schema.
+func
+ 
+streamResponse
+(
+to
+:
+schema
+:
+includeSchemaInPrompt
+:
+options
+:)
+=== streamResponse(to:schema:includeSchemaInPrompt:options:)
+Produces a response stream to a prompt and schema.
+func
+ 
+streamResponse
+(
+to
+:
+schema
+:
+options
+:
+contextOptions
+:
+metadata
+:)
+=== streamResponse(to:schema:options:contextOptions:metadata:)
+A full history of interactions, including user inputs and model responses.
+var
+ 
+transcript
+: 
+Transcript
+=== transcript
+The session’s policy for managing the transcript when errors occur.
+var
+ 
+transcriptErrorHandlingPolicy
+: 
+TranscriptErrorHandlingPolicy
+?
+=== transcriptErrorHandlingPolicy
+The total accumulated usage across all responses generated by this session.
+var
+ 
+usage
+: 
+LanguageModelSession
+.
+Usage
+=== usage
+A prompt from a person to the model.
+struct
+ 
+Prompt
+Prompt
+=== Prompt
+A linear history of entries that reflect an interaction with a session.
+struct
+ 
+Transcript
+Transcript
+=== Transcript
+Options for controlling how a language model session manages the transcript when errors occur.
+struct
+ 
+TranscriptErrorHandlingPolicy
+TranscriptErrorHandlingPolicy
+=== TranscriptErrorHandlingPolicy
+Access a larger context window and stronger reasoning by routing session requests
+ 
+through Private Cloud Compute.
+=== Adding server-side intelligence with Private Cloud Compute
+Analyze and extract information from images by combining them with descriptive text prompts.
+=== Analyzing images with multimodal prompting
+Measure how prompts, responses, and tool calls affect token consumption and
+ 
+response times in Instruments.
+=== Analyzing the runtime performance of your Foundation Models app
+Identify topics, actions, objects, and emotions in input text with a content tagging model.
+=== Categorizing and organizing data with content tags
+Adapt sessions dynamically at runtime by loading instructions and tools based
+ 
+on the state of your app.
+=== Composing dynamic sessions with instructions and profiles
+Enhance the experience in your app by prompting an on-device large language model.
+=== Generating content and performing tasks with Foundation Models
+Create robust apps by describing output you want programmatically.
+=== Generating Swift data structures with guided generation
+Create generative experiences that appropriately handle sensitive inputs and respect people.
+=== Improving the safety of generative model output
+Optimize your app’s token usage when prompting a model with the Foundation Models
+ 
+framework.
+=== Managing the context window
+Tailor your prompts to get effective results from an on-device model.
+=== Prompting an on-device foundation model
+Send requests on device to an open source model you export with Core AI to get a consistent API experience.
+=== Running a Core AI model in a Foundation Models session
+Generate content in the language people prefer when they interact with your app.
+=== Supporting languages and locales with Foundation Models
+Manage the prompts your app uses by versioning them to make the most out of
+ 
+model improvements.
+=== Updating prompts for new model versions

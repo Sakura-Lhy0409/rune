@@ -1,0 +1,192 @@
+A variant of Apple Foundation Models that runs on Private Cloud Compute to provide enhanced
+ 
+capabilities while maintaining privacy guarantees.
+class
+ 
+PrivateCloudComputeLanguageModel
+PrivateCloudComputeLanguageModel
+=== PrivateCloudComputeLanguageModel
+final
+ 
+class
+ 
+PrivateCloudComputeLanguageModel
+Overview
+To use the server-based model that powers Apple Intelligence, you change a single line of code
+ 
+that you apply when creating your 
+.
+[CODE] // Create a session with the server-side model. | let session = LanguageModelSession(model: PrivateCloudComputeLanguageModel()) | let response = try await session.respond(to: "Analyze this document...")
+Before using the model, verify its availability. Model availability depends on whether the device and
+ 
+region supports Apple Intelligence. For a list of supported devices,
+ 
+see 
+.
+To develop with PCC you must meet certain eligibility requirements. To learn more and
+ 
+request access to the managed entitlement, see
+ 
+.
+=== Conforms To
+=== Private Cloud Compute
+=== Creating an instance
+=== Inspecting the availability
+=== Getting the quota
+=== Accessing the context size
+=== Handling language and locales
+=== Accessing the error
+=== Default Implementations
+A Boolean value that indicates whether the app can use Private Cloud Compute.
+com.apple.developer.private-cloud-compute
+=== com.apple.developer.private-cloud-compute
+A type that emits notifications to observers when underlying data changes.
+protocol
+ 
+Observable
+Observable
+=== Observable
+A type whose values can be implicitly or explicitly copied.
+protocol
+ 
+Copyable
+Copyable
+=== Copyable
+A type whose values can persist beyond their immediate local scope.
+protocol
+ 
+Escapable
+Escapable
+=== Escapable
+A thread-safe type whose values can be shared across arbitrary concurrent
+ 
+contexts without introducing a risk of data races.
+protocol
+ 
+Sendable
+Sendable
+=== Sendable
+A type whose metatype can be shared across arbitrary isolation domains
+ 
+without introducing a risk of data races.
+protocol
+ 
+SendableMetatype
+SendableMetatype
+=== SendableMetatype
+=== Technologies
+Perform tasks with models that specialize in language understanding, structured output, and tool calling.
+Foundation Models
+=== Foundation Models
+A protocol that you use to interface with a model.
+protocol
+ 
+LanguageModel
+LanguageModel
+=== LanguageModel
+An object that represents a session that interacts with a language model.
+class
+ 
+LanguageModelSession
+LanguageModelSession
+=== LanguageModelSession
+A variant of Apple Foundation Models that runs on Private Cloud Compute to provide enhanced
+ 
+capabilities while maintaining privacy guarantees.
+class
+ 
+PrivateCloudComputeLanguageModel
+PrivateCloudComputeLanguageModel
+=== PrivateCloudComputeLanguageModel
+The availability status for a specific PCC language model.
+enum
+ 
+Availability
+Availability
+=== PrivateCloudComputeLanguageModel.Availability
+Errors that may occur when using Private Cloud Compute.
+enum
+ 
+Error
+Error
+=== PrivateCloudComputeLanguageModel.Error
+=== LanguageModel Implementations
+The usage quota state for a Private Cloud Compute language model.
+struct
+ 
+QuotaUsage
+QuotaUsage
+=== PrivateCloudComputeLanguageModel.QuotaUsage
+The availability of the language model.
+var
+ 
+availability
+: 
+PrivateCloudComputeLanguageModel
+.
+Availability
+=== availability
+The maximum context size in tokens supported by the model.
+var
+ 
+contextSize
+: 
+Int
+=== contextSize
+Creates a Private Cloud Compute language model instance.
+convenience
+ 
+init
+()
+=== init()
+A Boolean value that indicates whether the system is entirely ready.
+var
+ 
+isAvailable
+: 
+Bool
+=== isAvailable
+The usage quota for this model.
+var
+ 
+quotaUsage
+: 
+PrivateCloudComputeLanguageModel
+.
+QuotaUsage
+=== quotaUsage
+Languages that the model supports.
+var
+ 
+supportedLanguages
+: 
+Set
+<
+Locale
+.
+Language
+>
+=== supportedLanguages
+Returns a Boolean value that indicates whether the given locale is supported by the model.
+func
+ 
+supportsLocale
+(
+Locale
+) 
+async
+ 
+throws
+ -> 
+Bool
+=== supportsLocale(_:)
+Access a larger context window and stronger reasoning by routing session requests
+ 
+through Private Cloud Compute.
+=== Adding server-side intelligence with Private Cloud Compute
+Analyze and extract information from images by combining them with descriptive text prompts.
+=== Analyzing images with multimodal prompting
+=== Accessing Private Cloud Compute
+Accessing Private Cloud Compute
+=== Apple Intelligence
+Apple Intelligence

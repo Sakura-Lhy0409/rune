@@ -1,0 +1,308 @@
+Apple&#x27;s New EU Commission Rates from October 1, 2026 | Qonversion Blog
+Skip to main content
+Product
+Customers
+Solutions
+Developers
+Resources
+Blog
+Pricing
+Log In
+Contact Sales
+Home
+Blog
+News
+Apple&#x27;s New EU Commission Rates from October 1, 2026
+News
+Apple&#x27;s New EU Commission Rates from October 1, 2026
+Four rates instead of one, the Core Technology Fee replaced by a 5% commission, and a real rate set by your retention curve — not by Apple.
+Vlada
+August 24, 2026
+•
+13 min read
+On August 18, 2026, Apple published
+new business terms for apps in the European Union
+. They take effect on
+October 1, 2026
+, and Apple describes them as arriving "following close collaboration with the European Commission" — a change to Apple's own terms, not a court order.
+Apple's EU commission stopped being one number. It is now a function of where you take the payment, which Apple programs you belong to, and whether the subscription is past its first year — which means your effective rate is set partly by your retention curve, not by the App Store. And an app can now offer an alternative payment method alongside Apple In-App Purchase, under design rules and a choice locked in for twelve months.
+Below: every rate in one table, and an honest calculation of when 20% beats 26%.
+What are Apple's EU commission rates from October 1, 2026?
+From October 1, 2026, Apple charges 26% on sales through Apple In-App Purchase, 20% on alternative payment processing inside your app, 15% on out-of-app offers via an actionable link, and a 5% Core Technology Commission on apps distributed outside the App Store — the first three each with a reduced tier. Every rate below is from Apple's
+Changes for apps in the European Union
+page, checked on August 24, 2026.
+Where the sale happens
+Standard rate
+Reduced rate
+Apple In-App Purchase
+26%
+15%
+Alternative payment processing
+inside
+your app
+20%
+10%
+Out-of-app offer via an actionable link (store services commission)
+15%
+10%
+Out-of-app offer
+without
+an actionable link
+No published rate — see below
+—
+Apps distributed outside the App Store: alternative marketplaces and Web Distribution (Core Technology Commission)
+5%
+No reduced tier; narrow waiver for small marketplace operators
+Reduced rate conditions
+(identical for the first three rows): participation in the App Store Small Business Program, the Mini Apps Partner Program, or the Video Partner Program —
+or
+an auto-renewable subscription after its first year.
+The 7-day window, and what happens after it.
+The store services commission covers "Only sales made within 7 days of the link tap." The support page stops there, but
+Attachment 14
+does not: the initial purchase must fall inside the window, and once it is a subscription, "subsequent auto-renewals are all subject to commission." The window gates entry, not the renewal stream — do not model year two of a link-out subscription as free.
+The offer without a link.
+Apple permits out-of-app offers "regardless of whether you use an actionable link," but defines the commission only for offers that use one, and publishes no rate for the no-link case. It still needs the entitlement — and an offer users cannot tap converts differently from one they can.
+The Core Technology Commission does not stack on top of the 20%.
+Apple scopes it to apps distributed outside the App Store; it appears nowhere in the App Store payment rules. An App Store app using its own processor pays 20% or 10%, not 25%. The small-operator waiver is narrower still: it covers fees "to download your alternative app marketplace," not sales inside the apps you distribute.
+What replaced Apple's Core Technology Fee? A 5% Core Technology Commission
+The Core Technology Commission — a flat 5% on digital sales in apps distributed outside the App Store — replaced the Core Technology Fee of
+€0.50 per first annual install
+above one million.
+Before
+After October 1, 2026
+Core Technology Fee — €0.50 per first annual install above 1 million
+Core Technology Commission — 5% of digital sales outside the App Store
+Initial Acquisition Fee
+Eliminated
+Store Services Fee (tiered)
+Eliminated; replaced by one store services commission on out-of-app offers
+Several parallel EU addenda
+One set of terms for every developer distributing in the EU
+The old fee was charged per install — a tax on reach, not on revenue. A free app with a viral spike and thin conversion could owe Apple money on users who never paid. The new commission is charged on sales, so the worst case is no longer unbounded: a fixed risk became a variable cost.
+Do Apple's reduced EU rates apply to subscriptions after their first year?
+Yes — an auto-renewable subscription drops from 26% to 15% on Apple IAP, and from 20% to 10% on alternative in-app processing, once it passes its first year. Apple's condition names no plan length, so a monthly subscriber who stays thirteen months crosses the same line as an annual one who renews.
+So two apps with identical pricing and identical EU revenue can pay materially different effective rates. What 26% actually costs across three years, by profile:
+Assumptions: Apple IAP only; standard rate in year one, reduced rate after; no program participation; 36-month window; renewal rates held constant; revenue-weighted.
+Subscription profile
+Effective Apple rate over 3 years
+Monthly, 15% monthly churn
+24.5%
+Monthly, 5% monthly churn
+21.0%
+Annual, 30% year-over-year renewal
+22.9%
+Annual, 70% year-over-year renewal
+20.0%
+Same 26% headline. Four and a half points of spread — none of it negotiated with Apple, all of it a consequence of how long people stay.
+Your Apple commission is no longer a property of the platform. It is a property of your retention curve
+— so the retention work you were already doing now pays twice: once in revenue, once in rate.
+One catch if you process payments yourself: Apple's only view of that first-year boundary is the monthly report you file. The 10% rate is only as good as your own subscription data.
+What does an alternative payment option alongside Apple IAP actually look like?
+It looks like a second button on your purchase screen, governed by parity rules. Apple's
+payment options guidance
+requires Apple In-App Purchase to be "displayed at least as prominently as any other payment option," on Apple's artwork in "black or white," with colour not used to make your alternative look preferred. Your App Store product page may not carry alternative payment information.
+Mechanically you need the StoreKit External Purchases or Offers Entitlement, the
+ExternalPurchaseCustomLink
+API, and a system disclosure sheet telling users they are transacting with you, not Apple — shown on every tap until they opt out of the reminder.
+And a hard ceiling on reach: the entitlement works only on "a minimum of iOS 26.2, iPadOS 26.2, macOS 26.6" and equivalents. Whatever share of your EU base runs older software is not addressable without contacting Apple.
+Is alternative payment processing at 20% cheaper than Apple IAP at 26%?
+Sometimes — but by much less than six points, and on small tickets or year-two renewals often not at all. Six points is a budget you spend on what Apple was doing for you: "worldwide end-to-end payment processing, foreign currency exchange, tax support, customer service, and more."
+Assumptions — none of these come from Apple:
+1. €100 of EU subscription revenue, arriving as ten €10 charges or one €100 charge, so the fixed per-transaction fee becomes visible.
+2. Processing rates from vendors' public list prices:
+Stripe
+at 1.5% + €0.25 for standard EEA cards,
+Paddle
+at 5% + $0.50 per checkout as a merchant of record ($0.50 modelled as €0.50, which slightly overstates it). Negotiated rates differ.
+3.
+The tables assume every sale goes through the channel named.
+On a mixed screen users choose, and the parity rules mean you cannot steer them — so your real gain is the gap times the share who switch. At 40% adoption, the annual-plan gain below shrinks from €4.25 to €1.70.
+4. Revenue is modelled VAT-exclusive. Apple's support page describes the base loosely as "the price paid by the customer," but
+Attachment 14
+settles it: commission applies to amounts payable by the end user "net of transaction taxes charged by You." VAT is stripped before Apple's cut in every alternative channel.
+5. Excluded: tax registration and filing, disputes (Stripe lists €20 per chargeback), the involuntary-churn recovery IAP does for you, support staffing, and building and maintaining the flow.
+What you keep from €100, year one:
+Channel
+Ten €10 charges
+One €100 charge
+Apple IAP (26%)
+€74.00
+€74.00
+Alternative in-app + low-fee PSP (20% + 1.5% + €0.25/tx)
+€76.00
+€78.25
+Alternative in-app + merchant of record (20% + 5% + €0.50/tx)
+€70.00
+€74.50
+Out-of-app link + low-fee PSP (15% + 1.5% + €0.25/tx)
+€81.00
+€83.25
+Year two and later, at the reduced rates:
+Channel
+Ten €10 charges
+One €100 charge
+Apple IAP (15%)
+€85.00
+€85.00
+Alternative in-app + low-fee PSP (10% + 1.5% + €0.25/tx)
+€86.00
+€88.25
+Alternative in-app + merchant of record (10% + 5% + €0.50/tx)
+€80.00
+€84.50
+Out-of-app link + low-fee PSP (10% + 1.5% + €0.25/tx)
+€86.00
+€88.25
+Three things fall out that the headline does not tell you.
+Small tickets eat the gap.
+On €10 charges a low-fee processor turns six points into two — before adoption is applied, not after. A merchant of record turns it into a €4 loss per €100.
+Year two hurts the merchant-of-record case.
+Apple's reduced rate cuts its own take to 10%, but your vendor's 5% does not move. On a €100 annual charge the channel flips from €0.50 ahead to €0.50 behind; on ten €10 charges it goes from €4 behind to €5 behind — on exactly the renewals a subscription business runs on.
+Out-of-app looks best on paper and is hardest to read.
+The rate is lowest, but the model assumes the purchase completes, and a browser hand-off costs conversion.
+And the condition that reframes all of it: once you pick your payment options, you "must maintain that choice across all EU storefronts for 12 months." No single-country pilot, no quiet rollback in Q1 — a year-long commitment made before you have data on how it performs.
+Who this is for: large EU revenue, high transaction values, payment infrastructure and tax registration already in place, support capacity for billing questions. On ten €10 charges a merchant of record costs ten points to save six.
+What do Apple's new EU business terms require from subscription apps?
+The commission drops; the work Apple was handling on your behalf does not disappear.
+Tax.
+Apple's page
+puts you "responsible for the collection and remittance of any applicable taxes" — registration and filing across EU jurisdictions.
+Reporting, monthly, forever.
+All alternative payment transactions within 15 days of month end, including "transactions that didn't result in a purchase." Apple then invoices you: "You'll need to provide payment within 30 days of receiving the invoice." Cash flow reverses — you collect gross and pay Apple later, instead of receiving net.
+Audit and enforcement.
+Apple retains audit rights over your records; non-payment can mean offsetting proceeds in other markets or "removal of your app from the App Store."
+Refunds and support.
+Apple's guidance says "Report a Problem, and Family Sharing" will not reflect these transactions, and "It will be more difficult for Apple to support or refund customers." Those tickets come to you, and your provider must meet PCI Level 1 compliance.
+Child safety.
+Kids-category apps must gate alternative payment flows and cannot offer an out-of-app purchase on a website. Under 13, out-of-app offers are not permitted; from 13 to 17, both routes need a parental gate. Some EU storefronts set that threshold above 13.
+Attachment 14.
+New terms do not apply to an account that has not accepted them.
+What should you do before October 1, 2026?
+Seven things, with the owner for each.
+1.
+Accept Attachment 14
+—
+Account Holder
+. The
+updated Apple Developer Program License Agreement
+adds Attachment 14, covering EU alternative distribution, alternative payments and business terms. Only the Account Holder can accept it, and the terms apply from October 1, 2026 or the date you accept, whichever is later. Fees accrued under the discontinued addenda remain payable.
+2.
+Measure your EU exposure
+—
+analytics
+. What share of revenue is EU, and how does it split between first-year and later subscriptions? Without the second half, none of the rates resolve to a number.
+3.
+Measure your OS floor
+—
+analytics
+. What share of your EU base runs iOS 26.2 or later? That caps how much revenue an alternative payment option can reach on day one.
+4.
+Confirm your program status
+—
+finance
+. Small Business, Mini Apps or Video Partner participation moves the IAP rate by eleven points, alternative in-app processing by ten, and out-of-app offers by five. Check rather than assume.
+5.
+Rebuild unit economics across all four channels
+—
+finance and growth
+. Model year one and year two separately, and settle the VAT base question in Attachment 14 first.
+6.
+Decide on alternative payments with the twelve-month lock in mind
+—
+product
+. Budget for integration, the entitlement and disclosure sheet, monthly reporting (External Purchase Server API on iOS 26.4+, by hand below that), tax registration, refunds and support — and treat go-live as a year-long commitment across every EU storefront, not a test.
+7.
+Check that your analytics can split revenue by channel and by subscription year
+—
+analytics and data
+. This is the quiet blocker. If your reporting cannot separate IAP revenue from your own processor's, or tell a first-year payment from a renewal, you cannot calculate your effective rate at all — not before the decision, and not after, when you need to know whether it was right. Test that against your stack before October 1, 2026.
+The takeaway
+Apple's EU commission stopped being a constant and became a function. Four channels, two tiers, a first-year boundary that your retention curve decides, and a twelve-month lock on the choice — so the number in next year's model is one you partly control, and one that has to be measured rather than looked up.
+The same test is worth applying one level down: platform cost now scales with how well you retain, and the rest of your stack should scale with you rather than on top of you. If your reporting cannot yet tell you what you pay by channel and by subscription year, fix that first —
+see how Qonversion reports subscription revenue
+.
+dma
+app-store
+eu
+pricing
+subscriptions
+Vlada
+Marketing Manager at Qonversion
+Vlada drives marketing initiatives at Qonversion, connecting with the mobile app community.
+Share
+Share:
+Share
+More in
+News
+View all
+News
+News
+Apple Fiscal Calendar 2026: All Payment Dates for App Developers
+October 7, 2025
+News
+WWDC25: What Does It Mean for Subscription App Developers
+June 18, 2025
+News
+Epic vs Apple: Mastering External Payments
+May 19, 2025
+News
+Apple’s External Payment Ruling: A Win for Developers — But Only If You’re Ready
+May 6, 2025
+Ready to optimize your subscriptions?
+Start using Qonversion today and see the difference.
+Start Free
+Book a Demo
+Start Free Trial
+Start Free Trial
+Start building. Start growing.
+Try For Free
+Talk To Us
+Product
+Subscription Management
+Analytics
+A/B Experiments
+Remote Configs
+No-Code Builder 2.0
+Apple Search Ads
+Refund Keeper
+Customer CRM
+Dashboard
+Integrations
+Reliability
+Pricing
+Solutions
+For Indie Devs
+For Enterprise
+For Product Managers
+For Engineers
+For Analytics Teams
+Docs
+Docs
+Quickstart Guide
+Migration Guide
+SDKs
+Tutorials
+API Reference
+API Status
+Resources
+Blog
+Podcast
+Webinars
+Guides
+Customer Stories
+Partners
+Apple Receipt Checker
+Company
+Contact us
+About us
+Careers
+Compare
+vs RevenueCat
+vs Adapty
+vs In-House Solutions
+© 2026. Qonversion Inc.
+Terms of Service
+Privacy Policy
+Service Level Agreement (SLA)
+Cookie settings

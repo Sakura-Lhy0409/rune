@@ -1,0 +1,182 @@
+How vibe-coding app Anything is rebuilding after getting booted from the App Store twice | TechCrunch
+Disrupt 2026: OpenAI, Anthropic, Replit, and more take over 6 industry stages.
+25% off tickets now
+Back by popular demand:
+Save up to $300 on Disrupt
+Close
+TechCrunch Desktop Logo
+TechCrunch Mobile Logo
+Latest
+Startups
+Venture
+Apple
+Security
+AI
+Apps
+Disrupt 2026
+Events
+Podcasts
+Newsletters
+Search
+Submit
+Site Search Toggle
+Mega Menu Toggle
+Topics
+Latest
+AI
+Amazon
+Apps
+Biotech &amp; Health
+Climate
+Cloud Computing
+Commerce
+Crypto
+Enterprise
+EVs
+Fintech
+Fundraising
+Gadgets
+Gaming
+Google
+Government &amp; Policy
+Hardware
+Instagram
+Layoffs
+Media &amp; Entertainment
+Meta
+Microsoft
+Privacy
+Robotics
+Security
+Social
+Space
+Startups
+TikTok
+Transportation
+Venture
+More from TechCrunch
+Staff
+Events
+Startup Battlefield
+StrictlyVC
+Newsletters
+Podcasts
+Videos
+Partner Content
+TechCrunch Brand Studio
+Contact Us
+Image Credits:
+Anything
+Apps
+How vibe-coding app Anything is rebuilding after getting booted from the App Store twice
+Ivan Mehta
+7:22 AM PDT · April 14, 2026
+Apple is taking a tough stance on vibe-coding apps as the company is
+blocking updates
+or removing those apps from the App Store. Affected apps include
+Replit
+, Vibecode, and
+Anything
+. While Replit and Vibecode&#8217;s updates were paused, Anything&#8217;s app was removed twice. The company is now looking for new ways, like offering a desktop version of its service, to let users build apps for mobile devices.
+Anything&#8217;s co-founder, Dhruv Amin, said in a conversation with TechCrunch that Apple removed its app on March 26. Since then, the company has been unable to get its app approved, despite a period where there was a brief reinstatement.
+&#8220;It&#8217;s been a long saga. We built a mobile app primarily to let our users who are building iOS apps preview their own app on their own device while developing it. [We] had no problems through December. Post December, we and everyone else in the category started getting our updates blocked,&#8221; Amin told TechCrunch.
+Amin noted that Apple told the company that the app was restricted or removed because of its developer agreement clause 2.5.2, which prevents apps from downloading, installing, or executing code.
+&#8220;The app markets itself as a mobile app builder for iPhone and advertises making native iOS apps with features like 1-tap App Store submissions, code export, and full source code editing,&#8221; Apple told the company, according to a screenshot of an email
+shared by Anything on X
+.
+Guideline 2.5.2 &#8211; Gatekeeping &#8211; Vibes denied
+we haven&#39;t talked about this publicly
+for months we tried to resolve it privately with emails, calls, appeals, and four technical rewrites to comply with whatever Apple wanted
+here&#39;s our truth, unfiltered
+on March 26th, Apple…
+pic.twitter.com/yJfjxonC41
+&mdash; Anything (@anything)
+April 7, 2026
+Amin said that when the company managed to get on a call with Apple, the iPhone maker told them that the vibe-coding app was removed because of the potential it could be used to download malicious code. In addition, Apple noted that a user could build a harmful app, sideload it on their phone, and then claim that it passed Apple&#8217;s App Review process.
+Anything&#8217;s app
+was restored on April 3
+, but it was swiftly removed as Apple told the company that it couldn&#8217;t market itself as an app maker.
+TechCrunch reached out to Apple for a comment on these removals, and we will update the story if we hear back.
+Following the battle with Apple, Anything&#8217;s maker is looking for other ways to allow people to build mobile apps. Earlier this month, the company launched a feature that let users build apps using the iMessage platform. The company said it will also build a desktop companion app that lets users vibe code mobile apps on their computer.
+In addition, Amin said that the company may instead look at Google&#8217;s Android operating system for building its apps, as the platform is more open than iOS.
+Besides vibe-coding app makers, Epic Games CEO Tim Sweeney has been vocal about Apple&#8217;s tactics.
+In a reply to Replit&#8217;s Amjad Masad on X, Sweeny said that Apple needs to &#8220;stop blocking development tools apps ASAP.&#8221;
+Apple needs to stop blocking development tools apps ASAP. This practice is abhorrent to the founding principles of Apple as expressed by Steve Wozniak, in which every Apple ][ computer booted to a programming language prompt and treated using and making software equally.
+&mdash; Tim Sweeney (@TimSweeneyEpic)
+April 5, 2026
+Earlier this month,
+The Information
+reported that thanks to AI-powered coding tools, Apple saw an 84% jump in app submissions in a single quarter. This could force Apple to change its human-led review processes.
+Plus, as AI-powered coding takes off, consumers might demand that platforms like Apple allow them to create apps for themselves.
+Topics
+AI
+,
+app store
+,
+Apple
+,
+Apps
+,
+developers
+,
+iOS
+,
+TC
+,
+vibe coding
+When you purchase through links in our articles,
+we may earn a small commission
+. This doesn’t affect our editorial independence.
+Ivan Mehta
+Ivan covers global consumer tech developments at TechCrunch. He is based out of India and has previously worked at publications including Huffington Post and The Next Web.
+You can contact or verify outreach from Ivan by emailing
+im@ivanmehta.com
+or via encrypted message at ivan.42 on Signal.
+View Bio
+October 13 &#8211; 15
+San Francisco
+Last day to book an exhibit table is September 18. Don’t miss out on high-impact leads, investor access, and a brand spotlight in Disrupt’s Expo Hall.
+BOOK NOW
+Most Popular
+Clean tech startup Fluxnium found a way to tap 50,000 years&#8217; worth of nuclear fuel
+Tim De Chant
+Jensen Huang took a call from Trump, and showed off something else, too
+Connie Loizos
+The 9 buzziest startups from Y Combinator’s latest Demo Day, according to VCs
+Marina Temkin
+Dominic-Madori Davis
+Tesla says it will finally unveil the second-generation Roadster on October 1
+Anthony Ha
+Revolut confirms customer data breach through fake government requests
+Jagmeet Singh
+Matt Mullenweg tells (trolls?) Automattic staff, saying he&#8217;s back in control after CEO ouster
+Sarah Perez
+OpenAI puts Pro subscriptions on hold due to Astra demand
+Sarah Perez
+Loading the next article
+Error loading the next article
+X
+LinkedIn
+Facebook
+Instagram
+youTube
+Mastodon
+Threads
+Bluesky
+TechCrunch
+Staff
+Contact Us
+Advertise
+Site Map
+Terms of Service
+Privacy Policy
+RSS Terms of Use
+Code of Conduct
+OpenAI
+Hugging Face
+Flock
+Startup Battlefield
+Disrupt 2026
+Tech Layoffs
+ChatGPT
+© 2026 TechCrunch Media LLC.

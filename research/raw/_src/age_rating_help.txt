@@ -1,0 +1,1157 @@
+Set an app age rating - Manage app information - App Store Connect - Help - Apple Developer
+' />
+' />
+View in English
+Apple Developer
+Get Started
+Explore Get Started
+Overview
+Learn
+Apple Developer Program
+Stay Updated
+Latest News
+Hello Developer
+Platforms
+Explore Platforms
+Apple Platforms
+iOS
+iPadOS
+macOS
+tvOS
+visionOS
+watchOS
+App Store
+Featured
+Design
+Distribution
+Games
+Accessories
+Web
+Home
+CarPlay
+Technologies
+Explore Technologies
+Overview
+Xcode
+Swift
+SwiftUI
+Featured
+Accessibility
+AI &amp; Machine Learning
+App Intents
+Apple Intelligence
+Games
+Security
+Xcode Cloud
+Community
+Explore Community
+Overview
+Meet with Apple events
+Community events
+Developer Forums
+Open Source
+Featured
+WWDC
+Swift Student Challenge
+Developer Stories
+App Store Awards
+Apple Design Awards
+Apple Developer Centers
+Documentation
+Explore Documentation
+Documentation Library
+Technology Overviews
+Sample Code
+Human Interface Guidelines
+Videos
+Release Notes
+Featured Updates
+iOS
+iPadOS
+macOS
+watchOS
+visionOS
+tvOS
+Xcode
+Downloads
+Explore Downloads
+All Downloads
+Operating Systems
+Applications
+Design Resources
+Featured
+Xcode
+TestFlight
+Fonts
+SF Symbols
+Icon Composer
+Support
+Explore Support
+Overview
+Help Guides
+Developer Forums
+Feedback Assistant
+Contact Us
+Featured
+Account Help
+App Review Guidelines
+App Store Connect Help
+Upcoming Requirements
+Agreements and Guidelines
+System Status
+Quick Links
+Events
+News
+Forums
+Sample Code
+Videos
+&nbsp;
+-->
+Search
+Search Reset
+Release notes
+Release notes
+App Store Connect sections
+Get started
+App Store Connect workflow
+Get started
+App Store Connect for iPhone and iPad
+Get started
+Overview of accounts and roles
+Manage your team
+Add and edit users
+Manage your team
+Edit access to apps
+Manage your team
+View and edit your profile
+Manage your team
+Manage webhooks
+Manage your team
+Set up OS data transfer
+Manage your team
+Add a new app
+Create an app record
+Set your developer name
+Create an app record
+View and edit app information
+Create an app record
+Add watchOS app information
+Create an app record
+Add iMessage app information
+Create an app record
+Add platforms
+Create an app record
+Create and submit app bundles
+Create an app record
+Edit app bundle information
+Create an app record
+Remove an app
+Create an app record
+Edit access to an app
+Create an app record
+Upload builds
+Manage builds
+View builds and metadata
+Manage builds
+Choose a build to submit
+Manage builds
+Overview of Apple-hosted asset packs
+Manage asset packs
+Upload Apple-hosted asset packs
+Manage asset packs
+Set an app age rating
+Manage app information
+Manage app tags
+Manage app information
+Set the app motion information for Apple Vision Pro
+Manage app information
+Provide a custom license agreement
+Manage app information
+Localize app information
+Manage app information
+Manage app privacy
+Manage app information
+Set a tax category
+Manage app information
+Declare Regulated Medical Device Status
+Manage app information
+Overview of export compliance
+Manage app information
+Determine and upload app encryption documentation
+Manage app information
+Add an app icon
+Manage app information
+Upload app previews and screenshots
+Manage app information
+Set an app preview poster frame
+Manage app information
+Remove app previews or screenshots
+Manage app information
+Overview of Accessibility Nutrition Labels
+Manage app accessibility
+VoiceOver evaluation criteria
+Manage app accessibility
+Voice Control evaluation criteria
+Manage app accessibility
+Larger Text evaluation criteria
+Manage app accessibility
+Dark Interface evaluation criteria
+Manage app accessibility
+Differentiate Without Color Alone evaluation criteria
+Manage app accessibility
+Sufficient Contrast evaluation criteria
+Manage app accessibility
+Reduced Motion evaluation criteria
+Manage app accessibility
+Captions evaluation criteria
+Manage app accessibility
+Audio Descriptions evaluation criteria
+Manage app accessibility
+Manage Accessibility Nutrition Labels
+Manage app accessibility
+TestFlight Overview
+Test a beta version
+Provide test information
+Test a beta version
+Add internal testers
+Test a beta version
+Invite external testers
+Test a beta version
+View and manage tester information
+Test a beta version
+View tester feedback
+Test a beta version
+Add testers to builds
+Test a beta version
+View build status and metrics
+Test a beta version
+Stop testing a build
+Test a beta version
+Provide export compliance information for beta builds
+Test a beta version
+Test Apple-hosted asset packs
+Test a beta version
+Remove testers from a group
+Test a beta version
+Delete testers from TestFlight
+Test a beta version
+Test an App Clip experience
+Test a beta version
+Test iPhone and iPad apps on Macs with Apple silicon
+Test a beta version
+Test iPhone and iPad apps on Apple Vision Pro
+Test a beta version
+Testing subscriptions and In-App Purchases in TestFlight
+Test a beta version
+Overview of submitting for review
+Manage submissions to App Review
+Submit an app
+Manage submissions to App Review
+Submit an In-App Purchase
+Manage submissions to App Review
+Submit Apple-hosted asset packs
+Manage submissions to App Review
+Submit a custom product page
+Manage submissions to App Review
+Submit an In-App Event
+Manage submissions to App Review
+Submit Game Center components
+Manage submissions to App Review
+Remove a submission from review
+Manage submissions to App Review
+Reply to App Review messages
+Manage submissions to App Review
+Manage a submission with unresolved issues
+Manage submissions to App Review
+Upload a geographic coverage file
+Manage submissions to App Review
+Overview of publishing your app on the App Store
+Manage your app's availability
+Manage availability for your app on the App Store
+Manage your app's availability
+Set distribution methods
+Manage your app's availability
+Publish for pre-order
+Manage your app's availability
+Select an App Store version release option
+Manage your app's availability
+Manage availability of iPhone and iPad apps on Macs with Apple silicon
+Manage your app's availability
+Manage availability of iPhone and iPad apps on Apple Vision Pro
+Manage your app's availability
+Make a version unavailable for download
+Manage your app's availability
+View app status history
+Manage your app's availability
+Set a price
+Manage app pricing
+Schedule price changes for apps
+Manage app pricing
+Overview of maintaining an app
+Update your app
+Create a new version
+Update your app
+Release a version update in phases
+Update your app
+Nominate your app for featuring
+Manage featuring nominations
+Ratings and reviews overview
+Monitor ratings and reviews
+View ratings and reviews
+Monitor ratings and reviews
+Respond to reviews
+Monitor ratings and reviews
+Reset an app overview rating
+Monitor ratings and reviews
+Overview of reporting tools
+Measure app performance
+Differences in reporting tools
+Measure app performance
+View units, proceeds, sales, and pre-orders
+Measure app performance
+View subscription data
+Measure app performance
+Download and view reports
+Measure app performance
+Overview of app transfer
+Transfer an app
+App transfer criteria
+Transfer an app
+Initiate an app transfer
+Transfer an app
+Accept an app transfer
+Transfer an app
+Sign and update agreements
+Manage agreements
+View agreements status
+Manage agreements
+Enter banking information
+Manage banking information
+Provide tax information
+Manage tax information
+Provide tax information for business-to-business status
+Manage tax information
+Provide tax information for commissions and fees related to external purchases and alternative distribution
+Manage tax information
+Provide tax information for Core Technology Fee
+Manage tax information
+Manage invoices and other tax documents
+Manage tax information
+Manage European Union Digital Services Act trader requirements
+Manage compliance information
+View China mainland compliance information
+Manage compliance information
+Manage Korea compliance information
+Manage compliance information
+Manage information for DAC7
+Manage compliance information
+Manage information for ITA
+Manage compliance information
+Manage information for MRDP
+Manage compliance information
+Manage information for SERR
+Manage compliance information
+Manage information for State Council Decree No. 810
+Manage compliance information
+Overview of receiving payments
+Getting paid
+View payments and proceeds
+Getting paid
+Download financial reports
+Getting paid
+Overview of making payments to Apple
+Making payments to Apple
+Update your account for invoicing requirements
+Making payments to Apple
+Understanding taxes
+Making payments to Apple
+Invoice fields
+Making payments to Apple
+Reporting tokens and transactions to Apple
+Making payments to Apple
+Core Technology Fee overview
+Understanding the Core Technology Fee
+Estimate fees for alternative business terms
+Understanding the Core Technology Fee
+Measure your first annual installs
+Understanding the Core Technology Fee
+Core Technology Fee report fields
+Understanding the Core Technology Fee
+Request and manage promo codes
+Offer promo codes
+Overview of App Clips
+Offer App Clip experiences
+Offer a default App Clip experience
+Offer App Clip experiences
+Offer an advanced App Clip experience
+Offer App Clip experiences
+Generate App Clip codes
+Offer App Clip experiences
+Manage an App Clip experience
+Offer App Clip experiences
+View domain URL status
+Offer App Clip experiences
+Configure multiple product page versions
+Create custom product pages
+Overview of product page optimization
+Create product page optimization tests
+Create a test
+Create product page optimization tests
+Configure test treatments
+Create product page optimization tests
+Run a test
+Create product page optimization tests
+Apply a test treatment to your product page
+Create product page optimization tests
+Overview of In-App Events
+Offer In-App Events
+Offer In-App Events
+Offer In-App Events
+Manage events
+Offer In-App Events
+Overview for configuring In-App Purchases
+Configure In-App Purchase settings
+Generate keys for In-App Purchases
+Configure In-App Purchase settings
+Generate a shared secret to verify receipts
+Configure In-App Purchase settings
+Enter server URLs for App Store Server Notifications
+Configure In-App Purchase settings
+Set a tax category for In-App Purchases
+Configure In-App Purchase settings
+Turn on Family Sharing for In-App Purchases
+Configure In-App Purchase settings
+Promote In-App Purchases
+Configure In-App Purchase settings
+Create consumable or non-consumable In-App Purchases
+Manage In-App Purchases
+View and edit In-App Purchase information
+Manage In-App Purchases
+Set a price for an In-App Purchase
+Manage In-App Purchases
+Schedule price changes for In-App Purchases
+Manage In-App Purchases
+Set availability for In-App Purchases
+Manage In-App Purchases
+Create offer codes for In-App Purchases
+Manage In-App Purchases
+Offer auto-renewable subscriptions
+Manage subscriptions
+Set availability for an auto-renewable subscription
+Manage subscriptions
+Manage pricing for auto-renewable subscriptions
+Manage subscriptions
+Manage purchase options for an auto-renewable subscription
+Manage subscriptions
+Set up introductory offers for auto-renewable subscriptions
+Manage subscriptions
+Set up promotional offers for auto-renewable subscriptions
+Manage subscriptions
+Set up subscription offer codes
+Manage subscriptions
+Set up win-back offers
+Manage subscriptions
+Manage Streamlined Purchasing
+Manage subscriptions
+Enable billing grace period for auto-renewable subscriptions
+Manage subscriptions
+Create non-renewing subscriptions
+Manage subscriptions
+Overview of testing in sandbox
+Test In-App Purchases
+Create Sandbox Apple Account
+Test In-App Purchases
+Manage Sandbox Apple Account settings
+Test In-App Purchases
+Overview of Game Center
+Configure Game Center
+Manage leaderboards
+Configure Game Center
+Manage leaderboard sets
+Configure Game Center
+Manage achievements
+Configure Game Center
+Manage challenges
+Configure Game Center
+Manage activities
+Configure Game Center
+Overview of Game Center groups
+Configure Game Center
+Manage groups
+Configure Game Center
+Overview of testing Game Center
+Configure Game Center
+Remove leaderboard test data
+Configure Game Center
+Manage an app version for Game Center
+Configure Game Center
+Add multiplayer compatibility
+Configure Game Center
+Manage scores and players
+Configure Game Center
+Manage distribution on an alternative app marketplace
+Managing alternative distribution
+Get an alternative distribution package ID
+Managing alternative distribution
+Submit for Notarization
+Managing alternative distribution
+Create a marketplace app
+Managing alternative distribution
+Role permissions
+Reference > Account management
+User notifications
+Reference > Account management
+Compliance review
+Reference > Account management
+Tax ID formats
+Reference > Account management
+App and submission statuses
+Reference > App information
+App information
+Reference > App information
+Platform version information
+Reference > App information
+App preview specifications
+Reference > App information
+Screenshot specifications
+Reference > App information
+Required, localizable, and editable properties
+Reference > App information
+App Store localizations
+Reference > App information
+App privacy
+Reference > App information
+Age ratings values and definitions
+Reference > App information
+Provide app motion information
+Reference > App information
+Export compliance documentation for encryption
+Reference > App information
+App bundle information
+Reference > App information
+App pricing and availability
+Reference > Pricing and availability
+App Store pricing and availability start times by country or region
+Reference > Pricing and availability
+In-App Purchase and subscriptions pricing and availability
+Reference > Pricing and availability
+Build upload statuses
+Reference > App uploads
+App build statuses
+Reference > App uploads
+Maximum build file sizes
+Reference > App uploads
+On-demand resources size limits
+Reference > App uploads
+App Sandbox information
+Reference > App uploads
+Apple-hosted asset pack statuses
+Reference > App uploads
+Apple-hosted asset pack size limits
+Reference > App uploads
+TestFlight tester information
+Reference > TestFlight
+Beta tester feedback
+Reference > TestFlight
+In-App Purchase types
+Reference > In-App Purchases and subscriptions
+In-App Purchase information
+Reference > In-App Purchases and subscriptions
+In-App Purchase statuses
+Reference > In-App Purchases and subscriptions
+In-App Purchase localization statuses
+Reference > In-App Purchases and subscriptions
+Auto-renewable subscription information
+Reference > In-App Purchases and subscriptions
+Auto-renewable subscription price increase thresholds
+Reference > In-App Purchases and subscriptions
+Consent for subscription offer conversions
+Reference > In-App Purchases and subscriptions
+Leaderboards
+Reference > Game Center
+Achievements
+Reference > Game Center
+Challenges
+Reference > Game Center
+Game activities
+Reference > Game Center
+Group properties
+Reference > Game Center
+Game Center properties
+Reference > Game Center
+Nominations template
+Reference > Nominations
+In-App Event statuses
+Reference > In-App Events
+In-App Event badges
+Reference > In-App Events
+In-App Event media specifications
+Reference > In-App Events
+Payment information
+Reference > Reporting
+Financial report fields
+Reference > Reporting
+Transaction tax report fields
+Reference > Reporting
+Apple legal entities
+Reference > Reporting
+Currency codes
+Reference > Reporting
+Financial report regions and currencies
+Reference > Reporting
+Minimum payment threshold
+Reference > Reporting
+Summary Sales Report
+Reference > Reporting
+Sales Events Report
+Reference > Reporting
+Pre-Order Report
+Reference > Reporting
+Subscription Report
+Reference > Reporting
+Subscription Event Report
+Reference > Reporting
+Subscriber Report
+Reference > Reporting
+Subscription Offer Redemption Report
+Reference > Reporting
+Win-back eligibility report
+Reference > Reporting
+Report file names
+Reference > Reporting
+Subscription events
+Reference > Reporting
+Promotional codes
+Reference > Reporting
+Product type identifiers
+Reference > Reporting
+Cancellation reasons
+Reference > Reporting
+Sales and Trends metrics and dimensions
+Reference > Reporting
+Sales and Trends reports availability
+Reference > Reporting
+Banking information
+Reference > Reporting
+Store Services tiers in the EU
+Reference
+No results
+If you have any questions about membership, your account, or App Store Connect, please review developer support.
+App Store Connect Help
+App Store Connect
+/
+Manage app information
+/
+Set an app age rating
+Filter
+⌘K
+Release notes
+Get started
+App Store Connect sections
+App Store Connect workflow
+App Store Connect for iPhone and iPad
+Manage your team
+Overview of accounts and roles
+Add and edit users
+Edit access to apps
+View and edit your profile
+Manage webhooks
+Set up OS data transfer
+Create an app record
+Add a new app
+Set your developer name
+View and edit app information
+Add watchOS app information
+Add iMessage app information
+Add platforms
+Create and submit app bundles
+Edit app bundle information
+Remove an app
+Edit access to an app
+Manage builds
+Upload builds
+View builds and metadata
+Choose a build to submit
+Manage asset packs
+Overview of Apple-hosted asset packs
+Upload Apple-hosted asset packs
+Manage app information
+Set an app age rating
+Manage app tags
+Set the app motion information for Apple Vision Pro
+Provide a custom license agreement
+Localize app information
+Manage app privacy
+Set a tax category
+Declare Regulated Medical Device Status
+Overview of export compliance
+Determine and upload app encryption documentation
+Add an app icon
+Upload app previews and screenshots
+Set an app preview poster frame
+Remove app previews or screenshots
+Manage app accessibility
+Overview of Accessibility Nutrition Labels
+VoiceOver evaluation criteria
+Voice Control evaluation criteria
+Larger Text evaluation criteria
+Dark Interface evaluation criteria
+Differentiate Without Color Alone evaluation criteria
+Sufficient Contrast evaluation criteria
+Reduced Motion evaluation criteria
+Captions evaluation criteria
+Audio Descriptions evaluation criteria
+Manage Accessibility Nutrition Labels
+Test a beta version
+TestFlight Overview
+Provide test information
+Add internal testers
+Invite external testers
+View and manage tester information
+View tester feedback
+Add testers to builds
+View build status and metrics
+Stop testing a build
+Provide export compliance information for beta builds
+Test Apple-hosted asset packs
+Remove testers from a group
+Delete testers from TestFlight
+Test an App Clip experience
+Test iPhone and iPad apps on Macs with Apple silicon
+Test iPhone and iPad apps on Apple Vision Pro
+Testing subscriptions and In-App Purchases in TestFlight
+Manage submissions to App Review
+Overview of submitting for review
+Submit an app
+Submit an In-App Purchase
+Submit Apple-hosted asset packs
+Submit a custom product page
+Submit an In-App Event
+Submit Game Center components
+Remove a submission from review
+Reply to App Review messages
+Manage a submission with unresolved issues
+Upload a geographic coverage file
+Manage your app's availability
+Overview of publishing your app on the App Store
+Manage availability for your app on the App Store
+Set distribution methods
+Publish for pre-order
+Select an App Store version release option
+Manage availability of iPhone and iPad apps on Macs with Apple silicon
+Manage availability of iPhone and iPad apps on Apple Vision Pro
+Make a version unavailable for download
+View app status history
+Manage app pricing
+Set a price
+Schedule price changes for apps
+Update your app
+Overview of maintaining an app
+Create a new version
+Release a version update in phases
+Manage featuring nominations
+Nominate your app for featuring
+Monitor ratings and reviews
+Ratings and reviews overview
+View ratings and reviews
+Respond to reviews
+Reset an app overview rating
+Measure app performance
+Overview of reporting tools
+Differences in reporting tools
+View units, proceeds, sales, and pre-orders
+View subscription data
+Download and view reports
+Transfer an app
+Overview of app transfer
+App transfer criteria
+Initiate an app transfer
+Accept an app transfer
+Manage agreements
+Sign and update agreements
+View agreements status
+Manage banking information
+Enter banking information
+Manage tax information
+Provide tax information
+Provide tax information for business-to-business status
+Provide tax information for commissions and fees related to external purchases and alternative distribution
+Provide tax information for Core Technology Fee
+Manage invoices and other tax documents
+Manage compliance information
+Manage European Union Digital Services Act trader requirements
+View China mainland compliance information
+Manage Korea compliance information
+Manage information for DAC7
+Manage information for ITA
+Manage information for MRDP
+Manage information for SERR
+Manage information for State Council Decree No. 810
+Getting paid
+Overview of receiving payments
+View payments and proceeds
+Download financial reports
+Making payments to Apple
+Overview of making payments to Apple
+Update your account for invoicing requirements
+Understanding taxes
+Invoice fields
+Reporting tokens and transactions to Apple
+Understanding the Core Technology Fee
+Core Technology Fee overview
+Estimate fees for alternative business terms
+Measure your first annual installs
+Core Technology Fee report fields
+Offer promo codes
+Request and manage promo codes
+Offer App Clip experiences
+Overview of App Clips
+Offer a default App Clip experience
+Offer an advanced App Clip experience
+Generate App Clip codes
+Manage an App Clip experience
+View domain URL status
+Create custom product pages
+Configure multiple product page versions
+Create product page optimization tests
+Overview of product page optimization
+Create a test
+Configure test treatments
+Run a test
+Apply a test treatment to your product page
+Offer In-App Events
+Overview of In-App Events
+Offer In-App Events
+Manage events
+Configure In-App Purchase settings
+Overview for configuring In-App Purchases
+Generate keys for In-App Purchases
+Generate a shared secret to verify receipts
+Enter server URLs for App Store Server Notifications
+Set a tax category for In-App Purchases
+Turn on Family Sharing for In-App Purchases
+Promote In-App Purchases
+Manage In-App Purchases
+Create consumable or non-consumable In-App Purchases
+View and edit In-App Purchase information
+Set a price for an In-App Purchase
+Schedule price changes for In-App Purchases
+Set availability for In-App Purchases
+Create offer codes for In-App Purchases
+Manage subscriptions
+Offer auto-renewable subscriptions
+Set availability for an auto-renewable subscription
+Manage pricing for auto-renewable subscriptions
+Manage purchase options for an auto-renewable subscription
+Set up introductory offers for auto-renewable subscriptions
+Set up promotional offers for auto-renewable subscriptions
+Set up subscription offer codes
+Set up win-back offers
+Manage Streamlined Purchasing
+Enable billing grace period for auto-renewable subscriptions
+Create non-renewing subscriptions
+Test In-App Purchases
+Overview of testing in sandbox
+Create Sandbox Apple Account
+Manage Sandbox Apple Account settings
+Configure Game Center
+Overview of Game Center
+Manage leaderboards
+Manage leaderboard sets
+Manage achievements
+Manage challenges
+Manage activities
+Overview of Game Center groups
+Manage groups
+Overview of testing Game Center
+Remove leaderboard test data
+Manage an app version for Game Center
+Add multiplayer compatibility
+Manage scores and players
+Managing alternative distribution
+Manage distribution on an alternative app marketplace
+Get an alternative distribution package ID
+Submit for Notarization
+Create a marketplace app
+Reference
+Account management
+Role permissions
+User notifications
+Compliance review
+Tax ID formats
+App information
+App and submission statuses
+App information
+Platform version information
+App preview specifications
+Screenshot specifications
+Required, localizable, and editable properties
+App Store localizations
+App privacy
+Age ratings values and definitions
+Provide app motion information
+Export compliance documentation for encryption
+App bundle information
+Pricing and availability
+App pricing and availability
+App Store pricing and availability start times by country or region
+In-App Purchase and subscriptions pricing and availability
+App uploads
+Build upload statuses
+App build statuses
+Maximum build file sizes
+On-demand resources size limits
+App Sandbox information
+Apple-hosted asset pack statuses
+Apple-hosted asset pack size limits
+TestFlight
+TestFlight tester information
+Beta tester feedback
+In-App Purchases and subscriptions
+In-App Purchase types
+In-App Purchase information
+In-App Purchase statuses
+In-App Purchase localization statuses
+Auto-renewable subscription information
+Auto-renewable subscription price increase thresholds
+Consent for subscription offer conversions
+Game Center
+Leaderboards
+Achievements
+Challenges
+Game activities
+Group properties
+Game Center properties
+Nominations
+Nominations template
+In-App Events
+In-App Event statuses
+In-App Event badges
+In-App Event media specifications
+Reporting
+Payment information
+Financial report fields
+Transaction tax report fields
+Apple legal entities
+Currency codes
+Financial report regions and currencies
+Minimum payment threshold
+Summary Sales Report
+Sales Events Report
+Pre-Order Report
+Subscription Report
+Subscription Event Report
+Subscriber Report
+Subscription Offer Redemption Report
+Win-back eligibility report
+Report file names
+Subscription events
+Promotional codes
+Product type identifiers
+Cancellation reasons
+Sales and Trends metrics and dimensions
+Sales and Trends reports availability
+Banking information
+Store Services tiers in the EU
+Filter
+⌘K
+Manage app information
+Set an app age rating
+An age rating is a required
+app information
+property that helps users assess the content and any potentially objectionable material within your app or game. This rating supports the functionality of parental controls, allowing parents and guardians to establish a safe online environment for children. As a developer, you can deliver age-appropriate experiences tailored for users across all age groups.
+To determine the age rating of your app, respond to the age rating questionnaire in App Store Connect. This questionnaire includes a list of content descriptors, in-app controls, and capabilities that allow you to specify the frequency of each content type in your app. Your selections are then translated into an Apple global age rating, as well as additional region-specific ratings if required.
+Learn about age rating values and definitions.
+This process helps you understand how different types of content can impact your app’s rating across various regions, enabling you to make informed declarations of frequency of the content and features in your app.
+Depending on your responses, an age rating is assigned to each country or region based on their specific age suitability standards. This rating will be displayed on the App Store for that country or region and will remain consistent across all platforms. Learn about age rating values with region-specific requirements for
+Australia
+,
+Brazil
+, and
+Korea
+.
+Notes:
+Age ratings for an app may vary based on the OS version.
+View age range value details
+for Apple devices running a minimum of iOS 26, iPadOS 26, macOS Tahoe 26, tvOS 26, visionOS 26, and watchOS 26.
+View details
+for Apple devices running an earlier OS version.
+An Unrated app can’t be published on the App Store. It may be published on alternative app marketplaces or websites.
+Learn how to manage app age ratings with the App Store Connect API.
+Required role:
+Account Holder, Admin, App Manager, or
+Marketing
+.
+View role permissions.
+Set an app age rating
+In Apps, select the app you want to view.
+In the sidebar, under General, click App Information.
+Tip:
+To learn more about and view examples of the features and content used to determine age ratings, select a category from the panel of examples on the App Information Page. You can also browse
+Age rating categories
+.
+Below Age Ratings, click the Set Up Age Ratings button.
+When the dialog box appears, review the list of in-app controls and capabilities options, and select any that your app includes that can restrict content, then click Next.
+Navigate through each section of the progress bar, answering the questions and selecting the appropriate level of frequency for each content description, then click Next.
+If you don’t need to override your rating or display your app in the Kids category on the App Store, choose Not Applicable under Age Categories and Override, then proceed to Step 6.
+Age categories and override
+Your calculated rating is displayed in the Additional Information section of the progress bar. If your app is for a specific age category, has a EULA with age requirements, or if you believe your app should be rated higher, you can adjust the rating to better reflect your app’s content and features by choosing Made for Kids or Override to Higher Age Rating.
+Made for Kids category on the App Store
+If your calculated rating is 4+ or 9+ and you want your app to also display in the Kids category on the App Store, under Age Categories and Override, choose Made for Kids and from the menu, select the appropriate age range for your app. You can’t change this selection once your app is approved by App Review. The app and all subsequent updates will need to follow the
+Kids category guidelines
+.
+Note:
+You can’t select the Made for Kids option for visionOS apps, and apps in the Kids category can’t be made available on visionOS apps.
+Override to higher age rating
+To increase the rating of your app to a rating that exceeds the rating assigned by Apple, choose Override to Higher Age Rating and select the appropriate rating from the menu. App Store will display this specified age rating, and the content descriptions will still reflect your questionnaire answers.
+If your app will be distributed through alternative app marketplaces or your website in the European Union and you believe your app is Unrated, select Unrated from the menu options under Override to Higher Age Rating.
+Note:
+If your app has a EULA with minimum age requirements that exceed the rating that Apple calculated, you must override to a rating that adheres to the requirements.
+The override will apply in all regions where your app is available and may override to a different rating value per region based on region-specific requirements. Learn about age rating values with region-specific requirements for
+Australia
+,
+Brazil
+, and
+Korea
+.
+If your app has a dedicated website with details on age suitability, you can provide the URL in the field provided under Age Suitability URL (Optional).
+Click Save. The dialog box will close, returning you to the App Information page. Here, you can view your global and region-specific ratings . Click on each panel for details on the age ratings and the specific countries and regions they apply to.
+To edit your age rating, click App Information in the sidebar, then click Edit at the top of the page.
+Note:
+You can view the age ratings for Apple devices running an earlier OS version than 26 under the Operating Systems Earlier than Version 26 section.
+Learn more.
+Override region-specific ratings
+Override age rating for the Republic of Korea
+App Review may contact you if the Korean
+Games Rating and Administration Committee
+(GRAC) issues a region-specific rating that differs from your app's existing age rating. If you receive this notice, you need to update your app's age rating for the App Store in Korea by providing your Rating Classification Number (RCN) and submitting a new version of your app to App Review.
+In Apps, select your app.
+In the sidebar, under General, click App Information.
+In the Age Ratings section, next to Republic of Korea, click Add RCN.
+In the dialog that appears, enter your RCN and select the rating you received from GRAC.
+Select the checkbox confirming that this is the official rating issued by GRAC for your app, then click Save.
+Note:
+If an error appears after clicking Save, address the error message and click Save again.
+You can edit your RCN or override at any time before submitting your app for review by clicking Edit RCN next to Republic of Korea. From there, you can select a new rating, or clear your RCN and rating together by clicking Remove. While your app is in review, you can only view your RCN and rating by clicking View RCN. Once your app is approved, your RCN and rating are locked and can no longer be edited.
+Related
+Age ratings values and definitions
+Platform version information
+Required, localizable, and editable properties
+Submit your
+feedback
+Ask questions on the&nbsp;forums
+Contact Apple Developer&nbsp;Support
+Developer Footer
+Help
+App Store Connect
+Manage app information
+Set an app age rating
+Platforms
+Open Menu
+Close Menu
+iOS
+iPadOS
+macOS
+tvOS
+visionOS
+watchOS
+App Store
+Tools
+Open Menu
+Close Menu
+Swift
+SwiftUI
+Swift Playground
+TestFlight
+Xcode
+Xcode Cloud
+Icon Composer
+SF Symbols
+Technologies
+Open Menu
+Close Menu
+Accessibility
+Accessories
+AI & Machine Learning
+Apple Intelligence
+Audio &amp; Video
+Augmented Reality
+Business
+Design
+Distribution
+Education
+Games
+Health &amp; Fitness
+In-App Purchase
+Localization
+Maps &amp; Location
+Security
+Safari &amp; Web
+Resources
+Open Menu
+Close Menu
+Documentation
+Downloads
+Sample Code
+Videos
+Documentation Archive
+Support
+Open Menu
+Close Menu
+Help Guides & Articles
+Contact Us
+Forums
+Feedback & Bug Reporting
+System Status
+Account
+Open Menu
+Close Menu
+Apple Developer
+App Store Connect
+Certificates, IDs, &amp; Profiles
+Feedback Assistant
+Programs
+Open Menu
+Close Menu
+Apple Developer Program
+Apple Developer Enterprise Program
+App Store Small Business Program
+MFi Program
+Mini Apps Partner Program
+News Partner Program
+Video Partner Program
+Security Bounty Program
+Security Research Device Program
+Events
+Open Menu
+Close Menu
+Meet with Apple
+Apple Developer Centers
+App Store Awards
+Apple Design Awards
+Apple Developer Academies
+WWDC
+Read the
+latest news
+.
+Get the
+Apple Developer app
+.
+Follow us on
+bilibili
+,
+LinkedIn
+,
+WeChat
+, and
+YouTube
+.
+Light
+Dark
+Auto
+Copyright ©  2026
+Apple Inc.
+All rights reserved.
+Terms of Use
+Privacy Policy
+Agreements and Guidelines

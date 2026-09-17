@@ -1,0 +1,120 @@
+<!--
+{
+  "availability" : [
+    "iOS: 13.0.0 -",
+    "iPadOS: 13.0.0 -",
+    "macCatalyst: 13.1.0 -",
+    "tvOS: 13.0.0 -",
+    "visionOS: 1.0.0 -"
+  ],
+  "documentType" : "symbol",
+  "framework" : "BackgroundTasks",
+  "identifier" : "/documentation/BackgroundTasks",
+  "metadataVersion" : "0.1.0",
+  "role" : "Framework",
+  "symbol" : {
+    "kind" : "Framework",
+    "modules" : [
+      "Background Tasks"
+    ],
+    "preciseIdentifier" : "BackgroundTasks"
+  },
+  "title" : "Background Tasks"
+}
+-->
+
+# Background Tasks
+
+Support background processing in your app by wrapping your app’s most critical work in framework-provided tasks.
+
+## Overview
+
+Use this framework to keep your app content up to date and run tasks requiring minutes to complete even if your app is in the background. Longer tasks can leverage external power, network connectivity, and the GPU on supported devices.
+
+To launch your app in the background and perform necessary work, register launch handlers for framework-provided tasks and schedule the tasks as needed.
+
+Your app can also use a framework-provided task to execute critical jobs in the foreground and complete them in the background if a person backgrounds your app before the job completes.
+
+## Topics
+
+### Essentials
+
+  <doc://com.apple.documentation/documentation/Updates/BackgroundTasks>
+
+[`class BGTaskScheduler`](/documentation/BackgroundTasks/BGTaskScheduler)
+
+A class for scheduling tasks that add background support to your app’s most critical work.
+
+[`class BGTask`](/documentation/BackgroundTasks/BGTask)
+
+An abstract class for the framework’s tasks.
+
+### Background tasks
+
+  <doc://com.apple.documentation/documentation/UIKit/using-background-tasks-to-update-your-app>
+
+[Refreshing and Maintaining Your App Using Background Tasks](/documentation/BackgroundTasks/refreshing-and-maintaining-your-app-using-background-tasks)
+
+Use scheduled background tasks for refreshing your app content and for performing maintenance.
+
+[Choosing Background Strategies for Your App](/documentation/BackgroundTasks/choosing-background-strategies-for-your-app)
+
+Select the best method of scheduling background runtime for your app.
+
+[`class BGProcessingTask`](/documentation/BackgroundTasks/BGProcessingTask)
+
+A time-consuming processing task that runs while the app is in the background.
+
+[`class BGAppRefreshTask`](/documentation/BackgroundTasks/BGAppRefreshTask)
+
+An object representing a short task typically used to refresh content that’s run while the app is in the background.
+
+[`class BGHealthResearchTask`](/documentation/BackgroundTasks/BGHealthResearchTask)
+
+A time-consuming, necessary processing task that runs while the app is in the background to prepare data essential to a health research study.
+
+### Foreground tasks with background support
+
+[Performing long-running tasks on iOS and iPadOS](/documentation/BackgroundTasks/performing-long-running-tasks-on-ios-and-ipados)
+
+Use a continuous background task to do work that can complete as needed.
+
+[`class BGContinuedProcessingTask`](/documentation/BackgroundTasks/BGContinuedProcessingTask)
+
+A task that starts in the foreground and can continue running in the background as needed.
+
+  <doc://com.apple.documentation/documentation/BundleResources/Entitlements/com.apple.developer.background-tasks.continued-processing.gpu>
+
+### Task requests
+
+[`class BGProcessingTaskRequest`](/documentation/BackgroundTasks/BGProcessingTaskRequest)
+
+A request to launch your app in the background to execute a processing task that can take minutes to complete.
+
+[`class BGAppRefreshTaskRequest`](/documentation/BackgroundTasks/BGAppRefreshTaskRequest)
+
+A request to launch your app in the background to execute a short refresh task.
+
+[`class BGTaskRequest`](/documentation/BackgroundTasks/BGTaskRequest)
+
+An abstract class for representing task requests.
+
+[`class BGHealthResearchTaskRequest`](/documentation/BackgroundTasks/BGHealthResearchTaskRequest)
+
+A request to launch your app in the background to execute processing for a health research study in which a user participates.
+
+[`class BGContinuedProcessingTaskRequest`](/documentation/BackgroundTasks/BGContinuedProcessingTaskRequest)
+
+A request for a workload that the system continues processing even if a person backgrounds the app.
+
+### Development and testing
+
+[Starting and Terminating Tasks During Development](/documentation/BackgroundTasks/starting-and-terminating-tasks-during-development)
+
+Use the debugger during development to start tasks and to terminate them before completion.
+
+
+
+---
+
+Copyright &copy; 2026 Apple Inc. All rights reserved. | [Terms of Use](https://www.apple.com/legal/internet-services/terms/site.html) | [Privacy Policy](https://www.apple.com/privacy/privacy-policy)

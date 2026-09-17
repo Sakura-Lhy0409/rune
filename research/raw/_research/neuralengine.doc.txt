@@ -1,0 +1,132 @@
+The set of processing-unit configurations the model can use to make predictions.
+enum
+ 
+MLComputeUnits
+MLComputeUnits
+=== MLComputeUnits
+enum
+ 
+MLComputeUnits
+Overview
+Use this enumeration to set or inspect the processing units you allow a model to use when it makes a prediction.
+Use 
+ to allow the OS to select the best processing unit to use (including the neural engine, if available).
+Use 
+ to restrict the model to the CPU, if your app might run in the background or runs other GPU intensive tasks.
+=== Conforms To
+=== Allowing access to processing units
+=== Processing Unit Configurations
+=== Creating compute units
+Integrate machine learning models into your app.
+Core ML
+=== Core ML
+The set of processing-unit configurations the model can use to make predictions.
+enum
+ 
+MLComputeUnits
+MLComputeUnits
+=== MLComputeUnits
+The option you choose to allow the model to use all compute units available, including the neural engine.
+case
+ 
+all
+MLComputeUnitsAll
+=== MLComputeUnits.all
+The option you choose to allow the model to use both the CPU and GPU, but not the neural engine.
+case
+ 
+cpuAndGPU
+MLComputeUnitsCPUAndGPU
+=== MLComputeUnits.cpuAndGPU
+The option you choose to allow the model to use both the CPU and neural engine, but not the GPU.
+case
+ 
+cpuAndNeuralEngine
+MLComputeUnitsCPUAndNeuralEngine
+=== MLComputeUnits.cpuAndNeuralEngine
+The option you choose to limit the model to only use the CPU.
+case
+ 
+cpuOnly
+MLComputeUnitsCPUOnly
+=== MLComputeUnits.cpuOnly
+init
+?(
+rawValue
+: 
+Int
+)
+=== init(rawValue:)
+The processing unit or units the model uses to make predictions.
+var
+ 
+computeUnits
+: 
+MLComputeUnits
+computeUnits
+=== computeUnits
+Describes an integer.
+typealias
+ 
+NSInteger
+NSInteger
+=== NSInteger
+protocol
+ 
+BitwiseCopyable
+BitwiseCopyable
+=== BitwiseCopyable
+A type that can be compared for value equality.
+protocol
+ 
+Equatable
+Equatable
+=== Equatable
+A type that can be hashed into a 
+ to produce an integer hash value.
+protocol
+ 
+Hashable
+Hashable
+=== Hashable
+A type that can be converted to and from an associated raw value.
+protocol
+ 
+RawRepresentable
+RawRepresentable
+=== RawRepresentable
+A thread-safe type whose values can be shared across arbitrary concurrent
+ 
+contexts without introducing a risk of data races.
+protocol
+ 
+Sendable
+Sendable
+=== Sendable
+A type whose metatype can be shared across arbitrary isolation domains
+ 
+without introducing a risk of data races.
+protocol
+ 
+SendableMetatype
+SendableMetatype
+=== SendableMetatype
+=== Technologies
+MLComputeUnits
+MLComputeUnits
+=== Processing Unit Configurations
+=== Allowing access to processing units
+enum
+ 
+MLComputeUnits
+ : 
+NSInteger
+;
+MLComputeUnits
+MLComputeUnits
+MLComputeUnitsAll
+MLComputeUnitsCPUAndGPU
+MLComputeUnitsCPUAndNeuralEngine
+MLComputeUnitsCPUOnly
+computeUnits
+NSInteger

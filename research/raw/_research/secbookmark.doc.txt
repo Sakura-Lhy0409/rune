@@ -1,0 +1,231 @@
+In an app that has adopted App Sandbox, makes the resource pointed to by a security-scoped URL available to the app.
+func
+ 
+startAccessingSecurityScopedResource
+() -> 
+Bool
+- 
+startAccessingSecurityScopedResource
+=== startAccessingSecurityScopedResource()
+func
+ 
+startAccessingSecurityScopedResource
+() -> 
+Bool
+Return Value
+
+ if the request to access the resource succeeded; otherwise, 
+.
+Discussion
+When you obtain a security-scoped URL, such as by resolving a security-scoped bookmark, you can’t immediately use the resource it points to. To make the resource available to your app, by way of adding its location to your app’s sandbox, call this method on the security-scoped URL. You can also use Core Foundation equivalent, the 
+ function.
+If this method returns 
+, then you must relinquish access as soon as you finish using the resource. Call the 
+ method to relinquish access. You must balance each call to 
+ for a given security-scoped URL with a call to 
+. When you make the last balanced call to 
+, you immediately lose access to the resource in question.
+
+ 
+If you fail to relinquish your access to file-system resources when you no longer need them, your app leaks kernel resources. If sufficient kernel resources leak, your app loses its ability to add file-system locations to its sandbox, such as with Powerbox or security-scoped bookmarks, until relaunched.
+
+ 
+Security-scoped bookmarks aren’t available in versions of macOS prior to OS X 10.7.3.
+=== Working with Bookmark Data
+In an app that has adopted App Sandbox, makes the resource pointed to by a security-scoped URL available to the app.
+func
+ 
+CFURLStartAccessingSecurityScopedResource
+(
+CFURL
+!) -> 
+Bool
+=== CFURLStartAccessingSecurityScopedResource(_:)
+Type to represent a Boolean value.
+BOOL
+BOOL
+=== BOOL
+A value type whose instances are either 
+ or 
+.
+struct
+ 
+Bool
+Bool
+=== Bool
+A false value.
+false
+=== false
+A true value.
+true
+=== true
+=== Technologies
+Access essential data types, collections, and operating-system services to define the base layer of functionality for your app.
+=== Foundation
+An object that represents the location of a resource, such as an item on a remote server or the path to a local file.
+class
+ 
+NSURL
+NSURL
+=== NSURL
+Options used when creating bookmark data.
+struct
+ 
+BookmarkCreationOptions
+BookmarkCreationOptions
+=== NSURL.BookmarkCreationOptions
+Options used when creating file bookmark data
+typealias
+ 
+BookmarkFileCreationOptions
+BookmarkFileCreationOptions
+=== NSURL.BookmarkFileCreationOptions
+Options used when resolving bookmark data.
+struct
+ 
+BookmarkResolutionOptions
+BookmarkResolutionOptions
+=== NSURL.BookmarkResolutionOptions
+Returns a new URL made by resolving bookmark data.
++ 
+URLByResolvingBookmarkData:options:relativeToURL:bookmarkDataIsStale:error:
+=== URLByResolvingBookmarkData:options:relativeToURL:bookmarkDataIsStale:error:
+Returns a bookmark for the URL, created with specified options and resource values.
+func
+ 
+bookmarkData
+(
+options
+: 
+NSURL
+.
+BookmarkCreationOptions
+, 
+includingResourceValuesForKeys
+: [
+URLResourceKey
+]?, 
+relativeTo
+: 
+URL
+?) 
+throws
+ -> 
+Data
+- 
+bookmarkDataWithOptions:includingResourceValuesForKeys:relativeToURL:error:
+=== bookmarkData(options:includingResourceValuesForKeys:relativeTo:)
+Initializes and returns bookmark data derived from an alias file pointed to by a specified URL.
+class
+ 
+func
+ 
+bookmarkData
+(
+withContentsOf
+: 
+URL
+) 
+throws
+ -> 
+Data
++ 
+bookmarkDataWithContentsOfURL:error:
+=== bookmarkData(withContentsOf:)
+Returns the resource values for properties identified by a specified array of keys contained in specified bookmark data.
+class
+ 
+func
+ 
+resourceValues
+(
+forKeys
+: [
+URLResourceKey
+], 
+fromBookmarkData
+: 
+Data
+) -> [
+URLResourceKey
+ : 
+Any
+]?
++ 
+resourceValuesForKeys:fromBookmarkData:
+=== resourceValues(forKeys:fromBookmarkData:)
+In an app that has adopted App Sandbox, makes the resource pointed to by a security-scoped URL available to the app.
+func
+ 
+startAccessingSecurityScopedResource
+() -> 
+Bool
+- 
+startAccessingSecurityScopedResource
+=== startAccessingSecurityScopedResource()
+In an app that adopts App Sandbox, revokes access to the resource pointed to by a security-scoped URL.
+func
+ 
+stopAccessingSecurityScopedResource
+()
+- 
+stopAccessingSecurityScopedResource
+=== stopAccessingSecurityScopedResource()
+Creates an alias file on disk at a specified location with specified bookmark data.
+class
+ 
+func
+ 
+writeBookmarkData
+(
+Data
+, 
+to
+: 
+URL
+, 
+options
+: 
+NSURL
+.
+BookmarkFileCreationOptions
+) 
+throws
++ 
+writeBookmarkData:toURL:options:error:
+=== writeBookmarkData(_:to:options:)
+- 
+startAccessingSecurityScopedResource
+=== Related Documentation
+=== Working with Bookmark Data
+- (
+BOOL
+) 
+startAccessingSecurityScopedResource
+;
+Return Value
+
+ if the request to access the resource succeeded; otherwise, 
+.
+CFURLStartAccessingSecurityScopedResource
+CFURLStartAccessingSecurityScopedResource
+NSURL
+NSURL
+NSURLBookmarkCreationOptions
+NSURLBookmarkCreationOptions
+NSURLBookmarkFileCreationOptions
+NSURLBookmarkFileCreationOptions
+NSURLBookmarkResolutionOptions
+NSURLBookmarkResolutionOptions
+- 
+bookmarkDataWithOptions:includingResourceValuesForKeys:relativeToURL:error:
++ 
+bookmarkDataWithContentsOfURL:error:
++ 
+resourceValuesForKeys:fromBookmarkData:
+- 
+startAccessingSecurityScopedResource
+- 
+stopAccessingSecurityScopedResource
++ 
+writeBookmarkData:toURL:options:error:

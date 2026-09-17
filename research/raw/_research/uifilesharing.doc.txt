@@ -1,0 +1,63 @@
+A Boolean value indicating whether the app shares files.
+UIFileSharingEnabled
+=== UIFileSharingEnabled
+=== Details
+Discussion
+If you set this key to 
+, your app can share files with the user. Place the files in a 
+ folder located in the app’s home directiory. The default value is 
+.
+=== Related Documentation
+=== Storage
+Resources located in an app, framework, or plugin bundle.
+Bundle Resources
+=== Bundle Resources
+A resource containing key-value pairs that identify and configure a bundle.
+Information Property List
+=== Information Property List
+Describes the files or directories the app installs on the system.
+APFiles
+=== APFiles
+The base path to the files or folders that the app installs.
+APInstallerURL
+=== APInstallerURL
+A Boolean value indicating whether the app’s resources files should be mapped into memory.
+CSResourcesFileMapped
+=== CSResourcesFileMapped
+A Boolean value indicating whether the files this app creates are quarantined by default.
+LSFileQuarantineEnabled
+=== LSFileQuarantineEnabled
+A Boolean value indicating whether the app may open the original document from a file provider, rather than a copy of the document.
+LSSupportsOpeningDocumentsInPlace
+=== LSSupportsOpeningDocumentsInPlace
+A Boolean value that indicates whether the system should download documents before handing them over to the app.
+NSDownloadsUbiquitousContents
+=== NSDownloadsUbiquitousContents
+A Boolean value indicating whether the app continues working if the system purges the local storage.
+NSSupportsPurgeableLocalStorage
+=== NSSupportsPurgeableLocalStorage
+A Boolean value indicating whether the app shares files.
+UIFileSharingEnabled
+=== UIFileSharingEnabled
+Returns the path to either the user’s or application’s home directory, depending on the platform.
+func
+ 
+NSHomeDirectory
+() -> 
+String
+=== NSHomeDirectory()
+=== Technologies
+UIFileSharingEnabled
+=== Related Documentation
+=== Storage
+Information Property List
+APFiles
+APInstallerURL
+CSResourcesFileMapped
+LSFileQuarantineEnabled
+LSSupportsOpeningDocumentsInPlace
+NSDownloadsUbiquitousContents
+NSSupportsPurgeableLocalStorage
+UIFileSharingEnabled
+NSHomeDirectory
+NSHomeDirectory

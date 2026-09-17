@@ -1,0 +1,78 @@
+There&#x27;s ssh clients on iOS as well. There&#x27;s termux which is a linux userland com... | Hacker News
+Hacker News
+new
+|
+past
+|
+comments
+|
+ask
+|
+show
+|
+jobs
+|
+submit
+login
+mastax
+on April 8, 2022
+|
+parent
+|
+context
+|
+favorite
+|  on:
+Buffereditor – Code and Text Editor for iPhone, iP...
+There&#x27;s ssh clients on iOS as well.
+There&#x27;s termux which is a linux userland compiled for Android, more or less. I vaguely remember some play store policy issues with that. Last time I tried it I couldn&#x27;t install anything as they were out of CDN quota for the packages.
+skydhash
+on April 8, 2022
+|
+next
+[–]
+I have shellfish on my ipad and it’s pretty good. I also hav Textastic and Working Copy and with that you can do fixes  if you need to.
+kmeisthax
+on April 8, 2022
+|
+prev
+[–]
+On iOS the termux equivalent is iSH and a-shell. Both of these are, somehow, Apple-approved, free downloads from the App Store, and generally work well[0]. But they all have had to fight Apple on Section 2.5.2, which is kind of similar to whatever was tripping up termux on Google Play.
+Ostensibly, 2.5.2 should mean &quot;do not hide things from App Review by loading unreviewed code&quot;, which is entirely reasonable and defensible. But in practice, App Review likes to interpret it as &quot;do not allow
+the user
+to load unreviewed code onto their device&quot; - which neatly prohibits all emulation and virtualization apps. iSH was banned for a time because of this exact provision - it&#x27;s an x86 userland emulator with an API-compatible Linux kernel shim, much like that weird Java MIPS emulator[1] a lot of old CS courses taught assembly and OS dev in. The reason why iSH is back up is because App Review
+changed their mind
+, for reasons I don&#x27;t quite understand.
+There
+are
+on-device code interpreters for scripting languages in the App Store too - 2.5.2 has a separate, explicit carveout for them that Apple made
+very clear
+in the iDOS 2 rejection does not apply to emulators. In fact, that rejection letter pretty much spells out in plain language that Apple thinks emulators are piracy tools. They rejected UTM&#x27;s TestFlight submissions on a similar basis, albeit with less righteous indignation and more silence.
+I think the biggest problem here is the &quot;you&#x27;re holding it wrong&quot; factor, though. Apple didn&#x27;t notice iDOS 2 until media outlets were telling people how to install Windows 3.1 onto it. One of Apple&#x27;s big no-nos is &quot;do not give the user a windowing interface&quot;, because the core philosophy of iOS is that touch inputs need dedicated software with different code from mouse input[2]. Likewise, Apple doesn&#x27;t think coding on an iPad is a good idea. That 2.5.2 carveout I mentioned before patronizingly calls those script interpreters &quot;learn-to-code apps&quot;, with the idea that these are educational tools and that developers are expected to graduate to a Mac in order to get real work done.
+Google likes to blindly copy what Apple does sometimes, without understanding why and what tradeoffs Apple is making. In the case of termux, Android used to be way less strict about loading code and let apps load binaries straight from user data; but they decided to enforce the same restrictions Apple does, which broke the app if they updated it for Android 10. The underlying problem is, again, &quot;you&#x27;re holding it wrong&quot; - the people who work on security for these devices at both Apple and Google do not consider development workflows and do not
+want
+to have to do so. It&#x27;s
+much easier
+to keep malware off a device if you just put your foot down and say &quot;no programming on-device&quot;.
+[0] I can&#x27;t get Rust to run on iSH, and a-shell would require patching it into `ios-system` or retargeting rustc to run in WASI hosts.
+[1] MARS, I think it was called?
+[2] This is literally the reason why the iPad was even created. Back in the days of Windows XP, one of Steve Jobs&#x27; friends was bugging him about how XP tablets were going to storm the market. Jobs had Apple make a tablet computer demo that only accepted finger input, and this demo later became the iPhone&#x27;s touch input mechanism. The entirety of what we awkwardly call &quot;mobile devices&quot; today exists purely out of
+spite
+.
+Yes, I know Catalyst muddies the waters on this, and the Magic Keyboard breaks this ideology in half. I&#x27;m literally typing on a Magic Keyboard right now and it absolutely does make the iPad the most confused device I&#x27;ve ever used.
+Guidelines
+|
+FAQ
+|
+Lists
+|
+API
+|
+Security
+|
+Legal
+|
+Apply to YC
+|
+Contact
+Search:

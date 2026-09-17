@@ -1,0 +1,60 @@
+The processing unit or units the model uses to make predictions.
+var
+ 
+computeUnits
+: 
+MLComputeUnits
+computeUnits
+=== computeUnits
+var
+ 
+computeUnits
+: 
+MLComputeUnits
+ { 
+get
+ 
+set
+ }
+=== Allowing access to processing units
+Integrate machine learning models into your app.
+Core ML
+=== Core ML
+The set of processing-unit configurations the model can use to make predictions.
+enum
+ 
+MLComputeUnits
+MLComputeUnits
+=== MLComputeUnits
+The settings for creating or updating a machine learning model.
+class
+ 
+MLModelConfiguration
+MLModelConfiguration
+=== MLModelConfiguration
+The processing unit or units the model uses to make predictions.
+var
+ 
+computeUnits
+: 
+MLComputeUnits
+computeUnits
+=== computeUnits
+Measure how your model runs on your Mac or a connected device by generating a performance report in Xcode.
+=== Analyzing a Core ML model’s performance in Xcode
+=== Technologies
+computeUnits
+=== Allowing access to processing units
+@property
+ (
+readwrite
+) 
+MLComputeUnits
+ 
+computeUnits
+;
+MLComputeUnits
+MLComputeUnits
+MLModelConfiguration
+MLModelConfiguration
+computeUnits

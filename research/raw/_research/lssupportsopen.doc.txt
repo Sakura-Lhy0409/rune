@@ -1,0 +1,31 @@
+A Boolean value indicating whether the app may open the original document from a file provider, rather than a copy of the document.
+LSSupportsOpeningDocumentsInPlace
+=== LSSupportsOpeningDocumentsInPlace
+=== Details
+=== Documents
+Resources located in an app, framework, or plugin bundle.
+Bundle Resources
+=== Bundle Resources
+A resource containing key-value pairs that identify and configure a bundle.
+Information Property List
+=== Information Property List
+The document types supported by the bundle.
+CFBundleDocumentTypes
+=== CFBundleDocumentTypes
+A Boolean value indicating whether the app may open the original document from a file provider, rather than a copy of the document.
+LSSupportsOpeningDocumentsInPlace
+=== LSSupportsOpeningDocumentsInPlace
+A Boolean value that indicates whether the system should download documents before handing them over to the app.
+NSDownloadsUbiquitousContents
+=== NSDownloadsUbiquitousContents
+A Boolean value indicating whether the app is a document-based app.
+UISupportsDocumentBrowser
+=== UISupportsDocumentBrowser
+=== Technologies
+LSSupportsOpeningDocumentsInPlace
+=== Documents
+Information Property List
+CFBundleDocumentTypes
+LSSupportsOpeningDocumentsInPlace
+NSDownloadsUbiquitousContents
+UISupportsDocumentBrowser

@@ -1,0 +1,161 @@
+Distribute with AltStore PAL | AltStore
+AltStore
+⌘
+Ctrl
+k
+Download
+Patreon
+Github
+Delta Emulator
+More
+AltStore
+🏡
+AltStore Docs
+AltStore PAL
+🤗
+What is AltStore PAL?
+🔗
+Sources
+🔼
+Updating AltStore PAL
+🎁
+Day One Promo
+🧑‍🔧
+Troubleshooting
+AltStore Classic
+🪟
+How to Install (Windows)
+🍎
+How to Install (macOS)
+🛍️
+Getting Started
+🖥️
+AltServer
+🌐
+Remote AltServers
+🆔
+App IDs
+⚡
+Activating Apps
+🏎️
+Enabling JIT
+☑️
+Trusted Sources
+🐮
+MacDirtyCow
+⚠️
+Error Codes
+🙋
+Troubleshooting Guide
+Developers
+📓
+Make a Source
+🛒
+Distribute with AltStore PAL
+🏷️
+“Download on AltStore” Badge
+📝
+App Guidelines
+📔
+REST API
+⬆️
+Updating Apps
+🅿️
+Patreon Integration
+🤖
+AltSource CLI (Beta)
+Release Notes
+🛒
+AltStore PAL
+🛍️
+AltStore Classic
+🖥️
+AltServer
+Patreon
+🛠️
+Beta Apps
+🗣️
+Discord
+🧸
+Friend Zone
+About Us
+👨‍👩‍👧‍👦
+Team
+📰
+Press Kit
+Powered by GitBook
+On this page
+For the complete documentation index, see
+llms.txt
+. This page is also available as
+Markdown
+.
+Copy
+On this page
+Developers
+🛒
+Distribute with AltStore PAL
+Distributing your app with AltStore PAL is similar to what you may be used to when submitting to the Apple App Store. You will still submit apps through
+App Store Connect using your paid Apple Developer account, so make sure you are set up with one before proceeding. The only major difference is that your apps will only be available in the EU, Japan, and Brazil.
+You can distribute apps with AltStore PAL from anywhere. You
+do not
+need to be located in or have a business in the EU, Japan, or Brazil.
+When ready, follow each of the steps outlined below to begin distributing your apps on AltStore PAL 🙂
+Agree to Alternative EU Terms Addendum
+The Alternative EU Terms Addendum is an additional agreement you must make with Apple in order to distribute your apps outside the App Store in the EU specifically.
+Request EU Terms Addendum:
+https://developer.apple.com/contact/request/alternative-eu-terms-addendum/
+Notes:
+The new terms will change your commission rates and fees for apps distributed in the EU.
+Learn More
+If you&#x27;re only planning on only distributing in Japan, you do not need to request the EU Terms Addendum.
+Add AltStore PAL as an alternative marketplace
+Before you can submit your apps to AltStore PAL, you must prepare your developer account for distribution with alternative marketplaces
+Register your Developer ID with AltStore PAL using our
+REST API
+. You can find your Developer ID in App Store Connect by selecting &quot;Edit Profile&quot; in the top right.
+You will receive a response with a security token. In App Store Connect, go to Users and Access -&gt; Integrations -&gt; Marketplace, click &#x27;+&#x27; and input the token.
+Select the app(s) you want to distribute with AltStore PAL. You can change this at any time.
+Select &quot;Yes, send notifications&quot; on the next screen to let AltStore PAL process your apps automatically (recommended).
+All apps must be processed by AltStore PAL before they can be distributed.
+If you don&#x27;t want AltStore PAL to process your builds automatically, you can manually process them using our
+REST API
+.
+Submit your app(s) for Notarization
+Even though you are distributing outside the App Store, you still need to submit your app(s) to Apple for Notarization before they can be distributed. This is similar to Apple&#x27;s App Store review process but fewer guidelines. For more detailed instructions, see Apple&#x27;s
+Notarization
+support page.
+Select your app in App Store Connect
+In the App Review section, click Edit under &quot;Review Type&quot;.
+Select &quot;Notarization&quot; as the review type and click Save.
+Submit app(s) for review.
+If you still plan to distribute your app through the Apple App Store, you can skip this step.
+Your apps will be automatically notarized when approved for the App Store.
+Host your Alternative Distribution Package (ADP)
+Once Notarized, you&#x27;ll need to download your app&#x27;s ADP to then host it on your server.
+Download your ADP using our
+REST API
+.
+Upload the complete package to your server. You must preserve the directory hierarchy exactly, and the hashes of each file must not change. In other words,
+DO NOT modify the
+manifest.json
+in any way (e.g prettifying).
+Create a source
+Once your server is updated with your app&#x27;s ADP, the last step is to
+make a source
+, which is just a JSON file with information about your app(s).
+Once you&#x27;ve uploaded your source, it will be made available on PAL and anyone can now add the URL to download your apps!
+(Requires AltStore PAL 2.2 or later)
+Make your source discoverable (Optional)
+You can optionally make your source discoverable, which means your apps and updates will appear automatically on our
+website
+where anyone can easily find them.
+Add the
+fediUsername
+key to your source
+Federate your source using our
+REST API
+Last updated
+2 months ago
+Was this helpful?
+Was this helpful?

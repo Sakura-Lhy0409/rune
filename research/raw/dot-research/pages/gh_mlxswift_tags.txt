@@ -1,0 +1,303 @@
+[
+ {
+ "name": "0.31.6",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.31.6",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.31.6",
+ "commit": {
+ "sha": "0bb916c67f4b9e5c682cbe02a42c701c93ab5021",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/0bb916c67f4b9e5c682cbe02a42c701c93ab5021"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4zMS42"
+ },
+ {
+ "name": "0.31.5",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.31.5",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.31.5",
+ "commit": {
+ "sha": "eb889e01b7267bc6d9c01fde91bc517b09506c2d",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/eb889e01b7267bc6d9c01fde91bc517b09506c2d"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4zMS41"
+ },
+ {
+ "name": "0.31.4",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.31.4",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.31.4",
+ "commit": {
+ "sha": "dc43e62d7055353c7f99fa071a4e71d29dfddc44",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/dc43e62d7055353c7f99fa071a4e71d29dfddc44"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4zMS40"
+ },
+ {
+ "name": "0.31.3",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.31.3",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.31.3",
+ "commit": {
+ "sha": "61b9e011e09a62b489f6bd647958f1555bdf2896",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/61b9e011e09a62b489f6bd647958f1555bdf2896"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4zMS4z"
+ },
+ {
+ "name": "0.31.2",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.31.2",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.31.2",
+ "commit": {
+ "sha": "2512c5bebfd801c817b5d07828cbfdc44c76fab4",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/2512c5bebfd801c817b5d07828cbfdc44c76fab4"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4zMS4y"
+ },
+ {
+ "name": "0.31.1",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.31.1",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.31.1",
+ "commit": {
+ "sha": "399f23159f54699f918965e41897e1178d2352fe",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/399f23159f54699f918965e41897e1178d2352fe"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4zMS4x"
+ },
+ {
+ "name": "0.30.6",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.30.6",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.30.6",
+ "commit": {
+ "sha": "6ba4827fb82c97d012eec9ab4b2de21f85c3b33d",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/6ba4827fb82c97d012eec9ab4b2de21f85c3b33d"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4zMC42"
+ },
+ {
+ "name": "0.30.3",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.30.3",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.30.3",
+ "commit": {
+ "sha": "4dccaeda1d83cf8697f235d2786c2d72ad4bb925",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/4dccaeda1d83cf8697f235d2786c2d72ad4bb925"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4zMC4z"
+ },
+ {
+ "name": "0.30.2",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.30.2",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.30.2",
+ "commit": {
+ "sha": "f58bd2c2b3b84316da69182f436db4219aff30b9",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/f58bd2c2b3b84316da69182f436db4219aff30b9"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4zMC4y"
+ },
+ {
+ "name": "0.30.1",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.30.1",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.30.1",
+ "commit": {
+ "sha": "43531d76a8311efc9fd1b40bdd8cd3f6c8ba0a86",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/43531d76a8311efc9fd1b40bdd8cd3f6c8ba0a86"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4zMC4x"
+ },
+ {
+ "name": "0.29.1",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.29.1",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.29.1",
+ "commit": {
+ "sha": "072b684acaae80b6a463abab3a103732f33774bf",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/072b684acaae80b6a463abab3a103732f33774bf"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4yOS4x"
+ },
+ {
+ "name": "0.25.6",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.25.6",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.25.6",
+ "commit": {
+ "sha": "96c0f69cf15f38abd6248bb71fca908171dab1d8",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/96c0f69cf15f38abd6248bb71fca908171dab1d8"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4yNS42"
+ },
+ {
+ "name": "0.25.5",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.25.5",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.25.5",
+ "commit": {
+ "sha": "b79c74ce773440b86a81ef925ea78dd5023a16c0",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/b79c74ce773440b86a81ef925ea78dd5023a16c0"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4yNS41"
+ },
+ {
+ "name": "0.25.4",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.25.4",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.25.4",
+ "commit": {
+ "sha": "b94473af8c50010edba87a48bbd60c3d7f949852",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/b94473af8c50010edba87a48bbd60c3d7f949852"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4yNS40"
+ },
+ {
+ "name": "0.25.3",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.25.3",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.25.3",
+ "commit": {
+ "sha": "d3f89b1f520ea9e52fd9de68c1dca708f040406a",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/d3f89b1f520ea9e52fd9de68c1dca708f040406a"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4yNS4z"
+ },
+ {
+ "name": "0.25.2",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.25.2",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.25.2",
+ "commit": {
+ "sha": "a8f7411d0c7b63cbf3e64a694ec73850a46f9a1c",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/a8f7411d0c7b63cbf3e64a694ec73850a46f9a1c"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4yNS4y"
+ },
+ {
+ "name": "0.25.1",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.25.1",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.25.1",
+ "commit": {
+ "sha": "597631661221b5be8f47a69b8ad35d2fa20339e6",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/597631661221b5be8f47a69b8ad35d2fa20339e6"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4yNS4x"
+ },
+ {
+ "name": "0.23.1",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.23.1",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.23.1",
+ "commit": {
+ "sha": "939b2ad47dab82e038d57e2554879d9a60f67e9e",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/939b2ad47dab82e038d57e2554879d9a60f67e9e"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4yMy4x"
+ },
+ {
+ "name": "0.21.3",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.21.3",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.21.3",
+ "commit": {
+ "sha": "b990c58153af70eb0914bca7dd74401d341fa9ae",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/b990c58153af70eb0914bca7dd74401d341fa9ae"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4yMS4z"
+ },
+ {
+ "name": "0.21.2",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.21.2",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.21.2",
+ "commit": {
+ "sha": "70dbb62128a5a1471a5ab80363430adb33470cab",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/70dbb62128a5a1471a5ab80363430adb33470cab"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4yMS4y"
+ },
+ {
+ "name": "0.21.1",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.21.1",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.21.1",
+ "commit": {
+ "sha": "7f02cd874e380027540f305d9a8b36a40ef712b8",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/7f02cd874e380027540f305d9a8b36a40ef712b8"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4yMS4x"
+ },
+ {
+ "name": "0.21.0",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.21.0",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.21.0",
+ "commit": {
+ "sha": "bafcb33d7616418247eb47d3f91d0b49495821df",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/bafcb33d7616418247eb47d3f91d0b49495821df"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4yMS4w"
+ },
+ {
+ "name": "0.18.1",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.18.1",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.18.1",
+ "commit": {
+ "sha": "d649c62b77c487c25012910b0d02b30283d388ca",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/d649c62b77c487c25012910b0d02b30283d388ca"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4xOC4x"
+ },
+ {
+ "name": "0.18.0",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.18.0",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.18.0",
+ "commit": {
+ "sha": "78a7cfe6701d6e9c88e9d4a0d1f7990af84b2146",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/78a7cfe6701d6e9c88e9d4a0d1f7990af84b2146"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4xOC4w"
+ },
+ {
+ "name": "0.16.2",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.16.2",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.16.2",
+ "commit": {
+ "sha": "f27763bef455d76f9455e9dfc6704a6b2859fa26",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/f27763bef455d76f9455e9dfc6704a6b2859fa26"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4xNi4y"
+ },
+ {
+ "name": "0.16.1",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.16.1",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.16.1",
+ "commit": {
+ "sha": "86ad75ab1ee96cd70325732b37cd830f87d7e43f",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/86ad75ab1ee96cd70325732b37cd830f87d7e43f"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4xNi4x"
+ },
+ {
+ "name": "0.16.0",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.16.0",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.16.0",
+ "commit": {
+ "sha": "597aaa5f465b4b9a17c8646b751053f84e37925b",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/597aaa5f465b4b9a17c8646b751053f84e37925b"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4xNi4w"
+ },
+ {
+ "name": "0.15.2",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.15.2",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.15.2",
+ "commit": {
+ "sha": "084597e7ec38d97a92e50855b04de005c7dad1df",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/084597e7ec38d97a92e50855b04de005c7dad1df"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4xNS4y"
+ },
+ {
+ "name": "0.12.1",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.12.1",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.12.1",
+ "commit": {
+ "sha": "36d63a1fc386a551df14f5b67df1756dc17d2ebc",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/36d63a1fc386a551df14f5b67df1756dc17d2ebc"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4xMi4x"
+ },
+ {
+ "name": "0.10.0",
+ "zipball_url": "https://api.github.com/repos/ml-explore/mlx-swift/zipball/refs/tags/0.10.0",
+ "tarball_url": "https://api.github.com/repos/ml-explore/mlx-swift/tarball/refs/tags/0.10.0",
+ "commit": {
+ "sha": "7838f8cd93499f3d9e9a35b87cb74fe2664b325f",
+ "url": "https://api.github.com/repos/ml-explore/mlx-swift/commits/7838f8cd93499f3d9e9a35b87cb74fe2664b325f"
+ },
+ "node_id": "REF_kwDOK4_TI7ByZWZzL3RhZ3MvMC4xMC4w"
+ }
+]
+

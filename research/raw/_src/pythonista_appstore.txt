@@ -1,0 +1,454 @@
+‎Pythonista 3 App - App Store
+Search
+Today
+Games
+Apps
+Arcade
+Platform
+iPhone
+iPad
+Mac
+Vision
+Watch
+TV
+Pythonista 3
+Python IDE
+$9.99 · Designed for iPad. Not verified for macOS.
+Share
+1.5K Ratings
+4.5
+Age Rating
+4+
+Years
+Chart
+#19
+Productivity
+Developer
+omz:software
+Language
+EN
+English
+Size
+894.3
+MB
+iPhone, iPad
+Pythonista is a complete scripting environment for Python 3.10, running right on your iPad or iPhone, so you can develop and run Python scripts on the go.
+Like Python itself, "batteries are included" – from popular third-party modules like requests, numpy, matplotlib, pandas (and many more) to modules that are tailor-made for iOS. With Pythonista, your scripts can access sensor/location data, your photo library, contacts, reminders, the clipboard, and more, allowing you to harness the full potential of both Python and iOS.
+Pythonista is designed with a user-friendly interface that makes it easy for anyone to get started with coding, regardless of skill level. The complete Python documentation is also available for offline reading in the app.
+Pythonista is not just for learning and practicing Python – it's also a powerful tool for automating iOS with multiple app extensions. You can invoke scripts directly from the share sheet or a custom system keyboard in almost any app, and integrate scripts with Shortcuts and Siri. With Pythonista, it's easy to run your scripts whenever you need them, without having to switch between different apps.
+Features:
+&gt; Powerful code editor with syntax highlighting, code completion, and scripting support
+&gt; Interactive prompt with code completion, command history, and support for showing images
+&gt; Integrated visual debugger and object inspector
+&gt; Complete offline documentation with quick lookup directly from the editor
+&gt; Various beautiful light and dark color themes, and a theme editor to make your own
+&gt; UI editor for quick prototyping
+&gt; Integrated PEP 8 style checker and code formatter
+&gt; Supports most of the Python standard library and additional modules for graphics, sound, and iOS integration (for example clipboard, contacts, reminders, photos, ui...)
+&gt; Many popular third-party modules included, for example requests, numpy, matplotlib, pandas, Pillow...
+&gt; Lots of included examples
+&gt; Universal app for iPad and iPhone
+&gt; Share sheet extension for running scripts from almost any app
+&gt; Scriptable system-wide keyboard to use Python in any app that edits text
+&gt; Advanced integration with the Shortcuts app, allowing you to use Python scripts as actions in shortcuts and personal automations.
+Please note that Pythonista is not designed to enable the installation or download of additional modules written in compiled languages (C/C++). While many popular native libraries are included and work out-of-the-box, it is generally not possible to install additional modules with C/C++ dependencies.
+The name "Pythonista" is used with kind permission from the Python Software Foundation.
+more
+Ratings &amp; Reviews
+4.5
+out of 5
+1.5K Ratings
+Absolutely the best Python IDE!!!
+07/16/2018
+Stevo3985
+I love Pythonista, and have been using it for about 7 months now. It is as full featured as I could possibly hope for it to be (perhaps more so as it is on iOS and I am pretty stunned at how well it works while being locked down in a secured, chroot’d, containerized environment OS) and it allows for many third party plugins written by members of the community hoping to add more features to an already feature rich environment. There are MANY different places to seek a helping hand if you get lost or need assistance, and the developer is quite responsive, both via email support and on the OMZ forums. It may seem like a steep price for an app, but I honestly could only be more pleased if the app were opened up a bit more to allow API access from all different web services I use, but that is an Apple limitation and not something that the developer of this app is in control of, so it really is as good as it can be. If you’re a Python dev or even just dabbling and aspiring to become one, the is the program for you. The included features, help documentation, tutorials, and the help of the OMZ development team and the supporting community that frequents the forums really help to make this application the best, most useful that I have invested in since my first iPhone 4 introduced me to apps in the iOS App Store. Stop reading reviews, look how many 5 star ratings it has, buy this app, and start writing something amazing. You’ll get looks of disbelief when people hear that you developed and tested a good majority of your amazing application on an iPad or iPhone lol. You really will not be disappointed! 🤯
+Absolutely the best Python IDE!!!
+07/16/2018
+Stevo3985
+I love Pythonista, and have been using it for about 7 months now. It is as full featured as I could possibly hope for it to be (perhaps more so as it is on iOS and I am pretty stunned at how well it works while being locked down in a secured, chroot’d, containerized environment OS) and it allows for many third party plugins written by members of the community hoping to add more features to an already feature rich environment. There are MANY different places to seek a helping hand if you get lost or need assistance, and the developer is quite responsive, both via email support and on the OMZ forums. It may seem like a steep price for an app, but I honestly could only be more pleased if the app were opened up a bit more to allow API access from all different web services I use, but that is an Apple limitation and not something that the developer of this app is in control of, so it really is as good as it can be. If you’re a Python dev or even just dabbling and aspiring to become one, the is the program for you. The included features, help documentation, tutorials, and the help of the OMZ development team and the supporting community that frequents the forums really help to make this application the best, most useful that I have invested in since my first iPhone 4 introduced me to apps in the iOS App Store. Stop reading reviews, look how many 5 star ratings it has, buy this app, and start writing something amazing. You’ll get looks of disbelief when people hear that you developed and tested a good majority of your amazing application on an iPad or iPhone lol. You really will not be disappointed! 🤯
+My most used app.
+09/16/2020
+wildernessfamily78
+I’m a full time developer and I don’t know what I would do without Pythonista. For one, twice a week I go to our local hospital for my allergy shot. I have to sit there for 30 minutes after the shot. With Pythonista, I bring my iPad and I can keep on working on my Python apps that I’m creating. I get tired sitting at the computer. I can head over to the couch to sit with my pups, but on Big Bang Theory, and keep on working.Go outside on nice day, sit at the patio table and keep on programming.One one request. I know a lot of people prefer Git. I hate Git now that Microsoft purchased it. I use OpenSource Fossil. It would be GREAT to have the feature to be able to clone a repository using Fossil. I know there are a lot more people using Git. But, finger crossed if you add the feature, one more people would be aware how fantastic Fossil is and might start using and supporting OpenSource Fossil. Thanks in advance for any consideration on the Fossil feature!
+My most used app.
+09/16/2020
+wildernessfamily78
+I’m a full time developer and I don’t know what I would do without Pythonista. For one, twice a week I go to our local hospital for my allergy shot. I have to sit there for 30 minutes after the shot. With Pythonista, I bring my iPad and I can keep on working on my Python apps that I’m creating. I get tired sitting at the computer. I can head over to the couch to sit with my pups, but on Big Bang Theory, and keep on working.Go outside on nice day, sit at the patio table and keep on programming.One one request. I know a lot of people prefer Git. I hate Git now that Microsoft purchased it. I use OpenSource Fossil. It would be GREAT to have the feature to be able to clone a repository using Fossil. I know there are a lot more people using Git. But, finger crossed if you add the feature, one more people would be aware how fantastic Fossil is and might start using and supporting OpenSource Fossil. Thanks in advance for any consideration on the Fossil feature!
+This App Got Me Into Programming
+02/10/2021
+TheWeirdSquid
+I started using this app when I was 12 on my iPad that I had as a kid. The app is amazing, and has custom modules that let you control your device and create custom apps and such. It’s got UI modules, full access to documentation, and all the normal python modules. Even better, it works entirely offline. This app singlehandly allowed me to program things when and where I wanted, and allowed me to become a skilled programmer getting a degree in computer science. As far as mobile IDEs go, it’s the absolute best. In addition, there’s a community that creates tons of incredible programs that enhance the IDE, such as GitHub support, and even a fully functional bash terminal complete with pip so that you can install your own custom modules. It really is the best app on iOS for programming, and I would recommend it to anybody looking to try out programming. It’s well worth it’s price tag.
+This App Got Me Into Programming
+02/10/2021
+TheWeirdSquid
+I started using this app when I was 12 on my iPad that I had as a kid. The app is amazing, and has custom modules that let you control your device and create custom apps and such. It’s got UI modules, full access to documentation, and all the normal python modules. Even better, it works entirely offline. This app singlehandly allowed me to program things when and where I wanted, and allowed me to become a skilled programmer getting a degree in computer science. As far as mobile IDEs go, it’s the absolute best. In addition, there’s a community that creates tons of incredible programs that enhance the IDE, such as GitHub support, and even a fully functional bash terminal complete with pip so that you can install your own custom modules. It really is the best app on iOS for programming, and I would recommend it to anybody looking to try out programming. It’s well worth it’s price tag.
+Excellent tool for on the go Python
+05/12/2018
+Superspork
+I usually don’t write reviews, but I felt compelled to for this gem of an app. I regularly program on the side for fun and automation. I’ve used Pythonista to automate tasks on my phone, prototype programs for my Windows and Linux computers, and built silly games to play for fun. I’ve used Python at work to drastically speed up our workflows by several hours, which has been a life saver and even garnered me a raise. Not only was Pythonista an indispensable tool for prototyping those programs, but it has allowed me the opportunity to improve my skills on the go. There are some limitations I wish didn’t exist, but this is because of Apple, not the developers. The developers have gone above and beyond to implement extra libraries and integrate Pythonista with iOS. If you’re looking for a good iOS Python app or want to learn Python on the go, I highly recommend this app!
+Excellent tool for on the go Python
+05/12/2018
+Superspork
+I usually don’t write reviews, but I felt compelled to for this gem of an app. I regularly program on the side for fun and automation. I’ve used Pythonista to automate tasks on my phone, prototype programs for my Windows and Linux computers, and built silly games to play for fun. I’ve used Python at work to drastically speed up our workflows by several hours, which has been a life saver and even garnered me a raise. Not only was Pythonista an indispensable tool for prototyping those programs, but it has allowed me the opportunity to improve my skills on the go. There are some limitations I wish didn’t exist, but this is because of Apple, not the developers. The developers have gone above and beyond to implement extra libraries and integrate Pythonista with iOS. If you’re looking for a good iOS Python app or want to learn Python on the go, I highly recommend this app!
+What’s New
+Version History
+&gt; Python 3.10 support.
+&gt; Expanded Shortcuts support with custom actions for running scripts and accessing files in the Pythonista library.
+&gt; Added pandas and updated various other modules to more current versions.
+&gt; Revamped documentation with dark mode support and additional content about third-party modules.
+&gt; Various bugfixes.
+3.4
+04/27/2023
+Pythonista 3.3 App Store Release Notes
+• Support for dark mode on iOS 13 – you can now select separate themes for light/dark mode, and Pythonista will switch automatically between them. Switching between themes is also a bit faster now.
+• New custom keyboard ("PyKeys") for running scripts in any app with text input. Have a look at the sample scripts in the Examples/Keyboard folder for some ideas of what you can do with this.
+• Significantly improved support for external keyboards (more contextual shortcuts, arrow-key navigation almost everywhere…)
+• The outline (list of functions) in the editor can now be filtered -- just start typing if the keyboard is already active, or drag down the list to reveal the filter text field. The filter supports fuzzy matching, and you can enter line numbers as well.
+• Unified UI (and documentation) for creating script shortcuts in various places of iOS ("Shortcuts" option in the "wrench" menu).
+• New URL generator for easier inter-app automation (you can also use this with the Shortcuts app, but full Shortcuts support will come later).
+• Support for opening external folders using the system's file picker on iOS 13 (this was possible on iOS 12, but not easily discoverable).
+• Revamped `notifications` module with custom action buttons, support for attachments, location triggers, and more – see the new "Notification Quiz.py" sample code for a demo. The module also works in the share sheet extension now.
+• New "on device" option for speech recognition in the `speech` module (please note that this can be very slow though!)
+• New `location.render_map_snapshot()` function to generate an image from a location (see new "Satellite Image.py" sample code).
+• Console history is now persistent (you can clear it by tapping and holding the `^` button).
+• Various bugfixes for iOS 13 and new screen sizes, new sample code, documentation, and more – you can find the full release notes in the in-app documentation (which also supports multiple tabs now btw).
+Thanks for reading, and thanks for your patience with this release. It's not everything I'd like it to be (hello, Shortcuts app!), but there are still many new things to discover, and I hope you have a lot of fun with it!
+3.3
+02/26/2020
+• You can now sync your scripts via iCloud Drive, and open Python files from other apps.
+• Pythonista now uses Python 3.6. Among other things, this enables the use of f-strings for easier string formatting.
+• The "Convert Tabs" feature is now called "Reformat Code", and supports applying coding style guidelines, in addition to converting indentation.
+• Improved search in the script library and documentation.
+• Support for drag'n'drop in the script library (requires iOS 11).
+• Improved support for the iPhone X.
+• Unified tab bar UI on iPhone and iPad.
+• The Python interpreter is now built with IPv6 support (this should fix connectivity issues users were experiencing with some cellular providers).
+• Various bugfixes and minor improvements – please refer to the release notes page in the in-app documentation for details.
+3.2
+12/29/2017
+• The interactive console contains a new object inspector panel that allows you to view a list of all global variables and their attributes/members. Tap the (i) button to show or hide it.
+• The new Pythonista Today widget allows you to run a script in Notification Center (or on the home/lock screen). You can find more information in the `appex` module documentation, and various examples of widget scripts are available in the updated *Examples* folder.
+• Python 2 mode now uses Python 2.7.12 instead of 2.7.5.
+• When using the share sheet extension with a file input (e.g. sharing a Mail attachment), an additional "Import File" option is shown for non-Python files.
+• The `speech` module contains new functions for speech recognition, in addition to speech synthesis (iOS 10 only).
+• The `sound` module contains a new `Recorder` class for recording audio files from the microphone. `sound.play_effect` and `sound.Player` have also been improved to support stereo panning.
+3.1
+01/19/2017
+3.0
+06/14/2016
+&gt; Python 3.10 support.
+&gt; Expanded Shortcuts support with custom actions for running scripts and accessing files in the Pythonista library.
+&gt; Added pandas and updated various other modules to more current versions.
+&gt; Revamped documentation with dark mode support and additional content about third-party modules.
+&gt; Various bugfixes.
+more
+Version 3.4
+04/27/2023
+App Privacy
+App Privacy
+The developer,
+omz:software
+, indicated that the app’s privacy practices may include handling of data as described below. This information has not been verified by Apple. For more information, see the
+developer’s privacy policy
+.
+To help you better understand the developer’s responses, see
+Privacy Definitions and Examples
+.
+Privacy practices may vary, for example, based on the features you use or your age.
+Learn More
+Data Not Collected
+The developer does not collect any data from this app.
+The developer,
+omz:software
+, indicated that the app’s privacy practices may include handling of data as described below. For more information, see the
+developer’s privacy policy
+.
+Data Not Collected
+The developer does not collect any data from this app.
+Privacy practices may vary, for example, based on the features you use or your age.
+Learn More
+Accessibility
+The developer has not yet indicated which accessibility features this app supports.
+Learn More
+Information
+Seller
+Ole Zorn
+Size
+894.3 MB
+Category
+Productivity
+Compatibility
+Requires iOS 12.0 or later.
+iPhone
+Requires iOS 12.0 or later.
+iPad
+Requires iPadOS 12.0 or later.
+iPod&nbsp;touch
+Requires iOS 12.0 or later.
+Mac
+Requires macOS&nbsp;11.0 or later and a Mac with Apple&nbsp;M1&nbsp;chip or later.
+Apple Vision
+Requires visionOS 1.0 or later.
+Languages
+English
+Age Rating
+4+
+4+
+Learn More
+Copyright
+© 2023 omz:software
+Developer Website
+Privacy Policy
+Supports
+Family Sharing
+Up to six family members can use this app with Family Sharing enabled.
+More by omz:software
+View
+Editorial
+Productivity
+You Might Also Like
+View
+Enclave - Local AI Assistant
+Anonymous, Offline, Private AI
+View
+Codea
+Creative coding
+View
+LaTeX Editor Tex Pro
+LaTeX compiler typeset writer
+View
+Obsidian Web Clipper
+Save the web. Own your data.
+View
+MLC Chat
+Chat with Open Language Models
+View
+RealVNC Viewer: Remote Desktop
+Productivity
+View
+Things 3 for iPad
+Organize your life
+View
+Scrivener
+Productivity
+View
+Pal Chat - AI Chat Client
+Powerful AI chat playground
+View
+iA Writer
+Get focused, enjoy writing
+United States
+Español (México)
+العربية
+Русский
+简体中文
+Français (France)
+한국어
+Português (Brazil)
+Tiếng Việt
+繁體中文 (台灣)
+Select a country or region
+Africa, Middle East, and India
+See All
+Algeria
+Angola
+Armenia
+Azerbaijan
+Bahrain
+Benin
+Botswana
+Burkina Faso
+Cameroun
+Cape Verde
+Chad
+Côte d’Ivoire
+Congo, The Democratic Republic Of The
+Egypt
+Eswatini
+Gabon
+Gambia
+Ghana
+Guinea-Bissau
+India
+Iraq
+Israel
+Jordan
+Kenya
+Kuwait
+Lebanon
+Liberia
+Libya
+Madagascar
+Malawi
+Mali
+Mauritania
+Mauritius
+Morocco
+Mozambique
+Namibia
+Niger (English)
+Nigeria
+Oman
+Qatar
+Congo, Republic of
+Rwanda
+São Tomé and Príncipe
+Saudi Arabia
+Senegal
+Seychelles
+Sierra Leone
+South Africa
+Sri Lanka
+Tajikistan
+Tanzania, United Republic Of
+Tunisia
+Turkmenistan
+United Arab Emirates
+Uganda
+Yemen
+Zambia
+Zimbabwe
+Asia Pacific
+See All
+Afghanistan
+Australia
+Bhutan
+Brunei Darussalam
+Cambodia
+中国大陆
+Fiji
+香港
+Indonesia (English)
+日本
+Kazakhstan
+대한민국
+Kyrgyzstan
+Lao People's Democratic Republic
+澳門
+Malaysia (English)
+Maldives
+Micronesia, Federated States of
+Mongolia
+Myanmar
+Nauru
+Nepal
+New Zealand
+Pakistan
+Palau
+Papua New Guinea
+Philippines
+Singapore
+Solomon Islands
+台灣
+Thailand
+Tonga
+Turkmenistan
+Uzbekistan
+Vanuatu
+Vietnam
+Europe
+See All
+Albania
+Armenia
+Österreich
+Belarus
+Belgium
+Bosnia and Herzegovina
+Bulgaria
+Croatia
+Cyprus
+Czechia
+Denmark
+Estonia
+Finland
+France (Français)
+Georgia
+Deutschland
+Greece
+Hungary
+Iceland
+Ireland
+Italia
+Kosovo
+Latvia
+Lithuania
+Luxembourg (English)
+Malta
+Moldova, Republic Of
+Montenegro
+Nederland
+North Macedonia
+Norway
+Poland
+Portugal (Português)
+Romania
+Россия
+Serbia
+Slovakia
+Slovenia
+España
+Sverige
+Schweiz
+Türkiye (English)
+Ukraine
+United Kingdom
+Latin America and the Caribbean
+See All
+Anguilla
+Antigua and Barbuda
+Argentina (Español)
+Bahamas
+Barbados
+Belize
+Bermuda
+Bolivia (Español)
+Brasil
+Virgin Islands, British
+Cayman Islands
+Chile (Español)
+Colombia (Español)
+Costa Rica (Español)
+Dominica
+República Dominicana
+Ecuador (Español)
+El Salvador (Español)
+Grenada
+Guatemala (Español)
+Guyana
+Honduras (Español)
+Jamaica
+México
+Montserrat
+Nicaragua (Español)
+Panamá
+Paraguay (Español)
+Perú
+St. Kitts and Nevis
+Saint Lucia
+St. Vincent and The Grenadines
+Suriname
+Trinidad and Tobago
+Turks and Caicos
+Uruguay (English)
+Venezuela (Español)
+The United States and Canada
+See All
+Canada (English)
+Canada (Français)
+United States
+Estados Unidos (Español México)
+الولايات المتحدة
+США
+美国 (简体中文)
+États-Unis (Français France)
+미국
+Estados Unidos (Português Brasil)
+Hoa Kỳ
+美國 (繁體中文台灣)
+Copyright © 2026
+Apple Inc.
+All rights reserved.
+Internet Service Terms
+App Store &amp; Privacy
+Cookie Warning
+Support

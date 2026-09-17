@@ -1,0 +1,179 @@
+— uniquely replaced by Helmet per-route at prerender, or at
+runtime when the SPA hydrates. Other meta tags (description, og:*, twitter:*,
+canonical, robots) are provided per-route by SEOHead/Helmet; we don't repeat
+them here because vite-prerender-plugin would append rather than replace them. -->
+Why did Apple reject my app for Guideline 2.5.2? | PTKD Journal
+PTKD
+Sign in
+Start free scan
+Home
+/
+Journal
+/
+Why did Apple reject my app for Guideline 2.5.2?
+App Store
+Why did Apple reject my app for Guideline 2.5.2?
+Quick summary
+Updated
+May 2026
+Guideline 2.5.2 stops apps from downloading or executing code that changes app features after review. The common triggers are vibe coding apps, dynamic UI engines that fetch behavior from a server, and WebViews loading remote scripts with privileged capability. The exception is narrow: educational apps where users write and read their own code. To respond, identify the runtime code path, bundle the logic into the binary, or move dynamic execution to a server.
+Written by
+Laurens Dauchy
+Verified author
+Founder, PTKD
+Published
+May 17, 2026
+·
+8
+min read
+A Guideline 2.5.2 rejection lands in App Store Connect with a short message, no specifics about the offending code path, and a developer wondering whether their entire architecture just got blocked. The answer is usually narrower than the panic suggests: Apple is looking at one specific kind of code download, not at every network call your app makes.
+Short answer
+Guideline 2.5.2 stops apps from downloading or executing code that changes the app&#39;s features after review. The common triggers are vibe coding apps, dynamic UI engines that fetch behavior from a server, and WebViews loading remote scripts with privileged capability. The exception is narrow: educational apps where users write and read their own code in plain view.
+What you should know
+Guideline 2.5.2 protects the review process, not your users.
+Apple&#39;s concern is apps that change their behavior after approval without going back through review.
+JavaScript and Lua are not banned outright.
+What is blocked is downloaded code that runs as logic and changes features, not local scripts shipped inside your bundle.
+The educational exception is narrow.
+Code must be teaching-oriented and fully visible and editable to the user. Hidden execution does not qualify.
+Vibe coding apps are the current enforcement focus.
+Apple removed Anything in March 2026 and previously blocked Replit and Vibecode updates over the same guideline.
+Web content inside a WebView is generally fine.
+Remote scripts that interact with native bridges to invoke device features are the risk.
+What does Guideline 2.5.2 actually prohibit?
+The guideline text reads: &quot;Apps should be self-contained in their bundles, and may not read or write data outside the designated container area, nor may they download, install, or execute code which introduces or changes features or functionality of the app, including other apps.&quot; That is the canonical wording from
+Apple&#39;s App Review Guidelines
+.
+Three behaviors fall inside that ban. First, downloading binary code (executables, dynamic libraries, signed scripts) that runs as part of your app. Second, downloading interpreted code (JavaScript, Lua, Python, embedded scripts) that is then executed by a runtime inside your binary. Third, fetching configuration that drives native behavior in a way that crosses from data into logic. The line between data and logic is where most rejections live.
+The educational exception sits in one sentence and is easy to misread. The code in question has to be the thing the user is learning to write or read, not a vendor&#39;s library quietly updating itself in the background. Reviewers apply the exception narrowly.
+What code patterns most often trigger a 2.5.2 rejection?
+Reviewers look at a small set of patterns. A pre-submission self-audit against this list catches most cases before they happen.
+Pattern
+Example
+Risk level
+Remote JavaScript executed by a native bridge
+JS downloaded from your server and evaluated by
+JSContext
+with access to native APIs
+High
+Dynamic UI engine driven by remote schema
+Server returns a layout DSL that maps to native components and includes inline behavior
+Medium to High
+Over-the-air feature flags that toggle compiled paths
+A flag switches between two feature paths already in the binary
+Low
+Lua or Python interpreter loading new user scripts
+Game engine downloading new level logic, scripting app evaluating downloaded snippets
+High
+WKWebView loading remote HTML and JS for content
+Rendering a marketing page or in-app browser content
+Low
+A common confusion: WebViews running arbitrary JavaScript do not automatically violate 2.5.2. The line is what that JavaScript can do. JavaScript in a WKWebView rendering web content the way a normal browser would is fine. JavaScript evaluated in a JSContext, or passed through a bridge that invokes native modules and changes app behavior, is the problem.
+The 2017 change to the guideline added a sentence narrowing the educational exception, and
+MacStories noted at the time
+that the framing made the rule less about the language used and more about what the downloaded code can reach.
+Why are vibe coding apps hit hardest right now?
+Vibe coding apps, where a user types a prompt and the app builds a working mini app on the fly, run directly into 2.5.2 because the generated app behavior comes from a server and runs inside the parent app. As reported by
+9to5Mac in March 2026
+, Apple removed the Anything app from the App Store after rejecting a submission that tried to redirect generated previews to a web browser. Replit and Vibecode have also seen updates blocked on similar grounds.
+Apple&#39;s position is consistent with the older policy. The company is not against AI-generated code as a concept; the company is against AI-generated code that runs inside the binary with native capability and without going through review. The acceptable shape today is rendering generated apps in a sandboxed web preview, or sending users to a separately submitted app that contains the result.
+What does the educational exception actually cover?
+The exception was added so apps like Swift Playgrounds and learn-to-code platforms could exist. To qualify, the downloaded code has to be the subject of the lesson, not a hidden library. Source code must be completely viewable and editable by the user. The code cannot be used for purposes beyond learning, which rules out scripts that perform real work for the user.
+As
+Saagar Jha analyzed
+after iSH (a Linux shell on iOS) was rejected, reviewers in practice apply the exception narrowly. iSH was eventually approved, but only after a long negotiation about whether a shell counts as educational. If your app is not explicitly a teaching tool, do not plan to rely on this exception as a shield.
+How do you respond to a 2.5.2 rejection?
+A response in App Store Connect should be specific and short, not defensive. Identify the exact code path the reviewer likely flagged. Explain in plain language what your app does and does not download. If you ship interpreted code that was misread as a runtime executor, point to the file location and show that it is bundled, not fetched.
+If the app genuinely fetches logic from a server, the options are three. Bundle the logic into the binary and ship it with the next release. Move execution to a server you control with results returned as data. Open a Resolution Center thread to discuss the educational exception, if it honestly applies. The first option closes the rejection fastest. The third option works only when the app&#39;s whole purpose is teaching code.
+For builders who want an external automated read of their build before resubmitting, PTKD.com (
+https://ptkd.com
+) is one of the platforms focused on pre-submission scanning aligned with OWASP MASVS for no-code and vibe-coded apps. A scan will not predict reviewer behavior, but it will flag the obvious 2.5.2 risk patterns: embedded JS interpreters with bridges to native code, JSContext usage paired with network calls, and Lua or Python runtimes inside the bundle.
+What to watch out for
+Three myths show up in 2.5.2 panic threads on Reddit. The first is that any JavaScript at all triggers the rejection. False; the issue is execution context and capability, not the language itself. The second is that turning off a feature flag fixes a 2.5.2 rejection. Usually false; reviewers look at what the app can do, not what it does on first launch. The third is that an educational disclaimer in the App Store description protects the app. The educational exception is about behavior, not marketing copy.
+The harder edge case is over-the-air update tooling like CodePush, Expo Updates, and EAS Updates. Apple&#39;s stated position is that these are acceptable when updates do not change app behavior beyond bug fixes and UI tweaks. The unwritten line is what counts as a &quot;behavior change,&quot; and that line moves based on how the SDK is interpreted by a given reviewer. Treat OTA update tooling as observed-but-unpredictable: documented as allowed, applied with discretion.
+Key takeaways
+A 2.5.2 rejection is about downloaded code that runs as logic and changes app features, not about every dynamic network call.
+The most common 2026 triggers are vibe coding apps, dynamic UI engines with inline behavior, and JavaScript bridges to native APIs.
+The educational exception is narrow and requires fully visible, user-editable code with no other use.
+A clean response in App Store Connect identifies the suspected code path and either bundles the logic into the binary or moves execution server-side.
+Some teams outsource pre-submission scanning to platforms like PTKD.com (
+https://ptkd.com
+) to catch 2.5.2-shaped risks (embedded JS engines, scripting runtimes, native bridges) before they reach a reviewer.
+#
+app-store-review
+#
+guideline-2-5-2
+#
+rejection
+#
+executable-code
+#
+ios
+#
+vibe-coding
+Frequently asked questions
+My app uses CodePush. Will I get rejected under 2.5.2?
+Probably not, if updates stay within Apple&#x27;s guidance on bug fixes and UI tweaks rather than new features. CodePush and Expo Updates have shipped on the App Store for years, but the rule is interpreted unpredictably. Avoid pushing OTA updates that change the app&#x27;s surface in ways a reviewer might notice as new functionality, and keep the SDK current.
+My app downloads JSON configuration. Is that a 2.5.2 risk?
+No, downloading data is fine. The risk appears when the JSON becomes logic, for example a config that defines behavior the app then evaluates rather than reads. A feature flag returning a boolean is data. A config returning a JavaScript expression your app evaluates inside JSContext is code, and that crosses into 2.5.2 territory.
+Can I ship a Python interpreter inside my iOS app?
+Yes, if it only runs scripts that ship inside the bundle. The rejection trigger is downloading new Python scripts after submission and executing them with access to native capability. Several frameworks like BeeWare and Pyto have shipped Python on iOS, but they bundle the code rather than fetching it. Read-only execution of bundled scripts is generally acceptable to reviewers.
+How long after a 2.5.2 rejection until I can resubmit?
+You can resubmit immediately once the offending code path is removed or restructured. Use Resolution Center to confirm your interpretation with the reviewer before binary changes, then ship a new build. Resubmissions land back in review within the usual queue, typically 24 to 48 hours, though contested 2.5.2 cases can take noticeably longer.
+Does Guideline 2.5.2 apply to macOS apps on the Mac App Store?
+Yes, the same guideline governs the Mac App Store with the same wording. Mac apps have historically been rejected for using the itms-services URL scheme to install code outside the bundle, and for executing downloaded helper binaries. Notarization is a separate process for Mac apps outside the store and does not change the 2.5.2 rule.
+About the author
+Laurens Dauchy
+Founder, PTKD
+Laurens Dauchy is the founder of PTKD, a mobile app security scanner used by indie developers and AI-coded app teams. He writes about mobile security, OWASP MASVS, and the threat model behind no-code and AI-generated apps.
+Keep reading
+Journal · App Store
+How to bypass App Store review (and why it fails)
+You can&#x27;t bypass App Store review for public apps, and the techniques people try risk account termination. Here is why, and the legitimate faster paths.
+8 min read
+Journal · App Store
+How do I contact the Apple App Review team?
+There&#x27;s no App Review phone number, but you can message reviewers in Resolution Center and request a call. Here are the channels and when to use each.
+7 min read
+Journal · App Store
+How do I fix an App Store Guideline 2.5.2 rejection?
+Guideline 2.5.2 bans downloading or running code that changes your app&#x27;s features. OTA JS updates are fine; a remote eval is not. Here is the line and the fix.
+8 min read
+Journal · App Store
+Why did Apple reject my app under Guideline 3.2.2(ii)?
+Your free utility asks for an email on first launch and the rejection cites a guideline that reads &#x27;intentionally omitted&#x27;. Here is what Apple actually means.
+8 min read
+Scan your app in minutes
+Upload an APK, AAB, or IPA. PTKD returns an OWASP-aligned report with copy-paste fixes.
+Try PTKD free
+PTKD
+Made for vibe coders who want to ship secure apps without the complexity.
+Twitter
+GitHub
+Discord
+Product
+Features
+Pricing
+Integrations
+API
+Why PTKD
+Docs
+Getting Started
+CI/CD Setup
+API Reference
+Examples
+How It Works
+Popular topics
+Journal
+Android app security
+iOS vulnerability check
+Mobile security
+AI-coded app safety
+All topics →
+Company
+Blog
+Privacy
+Terms
+© 2026
+PTKD
+. All rights reserved.

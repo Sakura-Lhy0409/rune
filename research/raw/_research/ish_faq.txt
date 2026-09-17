@@ -1,0 +1,372 @@
+
+FAQ · ish-app/ish Wiki · GitHub 
+Skip to content 
+Navigation Menu
+Sign in Appearance settings
+Platform AI CODE CREATION GitHub Copilot Write better code with AI 
+ GitHub Copilot app Direct agents from issue to merge 
+ MCP Registry Integrate external tools 
+DEVELOPER WORKFLOWS Actions Automate any workflow 
+ Codespaces Instant dev environments 
+ Issues Plan and track work 
+ Code Review Manage code changes 
+ Code Quality Enforce quality at merge 
+APPLICATION SECURITY GitHub Advanced Security Find and fix vulnerabilities 
+ Code security Secure your code as you build 
+ Secret protection Stop leaks before they start 
+EXPLORE Why GitHub 
+ Documentation 
+ Blog 
+ Changelog 
+ Marketplace 
+View all features 
+Solutions BY COMPANY SIZE Enterprises 
+ Small and medium teams 
+ Startups 
+ Nonprofits 
+BY USE CASE App Modernization 
+ DevSecOps 
+ DevOps 
+ CI/CD 
+ View all use cases 
+BY INDUSTRY Healthcare 
+ Financial services 
+ Manufacturing 
+ Government 
+ View all industries 
+View all solutions 
+Resources EXPLORE BY TOPIC AI 
+ Software Development 
+ DevOps 
+ Security 
+ View all topics 
+EXPLORE BY TYPE Customer stories 
+ Events & webinars 
+ Ebooks & reports 
+ Business insights 
+ GitHub Skills 
+SUPPORT & SERVICES Documentation 
+ Customer support 
+ Community forum 
+ Trust center 
+ Partners 
+View all resources 
+Open Source COMMUNITY GitHub Sponsors Fund open source developers 
+PROGRAMS Security Lab 
+ Maintainer Community 
+ GitHub Stars 
+ Archive Program 
+REPOSITORIES Topics 
+ Trending 
+ Collections 
+Enterprise ENTERPRISE SOLUTIONS Enterprise platform AI-powered developer platform 
+AVAILABLE ADD-ONS GitHub Advanced Security Enterprise-grade security features 
+ Copilot for Business Enterprise-grade AI features 
+ Premium Support Enterprise-grade 24/7 support 
+Pricing 
+ Search / 
+Sign in 
+ Sign up Appearance settings
+You signed in with another tab or window. Reload to refresh your session. 
+ You signed out in another tab or window. Reload to refresh your session. 
+ You switched accounts on another tab or window. Reload to refresh your session. 
+Dismiss alert 
+{{ message }}
+Uh oh!
+There was an error while loading. Please reload this page .
+ish-app
+/ 
+ish 
+Public 
+Uh oh!
+There was an error while loading. Please reload this page .
+Notifications
+ You must be signed in to change notification settings 
+Fork
+ 1.5k 
+Star
+ 20.5k 
+Code 
+Issues 
+ 652 
+Pull requests 
+ 45 
+Discussions 
+Actions 
+Projects 
+Wiki 
+Security and quality 
+ 0 
+Insights 
+Additional navigation options 
+Code
+Issues
+Pull requests
+Discussions
+Actions
+Projects
+Wiki
+Security and quality
+Insights
+FAQ
+Jump to bottom 
+Edit 
+New page 
+Mark J. Reed edited this page Apr 22, 2025 
+ ·
+ 28 revisions 
+Frequently Asked Questions
+Q: My favorite program doesn't work!
+A: That’s not a question, but this is not surprising. Much of the emulation is still not finished, and many programs will fail. Do not hesitate to create an issue if the specific program is not already on the to-do list , as it will be brought to the attention of the contributors, and they will (eventually) make it work. You can also check out this page on the wiki where users actively test common programs.
+Q: When is the next TestFlight build coming out?
+A: Sooner than it took for build 32 to come out. New builds are more frequent, and the app will be updated when something new has been added or fixed.
+Q: Is iSH 32-bit or 64-bit?
+A: The app itself is a 64-bit ARM binary so that it can run on modern versions of iOS. iSH emulates x86_32 and as such can only run software compiled for this platform (specifically, it cannot currently run 64-bit ELF executables).
+Q: Why does iSH not emulate ARM or some other architecture?
+A: Mostly because x86 was what @tbodt was comfortable with at the time. Using x86 also has the added benefit of letting us access to the rich set of software that’s already been built for this platform. Performance-wise the choice of architecture is not all that important, since the code is being emulated anyways (that is, using ARM wouldn’t actually help much).
+Q: Why does iSH emulate at all? Can't it use a JIT compiler, or virtualization?
+A: iOS devices lack support for hardware virtualization, and even if such a thing did exist it would need to be exposed to applications before it could be used. Generating code on the fly, which is required for JIT compilation, is not intended for use by third-party applications and such a technique requires entitlements that cannot be used when uploading to App Store Connect (as is necessary for distribution via TestFlight).
+Q: I lost access to the TestFlight?
+A: That might be because we hit the limit of testers, at 10,000, so we did some house cleaning and removed testers who have either been inactive, or haven't updated. If needed you can join the TestFlight again. 
+Q: How do you know what an instruction does?
+A: Generally we look here .
+You can look up the instructions by number here 
+Q: iSH looks cool, but I'm not sure what to use it for. What can I do in iSH?
+A: Most things you can do in a headless Linux environment. A few ideas:
+Connect to telnet, SSH, and SFTP servers
+Edit files with vim , nano , or emacs 
+Work with git repositories
+Write and run programs in Python, C, C++, Bash, and many more languages
+Edit text files that other editors might not support, like .json files
+Convert images with magick / gm and vipsthumbnail 
+Test networks with ping , nslookup , traceroute and nc 
+Chat on IRC with irssi , weechat 
+Play text-based games like nethack and the classic advent (Colossal Cave Adventure)
+Read and download the sources of web pages with curl and wget 
+Use gpg to encrypt, decrypt, sign, and verify the signatures of files
+Create and extract tar and zip archives
+Add a custom footer
+Wiki pages 
+Pages 41 
+Loading 
+Home
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+32 bit Glibc support
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Adding a character device to iSH
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+App Store: Support
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Compatible Applications, Programs, Packages
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Contributing to iSH Development
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Extracting a dump of your files
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+FAQ
+Frequently Asked Questions 
+Q: My favorite program doesn't work! 
+Q: When is the next TestFlight build coming out? 
+Q: Is iSH 32-bit or 64-bit? 
+Q: Why does iSH not emulate ARM or some other architecture? 
+Q: Why does iSH emulate at all? Can't it use a JIT compiler, or virtualization? 
+Q: I lost access to the TestFlight? 
+Q: How do you know what an instruction does? 
+Q: iSH looks cool, but I'm not sure what to use it for. What can I do in iSH? 
+Loading 
+Filename‐Trouble with Unicode
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Fonts in iSH
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Genius
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Hostname always localhost
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+How to add a new device to proc ish
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+How To Enable OpenRC & Start Services When iSH App Starts
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Install & Activate Alternate Filesystems
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Installing apk
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Installing apk on the App Store Version
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Installing Golang
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Installing PHP with a TLS certificate and a php filemanager
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Installing R and any package from the CRAN
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+iSH Alpine Release Issues
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+iSH's built in APK
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Making a backup
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Mounting other file providers
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+My alpine
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Running a Python Web Server
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Running a VNC Server
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Running an SSH server
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Running in background
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Running nmap
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Running Ruby Programs
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Shortcuts Integration Workaround
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Themes
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Transferring filesystems between iSH and Docker
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Troubleshooting
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Upgrading to a new release
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+User Interface
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Using Alpine Linux repositories
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+Using iSH
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+View iSH files in Files App
+Uh oh!
+There was an error while loading. Please reload this page .
+Loading 
+What works?
+Uh oh!
+There was an error while loading. Please reload this page .
+Show 26 more pages…
+iSH Wiki
+Home 
+Help
+FAQ 
+Troubleshooting 
+Using iSH 
+User Interface 
+What works? 
+iSH's built in APK 
+Tutorials (Developer)
+Contributing to iSH Development 
+How to add a new Character Device to iSH 
+How to add a new entry to /proc/ish 
+Tutorials (General)
+Fixing hostname localhost 
+Running nmap 
+Running Ruby Programs 
+Installing PHP with a TLS certificate and a PHP filemanager 
+Installing R and any package from the CRAN 
+FileSystems
+iSH Alpine Release Issues 
+Using Alpine Linux repositories 
+Upgrading to a new release 
+Install & Activate Alternate Filesystems 
+Daemons - services
+Running in background 
+How To Enable OpenRC & Start Services When iSH App Starts 
+Running a Python web server 
+Running a VNC Server 
+Running an SSH server 
+iOS integration
+Shortcuts Integration Workaround 
+Extracting a dump of your files 
+View iSH files in Files App 
+Mounting other file providers 
+Clone this wiki locally
+Footer
+© 2026 GitHub, Inc.
+Footer navigation
+Terms 
+Privacy 
+Security 
+Status 
+Community 
+Docs 
+Contact 
+Manage cookies
+Do not share my personal information
+You can’t perform that action at this time.
+

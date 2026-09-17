@@ -1,0 +1,312 @@
+Apple announces changes to iOS in Japan - Apple
+Apple
+Store
+Mac
+iPad
+iPhone
+Watch
+Vision
+AirPods
+TV &amp; Home
+Entertainment
+Accessories
+Support
+0
++
+Newsroom
+Open Newsroom navigation
+Close Newsroom navigation
+Apple Services
+Apple Stories
+Search
+Newsroom
+Close
+opens in new window
+PRESS RELEASE
+December 17, 2025
+Apple announces changes to iOS in Japan
+The changes include new options for developers to distribute apps and process payments, and new protections to help reduce privacy and security risks the MSCA creates
+CUPERTINO, CALIFORNIA
+Apple today announced changes impacting iOS apps in Japan to comply with the Mobile Software Competition Act (MSCA). These updates create new options for developers to distribute apps on alternative app marketplaces and to process app payments for digital goods and services outside of Apple In-App Purchase. Across these changes, Apple has worked to reduce new privacy and security risks the law creates to provide users in Japan the best and safest experience possible.
+The MSCA’s requirements for alternative app marketplaces and app payments open new avenues for malware, fraud and scams, and privacy and security risks. Apple has worked with Japanese regulators to introduce protections from new threats — including important safeguards for younger users. These protections include Notarization for iOS apps, an authorization process for app marketplaces, and requirements that help protect children from inappropriate content and scams.
+While these safeguards do not eliminate the new risks, they are essential to Apple’s work to ensure iOS remains the best, most secure mobile platform available in Japan. Apple will continue to engage with regulators on strengthening protections for iOS users.
+Developers can learn about the new capabilities on the
+Apple Developer Support page
+and can integrate them into their apps beginning today as part of the iOS 26.2 release.
+New Options for Developers to Distribute Apps on iOS in Japan
+The App Store — where every app is reviewed to meet the App Store’s high bar for privacy and security — remains the best place for iOS users in Japan to discover and download the apps they love. This includes App Store features that protect users against fraud and scams and empower parents to ensure their kids have age-appropriate experiences.
+With the MSCA’s new requirements, developers will also have the option to distribute iOS apps in Japan using alternative app marketplaces other than the App Store. Alternative app marketplaces will have to be authorized by Apple and will need to meet ongoing requirements to serve developers and users. However, apps downloaded outside the App Store will not benefit from the same protections Apple provides through App Review, introducing new risks for apps that contain scams, fraud, and abuse, or that expose users to illicit, objectionable, or harmful content not allowed on the App Store.
+To reduce some of these new risks, Apple will conduct a baseline review — called Notarization — that applies to all iOS apps and focuses on basic functionality and protecting users from serious threats. This Notarization process involves a combination of automated checks and human review, and helps ensure apps function as promised and are free of known malware, viruses, or other security threats. However, Notarization is less comprehensive than the App Review process that applies to all apps on the App Store.
+Developers can learn more about operating or distributing from alternative app marketplaces on the new
+Apple Developer Support page
+.
+New Options for Payments in App Store Apps on iOS
+On the App Store, users in Japan can continue to use Apple In-App Purchase to buy digital goods and services, manage subscriptions, request refunds, and view their payment history.
+To comply with the MSCA, Apple is sharing tools that enable developers to offer more ways for users to purchase digital goods and services in apps on the App Store. For their iOS apps distributed on the App Store in Japan, developers will be able to include an alternative payment processing method in their app and/or link users to a website to complete a transaction.
+These alternative payment options will always be presented alongside Apple In-App Purchase, so that users in Japan are clear on when they are transacting through Apple. When users choose to pay with Apple In-App Purchase, they’ll continue to receive familiar protections and tools like refund support, subscription management, and Report a Problem. App Store users’ purchase history and subscription management will only reflect transactions made using Apple In-App Purchase.
+For apps that use alternative payment processing or link users to the web for transactions, Apple will not be able to issue refunds and will have less ability to support customers encountering issues, scams, or fraud. Users may need to share their payment information with additional parties, which can introduce new privacy and security risks.
+Updated Business Terms for iOS Apps in Japan
+To reflect these options for app distribution and payment processing, Apple is also sharing updated business terms for developers’ iOS apps in Japan. These business terms reflect the many ways Apple creates value for developers’ apps, whether or not they use the App Store and/or Apple In-App Purchase.
+Under the business terms for iOS apps in Japan, Apple will continue to only charge a commission on the sale of digital goods and services. The new terms include:
+App Store commission
+: iOS apps on the App Store will pay a reduced commission of either 10 percent for the vast majority of developers — including members of the Small Business Program, Video Partner Program, Mini Apps Partner Program, and for subscriptions following their first year — or 21 percent on transactions for digital goods and services. The App Store commission reflects the value of the tools, technology, and services that enable developers to create apps, in addition to App Store distribution, discovery, and ongoing services.
+Apple payment processing fee
+: In their iOS apps on the App Store, developers can process payments using Apple In-App Purchase for an additional 5 percent fee.
+Store services commission
+: iOS apps on the App Store will pay a commission of 15 percent on transactions for digital goods and services made on a website linked to by the developer’s app. Developers in the programs mentioned above, and subscriptions following their first year, will pay a reduced rate of 10 percent.
+Core Technology Commission
+: iOS apps distributed outside of the App Store will pay a 5 percent commission on the sale of digital goods and services, including paid apps. The Core Technology Commission compensates Apple for the tools, technologies, and services that enable developers to build and share their apps with iOS users.
+Under these new business terms, developers that sell digital goods and services in Japan will pay Apple the same or less than they do today. Developers that do not sell digital goods and services will continue not to pay Apple any commissions or fees.
+Impacts to Kids’ Online Safety
+Apple created the App Store to be a safe place for kids, where parents are empowered to ensure their children have age-appropriate experiences and have the tools they need to keep their children safe online. That’s why Apple has created industry-leading features like age ratings, Content &amp; Privacy Restrictions, content filters, Ask to Buy, and powerful controls that help parents choose how children use their devices.
+With the changes introduced under the MSCA, the new options for alternative distribution and payment methods may expose children to new risks. For instance, apps downloaded from outside the App Store may include illicit and objectionable content, and they will not undergo the same rigorous review process Apple employs to evaluate apps made for children on the App Store. For instance, similar regulatory changes in Europe have enabled types of apps that were previously unavailable on iOS, including pornography apps.
+In an effort to reduce new risks of fraud or scams targeting children, Apple has worked with regulators in Japan to preserve some guardrails, including:
+Apps in the Kids category
+on the App Store will not include links to websites to complete transactions, to reduce the risk of fraud or scams targeting children.
+For
+users under 18 years old
+, all apps from the App Store that use alternative payment processing or link to a website for transactions must include a parental gate that requires younger users to involve their parent or guardian before making a purchase.
+For
+users under 13 years old,
+apps from the App Store cannot link to websites for transactions to protect against the risk of scams that target younger kids.
+Apple is also working to provide developers using alternative payments with a new API so they can enable parents to monitor and approve purchases made outside of Apple In-App Purchase.
+Developers must also continue to provide age ratings for their apps, whether their app is distributed on the App Store or an alternative app marketplace.
+Apple will continue innovating to meet the evolving risks to kids’ safety online by building on the powerful tools and features it makes available today — like Child Accounts, web content filters, app restrictions, monitoring tools like Screen Time and Family Sharing, Communication Safety, and Communication Limits, which help parents shape who their children communicate with and shield them from inappropriate content.
+Additional Updates to iOS
+Alongside the new app distribution and payment options, Apple has introduced additional controls and choices for users in Japan with the release of iOS 26.2. These include:
+A
+browser choice screen
+and
+search engine choice experience
+, giving users in Japan new ways to pick their preferred browser and search engine.
+Default controls
+for navigation apps and app marketplaces.
+Across these controls, users can review and adjust their choices at any time in Settings.
+For developers, Apple is sharing tools in addition to the new options for alternative distribution and app payments, including:
+New options for developers of browser apps to use
+alternative browser engines
+other than WebKit, with strict security and privacy requirements.
+A new API that enables developers of
+voice-based conversational apps
+to provide users the option to launch their app with the iPhone side button.
+A process to request interoperability with core technologies in iPhone and iOS.
+Apple is providing detailed resources to help developers understand the options now available for their apps in Japan, which they can access from the
+Apple Developer Support page
+.
+Share article
+Media
+Text of this article
+December 17, 2025
+PRESS RELEASE
+Apple announces changes to iOS in Japan
+The changes include new options for developers to distribute apps and process payments, and new protections to help reduce privacy and security risks the MSCA creates
+CUPERTINO, CALIFORNIA
+Apple today announced changes impacting iOS apps in Japan to comply with the Mobile Software Competition Act (MSCA). These updates create new options for developers to distribute apps on alternative app marketplaces and to process app payments for digital goods and services outside of Apple In-App Purchase. Across these changes, Apple has worked to reduce new privacy and security risks the law creates to provide users in Japan the best and safest experience possible.
+The MSCA’s requirements for alternative app marketplaces and app payments open new avenues for malware, fraud and scams, and privacy and security risks. Apple has worked with Japanese regulators to introduce protections from new threats — including important safeguards for younger users. These protections include Notarization for iOS apps, an authorization process for app marketplaces, and requirements that help protect children from inappropriate content and scams.
+While these safeguards do not eliminate the new risks, they are essential to Apple’s work to ensure iOS remains the best, most secure mobile platform available in Japan. Apple will continue to engage with regulators on strengthening protections for iOS users.
+Developers can learn about the new capabilities on the
+Apple Developer Support page
+and can integrate them into their apps beginning today as part of the iOS 26.2 release.
+New Options for Developers to Distribute Apps on iOS in Japan
+The App Store — where every app is reviewed to meet the App Store’s high bar for privacy and security — remains the best place for iOS users in Japan to discover and download the apps they love. This includes App Store features that protect users against fraud and scams and empower parents to ensure their kids have age-appropriate experiences.
+With the MSCA’s new requirements, developers will also have the option to distribute iOS apps in Japan using alternative app marketplaces other than the App Store. Alternative app marketplaces will have to be authorized by Apple and will need to meet ongoing requirements to serve developers and users. However, apps downloaded outside the App Store will not benefit from the same protections Apple provides through App Review, introducing new risks for apps that contain scams, fraud, and abuse, or that expose users to illicit, objectionable, or harmful content not allowed on the App Store.
+To reduce some of these new risks, Apple will conduct a baseline review — called Notarization — that applies to all iOS apps and focuses on basic functionality and protecting users from serious threats. This Notarization process involves a combination of automated checks and human review, and helps ensure apps function as promised and are free of known malware, viruses, or other security threats. However, Notarization is less comprehensive than the App Review process that applies to all apps on the App Store.
+Developers can learn more about operating or distributing from alternative app marketplaces on the new
+Apple Developer Support page
+.
+New Options for Payments in App Store Apps on iOS
+On the App Store, users in Japan can continue to use Apple In-App Purchase to buy digital goods and services, manage subscriptions, request refunds, and view their payment history.
+To comply with the MSCA, Apple is sharing tools that enable developers to offer more ways for users to purchase digital goods and services in apps on the App Store. For their iOS apps distributed on the App Store in Japan, developers will be able to include an alternative payment processing method in their app and/or link users to a website to complete a transaction.
+These alternative payment options will always be presented alongside Apple In-App Purchase, so that users in Japan are clear on when they are transacting through Apple. When users choose to pay with Apple In-App Purchase, they’ll continue to receive familiar protections and tools like refund support, subscription management, and Report a Problem. App Store users’ purchase history and subscription management will only reflect transactions made using Apple In-App Purchase.
+For apps that use alternative payment processing or link users to the web for transactions, Apple will not be able to issue refunds and will have less ability to support customers encountering issues, scams, or fraud. Users may need to share their payment information with additional parties, which can introduce new privacy and security risks.
+Updated Business Terms for iOS Apps in Japan
+To reflect these options for app distribution and payment processing, Apple is also sharing updated business terms for developers’ iOS apps in Japan. These business terms reflect the many ways Apple creates value for developers’ apps, whether or not they use the App Store and/or Apple In-App Purchase.
+Under the business terms for iOS apps in Japan, Apple will continue to only charge a commission on the sale of digital goods and services. The new terms include:
+App Store commission
+: iOS apps on the App Store will pay a reduced commission of either 10 percent for the vast majority of developers — including members of the Small Business Program, Video Partner Program, Mini Apps Partner Program, and for subscriptions following their first year — or 21 percent on transactions for digital goods and services. The App Store commission reflects the value of the tools, technology, and services that enable developers to create apps, in addition to App Store distribution, discovery, and ongoing services.
+Apple payment processing fee
+: In their iOS apps on the App Store, developers can process payments using Apple In-App Purchase for an additional 5 percent fee.
+Store services commission
+: iOS apps on the App Store will pay a commission of 15 percent on transactions for digital goods and services made on a website linked to by the developer’s app. Developers in the programs mentioned above, and subscriptions following their first year, will pay a reduced rate of 10 percent.
+Core Technology Commission
+: iOS apps distributed outside of the App Store will pay a 5 percent commission on the sale of digital goods and services, including paid apps. The Core Technology Commission compensates Apple for the tools, technologies, and services that enable developers to build and share their apps with iOS users.
+Under these new business terms, developers that sell digital goods and services in Japan will pay Apple the same or less than they do today. Developers that do not sell digital goods and services will continue not to pay Apple any commissions or fees.
+Impacts to Kids’ Online Safety
+Apple created the App Store to be a safe place for kids, where parents are empowered to ensure their children have age-appropriate experiences and have the tools they need to keep their children safe online. That’s why Apple has created industry-leading features like age ratings, Content &amp; Privacy Restrictions, content filters, Ask to Buy, and powerful controls that help parents choose how children use their devices.
+With the changes introduced under the MSCA, the new options for alternative distribution and payment methods may expose children to new risks. For instance, apps downloaded from outside the App Store may include illicit and objectionable content, and they will not undergo the same rigorous review process Apple employs to evaluate apps made for children on the App Store. For instance, similar regulatory changes in Europe have enabled types of apps that were previously unavailable on iOS, including pornography apps.
+In an effort to reduce new risks of fraud or scams targeting children, Apple has worked with regulators in Japan to preserve some guardrails, including:
+Apps in the Kids category
+on the App Store will not include links to websites to complete transactions, to reduce the risk of fraud or scams targeting children.
+For
+users under 18 years old
+, all apps from the App Store that use alternative payment processing or link to a website for transactions must include a parental gate that requires younger users to involve their parent or guardian before making a purchase.
+For
+users under 13 years old,
+apps from the App Store cannot link to websites for transactions to protect against the risk of scams that target younger kids.
+Apple is also working to provide developers using alternative payments with a new API so they can enable parents to monitor and approve purchases made outside of Apple In-App Purchase.
+Developers must also continue to provide age ratings for their apps, whether their app is distributed on the App Store or an alternative app marketplace.
+Apple will continue innovating to meet the evolving risks to kids’ safety online by building on the powerful tools and features it makes available today — like Child Accounts, web content filters, app restrictions, monitoring tools like Screen Time and Family Sharing, Communication Safety, and Communication Limits, which help parents shape who their children communicate with and shield them from inappropriate content.
+Additional Updates to iOS
+Alongside the new app distribution and payment options, Apple has introduced additional controls and choices for users in Japan with the release of iOS 26.2. These include:
+A
+browser choice screen
+and
+search engine choice experience
+, giving users in Japan new ways to pick their preferred browser and search engine.
+Default controls
+for navigation apps and app marketplaces.
+Across these controls, users can review and adjust their choices at any time in Settings.
+For developers, Apple is sharing tools in addition to the new options for alternative distribution and app payments, including:
+New options for developers of browser apps to use
+alternative browser engines
+other than WebKit, with strict security and privacy requirements.
+A new API that enables developers of
+voice-based conversational apps
+to provide users the option to launch their app with the iPhone side button.
+A process to request interoperability with core technologies in iPhone and iOS.
+Apple is providing detailed resources to help developers understand the options now available for their apps in Japan, which they can access from the
+Apple Developer Support page
+.
+About Apple
+Apple revolutionized personal technology with the introduction of the Macintosh in 1984. Today, Apple leads the world in innovation with iPhone, iPad, Mac, AirPods, Apple Watch, and Apple Vision Pro. Apple’s six software platforms — iOS, iPadOS, macOS, watchOS, visionOS, and tvOS — provide seamless experiences across all Apple devices and empower people with breakthrough services including the App Store, Apple Music, Apple Pay, iCloud, and Apple TV. Apple’s more than 150,000 employees are dedicated to making the best products on earth and to leaving the world better than we found it.
+Press Contacts
+Apple Media Helpline
+media.help@apple.com
+Apple Media Helpline
+media.uk@apple.com
+Copy text
+About Apple
+Apple revolutionized personal technology with the introduction of the Macintosh in 1984. Today, Apple leads the world in innovation with iPhone, iPad, Mac, AirPods, Apple Watch, and Apple Vision Pro. Apple’s six software platforms — iOS, iPadOS, macOS, watchOS, visionOS, and tvOS — provide seamless experiences across all Apple devices and empower people with breakthrough services including the App Store, Apple Music, Apple Pay, iCloud, and Apple TV. Apple’s more than 150,000 employees are dedicated to making the best products on earth and to leaving the world better than we found it.
+Press Contacts
+Apple Media Helpline
+media.help@apple.com
+Apple Media Helpline
+media.uk@apple.com
+More from Apple Newsroom
+PHOTOS
+Celebrating “What Holds Us” on iPhone 18 Pro
+September 16, 2026
+Widow’s Bay
+triumphs as most decorated freshman comedy in Emmy history">
+PRESS RELEASE
+Widow’s Bay
+triumphs as most decorated freshman comedy in Emmy history
+September 15, 2026
+QUICK READ
+Apple’s new child safety features now available
+September 14, 2026
+Apple Newsroom
+The latest news and updates,
+direct from Apple.
+Read more
+Stay up to date with the latest articles from Apple Newsroom.
+Dismiss
+Get Notifications
+Apple Footer
+
+Apple
+Newsroom
+Apple announces changes to iOS in Japan
+Shop and Learn
+Shop and Learn
+Store
+Mac
+iPad
+iPhone
+Watch
+Vision
+AirPods
+TV &amp; Home
+AirTag
+Accessories
+Gift Cards
+Apple Wallet
+Apple Wallet
+Wallet
+Apple Card
+Apple Pay
+Apple Cash
+Account
+Account
+Manage Your Apple Account
+Apple Store Account
+iCloud.com
+Entertainment
+Entertainment
+Apple One
+Apple TV
+Apple Music
+Apple Arcade
+Apple Fitness+
+Apple News+
+Apple Podcasts
+Apple Books
+App Store
+Apple Store
+Apple Store
+Find a Store
+Genius Bar
+Today at Apple
+Group Reservations
+Apple Camp
+Apple Store App
+Certified Refurbished
+Apple Trade In
+Financing
+Carrier Deals at Apple
+Order Status
+Shopping Help
+For Business
+For Business
+Apple and Business
+Shop for Business
+For Education
+For Education
+Apple and Education
+Shop for K-12
+Shop for College
+For Healthcare
+For Healthcare
+Apple and Healthcare
+For Government
+For Government
+Apple and Government
+Shop for Veterans and Military
+Shop for State and Local Employees
+Shop for Federal Employees
+Apple Values
+Apple Values
+Accessibility
+Education
+Environment
+Inclusion and Diversity
+Privacy
+Racial Equity and Justice
+Supply Chain Innovation
+About Apple
+About Apple
+Newsroom
+Apple Leadership
+Career Opportunities
+Investors
+Ethics &amp; Compliance
+Events
+Contact Apple
+More ways to shop:
+Find an Apple Store
+or
+other retailer
+near you.
+Or call
+1-800-MY-APPLE
+(1-800-692-7753).
+United States
+Español
+Copyright ©
+2026
+Apple Inc. All rights reserved.
+Privacy Policy
+Terms of Use
+Sales and Refunds
+Legal
+Site Map

@@ -1,0 +1,83 @@
+AltStore
+User Guide
+AltStore PAL is joining the Fediverse!
+See more on
+explore.alt.store
+Sideloading for Everyone
+Discover apps that push the boundaries of iOS.
+Get AltStore
+Discover New Apps
+Check out these apps from verified developers on AltStore PAL.
+You can also find a list of available sources at
+explore.alt.store/directory
+Submit Your App
+A New Way to Sideload
+AltStore is an app store designed for sideloading. Every app in
+AltStore gets a beautifully generated store page with detailed
+information to make sideloading fun and easy. Browse apps from
+trusted developers, or add additional &quot;sources&quot; to
+further increase your options.
+Plus, AltStore is made with security in mind. You can view a
+full list of an app&#x27;s permissions from its store page, and
+AltStore will even automatically alert you if they change so you
+can sideload with confidence.
+Learn More
+Self-Published Apps
+Anyone can distribute their apps with AltStore. All you need is to
+make a “source”, which you can do by hosting a text file with
+basic information about your apps. Users can then enter your
+source URL in AltStore and your apps will automatically appear.
+Follow
+our complete guide to create your own source and start
+distributing your apps in minutes!
+Publish Apps
+By Indies — For Indies
+Riley Testut
+Developer
+Shane Gill
+Operations
+AltStore is an open-source project developed by a small, dedicated
+team, and you can follow along with our progress on GitHub.
+We’re
+continuously working on new updates for our apps, and you can try out
+in-development features by joining our Patreon.
+Join Patreon
+Downloads
+AltStore, Delta, and Clip are properties of AltStore LLC and are in no
+way associated with Nintendo Co., Ltd. or Apple Inc.
+AltStore PAL
+Available only in the European Union, Japan, & Brazil.
+Learn more
+Download
+AltStore Classic
+Requires AltServer to install. Follow our step-by-step
+Install Guide
+AltServer macOS
+Requires macOS 11 or later
+For macOS 10.14 and 10.15,
+see our
+FAQ
+AltServer Windows
+Requires Windows 10 or later
+“[AltStore] is clever, has been verified by other developers, and the
+service has an active community of thousands of users who side-load
+apps on their devices. For the past few weeks, I’ve been one of them.”
+- Federico Viticci,
+MacStories
+CoNTACT US
+Business Inquiries
+Press
+Developers
+Report an App
+Resources
+User Guide
+How To Distribute Apps
+Developer Terms
+App Submission Guidelines
+About
+Privacy Policy
+Copyright © 2024 AltStore
+Experience Apps like Never Before
+AltStore allows apps to exist on iOS that may not otherwise.
+Apple doesn&#x27;t allow all apps on their store, so
+AltStore gives those apps a chance.

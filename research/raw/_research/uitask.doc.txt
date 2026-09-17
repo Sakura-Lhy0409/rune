@@ -1,0 +1,494 @@
+The primary view controller for a custom keyboard app extension.
+class
+ 
+UIInputViewController
+UIInputViewController
+=== UIInputViewController
+@
+MainActor
+ 
+class
+ 
+UIInputViewController
+Overview
+To create a custom keyboard, first subclass the 
+ class, then add your keyboard’s user interface to the 
+ property of your subclass. In Xcode, you can start a custom keyboard by choosing the Custom Keyboard target template.
+A custom keyboard can respond to user input events in the following ways:
+Add text in the form of an unattributed 
+ object at the insertion point in the current text input object, by calling the 
+ method on the 
+ property. This property provides that method through its conformance to the 
+ protocol
+Delete text in a backward direction, starting at the insertion point, by calling the 
+ method on the 
+ property.
+Switch to another keyboard in the set of user-enabled keyboards, by calling the 
+ method.
+Dismiss the keyboard, by calling the 
+ method.
+Obtain textual context around the insertion point by reading the 
+ properties 
+ and 
+. To find out if the current text input object is empty, call the 
+ method on the 
+ property. You can employ this textual context by considering it along with user input, to offer context-sensitive output to a document from your keyboard.
+An input view controller conforms to the 
+ protocol, allowing you to respond to changes in document content and position of the insertion point.
+To present an appropriate keyboard layout, respond to the current text input object’s 
+ property. For each keyboard type trait you support, change the contents of your primary view accordingly.
+For more about creating a custom keyboard, read 
+ in 
+.
+=== Inherits From
+=== Conforms To
+=== Custom keyboard
+=== Providing a user interface for a custom keyboard
+=== Controlling a custom keyboard
+=== Interacting with a text input object
+=== Obtaining a supplementary lexicon
+=== Changing the primary language of a custom keyboard
+=== Configuring the keyboard behaviors
+A protocol that an object adopts to create a bar object in your app.
+protocol
+ 
+NSTouchBarProvider
+NSTouchBarProvider
+=== NSTouchBarProvider
+A protocol that enables an object to be encoded and decoded for archiving and distribution.
+protocol
+ 
+NSCoding
+NSCoding
+=== NSCoding
+The interface an app extension uses to respond to a request from a host app.
+protocol
+ 
+NSExtensionRequestHandling
+NSExtensionRequestHandling
+=== NSExtensionRequestHandling
+A static, plain-text Unicode string object.
+class
+ 
+NSString
+NSString
+=== NSString
+The group of methods that are fundamental to all Objective-C objects.
+protocol
+ 
+NSObjectProtocol
+NSObjectProtocol
+=== NSObjectProtocol
+A type whose instances can be encoded, and appropriately passed, as
+ 
+elements of a C 
+.
+protocol
+ 
+CVarArg
+CVarArg
+=== CVarArg
+A type with a customized textual representation suitable for debugging
+ 
+purposes.
+protocol
+ 
+CustomDebugStringConvertible
+CustomDebugStringConvertible
+=== CustomDebugStringConvertible
+A type with a customized textual representation.
+protocol
+ 
+CustomStringConvertible
+CustomStringConvertible
+=== CustomStringConvertible
+A type that can be compared for value equality.
+protocol
+ 
+Equatable
+Equatable
+=== Equatable
+A type that can be hashed into a 
+ to produce an integer hash value.
+protocol
+ 
+Hashable
+Hashable
+=== Hashable
+A singleton actor whose executor is equivalent to the main
+ 
+dispatch queue.
+actor
+ 
+MainActor
+MainActor
+=== MainActor
+A thread-safe type whose values can be shared across arbitrary concurrent
+ 
+contexts without introducing a risk of data races.
+protocol
+ 
+Sendable
+Sendable
+=== Sendable
+A type whose metatype can be shared across arbitrary isolation domains
+ 
+without introducing a risk of data races.
+protocol
+ 
+SendableMetatype
+SendableMetatype
+=== SendableMetatype
+=== Technologies
+Construct and manage a graphical, event-driven user interface for your iOS, iPadOS, or tvOS app.
+=== UIKit
+An interface that provides a source for shareable content to fulfill user requests to share current content.
+protocol
+ 
+UIActivityItemsConfigurationProviding
+UIActivityItemsConfigurationProviding
+=== UIActivityItemsConfigurationProviding
+A collection of methods that gives you access to the appearance proxy for a class.
+protocol
+ 
+UIAppearance
+UIAppearance
+=== UIAppearance
+A protocol that a class must adopt to allow appearance customization using the 
+ API.
+protocol
+ 
+UIAppearanceContainer
+UIAppearanceContainer
+=== UIAppearanceContainer
+A set of methods for adapting the contents of your view controllers to size and trait changes.
+protocol
+ 
+UIContentContainer
+UIContentContainer
+=== UIContentContainer
+A set of methods that define the focus behavior for a branch of the view hierarchy.
+protocol
+ 
+UIFocusEnvironment
+UIFocusEnvironment
+=== UIFocusEnvironment
+A property that enables a custom input or keyboard accessory view to play standard keyboard input clicks.
+protocol
+ 
+UIInputViewAudioFeedback
+UIInputViewAudioFeedback
+=== UIInputViewAudioFeedback
+The primary view controller for a custom keyboard app extension.
+class
+ 
+UIInputViewController
+UIInputViewController
+=== UIInputViewController
+Switches to the next keyboard in the list of user-enabled keyboards.
+func
+ 
+advanceToNextInputMode
+()
+- 
+advanceToNextInputMode
+=== advanceToNextInputMode()
+Dismisses the custom keyboard from the screen.
+func
+ 
+dismissKeyboard
+()
+- 
+dismissKeyboard
+=== dismissKeyboard()
+Supports interaction with the list of user-enabled keyboards.
+func
+ 
+handleInputModeList
+(
+from
+: 
+UIView
+, 
+with
+: 
+UIEvent
+)
+- 
+handleInputModeListFromView:withEvent:
+=== handleInputModeList(from:with:)
+A Boolean value that indicates whether the keyboard has a dictation key.
+var
+ 
+hasDictationKey
+: 
+Bool
+hasDictationKey
+=== hasDictationKey
+A Boolean value that indicates whether the keyboard has full access.
+var
+ 
+hasFullAccess
+: 
+Bool
+hasFullAccess
+=== hasFullAccess
+The primary view for the input view controller.
+var
+ 
+inputView
+: 
+UIInputView
+?
+inputView
+=== inputView
+A Boolean value that indicates whether the keyboard must display an input switcher key.
+var
+ 
+needsInputModeSwitchKey
+: 
+Bool
+needsInputModeSwitchKey
+=== needsInputModeSwitchKey
+The primary language for a custom keyboard.
+var
+ 
+primaryLanguage
+: 
+String
+?
+primaryLanguage
+=== primaryLanguage
+Obtains a supplementary lexicon of term pairs in a custom keyboard.
+func
+ 
+requestSupplementaryLexicon
+(
+completion
+: (
+UILexicon
+) -> 
+Void
+)
+- 
+requestSupplementaryLexiconWithCompletion:
+=== requestSupplementaryLexicon(completion:)
+A proxy to the text input object that the custom keyboard is interacting with.
+var
+ 
+textDocumentProxy
+: any 
+UITextDocumentProxy
+textDocumentProxy
+=== textDocumentProxy
+A set of methods a responder uses to implement simple text entry.
+protocol
+ 
+UIKeyInput
+UIKeyInput
+=== UIKeyInput
+Deletes a character from the displayed text.
+func
+ 
+deleteBackward
+()
+- 
+deleteBackward
+=== deleteBackward()
+A Boolean value that indicates whether the text-entry object has any text.
+var
+ 
+hasText
+: 
+Bool
+hasText
+=== hasText
+Inserts a character into the displayed text.
+func
+ 
+insertText
+(
+String
+)
+- 
+insertText:
+=== insertText(_:)
+Constants that specify the type of keyboard to display for a text-based view.
+enum
+ 
+UIKeyboardType
+UIKeyboardType
+=== UIKeyboardType
+A read-only array of term pairs, each in a lexicon entry object, for a custom keyboard.
+class
+ 
+UILexicon
+UILexicon
+=== UILexicon
+A read-only term pair, available within a lexicon object, for a custom keyboard.
+class
+ 
+UILexiconEntry
+UILexiconEntry
+=== UILexiconEntry
+The interface that determines whether a responder object supports paste configuration.
+protocol
+ 
+UIPasteConfigurationSupporting
+UIPasteConfigurationSupporting
+=== UIPasteConfigurationSupporting
+A set of standard methods that apps can adopt to support editing.
+protocol
+ 
+UIResponderStandardEditActions
+UIResponderStandardEditActions
+=== UIResponderStandardEditActions
+Methods for adding objects to your state restoration archives.
+protocol
+ 
+UIStateRestoring
+UIStateRestoring
+=== UIStateRestoring
+An object that provides textual context to a custom keyboard.
+protocol
+ 
+UITextDocumentProxy
+UITextDocumentProxy
+=== UITextDocumentProxy
+Textual context after the insertion point in the current text input object.
+var
+ 
+documentContextAfterInput
+: 
+String
+?
+documentContextAfterInput
+=== documentContextAfterInput
+Textual context before the insertion point in the current text input object.
+var
+ 
+documentContextBeforeInput
+: 
+String
+?
+documentContextBeforeInput
+=== documentContextBeforeInput
+An intermediary between a document and the text input system.
+protocol
+ 
+UITextInputDelegate
+UITextInputDelegate
+=== UITextInputDelegate
+A type that calls your code in reaction to changes in the trait environment.
+protocol
+ 
+UITraitChangeObservable
+UITraitChangeObservable
+=== UITraitChangeObservable
+A set of methods that makes the iOS interface environment available to your app.
+protocol
+ 
+UITraitEnvironment
+UITraitEnvironment
+=== UITraitEnvironment
+The protocol you adopt to restore an object’s state from a user activity.
+protocol
+ 
+UIUserActivityRestoring
+UIUserActivityRestoring
+=== UIUserActivityRestoring
+An object that manages a view hierarchy for your UIKit app.
+class
+ 
+UIViewController
+UIViewController
+=== UIViewController
+Enable network access and write access to a shared group container.
+=== Configuring open access for a custom keyboard
+Insert, delete, and manipulate text by using a proxy to a text input view.
+=== Handling text interactions in custom keyboards
+=== Custom Keyboard
+Custom Keyboard
+=== App Extension Programming Guide
+App Extension Programming Guide
+UIInputViewController
+UIInputViewController
+=== Providing a user interface for a custom keyboard
+=== Controlling a custom keyboard
+=== Interacting with a text input object
+=== Obtaining a supplementary lexicon
+=== Changing the primary language of a custom keyboard
+=== Configuring the keyboard behaviors
+=== Inherits From
+=== Conforms To
+=== Custom keyboard
+@interface
+ 
+UIInputViewController
+ : 
+UIViewController
+NSTouchBarProvider
+NSCoding
+NSExtensionRequestHandling
+NSString
+NSObject
+NSObject
+UIActivityItemsConfigurationProviding
+UIActivityItemsConfigurationProviding
+UIAppearance
+UIAppearance
+UIAppearanceContainer
+UIAppearanceContainer
+UIContentContainer
+UIContentContainer
+UIFocusEnvironment
+UIFocusEnvironment
+UIInputViewAudioFeedback
+UIInputViewAudioFeedback
+UIInputViewController
+UIInputViewController
+- 
+advanceToNextInputMode
+- 
+dismissKeyboard
+- 
+handleInputModeListFromView:withEvent:
+hasDictationKey
+hasFullAccess
+inputView
+needsInputModeSwitchKey
+primaryLanguage
+- 
+requestSupplementaryLexiconWithCompletion:
+textDocumentProxy
+UIKeyInput
+UIKeyInput
+- 
+deleteBackward
+hasText
+- 
+insertText:
+UIKeyboardType
+UIKeyboardType
+UILexicon
+UILexicon
+UILexiconEntry
+UILexiconEntry
+UIPasteConfigurationSupporting
+UIPasteConfigurationSupporting
+UIResponderStandardEditActions
+UIResponderStandardEditActions
+UIStateRestoring
+UIStateRestoring
+UITextDocumentProxy
+UITextDocumentProxy
+documentContextAfterInput
+documentContextBeforeInput
+UITextInputDelegate
+UITextInputDelegate
+UITraitEnvironment
+UITraitEnvironment
+UIUserActivityRestoring
+UIUserActivityRestoring
+UIViewController
+UIViewController

@@ -1,0 +1,117 @@
+# apple-fm-bench
+
+A tiny, dependency-free benchmark for **Apple's on-device Foundation Model** —
+the `fm` CLI that ships in macOS 27+ — exposed over `fm serve`. It measures the
+two numbers that actually matter:
+
+- **Prompt processing** (how fast the model ingests your prompt), and
+- **Decode** (how fast it generates new tokens).
+
+> ⚠️ **Beta:** Apple's `fm` CLI is currently beta software — its flags, output
+> format, and performance can change between OS builds. Treat every number here
+> as a snapshot, not a spec.
+
+```
+== PROMPT PROCESSING (TTFT vs exact prompt length) ==
+ 36 prompt tok -> TTFT median 261.9 ms
+ 1944 prompt tok -> TTFT median 1990.8 ms
+ --> PROMPT PROCESSING ~ 1,142 tok/s
+
+== DECODE (steady-state generation) ==
+ --> DECODE ~ 60 tok/s
+```
+
+## Why this exists
+
+Standard LLM benchmarks (llama-bench, llama-benchy, and friends) are built for
+`llama.cpp` / vLLM / SGLang servers that report detailed timing stats. Pointed
+at `fm serve`, they produce **garbage** — in testing, one popular tool reported
+**~600,000 tokens/sec** of prompt processing.
+
+`fm serve` breaks three assumptions those tools rely on:
+
+1. It **streams by default** and emits an instant empty "role" chunk, so naive
+ time-to-first-response measurements clock ~2 ms — before any real work.
+2. It reports **no `prompt_eval` / `predicted` timing** and **no `token_ids`**.
+3. It **ignores `min_tokens` / `ignore_eos`**, so you can't force an output
+ length to measure against.
+
+apple-fm-bench sidesteps all three:
+
+- **Prompt processing** is the *slope* of time-to-first-token (TTFT) versus
+ exact prompt length. A straight line `TTFT = overhead + cost_per_token x N`
+ falls out; the slope is pure prompt-eval speed and the intercept absorbs all
+ fixed overhead (network round-trip, the empty chunk, first-token sampling).
+- **Decode** is the steady-state rate over a long generation, timed from the
+ first real content token to the last.
+- **Token counts** come from `fm token-count` — the model's own tokenizer — so
+ there's no third-party-tokenizer approximation error.
+
+## Requirements
+
+- A Mac running **macOS 27+** with the built-in `fm` CLI (`/usr/bin/fm`). Verified on macOS 27.0; macOS 26 (Tahoe) introduced the Foundation Models *framework*, but the bundled `fm` command ships in 27.
+- **Python 3.9+** (system Python is fine). **No pip packages** — standard library only.
+
+> **Run it on the machine you're benchmarking — not over the network (for now).**
+> For accurate token counts the tool shells out to `fm token-count` *locally*, so
+> it needs the `fm` CLI on the same machine it runs on. There's currently no way
+> to count `fm` tokens remotely (`fm serve` exposes no token-count endpoint, and
+> its `usage` field is unreliable — PCC reports `prompt_tokens: 0`). So even
+> though `--base-url` can point at a remote `fm serve`, run this tool **on the Mac
+> that's running `fm`**. Benchmarking a remote server from a Mac without `fm` is
+> not supported yet.
+
+## Usage
+
+Start the server in one terminal and leave it running:
+
+```bash
+fm serve --host 127.0.0.1 --port 1976
+```
+
+Then benchmark in another:
+
+```bash
+python3 apple-fm-bench.py # on-device `system` model
+python3 apple-fm-bench.py --model pcc # Private Cloud Compute
+python3 apple-fm-bench.py --json out.json # also write machine-readable results
+```
+
+Useful flags:
+
+| Flag | Default | Meaning |
+|---|---|---|
+| `--base-url` | `http://127.0.0.1:1976/v1` | `fm serve` endpoint |
+| `--model` | `system` | `system` (on-device) or `pcc` (cloud) |
+| `--pp-reps` | `1 12 40 90 160` | filler repetitions -> the prompt-length sweep |
+| `--samples` | `4` | TTFT samples per prompt size (median taken) |
+| `--decode-runs` | `4` | decode runs (median taken) |
+| `--max-tokens` | `320` | decode generation length |
+
+### Benchmarking PCC (the gotcha)
+
+`pcc` (Private Cloud Compute) only works when **`fm serve` runs in the
+foreground of an unlocked desktop session**. Backgrounding it — or running it
+over SSH/headless — drops the interactive context and PCC reports
+`available: false`. The on-device `system` model has no such restriction.
+
+## Example results (M4 Pro Mac Mini, macOS 27 · beta `fm`)
+
+| Metric | `system` (on-device) | `pcc` (cloud) |
+|---|---|---|
+| Prompt processing | ~1,150 tok/s | ~3,290 tok/s |
+| Decode | ~52–60 tok/s | ~142 tok/s |
+
+Notes:
+- These come from a **beta** `fm` — expect them to shift as Apple updates the model and CLI.
+- PCC numbers include the network round-trip to Apple's servers; the slope
+ method cancels that fixed cost, so prompt-processing stays meaningful.
+- PCC `usage.prompt_tokens` is reported as `0`, which is why prompt length is
+ measured locally with `fm token-count`.
+- PCC decode tends to be very flat run-to-run, which may be a server-side
+ streaming cap rather than the model's true ceiling.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
+

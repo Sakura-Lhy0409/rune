@@ -1,0 +1,156 @@
+Submit an AI App to the App Store: Yes or No? | Newly — Newly
+Pricing
+YouTube
+Hackathons
+Careers
+Docs
+Articles · How-To
+Updated June 2026
+Can you submit an AI app to the App Store?
+Yes, with conditions.
+The question hides a simpler one: what did the AI actually produce? You can
+submit an AI app to the App Store
+when it is a real native app. You run into trouble when it is a repackaged website. Apple reviews the result, not the tool, so the answer comes down to what you upload, not how it was written.
+Start building today
+See the path to submitting
+The short answer
+Yes if it is a real native app,
+no if it is a repackaged website
+.
+Apple has no rule against apps written with AI. It reviews what you upload. A genuine native binary, the kind a tool like Newly produces, is reviewed like any other app. A WebView that just loads your website commonly trips Guideline 4.2 on minimum functionality. And an app from a commercialized template or app generation service is rejected under Guideline 4.2.6 unless the provider of the app’s content submits it directly.
+The practical read: build a real native app, publish it under your own developer account as the content provider, and the AI behind it is not the obstacle. The rest of this page shows the rule in Apple’s own words, then the path to submitting.
+By app type
+Native versus
+web wrapper
+.
+Whether you can submit an AI app to the App Store splits cleanly by what the build is. The same prompt can produce a real app or a thin wrapper depending on the tool, and review treats those very differently.
+A real native app
+A genuine React Native, Swift, or Kotlin app compiled to a native binary that runs on the device. It has real screens, real features, and a reason to exist as an app. This is reviewed like any other submission. The AI that helped write it is not a factor.
+A repackaged website
+A WebView that loads your existing site inside an app shell. Apple treats this as a website pretending to be an app, and it commonly trips Guideline 4.2 on minimum functionality. Building with AI does not change that; the problem is the web wrapper, not the AI.
+A generic template clone
+An app spun out of a commercialized template or app generation service, often a near-identical copy of many others. Guideline 4.2.6 rejects these unless the provider of the app&#x27;s content submits them directly. A unique native app you own and submit yourself sits on the right side of that rule.
+One detail decides the column: a native build runs on the device, a wrapper just renders your website. For more on that split, see
+native apps vs web apps vs PWAs
+.
+The rule
+What Guideline 4.2 and 4.2.6
+actually say
+.
+Two parts of the
+App Store Review Guidelines
+do the work here. The first sets the bar for being app-like at all. The second is the one people mishear as a ban on AI builders.
+“Your app should include features, content, and UI that elevate it beyond a repackaged website. If your app is not particularly useful, unique, or ‘app-like,’ it doesn’t belong on the App Store.”
+Apple, App Store Review Guidelines, 4.2 Minimum Functionality
+Apps “shouldn’t primarily be marketing materials, advertisements, web clippings, content aggregators, or a collection of links.”
+Apple, App Store Review Guidelines, 4.2.2
+“Apps created from a commercialized template or app generation service will be rejected unless they are submitted directly by the provider of the app’s content.”
+Apple, App Store Review Guidelines, 4.2.6
+Read 4.2.6 closely and the escape hatch is in the text. The rule rejects template and generation-service apps unless the provider of the content submits them. So an app built from your own idea, shipped as your own native codebase under your own account, is the permitted case, not the banned one. The thing 4.2.6 is aimed at is the factory of identical clones, not a unique app you own.
+The path
+The path to
+submitting
+.
+Once you have a real native app, the route to submit an AI app to the App Store is the same route any developer takes. Four moves, condensed. Each one links out where there is more depth than this page should repeat.
+1
+Enroll in the developer programs
+You publish under your own accounts. The Apple Developer Program is 99 dollars a year. The Google Play Developer account is a one-time 25 dollar fee. Enroll once in each and you can submit and update apps from then on. Doing this yourself is also what keeps you the provider of your app&#x27;s content, which is the position Guideline 4.2.6 expects.
+2
+Produce a native build
+You need a compiled binary, not a link to a website. With Newly that means a real React Native and Expo app, and Newly helps produce the build. With another route it means compiling your own code, for example an Expo project you wrote with help from ChatGPT. Either way the artifact you upload is a native app, which is what keeps you clear of the web-wrapper problem.
+3
+Test the build with TestFlight
+Before the public submission, run the iOS build through TestFlight so you and a few testers can install it on real devices and check it behaves. This is the step that catches the crash on launch or the missing permission that a simulator hides. It is optional in theory and worth it in practice.
+4
+Submit in App Store Connect
+Upload the build, fill in the listing, screenshots, privacy details, and pricing, then submit for review in App Store Connect, with the Google Play Console as the Android equivalent. We keep this short on purpose. Our full publish walkthrough covers every field and screenshot, so follow that when you are ready to ship.
+The costs, in one line
+The
+Apple Developer Program
+is 99 dollars a year. The
+Google Play Developer
+account is a one-time 25 dollar fee. Those are the platform charges to publish, separate from your build tool.
+Read the full publish walkthrough
+Where Newly fits
+How Newly fits
+this question
+.
+Newly outputs a real React Native and Expo app, a native binary rather than a WebView, and it also helps produce the build. You submit it under your own developer account as the provider of your app’s content. That is the exact arrangement Guideline 4.2.6 permits, which is why a Newly app is on the right side of both the minimum-functionality and the template rule. So if you want to submit an AI app to the App Store without inheriting the web-wrapper problem, a native codebase you own is the point.
+To be straight about it, Newly is not the only way. A developer writing Expo code with help from ChatGPT, or using another native builder, can submit too. And no tool can promise approval, since review covers far more than these two rules. What Newly removes is the specific failure mode of shipping a website dressed up as an app. Newly starts at $
+25
+a month.
+Try Newly from $
+25
+/mo
+See why apps get rejected
+FAQ
+How to submit an AI app to the App Store,
+answered
+.
+Can you submit an AI app to the App Store?
+Yes, with conditions. Apple does not reject an app because AI helped write it. It reviews what the AI produced. If the output is a real native app, with features, content, and UI that go beyond a repackaged website, it is reviewed like any other app and submits fine. If the output is mostly a website in a wrapper, it can be rejected under Guideline 4.2 for minimum functionality. So the honest answer to whether you can submit an AI app to the App Store is that it depends on the app, not the tool that built it.
+Does Apple reject apps just for being built with AI?
+What is Apple Guideline 4.2.6 and does it block AI app builders?
+Why do web-wrapper apps get rejected under Guideline 4.2?
+How much does it cost to submit an app to the stores?
+Is Newly the only way to submit an AI-built app?
+Will my AI-built app definitely get approved?
+Related
+Keep reading.
+Why Apps Get Rejected From the App Store
+Publish to the App Store
+AI App Builders That Build Native Apps
+Add Payments to Your App
+All Articles and Guides
+Build the kind of app
+that gets submitted
+.
+From $
+25
+a month, Newly turns your idea into a real React Native and Expo app, a native binary you own and submit under your own account. No web wrapper to explain to a reviewer.
+Try Newly from $
+25
+/mo
+See the publish walkthrough
+Building the future of native development. Create beautiful, performant apps without coding.
+Resources
+APK Builder
+Native Development
+iOS Development
+Android Development
+Lovable for Mobile Apps
+How-To Guides
+App Examples
+Guides
+Comparisons
+Mobile Sensors
+Browse All Resources →
+Product
+Newly AI
+Built with Newly
+App Templates
+Articles
+Tutorials
+Resources
+YouTube Videos
+Hackathons
+Vibe Coding Hackathons Tour
+Pricing
+Referral Program
+FAQ
+Docs
+Legal
+Support
+Privacy Policy
+Subprocessors
+Terms of Service
+About Us
+Careers
+Socials
+X
+Reddit
+LinkedIn
+YouTube
+© 2025
+Newly
+— All rights reserved

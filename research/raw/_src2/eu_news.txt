@@ -1,0 +1,251 @@
+Apple announces changes for apps in the European Union - Apple
+Apple
+Store
+Mac
+iPad
+iPhone
+Watch
+Vision
+AirPods
+TV &amp; Home
+Entertainment
+Accessories
+Support
+0
++
+Newsroom
+Open Newsroom navigation
+Close Newsroom navigation
+Apple Services
+Apple Stories
+Search
+Newsroom
+Close
+opens in new window
+UPDATE
+August 18, 2026
+Apple announces changes for apps in the European Union
+Following close collaboration with the European Commission, Apple announced changes to its business terms for apps in the EU.
+Apple today announced changes to its business terms for apps in the European Union, following close collaboration with the European Commission. These changes resolve Apple’s disagreements with the Commission over business terms and alternative distribution. They also reduce complexity by moving every developer that distributes apps in the EU to a single set of business terms. Developers can sign the new terms today, and changes will go into effect on October 1.
+Unified Business Terms for Developers That Distribute Apps in the EU
+Under this new model, Apple will charge a commission on the sale of digital goods and services. The Core Technology Fee, a per-install fee for developers that achieve extraordinary scale, will be replaced by the Core Technology Commission, a simple 5 percent commission on digital transactions in apps distributed outside the App Store. The new terms also eliminate the initial acquisition fee and store services fee.
+In addition, Apple is adjusting commission rates across the App Store, alternative app payments, and alternatively distributed apps. Each of these commissions reflects the many ways Apple creates value for developers’ apps, whether they use the App Store and/or Apple In-App Purchase.
+Under the new terms:
+For App Store apps using Apple In-App Purchase
+, the commission will be 26 percent. For the vast majority of developers, including those in the App Store Small Business Program, Mini Apps Partner Program, or Video Partner Program, and for auto-renewing subscriptions after their first year, it will be 15 percent.
+For App Store apps using alternative payment processing
+, the commission will be 20 percent. Developers in the programs mentioned above will pay a reduced rate of 10 percent.
+For App Store apps that link out of the app to complete purchases
+, the commission will be 15 percent. Developers in the programs mentioned above will pay a reduced rate of 10 percent.
+For apps distributed via alternative app marketplaces or the web
+, Apple will charge a 5 percent Core Technology Commission.
+Alternative Payments and Apple In-App Purchase
+Apple In-App Purchase is the safest, most trusted way for users to purchase and download apps and make seamless and secure payments in those apps. Under the updated terms, developers can now offer Apple In-App Purchase alongside alternative payment options, which had not previously been permitted in the EU. This is subject to presentation requirements designed to give users a consistent, transparent experience.
+To provide consistency and clarity for users, developers distributing apps in the EU will select their payment options — Apple In-App Purchase, alternative payment processing in their app, linking out to the web, or a combination — and must maintain those options for 12 months.
+Child Safety Protections for Alternative Payments in the EU
+The App Store is designed to be a safe and trusted place for everyone, particularly children. Apple has worked with the Commission to implement child safety measures for alternative payments similar to those already in place in other markets:
+Apps in the Kids category
+on the App Store will not include links to websites to complete transactions, to reduce the risk of fraud or scams targeting children.
+For
+users under 18 years old
+, all apps from the App Store that use alternative payment processing or link out to a website for transactions must include a parental gate that requires younger users to involve their parent or guardian before making a purchase.
+For
+users under 13 years old
+, apps from the App Store cannot link out to websites for transactions to protect against the risk of scams that target younger kids.
+In EU member states that require parental consent for digital actions for children older than 13 years old, these protections will scale accordingly.
+Expanded Eligibility to Operate Alternative App Marketplaces or Distribute via the Web
+Apple is also expanding who is eligible to operate an alternative app marketplace or distribute apps via the web in the EU. Companies will now qualify if they:
+Meet a moderate financial-stability bar as scored by Dun &amp; Bradstreet.
+Are publicly traded or owned by a publicly traded company.
+Have received venture funding from an established investment firm.
+Have completed a financial audit by a licensed accountant.
+Are a government entity, educational institution, or nonprofit.
+Web distribution, which is available only in the EU, does not have a marketplace operator standing behind it or ongoing oversight like the kind Apple provides for the App Store. This means a bad actor distributing via the web can operate for a long time, harming users, before anyone catches it. In order to keep EU users as safe as possible, Apple will continue to require every alternatively distributed app to go through Notarization — a baseline review focused on basic functionality and protection from serious threats.
+Apple is providing detailed resources to help developers understand the options now available for their apps in the EU, which they can access from the
+Apple Developer Support page
+.
+Share article
+Media
+Text of this article
+August 18, 2026
+UPDATE
+Apple announces changes for apps in the European Union
+Apple today announced changes to its business terms for apps in the European Union, following close collaboration with the European Commission. These changes resolve Apple’s disagreements with the Commission over business terms and alternative distribution. They also reduce complexity by moving every developer that distributes apps in the EU to a single set of business terms. Developers can sign the new terms today, and changes will go into effect on October 1.
+Unified Business Terms for Developers That Distribute Apps in the EU
+Under this new model, Apple will charge a commission on the sale of digital goods and services. The Core Technology Fee, a per-install fee for developers that achieve extraordinary scale, will be replaced by the Core Technology Commission, a simple 5 percent commission on digital transactions in apps distributed outside the App Store. The new terms also eliminate the initial acquisition fee and store services fee.
+In addition, Apple is adjusting commission rates across the App Store, alternative app payments, and alternatively distributed apps. Each of these commissions reflects the many ways Apple creates value for developers’ apps, whether they use the App Store and/or Apple In-App Purchase.
+Under the new terms:
+For App Store apps using Apple In-App Purchase
+, the commission will be 26 percent. For the vast majority of developers, including those in the App Store Small Business Program, Mini Apps Partner Program, or Video Partner Program, and for auto-renewing subscriptions after their first year, it will be 15 percent.
+For App Store apps using alternative payment processing
+, the commission will be 20 percent. Developers in the programs mentioned above will pay a reduced rate of 10 percent.
+For App Store apps that link out of the app to complete purchases
+, the commission will be 15 percent. Developers in the programs mentioned above will pay a reduced rate of 10 percent.
+For apps distributed via alternative app marketplaces or the web
+, Apple will charge a 5 percent Core Technology Commission.
+Alternative Payments and Apple In-App Purchase
+Apple In-App Purchase is the safest, most trusted way for users to purchase and download apps and make seamless and secure payments in those apps. Under the updated terms, developers can now offer Apple In-App Purchase alongside alternative payment options, which had not previously been permitted in the EU. This is subject to presentation requirements designed to give users a consistent, transparent experience.
+To provide consistency and clarity for users, developers distributing apps in the EU will select their payment options — Apple In-App Purchase, alternative payment processing in their app, linking out to the web, or a combination — and must maintain those options for 12 months.
+Child Safety Protections for Alternative Payments in the EU
+The App Store is designed to be a safe and trusted place for everyone, particularly children. Apple has worked with the Commission to implement child safety measures for alternative payments similar to those already in place in other markets:
+Apps in the Kids category
+on the App Store will not include links to websites to complete transactions, to reduce the risk of fraud or scams targeting children.
+For
+users under 18 years old
+, all apps from the App Store that use alternative payment processing or link out to a website for transactions must include a parental gate that requires younger users to involve their parent or guardian before making a purchase.
+For
+users under 13 years old
+, apps from the App Store cannot link out to websites for transactions to protect against the risk of scams that target younger kids.
+In EU member states that require parental consent for digital actions for children older than 13 years old, these protections will scale accordingly.
+Expanded Eligibility to Operate Alternative App Marketplaces or Distribute via the Web
+Apple is also expanding who is eligible to operate an alternative app marketplace or distribute apps via the web in the EU. Companies will now qualify if they:
+Meet a moderate financial-stability bar as scored by Dun &amp; Bradstreet.
+Are publicly traded or owned by a publicly traded company.
+Have received venture funding from an established investment firm.
+Have completed a financial audit by a licensed accountant.
+Are a government entity, educational institution, or nonprofit.
+Web distribution, which is available only in the EU, does not have a marketplace operator standing behind it or ongoing oversight like the kind Apple provides for the App Store. This means a bad actor distributing via the web can operate for a long time, harming users, before anyone catches it. In order to keep EU users as safe as possible, Apple will continue to require every alternatively distributed app to go through Notarization — a baseline review focused on basic functionality and protection from serious threats.
+Apple is providing detailed resources to help developers understand the options now available for their apps in the EU, which they can access from the
+Apple Developer Support page
+.
+Press Contacts
+Marni Goldberg
+Apple
+marni_goldberg@apple.com
+Apple Media Helpline
+media.help@apple.com
+Copy text
+Press Contacts
+Marni Goldberg
+Apple
+marni_goldberg@apple.com
+Apple Media Helpline
+media.help@apple.com
+More from Apple Newsroom
+PHOTOS
+Celebrating “What Holds Us” on iPhone 18 Pro
+September 16, 2026
+Widow’s Bay
+triumphs as most decorated freshman comedy in Emmy history">
+PRESS RELEASE
+Widow’s Bay
+triumphs as most decorated freshman comedy in Emmy history
+September 15, 2026
+QUICK READ
+Apple’s new child safety features now available
+September 14, 2026
+Apple Newsroom
+The latest news and updates,
+direct from Apple.
+Read more
+Stay up to date with the latest articles from Apple Newsroom.
+Dismiss
+Get Notifications
+Apple Footer
+
+Apple
+Newsroom
+Apple announces changes for apps in the European Union
+Shop and Learn
+Shop and Learn
+Store
+Mac
+iPad
+iPhone
+Watch
+Vision
+AirPods
+TV &amp; Home
+AirTag
+Accessories
+Gift Cards
+Apple Wallet
+Apple Wallet
+Wallet
+Apple Card
+Apple Pay
+Apple Cash
+Account
+Account
+Manage Your Apple Account
+Apple Store Account
+iCloud.com
+Entertainment
+Entertainment
+Apple One
+Apple TV
+Apple Music
+Apple Arcade
+Apple Fitness+
+Apple News+
+Apple Podcasts
+Apple Books
+App Store
+Apple Store
+Apple Store
+Find a Store
+Genius Bar
+Today at Apple
+Group Reservations
+Apple Camp
+Apple Store App
+Certified Refurbished
+Apple Trade In
+Financing
+Carrier Deals at Apple
+Order Status
+Shopping Help
+For Business
+For Business
+Apple and Business
+Shop for Business
+For Education
+For Education
+Apple and Education
+Shop for K-12
+Shop for College
+For Healthcare
+For Healthcare
+Apple and Healthcare
+For Government
+For Government
+Apple and Government
+Shop for Veterans and Military
+Shop for State and Local Employees
+Shop for Federal Employees
+Apple Values
+Apple Values
+Accessibility
+Education
+Environment
+Inclusion and Diversity
+Privacy
+Racial Equity and Justice
+Supply Chain Innovation
+About Apple
+About Apple
+Newsroom
+Apple Leadership
+Career Opportunities
+Investors
+Ethics &amp; Compliance
+Events
+Contact Apple
+More ways to shop:
+Find an Apple Store
+or
+other retailer
+near you.
+Or call
+1-800-MY-APPLE
+(1-800-692-7753).
+United States
+Español
+Copyright ©
+2026
+Apple Inc. All rights reserved.
+Privacy Policy
+Terms of Use
+Sales and Refunds
+Legal
+Site Map

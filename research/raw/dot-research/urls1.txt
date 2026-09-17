@@ -1,0 +1,37 @@
+# Apple Foundation Models - DocC JSON
+https://developer.apple.com/tutorials/data/documentation/foundationmodels.json | apple_fm_root
+https://developer.apple.com/tutorials/data/documentation/foundationmodels/systemlanguagemodel.json | apple_fm_systemlanguagemodel
+https://developer.apple.com/tutorials/data/documentation/foundationmodels/privatecloudcomputelanguagemodel.json | apple_fm_pcc
+https://developer.apple.com/tutorials/data/documentation/foundationmodels/adding-server-side-intelligence-with-private-cloud-compute.json | apple_fm_pcc_article
+https://developer.apple.com/tutorials/data/documentation/technotes/tn3193-managing-the-on-device-foundation-model-s-context-window.json | apple_tn3193
+https://developer.apple.com/tutorials/data/documentation/foundationmodels/languagemodelsession.json | apple_fm_session
+https://developer.apple.com/tutorials/data/documentation/foundationmodels/generable().json | apple_fm_generable
+# MLX Swift
+https://raw.githubusercontent.com/ml-explore/mlx-swift/main/README.md | mlxswift_readme
+https://raw.githubusercontent.com/ml-explore/mlx-swift-lm/main/README.md | mlxswiftlm_readme
+https://raw.githubusercontent.com/ml-explore/mlx-swift-lm/main/Package.swift | mlxswiftlm_package
+https://raw.githubusercontent.com/ml-explore/mlx-swift-examples/main/README.md | mlxexamples_readme
+https://api.github.com/repos/ml-explore/mlx-swift | gh_mlxswift_repo
+https://api.github.com/repos/ml-explore/mlx-swift/releases | gh_mlxswift_releases
+https://api.github.com/repos/ml-explore/mlx-swift-lm | gh_mlxswiftlm_repo
+https://api.github.com/repos/ml-explore/mlx-swift-examples | gh_mlxexamples_repo
+# llama.cpp swift
+https://raw.githubusercontent.com/ggml-org/llama.cpp/master/Package.swift | llamacpp_package_swift
+https://raw.githubusercontent.com/ggml-org/llama.cpp/master/build-xcframework.sh | llamacpp_xcframework_build
+https://raw.githubusercontent.com/ggml-org/llama.cpp/master/examples/llama.swiftui/README.md | llamacpp_swiftui_readme
+https://raw.githubusercontent.com/tattn/LocalLLMClient/main/README.md | localllmclient_readme
+https://api.github.com/repos/tattn/LocalLLMClient | gh_localllmclient_repo
+https://api.github.com/repos/tattn/LocalLLMClient/releases | gh_localllmclient_releases
+https://api.github.com/repos/ggml-org/llama.cpp/releases/latest | gh_llamacpp_release
+# benchmarks / notes
+https://raw.githubusercontent.com/john-rocky/CoreML-LLM/main/docs/RESEARCH.md | bench_johnrocky_research
+https://raw.githubusercontent.com/john-rocky/apple-silicon-llm-bench/main/README.md | bench_apple_silicon_llm
+https://raw.githubusercontent.com/alexziskind1/apple-fm-bench/main/README.md | bench_applefm
+https://raw.githubusercontent.com/john-rocky/PrivateFoundationModels/main/docs/RUNTIME_COMPARISON.md | bench_runtime_comparison
+https://www.ertas.ai/blog/llm-run-on-iphone-benchmarks | bench_ertas
+https://www.local-llm.net/compare/mlx-vs-coreml-vs-llamacpp-on-mac/ | bench_localllmnet
+# others
+https://raw.githubusercontent.com/apple/coremltools/main/README.md | coremltools_readme
+https://raw.githubusercontent.com/pytorch/executorch/main/README.md | executorch_readme
+https://raw.githubusercontent.com/mlc-ai/mlc-llm/main/README.md | mlcllm_readme
+https://raw.githubusercontent.com/huggingface/swift-transformers/main/README.md | swifttransformers_readme

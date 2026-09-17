@@ -1,0 +1,574 @@
+‎a-Shell App - App Store
+Search
+Today
+Games
+Apps
+Arcade
+Platform
+iPhone
+iPad
+Mac
+Vision
+Watch
+TV
+a-Shell
+*Local* Unix terminal (& ssh)
+Free · Designed for iPad. Not verified for macOS.
+Share
+550 Ratings
+4.5
+Age Rating
+16+
+Years
+Chart
+#20
+Developer Tools
+Developer
+Nicolas Holzschuch
+Language
+EN
++ 6 More
+Size
+2
+GB
+iPhone, iPad
+Local Unix terminal for iOS. Run C, C++, Python, JS, sh & all Unix commands locally on your phone, no network connection required.
+Powerful when combined with Shortcuts.
+a-Shell is a complete local terminal emulator, allowing to run most Unix commands on your iOS device. You can transfer files using scp and curl, edit them with vim and ed, process them using grep, awk and sed. You can work with git repositories using lg2.
+Most commands are compiled for iOS native Arm64 format, making them fast and well integrated with the BSD Unix that powers iOS/iPadOS.
+a-Shell includes Python, Lua, Perl, JavaScript, C, C++ for programming and TeX (texlive 2025, with Tikz and LuaTeX) for text processing.
+There are also multiple network utilities: nslookup, ping, whois, ifconfig... Type help for help, help -l to get the full list of commands.
+a-Shell can be controlled from Shortcuts: run commands in order, process files in a-Shell, get the results as text or files, transfer files to other apps...
+a-shell uses iOS 13+ “multiple windows” ability, so you can run multiple shells at the same time, with different commands, in different directories. You can edit a file in one window with vim and process it in the other with python.
+Compile your C or C++ programs to webAssembly using clang or clang++, and execute the resulting binary. A complete webAssembly SDK is included (WASI-libc).
+a-Shell is the complete version. If you need a smaller app, and you don't need a C compiler, a TeX engine, or numpy and matplotlib, there is a-Shell mini.
+more
+Ratings & Reviews
+4.5
+out of 5
+550 Ratings
+The notable boundary-pusher of local command line functions on iOS/iPadOS
+01/19/2023
+NeoYokel
+There are now quite a few terminal emulator-esque apps on the App Store, but I've been using a-Shell since it was joined only by Blink (from which it was forked) and iSH. As it was then, a-Shell remains the only one of these with which one can actually accomplish command line tasks *locally* beyond screwing around. I am ultimately not a command line native, and I don't have the basic theory beneath my use of Python scripts, yet I've been able to accomplish startlingly powerful things within this app, thanks in large part to gracious and immediately-available support via the project's Discord server.If you've found yourself here by way of a Siri Shortcut's requirement, I would encourage you to take the time to investigate the commands said shortcut(s) run - try running them yourself!
+The notable boundary-pusher of local command line functions on iOS/iPadOS
+01/19/2023
+NeoYokel
+There are now quite a few terminal emulator-esque apps on the App Store, but I've been using a-Shell since it was joined only by Blink (from which it was forked) and iSH. As it was then, a-Shell remains the only one of these with which one can actually accomplish command line tasks *locally* beyond screwing around. I am ultimately not a command line native, and I don't have the basic theory beneath my use of Python scripts, yet I've been able to accomplish startlingly powerful things within this app, thanks in large part to gracious and immediately-available support via the project's Discord server.If you've found yourself here by way of a Siri Shortcut's requirement, I would encourage you to take the time to investigate the commands said shortcut(s) run - try running them yourself!
+Seems like just a scam app and a lot of disappointment
+04/07/2023
+Stevo3985
+It sure promises a LOT of features I need, but I guess I’ll stick with the Alpine Linux container in iSH, cuz this app won’t even recognize my text inputs. I am not an iOS noob, and my day, I am a systems engineer for a network video company. I NEED these utilities on my iPhone, but not a single item can be used in the full @-shell and the mini is incapable of doing anything from inside the container where it exists. I couldn’t even run a simple SCP, rsync, or even ssh session to try and move files from a remote server. If this app isn’t a scam, it needs a lot of work, cuz I have worked through a whole week worth of remedy attempts, and have tried to reboot, reinstall, even factory reset and restored my iPhone from DFU mode (you read that correctly, I need this badly enough that I went scorched earth and started from scratch, and STILL cannot get this app to respond to my iPhone 13 Pro text inputs from any of my 3 keyboards) 🤦‍♂️ Fix it and I’ll fix my review. PLEASE!!!!
+Developer Response
+For actual help, there is: e-mail: another_shell@icloud.com, github issues: https://github.com/holzschu/a-shell/issues or discussions: https://github.com/holzschu/a-shell/discussions discord: https://discord.gg/cvYnZm69Gy and twitter: https://twitter.com/a_shell_iosAll of these offer a faster response time than appStore reviews (I do respond to all queries). I'll need a more accurate description of the symptoms, though.
+Seems like just a scam app and a lot of disappointment
+04/07/2023
+Stevo3985
+It sure promises a LOT of features I need, but I guess I’ll stick with the Alpine Linux container in iSH, cuz this app won’t even recognize my text inputs. I am not an iOS noob, and my day, I am a systems engineer for a network video company. I NEED these utilities on my iPhone, but not a single item can be used in the full @-shell and the mini is incapable of doing anything from inside the container where it exists. I couldn’t even run a simple SCP, rsync, or even ssh session to try and move files from a remote server. If this app isn’t a scam, it needs a lot of work, cuz I have worked through a whole week worth of remedy attempts, and have tried to reboot, reinstall, even factory reset and restored my iPhone from DFU mode (you read that correctly, I need this badly enough that I went scorched earth and started from scratch, and STILL cannot get this app to respond to my iPhone 13 Pro text inputs from any of my 3 keyboards) 🤦‍♂️ Fix it and I’ll fix my review. PLEASE!!!!
+Developer Response
+04/09/2023
+For actual help, there is: e-mail: another_shell@icloud.com, github issues: https://github.com/holzschu/a-shell/issues or discussions: https://github.com/holzschu/a-shell/discussions discord: https://discord.gg/cvYnZm69Gy and twitter: https://twitter.com/a_shell_iosAll of these offer a faster response time than appStore reviews (I do respond to all queries). I'll need a more accurate description of the symptoms, though.
+a-Shell is a must-have for bringing the full power of a terminal interface to your iOS device.
+06/12/2024
+michexta
+a-Shell is an outstanding terminal interface app for iOS, boasting a user-friendly design and powerful features. It supports a wide range of Linux commands, enabling seamless interaction with servers and local files. Its robust performance ensures smooth operation, even with complex scripts, and regular updates enhance its reliability and security.Whether for professional development or personal projects, a-Shell is a must-have for bringing the full power of a terminal interface to your iOS device.
+a-Shell is a must-have for bringing the full power of a terminal interface to your iOS device.
+06/12/2024
+michexta
+a-Shell is an outstanding terminal interface app for iOS, boasting a user-friendly design and powerful features. It supports a wide range of Linux commands, enabling seamless interaction with servers and local files. Its robust performance ensures smooth operation, even with complex scripts, and regular updates enhance its reliability and security.Whether for professional development or personal projects, a-Shell is a must-have for bringing the full power of a terminal interface to your iOS device.
+Pretty cool, but missing some features
+06/10/2021
+RSnake
+It would be nice to be able to have a bashrc or something that allows you to control prompts, and a ps and kill functionality and screen, etc…. for batch jobs. But the really odd thing is hitting a button (other than space and enter keys for some reason) won’t repeat the character - that’s super annoying in vim for instance, because it means you have to do some funky things just to move the cursor around at any sort of speed. [EDIT: The developer said there’s a setting to use the cap’s lock as an escape key that if you disable, allows you to get this feature. For those who don’t know you can use control-[ to get an escape char too.]  But overall really cool/useful. Even with a lack of wget (not a fan of curl), you can do pip install wget then python -m wget <site> and poof.
+Developer Response
+If you activate "caps-lock as escape" in the App settings, you also get auto-repeat for keys. It's pretty useful for Vim, I agree, but incompatible with multi-char input.
+Pretty cool, but missing some features
+06/10/2021
+RSnake
+It would be nice to be able to have a bashrc or something that allows you to control prompts, and a ps and kill functionality and screen, etc…. for batch jobs. But the really odd thing is hitting a button (other than space and enter keys for some reason) won’t repeat the character - that’s super annoying in vim for instance, because it means you have to do some funky things just to move the cursor around at any sort of speed. [EDIT: The developer said there’s a setting to use the cap’s lock as an escape key that if you disable, allows you to get this feature. For those who don’t know you can use control-[ to get an escape char too.]  But overall really cool/useful. Even with a lack of wget (not a fan of curl), you can do pip install wget then python -m wget <site> and poof.
+Developer Response
+06/10/2021
+If you activate "caps-lock as escape" in the App settings, you also get auto-repeat for keys. It's pretty useful for Vim, I agree, but incompatible with multi-char input.
+What’s New
+Version History
+- multiple bug fixes: making sure we're not in bracketed paste mode, interactive input in WebAssembly commands.
+- more complete cleanup after "exit" on iPhones
+- added the new options in "man config" (they were already in config, but the man page was lagging behind)
+2.2.1
+5d ago
+- fixed an issue where the terminal would sometimes not scroll with finger-swipe
+- fixed an issue where clicking on screen would not always work
+- re-introduced three keyboard shortcuts: command-., command-n and command-k
+- new WebAssembly interpreter: wasmkit (for iOS 18 and above only). About as fast as wasm3.
+- updated clang and clang++ to version 22.1.0, updated the SDK to keep in sync (wasi-sdk-33)
+- fixed several issues with wasm and wasm3
+- fixed multiple bugs.
+- updated SwiftTerm for faster rendering
+2.2.0
+Aug 30
+- moved to texlive-2026
+- fixed a major cause of crash at startup
+- $TERM is now xterm-256colors (it enables many more options in curses)
+- store bookmarks for already accessible directories
+- get the volume name as a bookmark when you select a mounted device with pickFolder
+- fixed issues with reloading in internalbrowser
+- added more optional entitlements for interacting with the system using pyobjc
+2.1.0
+Jul 1
+- fixed an issue with "cd -" in dash
+- fixed an issue with Thai keyboards
+- removed automatic autocomplete after completing a directory
+2.0.3
+May 27
+Multiple improvements over versions 2.0.0 and 2.0.1:
+- single-arrow buttons by default for iPhones that don't have LiquidGlass (iOS 18 and below)
+- brought back the ability to have the old toolbar on iPads (a fix for iPads where the standard toolbar does not appear)
+- fix for pickFolder inside other commands
+- fix for ffmpeg and control-C
+- fix for escape sequences (\033) in prompt definitions
+- several fixes for ssh and ssh-agent inside dash
+- openurl does not percent-encode urls that are already percent-encoded
+- openurl checks that is has a valid URL
+2.0.2
+May 15
+- Fixes three bugs that were present in version 2.0.0, plus everything that was already present in version 2.0.0:
+- new terminal rendering system (SwiftTerm), much faster than the previous one, but with incompatible changes
+- better integration with VoiceOver
+- better autocomplete
+- new config options, for blinking cursors
+- multi-arrow buttons on iPhones
+- better user interface for the internal browser
+- added Python package: curl-cffi
+2.0.1
+May 6
+- new terminal rendering system (SwiftTerm), much faster than the previous one, but with incompatible changes
+- better integration with VoiceOver
+- better autocomplete
+- new config options, for blinking cursors
+- multi-arrow buttons on iPhones
+- better user interface for the internal browser
+- added Python package: curl-cffi
+2.0.0
+May 1
+Fixes multiple issues with libgit2. This should fix the case where lg2 crashes randomly.
+1.17.5
+Jan 29
+- fixed issues with python, ssh-agent and lg2
+1.17.4
+12/22/2025
+- bug fix for ssh-agent
+- bug fix for Python (ctypes and kiwisolver)
+1.17.3
+11/26/2025
+Bug fixes for: Python 3.13 (opencv, kiwisolver), openrsync for local folders, ssh-agent, lg2, sha256.
+1.17.2
+11/22/2025
+- new command: rsync
+- updated Python to version 3.13
+- added scipy, scikit-learn, seaborn...
+- fixed issues with buttons and iOS 26
+- fixed bugs with man, less, nnn, scp...
+1.17.0
+11/06/2025
+- new command: "repeatCommand" will execute a command at regular intervals. There is one repeating command for each window. "repeatCommand" with no arguments shows the current repeating command, "repeatCommand --stop" will stop the repetition.
+- added TIFF and XML support to ImageMagick, updated ImageMagick to version 4.7.0
+- added libopus support to ffmpeg
+- fixes one issue with ffmpeg and hardware encoding that happens with iOS 26.
+- fixed a bug when copying screen content
+- fixed several issues with wasm3
+- fixed an issue with dvipdfmx and user-installed fonts
+1.16.1
+08/25/2025
+We updated the texlive binaries to texlive-2025. You will have to re-download the texlive installation to get version 2025.
+1.16.0
+06/11/2025
+Multiple bug fixes, including:
+- ssh-copy-id
+- better rendering of long text containing emojis
+- autocomplete for bookmarks and directories with spaces in their names
+- improved responde to ^C for some commands
+1.15.12
+05/12/2025
+- add support for alt-delete on external keyboards,
+- imageMagick now has access to system fonts,
+- fixed issues for restoring environment and sessions.
+1.15.11
+02/21/2025
+- multiple bug fixes (python, dash, sftp, ssh, curl...) and also everything that was new in 1.15.9, such as:
+- new h.265 encoder for ffmpeg: activate it with "-c:v libkvazaar -tag:v hvc1"
+- new HEIF decoder for ImageMagick; you can now edit your iPhone photos
+- updated bc to 7.0.3, added math extensions for bc
+1.15.10
+12/17/2024
+- new h.265 encoder for ffmpeg: activate it with "-c:v libkvazaar -tag:v hvc1"
+- new HEIF decoder for ImageMagick; you can now edit your iPhone photos
+- updated ImageMagick to 7.1.1
+- updated bc to 7.0.3, added math extensions for bc
+- multiple bug fixes in dash, TipKit, lua, bc, ssh...
+1.15.9
+12/09/2024
+- fixes an issue with dash
+- fixes issues with webAssembly interpreters
+1.15.8
+11/25/2024
+- fixes an issue with the new (fast) WebAssembly interpreter, wasm3. It can now scan directories.
+- Both WebAssembly interpreters are now compatible with WebAssembly code generated elsewhere.
+1.15.7
+11/21/2024
+- new parameter for the "Get File" Shortcut: get file "as a copy". Use this when you encounter an issue with "Get File" and iOS 18.
+- ffmpeg can add subtitles to video.
+1.15.6
+09/23/2024
+- Fixes major issues with the Shortcuts Intents and iOS 18: Get File, Put File, Execute Commands.
+1.15.5
+09/18/2024
+- Fixes a major issue with the "Get File" intent and iOS 18.
+- fixes a major issue with iOS 18 and clang and TeX
+1.15.4
+09/15/2024
+- Fixes a major issue with the "Get File" intent and iOS 18.
+1.15.3
+09/14/2024
+- fixes a major issue with f2c (Fortran-to-C compiler)
+- adds a new WebAssembly interpreter, wasm3 (faster on some commands).
+- introduces environment variables: APPNAME, APPVERSION and APPBUILDNUMBER, in case you need to check these for behaviour.
+1.15.2
+09/08/2024
+- multiple bug fixes: making sure we're not in bracketed paste mode, interactive input in WebAssembly commands.
+- more complete cleanup after "exit" on iPhones
+- added the new options in "man config" (they were already in config, but the man page was lagging behind)
+more
+Version 2.2.1
+5d ago
+App Privacy
+App Privacy
+The developer,
+Nicolas Holzschuch
+, indicated that the app’s privacy practices may include handling of data as described below. This information has not been verified by Apple. For more information, see the
+developer’s privacy policy
+.
+To help you better understand the developer’s responses, see
+Privacy Definitions and Examples
+.
+Privacy practices may vary, for example, based on the features you use or your age.
+Learn More
+Data Not Collected
+The developer does not collect any data from this app.
+The developer,
+Nicolas Holzschuch
+, indicated that the app’s privacy practices may include handling of data as described below. For more information, see the
+developer’s privacy policy
+.
+Data Not Collected
+The developer does not collect any data from this app.
+Privacy practices may vary, for example, based on the features you use or your age.
+Learn More
+Accessibility
+Accessibility
+The developer,
+Nicolas Holzschuch
+, indicated that this app supports the following accessibility features to help make common tasks in the app faster and easier to complete.
+Learn More
+VoiceOver
+Navigate and explore the app using gestures, braille, and speech output.
+Larger Text
+Increase the text size in the app to 200% or more.
+Dark Interface
+Apply a dark color scheme to the screens, menus, and controls to reduce eye strain.
+Sufficient Contrast
+Increase or adjust the contrast between text or iconography and background.
+The developer indicated that this app supports the following accessibility features.
+Learn More
+Supported Features
+VoiceOver
+Larger Text
+Dark Interface
+Sufficient Contrast
+Information
+Seller
+Nicolas Holzschuch
+Size
+2 GB
+Category
+Developer Tools
+Compatibility
+Requires iOS 14.0 or later.
+iPhone
+Requires iOS 14.0 or later.
+iPad
+Requires iPadOS 14.0 or later.
+iPod touch
+Requires iOS 14.0 or later.
+Mac
+Requires macOS 12.0.0 or later and a Mac with Apple M1 chip or later.
+Apple Vision
+Requires visionOS 1.0 or later.
+Languages
+English and 6 more
+English, French, German, Japanese, Korean, Simplified Chinese, Spanish
+Age Rating
+16+
+16+
+Learn More
+Contains
+Unrestricted Web Access
+Copyright
+© Nicolas Holzschuch
+Developer Website
+Privacy Policy
+More by Nicolas Holzschuch
+View
+a-Shell mini
+*Local* Unix terminal (& ssh)
+View
+Carnets - Jupyter
+A standalone Jupyter notebook
+View
+Carnets - Jupyter (with scipy)
+Jupyter notebooks, with scipy
+You Might Also Like
+View
+xTerminal - SSH Terminal Shell
+SSH Client, Shell Console Term
+View
+Kodex
+A powerful code editor
+View
+Runestone Text Editor
+Edit plain text and code
+View
+Textastic Code Editor
+Text, Coding, SFTP Client, SSH
+View
+Web Inspector
+Developer Console for Safari
+View
+Terminal#
+SSH client
+View
+Pyto IDE
+Python, C/C++
+View
+Code Editor - Compiler & IDE
+Programming on mobile
+View
+Termius - Modern SSH Client
+SFTP, Terminal, Telnet, PuTTY
+View
+Proxyman - Capture HTTPS
+Capture HTTPS from your iPhone
+United States
+Español (México)
+العربية
+Русский
+简体中文
+Français (France)
+한국어
+Português (Brazil)
+Tiếng Việt
+繁體中文 (台灣)
+Select a country or region
+Africa, Middle East, and India
+See All
+Algeria
+Angola
+Armenia
+Azerbaijan
+Bahrain
+Benin
+Botswana
+Burkina Faso
+Cameroun
+Cape Verde
+Chad
+Côte d’Ivoire
+Congo, The Democratic Republic Of The
+Egypt
+Eswatini
+Gabon
+Gambia
+Ghana
+Guinea-Bissau
+India
+Iraq
+Israel
+Jordan
+Kenya
+Kuwait
+Lebanon
+Liberia
+Libya
+Madagascar
+Malawi
+Mali
+Mauritania
+Mauritius
+Morocco
+Mozambique
+Namibia
+Niger (English)
+Nigeria
+Oman
+Qatar
+Congo, Republic of
+Rwanda
+São Tomé and Príncipe
+Saudi Arabia
+Senegal
+Seychelles
+Sierra Leone
+South Africa
+Sri Lanka
+Tajikistan
+Tanzania, United Republic Of
+Tunisia
+Turkmenistan
+United Arab Emirates
+Uganda
+Yemen
+Zambia
+Zimbabwe
+Asia Pacific
+See All
+Afghanistan
+Australia
+Bhutan
+Brunei Darussalam
+Cambodia
+中国大陆
+Fiji
+香港
+Indonesia (English)
+日本
+Kazakhstan
+대한민국
+Kyrgyzstan
+Lao People's Democratic Republic
+澳門
+Malaysia (English)
+Maldives
+Micronesia, Federated States of
+Mongolia
+Myanmar
+Nauru
+Nepal
+New Zealand
+Pakistan
+Palau
+Papua New Guinea
+Philippines
+Singapore
+Solomon Islands
+台灣
+Thailand
+Tonga
+Turkmenistan
+Uzbekistan
+Vanuatu
+Vietnam
+Europe
+See All
+Albania
+Armenia
+Österreich
+Belarus
+Belgium
+Bosnia and Herzegovina
+Bulgaria
+Croatia
+Cyprus
+Czechia
+Denmark
+Estonia
+Finland
+France (Français)
+Georgia
+Deutschland
+Greece
+Hungary
+Iceland
+Ireland
+Italia
+Kosovo
+Latvia
+Lithuania
+Luxembourg (English)
+Malta
+Moldova, Republic Of
+Montenegro
+Nederland
+North Macedonia
+Norway
+Poland
+Portugal (Português)
+Romania
+Россия
+Serbia
+Slovakia
+Slovenia
+España
+Sverige
+Schweiz
+Türkiye (English)
+Ukraine
+United Kingdom
+Latin America and the Caribbean
+See All
+Anguilla
+Antigua and Barbuda
+Argentina (Español)
+Bahamas
+Barbados
+Belize
+Bermuda
+Bolivia (Español)
+Brasil
+Virgin Islands, British
+Cayman Islands
+Chile (Español)
+Colombia (Español)
+Costa Rica (Español)
+Dominica
+República Dominicana
+Ecuador (Español)
+El Salvador (Español)
+Grenada
+Guatemala (Español)
+Guyana
+Honduras (Español)
+Jamaica
+México
+Montserrat
+Nicaragua (Español)
+Panamá
+Paraguay (Español)
+Perú
+St. Kitts and Nevis
+Saint Lucia
+St. Vincent and The Grenadines
+Suriname
+Trinidad and Tobago
+Turks and Caicos
+Uruguay (English)
+Venezuela (Español)
+The United States and Canada
+See All
+Canada (English)
+Canada (Français)
+United States
+Estados Unidos (Español México)
+الولايات المتحدة
+США
+美国 (简体中文)
+États-Unis (Français France)
+미국
+Estados Unidos (Português Brasil)
+Hoa Kỳ
+美國 (繁體中文台灣)
+Copyright © 2026
+Apple Inc.
+All rights reserved.
+Internet Service Terms
+App Store & Privacy
+Cookie Warning
+Support

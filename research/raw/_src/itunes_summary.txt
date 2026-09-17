@@ -1,0 +1,20 @@
+
+key          id         name                             seller             ver    updated            released           price minOs genres
+---          --         ----                             ------             ---    -------            --------           ----- ----- ------
+ashell       1473805438 a-Shell                          Nicolas Holzschuch 2.2.1  2026/9/12 7:15:42  2019/10/25 7:00:00 Free  14.0  Developer Tools/Productivity
+ashell_mini  1548711022 Barbee - Hide Menu Bar Items     翔 何              5.0    2026/9/10 7:33:36  2021/5/9 7:00:00   Free  11.0  Utilities/Productivity
+blink_new    1594898306 Blink Shell, Build & Code        Blink Shell, Inc   18.7.0 2026/8/30 17:22:22 2022/2/9 8:00:00   Free  17.6  Developer Tools/Utilities
+blink_old    1156707581 *** NOT FOUND ***                                                                                            
+carnets      1468533013 Anxiety (feat. Selena Gomez)                                                  2019/1/31 8:00:00              
+ish          1436902243 iSH Shell                        Theodore Dubois    1.3.2  2023/5/21 11:28:26 2020/10/22 7:00:00 Free  11.0  Developer Tools/Utilities
+juno_connect 1455870636 *** NOT FOUND ***                                                                                            
+juno_jupyter 1462583347 Sugar Hollow                                                                  2019/5/24 12:00:00             
+pythonista3  1085972851 *** NOT FOUND ***                                                                                            
+pyto         1436650069 Pyto IDE                         Develobile S.p.A.  19.0.1 2024/6/9 14:11:52  2018/9/24 3:14:38  Free  14.0  Developer Tools/Productivity
+runestone    1549105180 Blair and the Imagination Parade                                              2021/1/13 12:00:00             
+scriptable   1405459188 Scriptable                       Simon Stovring     1.7.19 2024/9/30 10:29:59 2018/9/21 15:36:44 Free  15.5  Developer Tools
+termius      1176071029 *** NOT FOUND ***                                                                                            
+textastic    1044949203 *** NOT FOUND ***                                                                                            
+workingcopy  896624030  *** NOT FOUND ***                                                                                            
+
+

@@ -1,0 +1,263 @@
+An extension other apps use to access files and folders managed by your app and synced with a remote storage.
+File Provider
+=== File Provider
+Overview
+If your app focuses on providing and syncing user documents from remote storage, you can implement a File Provider extension to give users access to those documents when they’re using other apps. If you just need to share local documents, see 
+ below.
+The framework has two different starting points for building your File Provider extension.
+The system manages the content accessed through the File Provider extension. Available in macOS 11+ and iOS 16+.
+The extension hosts and manages the files accessed through the File Provider extension. Available in iOS 11+.
+The replicated extension takes responsibility for monitoring and managing the local copies of your documents. The file provider focuses on syncing data between the local copy and the remote storage—uploading any local changes and downloading any remote changes. For more information, see 
+.
+The nonreplicated extension manages a local copy of the extension’s content, including creating and managing placeholders for remote files. It also syncs the content with your remote storage. For more information, see 
+.
+Share files locally
+You don’t need a File Provider extension to allow access to documents that your app stores locally.
+In iOS, to give other apps access to the files in your 
+ directory, set the following keys in your app’s Info tab or its 
+ file. For document browser-based apps, set the 
+ key. For all other apps, set both the 
+ and 
+ keys.
+After you set these keys, other apps can open and edit the contents of your 
+ directory in place. Your files also appear in both the Files app and the document browser. For more information, see the 
+ class.
+=== Essentials
+=== Extension types
+=== Extension management
+=== Provided items
+=== Cloud search
+=== Domains
+=== Errors
+=== Data export
+=== Structures
+=== Enumerations
+A view controller for browsing and performing actions on documents that you store locally and in the cloud.
+class
+ 
+UIDocumentBrowserViewController
+UIDocumentBrowserViewController
+=== UIDocumentBrowserViewController
+Learn about important changes to File Provider.
+=== File Provider updates
+=== Technologies
+An extension other apps use to access files and folders managed by your app and synced with a remote storage.
+File Provider
+=== File Provider
+=== Share files locally
+FILEPROVIDER_API_AVAILABILITY_FEEDBACK
+=== FILEPROVIDER_API_AVAILABILITY_FEEDBACK
+FILEPROVIDER_API_AVAILABILITY_SEARCH
+=== FILEPROVIDER_API_AVAILABILITY_SEARCH
+FILEPROVIDER_API_AVAILABILITY_SYNC_CONTROLS
+=== FILEPROVIDER_API_AVAILABILITY_SYNC_CONTROLS
+FILE_PROVIDER_AVAILABILITY_NAMESPACE_POLICY
+=== FILE_PROVIDER_AVAILABILITY_NAMESPACE_POLICY
+A File Provider extension’s domain.
+class
+ 
+NSFileProviderDomain
+NSFileProviderDomain
+=== NSFileProviderDomain
+A structure that contains information about File Provider extension errors.
+struct
+ 
+NSFileProviderError
+NSFileProviderError
+=== NSFileProviderError
+The error codes for the File Provider extension.
+enum
+ 
+Code
+Code
+=== NSFileProviderError.Code
+The key for accessing the existing item from a filename collision error’s user info dictionary.
+let
+ 
+NSFileProviderErrorCollidingItemKey
+: 
+String
+NSFileProviderErrorCollidingItemKey
+=== NSFileProviderErrorCollidingItemKey
+The error domain for the File Provider extension.
+let
+ 
+NSFileProviderErrorDomain
+: 
+String
+NSFileProviderErrorDomain
+=== NSFileProviderErrorDomain
+The key for accessing information about sync-related errors.
+let
+ 
+NSFileProviderErrorItemKey
+: 
+String
+NSFileProviderErrorItemKey
+=== NSFileProviderErrorItemKey
+The key for accessing the specified item’s identifier when the item doesn’t exist.
+let
+ 
+NSFileProviderErrorNonExistentItemIdentifierKey
+: 
+String
+NSFileProviderErrorNonExistentItemIdentifierKey
+=== NSFileProviderErrorNonExistentItemIdentifierKey
+The principal class for the nonreplicated File Provider extension.
+class
+ 
+NSFileProviderExtension
+NSFileProviderExtension
+=== NSFileProviderExtension
+An item the File Provider extension manages.
+typealias
+ 
+NSFileProviderItem
+NSFileProviderItem
+=== NSFileProviderItem
+An item’s capabilities, which define the actions that the user can perform in the document browser.
+struct
+ 
+NSFileProviderItemCapabilities
+NSFileProviderItemCapabilities
+=== NSFileProviderItemCapabilities
+A unique identifier for an item managed by the File Provider extension.
+struct
+ 
+NSFileProviderItemIdentifier
+NSFileProviderItemIdentifier
+=== NSFileProviderItemIdentifier
+A protocol that defines the properties of an item managed by the File Provider extension.
+protocol
+ 
+NSFileProviderItemProtocol
+NSFileProviderItemProtocol
+=== NSFileProviderItemProtocol
+A manager object that you use to communicate with the file provider from either your app or your File Provider extension.
+class
+ 
+NSFileProviderManager
+NSFileProviderManager
+=== NSFileProviderManager
+enum
+ 
+NSFileProviderNamespacePolicy
+NSFileProviderNamespacePolicy
+=== NSFileProviderNamespacePolicy
+A File Provider extension in which the system replicates the contents on disk.
+protocol
+ 
+NSFileProviderReplicatedExtension
+NSFileProviderReplicatedExtension
+=== NSFileProviderReplicatedExtension
+A protocol you implement to support searching in your file provider.
+protocol
+ 
+NSFileProviderSearching
+NSFileProviderSearching
+=== NSFileProviderSearching
+A structure that contains the file type and file creator codes for an item.
+struct
+ 
+NSFileProviderTypeAndCreator
+NSFileProviderTypeAndCreator
+=== NSFileProviderTypeAndCreator
+struct
+ 
+NSFileProviderUserInfoKey
+NSFileProviderUserInfoKey
+=== NSFileProviderUserInfoKey
+System interpreted user info key
+ 
+When setting a value to that user info on a domain, the system will ingest this value.
+ 
+If user has given their consent for telemetry, this value will be used to decorate telemetry messages sent
+ 
+by the FileProvider subsystem.
+ 
+The telemetry messages can be then later on retrieved by developers along with the other metrics through the CloudKit console as detailed here:
+ 
+https://developer.apple.com/documentation/fileprovider/exporting-file-provider-metrics-data?language=objc
+ 
+This will help developers triaging data they receive from testing population compared to regular users
+ 
+The value must either be a NSNumber between [0 - 31]. If it’s not in that range, or if it is not a NSNumber, any
+ 
+call to addDomain with that invalid UserInfo dictionary will fail with a EINVAL POSIX NSError.
+ 
+To update this value, the provider must call addDomain with an updated userInfo dictionary
+static
+ 
+let
+ 
+experimentID
+: 
+NSFileProviderUserInfoKey
+NSFileProviderUserInfoExperimentIDKey
+=== experimentID
+Constants that describe why an external volume might not be eligible for storing a domain.
+struct
+ 
+NSFileProviderVolumeUnsupportedReason
+NSFileProviderVolumeUnsupportedReason
+=== NSFileProviderVolumeUnsupportedReason
+Download and analyze usage, consistency, and error data.
+=== Exporting file provider metrics data
+=== Global variables and macros
+Build a File Provider extension that hosts and manages the user’s local files.
+=== Nonreplicated File Provider extension
+Build a File Provider extension that syncs the local copies of your files with your remote storage.
+=== Replicated File Provider extension
+=== LSSupportsOpeningDocumentsInPlace
+LSSupportsOpeningDocumentsInPlace
+=== UIFileSharingEnabled
+UIFileSharingEnabled
+=== UISupportsDocumentBrowser
+UISupportsDocumentBrowser
+=== Essentials
+=== Extension types
+=== Extension management
+=== Provided items
+=== Cloud search
+=== Domains
+=== Errors
+=== Data export
+=== Global variables and macros
+=== Variables
+=== Macros
+=== Type Aliases
+=== Enumerations
+UIDocumentBrowserViewController
+NSFileProviderDomain
+NSFileProviderDomain
+NSFileProviderErrorCode
+NSFileProviderErrorCode
+NSFileProviderErrorCollidingItemKey
+NSFileProviderErrorDomain
+NSFileProviderErrorItemKey
+NSFileProviderErrorNonExistentItemIdentifierKey
+NSFileProviderExtension
+NSFileProviderExtension
+NSFileProviderItem
+NSFileProviderItem
+NSFileProviderItemCapabilities
+NSFileProviderItemCapabilities
+NSFileProviderItemIdentifier
+NSFileProviderItemIdentifier
+NSFileProviderItem
+NSFileProviderItem
+NSFileProviderManager
+NSFileProviderManager
+NSFileProviderNamespacePolicy
+NSFileProviderNamespacePolicy
+NSFileProviderReplicatedExtension
+NSFileProviderReplicatedExtension
+NSFileProviderSearching
+NSFileProviderSearching
+NSFileProviderTypeAndCreator
+NSFileProviderTypeAndCreator
+NSFileProviderUserInfoKey
+NSFileProviderUserInfoKey
+NSFileProviderUserInfoExperimentIDKey
+NSFileProviderVolumeUnsupportedReason
+NSFileProviderVolumeUnsupportedReason

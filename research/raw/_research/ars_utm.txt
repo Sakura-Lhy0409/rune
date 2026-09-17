@@ -1,0 +1,158 @@
+ 
+PC emulator comes to iOS, but Apple’s restrictions hamper performance - Ars Technica 
+Skip to content
+Ars Technica home 
+Sections
+Forum
+Subscribe
+Search
+AI
+Biz & IT
+Cars
+Culture
+Gaming
+Health
+Policy
+Science
+Security
+Space
+Tech
+Feature
+Reviews
+AI
+Biz & IT
+Cars
+Culture
+Gaming
+Health
+Policy
+Science
+Security
+Space
+Tech
+Forum
+Subscribe
+Story text 
+Size 
+Small 
+ Standard 
+ Large 
+Width
+ * 
+Standard 
+ Wide 
+Links 
+Standard 
+ Orange 
+* Subscribers only 
+Learn more 
+Pin to story
+Theme 
+HyperLight
+Day & Night
+Dark
+System
+Search 
+Sign In
+Sign in dialog...
+Sign in
+It works, technically
+PC emulator comes to iOS, but Apple’s restrictions hamper performance
+UTM SE’s lack of JIT compilation means “SE stands for Slow Edition.”
+Kyle Orland
+–
+Jul 15, 2024 11:54 am
+| 
+103
+Space Cadet Pinball has never been so portable... or so tiny!
+Credit:
+Turing Software / App Store
+Space Cadet Pinball has never been so portable... or so tiny!
+Credit:
+Turing Software / App Store
+Text
+ settings 
+Story text 
+Size 
+Small 
+ Standard 
+ Large 
+Width
+ * 
+Standard 
+ Wide 
+Links 
+Standard 
+ Orange 
+* Subscribers only 
+Learn more 
+Minimize to nav
+One month after PC emulator UTM was rejected from the iOS App Store , the developers have announced that a new “UTM SE” version is now available for free on the App Store . But the app’s performance is severely hampered by Apple’s restrictions on so-called “just-in-time” (JIT) compilation, limiting the app’s suitability for effectively emulating many PC games.
+Built on the generic command-line emulation layer QEMU , the open-source UTM boasts support for “30+ processors,” from x86 and PowerPC to RISC-V and ARM64. The App Store listing promises you can “run classic software and old-school games” through both a VGA graphics mode and text-based terminal.
+Don’t expect a seamless, RetroArch-style path to playing Space Cadet Pinball on your iPhone, though. The UTM developers link to pre-configured settings downloads for versions of Windows going back to XP, alongside guides for getting those OSes up and running on iOS. But users will need to bring their own legitimate Windows installation ISO and go through the cumbersome process of installing the OS as well as a version of SPICE tools to help coordinate access through iOS (downloading pre-built, UTM-compatible Linux builds seems more straightforward).
+Slow by design
+Even after that, don’t expect high-level performance from this new emulator. That’s because UTM SE must abide by App Store restrictions prohibiting apps that “install executable code.” As such, the App Store version is a “JIT-less” build that uses a Tiny-Code Threaded Interpreter (TCTI) to interpret each original line of code being run rather than fully recompiling it at runtime for smoother performance.
+A video shows how the lack of JIT recompilation slows down GameCube emulation on DolphiniOS.
+The lack of that JIT recompilation means the “SE [in UTM SE] stands for Slow Edition,” as moderator CZ pithily put it in the UTM Discord . “This is us telling you gaming on UTM SE is not happening.” At least one user who tested running Linux via UTM SE confirmed it is “dog slow” and “a gloopy experience.” Those who want full performance out of UTM can still install the regular, non-SE version of the app via sideloading or an alt store.
+You may remember that the developers of GameCube/Wii emulator DolphiniOS cited the lack of JIT recompilation as the reason their app can’t run at a functional frame rate through the iOS App Store . However, similar restrictions haven’t stopped emulators like Delta from running classic gaming consoles up through the Nintendo DS at a playable frame rate, suggesting that UTM SE might be sufficient for older MS-DOS or Windows 95-era titles.
+Related Stories 
+Apple rejects PC emulators on the iOS App Store
+New iOS emulation rules only apply to "retro game consoles," not retro computers.
+Why a GameCube/Wii emulator may not be possible on the iOS App Store
+DolphiniOS dev says barring just-in-time compilation prevents playable performance.
+Listing image:
+Turing Software / App Store
+Kyle Orland
+Senior Gaming Editor 
+Kyle Orland
+Senior Gaming Editor 
+Kyle Orland has been the Senior Gaming Editor at Ars Technica since 2012, writing primarily about the business, tech, and culture behind video games. He has journalism and computer science degrees from University of Maryland. He once wrote a whole book about Minesweeper .
+103 Comments
+Comments
+Forum view 
+Loading comments...
+Prev story 
+Next story 
+Most Read
+1. 
+ Iran strikes on Amazon data centers caused permanent loss of customer data 
+2. 
+ macOS 27 Golden Gate: The Ars Technica review 
+3. 
+ This Atlantic hurricane season is about to do something that hasn't happened in 175 years 
+4. 
+ It’s OK to tell ICE their actions will haunt them, judge rules in speech fight 
+5. 
+ Apple reportedly building server packed with M-series Ultra chips for AI 
+Customize 
+Ars Technica has been separating the signal from
+ the noise for over 25 years. With our unique combination of
+ technical savvy and wide-ranging interest in the technological arts
+ and sciences, Ars is the trusted source in a sea of information. After
+ all, you don’t need to know everything, only what’s important.
+More
+ from Ars
+About Us 
+Staff Directory 
+Ars Newsletters 
+General FAQ 
+Posting Guidelines 
+AI Policy 
+RSS Feeds 
+Contact 
+ Contact us 
+Advertise with us 
+Reprints 
+Manage Preferences
+© 2026 Condé Nast. All rights reserved. Use of and/or
+ registration on any portion of this site constitutes acceptance of our User Agreement and
+ Privacy Policy and
+ Cookie Statement and Ars
+ Technica Addendum and Your
+ California Privacy Rights . Ars Technica may earn compensation on
+ sales from links on this site. Read our
+ affiliate link policy . The material on this site may not be
+ reproduced, distributed, transmitted, cached or otherwise used, except
+ with the prior written permission of Condé Nast. Ad
+ Choices 
+

@@ -1,0 +1,23 @@
+# 构建产物（本机用 Tools/rune.ps1 生成；macOS 上用 swift build 生成）
+.build/
+*.lib
+*.exe
+*.o
+*.swiftmodule
+*.swiftdoc
+*.swiftinterface
+ModuleCache/
+
+# 由 rune.ps1 生成的测试入口（每次构建重新生成）
+TestRunner.swift
+
+# 编辑器 / 系统
+.DS_Store
+Thumbs.db
+*.swp
+
+# 临时日志
+*.log
+
+# 说明：research/ 是**故意提交**的（465 份事实取证件，见 research/README.md）。
+# 它是设计文档里每条"已核实"结论的证据链，不是构建产物，请不要加进 .gitignore。

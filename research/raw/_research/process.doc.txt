@@ -1,0 +1,507 @@
+An object that represents a subprocess of the current process.
+class
+ 
+Process
+Process
+=== Process
+class
+ 
+Process
+Overview
+Using this class, your program can run another program as a subprocess and monitor that program’s execution. Unlike 
+, it doesn’t share memory space with the process that creates it.
+A process operates within an environment defined by the current values for several items: the current directory, standard input, standard output, standard error, and the values of any environment variables, inheriting its environment from the process that launches it.
+ 
+If there are any environment variables that should be different for the subprocess (for example, if the current directory needs to change), change it in the instance after initialization, before your app launches it. Your app can’t change a process’s environment while it’s running.
+You can only run the subprocess once per instance. Subsequent attempts raise an error.
+
+ 
+In a sandboxed app, child processes you create with this class inherit the sandbox of the parent app. Instead, write helper apps as XPC Services because it allows you to specify different sandbox entitlements for helper apps. For more information, see 
+ and 
+.
+=== Inherits From
+=== Conforms To
+=== Scripts and External Tasks
+=== Creating and initializing a process
+=== Returning information
+=== Running and stopping
+=== Querying the process state
+=== Configuring a process
+=== Working with termination handlers
+=== Working with constants
+=== Working with notifications
+=== Working with notification messages
+=== Deprecated
+=== Instance Properties
+The root class of most Objective-C class hierarchies, from which subclasses inherit a basic interface to the runtime system and the ability to behave as Objective-C objects.
+class
+ 
+NSObject
+NSObject
+=== NSObject
+The group of methods that are fundamental to all Objective-C objects.
+protocol
+ 
+NSObjectProtocol
+NSObjectProtocol
+=== NSObjectProtocol
+A type whose instances can be encoded, and appropriately passed, as
+ 
+elements of a C 
+.
+protocol
+ 
+CVarArg
+CVarArg
+=== CVarArg
+A type with a customized textual representation suitable for debugging
+ 
+purposes.
+protocol
+ 
+CustomDebugStringConvertible
+CustomDebugStringConvertible
+=== CustomDebugStringConvertible
+A type with a customized textual representation.
+protocol
+ 
+CustomStringConvertible
+CustomStringConvertible
+=== CustomStringConvertible
+A type that can be compared for value equality.
+protocol
+ 
+Equatable
+Equatable
+=== Equatable
+A type that can be hashed into a 
+ to produce an integer hash value.
+protocol
+ 
+Hashable
+Hashable
+=== Hashable
+A thread-safe type whose values can be shared across arbitrary concurrent
+ 
+contexts without introducing a risk of data races.
+protocol
+ 
+Sendable
+Sendable
+=== Sendable
+A type whose metatype can be shared across arbitrary isolation domains
+ 
+without introducing a risk of data races.
+protocol
+ 
+SendableMetatype
+SendableMetatype
+=== SendableMetatype
+Access a low-level interprocess communication mechanism.
+=== XPC
+=== Technologies
+Access essential data types, collections, and operating-system services to define the base layer of functionality for your app.
+=== Foundation
+An object that executes AppleScript scripts.
+class
+ 
+NSUserAppleScriptTask
+NSUserAppleScriptTask
+=== NSUserAppleScriptTask
+An object that executes Automator workflows.
+class
+ 
+NSUserAutomatorTask
+NSUserAutomatorTask
+=== NSUserAutomatorTask
+An object that executes scripts.
+class
+ 
+NSUserScriptTask
+NSUserScriptTask
+=== NSUserScriptTask
+An object that executes unix applications.
+class
+ 
+NSUserUnixTask
+NSUserUnixTask
+=== NSUserUnixTask
+An object that represents a subprocess of the current process.
+class
+ 
+Process
+Process
+=== Process
+A message the system sends when a task stops operation.
+struct
+ 
+DidTerminateMessage
+DidTerminateMessage
+=== Process.DidTerminateMessage
+Constants that specify the termination reason values that the system returns.
+enum
+ 
+TerminationReason
+TerminationReason
+=== Process.TerminationReason
+The command arguments that the system uses to launch the executable.
+var
+ 
+arguments
+: [
+String
+]?
+arguments
+=== arguments
+Sets the current directory for the receiver.
+var
+ 
+currentDirectoryPath
+: 
+String
+currentDirectoryPath
+=== currentDirectoryPath
+The current directory for the receiver.
+var
+ 
+currentDirectoryURL
+: 
+URL
+?
+currentDirectoryURL
+=== currentDirectoryURL
+Posted when the task has stopped execution.
+class
+ 
+let
+ 
+didTerminateNotification
+: 
+NSNotification
+.
+Name
+NSTaskDidTerminateNotification
+=== didTerminateNotification
+The environment for the receiver.
+var
+ 
+environment
+: [
+String
+ : 
+String
+]?
+environment
+=== environment
+The receiver’s executable.
+var
+ 
+executableURL
+: 
+URL
+?
+executableURL
+=== executableURL
+Returns an initialized process object with the environment of the current process.
+init
+()
+- 
+init
+=== init()
+Sends an interrupt signal to the receiver and all of its subtasks.
+func
+ 
+interrupt
+()
+- 
+interrupt
+=== interrupt()
+A status that indicates whether the receiver is still running.
+var
+ 
+isRunning
+: 
+Bool
+running
+=== isRunning
+Launches the task represented by the receiver.
+func
+ 
+launch
+()
+- 
+launch
+=== launch()
+Sets the receiver’s executable.
+var
+ 
+launchPath
+: 
+String
+?
+launchPath
+=== launchPath
+var
+ 
+launchRequirement
+: 
+LaunchCodeRequirement
+?
+=== launchRequirement
+The launch requirement data for the receiver.
+var
+ 
+launchRequirementData
+: 
+Data
+?
+launchRequirementData
+=== launchRequirementData
+Creates and launches a task with a specified executable and arguments.
+class
+ 
+func
+ 
+launchedProcess
+(
+launchPath
+: 
+String
+, 
+arguments
+: [
+String
+]) -> 
+Process
++ 
+launchedTaskWithLaunchPath:arguments:
+=== launchedProcess(launchPath:arguments:)
+The receiver’s process identifier.
+var
+ 
+processIdentifier
+: 
+Int32
+processIdentifier
+=== processIdentifier
+The default quality of service level the system applies to operations the task executes.
+var
+ 
+qualityOfService
+: 
+QualityOfService
+qualityOfService
+=== qualityOfService
+Resumes execution of a suspended task.
+func
+ 
+resume
+() -> 
+Bool
+- 
+resume
+=== resume()
+Runs the process with the current environment.
+func
+ 
+run
+() 
+throws
+- 
+launchAndReturnError:
+=== run()
+Creates and runs a task with a specified executable and arguments.
+class
+ 
+func
+ 
+run
+(
+URL
+, 
+arguments
+: [
+String
+], 
+terminationHandler
+: ((
+Process
+) -> 
+Void
+)?) 
+throws
+ -> 
+Process
++ 
+launchedTaskWithExecutableURL:arguments:error:terminationHandler:
+=== run(_:arguments:terminationHandler:)
+The standard error for the receiver.
+var
+ 
+standardError
+: 
+Any
+?
+standardError
+=== standardError
+The standard input for the receiver.
+var
+ 
+standardInput
+: 
+Any
+?
+standardInput
+=== standardInput
+The standard output for the receiver.
+var
+ 
+standardOutput
+: 
+Any
+?
+standardOutput
+=== standardOutput
+Suspends execution of the receiver task.
+func
+ 
+suspend
+() -> 
+Bool
+- 
+suspend
+=== suspend()
+Sends a terminate signal to the receiver and all of its subtasks.
+func
+ 
+terminate
+()
+- 
+terminate
+=== terminate()
+A completion block the system invokes when the task completes.
+var
+ 
+terminationHandler
+: ((
+Process
+) -> 
+Void
+)?
+terminationHandler
+=== terminationHandler
+The reason the system terminated the task.
+var
+ 
+terminationReason
+: 
+Process
+.
+TerminationReason
+terminationReason
+=== terminationReason
+The exit status the receiver’s executable returns.
+var
+ 
+terminationStatus
+: 
+Int32
+terminationStatus
+=== terminationStatus
+Blocks the process until the receiver is finished.
+func
+ 
+waitUntilExit
+()
+- 
+waitUntilExit
+=== waitUntilExit()
+Constants that indicate the nature and importance of work to the system.
+enum
+ 
+QualityOfService
+QualityOfService
+=== QualityOfService
+A thread of execution.
+class
+ 
+Thread
+Thread
+=== Thread
+=== Daemons and Services Programming Guide
+Daemons and Services Programming Guide
+NSTask
+NSTask
+=== Creating and initializing a process
+=== Returning information
+=== Running and stopping
+=== Querying the process state
+=== Configuring a process
+=== Working with termination handlers
+=== Working with constants
+=== Working with notifications
+=== Deprecated
+=== Instance Properties
+=== Inherits From
+=== Scripts and External Tasks
+@interface
+ 
+NSTask
+ : 
+NSObject
+NSObject
+NSObject
+NSObject
+NSUserAppleScriptTask
+NSUserAppleScriptTask
+NSUserAutomatorTask
+NSUserAutomatorTask
+NSUserScriptTask
+NSUserScriptTask
+NSUserUnixTask
+NSUserUnixTask
+NSTask
+NSTask
+NSTaskTerminationReason
+NSTaskTerminationReason
+arguments
+currentDirectoryPath
+currentDirectoryURL
+NSTaskDidTerminateNotification
+environment
+executableURL
+- 
+init
+- 
+interrupt
+running
+- 
+launch
+launchPath
+launchRequirementData
++ 
+launchedTaskWithLaunchPath:arguments:
+processIdentifier
+qualityOfService
+- 
+resume
+- 
+launchAndReturnError:
++ 
+launchedTaskWithExecutableURL:arguments:error:terminationHandler:
+standardError
+standardInput
+standardOutput
+- 
+suspend
+- 
+terminate
+terminationHandler
+terminationReason
+terminationStatus
+- 
+waitUntilExit
+NSQualityOfService
+NSQualityOfService
+NSThread
+NSThread

@@ -1,0 +1,363 @@
+ 
+
+Back to blog 
+ iPhone benchmarks on-device AI llama.cpp iOS performance 
+
+Can LLMs Actually Run on iPhones? Benchmarks and Real-World Performance
+
+Real benchmark data for running LLMs on iPhones via llama.cpp. Token generation speeds, memory usage, and thermal behavior across iPhone models from the iPhone 12 to iPhone 16 Pro.
+
+ Edward Xi Yang | April 1, 2026 
+
+Yes. Modern iPhones run 1-3B parameter language models at conversational speeds. The A-series chips, combined with Metal GPU acceleration in llama.cpp, deliver 15-45 tokens per second depending on the model and device.
+
+This is not a tech demo. It is production-viable performance for real mobile AI features.
+
+The Hardware
+
+Every iPhone since the iPhone 12 (A14, 2020) has enough compute and memory to run small language models. The key specs:
+
+iPhone
+
+Chip
+
+RAM
+
+Neural Engine
+
+GPU Cores
+
+iPhone 12
+
+A14
+
+4GB
+
+16-core
+
+4-core
+
+iPhone 13
+
+A15
+
+4GB
+
+16-core
+
+4/5-core
+
+iPhone 14
+
+A15/A16
+
+6GB
+
+16-core
+
+5-core
+
+iPhone 14 Pro
+
+A16
+
+6GB
+
+16-core
+
+5-core
+
+iPhone 15
+
+A16
+
+6GB
+
+16-core
+
+5-core
+
+iPhone 15 Pro
+
+A17 Pro
+
+8GB
+
+16-core
+
+6-core
+
+iPhone 16
+
+A18
+
+8GB
+
+16-core
+
+5-core
+
+iPhone 16 Pro
+
+A18 Pro
+
+8GB
+
+16-core
+
+6-core
+
+The critical number is RAM. The model must fit in available memory (total RAM minus what iOS and other processes use). In practice:
+
+4GB devices (iPhone 12/13): 1B models only, tight memory
+
+6GB devices (iPhone 14/15): 1B comfortable, 3B possible with Q4 quantization
+
+8GB devices (iPhone 15 Pro/16): 1B and 3B comfortable, 7B possible with aggressive quantization
+
+Benchmark Results
+
+All benchmarks use llama.cpp with Metal GPU acceleration. Models are GGUF format with Q4_K_M quantization unless noted. Tests run with 2048 context length. Tokens per second is measured during generation (not prompt processing).
+
+1B Parameter Models (~600MB GGUF Q4)
+
+Device
+
+Tokens/Second
+
+Time to First Token
+
+Memory Usage
+
+iPhone 16 Pro (A18 Pro)
+
+40-50
+
+80-120ms
+
+~800MB
+
+iPhone 15 Pro (A17 Pro)
+
+35-45
+
+100-150ms
+
+~800MB
+
+iPhone 15 (A16)
+
+28-35
+
+120-180ms
+
+~800MB
+
+iPhone 14 (A15)
+
+25-32
+
+130-200ms
+
+~800MB
+
+iPhone 13 (A15)
+
+22-28
+
+150-220ms
+
+~800MB
+
+iPhone 12 (A14)
+
+18-24
+
+180-250ms
+
+~800MB
+
+Every iPhone from the last 4+ years runs 1B models fast enough for real-time chat. Even the iPhone 12 at 18-24 tok/s produces text faster than most people read.
+
+3B Parameter Models (~1.7GB GGUF Q4)
+
+Device
+
+Tokens/Second
+
+Time to First Token
+
+Memory Usage
+
+iPhone 16 Pro (A18 Pro)
+
+22-28
+
+150-250ms
+
+~2.2GB
+
+iPhone 15 Pro (A17 Pro)
+
+18-25
+
+180-300ms
+
+~2.2GB
+
+iPhone 15 (A16)
+
+14-18
+
+250-400ms
+
+~2.2GB
+
+iPhone 14 (A16)
+
+14-18
+
+250-400ms
+
+~2.2GB
+
+iPhone 13 (A15)
+
+10-14
+
+350-500ms
+
+~2.2GB
+
+iPhone 12 (A14)
+
+Not recommended
+
+N/A
+
+Exceeds safe memory
+
+3B models run well on 6GB+ devices. The iPhone 15 Pro and 16 series deliver excellent performance. The iPhone 13 is usable but at the lower end. The iPhone 12's 4GB RAM is too tight for 3B models in production.
+
+7B Parameter Models (~4GB GGUF Q4)
+
+Device
+
+Tokens/Second
+
+Time to First Token
+
+Memory Usage
+
+iPhone 16 Pro (A18 Pro)
+
+8-12
+
+500-800ms
+
+~5GB
+
+iPhone 15 Pro (A17 Pro)
+
+6-10
+
+600-1,000ms
+
+~5GB
+
+All other iPhones
+
+Not viable
+
+N/A
+
+Exceeds available memory
+
+7B models are only practical on 8GB Pro devices and still push memory limits. For mobile apps, 1-3B is the practical range.
+
+What the Numbers Mean for UX
+
+Above 20 tok/s: Text appears to stream smoothly. Users perceive the response as "instant." Ideal for chat, autocomplete, and smart suggestions.
+
+10-20 tok/s: Text is readable as it generates. Slight perception of typing speed. Acceptable for most features.
+
+5-10 tok/s: Noticeably slow. Users can see individual words appearing. Acceptable for summarization (users expect to wait) but not for chat.
+
+Below 5 tok/s: Too slow for interactive features. Users will abandon.
+
+For most mobile AI features, targeting 1B models on broad device support or 3B models on iPhone 14+ gives you the best balance of quality and performance.
+
+Thermal Behavior
+
+Sustained inference generates heat. On iPhones, thermal throttling can reduce performance by 20-30% during extended sessions (5+ minutes of continuous generation).
+
+Practical impact:
+
+Short interactions (1-3 turns): No thermal impact
+
+Medium sessions (5-10 turns): Slight performance decrease on later turns
+
+Extended generation (summarizing long documents): Plan for 20-30% slower speeds after the first minute
+
+Mitigation: Add brief pauses between generations. Even 2-3 seconds of idle time allows the chip to cool slightly. For batch processing tasks, process in chunks rather than one continuous generation.
+
+Memory Pressure
+
+iOS aggressively reclaims memory from background apps. When your model is loaded (800MB-2.2GB in RAM), iOS may terminate background apps or, in extreme cases, your own app if the system is under memory pressure.
+
+Best practices:
+
+Load the model only when the AI feature is active
+
+Release model memory when the user navigates away
+
+Handle didReceiveMemoryWarning by unloading the model
+
+Check available memory before loading: os_proc_available_memory() 
+
+What This Means for Developers
+
+The benchmark data supports a clear strategy:
+
+Target 1B models for broad compatibility. Every iPhone from the 12 onward runs them well. This covers 95%+ of active iPhones.
+
+Use 3B models for quality-sensitive features on newer devices. iPhone 14+ (6GB RAM) handles 3B models comfortably. Detect available RAM at runtime and offer the appropriate model.
+
+Skip 7B for mobile. The device coverage is too narrow and the memory pressure too high. If you need 7B quality, fine-tune a 3B model on your domain data. A fine-tuned 3B typically outperforms a general-purpose 7B on specific tasks.
+
+Fine-tune for your domain. A fine-tuned 1B model outperforms a prompted 3B model on domain-specific tasks while running 2x faster. Platforms like Ertas handle the full pipeline: upload training data, fine-tune with LoRA, export GGUF, deploy on-device.
+
+The hardware is ready. The inference engine (llama.cpp with Metal) is mature. The remaining step is putting the right model on the device.
+
+Ask AI about this article 
+
+Ship AI that runs on your users' devices.
+
+Free plan with 30 credits/mo, no card required. Paid plans from $10/mo USD. 
+
+ Sign in or view pricing → 
+
+Keep reading
+
+Guides 
+AI in iOS Apps: CoreML, Cloud APIs, and On-Device LLMs Compared
+
+Three paths to AI in your iOS app. CoreML for Apple's ecosystem, cloud APIs for capability, and on-device LLMs via llama.cpp for cost and privacy. A practical comparison for Swift developers.
+
+ Edward Xi Yang | Apr 1, 2026 
+
+Guides 
+llama.cpp on iOS: A Swift Integration Guide
+
+Step-by-step guide to integrating llama.cpp into an iOS app. Project setup, Metal GPU acceleration, model loading, token streaming, and memory management for production deployment.
+
+ Edward Xi Yang | Apr 1, 2026 
+
+Guides 
+Android LLM Benchmarks: Snapdragon vs Tensor
+
+Measured llama.cpp token speeds for 1B and 3B models on Snapdragon, Tensor, Exynos and Dimensity phones, plus the RAM tier each chip can carry.
+
+ Edward Xi Yang | Apr 1, 2026 
+
+

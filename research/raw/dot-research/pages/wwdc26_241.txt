@@ -1,0 +1,657 @@
+---
+title: "What’s new in the Foundation Models framework - WWDC26 - Videos - Apple Developer"
+session: "241"
+event: "WWDC 2026"
+category: "wwdc"
+url: "https://developer.apple.com/videos/play/wwdc2026/241/"
+description: "Explore what's new in the Foundation Models framework. Learn how to access Private Cloud Compute, integrate third-party and open source..."
+language: "en"
+fetched: "1775407794.9043472"
+---
+
+# What’s new in the Foundation Models framework - WWDC26 - Videos - Apple Developer
+
+Explore what's new in the Foundation Models framework. Learn how to access Private Cloud Compute, integrate third-party and open source...
+
+**Session:** 241 
+**Event:** WWDC 2026 
+**URL:** https://developer.apple.com/videos/play/wwdc2026/241/ 
+
+---
+
+## Transcript
+
+**[00:00:07.021]** Hello everyone, and welcome!
+
+**[00:00:09.329]** My name is Erik!
+
+**[00:00:10.718]** And my name is Zhen!
+
+**[00:00:12.593]** Last year we introduced the Foundation Models framework
+
+**[00:00:15.843]** with features like guided generation, snapshot streaming,
+
+**[00:00:19.096]** and the powerful tool protocol.
+
+**[00:00:21.411]** We were blown away by your excitement
+
+**[00:00:23.837]** for the Foundation Models framework in year one,
+
+**[00:00:26.492]** and we think you're going to love what we've lined up for you this year, even more!
+
+**[00:00:32.208]** We're going to walk through everything that's new in the framework this year.
+
+**[00:00:35.946]** And let me tell you, this release is packed!
+
+**[00:00:40.037]** Our 2027 release is all about integrations into and beyond the OS,
+
+**[00:00:45.940]** a wider variety of models,
+
+**[00:00:47.971]** and new primitives for building agentic experiences.
+
+**[00:00:51.802]** Let's kick it off with one of our most exciting updates.
+
+**[00:00:55.431]** The Foundation Models framework,
+
+**[00:00:57.145]** including many of the brand new APIs that we're announcing today,
+
+**[00:01:01.225]** is going open source!
+
+**[00:01:03.845]** And doing it in style!
+
+**[00:01:06.050]** In addition to the core framework, we're also releasing a new package,
+
+**[00:01:10.708]** Foundation Models framework utilities, that will be updated between OS releases
+
+**[00:01:16.723]** to give you access to emerging and experimental building blocks.
+
+**[00:01:20.476]** And during the course of this session, you'll be hearing about
+
+**[00:01:23.613]** multiple other packages all joining the Foundation Models framework ecosystem.
+
+**[00:01:29.632]** So, are you ready to jump in with us?
+
+**[00:01:32.801]** I'm going to cover everything related to the new models,
+
+**[00:01:35.689]** new modalities, and new tools we're adding to the framework.
+
+**[00:01:39.511]** And I'm going to show you the brand new APIs we've made
+
+**[00:01:43.043]** to help you get the most out of them!
+
+**[00:01:45.664]** We've got a full schedule!
+
+**[00:01:48.132]** First up, we've got a whole pile of model updates for you,
+
+**[00:01:51.564]** including updates to the on-device model and access to server models.
+
+**[00:01:57.326]** We've also added new system tools that supercharge your session
+
+**[00:02:01.024]** with help from Spotlight and the Vision framework.
+
+**[00:02:04.643]** Afterwards, Zhen will rejoin us
+
+**[00:02:07.076]** to tell you about a powerful new API called dynamic profiles,
+
+**[00:02:11.121]** our new primitive for creating agentic experiences.
+
+**[00:02:15.171]** Zhen will also dig into the brand new Evaluations framework
+
+**[00:02:18.993]** and its tight integration with Foundation Models.
+
+**[00:02:23.237]** And to wrap up,
+
+**[00:02:24.288]** we have some exciting news to share about Mac-specific productivity tools,
+
+**[00:02:28.530]** so make sure to stick around!
+
+**[00:02:31.869]** Let's jump right in with our new model!
+
+**[00:02:34.930]** This release comes with a new on-device model,
+
+**[00:02:37.773]** rebuilt from the ground up, and better across the board.
+
+**[00:02:41.255]** It's more intelligent; better at logic and tool calling.
+
+**[00:02:45.684]** In iOS 26.4, we released new APIs for inspecting the model's context size
+
+**[00:02:52.162]** and counting the tokens in instructions, prompts, and transcripts.
+
+**[00:02:56.923]** You'll want to use these going forward
+
+**[00:02:59.081]** to adapt your app to the hardware it's running on.
+
+**[00:03:02.928]** We've also been hard at work on refining our guardrails.
+
+**[00:03:06.472]** You may have noticed adjustments in iOS 26.4
+
+**[00:03:09.591]** to reduce the number of false positives,
+
+**[00:03:11.888]** and we're continuing to make even more improvements in iOS 27.
+
+**[00:03:16.395]** In addition the on-device model is also gaining Vision capabilities,
+
+**[00:03:21.396]** which unlocks entire new categories of applications.
+
+**[00:03:26.463]** The API is simple, a natural extension of the existing prompt builders.
+
+**[00:03:33.236]** Here we've created a session,
+
+**[00:03:35.270]** and we want to ask about the photo of the origami on the right.
+
+**[00:03:39.482]** Simply insert an image attachment into your prompt, together with text.
+
+**[00:03:45.857]** Now, the model can answer questions about the image.
+
+**[00:03:52.380]** Image attachments can be created from a variety of types including;
+
+**[00:03:56.675]** UIImage,
+
+**[00:03:58.935]** NSImage,
+
+**[00:04:01.700]** CGImage
+
+**[00:04:04.091]** Core Image types,
+
+**[00:04:06.107]** CoreVideo Pixel Buffers,
+
+**[00:04:09.066]** and file URLs.
+
+**[00:04:12.187]** The model supports images in any size and aspect ratio,
+
+**[00:04:15.749]** so you don't need to crop or pad to any particular shape.
+
+**[00:04:19.514]** Arbitrary image sizes are allowed, but bear in mind
+
+**[00:04:23.358]** that larger images will consume more tokens and incur more latency.
+
+**[00:04:28.043]** Thanks to all these upgrades,
+
+**[00:04:29.624]** the on-device system language model is more capable than ever.
+
+**[00:04:34.248]** But if you need even more horsepower, we're giving you access to a brand new
+
+**[00:04:39.188]** PrivateCloudComputeLanguageModel.
+
+**[00:04:41.367]** The Private Cloud Compute model is the very same one that
+
+**[00:04:44.427]** powers many of the Apple Intelligence features you know and love.
+
+**[00:04:48.504]** It is a much bigger model than the on-device models,
+
+**[00:04:51.995]** and has a 32,000 token context window,
+
+**[00:04:55.715]** and it comes with a powerful new capability, reasoning.
+
+**[00:05:00.093]** Reasoning models are trained to spend time carefully thinking through
+
+**[00:05:03.686]** their answers before providing a response,
+
+**[00:05:06.850]** which results in significantly better outcomes.
+
+**[00:05:10.229]** Using Private Cloud Compute couldn't be easier.
+
+**[00:05:14.222]** Just create an instance of the model
+
+**[00:05:16.282]** and use it to initialize your language model session.
+
+**[00:05:19.752]** When prompting the session,
+
+**[00:05:21.134]** I can now specify a reasoning level on the new contextOptions argument.
+
+**[00:05:26.816]** reasoningLevel controls how much the model is allowed think before responding.
+
+**[00:05:31.942]** Deep reasoning produces better responses in exchange for additional compute.
+
+**[00:05:37.906]** One of the best things about Private Cloud Compute
+
+**[00:05:41.042]** is that you don't have to worry about account setup,
+
+**[00:05:44.357]** you don't have to deal with authentication,
+
+**[00:05:47.317]** and you don't have to store API keys, it's all completely seamless!
+
+**[00:05:53.482]** And of course, Private Cloud Compute is above all else, private.
+
+**[00:05:59.139]** No prompts are ever stored,
+
+**[00:06:01.155]** and we make it possible for independent researchers to verify these claims.
+
+**[00:06:06.127]** And to top it all off, Private Cloud Compute makes it possible for us
+
+**[00:06:10.180]** to bring the Foundation Models framework to watchOS.
+
+**[00:06:14.329]** Starting in watchOS 27,
+
+**[00:06:16.280]** you can wear your most powerful intelligence features right on your wrist.
+
+**[00:06:21.916]** PCC is available with no cloud API costs
+
+**[00:06:25.506]** to developers who have less than 2 million first time downloads.
+
+**[00:06:29.243]** Your users will have access to PCC every day
+
+**[00:06:32.996]** and if they are subscribed to iCloud+, their limit will be even higher!
+
+**[00:06:38.011]** To learn more about the ins and outs of PrivateCloudComputeLanguageModel,
+
+**[00:06:42.142]** including the entitlement you'll need to use it,
+
+**[00:06:44.602]** make sure to tune in to our video about building with Private Cloud Compute.
+
+**[00:06:48.678]** In addition to an overhauled on-device model
+
+**[00:06:51.647]** and the new Private Cloud Compute model,
+
+**[00:06:54.058]** we're opening up our model abstraction layer
+
+**[00:06:56.822]** to make it possible for nearly any language model
+
+**[00:06:59.668]** to be used with the Foundation Model's framework.
+
+**[00:07:02.794]** The abstraction layer is built around a new LanguageModel protocol
+
+**[00:07:06.822]** that allows both local and servers models to back a LanguageModelSession.
+
+**[00:07:12.425]** Existing models like SystemLanguageModel and PrivateCloudComputeLanguageModel
+
+**[00:07:17.664]** already conform to this protocol.
+
+**[00:07:20.533]** And, we're open sourcing two additional implementations:
+
+**[00:07:25.487]** CoreAILanguageModel and MLXLanguageModel,
+
+**[00:07:29.223]** for running a myriad of local models on the Apple Neural Engine in your Mac's GPU.
+
+**[00:07:34.977]** We're also excited to share that we've been hard at work behind the scenes
+
+**[00:07:39.045]** to ensure you have access to a variety of frontier server models!
+
+**[00:07:43.464]** Anthropic, and Google are both publishing Swift packages
+
+**[00:07:47.832]** to provide you with access to their latest and greatest models!
+
+**[00:07:51.364]** The model abstraction layer makes using third party models simple.
+
+**[00:07:55.410]** I'll just import a language model package using Swift Package Manager,
+
+**[00:08:00.490]** initialize the model that I want to use,
+
+**[00:08:04.274]** and pass it when creating my session.
+
+**[00:08:15.981]** Everything downstream stays the same.
+
+**[00:08:21.917]** Bear in mind that if you use third party server models,
+
+**[00:08:24.911]** you'll probably have to deal with both authentication and billing.
+
+**[00:08:30.075]** Remember, never store private keys in your app binary.
+
+**[00:08:35.116]** Always fetch access tokens with a secure mechanism like OAuth,
+
+**[00:08:39.613]** and store them securely using KeyChain.
+
+**[00:08:42.575]** As a developer, you'll typically be billed per-token when using 3rd party models,
+
+**[00:08:48.493]** so we've made it easy to keep track of your usage.
+
+**[00:08:51.957]** Sessions and responses now have a usage property
+
+**[00:08:56.041]** that tells you precisely how many tokens were used.
+
+**[00:08:59.560]** You can also check how many of the input tokens were read from cache,
+
+**[00:09:03.635]** and how many of the response tokens were used for reasoning.
+
+**[00:09:08.291]** If you'd like to learn more about using LanguageModels,
+
+**[00:09:11.354]** or how you can author your own LanguageModel package,
+
+**[00:09:14.366]** check out "Bring an LLM provider to the Foundation Models framework".
+
+**[00:09:19.437]** We have finally made it through all our model updates!
+
+**[00:09:23.172]** Next up is system tools!
+
+**[00:09:25.628]** In this release, we're introducing several built-in tools
+
+**[00:09:29.298]** that supercharge your LanguageModelSessions
+
+**[00:09:31.595]** with system provided functionality.
+
+**[00:09:34.315]** FoundationModels now contains two native tools
+
+**[00:09:37.802]** backed by the Vision framework's powerful capabilities.
+
+**[00:09:41.158]** The BarcodeReaderTool allows the model read information from barcodes,
+
+**[00:09:45.443]** and the OCRTool allows the model to extract structured text from images.
+
+**[00:09:50.261]** Both enhance a model's ability to reason about visual information
+
+**[00:09:53.899]** in ways it can't natively.
+
+**[00:09:56.172]** The "What's new in image understanding" video has more detail about
+
+**[00:09:59.863]** how to leverage these tools, so queue that one up for more info.
+
+**[00:10:04.016]** Similarly, we're also introducing a search tool powered by Spotlight
+
+**[00:10:08.831]** for implementing fully local Retrieval-Augmented Generation.
+
+**[00:10:13.613]** This has been one of your most most requested features.
+
+**[00:10:17.437]** Retrieval-Augmented Generation, or RAG,
+
+**[00:10:20.448]** is a technique that gives the model access to up-to-date personal or domain knowledge
+
+**[00:10:25.847]** by leveraging a Spotlight index and specially processed queries.
+
+**[00:10:31.525]** If this sounds like just what you've been waiting for,
+
+**[00:10:34.480]** "LLM search using Core Spotlight" should be at the top of your watch list.
+
+**[00:10:38.945]** Now that we've looked at all the new models in this release,
+
+**[00:10:42.216]** and the new system tools we're adding to the SDK, I'm going to hand off to Zhen
+
+**[00:10:46.534]** to tell you all about our new APIs for building agentic app experiences.
+
+**[00:10:51.556]** Get excited!
+
+**[00:10:52.993]** Take it away, Zhen!
+
+**[00:10:54.029]** Thanks Erik!
+
+**[00:10:56.311]** I'm going to introduce you to dynamic profiles,
+
+**[00:10:59.998]** our new primitive for building agentic experiences.
+
+**[00:11:04.974]** Let's begin by walking through the crafts app
+
+**[00:11:07.967]** and looking at the kinds of experiences dynamic profiles make possible.
+
+**[00:11:12.894]** Inside the app, I can create a journal entry with some origami photos.
+
+**[00:11:17.670]** The app creates a session that starts in craft analysis mode.
+
+**[00:11:21.829]** The instructions tell the model to analyze the images, and record what it finds.
+
+**[00:11:27.333]** It identifies the craft type, colors, and materials,
+
+**[00:11:32.027]** then saves them back to the journal, through a tool call.
+
+**[00:11:36.179]** Next, the app switches to brainstorming mode
+
+**[00:11:40.001]** using Private Cloud Compute's reasoning capability,
+
+**[00:11:43.545]** it takes everything it just learned
+
+**[00:11:45.686]** and suggests a list of creative origami projects.
+
+**[00:11:49.894]** Pretty cool, right?
+
+**[00:11:51.925]** To implement this feature, I'd start by creating a LanguageModelSession.
+
+**[00:11:56.869]** Then I'll add more sessions, each with its own models, instructions, and tools.
+
+**[00:12:04.811]** But what if I want the model to autonomously switch modes?
+
+**[00:12:10.204]** Things start to get hairy.
+
+**[00:12:14.703]** Managing context and orchestrating an agentic system like this
+
+**[00:12:18.916]** can involve a lot of boilerplates.
+
+**[00:12:21.944]** That's why Foundation Models is introducing a new declarative API,
+
+**[00:12:27.157]** dynamic profiles, so you can focus on what matters in the context,
+
+**[00:12:32.180]** and worry less about imperative controls,
+
+**[00:12:35.265]** all within a single language model session.
+
+**[00:12:39.154]** To create a simple dynamic profile, I can declare a struct,
+
+**[00:12:44.979]** and conform it to the DynamicProfile protocol
+
+**[00:12:49.371]** with a body property that contains a Profile.
+
+**[00:12:54.144]** Language model sessions now can be initialized with a DynamicProfile.
+
+**[00:12:59.951]** I can specify the instructions and tools,
+
+**[00:13:03.751]** that should be present in the context, at that very moment.
+
+**[00:13:08.704]** This is the simplest form of a DynamicProfile,
+
+**[00:13:12.484]** a data structure made up of instructions, and tools.
+
+**[00:13:17.215]** I want to implement two different modes,
+
+**[00:13:19.668]** one for craft analysis, and one for brainstorm.
+
+**[00:13:23.435]** My app has an observable object that stores a mode variable,
+
+**[00:13:28.789]** so I can switch on it.
+
+**[00:13:31.251]** In the different branches,
+
+**[00:13:33.052]** the LanguageModelSession should have different instructions and tools.
+
+**[00:13:38.793]** I can even give the model a tool,
+
+**[00:13:41.363]** to intelligently switch to the context for brainstorm mode.
+
+**[00:13:47.355]** Sometimes it's not enough to just manage the context,
+
+**[00:13:51.741]** you may also want different models and configurations for different tasks,
+
+**[00:13:57.247]** while still maintaining the conversation history.
+
+**[00:14:02.241]** In my crafts app, there are 2 scenarios: craft analysis and brainstorm.
+
+**[00:14:09.199]** Each of them already has a different set of instructions and tools.
+
+**[00:14:15.348]** For quick tasks like analyzing a craft, SystemLanguageModel is probably enough.
+
+**[00:14:22.018]** Now, if I want to switch to brainstorming,
+
+**[00:14:25.228]** I can also specify Private Cloud Compute, configured with deep reasoning.
+
+**[00:14:31.843]** To describe those configurations, I can use modifiers.
+
+**[00:14:37.650]** A model modifier to specify PCC,
+
+**[00:14:41.939]** And a reasoningLevel modifier to ask the model think thoroughly.
+
+**[00:14:47.073]** Now we have a LanguageModelSession
+
+**[00:14:49.138]** with dynamically configured model, tools, and instructions.
+
+**[00:14:54.236]** When the app needs to handle different context with different model capabilities,
+
+**[00:14:59.189]** dynamic profiles are a great fit.
+
+**[00:15:02.320]** The important thing to understand is that a DynamicProfile
+
+**[00:15:06.613]** resolves to a single active Profile at any given time.
+
+**[00:15:11.488]** You use conditionals to pick which Profile is active,
+
+**[00:15:15.773]** and the framework handles the transition for you.
+
+**[00:15:19.383]** Now let's try it out in the crafts app.
+
+**[00:15:22.754]** As I select the idea, the model switches to Private Cloud Compute.
+
+**[00:15:28.152]** It still has the full context from the analysis, but generating creative
+
+**[00:15:33.555]** project ideas benefits from the larger model's capabilities,
+
+**[00:15:37.833]** like better tool calling, and broader world knowledge.
+
+**[00:15:41.466]** Profiles make it so much easier to manage context
+
+**[00:15:45.412]** and dynamically configure sessions.
+
+**[00:15:48.283]** When using this API, consider privacy boundaries, model capabilities, and cost.
+
+**[00:15:55.020]** To explore more, check out the deep dive session:
+
+**[00:15:58.950]** "Build agentic app experiences with Foundation Models framework".
+
+**[00:16:03.977]** As powerful as these capabilities are,
+
+**[00:16:06.810]** language models are inherently non-deterministic,
+
+**[00:16:10.557]** which makes their behaviors hard to predict.
+
+**[00:16:14.280]** The Evaluations framework is a new Swift framework
+
+**[00:16:17.851]** that measures the quality of your intelligence features.
+
+**[00:16:22.201]** With the Evaluations framework,
+
+**[00:16:24.122]** you can quantify accuracy as you tweak your prompts.
+
+**[00:16:28.896]** Evaluations is built to help app developers like you,
+
+**[00:16:32.935]** understand the statistical impact of changes,
+
+**[00:16:36.568]** and deliver your app with confidence.
+
+**[00:16:40.052]** To learn more about Evaluations, check out these sessions.
+
+**[00:16:46.274]** Now, I want to shift gears, and talk about our tooling and open source efforts.
+
+**[00:16:52.742]** In macOS 27, the models are coming to the command line.
+
+**[00:16:57.525]** The fm CLI is a brand new way to use Apple Foundation Models
+
+**[00:17:02.304]** for everyday productivity.
+
+**[00:17:05.236]** You can access the on-device model and PCC from the terminal,
+
+**[00:17:10.091]** just by using the fm command.
+
+**[00:17:14.381]** fm has a nice helper and it lists all the features it supports.
+
+**[00:17:20.780]** I've been using fm chat to experiment with models, for my app features.
+
+**[00:17:26.563]** Let me show you.
+
+**[00:17:28.172]** I want to know, what does valley fold mean in the context origami?
+
+**[00:17:38.343]** Easy.
+
+**[00:17:39.179]** Just like that.
+
+**[00:17:40.859]** I can even plug fm into shell scripts to summarize documents,
+
+**[00:17:45.819]** extract information, or generate content.
+
+**[00:17:49.689]** For example, I have some pictures with random names
+
+**[00:17:53.552]** like this one, IMG_1234.
+
+**[00:17:58.631]** Let me just ask fm to generate a file name based on the content inside the image.
+
+**[00:18:07.992]** Look at that!
+
+**[00:18:09.057]** It just came up with a nice, descriptive name!
+
+**[00:18:13.710]** And if you're a data scientist or researcher
+
+**[00:18:16.954]** working in the Python ecosystem,
+
+**[00:18:19.333]** the FoundationModels SDK for Python has you covered, too.
+
+**[00:18:25.410]** The Python SDK gives you direct access to the very same on-device model
+
+**[00:18:31.075]** that powers the Swift Foundation Models framework.
+
+**[00:18:35.215]** You can check model availability,
+
+**[00:18:38.117]** or generate a response with just a few lines of Python.
+
+**[00:18:42.672]** The SDK has the core feature of the Swift framework
+
+**[00:18:46.731]** so you can go from a prompt to a structured response in seconds.
+
+**[00:18:51.705]** To learn more, check out the session:
+
+**[00:18:54.364]** "Build AI-powered scripts with the fm CLI and Python SDK".
+
+**[00:19:00.039]** Now that we have looked at productivity on Mac,
+
+**[00:19:03.267]** let's talk about open source.
+
+**[00:19:06.485]** Starting with Foundation Models framework utilities.
+
+**[00:19:11.952]** Utilities contains a collection of building blocks
+
+**[00:19:15.393]** to help you explore emerging practices in working with LLMs.
+
+**[00:19:21.517]** It provides profile modifiers for transcript management,
+
+**[00:19:25.868]** a skill API for procedural knowledge loading,
+
+**[00:19:29.753]** and a language model that can interface with servers
+
+**[00:19:33.164]** using the Chat Completions standard.
+
+**[00:19:36.444]** These are just the starting points.
+
+**[00:19:39.244]** Tools and trends evolve,
+
+**[00:19:41.010]** and the Foundation Models framework utilities
+
+**[00:19:43.809]** is there to grow with you.
+
+**[00:19:47.247]** In addition to the utilities package,
+
+**[00:19:49.627]** the core of the FoundationModels framework will also be open source.
+
+**[00:19:55.485]** Open sourcing the Foundation Models framework
+
+**[00:19:58.384]** makes it a great solution for interacting with LLMs
+
+**[00:20:02.228]** everywhere Swift runs, including Linux servers.
+
+**[00:20:06.524]** Together with other model providers like Anthropic and Google,
+
+**[00:20:11.661]** alongside CoreAI and MLX integrations,
+
+**[00:20:15.679]** you'll be able to run any model, anywhere.
+
+**[00:20:19.046]** Welcome back Erik!
+
+**[00:20:20.370]** Are you ready to wrap up?
+
+**[00:20:21.753]** Way to bring it home Zhen!
+
+**[00:20:24.539]** We hope you're as jazzed as we are about all these new capabilities,
+
+**[00:20:28.378]** models, and APIs.
+
+**[00:20:30.325]** We've only just scratched the surface.
+
+**[00:20:33.278]** Yeah, to get the full scoop, make sure to check out other videos,
+
+**[00:20:37.464]** for deep dives on all the topics we've introduced here,
+
+**[00:20:40.808]** from the Evaluations framework to Private Cloud Compute,
+
+**[00:20:44.720]** the enhanced Xcode instrument, and the nitty gritty on dynamic profiles.
+
+**[00:20:50.600]** Some great next steps would be to explore our sample app
+
+**[00:20:53.989]** to learn more about dynamic profiles,
+
+**[00:20:56.116]** and to start getting familiar with the Evaluations framework.
+
+**[00:20:59.772]** On behalf of the whole team, thanks for joining us!
+
+**[00:21:03.566]** Thank you!
+

@@ -1,0 +1,43 @@
+<!--
+{
+  "availability" : [
+    "macOS: 10.7.0 -"
+  ],
+  "documentType" : "symbol",
+  "framework" : "BundleResources",
+  "identifier" : "/documentation/BundleResources/Entitlements/com.apple.security.cs.allow-jit",
+  "metadataVersion" : "0.1.0",
+  "role" : "Property List Key",
+  "symbol" : {
+    "kind" : "Property List Key",
+    "modules" : [
+      "Bundle Resources"
+    ],
+    "preciseIdentifier" : "entitlements:Entitlements.com.apple.security.cs.allow-jit"
+  },
+  "title" : "Allow execution of JIT-compiled code entitlement"
+}
+-->
+
+# Allow execution of JIT-compiled code entitlement
+
+A Boolean value that indicates whether the app may create writable and executable memory using the `MAP_JIT` flag.
+
+## Discussion
+
+You can create memory that’s both writable and executable by passing the `MAP_JIT` flag to the `mmap()` system function. The Hardened Runtime disallows this by default, because it creates a security risk. However, some apps and system frameworks rely on this functionality, typically for performance reasons. Examples include:
+
+- The fast-path of the <doc://com.apple.documentation/documentation/JavaScriptCore> framework
+- Certain Python frameworks
+- Perl-compatible regular expressions (PCRE)
+- An app that creates a dynamically-compiled, proprietary macro language
+
+Without the `Allow execution of JIT-compiled code entitlement`, frameworks that rely on just-in-time (JIT) compilation may fall back to an interpreter. Other code using JIT compilation may crash or behave in unexpected ways.
+
+Digital rights management (DRM) solutions that currently use unsigned executable memory should instead change to using the `MAP_JIT` flag and the entitlement.
+
+To add the entitlement to your app, first enable the Hardened Runtime capability in Xcode, and then under Runtime Exceptions, select Allow Execution of JIT-compiled Code.
+
+---
+
+Copyright &copy; 2026 Apple Inc. All rights reserved. | [Terms of Use](https://www.apple.com/legal/internet-services/terms/site.html) | [Privacy Policy](https://www.apple.com/privacy/privacy-policy)

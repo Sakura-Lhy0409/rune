@@ -1,0 +1,1542 @@
+Latest News - Apple Developer
+View in English
+Apple Developer
+Get Started
+Explore Get Started
+Overview
+Learn
+Apple Developer Program
+Stay Updated
+Latest News
+Hello Developer
+Platforms
+Explore Platforms
+Apple Platforms
+iOS
+iPadOS
+macOS
+tvOS
+visionOS
+watchOS
+App Store
+Featured
+Design
+Distribution
+Games
+Accessories
+Web
+Home
+CarPlay
+Technologies
+Explore Technologies
+Overview
+Xcode
+Swift
+SwiftUI
+Featured
+Accessibility
+AI &amp; Machine Learning
+App Intents
+Apple Intelligence
+Games
+Security
+Xcode Cloud
+Community
+Explore Community
+Overview
+Meet with Apple events
+Community events
+Developer Forums
+Open Source
+Featured
+WWDC
+Swift Student Challenge
+Developer Stories
+App Store Awards
+Apple Design Awards
+Apple Developer Centers
+Documentation
+Explore Documentation
+Documentation Library
+Technology Overviews
+Sample Code
+Human Interface Guidelines
+Videos
+Release Notes
+Featured Updates
+iOS
+iPadOS
+macOS
+watchOS
+visionOS
+tvOS
+Xcode
+Downloads
+Explore Downloads
+All Downloads
+Operating Systems
+Applications
+Design Resources
+Featured
+Xcode
+TestFlight
+Fonts
+SF Symbols
+Icon Composer
+Support
+Explore Support
+Overview
+Help Guides
+Developer Forums
+Feedback Assistant
+Contact Us
+Featured
+Account Help
+App Review Guidelines
+App Store Connect Help
+Upcoming Requirements
+Agreements and Guidelines
+System Status
+Quick Links
+Events
+News
+Forums
+Sample Code
+Videos
+&nbsp;
+-->
+News
+Open Menu
+Close Menu
+Hello Developer
+Software Releases
+Site Updates
+Upcoming Requirements
+RSS
+Get ready with the latest beta releases
+September 16, 2026
+The beta versions of iOS 27.2, iPadOS 27.2, macOS 27.2, tvOS 27.2, visionOS 27.2, and watchOS 27.2 are now available. Get your apps ready by confirming they work as expected on these releases. And make sure to build and test with Xcode 27.2 to take advantage of the advancements in the latest SDKs.
+Note about iOS 27.1 and iPhone Duo
+When iPhone Duo becomes available on October 23, it will run iOS 27.1. This version builds on the foundation of iOS 27 and introduces features that were purpose-built for the new foldable design.
+Xcode 27.1 will add development support for iPhone Duo. This includes updated SDKs and a simulator that supports the all-new poses and orientations of iPhone Duo. A beta version will be available later this month.
+View downloads and
+release notes
+Learn about testing a
+beta OS
+Learn about
+sending feedback
+Get your subscriptions ready for iOS 27
+September 16, 2026
+Discover how you can expand the reach of your subscriptions with new features in iOS 27. You can start preparing today by making sure your apps use StoreKit 2 to handle your Apple In-App Purchases.
+Request access to Bundles and Suites
+Offer multiple subscriptions as a single Apple In-App Purchase in your apps with new Bundles and Suites capabilities. With Bundles, people can access multiple subscriptions in one purchase — across a single app, multiple apps from the same developer, or even spanning multiple developers’ apps. With Suites, people get access to a single subscription that seamlessly works across a set of apps from a single developer.
+The App Store provides the purchase experience, which displays all apps included in your Bundle or Suite, so it’s easy for people to download and access their subscription content right away.
+To get started, review our
+Bundles and Suites page
+, which includes eligible configurations, technical requirements, and how to submit a request form. Bundles and Suites will be available later this year in iOS 27, iPadOS 27, macOS 27, tvOS 27, or later.
+Offer Bundles and Suites
+Bundles and Suites video
+Multiseat purchasing enabled in App Store Connect
+Multiseat purchases make it easy for organizations and groups to buy your subscriptions in bulk through Volume Purchasing and Group Purchases. This presents you with an opportunity to expand your subscription beyond single users, as small businesses and specific work groups or departments can access your subscription without having to go through additional administrative workflows.
+With Volume Purchasing, organizations that use Apple Business and Apple School Manager can buy your subscriptions through a single Apple In-App Purchase and assign seats using a device management provider.
+With Group Purchases, a subscriber can buy multiple seats in a single Apple In-App Purchase and invite others to join. Apple handles any seat assignment and the invitation flow, to let groups — like small businesses, individual departments, or teams — easily access your subscriptions.
+This opens your subscription to users who don't fit the traditional single-subscriber model: a work team splitting the cost of a productivity app, a small business outfitting a handful of employees, a department within a larger company, or a group of collaborators sharing access to a creative tool. Any of these groups can become paying subscribers today, without going through IT or procurement.
+Starting today, multiseat purchases are enabled by default for subscriptions in App Store Connect. You have full control over availability and can disable multiseat purchases entirely, or selectively manage availability across the App Store, Apple Business, and Apple School Manager.
+Volume Purchasing launches on October 22, 2026, and Group Purchases will launch this winter.
+Manage purchase options for an
+auto-renewable subscription
+Offer subscriptions to
+groups and organizations
+Updates to App Tracking Transparency in the European Union
+September 16, 2026
+As part of agreements with select European competition authorities, Apple is introducing changes to its App Tracking Transparency framework in the European Union. Beginning with iOS 27.2 and iPadOS 27.2, developers will have the option to use an alternative version of the App Tracking Transparency system prompt in the EU. The requirements for when you must seek permission to track users will remain the same. Due to legal requirements, only the alternative version of the system prompt is available for apps distributed in Germany, France, Italy, Poland, and Romania.
+Learn more
+Get ready for iPhone Duo
+September 9, 2026
+Start getting ready for iPhone Duo today. Watch new videos, sign up for Group Labs, and take part in Q&amp;As on the Apple Developer Forums.
+Explore now
+App Store submissions now open for the latest OS releases
+September 9, 2026
+iOS 27, iPadOS 27, macOS 27, tvOS 27, visionOS 27, and watchOS 27 will soon be available to customers worldwide, which means you can now submit apps and games that take advantage of the latest Apple technologies and innovations like Apple Intelligence, the Foundation Models framework, design updates, new App Store features, and more.
+Download the Xcode 27 Release Candidate.
+Build your apps and games using the latest SDKs, test with TestFlight, and submit for review to the App Store.
+Optimize your app for macOS 27.
+macOS 26 is the final release supporting Intel Mac computers and Rosetta — macOS 27 will be Apple silicon only. To limit your app to Macs with Apple silicon, set your Xcode build architecture to arm64 only, then rebuild and resubmit. Removing support for Intel-based apps lets you further simplify your development and
+optimize your app for Apple silicon
+.
+Answer age rating questions.
+New
+Time Allowances
+give parents more flexible ways to manage the time their kids spend in apps across categories, including Entertainment, Games, and Social Media. If your app or game includes social media capabilities, you’ll need to indicate them in App Store Connect.
+Prepare your App Store assets.
+Make a strong impression using new product page headers and search result assets on the App Store. Explore
+design guidance and templates
+to create captivating product page headers, search results, screenshots, app previews, and In-App Events. Before you publish, use the new product page preview tool in App Store Connect to see exactly how your page will look on the App Store. Coming soon.
+Starting April 2027
+, apps and games uploaded to App Store Connect need to meet the following minimum requirements:
+iOS and iPadOS apps must be built with the iOS 27 &amp; iPadOS 27 SDK or later
+tvOS apps must be built with the tvOS 27 SDK or later
+visionOS apps must be built with the visionOS 27 SDK or later
+watchOS apps must be built with the watchOS 27 SDK or later
+Learn more
+about submitting
+Upcoming changes to Rosetta support for Intel-based macOS apps
+September 1, 2026
+In 2020, we introduced Apple silicon for Mac computers, providing Rosetta as a translation layer during the transition period.
+As announced at WWDC last year
+, we’re now concluding this transition.
+What this means for developers who have macOS apps:
+macOS 26.4 or later: Users may receive a system notification when launching apps that rely on Rosetta, alerting them to update to an Apple silicon native version.
+macOS 27: Final release to support Rosetta — Intel-only apps will no longer run on Mac computers with Apple silicon after this update.
+Please note that Rosetta functionality for older, unmaintained gaming titles that rely on Intel-based frameworks will continue to be supported.
+What you need to do:
+To ensure your apps remain available and your users aren't interrupted by system notifications, add Apple silicon support to your apps now.
+If you haven’t updated your app yet:
+Begin the transition immediately. Build and distribute your app as a universal binary, which runs natively on both Apple silicon and Intel-based Mac computers.
+Optimize your app
+for Apple silicon
+Port your macOS apps
+to Apple silicon
+Visit the
+Apple Developer Forums
+If you already offer an Apple silicon version:
+Reach out to your users directly. Encourage them to download and install your latest native version to avoid the notifications on macOS 26.4 or later and ensure the app runs when macOS 27 ships this fall.
+Tax and price updates for apps, In-App Purchases, and subscriptions
+August 27, 2026
+The App Store is designed to make it easy to sell your digital goods and services globally, with support for 43 currencies across 175 storefronts.
+From time to time, we may need to adjust prices or your proceeds due to changes in tax regulations or foreign exchange rates. These adjustments are made using publicly available exchange rate information from reputable financial media (e.g., The Wall Street Journal) or financial companies (e.g., Bloomberg) to help make sure prices for apps and In-App Purchases stay consistent across all storefronts.
+Read more
+Surprise and shine
+August 26, 2026
+Join us for a special Apple Event on September 9 at 10 a.m. PT.
+Watch on
+apple.com
+, Apple TV, or YouTube Live.
+Update: New domain for Sign in with Apple
+August 24, 2026
+Starting later this year, new Sign in with Apple addresses, previously issued on
+privaterelay.appleid.com
+, will be issued on
+private.icloud.com
+. Existing addresses on
+privaterelay.appleid.com
+will continue to work and forward mail to users without interruption.
+After further consideration and reviewing community feedback, iCloud+ Hide My Email addresses will remain on
+icloud.com
+.
+What you need to do
+Developers with apps or websites that use Sign in with Apple should ensure that their account systems, email validation logic, and allowlists accept addresses on the new
+private.icloud.com
+domain in addition to the existing
+privaterelay.appleid.com
+domain.
+Learn more
+about Sign in with Apple
+Communicating using the Private Email
+Relay Service
+Changes for apps in the European Union
+August 18, 2026
+Apple is making changes to its business terms for apps in the European Union, following close collaboration with the European Commission. The changes reduce complexity by moving every developer that distributes apps in the EU to a single set of business terms.
+Under the new business terms, Apple will charge a commission on the sale of digital goods and services. The Core Technology Fee, a per-install fee for developers who achieve extraordinary scale, will be replaced by the Core Technology Commission, a simple 5% commission on digital transactions in apps distributed outside the App Store. The new terms also eliminate the Initial Acquisition Fee and Store Services Fee.
+Members of the Apple Developer Program can review and agree to the updated terms today in the Apple Developer Program License Agreement. Some key updates, which go into effect October 1, 2026, include:
+Adjusting commission rates across the App Store, alternative payments, and alternatively distributed apps.
+Allowing apps to offer alternative payment options alongside Apple In-App Purchase.
+Adding child safety protections for alternative payments on the App Store.
+Expanding the qualifications for developers to operate alternative app marketplaces and distribute their apps over the web.
+Learn more about
+the changes
+You can also request a
+30-minute online appointment
+to ask questions about these changes.
+Updated Apple Developer Program License Agreement now available
+August 18, 2026
+Attachment 14 of the
+Apple Developer Program License Agreement
+has been added to specify updated terms for apps in the European Union, including alternative distribution, alternative payments, and business terms.  These terms will go into effect on October 1, 2026.
+Please review the changes and
+sign in to your account
+to accept the updated terms.
+Translations of the updated agreement will be available on the
+Apple Developer website
+within one month.
+Updates to age ratings for the Republic of Korea
+August 12, 2026
+Apple generates appropriate age ratings based on your answers to the age rating questionnaire in App Store Connect. In compliance with local regulatory requirements, apps in the Games and Entertainment categories distributed on the App Store in Korea receive a region-specific age rating based on these answers. We’re making two changes to age ratings in the Republic of Korea: one taking effect today and the other later this year.
+First, starting today, if your app has received an official rating from the
+Game Rating and Administration Committee
+(GRAC), you can now override your app’s existing age rating for the App Store in Korea to any of the region-specific ratings (All, 12+, 15+, or 19+) by providing your GRAC Rating Classification Number (RCN) with your app’s next version submission.
+Learn how to override an age rating for the Republic
+of Korea
+Second, starting in October 2026, two content descriptors will move from an age rating of All to 12+ for the App Store in Korea:
+Infrequent profanity and crude humor
+Infrequent mature or suggestive themes
+Learn more about the Republic of Korea age
+rating values
+Get ready for new creative assets on the App Store
+August 5, 2026
+As we
+announced in June
+, Apple is introducing new ways to market your apps and games on the App Store. With these new assets, you can go beyond in-use visuals to highlight your brand, seasonal offerings, exciting new content, and more. Your creative assets can be used across the App Store in multiple places, including your product page header, search results, In-App Events, and more.
+To help you plan your images and videos ahead of the fall launch, review our new App Store asset best practices, which include recommendations, as well as Figma, Photoshop, and Pixelmator design templates you can use to create captivating and compelling assets.
+Learn about best practices
+and resources
+Age rating questionnaire now includes social media questions
+July 9, 2026
+As
+announced in June
+, new Time Allowances in iOS 27, iPadOS 27, and macOS 27, or later, give parents more flexible ways to manage the time their kids spend in apps across categories, including Entertainment, Games, and Social Media.
+To support this, the age rating questionnaire in App Store Connect now includes questions about your app’s social media capabilities. A social media capability is defined as the ability to redistribute, amplify, or interact with user-generated content through a social feed or similar discovery method. The Time Allowance category for Social Media is based on whether your app or game offers social media capabilities, regardless of the app category selected in App Store Connect. Apps with these capabilities will display a new Social Media content descriptor on their App Store product page. If you indicate that your app or game includes social media capabilities but they are disabled for anyone under 13, it won’t be included in the Time Allowance category for Social Media for users under 13. For more details, refer to
+Introducing Time Allowances
+.
+You can review and answer these questions starting today. As previously shared, beginning in September 2026, responses will be required when submitting new apps or updates to the App Store, or when submitting apps for notarization for alternative distribution.
+Set an app
+age rating
+Age rating values
+and definitions
+Design kits for iOS, iPadOS, and macOS 27 are here
+June 23, 2026
+Apple design kits for Figma and Sketch are now available for iOS, iPadOS, and macOS 27. These include:
+Updates to Liquid Glass
+Expanded component and state support
+Naming changes to better align with code
+Improved resizing
+The addition of Dark Mode for macOS
+Download the design kits from the Apple
+Design Resources
+Updated Apple Developer Program License Agreement now available
+June 18, 2026
+Attachment 12 of the
+Apple Developer Program License Agreement
+has been revised to specify terms for iOS apps in Brazil, including alternative distribution, alternative payments and out-of-app offers, and the Core Technology Commission. Please review the changes and
+sign in to your account
+to accept the updated terms.
+Translations of the updated agreement will be available on the
+Apple Developer website
+within one month.
+Changes to iOS in Brazil
+June 18, 2026
+As part of a recent agreement with Brazil’s competition regulator CADE (Conselho Administrativo de Defesa Econômica), Apple is introducing changes to iOS that create new options for developers' apps in Brazil. Beginning with iOS 26.5, developers can distribute apps on alternative app marketplaces, operate alternative app marketplaces, process app payments for digital goods and services outside of Apple In-App&nbsp;Purchase in iOS, and more.
+Read more
+New domain for Sign in with Apple and iCloud+ Hide My Email
+June 15, 2026
+Later this summer, Apple will unify the email domains used by Sign in with Apple and iCloud+ Hide My Email under a single, shared domain: private.icloud.com.
+Read more
+Deprecation of the ImageCreator class
+June 11, 2026
+As we continue to refine our approach to image generation, the ImageCreator class is being discontinued and will no longer work in iOS 27, iPadOS 27, macOS 27, and visionOS 27 or later. When we introduced the Image Playground framework, we included the ImageCreator class as a way for apps to generate images programmatically using the on-device image generation model.
+Read more
+WWDC26 survey
+June 11, 2026
+Share your thoughts on this year’s conference.
+Take the survey
+Find out what's new for Apple developers
+June 8, 2026
+Discover the latest advancements on all Apple platforms and create even more unique, intelligent experiences in your apps and games with major enhancements across languages, frameworks, tools, and services. The latest SDKs bring incredible new features, including platform design refinements, powerful Apple Intelligence capabilities, and new AI development frameworks.
+Explore
+what’s new
+Install the latest
+beta software
+Browse documentation
+and sample code
+Introducing Time Allowances
+June 8, 2026
+New Time Allowances in iOS 27, iPadOS 27, and macOS 27, or later, give parents more flexible ways to manage the time their kids spend in apps across categories, including Entertainment, Games, and Social Media.
+Read more
+Updated Apple Developer Program License Agreement and App Review Guidelines now available
+June 8, 2026
+The Apple Developer Program License Agreement and App Review Guidelines have been revised to support new features, updated policies, and to provide clarification.
+Read more
+Update for Apps Distributed in Texas
+June 3, 2026
+Due to a recent court ruling lifting an injunction on Texas law SB 2420, new Apple Accounts in Texas are now subject to the law, which introduced age assurance requirements for app marketplaces and developers. As previously
+announced
+, this includes age assurance and parent or guardian consent on behalf of minors under the age of 18 for downloads, Apple In-App Purchases, and significant changes associated with an app. Parents or guardians will also be able to revoke their consent for any app they previously approved for their child. These changes will go into effect starting June 4, 2026.
+Developers can request age category data for these Apple Accounts through the
+Declared Age Range API
+. For significant changes, developers should use the
+Significant Change API
+under the PermissionKit framework. As a reminder, it’s the developer’s responsibility to determine when there’s a significant change to their app. To learn about a parent or guardian’s revocation of consent, the App Store is providing a server notification that developers can configure to receive notifications that consent has been withdrawn for their app on a child or teen’s device.
+Next steps
+Review documentation and implement the following:
+Declared Age Range API
+Significant Change API under PermissionKit
+New age rating property type in StoreKit
+App Store server notification
+Use Apple’s sandbox testing environment to validate that the APIs have been implemented correctly.
+For the most up-to-date requirements and API references, see:
+Age assurance frameworks Q&amp;A
+Learn more about how you can
+provide age-appropriate experiences
+and safeguard privacy in your apps and games using robust features available across Apple platforms.
+Apple Developer Centers are expanding to Berlin
+June 3, 2026
+Apple Developer Centers are dedicated spaces designed for in-person developer sessions, labs, workshops, and appointments across a wide range of Apple technologies and platforms.
+With locations in Cupertino, Shanghai, Bengaluru, and Singapore, these purpose-built facilities bring expert guidance and hands-on learning directly to the developer community. Later this year, Apple will open its fifth Developer Center in Berlin, offering developers throughout Europe even greater access to Apple experts and events.
+Created for teams of all sizes and at every stage of app development, the Apple Developer Center Berlin will serve as a home base for in-person sessions, workshops, and one-on-one appointments. Additionally, consultation areas and dedicated labs will offer hands-on support from Apple experts in multiple languages.
+Learn more
+Introducing the 2026 Apple Design Award winners
+June 2, 2026
+Join us in celebrating these extraordinary apps and games.
+Meet the 2026 Apple Design
+Award winners
+All systems glow
+June 1, 2026
+WWDC26 is just one week away. Get ready for five days of technology, creativity, and community — all online and free.
+Learn more
+Get ready with the latest beta releases
+May 26, 2026
+The beta versions of iOS 26.6, iPadOS 26.6, macOS 26.6, tvOS 26.6, visionOS 26.6, and watchOS 26.6 are now available. Get your apps ready by confirming they work as expected on these releases. And make sure to build and test with Xcode 26.5 to take advantage of the advancements in the latest SDKs.
+View downloads and
+release notes
+Learn about testing a
+beta OS
+Learn about
+sending feedback
+Upcoming changes to age ratings in Australia and Vietnam
+May 21, 2026
+Starting June 18, 2026, age ratings on the App Store will be updated in Australia and Vietnam.
+Australia
+The 15+ age rating will no longer be available on the App Store in Australia. Apps currently rated 15+ with the following content descriptors will be updated to 16+:
+Unrestricted web access
+Frequent medical or treatment information
+Loot boxes
+The new rating will appear on your app’s product page in Australia. Please ensure your responses to the age rating questionnaire in App Store Connect accurately reflect your app’s content.
+Vietnam
+To align with Article 38 of Vietnam Decree 147, apps available on the App Store in Vietnam will require a region-specific age rating. Based on your age rating questionnaire responses in App Store Connect, your app will receive one of four ratings (00+(all ages), 12+, 16+, or 18+) which will appear on its product page in Vietnam. Additional details, including age rating values, will be available in App Store Connect and
+App Store Connect Help
+on June 18.
+Introducing the 2026 Apple Design Award finalists
+May 18, 2026
+Every year, the Apple Design Awards recognize innovation, ingenuity, and technical achievement in app and game design. But they’ve also become something more: A moment to step back and celebrate the work of Apple developers across the community.
+Meet this
+year’s finalists
+Coming bright up
+May 18, 2026
+Get ready for a week of technology, creativity, and community — all online and free. Here’s what WWDC26 has in store.
+Learn more
+Tax and price updates for apps, In-App Purchases, and subscriptions
+May 11, 2026
+The App Store is designed to make it easy to sell your digital goods and services globally, with support for 43 currencies across 175 storefronts. From time to time, we may need to adjust prices or your proceeds due to changes in tax regulations or foreign exchange rates. These adjustments are made using publicly available exchange rate information from reputable financial media (e.g., The Wall Street Journal) or financial companies (e.g., Bloomberg) to help make sure prices for apps and In-App Purchases stay consistent across all storefronts.
+Read more
+Brazilian betting license requirement for App Store availability
+May 8, 2026
+Following changes to Brazil’s fixed-odds betting regulation, apps with fixed-odds betting (gambling) features can now be distributed on the App Store in Brazil with a valid fixed-odds betting license from the
+Secretariat of Prizes and Bets (SPA)
+. If any of your apps include these features (indicated by selecting “Yes” to the gambling question in the age rating questionnaire in App Store Connect), you’ll need to provide this license. Keep in mind that answering “Yes” to the gambling question in the age rating questionnaire will set your Brazil age rating to A18.
+A new app version must be submitted to initiate the license verification process. Updating the App Review Information section in App Store Connect alone won’t start a review. When submitting a new version of your app for review:
+Include your license information in the App Review Information section in App Store Connect.
+Enter your license details in the Notes field.
+Attach any supporting documents using the file attachment field.
+Please ensure that your app complies with all disclosures and warnings requirements, including but not limited to age restrictions and gambling risks, as required under the law. For questions regarding your legal obligations, please contact your legal counsel.
+Learn more about Brazil
+age ratings
+Learn more about Brazil’s fixed-odds
+betting regulation
+Now Available: Monthly Subscriptions with a 12-Month Commitment
+April 27, 2026
+Today, we’re introducing a new way that people can pay for your auto-renewable subscriptions on the App Store: monthly subscriptions with a 12-month commitment. This new payment option allows you to offer subscribers more affordable options. People can cancel their subscription at any time, which will prevent the subscription from renewing after they’ve completed their agreed-to payments to fulfill their commitment.
+To provide transparency, people can easily view the number of completed and remaining payments for the subscription in their Apple Account. Apple will also send email and, if opted in, push notifications ahead of their renewal date to remind them of their upcoming purchase.
+You can now configure this type of subscription in App Store Connect and test it in Xcode. With the exception of the United States and Singapore, monthly subscriptions with a 12-month commitment will be available worldwide to people on iOS 26.4, iPadOS 26.4, macOS Tahoe 26.4, tvOS 26.4, and visionOS 26.4, or later, with the release of iOS 26.5, iPadOS 26.5, macOS Tahoe 26.5, tvOS 26.5, and visionOS 26.5 in May.
+Learn about
+configuring subscriptions
+Learn about
+auto-renewable subscriptions
+App Store expands support to 11 new languages
+March 31, 2026
+To help your apps and games reach more people worldwide — especially in India — App Store Connect now supports localized metadata for 11 new languages, bringing the total number of supported localizations to 50. The new languages include Bangla, Gujarati, Kannada, Malayalam, Marathi, Odia, Punjabi, Slovenian, Tamil, Telugu, and Urdu.
+You can now provide localized metadata — such as your app name, description, screenshots, and more — in App Store Connect. When you localize your metadata, it helps make your app relevant to potential users across languages and cultures, and provides an opportunity to grow your business. You can add localized metadata with your next version submission for each platform you support and use new localized App Store badges in your marketing communications.
+Learn how to localize your
+app information
+Learn about expanding your app to
+new markets
+Download the new localized
+App Store badges
+Updated Apple Developer Program License Agreement now available
+March 30, 2026
+The
+Apple Developer Program License Agreement
+has been revised to support new features, updated policies, and clarifications. Please review the changes and
+sign in to your account
+to accept the updated terms.
+Definitions, Section 3.3.3(B), Section 3.3.7(K): Specified requirements for use of the Foveated Streaming framework and clarified data privacy requirements.
+Definitions, Section 3.3.3(Q): Specified requirements for use of the Family Controls framework.
+Definitions, Section 3.3.7(J): Specified requirements for use of the Accessory Notifications framework and Accessory Live Activities framework.
+Translations of the updated agreement will be available on the
+Apple Developer website
+within one month.
+Get ready with the latest beta releases
+March 30, 2026
+The beta versions of iOS 26.5, iPadOS 26.5, macOS 26.5, tvOS 26.5, visionOS 26.5, and watchOS 26.5 are now available. Get your apps ready by confirming they work as expected on these releases. And make sure to build and test with Xcode 26.5 beta to take advantage of the advancements in the latest SDKs.
+View downloads and
+release notes
+Learn about testing a
+beta OS
+Learn about
+sending feedback
+Update on regulated medical device apps in the European Economic Area, United Kingdom, and United States
+March 26, 2026
+To provide additional transparency to customers, the App Store will now display whether an app is a regulated medical device on its product page in the
+European Economic Area (EEA)
+,
+United Kingdom
+, or United States. Regulated medical device apps are those that function on their own or as part of a system for a range of medical purposes, including diagnosis, prevention, monitoring, and treatment of diseases and physiological conditions. These apps may require registration or authorization from regulatory bodies, such as the U.S. Food and Drug Administration (FDA).
+If you distribute in the EEA, UK, or U.S. and your app meets either of the following criteria, you’ll need to provide a regulated medical device status in App Store Connect, along with relevant regulatory information, such as contact details and safety information:
+Its primary or secondary category is Health &amp; Fitness or Medical
+It’s marked as containing frequent references to Medical or Treatment Information in the Age Rating questionnaire in App Store Connect
+Starting today, this status is required for new apps that meet either of the criteria above in order to distribute in these regions. Existing apps distributed in these regions that meet either of the criteria above must provide a status by early 2027. However, if you haven’t declared your app’s status by early 2027, you’ll no longer be able to submit app updates. If your app is not a regulated medical device, you can select No.
+Learn about providing a regulated medical
+device status
+New In-App Purchase and subscription data now available in Analytics
+March 25, 2026
+Analytics in App Store Connect receives its biggest update since its launch, including a refreshed user experience that makes it easier to measure the performance of your apps and games. Updates include:
+More than 100 new metrics. Now you can access monetization and subscription data in Analytics to better understand the performance of your In-App Purchases and offers.
+New cohort capabilities. Analyze user behavior based on common attributes — such as download date, download source, offer start date, and more — to measure how a particular group of users performs over time. For example, if you’ve expanded your app to a new region, you can monitor how long it takes users in that region to make a purchase compared to other more established regions. Cohort data is aggregated to ensure user privacy.
+New peer group benchmarks. Discover how you stack up to peers with two new monetization benchmarks: download-to-paid conversion and proceeds per download. Benchmarks incorporate differential privacy techniques to protect individual developer performance while also providing meaningful and actionable insights.
+Two new subscription reports. Export these via the Analytics Reports API to perform offline analysis and integrate Analytics into your own data systems.
+Additional filters. Apply up to seven filters to your selected metrics at once allowing you to drill down further and uncover additional insights.
+App Store Analytics Guide. This new guide in App Store Connect Help enables you to develop a data-driven strategy and understand App Store tools and features you can use to grow your business.
+Learn about measuring performance
+with Analytics
+Read the new
+Analytics guide
+WWDC26: June 8-12, 2026
+March 23, 2026
+Join the worldwide developer community online for a week of technology, creativity, and community.
+Be there for the reveal of the latest Apple tools, frameworks, and features. Learn to elevate your apps and games through video sessions hosted by Apple engineers and designers. Engage with Apple experts in labs and connect with the worldwide developer community. All online and free.
+Learn more
+about WWDC26
+Apple Developer is now on bilibili and LinkedIn
+March 17, 2026
+Check out Apple Developer on bilibili and LinkedIn to learn about the latest news, announcements, videos, and events — including the Worldwide Developers Conference and Meet with Apple activities — for the developer community.
+Follow
+on bilibili
+Follow
+on LinkedIn
+Adjustments to the China storefront of the App Store on iOS and iPadOS
+March 12, 2026
+Apple is making changes to the App Store in China following discussions with the Chinese regulator.
+As of March 15, 2026, changes will be made to the commission rates that apply to the China mainland storefront of the App Store on iOS and iPadOS.
+The commission rate for standard Apple In-App Purchase and paid app transactions will be 25%. Currently, the rate is 30%. The commission rate for qualifying Apple In-App Purchase transactions under the App Store Small Business Program and Mini Apps Partner Program, and for auto-renewals of Apple In-App Purchase subscriptions after the first year, will be 12%. Currently, the rate is 15%.
+Signing the updated terms by March 15 is not required to receive the benefit of these commission rate changes starting that date.
+We strive for iOS and iPadOS to be the best app ecosystem and a great business opportunity for developers in China. We are committed to terms that remain fair and transparent to all developers, and to always offering competitive App Store rates to developers distributing apps in China that are no higher than overall rates in other markets.
+The
+Apple Developer Program License Agreement
+has been revised to support updated policies. You can
+sign in to your account
+to accept the updated terms.
+Translations of the updated agreement will be available on
+Apple Developer website
+within one month.
+Age requirements for apps distributed in Brazil, Australia, Singapore, Utah, and Louisiana
+February 24, 2026
+Today we’re providing an update on the tools available for developers to meet their age assurance obligations under upcoming U.S. and regional laws, including in Brazil, Australia, Singapore, Utah, and Louisiana. Updates to the Declared Age Range API are now available in beta for testing.
+Read more
+Get ready with the latest beta releases
+February 16, 2026
+The beta versions of iOS 26.4, iPadOS 26.4, macOS 26.4, tvOS 26.4, visionOS 26.4, and watchOS 26.4 are now available. Get your apps ready by confirming they work as expected on these releases. And make sure to build and test with Xcode 26.4 beta to take advantage of the advancements in the latest SDKs.
+View downloads and
+release notes
+Learn about testing a
+beta OS
+Learn about
+sending feedback
+Updated App Review Guidelines now available
+February 6, 2026
+The App Review Guidelines have been revised to clarify that apps with random or anonymous chat are subject to the
+1.2 User-Generated Content guideline
+.
+Translations of the guidelines will be available on
+Apple Developer website
+within one month.
+Swift Student Challenge submissions are now open
+February 6, 2026
+The Swift Student Challenge is here! Submissions are now open through February 28, and students from all over the world are invited to submit their app playgrounds.
+Learn more about
+the Challenge
+Key things to know
+No prior experience is needed. The Challenge is open to students of all levels who meet the
+eligibility
+requirements.
+The Challenge is free to enter — all you need is access to a Mac or iPad with Xcode or Swift Playground.
+Your app playground can be on any topic of your choice. The best app ideas come from subjects or experiences that you're passionate about.
+Your app playground should be experienced within 3 minutes or less.
+The Swift Student Challenge is a great opportunity for students to build their skills and create something great.
+Learn more
+Watch a new video
+to learn from past winners and Apple experts.
+Explore
+learning resources
+.
+Upcoming SDK minimum requirements
+February 3, 2026
+Starting April 28, 2026, apps and games uploaded to App Store Connect need to meet the following minimum requirements:
+iOS and iPadOS apps must be built with the iOS 26 &amp; iPadOS 26 SDK or later
+tvOS apps must be built with the tvOS 26 SDK or later
+visionOS apps must be built with the visionOS 26 SDK or later
+watchOS apps must be built with the watchOS 26 SDK or later
+Learn more
+about submitting
+Price updates for apps, In-App Purchases, and subscriptions
+January 29, 2026
+The App Store is designed to make it easy to sell your digital goods and services globally, with support for 43 currencies across 175 storefronts.
+From time to time, we need to adjust prices or your proceeds due to changes in tax regulations or foreign exchange rates. These adjustments are made using publicly available exchange rate information from financial data providers to help make sure prices for apps and In-App Purchases stay consistent across all storefronts.
+As of January 29:
+Your proceeds from the sale of eligible apps and In‑App Purchases have been modified in:
+Bhutan: Goods and Services Tax (GST) introduction of 5%
+Finland: Reduced value‑added tax (VAT) rate decrease from 14% to 13.5% for news, magazines, books, and audiobooks
+Ghana: Removal of 2019 COVID-19 Health Recovery Levy
+Kazakhstan: VAT rate increase from 12% to 16%
+Lithuania: Reduced VAT rate decrease from 9% to 5% for news, magazines, books, and audiobooks
+Mauritius: VAT introduction of 15%
+Russia: VAT rate increase from 20% to 22%
+Türkiye: Digital sales tax (DST) rate decrease from 7.5% to 5%
+Zimbabwe: VAT rate increase from 15% to 15.5%
+Exhibit B of the Paid Applications Agreement will be updated to indicate that Apple collects and remits applicable taxes in Bhutan and Mauritius.¹
+Beginning February 16:
+Pricing for apps and In-App Purchases will be updated for Mauritius if you haven’t selected Mauritius as the base storefront for your app or In‑App Purchase.² This update considers the VAT introduction listed in the tax updates section above.
+If you’ve selected Mauritius as the base storefront for your app or In-App Purchase, prices won’t change. On other storefronts, prices will be updated to maintain equalization with your chosen base price.
+Prices won’t change in any region if your In‑App Purchase is an auto‑renewable subscription. Prices also won’t change on the storefronts where you manually manage prices instead of using the automated equalized prices.
+The Pricing and Availability section of Apps has been updated in
+App Store Connect
+to display these upcoming price changes. As always, you can change the prices of your apps, In‑App Purchases, and auto‑renewable subscriptions at any time.
+Learn more about managing your prices
+View or edit upcoming
+price changes
+Edit your app’s base country
+or region
+Pricing and availability start times by country
+or region
+Set a price for an
+In-App Purchase
+Learn more about your proceeds
+View payments
+and proceeds
+Download
+financial reports
+¹ Translations of the updated agreement will be available on the
+Apple Developer website
+within one month.
+² Excludes auto-renewable subscriptions.
+Update on age requirements for apps distributed in Texas
+December 23, 2025
+A recent injunction issued by a district court suspended enforcement of Texas state law SB2420, which introduced age assurance requirements for app marketplaces and developers. In light of this ruling, Apple will pause previously announced implementation plans and monitor the ongoing legal process.
+The tools we
+previously announced
+to help developers meet their compliance obligations will remain available for sandbox testing, including:
+Declared Age Range API
+Significant Change API under PermissionKit
+New age rating property type in StoreKit
+App Store Server Notifications
+These tools can also be used to help developers with their obligations under laws coming into effect in Utah and Louisiana in 2026. The Declared Age Range API remains available worldwide for users on iOS 26, iPadOS 26, and macOS 26, or later.
+Changes to iOS in Japan
+December 17, 2025
+To comply with the Mobile Software Competition Act (MSCA), Apple is introducing changes to iOS that create new options for developers' apps in Japan. Beginning with iOS 26.2, developers can distribute apps on alternative app marketplaces, operate alternative app marketplaces, process app payments for digital goods and services outside of Apple In-App Purchase in iOS, and more.
+The new options for downloading apps from alternative app marketplaces and making app payments open new avenues for malware, fraud, scams, and privacy and security risks. Apple has worked with Japanese regulators to introduce protections from these new threats — with a special emphasis on the safety of younger users. Those protections include Notarization for iOS apps, an authorization process for app marketplaces, and requirements that help protect children from inappropriate content and scams.
+By March 17, 2026, all current members of the Apple Developer Program will need to agree to the latest update to the Apple Developer Program License Agreement, which includes new terms that allow for these options in Japan.
+Learn more about
+the updates
+You can also request a
+30-minute online appointment
+to ask questions about these changes.
+Updated Apple Developer Program License Agreement now available
+December 17, 2025
+The
+Apple Developer Program License Agreement
+has been revised to support new features, updated policies, and to provide clarification. Please review the changes and
+sign in to your account
+to accept the updated terms.
+Section 3.3.3(A): Specified requirement on recordings and privacy.
+Section 3.3.3(J): Specified requirements for launching voice-based conversational apps via the side button on iPhone.
+Definitions, section 3.3.3(P): Specified terms for use of the Declared Age Range API and Significant App Topic Update API.
+Definitions, section 3.3.8(J): Specified requirements for use of the Wi-Fi Infrastructure Framework.
+Attachment 12: Specified terms for iOS apps in Japan, including alternative distribution, alternative payments and out-of-app offers, and the Core Technology Commission.
+Schedules 2 and 3, section 3.4: Specified the right to offset or recoup amounts owed to Apple.
+Schedules 2 and 3, section 5.4: Clarified requirements for consumer protection.
+Translations of the updated agreement will be available on the
+Apple Developer website
+within one month.
+New Requirements for Social Media Apps in Australia
+December 8, 2025
+Beginning December 10, 2025, a new Australian law will require certain social media platforms operating in Australia to prevent people under 16 from having a social media account. Impacted developers are responsible for making sure they follow the requirements of the new law, including deactivating any existing accounts for users under 16 and monitoring new signups.
+Read more
+App Store Award winners announced
+December 4, 2025
+Join us in celebrating the outstanding work of these developers from around the world.
+Meet
+the winners
+App Store Award finalists announced
+November 19, 2025
+Every year, the App Store Awards celebrate exceptional apps and games that improve people’s lives while showcasing the highest levels of technical innovation, user experience, design, and positive cultural impact. This year, the App Store Editorial team is proud to recognize 49 outstanding finalists. Winners will be announced in the coming weeks.
+Learn about
+the finalists
+Introducing the App Store Mini Apps Partner Program
+November 13, 2025
+Today, we’re introducing the Mini Apps Partner Program, which expands on the App Store’s ongoing support for apps that offer mini apps. Mini apps are self-contained experiences that are built using web technologies like HTML5 and JavaScript. This program is designed to help developers who host mini apps grow their business and further the availability of mini apps on the App Store — all while providing a great customer experience.
+Participating developers may benefit from a reduced commission rate of 15% on the sales of qualifying In-App Purchases. To be eligible for this reduced commission rate, participating apps must support certain App Store technologies, including the Declared Age Range API and the Advanced Commerce API in order to help provide a safe and seamless experience for customers of all ages.
+Learn more about the Mini Apps Partner Program
+and eligibility
+Updated App Review Guidelines now available
+November 13, 2025
+The
+App Review Guidelines
+have been revised to support updated policies and to provide clarification. Please review the changes below:
+1.2.1(a): This new guideline specifies that creator apps must provide a way for users to identify content that exceeds the app’s age rating, and use an age restriction mechanism based on verified or declared age to limit access by underage users.
+2.5.10: This language has been deleted (“Apps should not be submitted with empty ad banners or test advertisements.”).
+3.2.2(ix): Clarified that loan apps may not charge a maximum APR higher than 36%, including costs and fees, and may not require repayment in full in 60 days or less.
+4.1(c): This new guideline specifies that you cannot use another developer’s icon, brand, or product name in your app’s icon or name, without approval from the developer.
+4.7: Clarifies that HTML5 and JavaScript mini apps and mini games are in scope of the guideline.
+4.7.2: Clarifies that apps offering software not embedded in the binary may not extend or expose native platform APIs or technologies to the software without prior permission from Apple.
+4.7.5: Clarifies that apps offering software not embedded in the binary must provide a way for users to identify content that exceeds the app’s age rating, and use an age restriction mechanism based on verified or declared age to limit access by underage users.
+5.1.1(ix): Adds crypto exchanges to the list of apps that provide services in highly regulated fields.
+5.1.2(i): Clarifies that you must clearly disclose where personal data will be shared with third parties, including with third-party AI, and obtain explicit permission before doing so.
+Translations of the guidelines will be available on
+Apple Developer website
+within one month.
+Next steps for apps distributed in Texas
+November 4, 2025
+Today we’re releasing more details about the tools we’re making available for developers to help them meet their compliance obligations under upcoming U.S. state laws, including SB2420 in Texas. While we're providing these tools to help developers navigate the evolving legal landscape, Apple remains concerned about the potential implications of laws like SB2420 in Texas. Specifically, we worry they could undermine the privacy of all users by requiring the collection of sensitive personal information just to download an app – even those that simply provide weather forecasts or sports scores.
+Read more
+Get ready with the latest beta releases
+November 4, 2025
+The beta versions of iOS 26.2, iPadOS 26.2, macOS 26.2, tvOS 26.2, visionOS 26.2, and watchOS 26.2 are now available. Get your apps ready by confirming they work as expected on these releases. And make sure to build and test with Xcode 26.2 beta to take advantage of the advancements in the latest SDKs.
+View downloads and
+release notes
+Learn about testing a
+beta OS
+Learn about
+sending feedback
+Price updates for apps, In-App Purchases, and subscriptions
+October 30, 2025
+The App Store is designed to make it easy to sell your digital goods and services globally, with support for 44 currencies across 175 storefronts.
+From time to time, we may need to adjust prices or your proceeds due to changes in tax regulations or foreign exchange rates. These adjustments are made using publicly available exchange rate information from financial data providers to help make sure prices for apps and In-App Purchases stay consistent across all storefronts.
+Price updates
+Beginning November 17:
+Pricing for apps and In-App Purchases will be updated for Poland, Switzerland, and Türkiye if you haven’t selected one of these storefronts as the base storefront for your app or In‑App Purchase.¹
+If you’ve selected Poland, Switzerland, or Türkiye as the base storefront for your app or In-App Purchase, prices won’t change. On other storefronts, prices will be updated to maintain equalization with your chosen base price.
+Prices won’t change in any region if your In‑App Purchase is an auto‑renewable subscription. Prices also won’t change on the storefronts where you manually manage prices instead of using the automated equalized prices.
+The Pricing and Availability section of Apps has been updated in
+App Store Connect
+to display these upcoming price changes. As always, you can change the prices of your apps, In‑App Purchases, and auto‑renewable subscriptions at any time.
+Learn more about managing your prices
+View or edit upcoming
+price changes
+Edit your app’s base country
+or region
+Pricing and availability start times by country
+or region
+Set a price for an
+In-App Purchase
+¹ Excludes auto-renewable subscriptions.
+Enhancements to help you submit and market your apps and games
+October 29, 2025
+As part of our ongoing commitment to helping developers succeed on the App Store, we’re introducing new options for submitting content and updates while your app is in review, double the number of custom product pages, and offer codes for all In-App Purchase types.
+Submit additional items to App Review
+Now you can send additional items to App Review independent of an existing submission, giving you greater flexibility when submitting your apps and games. For example, you can now submit:
+One or more In-App Events in a separate submission if you have an app version under review.
+An app version to address a critical bug that’s separate from any existing custom product pages under review.
+One or more Game Center features — including achievements, leaderboards, challenges, and more — in a submission that’s separate from an app version under review.
+Learn more
+about submitting
+Create double the number of custom product pages and add keywords
+Custom product pages let you highlight different content and features within your app or game using unique screenshots, app previews, and promotional text. To provide you with even more flexibility, you can now create and publish up to 70 custom pages at a given time. Additionally, you can now assign keywords to each custom product page so they’re more discoverable on the App Store. Custom product pages with keywords assigned to them can appear in search results for those selected keywords instead of your default product page.
+Learn more about custom
+product pages
+Offer codes expand to all In-App Purchase types
+Offer codes now support all In-App Purchase types, including consumable, non-consumable, and non-renewing subscriptions, in addition to expanded support for auto-renewable subscriptions. With offer codes, you can present people with a limited-time offer for a free or discounted In-App Purchase. This allows you to share the value of your In-App Purchases and encourage engagement and purchases within your apps and games. This expanded support includes the ability to create offer codes for:
+Consumable, non-consumable, and non-renewing subscriptions.
+Auto-renewable subscriptions that don’t auto-renew once the promotional period ends.
+Schedule 1 and the Paid Applications Agreement (Schedules 2 and 3) will be updated to indicate that offer codes are available for all In-App Purchase types.¹
+Promo codes for In-App Purchases
+Offer codes build on the functionality of
+promo codes
+and provide improved configuration and customer eligibility options. As a result, starting March 26, 2026, you’ll no longer be able to create promo codes for In-App Purchases in App Store Connect. Any existing promo codes for In-App Purchases you’ve created can be redeemed until they expire. You can continue to use promo codes in order to provide people with a free download of your app.
+Learn about creating
+offer codes
+Learn about offer codes for
+auto-renewable subscriptions
+Implementing
+offer codes
+¹ Translations of the updated agreement will be available on the
+Apple Developer website
+within one month.
+New requirement for apps using Sign in with Apple for account creation
+October 9, 2025
+Starting January 1, 2026, developers based in the Republic of Korea must provide a
+server‑to‑server notification endpoint
+when registering a new Services ID, or updating an existing Services ID, to
+associate their website
+with an app using
+Sign in with Apple
+.
+As a reminder, registering a notification endpoint allows Apple to send you important updates about the people who use your app and their account status, including:
+Changes in email forwarding preferences.
+Account deletions in your app.
+Permanent Apple Account deletions.
+To learn more about server-to-server notifications, see
+WWDC20 session 10173: Get the most out of Sign in with Apple
+.
+When you receive these notifications, you should immediately update any data associated with the account change in the app, as well as any necessary server infrastructure, to give people more control of the personal data they’ve shared. For more information, see
+Processing changes for Sign in with Apple accounts
+.
+Before submitting a new app to the App Store, or updating an existing app configuration to register a new Services ID or modify an existing Services ID, please read the guidance below.
+Account change guidance
+Account changes are directly related to privacy and control for the user and their personal data, and confirming account changes should be straightforward and transparent.
+For account email forwarding changes:
+Ensure any displayed user data affected by the account change matches the change event in the notification payload. Typically, this data is displayed in the app’s account settings or user profile.
+If people need to visit a website to finish changing or verifying their email address, include a link directly to the page on your website where they can complete the process.
+Keep users informed. If the email forwarding change affects other services you offer, let them know. If your app supports In-App Purchases, help people understand how billing, order tracking, and cancellations will be handled with the new email address.
+For account deletions:
+See
+TN3194: Handling account deletions and revoking tokens for Sign in with Apple
+.
+Note:
+Always follow applicable legal requirements for storing and retaining user account information and for handling account changes and deletions. This includes complying with local laws where your apps are available. If you have questions regarding your legal obligations, check with your legal counsel.
+Resources
+App Review Guidelines
+Human Interface Guidelines: Managing accounts
+Updated Apple Developer Program License Agreement now available
+October 8, 2025
+The Apple Developer Program License Agreement has been revised to support updated policies and to provide clarification. Please review the changes below and
+sign in to your account
+to accept the updated terms.
+Section 3.3.1(B): Updated requirements related to interpreted code
+Definitions, Section 3.3.3(F): Specified requirements for use of the Location Push Service Extension
+Section 3.3.8(A), Attachment 4: Added links to terms for Xcode Cloud and CloudKit related to Regulation (EU) 2023/2854 (EU Data Act)
+Section 3.3.9(D): Updated terms regarding the entity that distributes the Tap to Pay APIs
+Schedule 1, Exhibit C: Updated Section 1 definition for Promo Codes
+Schedule 2, Section 3.13: Updated references to Offer Codes
+Schedule 2, Section 3.13(b): Updated availability terms for Offer Codes
+Translations of the updated agreement will be available on the
+Apple Developer website
+within one month.
+New requirements for apps available in Texas
+October 8, 2025
+Beginning January 1, 2026, a new state law in Texas — SB2420 — introduces age assurance requirements for app marketplaces and developers. While we share the goal of strengthening kids’ online safety, we are concerned that SB2420 impacts the privacy of users by requiring the collection of sensitive, personally identifiable information to download any app, even if a user simply wants to check the weather or sports scores. Apple will continue to provide parents and developers with industry-leading tools that help enhance child safety while safeguarding privacy within the constraints of the law.
+Once this law goes into effect, users located in Texas who create a new Apple Account will be required to confirm whether they are 18 years or older. All new Apple Accounts for users under the age of 18 will be required to join a
+Family Sharing group
+, and parents or guardians will need to provide consent for all App Store downloads, app purchases, and transactions using Apple's In-App Purchase system by the minor. This will also impact developers, who will need to adopt new capabilities and modify behavior within their apps to meet their obligations under the law. Similar requirements will come into effect later next year in Utah and Louisiana.
+Today we’re sharing details about updates that we’re making and the tools we’ll provide to help developers meet these new requirements.
+To assist developers in meeting their obligations in a privacy-preserving way, we’ll introduce capabilities to help them obtain users’ age categories and manage significant changes as required by Texas state law. The
+Declared Age Range API
+is available to implement now, and will be updated in the coming months to provide the required age categories for new account users in Texas. And new APIs launching later this year will enable developers, when they determine a significant change is made to their app, to invoke a system experience to allow the user to request that parental consent be re-obtained. Additionally, parents will be able to revoke consent for a minor continuing to use an app. More details, including additional technical documentation, will be released later this fall.
+We know protecting kids from online threats requires constant vigilance and effort. That’s why we will continue to create
+industry-leading features
+to help developers provide age-appropriate experiences and safeguard privacy in their apps and games, and empower parents with a
+comprehensive set of tools
+to help keep their kids safe online.
+Upcoming Currency Change in Bulgaria
+September 25, 2025
+Beginning January 1, 2026, Bulgaria will adopt the euro (EUR) as its official currency, replacing the Bulgarian lev (BGN). As a result, the currency for App Store purchases and subscriptions in Bulgaria will change from BGN to EUR on this date. Your proceeds from sales in Bulgaria will also change to euros.
+If you’ve selected the lev as the currency for your bank in App Store Connect, it will automatically change to the euro on December 1, 2025. If you’ve selected a different currency for your bank account, you’ll continue to be paid in that currency. The statutory fixed conversion rate is 1.95583 BGN = 1 EUR as established on July 8, 2025, by the Council of the European Union in connection with the introduction of the euro as the official currency in the Republic of Bulgaria.
+Auto-renewing subscriptions, manually priced apps and In‑App Purchases, or apps and In‑App Purchases with Bulgaria as the base storefront:
+Pricing on the Bulgaria storefront will be updated to a euro price based on the statutory conversion rate and rounded down to a supported euro price point. If you’ve chosen Bulgaria as the base storefront for your app or In‑App Purchases, pricing in other storefronts may be updated to maintain equalization with the new euro price.
+Other apps or In‑App Purchases:
+Pricing on the Bulgaria storefront will be converted to the euro using the standard equalization for euro markets where App Store sales are subject to value‑added tax (VAT).
+You can change the prices of your apps, In‑App Purchases, and auto‑renewable subscriptions at any time.
+Auto‑renewable subscriptions won’t be interrupted. Subscription prices will be automatically updated for each current, preserved, and future scheduled price to euros. Customers with auto‑renewable subscriptions will receive an email informing them of the currency change.
+Per the Euro Act, you’ll need to communicate both the lev and euro prices for In‑App Purchases to customers within your app for the duration of the transitional period from now until the end of the transition period on August 8, 2026. This messaging should appear anywhere prices are displayed.
+Your Sales and Trends reports and monthly financial reports will also be updated. For Sales and Trends, euros will be indicated for transactions after the currency change. For monthly financial reports, earnings from sales that occurred before the currency change will be in the BG report, and earnings from sales after the currency change will be in the EU report.
+All refunds issued after January 1, 2026, will be refunded in euros, regardless of the date of purchase.
+Learn more about the Bulgaria
+EUR adoption
+Get ready with the latest beta releases
+September 22, 2025
+The beta versions of iOS 26.1, iPadOS 26.1, macOS 26.1, tvOS 26.1, visionOS 26.1, and watchOS 26.1 are now available. Get your apps ready by confirming they work as expected on these releases. And to take advantage of the advancements in the latest SDKs, make sure to build and test with Xcode 26.0.1.
+View downloads and
+release notes
+Learn about testing a
+beta OS
+Learn about
+sending feedback
+App Store submissions now open for the latest OS releases
+September 9, 2025
+iOS 26, iPadOS 26, macOS Tahoe 26, tvOS 26, visionOS 26, and watchOS 26 will soon be available to customers worldwide — which means you can now submit apps and games that take advantage of Apple’s broadest design update ever.
+Build your apps and games using the
+Xcode 26 Release Candidate
+and latest SDKs, test with TestFlight, and submit for review to the App Store. By taking advantage of the
+new design and Liquid Glass
+, the
+Foundation Models framework
+, the new
+Apple Games app
+, and more, you can deliver even more unique experiences on Apple platforms.
+Starting April 2026, apps and games uploaded to App Store Connect need to meet the following minimum requirements.
+iOS and iPadOS apps must be built with the iOS 26 &amp; iPadOS 26 SDK or later
+tvOS apps must be built with the tvOS 26 SDK or later
+visionOS apps must be built with the visionOS 26 SDK or later
+watchOS apps must be built with the watchOS 26 SDK or later
+Learn more
+about submitting
+Awe dropping.
+August 26, 2025
+Join us for a special Apple Event on September 9 at 10 a.m. PT.
+Watch on
+apple.com
+, Apple TV, or
+YouTube Live
+.
+Tax and Price Updates for Apps, In-App Purchases, and Subscriptions
+August 21, 2025
+The App Store is designed to make it easy to sell your digital goods and services globally, with support for 44 currencies across 175 storefronts.
+From time to time, we need to adjust prices or your proceeds due to changes in tax regulations or foreign exchange rates. These adjustments are made using publicly available exchange rate information from financial data providers to help make sure prices for apps and In-App Purchases stay consistent across all storefronts.
+Tax and price updates
+As of August 21:
+Your proceeds from the sale of eligible apps and In‑App Purchases have been modified in:
+Brazil: Imposto sobre Operações Financeiras (IOF) of 3.5%
+Canada: Digital services tax (DST) no longer applicable
+Estonia: Value‑added tax (VAT) rate increase from 22% to 24%
+Romania:
+- VAT rate increase from 19% to 21%
+- Reduced VAT rate increase from 5% to 11% for news, magazines, books, and audiobooks
+The Philippines: VAT introduction of 12% for developers based outside of the Philippines
+Vietnam:
+- Organizations based outside of Vietnam: VAT rate increase from 5% to 10%.
+- Individual developers based outside of Vietnam: Personal income tax (PIT) introduction of 5%, replacing the corporate income tax (CIT). Reduced VAT rate of 0% for news, magazines, and books no longer applies and all content will be taxed at the standard rate.
+- Organizations based in Vietnam: Apple will no longer remit foreign contractor tax (FCT) on sales to end customers. FCT of 5% introduced on Apple’s commission.
+- Individual developers based in Vietnam: Personal income tax (PIT) introduction of 2%, replacing the corporate income tax (CIT). FCT of 5% introduced on Apple’s commission. Reduced VAT rate of 0% for news, magazines, and books no longer applies and all content will be taxed at the standard rate.
+Exhibit B and C of the Paid Applications Agreement will be updated to indicate that Apple collects and remits applicable taxes in the Philippines, and the relevant tax changes in Vietnam.¹
+Beginning September 8:
+Pricing for apps and In-App Purchases will be updated for the Philippines and Vietnam if you haven’t selected one of these storefronts as the base storefront for your app or In‑App Purchase.² These updates also consider VAT introductions and changes listed in the tax updates section above.
+If you’ve selected the Philippines or Vietnam as the base storefront for your app or In-App Purchase, prices won’t change. On other storefronts, prices will be updated to maintain equalization with your chosen base price.
+Prices won’t change in any region if your In‑App Purchase is an auto‑renewable subscription. Prices also won’t change on the storefronts where you manually manage prices instead of using the automated equalized prices.
+The Pricing and Availability section of Apps has been updated in
+App Store Connect
+to display these upcoming price changes. As always, you can change the prices of your apps, In‑App Purchases, and auto‑renewable subscriptions at any time.
+Learn more about managing your prices
+View or edit upcoming
+price changes
+Edit your app’s base country
+or region
+Pricing and availability start times by country
+or region
+Set a price for an
+In-App Purchase
+Learn more about your proceeds
+View payments
+and proceeds
+Download
+financial reports
+¹ Translations of the updated agreement will be available on the
+Apple Developer website
+within one month.
+² Excludes auto-renewable subscriptions.
+Updated age ratings in App Store Connect
+July 24, 2025
+The App Store is designed to be a safe and trusted place for all ages, including children. The age rating system for apps and games has been updated in order to provide people with more granular age ratings. We’ve also introduced new age rating questions to help identify sensitive content in your app and added the ability to set a higher rating to reflect your app’s minimum age requirement. Ratings for all apps and games on the App Store have been automatically updated to align with this new system and will be reflected on Apple devices running beta versions of iOS 26, iPadOS 26, macOS Tahoe 26, tvOS 26, visionOS 26, and watchOS 26.
+The updated age rating system adds 13+, 16+, and 18+ to the existing 4+ and 9+ ratings. Age ratings are assigned to each country or region and may vary based on region-specific suitability standards.
+We’ve introduced a new set of required questions to the ratings questionnaire for all apps. These new questions cover:
+In-app controls.
+Capabilities.
+Medical or wellness topics.
+Violent themes in your app or game.
+Your answers to these questions will help Apple better calculate a rating and help you deliver an age-appropriate experience.
+If your app has a policy requiring a higher minimum user age than the rating assigned by Apple, you can set a higher age rating after you respond to the age ratings questions. You can view the age rating for each of your apps under the updated system and respond to the new questions for each app in the App Information section in
+App Store Connect
+.
+As a reminder, you must consider how all app features, including AI assistants and chatbot functionality, impact the frequency of sensitive content appearing within your app to make sure it receives the appropriate rating. All apps are subject to the
+App Review Guidelines
+, such as the safety guidelines regarding objectionable content or user generated content, and must abide by all applicable local laws and regulations, like the Children’s Online Privacy Protection Act (“COPPA”), and the European Union’s General Data Protection Regulation (“GDPR”).
+Please provide responses to the updated age rating questions for each of your apps by January 31, 2026, to avoid an interruption when submitting your app updates in App Store Connect.
+Learn more about age ratings values
+and definitions
+Learn how to set your
+app rating
+New 64-bit requirement for watchOS apps
+July 22, 2025
+Beginning April 2026, watchOS apps uploaded to App Store Connect must also include 64-bit support and be built with the
+watchOS 26
+SDK. To enable 64-bit support in your project, we recommend using the default Xcode build setting of “Standard architectures” to build a single binary with 64-bit code.
+You can test ARM64 compatibility for your apps in the Xcode Simulator, and on Apple Watch Series 9 or 10, or Apple Watch Ultra 2 running watchOS 26 beta.
+Learn more about the SDKs included
+in Xcode
+iOS and iPadOS 26 design kits are here
+July 18, 2025
+Apple Ul design kits for Figma and Sketch are now available for iOS and iPadOS 26.
+Apple Design Resources
+Updates for apps in the European Union
+June 26, 2025
+The European Commission has required Apple to make a series of additional changes under the Digital Markets Act:
+Communication and promotion of offers
+Today, we’re introducing updated terms that let developers with apps in the European Union storefronts of the App Store communicate and promote offers for purchase of digital goods or services available at a destination of their choice. The destination can be a website, alternative app marketplace, or another app, and can be accessed outside the app or within the app via a web view or native experience.
+App Store apps that communicate and promote offers for digital goods or services will be subject to new business terms for those transactions — an initial acquisition fee, store services fee, and for apps on the StoreKit External Purchase Link Entitlement (EU) Addendum, the Core Technology Commission (CTC). The CTC reflects value Apple provides developers through ongoing investments in the tools, technologies, and services that enable them to build and share innovative apps with users.
+Music streaming apps on the App Store in the European Economic Area (EEA) wanting to use the Music Streaming Services Entitlement (EEA) can use these options.
+Update to Business Terms for Apps in the European Union
+By January 1, 2026, Apple plans to move to a single business model in the EU for all developers. Under this single business model, Apple will transition from the Core Technology Fee (CTF) to the CTC on digital goods or services. The CTC will apply to digital goods or services sold by apps distributed from the App Store, Web Distribution, and/or alternative marketplaces.
+Apps currently under the Alternative Terms Addendum for Apps in the EU continue to be subject only to the CTF until the transition to the CTC is fully implemented next year. At that time, qualifying transactions will be subject to the CTC, and the CTF will no longer apply. Additional details regarding this transition will be provided at a later date.
+User Experience Update
+Beginning with iOS 18.6 and iPadOS 18.6, iOS and iPadOS will provide an
+updated user experience
+in the EU for installing alternative marketplaces or apps from a developer’s website. Additionally, later this year, we will provide an API which will allow developers to initiate the download of alternatively distributed apps they publish from within their app.
+To learn more, view
+Communication and promotion of offers on the App Store in the EU
+. To read the full terms, view the
+Alternative Terms Addendum for Apps in the EU
+or the
+StoreKit External Purchase Link Entitlement Addendum for EU Apps
+. You can also request a
+30-minute online appointment
+to ask questions and provide feedback about these changes.
+Find out what’s new for Apple developers
+June 9, 2025
+Discover the latest advancements on all Apple platforms. With incredible new features in iOS, iPadOS, macOS, tvOS, visionOS, and watchOS, and major enhancements across languages, frameworks, tools, and services, you can create even more unique experiences in your apps and games.
+Explore
+what’s new
+Updated agreements and guidelines now available
+June 9, 2025
+The
+Apple Developer Program License Agreement
+and
+App Review Guidelines
+have been revised to support new features and updated policies, and to provide clarification. Please review the changes below.
+Apple Developer Program License Agreement
+Section 3.3.3(D): Updated language on requirements for data and privacy.
+Section 3.3.3(N): Updated requirements for use of the ID Verifier APIs.
+Definitions, 3.3.3(P): Specified requirements for use of the Declared Age Range API.
+Definitions, 3.3.7(G): Specified requirements for use of the Wi-Fi Aware framework.
+Definitions, 3.3.7(H): Specified requirements for use of the TelephonyMessagingKit APIs.
+Definitions, 3.3.7(I): Specified requirements for use of the Default Dialer APIs.
+Definition, Section 3.3.8(H), Attachment 11: Specified requirements for use of EnergyKit.
+Definitions, 3.3.8(I): Specified requirements for use of the Foundation Models framework.
+Definitions, Attachment 4: Specified requirements for use of the iCloud Extended Share APIs.
+Section 6.4: Removed language on Bitcode submissions as it is no longer applicable, and replaced it with terms regarding iOS app widgets on CarPlay.
+Section 7.4(B): Updated and clarified requirements for TestFlight related to digital purchases and tester invitations.
+Section 7.7: Updated language on customization of icons and widgets.
+Section 7.8: Specified terms related to the Apple Games app.
+Attachment 6: Updated terms regarding the entity that distributes the map in China.
+App Review Guidelines
+3.1.2(a), bullet 2: This language has been deleted (“You may offer a single subscription that is shared across your own apps and services”).
+3.1.2(a), bullet 5: This language has been relocated to Guideline 3.2.2(x).
+3.2.1(viii): Clarified that financial apps must have necessary licensing and permissions in the locations where developers make them available.
+3.2.2(x): This new guideline contains the language relocated from Guideline 3.1.2(a), bullet 5, and permits developers to otherwise incentivize users to take specific actions within app.
+Please
+sign in to your account
+to accept the updated Apple Developer Program License Agreement.
+Translations of the guidelines will be available on
+Apple Developer website
+within one month.
+Sleek peek.
+June 2, 2025
+WWDC25 is almost here! Find out how to tune in to the Keynote and Platforms State of the Union on Monday, June 9.
+Learn more
+On the horizon.
+May 20, 2025
+Here’s what's in store for WWDC25. Join us online from June 9 to 13 for a week of technology and creativity.
+Learn more
+Tax and Price updates for Apps, In-App Purchases, and Subscriptions
+May 16, 2025
+The App Store is designed to make it easy to sell your digital goods and services globally, with support for 44 currencies across 175 storefronts.
+From time to time, we may need to adjust prices or your proceeds due to changes in tax regulations or foreign exchange rates. These adjustments are made using publicly available exchange rate information from financial data providers to help make sure prices for apps and In-App Purchases stay consistent across all storefronts.
+Tax and price updates
+As of May 16:
+Your proceeds from the sale of eligible apps and In‑App Purchases have been modified in Brazil to account for the Contribuições de Intervenção no Domínio Econômico (CIDE) tax introduction of 10% for developers based outside of Brazil.
+Beginning June 2:
+Pricing for apps and In-App Purchases will be updated for Brazil and Kazakhstan if you haven’t selected one of these storefronts as the base storefront for your app or In‑App Purchase.¹ The updates in Brazil also consider the 10% CIDE tax introduction.
+If you’ve selected Brazil or Kazakhstan as the base storefront for your app or In-App Purchase, prices won’t change. On other storefronts, prices will be updated to maintain equalization with your chosen base price.
+Prices won’t change in any region if your In‑App Purchase is an auto‑renewable subscription. Prices also won’t change on the storefronts where you manually manage prices instead of using the automated equalized prices.
+The Pricing and Availability section of Apps has been updated in
+App Store Connect
+to display these upcoming price changes. As always, you can change the prices of your apps, In‑App Purchases, and auto‑renewable subscriptions at any time.
+Additional upcoming changes
+Beginning August 4:
+All auto-renewable subscription price increases in Austria, Germany, and Poland will require customers to consent to the new price for their subscription to continue renewing.
+Price increases scheduled with a start date on or after August 4:
+All customers must consent to the new price. If a subscriber doesn’t agree to the new price or takes no action, Apple will continue to request consent approximately weekly through email, push notifications, and in-app messaging until their subscription expires at the end of their current billing cycle.
+Price increases scheduled with a start date before August 4:
+Current notice criteria will remain in effect, even if the renewal occurs after August 4 (for annual subscriptions, renewal could be as late as August 2026).
+See criteria
+, noting that consent may apply to customers depending on the size or velocity of your price increases.
+To help ensure a smooth transition, we recommend avoiding scheduling price increases with a start date between August 2 and August 4.
+Learn more about managing your prices
+View or edit upcoming
+price changes
+Edit your app’s base country
+or region
+Pricing and availability start times by country
+or region
+Set a price for an
+In-App Purchase
+Learn more about your proceeds
+View payments
+and proceeds
+Download
+financial reports
+¹ Excludes auto-renewable subscriptions.
+Updated guidelines now available
+May 1, 2025
+The App Review Guidelines have been updated for compliance with a United States court decision regarding buttons, external links, and other calls to action in apps. These changes affect apps distributed on the United States storefront of the App Store, and are reflected in updates to Guidelines 3.1.1, 3.1.1(a), 3.1.3, and 3.1.3(a).
+View the
+App Review Guidelines
+Translations of the guidelines will be available on
+Apple Developer website
+within one month.
+WWDC25: June 9-13, 2025
+March 25, 2025
+Join the worldwide developer community online for a week of technology and creativity.
+Be there for the reveal of the latest Apple tools, frameworks, and features. Learn to elevate your apps and games through video sessions hosted by Apple engineers and designers. Engage with Apple experts in labs and connect with the worldwide developer community. All online and at no cost.
+Learn more
+about WWDC25
+Apple Developer is now on WeChat
+February 24, 2025
+Check out the official Apple Developer WeChat account to find news, announcements, and upcoming activities for the developer community.
+Learn more in
+Simplified Chinese
+Get ready with the latest beta releases
+February 21, 2025
+The beta versions of iOS 18.4, iPadOS 18.4, macOS 15.4, tvOS 18.4, visionOS 2.4, and watchOS 11.4 are now available. Get your apps ready by confirming they work as expected on these releases. And to take advantage of the advancements in the latest SDKs, make sure to build and test with Xcode 16.3.
+As
+previewed last year
+, iOS 18.4 and iPadOS 18.4 include support for
+default translation apps
+for all users worldwide, and
+default navigation apps
+for EU users.
+Beginning April 24, 2025, apps uploaded to App Store Connect must be built with Xcode 16 or later using an SDK for iOS 18, iPadOS 18, tvOS 18, visionOS 2, or watchOS 11.
+View downloads and
+release notes
+New requirement for apps on the App Store in the European Union
+February 18, 2025
+As of today
+, apps without trader status have been removed from the App Store in the European Union (EU) until trader status is provided and verified by Apple.
+Account Holders or Admins in the Apple Developer Program will need to enter this status in App Store Connect to comply with the
+Digital Services Act
+.
+Learn what a trader is and how to enter
+your status
+New features for APNs token authentication are now available
+February 17, 2025
+You can now take advantage of upgraded security options when creating new token authentication keys for the Apple Push Notification service (APNs).
+Team-scoped keys
+enable you to restrict your token authentication keys to either development or production environments, providing an additional layer of security and ensuring that keys are used only in their intended environments.
+Topic-specific keys
+provide more granular control by enabling you to associate each key with a specific bundle ID, allowing for more streamlined and organized key management. This is particularly beneficial for large organizations that manage multiple apps across different teams.
+Your existing keys will continue to work for all push topics and environments. At this time, you don’t have to update your keys unless you want to take advantage of the new capabilities.
+For detailed instructions on how to secure your communications with APNs, read
+Establishing a token-based connection to APNs
+.
+Upcoming changes to offers and trials for subscriptions in South Korea
+February 14, 2025
+Starting February 14, 2025, new regulatory requirements in South Korea will apply to all apps with offers and trials for auto-renewing subscriptions.
+To comply, if you offer trials or offers for auto-renewing subscriptions to your app or game, additional consent must be obtained for your trial or offer after the initial transaction. The App Store will help to get consent by informing the affected subscribers with an email, push notification, and in-app price consent sheet, and asking your subscribers to agree to the new price.
+This additional consent must be obtained from customers within 30 days from the payment or conversion date for:
+Free to paid trials
+Discounted subscription offers to standard-price subscriptions
+Apps that do not offer a free trial or discounted offer before a subscription converts to the regular price are not affected.
+Learn more about
+this regulation
+Tax and price updates for apps, In-App Purchases, and subscriptions
+February 6, 2025
+The App Store is designed to make it easy to sell your digital goods and services globally, with support for 44 currencies across 175 storefronts.
+From time to time, we may need to adjust prices or your proceeds due to changes in tax regulations or foreign exchange rates. These adjustments are made using publicly available exchange rate information from financial data providers to help make sure prices for apps and In-App Purchases stay consistent across all storefronts.
+Tax and pricing updates for February
+As of February 6:
+Your proceeds from the sale of eligible apps and In‑App Purchases have been modified in:
+Azerbaijan: value-added tax (VAT) introduction of 18%
+Peru: VAT introduction of 18%
+Slovakia: Standard VAT rate increase from 20% to 23%
+Slovakia: Reduced VAT rate introduction of 5% for ebooks
+Estonia: Reduced VAT rate increase from 5% to 9% for news publications, magazines, and other periodicals
+Finland: Reduced VAT rate increase from 10% to 14% for ebooks
+Exhibit B of the Paid Applications Agreement has been updated to indicate that Apple collects and remits applicable taxes in Azerbaijan and Peru.¹
+As of February 24:
+Pricing for apps and In-App Purchases will be updated for the Azerbaijan and Peru storefronts if you haven’t selected one of these as the base for your app or In‑App Purchase.² These updates also consider VAT introductions listed in the tax updates section above.
+If you’ve selected the Azerbaijan or Peru storefront as the base for your app or In-App Purchase, prices won’t change. On other storefronts, prices will be updated to maintain equalization with your chosen base price.
+Prices won’t change in any region if your In‑App Purchase is an auto‑renewable subscription. Prices also won’t change on the storefronts where you manually manage prices instead of using the automated equalized prices.
+The Pricing and Availability section of Apps has been updated in
+App Store Connect
+to display these upcoming price changes. As always, you can change the prices of your apps, In‑App Purchases, and auto‑renewable subscriptions at any time.
+Learn more about managing your prices
+View or edit upcoming
+price changes
+Edit your app’s base country
+or region
+Pricing and availability start times by country
+or region
+Set a price for an
+In-App Purchase
+Beginning April 1:
+As a result of last year’s
+change in Japan’s tax regulations
+, Apple (through iTunes K.K. in Japan) is now designated as a Specified Platform Operator by the Japan tax authority. All paid apps and In-App Purchases, (including game items, such as coins) sold by non-Japan-based developers on the App Store in Japan will be subject to the platform tax regime. Apple will collect and remit a 10% Japanese consumption tax (JCT) to the National Tax Agency JAPAN on such transactions at the time of purchase. Your proceeds will be adjusted accordingly.
+Please note any prepaid payment instruments (such as coins) sold prior to April 1, 2025, will not be subject to platform taxation, and the relevant JCT compliance should continue to be managed by the developer.
+For specific information on how the JCT affects in-game items, see Question 7 in the Tax Agency of Japan’s
+Q&amp;A about Platform Taxation of Consumption Tax
+.
+Learn more about your proceeds
+View payments
+and proceeds
+Download
+financial reports
+¹ Translations of the updated agreement are available on the Apple Developer website today.
+² Excludes auto-renewable subscriptions.
+Game distribution on the App Store in Vietnam
+February 4, 2025
+The Vietnamese Ministry of Information and Communications (MIC) requires games to be licensed to remain available on the App Store in Vietnam. To learn more and apply for a game license,
+review the regulations
+.
+Once you have obtained your license:
+Sign in to
+App Store Connect
+.
+Enter the license number and the associated URL in the description section of your game’s product page.
+Note that you only need to provide this information for the
+App Store localization
+displayed on the Vietnam storefront.
+Submit an update to App Review.
+If you have questions on how to comply with these requirements, please contact the
+Authority of Broadcasting and Electronic Information (ABEI)
+under the Vietnamese Ministry of Information and Communications.
+View the
+full law
+Apply for the Swift Student Challenge now through February 23
+February 3, 2025
+Submissions for the Swift Student Challenge 2025 are now open through February 23. You have three more weeks to design, test, refine, and submit your app playground for consideration to be named one of 350 winners.
+What to know:
+The Challenge is free to enter — you just need access to an iPad or Mac with Swift Playground or Xcode.
+The best app ideas are personal — let your passion shine through your work.
+No formal coding experience required — the Challenge is open to students of all levels.
+Your app playground doesn’t need to be intricate — it should be experienced within 3 minutes or less.
+Where to start:
+Explore tools and tutorials
+to build an incredible app playground.
+Get inspired by last year’s Distinguished Winners
+, learn about their winning apps, and read about their experiences at Apple Park.
+Learn more about
+the Challenge
+Introducing the Advanced Commerce API
+January 23, 2025
+The App Store facilitates billions of transactions annually to help developers grow their businesses and provide a world-class customer experience. To further support developers’ evolving business models — such as exceptionally large content catalogs, creator experiences, and subscriptions with optional add-ons — we’re introducing the Advanced Commerce API.
+Developers can apply to use the Advanced Commerce API to support eligible App Store business models and more flexibly manage their In-App Purchases within their app. These purchases leverage the power of the trusted App Store commerce system, including end-to-end payment processing, tax support, customer service, and more, so developers can focus on providing great app experiences.
+Learn about eligibility requirements and how
+to apply
+Apps without trader status will be removed from the App Store in the EU
+January 16, 2025
+Starting February 17, 2025
+: Due to the European Union’s
+Digital Services Act
+, apps without trader status will be removed from the App Store in the European Union until trader status is provided and verified, if necessary.
+As a reminder, Account Holders or Admins in the Apple Developer Program need to enter trader status in App Store Connect for apps on the App Store in the European Union in order to comply with the Digital Services Act.
+Learn what a trader is and how to enter
+your status
+Reminder: Upcoming Changes to the App Store Receipt Signing Intermediate Certificate
+January 16, 2025
+As part of ongoing efforts to improve security and privacy on Apple platforms, the App Store receipt signing intermediate certificate is being updated to use the SHA-256 cryptographic algorithm. This certificate is used to sign App Store receipts, which are the proof of purchase for apps and In-App Purchases.
+This update is being completed in
+multiple phases
+and some existing apps on the App Store may be impacted by the next update, depending on how they verify receipts.
+Starting
+January 24, 2025
+, if your app performs on-device receipt validation and doesn’t support the SHA-256 algorithm, your app will fail to validate the receipt. If your app prevents customers from accessing the app or premium content when receipt validation fails, your customers may lose access to their content.
+If your app performs on-device receipt validation, update your app to support certificates that use the SHA-256 algorithm; alternatively, use the
+AppTransaction
+and
+Transaction
+APIs to verify App Store transactions.
+For more details, view
+TN3138: Handling App Store receipt signing certificate changes
+.
+Algorithm changes to server connections for Apple Pay on the Web
+January 9, 2025
+Starting next month, Apple will change the supported algorithms that secure server connections for Apple Pay on the Web. In order to maintain uninterrupted service, you’ll need to ensure that your production servers support one or more of the
+designated six ciphers
+before
+February 4, 2025.
+These algorithm changes will affect any secure connection you’ve established as part of your Apple Pay integration, including the following touchpoints:
+Requesting an Apple Pay payment session
+(Apple Pay on the Web only)
+Renewing your domain verification
+(Apple Pay on the Web only)
+Receiving and handling merchant token notifications
+for recurring, deferred, and automatic-reload transactions (Apple Pay on the Web and in app)
+Creating and updating
+Wallet Orders
+(Apple Pay on the Web and in app)
+Managing merchant onboarding via the
+Apple Pay Web Merchant Registration API
+(payment service provider (PSP) and e-commerce platforms only)
+Get ready with the latest beta releases
+December 16, 2024
+The beta versions of iOS 18.3, iPadOS 18.3, macOS 15.3, tvOS 18.3, visionOS 2.3, and watchOS 11.3 are now available. Get your apps ready by confirming they work as expected on these releases. And to take advantage of the advancements in the latest SDKs, make sure to build and test with Xcode 16.2.
+View downloads and
+release notes
+Learn about testing a
+beta OS
+Learn about
+sending feedback
+App Store Award winners announced
+December 11, 2024
+Join us in celebrating the outstanding work of these developers from around the world.
+Meet
+the winners
+Updated Apple Developer Program License Agreement now available
+December 6, 2024
+Attachment 2 of the Apple Developer Program License Agreement has been amended to specify requirements for use of the In-App Purchase API. Please review the changes and accept the updated terms in your account.
+View the full terms
+and conditions
+Translations of the updated agreement will be available on the
+Apple Developer website
+within one month.
+Get your apps and games ready for the holidays
+December 2, 2024
+The busiest season on the App Store is almost here. Make sure your apps and games are up to date and ready.
+App Review will continue to accept submissions throughout the holiday season. Please plan to submit time-sensitive submissions early, as we anticipate high volume and reviews may take longer to complete from December 20-26.
+Learn more about submitting to
+the App Store
+App Store Award finalists announced
+November 25, 2024
+Every year, the App Store Awards celebrate exceptional apps and games that improve people's lives while showcasing the highest levels of technical innovation, user experience, design, and positive cultural impact. This year, the App Store Editorial team is proud to recognize over 40 outstanding finalists. Winners will be announced in the coming weeks.
+Learn about
+the finalists
+Price and tax updates for apps, In-App Purchases, and subscriptions
+November 14, 2024
+The App Store is designed to make it easy to sell your digital goods and services globally, with support for 44 currencies across 175 storefronts.
+From time to time, we may need to adjust prices or your proceeds due to changes in tax regulations or foreign exchange rates. These adjustments are made using publicly available exchange rate information from financial data providers to help make sure prices for apps and In-App Purchases stay consistent across all storefronts.
+Tax updates as of October:
+Your proceeds from the sale of eligible apps and In‑App Purchases have been increased in:
+Nepal:
+Apple no longer remits Nepal value-added tax (VAT) for local developers and proceeds were increased accordingly.
+Kazakhstan:
+Apple no longer remits Kazakstan VAT for local developers and proceeds were increased accordingly.
+Madeira:
+Decrease of the Madeira VAT rate from 5% to 4% for news publications, magazines and other periodicals, books, and audiobooks.
+Exhibit B of the Paid Applications Agreement has been updated to indicate that Apple will not remit VAT in Nepal and Kazakhstan for local developers.
+Learn more about your proceeds
+View payments
+and proceeds
+Download
+financial reports
+Price updates as of December 2:
+Pricing for apps and In-App Purchases will be updated for the Japan and Türkiye storefronts if you haven’t selected one of these as the base for your app or In‑App Purchases.
+If you’ve selected the Japan or Türkiye storefront as the base for your app or In-App Purchase, prices won’t change. On other storefronts, prices will be updated to maintain equalization with your chosen base price.
+Prices won’t change in any region if your In‑App Purchase is an auto‑renewable subscription and won’t change on the storefronts where you manually manage prices instead of using the automated equalized prices.
+The Pricing and Availability section of Apps has been updated in
+App Store Connect
+to display these upcoming price changes. As always, you can change the prices of your apps, In‑App Purchases, and auto‑renewable subscriptions at any time.
+Learn more about managing your prices
+View or edit upcoming
+price changes
+Edit your app’s base country
+or region
+Pricing and availability start times by country
+or region
+Set a price for an
+In-App Purchase
+Enhancements to the App Store featuring process
+November 12, 2024
+Share your app or game’s upcoming content and enhancements for App Store featuring consideration with new Featuring Nominations in App Store Connect. Submit a nomination to tell our team about a new launch, in-app content, or added functionality. If you’re featured in select placements on the Today tab, you’ll also receive a notification via the App Store Connect app.
+In addition, you can promote your app or game’s biggest moments — such as an app launch, new version, or select featuring placements on the App Store — with readymade marketing assets. Use the App Store Connect app to generate Apple-designed assets and share them to your social media channels. Include the provided link alongside your assets so people can easily download your app or game on the App Store.
+Learn more about
+getting featured
+Submit a
+Featuring Nomination
+New Broadcast Push Notification Metrics Now Available in the Push Notifications Console
+November 11, 2024
+The Push Notifications Console now includes metrics for broadcast push notifications sent in the Apple Push Notification service (APNs) production environment. The console’s interface provides an aggregated view of the broadcast push notifications that are successfully accepted by APNs, the number of devices that receive them, and a snapshot of the maximum number of devices subscribed to your channels.
+Set up broadcast
+push notifications
+Broadcast updates to your
+Live Activities
+Upcoming changes to the App Store Receipt Signing Intermediate Certificate
+October 31, 2024
+As part of ongoing efforts to improve security and privacy on Apple platforms, the App Store receipt signing intermediate certificate is being updated to use the SHA-256 cryptographic algorithm. This certificate is used to sign App Store receipts, which are the proof of purchase for apps and In-App Purchases.
+This update is being completed in
+multiple phases
+and some existing apps on the App Store may be impacted by the next update, depending on how they verify receipts.
+Starting
+January 24, 2025
+, if your app performs on-device receipt validation and doesn't support a SHA-256 algorithm, your app will fail to validate the receipt. If your app prevents customers from accessing the app or premium content when receipt validation fails, your customers may lose access to their content.
+If your app performs on-device receipt validation, update your app to support certificates that use the SHA-256 algorithm; alternatively, use the
+AppTransaction
+and
+Transaction
+APIs to verify App Store transactions.
+For more details, view
+TN3138: Handling App Store receipt signing certificate change
+.
+TestFlight enhancements to help you reach testers
+October 24, 2024
+Beta testing your apps, games, and App Clips is even better with new enhancements to TestFlight. Updates include:
+Redesigned invitations.
+TestFlight invitations now include your beta app description to better highlight new features and content your app or game offers to prospective testers. Apps and games with an approved version that’s ready for distribution can also
+include
+their screenshots and app category in their invite. We’ve also added a way for people to leave feedback if they didn’t join your beta, so you can understand why they didn’t participate.
+Tester enrollment criteria.
+You can choose to
+set criteria
+, such as device type and OS versions, to more easily enroll qualified testers via a public link to provide more relevant feedback on your invite.
+Public link metrics.
+Find out how successful your public link is at enrolling testers for your app with
+new metrics
+. Understand how many testers viewed your invite in the TestFlight app and chose to accept it. If you’ve set criteria for the public link, you can also view how many testers didn’t meet the criteria.
+To get started with TestFlight, upload your build, add test information, and invite testers.
+Learn more
+about TestFlight
+Get ready with the latest beta releases
+October 23, 2024
+The beta versions of iOS 18.2, iPadOS 18.2, and macOS 15.2 are now available. Get your apps ready by confirming they work as expected on these
+releases
+. And make sure to build and test with Xcode 16.2 beta to take advantage of the advancements in the latest SDKs.
+As
+previewed earlier this year
+, changes to the browser choice screen, default apps, and app deletion for EU users, as well as support in Safari for exporting user data and for web browsers to import that data, are now available in the beta versions of iOS 18.2 and iPadOS 18.2.
+These releases also include improvements to the Apps area in Settings first introduced in iOS 18 and iPadOS 18. All users worldwide will be able to manage their default apps via a Default Apps section at the top of the Apps area. New calling and messaging defaults are also now available for all users worldwide.
+Following feedback from the European Commission and from developers, in these releases developers can develop and test EU-specific features, such as alternative browser engines, contactless apps, marketplace installations from web browsers, and marketplace apps, from anywhere in the world. Developers of apps that use alternative browser engines can now use WebKit in those same apps.
+View details about the
+browser choice screen
+,
+how to make an app available for users to choose as a default
+, how to create a
+calling
+or
+messaging
+app that can be a default, and
+how to import user data from Safari
+.
+Updated agreements now available
+October 23, 2024
+The Apple Developer Program License Agreement and its Schedules 1, 2, and 3 have been updated to support updated policies and upcoming features, and to provide clarification. Please review the changes below and accept the updated terms in your account.
+Read more
+New requirement for app updates in the European Union
+October 17, 2024
+Starting today
+, in order to submit updates for apps on the App Store in the European Union (EU) Account Holders or Admins in the Apple Developer Program need to enter trader status in App Store Connect. If you’re a trader, you’ll need to provide your trader information before you can submit your app for review.
+Starting February 17, 2025
+, apps without trader status will be removed from the App Store in the EU until trader status is provided and verified in order to comply with the
+Digital Services Act
+.
+Learn what a trader is and how to enter
+your status
+Apple Push Notification service server certificate update
+October 17, 2024
+The Certification Authority (CA) for Apple Push Notification service (APNs) is changing. APNs will update the server certificates in sandbox on January 20, 2025, and in production on February 24, 2025. All developers using APNs will need to update their application’s Trust Store to include the new server certificate:
+SHA-2 Root : USERTrust RSA Certification Authority certificate
+.
+To ensure a smooth transition and avoid push notification delivery failures, please make sure that both old and new server certificates are included in the Trust Store before the cut-off date for each of your application servers that connect to sandbox and production.
+At this time, you don’t need to update the APNs SSL provider certificates issued to you by Apple.
+Announcing the Swift Student Challenge 2025
+October 8, 2024
+We’re thrilled to announce the Swift Student Challenge 2025. The Challenge provides the next generation of student developers the opportunity to showcase their creativity and coding skills by building app playgrounds with Swift.
+Applications for the next Challenge will open in February 2025 for three weeks.
+We’ll select 350 Swift Student Challenge winners whose submissions demonstrate excellence in innovation, creativity, social impact, or inclusivity. From this esteemed group, we’ll name 50 Distinguished Winners whose work is truly exceptional and invite them to join us at Apple in Cupertino for three incredible days where they’ll gain invaluable insights from Apple experts and engineers, connect with their peers, and enjoy a host of unforgettable experiences.
+All Challenge winners will receive one year of membership in the Apple Developer Program, a special gift from Apple, and more.
+To help you get ready, we’re launching new coding resources, including Swift Coding Clubs designed for students to develop skills for a future career, build community, and get ready for the Challenge.
+Learn more
+Upcoming regional age ratings in Australia and France
+September 26, 2024
+Apple is committed to making the App Store a safe place for everyone — especially kids. Within the next few months, the following regional age ratings for Australia and France will be implemented in accordance with local laws. No action is needed on your part. Where required by local regulations, regional ratings will appear alongside Apple global age ratings.
+Australia
+Apps with any instances of simulated gambling will display an R18+ regional age rating in addition to the Apple global age rating on the App Store in Australia.
+France
+Apps with a 17+ Apple global age rating will also display an 18+ regional age rating on the App Store in France.
+Learn more about the
+age ratings
+Developer Footer
+News
+Platforms
+Open Menu
+Close Menu
+iOS
+iPadOS
+macOS
+tvOS
+visionOS
+watchOS
+App Store
+Tools
+Open Menu
+Close Menu
+Swift
+SwiftUI
+Swift Playground
+TestFlight
+Xcode
+Xcode Cloud
+Icon Composer
+SF Symbols
+Technologies
+Open Menu
+Close Menu
+Accessibility
+Accessories
+AI & Machine Learning
+Apple Intelligence
+Audio &amp; Video
+Augmented Reality
+Business
+Design
+Distribution
+Education
+Games
+Health &amp; Fitness
+In-App Purchase
+Localization
+Maps &amp; Location
+Security
+Safari &amp; Web
+Resources
+Open Menu
+Close Menu
+Documentation
+Downloads
+Sample Code
+Videos
+Documentation Archive
+Support
+Open Menu
+Close Menu
+Help Guides & Articles
+Contact Us
+Forums
+Feedback & Bug Reporting
+System Status
+Account
+Open Menu
+Close Menu
+Apple Developer
+App Store Connect
+Certificates, IDs, &amp; Profiles
+Feedback Assistant
+Programs
+Open Menu
+Close Menu
+Apple Developer Program
+Apple Developer Enterprise Program
+App Store Small Business Program
+MFi Program
+Mini Apps Partner Program
+News Partner Program
+Video Partner Program
+Security Bounty Program
+Security Research Device Program
+Events
+Open Menu
+Close Menu
+Meet with Apple
+Apple Developer Centers
+App Store Awards
+Apple Design Awards
+Apple Developer Academies
+WWDC
+Read the
+latest news
+.
+Get the
+Apple Developer app
+.
+Follow us on
+bilibili
+,
+LinkedIn
+,
+WeChat
+, and
+YouTube
+.
+Light
+Dark
+Auto
+Copyright ©  2026
+Apple Inc.
+All rights reserved.
+Terms of Use
+Privacy Policy
+Agreements and Guidelines

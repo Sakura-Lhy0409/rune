@@ -1,0 +1,513 @@
+A query that you perform against Spotlight metadata.
+class
+ 
+NSMetadataQuery
+NSMetadataQuery
+=== NSMetadataQuery
+class
+ 
+NSMetadataQuery
+Overview
+The 
+ class encapsulates the functionality provided by the 
+ opaque type for querying the Spotlight metadata.
+ objects provide metadata query results in several ways:
+As individual attribute values for requested attributes.
+As value lists that contain the distinct values for given attributes in the query results.
+As a result array proxy, containing all the query results. This is suitable for use with Cocoa bindings.
+As a hierarchical collection of results, grouping together items with the same values for specified grouping attributes. This is also suitable for use with Cocoa bindings.
+Queries have two phases: the initial gathering phase that collects all currently matching results and a second live-update phase.
+By default, the receiver has no limitation on its search scope. Use the 
+ property to customize.
+By default, notification of updated results occurs at 1.0 seconds. Use the 
+ property to customize.
+You must set a predicate with the 
+ property before starting a query.
+=== Inherits From
+=== Conforms To
+=== File Search
+=== Configuring queries
+=== Running queries
+=== Getting query results
+=== Working with notifications
+=== Working with notification messages
+=== Constants
+The root class of most Objective-C class hierarchies, from which subclasses inherit a basic interface to the runtime system and the ability to behave as Objective-C objects.
+class
+ 
+NSObject
+NSObject
+=== NSObject
+The group of methods that are fundamental to all Objective-C objects.
+protocol
+ 
+NSObjectProtocol
+NSObjectProtocol
+=== NSObjectProtocol
+A type whose instances can be encoded, and appropriately passed, as
+ 
+elements of a C 
+.
+protocol
+ 
+CVarArg
+CVarArg
+=== CVarArg
+A type with a customized textual representation suitable for debugging
+ 
+purposes.
+protocol
+ 
+CustomDebugStringConvertible
+CustomDebugStringConvertible
+=== CustomDebugStringConvertible
+A type with a customized textual representation.
+protocol
+ 
+CustomStringConvertible
+CustomStringConvertible
+=== CustomStringConvertible
+A type that can be compared for value equality.
+protocol
+ 
+Equatable
+Equatable
+=== Equatable
+A type that can be hashed into a 
+ to produce an integer hash value.
+protocol
+ 
+Hashable
+Hashable
+=== Hashable
+=== MDQuery
+=== Technologies
+Access essential data types, collections, and operating-system services to define the base layer of functionality for your app.
+=== Foundation
+The metadata associated with a file.
+class
+ 
+NSMetadataItem
+NSMetadataItem
+=== NSMetadataItem
+A query that you perform against Spotlight metadata.
+class
+ 
+NSMetadataQuery
+NSMetadataQuery
+=== NSMetadataQuery
+A message a metadata query sends when it finishes the initial result-gathering phase of the query.
+struct
+ 
+DidFinishGatheringMessage
+DidFinishGatheringMessage
+=== NSMetadataQuery.DidFinishGatheringMessage
+A message a metadata query sends when it starts the initial result-gathering phase of the query.
+struct
+ 
+DidStartGatheringMessage
+DidStartGatheringMessage
+=== NSMetadataQuery.DidStartGatheringMessage
+The query’s delegate.
+var
+ 
+delegate
+: (any 
+NSMetadataQueryDelegate
+)?
+delegate
+=== delegate
+Disables updates to the query results.
+func
+ 
+disableUpdates
+()
+- 
+disableUpdates
+=== disableUpdates()
+Enables updates to the query results.
+func
+ 
+enableUpdates
+()
+- 
+enableUpdates
+=== enableUpdates()
+Enumerates the current set of results using the given block.
+func
+ 
+enumerateResults
+((
+Any
+, 
+Int
+, 
+UnsafeMutablePointer
+<
+ObjCBool
+>) -> 
+Void
+)
+- 
+enumerateResultsUsingBlock:
+=== enumerateResults(_:)
+Enumerates the current set of results using the given options and block.
+func
+ 
+enumerateResults
+(
+options
+: 
+NSEnumerationOptions
+, 
+using
+: (
+Any
+, 
+Int
+, 
+UnsafeMutablePointer
+<
+ObjCBool
+>) -> 
+Void
+)
+- 
+enumerateResultsWithOptions:usingBlock:
+=== enumerateResults(options:using:)
+An array containing hierarchical groups of query results. (read-only)
+var
+ 
+groupedResults
+: [
+NSMetadataQueryResultGroup
+]
+groupedResults
+=== groupedResults
+An array of grouping attributes. (read-only)
+var
+ 
+groupingAttributes
+: [
+String
+]?
+groupingAttributes
+=== groupingAttributes
+Returns the index of a query result object in the receiver’s results array.
+func
+ 
+index
+(
+ofResult
+: 
+Any
+) -> 
+Int
+- 
+indexOfResult:
+=== index(ofResult:)
+A Boolean value that indicates whether the receiver is in the initial gathering phase of the query. (read-only)
+var
+ 
+isGathering
+: 
+Bool
+gathering
+=== isGathering
+A Boolean value that indicates whether the query has started. (read-only)
+var
+ 
+isStarted
+: 
+Bool
+started
+=== isStarted
+A Boolean value that indicates whether the query has stopped.
+var
+ 
+isStopped
+: 
+Bool
+stopped
+=== isStopped
+The interval at which notification of updated results occurs.
+var
+ 
+notificationBatchingInterval
+: 
+TimeInterval
+notificationBatchingInterval
+=== notificationBatchingInterval
+The queue on which query result notifications are posted.
+var
+ 
+operationQueue
+: 
+OperationQueue
+?
+operationQueue
+=== operationQueue
+The predicate used to filter query results.
+var
+ 
+predicate
+: 
+NSPredicate
+?
+predicate
+=== predicate
+Returns the query result at a specific index.
+func
+ 
+result
+(
+at
+: 
+Int
+) -> 
+Any
+- 
+resultAtIndex:
+=== result(at:)
+The number of results returned by the query. (read-only)
+var
+ 
+resultCount
+: 
+Int
+resultCount
+=== resultCount
+An array containing the query’s results.
+var
+ 
+results
+: [
+Any
+]
+results
+=== results
+An array of objects that define the query’s scope.
+var
+ 
+searchItems
+: [
+Any
+]?
+searchItems
+=== searchItems
+An array containing the search scopes.
+var
+ 
+searchScopes
+: [
+Any
+]
+searchScopes
+=== searchScopes
+An array of sort descriptor objects.
+var
+ 
+sortDescriptors
+: [
+NSSortDescriptor
+]
+sortDescriptors
+=== sortDescriptors
+Attempts to start the query.
+func
+ 
+start
+() -> 
+Bool
+- 
+startQuery
+=== start()
+Stops the receiver’s current query from gathering any further results.
+func
+ 
+stop
+()
+- 
+stopQuery
+=== stop()
+Returns the value for the attribute name 
+ at the index in the results specified by 
+.
+func
+ 
+value
+(
+ofAttribute
+: 
+String
+, 
+forResultAt
+: 
+Int
+) -> 
+Any
+?
+- 
+valueOfAttribute:forResultAtIndex:
+=== value(ofAttribute:forResultAt:)
+An array of attributes whose values are gathered by the query.
+var
+ 
+valueListAttributes
+: [
+String
+]
+valueListAttributes
+=== valueListAttributes
+A dictionary containing the value lists generated by the query.
+var
+ 
+valueLists
+: [
+String
+ : [
+NSMetadataQueryAttributeValueTuple
+]]
+valueLists
+=== valueLists
+The 
+ class represents attribute-value tuples, which are objects that contain the attribute name and value of a metadata attribute.
+class
+ 
+NSMetadataQueryAttributeValueTuple
+NSMetadataQueryAttributeValueTuple
+=== NSMetadataQueryAttributeValueTuple
+An interface that enables the delegate of a metadata query to provide substitute results or attributes.
+protocol
+ 
+NSMetadataQueryDelegate
+NSMetadataQueryDelegate
+=== NSMetadataQueryDelegate
+The 
+ class represents a collection of grouped attribute results returned by an 
+ object.
+class
+ 
+NSMetadataQueryResultGroup
+NSMetadataQueryResultGroup
+=== NSMetadataQueryResultGroup
+Posted when the receiver has finished with the initial result-gathering phase of the query.
+static
+ 
+let
+ 
+NSMetadataQueryDidFinishGathering
+: 
+NSNotification
+.
+Name
+NSMetadataQueryDidFinishGatheringNotification
+=== NSMetadataQueryDidFinishGathering
+Posted when the receiver begins with the initial result-gathering phase of the query.
+static
+ 
+let
+ 
+NSMetadataQueryDidStartGathering
+: 
+NSNotification
+.
+Name
+NSMetadataQueryDidStartGatheringNotification
+=== NSMetadataQueryDidStartGathering
+Posted when the receiver’s results have changed during the live-update phase of the query.
+static
+ 
+let
+ 
+NSMetadataQueryDidUpdate
+: 
+NSNotification
+.
+Name
+NSMetadataQueryDidUpdateNotification
+=== NSMetadataQueryDidUpdate
+Posted as the receiver is collecting results during the initial result-gathering phase of the query.
+static
+ 
+let
+ 
+NSMetadataQueryGatheringProgress
+: 
+NSNotification
+.
+Name
+NSMetadataQueryGatheringProgressNotification
+=== NSMetadataQueryGatheringProgress
+In addition to including the requested metadata attributes, a query result also includes content relevance, accessed with the following key.
+=== Content Relevance
+Constants for keys to retrieve the collection of changed items from a notification’s user info dictionary.
+=== Keys for Use with a Notification Info Dictionary
+Constants for the predefined search scopes used by 
+.
+=== Metadata Query Search Scopes
+NSMetadataQuery
+NSMetadataQuery
+=== Configuring queries
+=== Running queries
+=== Getting query results
+=== Working with notifications
+=== Constants
+=== Inherits From
+=== File Search
+@interface
+ 
+NSMetadataQuery
+ : 
+NSObject
+NSObject
+NSObject
+NSObject
+NSMetadataItem
+NSMetadataItem
+NSMetadataQuery
+NSMetadataQuery
+delegate
+- 
+disableUpdates
+- 
+enableUpdates
+- 
+enumerateResultsUsingBlock:
+- 
+enumerateResultsWithOptions:usingBlock:
+groupedResults
+groupingAttributes
+- 
+indexOfResult:
+gathering
+started
+stopped
+notificationBatchingInterval
+operationQueue
+predicate
+- 
+resultAtIndex:
+resultCount
+results
+searchItems
+searchScopes
+sortDescriptors
+- 
+startQuery
+- 
+stopQuery
+- 
+valueOfAttribute:forResultAtIndex:
+valueListAttributes
+valueLists
+NSMetadataQueryAttributeValueTuple
+NSMetadataQueryAttributeValueTuple
+NSMetadataQueryDelegate
+NSMetadataQueryDelegate
+NSMetadataQueryResultGroup
+NSMetadataQueryResultGroup
+NSMetadataQueryDidFinishGatheringNotification
+NSMetadataQueryDidStartGatheringNotification
+NSMetadataQueryDidUpdateNotification
+NSMetadataQueryGatheringProgressNotification

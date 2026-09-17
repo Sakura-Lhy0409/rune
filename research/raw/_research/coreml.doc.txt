@@ -1,0 +1,419 @@
+Integrate machine learning models into your app.
+Core ML
+=== Core ML
+Overview
+Use 
+ to integrate machine learning models into your app. 
+ provides a unified representation for all models. Your app uses 
+ APIs and user data to make predictions, and to train or fine-tune models, all on a person’s device.
+A model is the result of applying a machine learning algorithm to a set of training data. You use a model to make predictions based on new input data. Models can accomplish a wide variety of tasks that would be difficult or impractical to write in code. For example, you can train a model to categorize photos, or detect specific objects within a photo directly from its pixels.
+You build and train a model with the 
+ bundled with Xcode. Models trained using 
+ are in the 
+ model format and are ready to use in your app. Alternatively, you can use a wide variety of other machine learning libraries and then use 
+ to convert the model into the 
+ format. Once a model is on a person’s device, you can use 
+ to retrain or fine-tune it on-device, with that person’s data.
+ optimizes on-device performance by leveraging the CPU, GPU, and Neural Engine while minimizing its memory footprint and power consumption. Running a model strictly on a person’s device removes any need for a network connection, which helps keep a person’s data private and your app responsive.
+The framework is the foundation for domain-specific frameworks and functionality. It supports 
+ for analyzing images, 
+ for processing text, 
+ for converting audio to text, and 
+ for identifying sounds in audio. 
+ itself builds on top of low-level primitives like 
+ and 
+, as well as 
+.
+If your app integrates AI models using the latest architectures and inference
+ 
+techniques, see 
+.
+=== Core ML models
+=== Model inputs and outputs
+=== App integration
+=== Model encryption
+=== Compute devices
+=== Compute plan
+=== Model state
+=== Model tensor
+=== Model structure
+=== Model errors
+=== Model deployments
+=== Optimization
+=== Reference
+Integrate machine learning models into your app.
+Core ML
+=== Core ML
+Returns an array that contains all of the compute devices that are accessible.
+MLAllComputeDevices
+=== MLAllComputeDevices
+A convenience wrapper for batches of feature providers.
+class
+ 
+MLArrayBatchProvider
+MLArrayBatchProvider
+=== MLArrayBatchProvider
+An interface that represents a collection of feature providers.
+protocol
+ 
+MLBatchProvider
+MLBatchProvider
+=== MLBatchProvider
+An object that represents a CPU compute device.
+class
+ 
+MLCPUComputeDevice
+MLCPUComputeDevice
+=== MLCPUComputeDevice
+Compute devices for framework operations.
+enum
+ 
+MLComputeDevice
+MLComputeDevice
+=== MLComputeDevice
+An interface that represents a compute device type.
+protocol
+ 
+MLComputeDeviceProtocol
+MLComputeDeviceProtocol
+=== MLComputeDeviceProtocol
+A class representing the compute plan of a model.
+class
+ 
+MLComputePlan
+MLComputePlan
+=== MLComputePlan
+A class describing the plan for executing a model.
+MLComputePlan
+=== MLComputePlan
+A class that represents the estimated cost of executing a layer or operation.
+MLComputePlanCost
+=== MLComputePlanCost
+The anticipated compute devices to use for executing a layer or operation.
+MLComputePlanDeviceUsage
+=== MLComputePlanDeviceUsage
+The compute policy determining what compute device, or compute devices, to execute ML workloads on.
+struct
+ 
+MLComputePolicy
+MLComputePolicy
+=== MLComputePolicy
+A convenience wrapper for the given dictionary of data.
+class
+ 
+MLDictionaryFeatureProvider
+MLDictionaryFeatureProvider
+=== MLDictionaryFeatureProvider
+An interface that represents a collection of values for either a model’s input or its output.
+protocol
+ 
+MLFeatureProvider
+MLFeatureProvider
+=== MLFeatureProvider
+A generic wrapper around an underlying value and the value’s type.
+class
+ 
+MLFeatureValue
+MLFeatureValue
+=== MLFeatureValue
+An object that represents a GPU compute device.
+class
+ 
+MLGPUComputeDevice
+MLGPUComputeDevice
+=== MLGPUComputeDevice
+An encapsulation of all the details of your machine learning model.
+class
+ 
+MLModel
+MLModel
+=== MLModel
+An abstraction of a compiled Core ML model asset.
+class
+ 
+MLModelAsset
+MLModelAsset
+=== MLModelAsset
+A set of Core ML models from a model deployment.
+class
+ 
+MLModelCollection
+MLModelCollection
+=== MLModelCollection
+Information about a Core ML model error.
+struct
+ 
+MLModelError
+MLModelError
+=== MLModelError
+Information about a Core ML model error.
+enum
+ 
+Code
+Code
+=== MLModelError.Code
+The domain for Core ML errors.
+let
+ 
+MLModelErrorDomain
+: 
+String
+MLModelErrorDomain
+=== MLModelErrorDomain
+A class representing the structure of a model.
+MLModelStructure
+=== MLModelStructure
+An enum representing the structure of a model.
+enum
+ 
+MLModelStructure
+MLModelStructure
+=== MLModelStructure
+A class representing the structure of a NeuralNetwork model.
+MLModelStructureNeuralNetwork
+=== MLModelStructureNeuralNetwork
+A class representing a layer in a NeuralNetwork.
+MLModelStructureNeuralNetworkLayer
+=== MLModelStructureNeuralNetworkLayer
+A class representing the structure of a Pipeline model.
+MLModelStructurePipeline
+=== MLModelStructurePipeline
+A class representing the structure of an ML Program model.
+MLModelStructureProgram
+=== MLModelStructureProgram
+A class representing an argument in the Program.
+MLModelStructureProgramArgument
+=== MLModelStructureProgramArgument
+A class representing a binding in the Program
+MLModelStructureProgramBinding
+=== MLModelStructureProgramBinding
+A class representing a block in the Program.
+MLModelStructureProgramBlock
+=== MLModelStructureProgramBlock
+A class representing a function in the Program.
+MLModelStructureProgramFunction
+=== MLModelStructureProgramFunction
+A class representing a named value type in a Program.
+MLModelStructureProgramNamedValueType
+=== MLModelStructureProgramNamedValueType
+A class representing an Operation in a Program.
+MLModelStructureProgramOperation
+=== MLModelStructureProgramOperation
+A class representing a constant value in the Program.
+MLModelStructureProgramValue
+=== MLModelStructureProgramValue
+A class representing the type of a value or a variable in the Program.
+MLModelStructureProgramValueType
+=== MLModelStructureProgramValueType
+An object that represents a Neural Engine compute device.
+class
+ 
+MLNeuralEngineComputeDevice
+MLNeuralEngineComputeDevice
+=== MLNeuralEngineComputeDevice
+MLOptimizationHints
+MLOptimizationHints
+=== MLOptimizationHints
+A sendable feature value.
+struct
+ 
+MLSendableFeatureValue
+MLSendableFeatureValue
+=== MLSendableFeatureValue
+Handle to the state buffers.
+class
+ 
+MLState
+MLState
+=== MLState
+Constraint of a state feature value.
+class
+ 
+MLStateConstraint
+MLStateConstraint
+=== MLStateConstraint
+A multi-dimensional array of numerical or Boolean scalars tailored to ML use cases, containing methods to perform
+ 
+transformations and mathematical operations efficiently using a ML compute device.
+struct
+ 
+MLTensor
+MLTensor
+=== MLTensor
+A type that can be used to slice a dimension of a tensor. Don’t use this type directly.
+protocol
+ 
+MLTensorRangeExpression
+MLTensorRangeExpression
+=== MLTensorRangeExpression
+A type that represents the tensor scalar types supported by the framework. Don’t use this type directly.
+protocol
+ 
+MLTensorScalar
+MLTensorScalar
+=== MLTensorScalar
+Measure how your model runs on your Mac or a connected device by generating a performance report in Xcode.
+=== Analyzing a Core ML model’s performance in Xcode
+=== CoreML Enumerations
+Install Core ML models on the user’s device dynamically at runtime.
+=== Downloading and Compiling a Model on the User’s Device
+Encrypt your app’s built-in model at compile time by adding a compiler flag.
+=== Encrypting a Model in Your App
+Create a model encryption key to encrypt a compiled model or model archive.
+=== Generating a Model Encryption Key
+Obtain a Core ML model to use in your app.
+=== Getting a Core ML Model
+Add a simple model to an app,
+ 
+pass input data to the model, and process the model’s predictions.
+=== Integrating a Core ML Model into Your App
+Integrate a recurrent neural network model to process sequences of inputs.
+=== Making Predictions with a Sequence of Inputs
+Expand and modify your model with new layers.
+=== Model Customization
+Integrate tabular, image, and text classifcation models into your app.
+=== Model Integration Samples
+Update your model to adapt to new data.
+=== Model Personalization
+Computes the element-wise minimum between two tensors.
+func
+ 
+pointwiseMax
+(
+_
+:
+_
+:)
+=== pointwiseMax(_:_:)
+Computes the element-wise minimum of two tensors.
+func
+ 
+pointwiseMin
+(
+_
+:
+_
+:)
+=== pointwiseMin(_:_:)
+Convert a Core ML model file into a model package in Xcode.
+=== Updating a Model File to a Model Package
+Calls the given closure within a task-local context using the specified compute policy to influence what compute device tensor
+ 
+operations are executed on.
+func
+ 
+withMLTensorComputePolicy
+(
+_
+:
+_
+:)
+=== withMLTensorComputePolicy(_:_:)
+Calls the given closure within a task-local context using the specified compute policy to influence what compute device tensor
+ 
+operations are executed on.
+func
+ 
+withMLTensorComputePolicy
+<
+Result
+>(
+MLComputePolicy
+, () 
+throws
+ -> 
+Result
+) 
+rethrows
+ -> 
+Result
+=== withMLTensorComputePolicy(_:_:)
+Calls the given closure within a task-local context using the specified compute policy to influence what compute device tensor
+ 
+operations are executed on.
+func
+ 
+withMLTensorComputePolicy
+<
+R
+>(
+MLComputePolicy
+, () 
+async
+ 
+throws
+ -> 
+R
+) 
+async
+ 
+rethrows
+ -> 
+R
+=== withMLTensorComputePolicy(_:_:)
+Make large-scale mathematical computations and image calculations, optimized for high performance and low energy consumption.
+=== Accelerate
+Implement and run neural networks for training and inference.
+=== BNNS
+Run AI models in your app on Apple silicon.
+=== Core AI
+Create machine learning models for use in your app.
+=== Create ML
+Optimize graphics and compute performance with kernels that are fine-tuned for the unique characteristics of each Metal GPU family.
+=== Metal Performance Shaders
+Analyze natural language text and deduce its language-specific metadata.
+=== Natural Language
+Classify various sounds by analyzing audio files or streams.
+=== Sound Analysis
+Perform speech recognition on live or prerecorded audio, and receive transcriptions, alternative interpretations, and confidence levels of the results.
+=== Speech
+Analyze image and video content in your app using computer vision algorithms for object detection, text recognition, and image segmentation.
+=== Vision
+=== Technologies
+=== Core ML Tools
+Core ML Tools
+=== Create ML app
+Create ML app
+=== Core ML models
+=== Model inputs and outputs
+=== App integration
+=== Model encryption
+=== Compute devices
+=== Compute plan
+=== Model state
+=== Model structure
+=== Model errors
+=== Model deployments
+=== Optimization
+=== Reference
+MLArrayBatchProvider
+MLArrayBatchProvider
+MLBatchProvider
+MLBatchProvider
+MLCPUComputeDevice
+MLCPUComputeDevice
+MLComputeDeviceProtocol
+MLComputeDeviceProtocol
+MLDictionaryFeatureProvider
+MLDictionaryFeatureProvider
+MLFeatureProvider
+MLFeatureProvider
+MLFeatureValue
+MLFeatureValue
+MLGPUComputeDevice
+MLGPUComputeDevice
+MLModel
+MLModel
+MLModelAsset
+MLModelAsset
+MLModelCollection
+MLModelCollection
+MLModelError
+MLModelError
+MLModelErrorDomain
+MLNeuralEngineComputeDevice
+MLNeuralEngineComputeDevice
+MLState
+MLState
+MLStateConstraint
+MLStateConstraint

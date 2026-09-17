@@ -1,0 +1,319 @@
+Operating an alternative app marketplace in the EU - Support - Apple Developer
+' />
+' />
+View in English
+Apple Developer
+Get Started
+Explore Get Started
+Overview
+Learn
+Apple Developer Program
+Stay Updated
+Latest News
+Hello Developer
+Platforms
+Explore Platforms
+Apple Platforms
+iOS
+iPadOS
+macOS
+tvOS
+visionOS
+watchOS
+App Store
+Featured
+Design
+Distribution
+Games
+Accessories
+Web
+Home
+CarPlay
+Technologies
+Explore Technologies
+Overview
+Xcode
+Swift
+SwiftUI
+Featured
+Accessibility
+AI &amp; Machine Learning
+App Intents
+Apple Intelligence
+Games
+Security
+Xcode Cloud
+Community
+Explore Community
+Overview
+Meet with Apple events
+Community events
+Developer Forums
+Open Source
+Featured
+WWDC
+Swift Student Challenge
+Developer Stories
+App Store Awards
+Apple Design Awards
+Apple Developer Centers
+Documentation
+Explore Documentation
+Documentation Library
+Technology Overviews
+Sample Code
+Human Interface Guidelines
+Videos
+Release Notes
+Featured Updates
+iOS
+iPadOS
+macOS
+watchOS
+visionOS
+tvOS
+Xcode
+Downloads
+Explore Downloads
+All Downloads
+Operating Systems
+Applications
+Design Resources
+Featured
+Xcode
+TestFlight
+Fonts
+SF Symbols
+Icon Composer
+Support
+Explore Support
+Overview
+Help Guides
+Developer Forums
+Feedback Assistant
+Contact Us
+Featured
+Account Help
+App Review Guidelines
+App Store Connect Help
+Upcoming Requirements
+Agreements and Guidelines
+System Status
+Quick Links
+Events
+News
+Forums
+Sample Code
+Videos
+&nbsp;
+-->
+Support
+Open Menu
+Close Menu
+Overview
+Guides
+Agreements and Guidelines
+Contact Us
+Operating an alternative app marketplace in the&nbsp;EU
+iOS and iPadOS include capabilities that let developers build an alternative app marketplace to distribute notarized apps in the European Union. Based on specific criteria and ongoing requirements that help protect users and developers, authorization from Apple is required to operate an alternative app marketplace. Authorized developers have access to marketplace capabilities that enable them to securely receive notarized apps from other Apple&nbsp;Developer&nbsp;Program members, allow users to download and install marketplace apps from their website, integrate with system functionality, back up and restore users’ apps, and more. These capabilities are available to EU users on devices running a minimum of iOS&nbsp;17.4 or iPadOS&nbsp;18.
+How alternative app marketplaces&nbsp;work
+An alternative app marketplace is made up of several technical components: a marketplace app that uses the MarketplaceKit framework, a company website, and a server. The website offers a download button to install a marketplace app, and the marketplace app installs from a marketplace’s server rather than the App&nbsp;Store. Apple provides authorized marketplace developers access to the MarketplaceKit framework and APIs that:
+Let marketplaces receive and retrieve notarized apps from Apple&nbsp;Developer&nbsp;Program members securely.
+Enable users to download and install marketplace apps from websites using authorized browsers.
+Allow integration with system functionality, back up and restore users’ apps, and more.
+With App&nbsp;Store&nbsp;Connect distribution tools, individual app developers can choose to notify alternative app marketplaces of their app updates so marketplaces can offer users important functionality, like automatic app updates.
+Get started with an entitlement&nbsp;request
+Operating an alternative app marketplace requires significant responsibility and oversight of the user experience, including content guidelines and moderation processes, anti-fraud measures to prevent scams, transparent data collection policies, and the ability to manage payment disputes and refunds. To uphold user experience standards, Apple will authorize marketplace developers through the Alternative App Marketplace Entitlement to distribute a dedicated marketplace app after meeting specific criteria and committing to ongoing requirements that help protect users and developers.
+If you’re interested in becoming a marketplace developer in the EU, the Account Holder of your Apple&nbsp;Developer&nbsp;Program membership will first need to agree to the latest version of the Apple&nbsp;Developer&nbsp;Program License Agreement. Once you’ve agreed, you can
+submit a request for the entitlement
+. To qualify for the entitlement, you must:
+Be enrolled in the Apple&nbsp;Developer&nbsp;Program as an organization.
+Agree to build an app whose primary purpose is discovery and distribution of other notarized apps.
+Agree to provide and publish terms (if your marketplace distributes other developers’ apps), including those pertaining to content and business model, for any apps you will distribute.
+Agree to publish transparent data collection policies and offer users control over how their data is collected and used.
+Agree to follow applicable laws of the jurisdictions where you operate.
+Agree to be responsible for handling governmental and other requests to take down listings of apps in your alternative app marketplace.
+Agree to engage in ongoing monitoring and detection of fraudulent, malicious, or illegal apps, activity in apps, or developers in your alternative app marketplace.
+Agree to not distribute any apps that infringe the intellectual property of others, including Apple.
+Agree to implement a mechanism for reviewing other developers’ apps for intellectual property infringement prior to distributing them through your alternative app marketplace.
+Agree to provide a process to handle intellectual property disputes related to your alternative app marketplace or apps in your alternative app marketplace.
+Meet one of the following:
+Fee waiver.
+You’re a nonprofit organization, accredited educational institution, or government entity which has been approved for an Apple&nbsp;Developer&nbsp;Program fee waiver.
+Global Business Ranking (GBR) score from Dun &amp; Bradstreet (D&amp;B) rating.
+Your organization’s GBR score from D&amp;B qualifies you for the “Low Risk” or “Below Average Risk” categories.
+Stock exchange listing.
+Your organization is publicly traded or is part of a corporate group that is publicly traded, on a stock exchange listed on the World Federation of Exchanges (WFE), or an exchange operated by Euronext.
+Venture capital funding.
+Your organization is funded by a venture capital firm listed on the Midas List, Midas List Europe, Invest Europe, or the HEC-Dow Jones Venture Capital Performance Ranking. There is no minimum funding amount required.
+Stand-by letter of credit.
+Provide Apple with a stand-by letter of credit in the amount of USD 1,000,000 (or the equivalent in local currency) from a financial institution that’s at least “BBB-” rated or equivalent by S&amp;P, Fitch, or Moody’s, and maintain that stand-by letter of credit for at least 6 months after your marketplace begins distributing apps to customers.
+Financial audit.
+Provide Apple with confirmation of a financial audit with an unqualified and unmodified opinion conducted within the last three years by an accredited accounting or assurance firm, such as one under the EU Statutory Audit Directive. Apple will not assess your financial standing or the value of your assets.
+One million first annual installs worldwide.
+Be enrolled in the Apple&nbsp;Developer&nbsp;Program in good standing for two continuous years or more, and have an app that had more than one million first annual installs worldwide on iOS and/or iPadOS in the prior calendar year.
+Entitlement assignment
+When submitting your request, you can apply for the development entitlement or the distribution entitlement.
+The development entitlement is assigned to your developer account shortly after submission, so you can immediately start building and testing your marketplace components with Xcode.
+The distribution entitlement, which enables you to distribute your marketplace app, requires review and verification of your eligibility. If approved, the entitlement will be assigned to your developer account on October&nbsp;1,&nbsp;2026, or the date you’ve been approved, whichever is later. For details on obtaining the entitlement before October&nbsp;1, see Q&amp;A below.
+Build and maintain an alternative app&nbsp;marketplace
+If your entitlement request is approved and the development-only entitlement is assigned to your developer account, you can start building and testing your marketplace components with Xcode. The distribution entitlement requires verification of your eligibility requirements and may take longer to process.
+Creating an alternative app marketplace
+MarketplaceKit
+App Store Connect Help: Create a marketplace app
+Developer and user support
+When operating an alternative app marketplace, it will be your responsibility to protect developers and users by publishing transparent data collection policies and offer users control over how their data is collected and used. You’ll need to provide timely support if questions or issues arise. Apple won’t be able to assist with fraud, IP disputes, payment disputes, or refunds.
+Transaction reporting
+As an alternative app marketplace operator, you are responsible for reporting your transactions of digital goods or services to Apple, including those that didn’t result in a completed sale. These transactions include digital goods or services you sell, paid downloads of apps on your marketplace, paid downloads of your alternative app marketplace, and subscriptions to a catalog of apps you distribute on your alternative app marketplace.
+App developers who distribute their apps on your alternative app marketplace are responsible for reporting their transactions of digital goods or services to Apple, including those that didn’t result in a completed sale. These transactions include purchases made within the developer’s app and through actionable links out of the app.
+Commissions
+Alternative app marketplaces and apps distributed through them are subject to a 5% Core&nbsp;Technology&nbsp;Commission (CTC) on the sales of paid apps and digital goods or services (including one-time purchases and auto-renewing subscriptions) for use within apps on an Apple platform. The CTC covers the following types of transactions:
+Sales of digital goods and services within alternative app marketplaces and apps distributed via alternative app marketplaces.
+Sales of digital goods or services (including one-time purchases and auto-renewing subscriptions) required to access or download alternative app marketplaces and apps distributed via alternative app marketplaces, including paid subscriptions to access or download app content or catalogs of apps.
+Sales when alternative app marketplaces or apps distributed via alternative app marketplaces direct users to offers and promotions available outside of the app or marketplace with actionable links that open in a web browser to a website for the purchase of digital goods and services. Only sales made within 7 days of the link tap are subject to this commission.
+CTC waiver for small marketplace operators.
+If you're a small marketplace operator, you qualify to have the CTC waived on fees your EU marketplace app charges to download your alternative app marketplace, or subscription fees to access apps distributed by your alternative app marketplace. To qualify you need to earn less than:
+€10 million in global revenue in the last 12 months; and
+€1 million in total lifetime revenue from your EU marketplace app’s download price or subscription fees to access apps distributed by your marketplace.
+For more details on the CTC, reporting, and making payments, see:
+Reporting tokens and transactions to Apple
+Reporting transactions for the Core Technology Commission
+Overview of making payments to Apple
+Q&amp;A
+What’s the difference between the development and distribution entitlement?
+When submitting your request, you can apply for the development entitlement or the distribution entitlement. The development entitlement is assigned to your developer account shortly after submission, so you can immediately start building and testing your marketplace components with Xcode. The distribution entitlement enables you to distribute your marketplace app, allowing users to discover and download notarized iOS and iPadOS apps in the European Union. This entitlement requires verification of your eligibility and may take longer to process.
+If my marketplace is approved in another region, do I still need to apply to operate in the EU?
+Yes. If you've been approved to operate an alternative app marketplace in another region, such as Japan or Brazil, you are still required to submit a separate request to operate in the EU. To expedite the approval process, you'll need to provide the bundle ID of your marketplace app during the request process.
+How do I determine my global revenue for the purpose of qualifying for a CTC waiver?
+When you calculate your global revenue, you must take into account the following:
+Revenue from business activity globally, inside or outside of your apps (physical, digital, advertising, or otherwise).
+Revenue from associated corporate entities. An associated corporate entity is any other entity that controls, is controlled by, or is under the control of your company.
+Use revenue figures from the most recent 12-month financial statement on your company's record. If this is not available, you may declare your global business revenue from the last 12 months.
+Convert any revenue in foreign currencies using the spot rate at the end of that 12-month period.
+Can I get the distribution entitlement before October&nbsp;1,&nbsp;2026?
+Yes. You can request assignment of the distribution entitlement before October&nbsp;1,&nbsp;2026, if you meet one of the following, and you agree to the Alternative Terms Addendum for Apps in the&nbsp;EU:
+You've been approved to operate a marketplace in Japan or Brazil.
+You've been approved using the "Stand-by letter of credit" option.
+You've been approved using the "One million first annual installs worldwide" option.
+Please note that as Apple moves to a unified business model in the EU for all developers, the Alternative Terms Addendum for Apps in the&nbsp;EU is being phased out and will be superseded by Attachment&nbsp;14 of the Apple&nbsp;Developer&nbsp;Program License Agreement on October&nbsp;1,&nbsp;2026. Developers that owe Apple fees and commissions accrued under the Alternative Terms Addendum for Apps in the&nbsp;EU will remain responsible for paying those amounts to Apple.
+If I've been approved as a marketplace operator under the Alternative Terms Addendum for Apps in the EU, do I need to agree to the updated Apple Developer Program License Agreement?
+Yes. All marketplace operators in the EU need to agree to the updated Apple&nbsp;Developer&nbsp;Program License Agreement that includes Attachment&nbsp;14. The updated terms supersede the Alternative Terms Addendum for Apps in the&nbsp;EU. After agreeing to the updated terms, your account will be subject to the unified EU terms starting October&nbsp;1,&nbsp;2026, or the date you agree, whichever is later.
+To agree to the Apple&nbsp;Developer&nbsp;Program License Agreement in your
+Apple&nbsp;Developer&nbsp;account
+, you’ll need to be the Account Holder of your membership. Please note you’re not required to resubmit an entitlement request.
+Submit your
+feedback
+Ask questions on the&nbsp;forums
+Contact Apple Developer&nbsp;Support
+Developer Footer
+Support
+Operating an alternative app marketplace in the EU
+Platforms
+Open Menu
+Close Menu
+iOS
+iPadOS
+macOS
+tvOS
+visionOS
+watchOS
+App Store
+Tools
+Open Menu
+Close Menu
+Swift
+SwiftUI
+Swift Playground
+TestFlight
+Xcode
+Xcode Cloud
+Icon Composer
+SF Symbols
+Technologies
+Open Menu
+Close Menu
+Accessibility
+Accessories
+AI & Machine Learning
+Apple Intelligence
+Audio &amp; Video
+Augmented Reality
+Business
+Design
+Distribution
+Education
+Games
+Health &amp; Fitness
+In-App Purchase
+Localization
+Maps &amp; Location
+Security
+Safari &amp; Web
+Resources
+Open Menu
+Close Menu
+Documentation
+Downloads
+Sample Code
+Videos
+Documentation Archive
+Support
+Open Menu
+Close Menu
+Help Guides & Articles
+Contact Us
+Forums
+Feedback & Bug Reporting
+System Status
+Account
+Open Menu
+Close Menu
+Apple Developer
+App Store Connect
+Certificates, IDs, &amp; Profiles
+Feedback Assistant
+Programs
+Open Menu
+Close Menu
+Apple Developer Program
+Apple Developer Enterprise Program
+App Store Small Business Program
+MFi Program
+Mini Apps Partner Program
+News Partner Program
+Video Partner Program
+Security Bounty Program
+Security Research Device Program
+Events
+Open Menu
+Close Menu
+Meet with Apple
+Apple Developer Centers
+App Store Awards
+Apple Design Awards
+Apple Developer Academies
+WWDC
+Read the
+latest news
+.
+Get the
+Apple Developer app
+.
+Follow us on
+bilibili
+,
+LinkedIn
+,
+WeChat
+, and
+YouTube
+.
+Light
+Dark
+Auto
+Copyright ©  2026
+Apple Inc.
+All rights reserved.
+Terms of Use
+Privacy Policy
+Agreements and Guidelines

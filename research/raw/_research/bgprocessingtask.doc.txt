@@ -1,0 +1,138 @@
+A time-consuming processing task that runs while the app is in the background.
+class
+ 
+BGProcessingTask
+BGProcessingTask
+=== BGProcessingTask
+class
+ 
+BGProcessingTask
+Overview
+Use processing tasks for long data updates, processing data, and app maintenance. Although processing tasks can run for minutes, the system can interrupt the process. Add an expiration handler by setting 
+ for any required cleanup.
+Executing processing tasks requires setting the 
+ 
+ capability. For information on setting this capability, see 
+.
+Processing tasks run only when the device is idle. The system terminates any background processing tasks running when the user starts using the device. Background refresh tasks aren’t affected.
+=== Inherits From
+=== Inherited By
+=== Conforms To
+=== Background tasks
+Support background processing in your app by wrapping your app’s most critical work in framework-provided tasks.
+Background Tasks
+=== Background Tasks
+An object representing a short task typically used to refresh content that’s run while the app is in the background.
+class
+ 
+BGAppRefreshTask
+BGAppRefreshTask
+=== BGAppRefreshTask
+A time-consuming, necessary processing task that runs while the app is in the background to prepare data essential to a health research study.
+class
+ 
+BGHealthResearchTask
+BGHealthResearchTask
+=== BGHealthResearchTask
+A time-consuming processing task that runs while the app is in the background.
+class
+ 
+BGProcessingTask
+BGProcessingTask
+=== BGProcessingTask
+An abstract class for the framework’s tasks.
+class
+ 
+BGTask
+BGTask
+=== BGTask
+A handler called shortly before the task’s background time expires.
+var
+ 
+expirationHandler
+: (() -> 
+Void
+)?
+expirationHandler
+=== expirationHandler
+A class for scheduling tasks that add background support to your app’s most critical work.
+class
+ 
+BGTaskScheduler
+BGTaskScheduler
+=== BGTaskScheduler
+Select the best method of scheduling background runtime for your app.
+=== Choosing Background Strategies for Your App
+Use scheduled background tasks for refreshing your app content and for performing maintenance.
+=== Refreshing and Maintaining Your App Using Background Tasks
+Services provided by an app that require it to run in the background.
+UIBackgroundModes
+=== UIBackgroundModes
+The group of methods that are fundamental to all Objective-C objects.
+protocol
+ 
+NSObjectProtocol
+NSObjectProtocol
+=== NSObjectProtocol
+A type whose instances can be encoded, and appropriately passed, as
+ 
+elements of a C 
+.
+protocol
+ 
+CVarArg
+CVarArg
+=== CVarArg
+A type with a customized textual representation suitable for debugging
+ 
+purposes.
+protocol
+ 
+CustomDebugStringConvertible
+CustomDebugStringConvertible
+=== CustomDebugStringConvertible
+A type with a customized textual representation.
+protocol
+ 
+CustomStringConvertible
+CustomStringConvertible
+=== CustomStringConvertible
+A type that can be compared for value equality.
+protocol
+ 
+Equatable
+Equatable
+=== Equatable
+A type that can be hashed into a 
+ to produce an integer hash value.
+protocol
+ 
+Hashable
+Hashable
+=== Hashable
+Configure your app to perform tasks in the background to make efficient use of processing time and power.
+=== Using background tasks to update your app
+=== Technologies
+BGProcessingTask
+BGProcessingTask
+=== Inherits From
+=== Inherited By
+=== Background tasks
+@interface
+ 
+BGProcessingTask
+ : 
+BGTask
+BGAppRefreshTask
+BGAppRefreshTask
+BGHealthResearchTask
+BGHealthResearchTask
+BGProcessingTask
+BGProcessingTask
+BGTask
+BGTask
+expirationHandler
+BGTaskScheduler
+BGTaskScheduler
+NSObject
+NSObject
