@@ -30,9 +30,9 @@
 |---|---|
 | **更新日期** | 2026-09-18 |
 | **当前阶段** | **M0 已完成 ✅ → 进入 M1 可用内核** |
-| **当前里程碑** | ✅ **M1-10 Workflow 引擎（批处理编排）**（657 测试全绿）—— 下一步见 §7 |
-| **上一个完成的里程碑** | ✅ **M1-10：Workflow 引擎（DAG 调度 / 无屏障流水线 / 失败隔离 / 成本上界）+ 与 Turn 的组合测试**（657 测试全绿） |
-| **已完成里程碑** | ✅ M0 全部（…→**258 出口验收达成**）→ ✅ M1-1 ToolScheduler（282）→ ✅ M1-2 协议适配器（328）→ ✅ M1-3 波次调度（341）→ ✅ M1-4 计划与审批（379）→ ✅ M1-5 GoalEngine（405）→ ✅ M1-6 修正性重试（447）→ ✅ M1-7 上下文装配器（487）→ ✅ M1-8 工具注册表（540）→ ✅ M1-9 技能库 + 场景测试（608）→ ✅ **M1-10 Workflow 引擎（657）** |
+| **当前里程碑** | ✅ **M1-11 VFS 层（真实文件系统 + 内存，同一套 conformance 断言）**（705 测试全绿）—— 下一步见 §7 |
+| **上一个完成的里程碑** | ✅ **M1-11：VFS 层（两份实现 + 一致性断言 + 沙箱边界）**（705 测试全绿） |
+| **已完成里程碑** | ✅ M0 全部（…→**258 出口验收达成**）→ ✅ M1-1 ToolScheduler（282）→ ✅ M1-2 协议适配器（328）→ ✅ M1-3 波次调度（341）→ ✅ M1-4 计划与审批（379）→ ✅ M1-5 GoalEngine（405）→ ✅ M1-6 修正性重试（447）→ ✅ M1-7 上下文装配器（487）→ ✅ M1-8 工具注册表（540）→ ✅ M1-9 技能库 + 场景测试（608）→ ✅ M1-10 Workflow 引擎（657）→ ✅ **M1-11 VFS 层（705）** |
 | **阻塞项** | 无 |
 | **本机可验证范围** | ✅ 平台无关的 Swift 代码（Kernel / 补丁 / 检索 / 网关 / 策略 / **Turn 循环**）<br>❌ iOS 专属（UI / Live Activity / Core ML / VFS 真实文件系统 / 沙箱 / GRDB / JSC）—— 需 macOS |
 
@@ -41,7 +41,7 @@
 ```
 设计文档      ████████████████████ 100%
 M0 地基       ████████████████████ 100%   ✅ 出口验收已达成
-M1 可用内核   ██████████████████░  90%   ← 内核已可端到端跑通 + 批处理编排；剩混合检索融合 / MCP 编解码，或上 macOS
+M1 可用内核   ███████████████████  95%   ← 内核 + VFS 就绪，**只差真实 IO 与 UI（都要 macOS）**
 M2 移动体验   ░░░░░░░░░░░░░░░░░░░░░   0%
 M3 多渠道     ░░░░░░░░░░░░░░░░░░░░░   0%
 M4 端侧+记忆  ░░░░░░░░░░░░░░░░░░░░░   0%
@@ -61,7 +61,7 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 
 ### 包结构现状
 
-**包结构**：`RuneKernel` ✅ **31 个源文件 / 657 测试**（本机可测）；
+**包结构**：`RuneKernel` ✅ **32 个源文件 / 705 测试**（本机可测）；
 `RuneNet` `RuneStore` `RuneVM` `RuneBench` `RuneGateway` `RuneContext` `RuneCore` `RuneTools` `RuneMCP` `RuneUI` ⬜ 骨架（`Package.swift` + 带实现清单的占位文件）。
 
 ---
@@ -147,6 +147,7 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 | C20 | ✅ 技能库 + 渐进式披露（608 测试） | `Skill.swift` `SkillLibrary.swift` | ⚠️ **L1 正文永不自动加载**（API 上就不提供「取全部正文」）；⚠️ 中文 L0 成本是英文的 ~2 倍（设计文档的 15 token 是英文尺子 → 实测改 40，T29）；⚠️ token 预算必须把标题行算进去；⚠️ 技能只能**申请**权限、且必须在加载正文**之前**就位；12 个内置技能各带验证清单 |
 | C21 | ✅ 端到端场景测试（定位→读→补丁→跑测试→提交） | `ScenarioTests.swift` | ⭐ **它挖出两个致命 bug**：① `.dispatching` 在「恢复非幂等意图 + 用户批准」后 `removeFirst()` **越界崩 App**（T31）；② **审批路径是死循环** —— `PolicyEngine` 是纯函数，批准后重新派发又算出「需要确认」，于是**任何需要审批的工具永远执行不了**（推送/删除/Shortcuts 全瘫痪）（T30）。修法：`approve` 按相位路由 + `.dispatching` 防御分支 + `approvedFingerprints`（按**指纹**不按 callID，防复用 id 提权） |
 | C22 | ✅ Workflow 引擎（657 测试） | `Workflow.swift` | ⚠️ 引擎**不执行任何东西**（只回答"下一步跑哪些"，因此完全确定 + 天然可恢复）；⚠️ `pipeline` 的无屏障语义靠**深度降序**调度（按书写顺序会退化成三级屏障）；⚠️ 上游 `null` **整条链短路**，且 `skipped` 与 `failed` 在三处（状态/汇总/看板）都必须区分；⚠️ **`addSteps` 必须先"重新打开"已 completed 的运行**，否则脚本的第二阶段静默消失（T32）；⚠️ 脚本关键字扫描**不是安全边界**（真正的边界是宿主不暴露那些全局，T33） |
+| C23 | ✅ VFS 层（705 测试） | `VFS.swift` | ⚠️ **两份实现跑同一套 conformance 断言** —— 一上来就抓到 4 处不一致（二进制检测/候选提示/回收站语义/末尾换行）；⚠️ **读出来必须能原样写回去**（切片曾丢掉 `endsWithNewline` → 每次往返都在改文件）；⚠️ iOS 真正咬人的是**大小写不敏感**（`README.md` 在 iOS 上就是 `readme.md`，T34）；⚠️ **`==` 在"要比字节形式"的地方是陷阱**（两处静默失效，T35）；⚠️ 快照在手机上很贵，`clonefile` 待 macOS |
 
 ---
 
@@ -155,7 +156,7 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 | 项 | 状态 | 备注 |
 |---|---|---|
 | M1 纯逻辑 | ✅ 已完成 | Kernel 全部纯逻辑（657 测试）。**Windows 上没有更多阻塞项了** |
-| ⚠️ 待 macOS 的风险点 | 🔶 未验证 | ①「多工具结果在 Anthropic/Gemini 下是**连续同角色消息**，依赖服务端合并」—— 上 macOS 后必须用真实渠道压一次；② **L3 主模型压缩只有"报告"**（装配器给了候选 id，但"谁去花这笔钱、谁落事件"还没接）；③ **Workflow 的 JSC 宿主不存在**（脚本 → DAG 的编译层是 macOS 的活）；④ 86 个工具只有**契约**、没有实现 |
+| ⚠️ 待 macOS 的风险点 | 🔶 未验证 | ①「多工具结果在 Anthropic/Gemini 下是**连续同角色消息**，依赖服务端合并」—— 上 macOS 后必须用真实渠道压一次；② **L3 主模型压缩只有"报告"**（装配器给了候选 id，但"谁去花这笔钱、谁落事件"还没接）；③ **Workflow 的 JSC 宿主不存在**（脚本 → DAG 的编译层是 macOS 的活）；④ 86 个工具只有**契约**、没有实现（VFS 已就绪，实现只剩"接线"） |
 
 ---
 
@@ -163,9 +164,9 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 
 ### ⚠️ 现状：Windows 上能做的纯逻辑已经做完
 
-`RuneKernel` 有 **31 个源文件、657 项测试**，覆盖：值类型与协议、补丁引擎、检索、网关、
+`RuneKernel` 有 **32 个源文件、705 项测试**，覆盖：值类型与协议、补丁引擎、检索、网关、
 策略引擎、Turn 循环与崩溃恢复、波次调度、计划引擎、审批代理、目标引擎、修正性重试与协议不变式、
-上下文预算制装配、86 个工具契约、技能与渐进式披露、Workflow 批处理编排。
+上下文预算制装配、86 个工具契约、技能与渐进式披露、Workflow 批处理编排、**VFS（真实文件系统 + 内存两份实现）**。
 **并且有一条端到端场景测试证明它们拼得起来。**
 
 **路线 A（推荐）—— 把所有需要 macOS 的部分集中做掉**，按此顺序：
@@ -235,6 +236,8 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 | **T31** | ⚠️ 状态机缺防御分支 = **崩溃**：`.dispatching` 无条件 `currentWave.removeFirst()`，而「恢复非幂等意图」那条路径下 `currentWave` 是空的 | 状态机必须是**全函数**：`pendingIntents` 非空时路由到 `.executing`；`approve` 也要按相位路由 |
 | **T32** | ⚠️ 编排脚本的第二阶段**静默消失**：第一个 `agent()` 完成时已知步骤全终结 → 运行被标 `completed` → 脚本走到下一阶段再加步骤时被 `status == .running` 守卫挡住，新步骤永远 `pending` | `addSteps` 先把运行**重新打开**（脚本还在执行这件事本身就是证据） |
 | **T33** | ⚠️ 把「关键字黑名单」当成安全边界（`this["fet"+"ch"]` 一行就绕过） | 真正的边界是**宿主不暴露那个能力**；扫描只用于可用性提示与纵深防御，注释里必须写清"命中 ≠ 攻击、不命中 ≠ 安全" |
+| **T34** | ⚠️ **iOS 上文件名大小写不敏感**：`README.md` 与 `readme.md` 是**同一个文件**（APFS 默认），而 Windows/Linux 上是两个 → 模型"新建"实际是**覆盖**，不可撤销。**反向陷阱**：NFC/NFD 在 Swift+APFS 上**基本不是问题**（Swift `==` 与 APFS 都规范化不敏感）—— 别按错的前提写代码 | 把"文件系统怎么比较文件名"做成**显式可注入**的属性（`FilenameComparison`），并提供 `collidingEntry`：写之前先查有没有只有大小写不同的同名文件 |
+| **T35** | ⚠️ **`==` / `contains` / `!=` 在"要比不同字节形式"的地方是陷阱**：Swift 字符串比较按 Unicode 规范等价，所以 `forms.contains(decomposed)` 对 NFC 形式**永远为真** → 备选形式永远加不进列表，兜底逻辑静默失效（一次踩了两处） | 凡是"我要的是不同字节"就按 `Array(s.utf8)` 比；写测试时断言**字节数/字节数组**，不要断言字符串相等 |
 
 ---
 
@@ -267,7 +270,7 @@ D:\项目\ios平台agent\          （构建时请用 C:\Users\MSI-NB\rune-ws）
 │  └─ 附录A / 附录B          渠道事实表 / 技术选型核实表
 ├─ research/                 取证材料（465 份，非交付物，**刻意入库**）
 └─ Packages/
-   ├─ RuneKernel/            ✅ 零依赖核心（31 源文件 / 657 测试全绿）
+   ├─ RuneKernel/            ✅ 零依赖核心（32 源文件 / 705 测试全绿）
    │  ├─ Package.swift       仅供 macOS 使用；本机走 rune.ps1
    │  ├─ Sources/RuneKernel/        ← 25 个 .swift（清单见下）
    │  └─ Tests/RuneKernelTests/     ← 13 个 .swift
@@ -281,7 +284,7 @@ D:\项目\ios平台agent\          （构建时请用 C:\Users\MSI-NB\rune-ws）
 | 值类型与安全 | `JSONValue` `SHA256` `Trust` `Content` `Tool` `Capability` `Errors` |
 | 编辑与检索 | `TextPatch` `GlobMatcher` `IgnoreRules` `GrepEngine` |
 | 网关 | `ChatRequest` `StreamParsing` `ProtocolEncoders` `ProtocolDecoders` `ToolCallAssembler` `ProviderQuirks` |
-| 运行时 | `TurnRunner` `ToolScheduler` `PolicyEngine` `Plan` `Event` `Correction` `Context` `ToolRegistry` `Skill` `SkillLibrary` `Workflow` |
+| 运行时 | `TurnRunner` `ToolScheduler` `PolicyEngine` `Plan` `Event` `Correction` `Context` `ToolRegistry` `Skill` `SkillLibrary` `Workflow` `VFS` |
 | 编排 | `PlanEngine` `ApprovalBroker` `GoalEngine` |
 
 **测试文件**：`JSONAndHashing` `Security` `RuntimeModel` `Patch` `Search` `Gateway` `Policy`
