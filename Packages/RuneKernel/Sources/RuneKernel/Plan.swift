@@ -224,6 +224,13 @@ public struct Goal: Sendable, Codable, Hashable, Identifiable {
     public var blockedReason: String?
     /// 连续同因轮次计数（防止模型轻易放弃）
     public var blockedStreak: Int
+    /// **连续无实质进展**的轮次计数。
+    ///
+    /// 与 `blockedStreak` 是两件事：
+    ///   * `blockedStreak` = "我遇到了同一个障碍"
+    ///   * `consecutiveNoProgress` = "我没有障碍，但也没做出任何东西"（跑偏 / 空转）
+    /// 后者同样需要熔断 —— 否则 Agent 会一直"在忙"，烧钱烧电却什么都没产出。
+    public var consecutiveNoProgress: Int
     /// 什么算"完成"
     public var deliverableSpec: DeliverableSpec?
     public var budget: GoalBudget
@@ -239,6 +246,7 @@ public struct Goal: Sendable, Codable, Hashable, Identifiable {
         roundsUsed: Int = 0,
         blockedReason: String? = nil,
         blockedStreak: Int = 0,
+        consecutiveNoProgress: Int = 0,
         deliverableSpec: DeliverableSpec? = nil,
         budget: GoalBudget = .init(),
         lastCheckpointID: UUID? = nil,
@@ -252,6 +260,7 @@ public struct Goal: Sendable, Codable, Hashable, Identifiable {
         self.roundsUsed = roundsUsed
         self.blockedReason = blockedReason
         self.blockedStreak = blockedStreak
+        self.consecutiveNoProgress = consecutiveNoProgress
         self.deliverableSpec = deliverableSpec
         self.budget = budget
         self.lastCheckpointID = lastCheckpointID
