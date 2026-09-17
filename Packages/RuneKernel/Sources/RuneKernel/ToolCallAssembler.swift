@@ -36,6 +36,20 @@ public enum JSONRepair {
             return Result(value: value, wasRepaired: false)
         }
 
+        // 1b. 模型常把 JSON 包在 ``` 围栏里，或前后带寒暄
+        //     （"好的，结果如下：{...} 还需要我做什么吗？"）。
+        //
+        //     ⚠️ 这条不是锦上添花：**"只输出 JSON"这句话模型经常不听**，
+        //        所以"要模型产出 JSON"的那些流程（如结构化压缩）如果只认纯 JSON，
+        //        就会 100% 失败 —— 而且是那种"每一轮都失败、看起来像模型不会做"的失败。
+        //
+        //     工具参数那条路径上模型给的是纯 JSON，所以这个分支对它是空操作（不会误伤）。
+        if let embedded = extractBalancedJSON(trimmed), embedded != trimmed,
+           let inner = parse(embedded) {
+            return Result(value: inner.value, wasRepaired: true,
+                          fixes: ["从说明文字里提取出 JSON"] + inner.fixes)
+        }
+
         // 2. 逐级修复
         var fixes: [String] = []
         var candidate = trimmed
@@ -90,6 +104,59 @@ public enum JSONRepair {
     }
 
     // MARK: 扫描辅助
+
+    /// 从一段带说明文字的输出里抠出**第一个完整的 JSON 对象或数组**（没有则返回 nil）。
+    ///
+    /// ⚠️ 只解决"**有且只有一个** JSON"的常见情况。说明文字里出现多个 JSON 片段时
+    ///    （例如"（这里用 { } 表示占位）：{真正的参数}"），"第一个配平的"可能是那块**诱饵** ——
+    ///    所以需要按形状判断调用方（如 `CompactionSummary.parse`）要用下面的候选列表自己挑。
+    static func extractBalancedJSON(_ text: String) -> String? {
+        extractBalancedJSONCandidates(text).first
+    }
+
+    /// 文本里**所有**配平的 JSON 对象/数组，按出现位置排序。
+    ///
+    /// ⚠️ 必须感知字符串与转义：`{"code": "if (a) { b }"}` 里的花括号不算嵌套层级 ——
+    ///    不处理的话会在字符串中间就以为配平了，抠出半截 JSON。
+    static func extractBalancedJSONCandidates(_ text: String) -> [String] {
+        let chars = Array(text)
+        var out: [String] = []
+        var start = 0
+        while start < chars.count {
+            guard chars[start] == "{" || chars[start] == "[" else { start += 1; continue }
+            var depth = 0
+            var inString = false
+            var escaped = false
+            var index = start
+            var closed = false
+            while index < chars.count {
+                let ch = chars[index]
+                if inString {
+                    if escaped { escaped = false }
+                    else if ch == "\\" { escaped = true }
+                    else if ch == "\"" { inString = false }
+                } else {
+                    switch ch {
+                    case "\"": inString = true
+                    case "{", "[": depth += 1
+                    case "}", "]":
+                        depth -= 1
+                        if depth == 0 {
+                            out.append(String(chars[start...index]))
+                            closed = true
+                        }
+                        if depth < 0 { break }
+                    default: break
+                    }
+                }
+                if closed { break }
+                index += 1
+            }
+            // 这个起点配不平（说明文字里孤零零一个花括号）→ 换下一个起点继续找
+            start += 1
+        }
+        return out
+    }
 
     /// 扫描文本，返回字符串状态与括号栈
     private static func scan(_ text: String) -> (inString: Bool, escaped: Bool, stack: [Character]) {
