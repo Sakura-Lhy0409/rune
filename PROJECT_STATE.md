@@ -15,7 +15,7 @@
 | **每次踩到坑** | 写进 §8（现象 + 原因 + 解法），避免重复踩 |
 | **每个新会话开始** | 先读本文档 → 再读 §7 下一步 → 然后动手。**不要从零重新探索代码库。** |
 
-**反向纪律：动手前先查 §5 与 §10；§5 里有的东西不要再实现一遍。**
+**反向纪律：动手前先查 §5 与 §10；§5 里有的东西不要再实现一遍。别相信"我记得做过了" —— 去查。**
 
 ## 1. 项目一句话
 
@@ -154,7 +154,7 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 
 | 项 | 状态 | 备注 |
 |---|---|---|
-| M1 纯逻辑 | ✅ 已完成 | Kernel 全部纯逻辑（447 测试）。**Windows 上没有更多阻塞项了** |
+| M1 纯逻辑 | ✅ 已完成 | Kernel 全部纯逻辑（657 测试）。**Windows 上没有更多阻塞项了** |
 | ⚠️ 待 macOS 的风险点 | 🔶 未验证 | ①「多工具结果在 Anthropic/Gemini 下是**连续同角色消息**，依赖服务端合并」—— 上 macOS 后必须用真实渠道压一次；② **L3 主模型压缩只有"报告"**（装配器给了候选 id，但"谁去花这笔钱、谁落事件"还没接）；③ **Workflow 的 JSC 宿主不存在**（脚本 → DAG 的编译层是 macOS 的活）；④ 86 个工具只有**契约**、没有实现 |
 
 ---
@@ -163,27 +163,23 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 
 ### ⚠️ 现状：Windows 上能做的纯逻辑已经做完
 
-`RuneKernel` 现在有 **31 个源文件、657 项测试**，覆盖：值类型与协议、补丁引擎、检索、
-网关（协议适配 + 流拼装 + 成本）、策略引擎、Turn 循环与崩溃恢复、波次调度、计划引擎、
-审批代理、目标引擎、修正性重试与协议不变式、上下文预算制装配、86 个工具契约、
-技能与渐进式披露、**Workflow 批处理编排**。**并且有一条端到端场景测试证明它们拼得起来。**
+`RuneKernel` 有 **31 个源文件、657 项测试**，覆盖：值类型与协议、补丁引擎、检索、网关、
+策略引擎、Turn 循环与崩溃恢复、波次调度、计划引擎、审批代理、目标引擎、修正性重试与协议不变式、
+上下文预算制装配、86 个工具契约、技能与渐进式披露、Workflow 批处理编排。
+**并且有一条端到端场景测试证明它们拼得起来。**
 
-**接下来只有两条路**：
+**路线 A（推荐）—— 把所有需要 macOS 的部分集中做掉**，按此顺序：
+`RuneStore`（GRDB + 事件落盘）→ `RuneNet`（真实 URLSession + SSE + 出口代理）→
+`RuneBench`（VFS + security-scoped bookmark + 原生 CPython 垫片）→ `RuneTools`（86 个工具实现）→
+`RuneCore`（把 Kernel 接上真实 IO）→ `RuneUI`。⚠️ 不要在 Windows 上做这些 —— 无法验证。
 
-**路线 A（推荐）：把所有需要 macOS 的部分集中做掉。**
-在 macOS 上按此顺序：`RuneStore`（GRDB + 事件落盘）→ `RuneNet`（真实 URLSession +
-SSE 传输 + 出口代理）→ `RuneBench`（VFS + security-scoped bookmark + 原生 CPython 垫片）→
-`RuneTools`（45 个工具）→ `RuneCore`（把 Kernel 的纯逻辑接上真实 IO）→ `RuneUI`。
-⚠️ 不要在 Windows 上做这些 —— 无法验证。
-
-**路线 B（在 Windows 上继续插入式工作，都有价值但优先级低于 A）**：
-1. ✅ **已完成**：上下文装配器（C18）、工具注册表 86 个（C19）、技能库与渐进式披露（C20）、端到端场景测试（C21）。
+**路线 B（在 Windows 上继续插入式工作，优先级低于 A）**：
+1. ✅ **已完成**：上下文装配器（C18）、工具注册表（C19）、技能库（C20）、场景测试（C21）、Workflow 引擎（C22）。
 2. **混合检索的融合层**：FTS5 BM25 + 向量的 RRF 融合排序（纯算法）。
 3. **`RuneMCP` 的协议编解码**（纯 JSON-RPC 部分）。
-4. ✅ **已完成**：Workflow 引擎（C22，DAG 调度 + 无屏障流水线 + 失败隔离 + 成本上界）。**剩下的**是 JSC 宿主（把脚本编译成 DAG → macOS）。
-5. **cassette 回放夹具**：目前验收用的是测试内脚本闭包，应改成录制的真实会话夹具。
+4. **cassette 回放夹具**：目前验收用的是测试内脚本闭包，应改成录制的真实会话夹具。
 
-**建议**：内核已经能端到端跑通（C21 的场景测试就是证据）。**再往下的价值断崖式下降 —— 应该上 macOS 走 A。**
+**建议**：内核已经能端到端跑通（C21 就是证据）。**再往下的价值断崖式下降 —— 应该上 macOS 走 A。**
 
 ---
 
@@ -200,6 +196,7 @@ SSE 传输 + 出口代理）→ `RuneBench`（VFS + security-scoped bookmark + �
 | E5 | `Testing.__swiftPMEntryPoint` 有**两个重载** | `ambiguous use of '__swiftPMEntryPoint'` | 用显式类型标注：`let code: CInt = await ...` |
 | E6 | 写入 `C:\` 根目录被沙箱拒绝 | `Access is denied` | 临时文件放 `$env:USERPROFILE` 或仓库内 |
 | E7 | `data as [UInt8]` 在跨平台下不可靠 | `cannot convert value of type 'Data' to type '[UInt8]'` | 用 `data.withUnsafeBytes { update($0) }` |
+| E8 | 内联管道看编译输出会**超时**（`pwsh ... \| Select-String` 120s 无输出） | 命令超时、exit 1，但实际在编译 | 改成 `\| Out-File $env:TEMP\x.log` 再读，或 `run_in_background: true` |
 
 ### 8.2 项目本身的陷阱（来自设计文档核实）
 
@@ -252,7 +249,7 @@ SSE 传输 + 出口代理）→ `RuneBench`（VFS + security-scoped bookmark + �
 存储        ❌ unicode61 分词   ✅ CJK tokenizer / trigram   ⚠️ sqlite-vec 需静态注册
 体积        内嵌 CPython ⇒ App 约 1-2GB（不可优化，只能接受）
 审核        2.5.2 + ADPLA §3.3.1(B) · 1.2（过滤必须在二进制内）· 5.1.2(i)（第三方 AI 需显式许可）
-本机构建    必须走 Tools\rune.ps1；swift build/test 不可用
+本机构建    必须走 Tools\rune.ps1；swift build/test 不可用。⚠️ 用 Out-File 看编译输出（内联 Select-String 会超时）
 ```
 
 ---
