@@ -210,6 +210,16 @@ public struct TurnState: Sendable, Codable, Hashable {
     /// 之所以不让运行时直接改状态：用户点的那个按钮会决定往模型上下文里注入什么话，
     /// 那必须和工具调用一样可审计（谁在什么时候决定了什么）。
     public var pendingCorrectionResolution: CorrectionResolution?
+    /// **本轮已获批的调用指纹。**
+    ///
+    /// ⚠️ 没有它就等于**审批路径是个死循环**：`PolicyEngine.approvalRequirement` 是纯函数，
+    /// 同一个调用重新派发时算出来的结论完全一样 —— 于是「用户点了允许」之后又弹一次，
+    /// 弹到用户放弃为止。端到端场景测试就是这么把这个洞挖出来的。
+    ///
+    /// ⚠️ 记的是**指纹**（callID + 工具名 + 规范化参数）而不是 callID：
+    /// callID 来自厂商，理论上可以被复用。只按 id 记的话，
+    /// 一个复用了旧 id 的、参数完全不同的调用会被**自动放行** —— 那是提权。
+    public var approvedFingerprints: Set<String>
 
     public init(
         turnID: UUID = UUID(),
@@ -233,7 +243,8 @@ public struct TurnState: Sendable, Codable, Hashable {
         wasRestored: Bool = false,
         steerNotes: [String] = [],
         corrections: CorrectionLedger = CorrectionLedger(),
-        pendingCorrectionResolution: CorrectionResolution? = nil
+        pendingCorrectionResolution: CorrectionResolution? = nil,
+        approvedFingerprints: Set<String> = []
     ) {
         self.turnID = turnID
         self.sessionID = sessionID
@@ -257,6 +268,7 @@ public struct TurnState: Sendable, Codable, Hashable {
         self.steerNotes = steerNotes
         self.corrections = corrections
         self.pendingCorrectionResolution = pendingCorrectionResolution
+        self.approvedFingerprints = approvedFingerprints
     }
 
     /// 是否还能继续推进。
@@ -669,6 +681,21 @@ public enum TurnRunner {
                 record(.toolIntent, "波次 \(state.waveIndex)（\(state.waveCalls.count) 个）：\(waveDescription ?? "")")
             }
 
+            // ⚠️ **有意图还没执行 → 那是 `.executing` 的活，不能去 `currentWave` 取调用。**
+            //
+            //    这条是被端到端场景测试逼出来的**崩溃**：恢复一个"非幂等调用结果未知"的 Turn 时，
+            //    恢复分支把状态置成 `.awaitingApproval`，但那个调用在 `pendingIntents` 里、
+            //    **不在** `currentWave` 里。用户点了「重新执行」之后（`approve` → `.dispatching`），
+            //    波次管理的条件 `currentWave.isEmpty && pendingIntents.isEmpty` 不成立 → 整块被跳过 →
+            //    直接执行 `currentWave.removeFirst()` → **空数组越界，App 崩**。
+            //
+            //    修法有两层：`approve` 正确地按相位路由（见它的注释），
+            //    以及这里加一条**防御分支** —— 状态机必须是全函数，任何状态组合都不能崩。
+            if !state.pendingIntents.isEmpty {
+                state.status = .executing
+                return StepOutcome(state: state, newEvents: events, didAdvance: true)
+            }
+
             if state.toolCallCount >= config.maxToolCalls {
                 state.status = .failed
                 emit(.budgetExceeded, ["reason": .string("工具调用数达上限 \(config.maxToolCalls)")])
@@ -725,10 +752,21 @@ public enum TurnRunner {
                 return StepOutcome(state: state, newEvents: events, didAdvance: true)
             }
 
-            let decision = evaluatePolicy(
-                spec: spec, paths: extraction.paths, access: callAccess,
-                call: call, policy: deps.policy, context: deps.policyContext
-            )
+            // ⚠️ **用户已经批准过这一次调用** → 直接放行。
+            //
+            //    没有这一步，审批就是**死循环**：`PolicyEngine.approvalRequirement` 是纯函数，
+            //    重新派发同一个调用会算出同样的「需要确认」，于是卡片会无限弹下去，
+            //    直到用户放弃。端到端场景测试就是这么把这个洞挖出来的。
+            //
+            //    ⚠️ 只跳过"审批"这一层 —— 越出挂载点的检查在上面**必须**先执行，
+            //    否则"曾经批准过一次"会变成永久的越权通行证。
+            let alreadyApproved = state.approvedFingerprints.contains(approvalFingerprint(for: call))
+            let decision: CapabilityDecision = alreadyApproved
+                ? .allowed
+                : evaluatePolicy(
+                    spec: spec, paths: extraction.paths, access: callAccess,
+                    call: call, policy: deps.policy, context: deps.policyContext
+                )
 
             switch decision {
             case .humanOnly(let zone):
@@ -955,11 +993,41 @@ public enum TurnRunner {
     }
 
     /// 用户批准后继续（把 `awaitingApproval` 解开）
+    ///
+    /// ⚠️ 必须**按"现在到底在等什么"路由到正确的相位**，不能一律回到 `.dispatching`：
+    ///
+    /// 两类等待的落点完全不同：
+    ///   * **权限审批**：调用被放回 `currentWave` 队头 → 回 `.dispatching` 重新写意图；
+    ///   * **恢复时"结果未知"的确认**：调用在 `pendingIntents` 里、`currentWave` 是空的
+    ///     → 必须回 `.executing`。回到 `.dispatching` 会去空数组里取调用 —— **直接崩**。
+    ///
+    /// 这个 bug 是端到端场景测试（断电恢复）抓出来的：单元测试从没组合出
+    /// "非幂等意图 + 用户批准" 这个状态，所以一路绿灯。
     public static func approve(_ state: TurnState, deps: Dependencies) -> TurnState {
         var state = state
         guard state.status == .awaitingApproval else { return state }
-        state.status = state.queuedCalls.isEmpty ? .dispatching : .dispatching
+        if state.pendingIntents.isEmpty {
+            // 权限审批：把**队头那个**调用记为已批准。
+            // 不记的话，重新派发时策略引擎会算出同样的「需要确认」→ 卡片无限弹。
+            if let call = state.currentWave.first {
+                state.approvedFingerprints.insert(approvalFingerprint(for: call))
+            }
+            state.status = .dispatching
+        } else {
+            // 恢复时的「结果未知」确认 → 重新执行那个调用（它已经在 `pendingIntents` 里）
+            state.status = .executing
+        }
         return state
+    }
+
+    /// 审批记忆的指纹：**callID + 工具名 + 规范化参数**。
+    ///
+    /// ⚠️ 不能只记 callID：它来自厂商，理论上可以被复用。只按 id 记的话，
+    /// 一个复用了旧 id、参数完全不同的调用会被**自动放行** —— 那是提权。
+    /// 参数走 `canonicalString()`（键序无关），否则同一份参数换个键序就又弹一次卡片。
+    static func approvalFingerprint(for call: ToolCall) -> String {
+        let args = (try? call.arguments())?.canonicalString() ?? String(decoding: call.argumentsJSON, as: UTF8.self)
+        return SHA256.hexDigest("\(call.id)\u{1}\(call.name)\u{1}\(args)")
     }
 
     // MARK: 协议不变式

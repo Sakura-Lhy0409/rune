@@ -17,8 +17,6 @@
 
 **反向纪律：动手前先查 §5 与 §10；§5 里有的东西不要再实现一遍。**
 
----
-
 ## 1. 项目一句话
 
 **Rune（符文）**：完全在 iPhone/iPad 本地运行的通用 Agent。模型可走云端 API（BYOK，含中转站），但**工具循环、文件系统、代码执行、Git、检索、记忆全部在设备上完成**，没有任何远端执行路径。
@@ -32,9 +30,9 @@
 |---|---|
 | **更新日期** | 2026-09-18 |
 | **当前阶段** | **M0 已完成 ✅ → 进入 M1 可用内核** |
-| **当前里程碑** | ✅ **M1-8 工具注册表（86 个工具契约）+ 路径提取修复**（540 测试全绿）—— 下一步见 §7 |
-| **上一个完成的里程碑** | ✅ **M1-8：工具注册表 86 个 + 路径提取与授权的静默失效修复**（540 测试全绿） |
-| **已完成里程碑** | ✅ M0 全部（…→**258 出口验收达成**）→ ✅ M1-1 ToolScheduler（282）→ ✅ M1-2 协议适配器（328）→ ✅ M1-3 波次调度（341）→ ✅ M1-4 计划与审批（379）→ ✅ M1-5 GoalEngine（405）→ ✅ M1-6 修正性重试（447）→ ✅ M1-7 上下文装配器（487）→ ✅ **M1-8 工具注册表（540）** |
+| **当前里程碑** | ✅ **M1-9 技能库 + 端到端场景测试（挖出两个致命 bug）**（608 测试全绿）—— 下一步见 §7 |
+| **上一个完成的里程碑** | ✅ **M1-9：技能库/渐进式披露 + 端到端场景测试（含两处审批路径致命 bug 的修复）**（608 测试全绿） |
+| **已完成里程碑** | ✅ M0 全部（…→**258 出口验收达成**）→ ✅ M1-1 ToolScheduler（282）→ ✅ M1-2 协议适配器（328）→ ✅ M1-3 波次调度（341）→ ✅ M1-4 计划与审批（379）→ ✅ M1-5 GoalEngine（405）→ ✅ M1-6 修正性重试（447）→ ✅ M1-7 上下文装配器（487）→ ✅ M1-8 工具注册表（540）→ ✅ **M1-9 技能库 + 场景测试（608）** |
 | **阻塞项** | 无 |
 | **本机可验证范围** | ✅ 平台无关的 Swift 代码（Kernel / 补丁 / 检索 / 网关 / 策略 / **Turn 循环**）<br>❌ iOS 专属（UI / Live Activity / Core ML / VFS 真实文件系统 / 沙箱 / GRDB / JSC）—— 需 macOS |
 
@@ -43,7 +41,7 @@
 ```
 设计文档      ████████████████████ 100%
 M0 地基       ████████████████████ 100%   ✅ 出口验收已达成
-M1 可用内核   ████████████████░░░  80%   ← 纯逻辑继续推进（下一步：混合检索融合 / Skill 注册表；或上 macOS）
+M1 可用内核   █████████████████░░  85%   ← 内核已可端到端跑通；剩混合检索融合 / MCP 编解码，或上 macOS
 M2 移动体验   ░░░░░░░░░░░░░░░░░░░░░   0%
 M3 多渠道     ░░░░░░░░░░░░░░░░░░░░░   0%
 M4 端侧+记忆  ░░░░░░░░░░░░░░░░░░░░░   0%
@@ -59,14 +57,12 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 | 模型自主完成"读 → 改 → 跑测试" | ✅ 工具顺序 `grep_search → read_file → apply_patch → run_tests`，bug 真被修好 |
 | 中途被杀后正确恢复 | ✅ **对 0..40 每一个切断点**验证：恢复后最终文件状态与基线**完全一致**，且**补丁只实际改动一次**（无重复副作用） |
 | 非幂等操作不自动重做 | ✅ 结果未知时进入 `awaitingApproval`，明确告知"是否已生效无法确定" |
-| 事件日志完整可校验 | ✅ 哈希链逐条衔接（`previousHash == 上一条.hash`） |
+| 事件日志完整可校验 | ✅ 哈希链逐条衔接（`previousHash == 上一条.hash`）；端到端场景测试逐条 `verifyHash()` |
 
 ### 包结构现状
 
-| 包 | 状态 | 本机可测 |
-|---|---|---|
-| `RuneKernel` | ✅ **28 个源文件 / 540 测试** | ✅ |
-| `RuneNet` `RuneStore` `RuneVM` `RuneBench` `RuneGateway` `RuneContext` `RuneCore` `RuneTools` `RuneMCP` `RuneUI` | ⬜ 骨架（`Package.swift` + 带实现清单的占位文件） | 部分 |
+**包结构**：`RuneKernel` ✅ **30 个源文件 / 608 测试**（本机可测）；
+`RuneNet` `RuneStore` `RuneVM` `RuneBench` `RuneGateway` `RuneContext` `RuneCore` `RuneTools` `RuneMCP` `RuneUI` ⬜ 骨架（`Package.swift` + 带实现清单的占位文件）。
 
 ---
 
@@ -79,9 +75,8 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 | **构建命令** | ⭐ `pwsh -NoProfile -File Tools\rune.ps1 build RuneKernel`<br>`pwsh -NoProfile -File Tools\rune.ps1 test RuneKernel` |
 | Swift 工具链 | ✅ **6.3.3 for Windows**（`x86_64-unknown-windows-msvc`），满足 WasmKit 的 Swift 6.3 要求 |
 | MSVC | VS 2022 Build Tools，**必须经 `vcvars64.bat` 激活**（`link.exe` 不在 PATH）。脚本已处理 |
-| python / node / cmake | ✅ 可用；ninja ❌ 未装（wasm 构建时才需要） |
-| git | ✅ 已初始化（首次提交 `fee5338`）。`core.autocrlf=false` + `.gitattributes` 强制 LF（**补丁引擎的换行保真测试依赖这一点**）。`research/` 标记为 `-text -diff` 且**故意提交**（它是证据链） |
-| CPU | 32 核 |
+| python/node/cmake | ✅ 可用；ninja ❌ 未装（wasm 构建时才需要）。CPU 32 核 |
+| git | ✅ 已初始化。`core.autocrlf=false` + `.gitattributes` 强制 LF（**补丁引擎的换行保真测试依赖这一点**）。`research/` 标记 `-text -diff` 且**故意提交**（证据链） |
 | **不能做的事** | 无法构建 iOS App、无模拟器、无法验证 SwiftUI / Live Activity / AVFoundation / Core ML |
 
 ### ⚠️ `swift build` / `swift test` 在本机**不可用**
@@ -148,7 +143,9 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 | C16 | ✅ 修正性重试策略层（447 测试） | `Correction.swift` | ⚠️ 编码器**只发 `summary`** → 建议与候选必须拼进去（T17）；⚠️ 按**根因**分桶；⚠️ 逐字重复立刻止损；⚠️「模型改不了」的错误不记账；⚠️ 运行时引导语 ≠ 用户指令（T20） |
 | C17 | ✅ 对话历史协议不变式 | `TurnRunner.reapOrphanCalls` | ⚠️ 漏一个配对结果 → 会话**后续全部 400**（T18）；⚠️ 兜底只在 `.reasoning` 入口做；⚠️ 判定读**历史**不是队列；⚠️ 运行时**不能伪造工具调用**（T19） |
 | C18 | ✅ 上下文预算制装配器 + L1 裁剪（487 测试） | `Context.swift` | ⚠️ 中文 token **1 字符 ≈ 1**（用 `/4` 估会低估 4 倍 → 撑爆窗口 / 账单失控，T22）；⚠️ 装配器**永不自己花钱**（L3 只报告不执行，T23）；⚠️ 渲染顺序与块内排序必须**确定性**，否则 Prompt Cache 永不命中；⚠️ 缺「当前目标 / 最近失败」**不许发出去**；⚠️ 输出预留 ≥10% 不可挤占 |
-| C19 | ✅ 工具注册表（86 个工具契约）+ 校验器 + 按档可见性（540 测试） | `ToolRegistry.swift` | ⚠️ 声明写错**不报错，只静默少一层保护** → 15 条校验规则把它变成测试失败；⚠️ `pathParameters` **必须声明全**（「声明了但不全」更危险，T26）；⚠️ 路径参数命名要避开 `target`/`source` 这类歧义词；⚠️ 执行类工具输出必须走制品；⚠️ 审批的真正防线是**作用域**不是弹窗 |
+| C19 | ✅ 工具注册表（86 个工具契约）+ 校验器 + 按档可见性（540 测试） | `ToolRegistry.swift` | ⚠️ 声明写错**不报错，只静默少一层保护** → 17 条校验规则把它变成测试失败；⚠️ `pathParameters` **必须声明全**（「声明了但不全」更危险，T26）；⚠️ 路径参数命名要避开 `target`/`source` 这类歧义词；⚠️ 执行类工具输出必须走制品；⚠️ 审批的真正防线是**作用域**不是弹窗 |
+| C20 | ✅ 技能库 + 渐进式披露（608 测试） | `Skill.swift` `SkillLibrary.swift` | ⚠️ **L1 正文永不自动加载**（API 上就不提供「取全部正文」）；⚠️ 中文 L0 成本是英文的 ~2 倍（设计文档的 15 token 是英文尺子 → 实测改 40，T29）；⚠️ token 预算必须把标题行算进去；⚠️ 技能只能**申请**权限、且必须在加载正文**之前**就位；12 个内置技能各带验证清单 |
+| C21 | ✅ 端到端场景测试（定位→读→补丁→跑测试→提交） | `ScenarioTests.swift` | ⭐ **它挖出两个致命 bug**：① `.dispatching` 在「恢复非幂等意图 + 用户批准」后 `removeFirst()` **越界崩 App**（T31）；② **审批路径是死循环** —— `PolicyEngine` 是纯函数，批准后重新派发又算出「需要确认」，于是**任何需要审批的工具永远执行不了**（推送/删除/Shortcuts 全瘫痪）（T30）。修法：`approve` 按相位路由 + `.dispatching` 防御分支 + `approvedFingerprints`（按**指纹**不按 callID，防复用 id 提权） |
 
 ---
 
@@ -165,7 +162,7 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 
 ### ⚠️ 现状：Windows 上能做的纯逻辑已经做完
 
-`RuneKernel` 现在有 **28 个源文件、540 项测试**，覆盖：值类型与协议、补丁引擎、检索、
+`RuneKernel` 现在有 **30 个源文件、608 项测试**，覆盖：值类型与协议、补丁引擎、检索、
 网关（协议适配 + 流拼装 + 成本）、策略引擎、Turn 循环与崩溃恢复、波次调度、
 计划引擎、审批代理、目标引擎、**修正性重试与协议不变式**。
 
@@ -178,14 +175,13 @@ SSE 传输 + 出口代理）→ `RuneBench`（VFS + security-scoped bookmark + �
 ⚠️ 不要在 Windows 上做这些 —— 无法验证。
 
 **路线 B（在 Windows 上继续插入式工作，都有价值但优先级低于 A）**：
-1. ✅ **已完成**：上下文装配器（`Context.swift`，C18）、工具注册表 86 个（`ToolRegistry.swift`，C19）。
+1. ✅ **已完成**：上下文装配器（C18）、工具注册表 86 个（C19）、技能库与渐进式披露（C20）、端到端场景测试（C21）。
 2. **混合检索的融合层**：FTS5 BM25 + 向量的 RRF 融合排序（纯算法）。
-3. **Skill 注册表与渐进式披露**（L0 目录截断、L1 按需加载）—— 元工具 `use_skill`/`search_skills` 已声明，缺实现。
-4. **`RuneMCP` 的协议编解码**（纯 JSON-RPC 部分）。
-5. **Workflow 脚本的纯逻辑**：编排脚本的解析与校验（执行需要 JSC → macOS）。
-6. **cassette 回放夹具**：目前验收用的是测试内脚本闭包，应改成录制的真实会话夹具。
+3. **`RuneMCP` 的协议编解码**（纯 JSON-RPC 部分）。
+4. **Workflow 脚本的纯逻辑**：编排脚本的解析与校验（执行需要 JSC → macOS）。
+5. **cassette 回放夹具**：目前验收用的是测试内脚本闭包，应改成录制的真实会话夹具。
 
-**建议**：如果目标是尽快跑起一个真实的端到端 Agent，走 A；否则走 B 的 2、3 项。
+**建议**：内核已经能端到端跑通（C21 的场景测试就是证据）。**再往下的价值断崖式下降 —— 应该上 macOS 走 A。**
 
 ---
 
@@ -235,6 +231,9 @@ SSE 传输 + 出口代理）→ `RuneBench`（VFS + security-scoped bookmark + �
 | **T26** | ⚠️ **`pathParameters` 声明了但不全**（`git_add` 声明 `["path"]` 却还有 `files: [string]`）→ 静默忽略那些路径。**比完全没声明更危险，因为它看上去是对的** | `validate()` 规则 `undeclaredPathParameter`：schema 里像路径的参数必须全部声明 |
 | **T27** | ⚠️ 参数名歧义：`run_build` 的 `target` 是**构建目标名**，但 `target` 在路径键名启发式里 → 会被当成路径解析 | 非路径参数不要叫 `target`/`source`/`to`（改名为 `build_target`） |
 | **T28** | ⚠️ 中文文案里手打 ASCII `"` 会**截断 Swift 字符串字面量**，报错却是「expected ',' separator」；在 `#"…"#` 里写出 `"#` 更会直接终止原始字符串 | 中文引号一律 `「」`；`validate()` 的 `asciiQuoteInProse` 规则会在测试里抓住它 |
+| **T29** | ⚠️ 设计文档里的 token 预算若来自**英文估算**，直接拿来卡中文会全部「超标」（中文 1 字符 ≈ 1 token，密度是英文的 ~4 倍） | 定预算前先用 `TokenEstimator` 量真实条目；预算要**把标题行与提示行一起算进去**，否则硬预算会超标 |
+| **T30** | ⚠️ **纯函数式策略判定 + 不可变状态 = 审批死循环**：批准后重新派发，`approvalRequirement` 算出同样结论 → 卡片无限弹 → **任何需要审批的工具永远执行不了**（推送/删除/Shortcuts 全瘫） | `TurnState.approvedFingerprints` 记住「这一次已批准」；⚠️ 指纹 = callID + 工具名 + **规范化参数**（只按 callID 记会被复用 id 绕过 = 提权） |
+| **T31** | ⚠️ 状态机缺防御分支 = **崩溃**：`.dispatching` 无条件 `currentWave.removeFirst()`，而「恢复非幂等意图」那条路径下 `currentWave` 是空的 | 状态机必须是**全函数**：`pendingIntents` 非空时路由到 `.executing`；`approve` 也要按相位路由 |
 
 ---
 
@@ -267,7 +266,7 @@ D:\项目\ios平台agent\          （构建时请用 C:\Users\MSI-NB\rune-ws）
 │  └─ 附录A / 附录B          渠道事实表 / 技术选型核实表
 ├─ research/                 取证材料（465 份，非交付物，**刻意入库**）
 └─ Packages/
-   ├─ RuneKernel/            ✅ 零依赖核心（28 源文件 / 540 测试全绿）
+   ├─ RuneKernel/            ✅ 零依赖核心（30 源文件 / 608 测试全绿）
    │  ├─ Package.swift       仅供 macOS 使用；本机走 rune.ps1
    │  ├─ Sources/RuneKernel/        ← 25 个 .swift（清单见下）
    │  └─ Tests/RuneKernelTests/     ← 13 个 .swift
@@ -281,7 +280,7 @@ D:\项目\ios平台agent\          （构建时请用 C:\Users\MSI-NB\rune-ws）
 | 值类型与安全 | `JSONValue` `SHA256` `Trust` `Content` `Tool` `Capability` `Errors` |
 | 编辑与检索 | `TextPatch` `GlobMatcher` `IgnoreRules` `GrepEngine` |
 | 网关 | `ChatRequest` `StreamParsing` `ProtocolEncoders` `ProtocolDecoders` `ToolCallAssembler` `ProviderQuirks` |
-| 运行时 | `TurnRunner` `ToolScheduler` `PolicyEngine` `Plan` `Event` `Correction` `Context` `ToolRegistry` |
+| 运行时 | `TurnRunner` `ToolScheduler` `PolicyEngine` `Plan` `Event` `Correction` `Context` `ToolRegistry` `Skill` `SkillLibrary` |
 | 编排 | `PlanEngine` `ApprovalBroker` `GoalEngine` |
 
 **测试文件**：`JSONAndHashing` `Security` `RuntimeModel` `Patch` `Search` `Gateway` `Policy`
