@@ -61,7 +61,8 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 | **构建命令** | ⭐ `pwsh -NoProfile -File Tools\rune.ps1 build RuneKernel`<br>`pwsh -NoProfile -File Tools\rune.ps1 test RuneKernel` |
 | Swift 工具链 | ✅ **6.3.3 for Windows**（`x86_64-unknown-windows-msvc`），满足 WasmKit 的 Swift 6.3 要求 |
 | MSVC | VS 2022 Build Tools，**必须经 `vcvars64.bat` 激活**（`link.exe` 不在 PATH）。脚本已处理 |
-| git / python / node / cmake | ✅ 可用；ninja ❌ 未装（wasm 构建时才需要） |
+| python / node / cmake | ✅ 可用；ninja ❌ 未装（wasm 构建时才需要） |
+| git | ✅ 已初始化（首次提交 `fee5338`）。`core.autocrlf=false` + `.gitattributes` 强制 LF（**补丁引擎的换行保真测试依赖这一点**）。`research/` 标记为 `-text -diff` 且**故意提交**（它是证据链） |
 | CPU | 32 核 |
 | **不能做的事** | 无法构建 iOS App、无模拟器、无法验证 SwiftUI / Live Activity / AVFoundation / Core ML |
 
