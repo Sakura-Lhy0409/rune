@@ -32,23 +32,30 @@
 |---|---|
 | **更新日期** | 2026-09-17 |
 | **当前阶段** | **M0 地基** |
-| **当前里程碑** | M0-3：`grep_search` 纯逻辑核心 + 其余包骨架 |
-| **上一个完成的里程碑** | ✅ **M0-2：`apply_patch` 补丁引擎 + `edit_file` 引擎**（122 测试全绿） |
-| **已完成里程碑** | ✅ M0-1 `RuneKernel` 核心（85 测试）→ ✅ M0-2 补丁引擎（累计 122 测试） |
+| **当前里程碑** | M0-4：`RuneGateway` 纯逻辑（`ToolCallAssembler` + quirks + 缓存记账） |
+| **上一个完成的里程碑** | ✅ **M0-3：检索子系统（glob/ignore/grep）+ 10 个包骨架**（172 测试全绿） |
+| **已完成里程碑** | ✅ M0-1 Kernel 核心（85）→ ✅ M0-2 补丁引擎（122）→ ✅ M0-3 检索子系统（**172**） |
 | **阻塞项** | 无 |
-| **本机可验证范围** | ✅ 平台无关的 Swift 代码（Kernel / 补丁引擎 / 网关逻辑 / 策略引擎）<br>❌ iOS 专属（UI / Live Activity / Core ML / VFS 真实文件系统 / 沙箱）—— 需 macOS |
+| **本机可验证范围** | ✅ 平台无关的 Swift 代码（Kernel / 补丁引擎 / 检索 / 网关逻辑 / 策略引擎）<br>❌ iOS 专属（UI / Live Activity / Core ML / VFS 真实文件系统 / 沙箱 / GRDB）—— 需 macOS |
 
 ### 进度条
 
 ```
 设计文档      ████████████████████ 100%
-M0 地基       ██████████░░░░░░░░░░░  50%   ← 当前
+M0 地基       █████████████░░░░░░░  65%   ← 当前
 M1 可用内核   ░░░░░░░░░░░░░░░░░░░░░   0%
 M2 移动体验   ░░░░░░░░░░░░░░░░░░░░░   0%
 M3 多渠道     ░░░░░░░░░░░░░░░░░░░░░   0%
 M4 端侧+记忆  ░░░░░░░░░░░░░░░░░░░░░   0%
 M5 上架准备   ░░░░░░░░░░░░░░░░░░░░░   0%
 ```
+
+### 包结构现状
+
+| 包 | 状态 | 本机可测 |
+|---|---|---|
+| `RuneKernel` | ✅ 13 个源文件 / 172 测试 | ✅ |
+| `RuneNet` `RuneStore` `RuneVM` `RuneBench` `RuneGateway` `RuneContext` `RuneCore` `RuneTools` `RuneMCP` `RuneUI` | ⬜ 骨架已建（`Package.swift` + 带实现清单的占位文件） | 部分 |
 
 ---
 
@@ -130,6 +137,12 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 | C4.4 | ├ 换行保真（CRLF / LF / 无末行换行） | 同上 | 三向测试；替换文本的换行风格跟随目标文件 |
 | C4.5 | ├ 诊断可执行（供模型自我修正） | 同上 | 找不到 → 给最近位置；歧义 → 给全部候选；重叠 → 提示合并 |
 | C4.6 | └ `TextEdit.replaceUnique` | 同上 | 唯一才替换；多处/找不到都拒绝（**绝不悄悄全改**） |
+| C5 | ✅ **检索子系统** | `GlobMatcher.swift` · `IgnoreRules.swift` · `GrepEngine.swift` | **50 项新测试**（累计 172 全绿） |
+| C5.1 | ├ `GlobPattern`（通配匹配） | `GlobMatcher.swift` | `**` 跨层、`?`、`[a-z]`/`[!x]`、`{a,b}`、锚定、目录专用、**默认大小写不敏感** |
+| C5.2 | ├ `IgnoreRules`（gitignore 语义） | `IgnoreRules.swift` | 注释/空行、`!` 取反、**最后匹配胜出**、祖先级联忽略、**内置默认清单**、带得出"是哪条规则" |
+| C5.3 | ├ `PathFilter`（两层忽略 + include/exclude） | 同上 | 项目规则一律生效；**内置默认在显式 include 时让位** |
+| C5.4 | └ `GrepEngine`（搜索核心） | `GrepEngine.swift` | 字面量/正则、整词、**字面量预筛**、二进制跳过、上下文行、三种输出模式、**预算截断且如实告知**、确定性排序、中文定位 |
+| C6 | ✅ **10 个包的骨架** | `Packages/Rune{Net,Store,VM,Bench,Gateway,Context,Core,Tools,MCP,UI}/` | 每个含正确的 `Package.swift`（依赖声明已校验）+ 带**实现清单**的占位文件 |
 
 ---
 
@@ -137,30 +150,31 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 
 | 项 | 状态 | 备注 |
 |---|---|---|
-| M0-3 grep 核心 + 包骨架 | 🚧 即将开始 | 见 §7 |
-| 其余包的骨架 | ⬜ 未开始 | 只放占位文件，保证结构就位 |
+| M0-4 网关纯逻辑 | 🚧 即将开始 | 见 §7 第 1 项（本机可测，价值最高） |
+| M0-5 策略引擎 | ⬜ 未开始 | 见 §7 第 2 项 |
 
 ---
 
 ## 7. 下一步（按优先级，可直接执行）
 
-### 立即（M0-3，纯逻辑、本机可测）
-1. **`grep_search` 纯逻辑核心**：字面量预筛 + 正则匹配、结果排序（按文件 mtime / 命中数）、上下文行截取、二进制跳过判定、`.gitignore` 忽略清单、结果条数与字节预算截断。
-2. **其余包的骨架**（`RuneStore` / `RuneNet` / `RuneVM` / `RuneBench` / `RuneGateway` / `RuneContext` / `RuneCore` / `RuneTools` / `RuneMCP`）—— 只放 `Package.swift` + 占位文件。
+### 立即（M0-4，纯逻辑、本机可测，**设计文档里最容易写错的地方**）
+1. **`ToolCallAssembler`**（放在 `RuneKernel` 内，供 `RuneGateway` 使用）：
+   - 三种协议形态的参数拼装：OpenAI 标准分片（按 `index` 拼接 `arguments`）/ Anthropic blocks（`content_block_start` → `input_json_delta` → `stop`）/ Gemini 整块（`functionCall` 一次性给全）
+   - **7 种脏情况**：空参数、JSON 被截断（`finish_reason == length`）、`name` 多次出现且不同、工具名幻觉、参数不合 schema、流在工具调用中途断开、`finish_reason` 缺失
+   - JSON 修复（补括号、去尾逗号）
+2. **`ProviderQuirks` + 协议族枚举**：把"新渠道接入不改代码"变成数据结构（参考 `docs/附录A` §2.6 的三张映射表：思考链字段、鉴权形态、推理参数旋钮）。
+3. **缓存经济学记账**：写入 1.25× / 读取 0.1× / 省下多少钱；各厂商缓存机制差异（附录A §8 决策表）。
 
-### 随后（M0-4，纯逻辑、本机可测）
-3. **`RuneGateway` 的纯逻辑部分**（最高价值，且设计文档里最容易写错）：
-   - `ToolCallAssembler`：三种协议形态（OpenAI 标准分片 / Anthropic blocks / Gemini 整块）的参数拼装，含 7 种脏情况处理（空参数、JSON 截断、name 多次出现、`finish_reason` 缺失…）
-   - `ProviderQuirks` 配置模型 + 协议族枚举
-   - 缓存经济学记账（写入 1.25× / 读取 0.1× / 省下多少）
-   - 路由策略与降级链（含"降级必须可见"）
-4. **策略引擎 `PolicyEngine`**（纯逻辑）：能力令牌判定 + 人类专属区 + 污点规则 + 审批分级。
+### 随后（M0-5，纯逻辑、本机可测）
+4. **`PolicyEngine`**：能力令牌判定 + 人类专属区 + 污点规则 + 审批分级 + 出口白名单（`docs/09 §3–§4`）。
+5. **路由策略与降级链**：任务类型 → 模型；降级必须对用户可见。
 
 ### 需要 macOS 才能做（不要在 Windows 上浪费时间）
-5. `RuneStore`（GRDB + 迁移 + 哈希链落盘）
-6. `VFS` 真实文件系统映射 + security-scoped bookmark
-7. `RuneVM` / 原生 CPython 集成
-8. 任何 SwiftUI / Live Activity / Core ML
+6. `RuneStore`（GRDB + 迁移 + 哈希链落盘）—— ⚠️ FTS5 必须用 CJK 分词器或 `trigram`
+7. `RuneNet`（SSE 解析 + 断流重连 + 出口代理）
+8. `RuneBench`（VFS 真实文件系统映射 + security-scoped bookmark + 原生 CPython 集成）
+9. `RuneVM`（WasmKit 沙箱）
+10. 任何 SwiftUI / Live Activity / Core ML
 
 ---
 
@@ -191,6 +205,9 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 | T7 | `json` 键序不稳定会破坏指纹去重 | 用 `JSONValue.canonicalString()`（已实现并有测试） |
 | **T8** | ⚠️ **Swift 把 `"\r\n"` 当作单个 Character（字素簇）**，所以 `components(separatedBy: "\n")` 在 CRLF 文本上**根本不分割**，会把整个文件当成一行 → 所有按行匹配的补丁**静默失败** | **先把 `\r\n` 归一化成 `\n` 再分割**（`LineTable.parse` 已处理，并有 CRLF 测试守护） |
 | **T9** | 替换文本的换行风格不跟随目标文件 → 在 CRLF 文件里插进 LF 行，diff 出现整文件噪音 | `TextEdit.normalizeNewlines(_:to:)`（已实现并有测试） |
+| **T10** | ⚠️ **Swift 原生字符串 `#"…"#` 的定界符是 `"#`（引号在前）**，写成 `#"a\(#"` 会被认为是**未闭合**（因为 `\(` 后面是 `#` 再 `"`，顺序反了） | 写正则字面量用普通字符串 + 双反斜杠（`"return round\\("`），别用 `#"…"#` 混排转义 |
+| **T11** | 测试夹具的字典 key 与虚拟路径不一致 → 读不到文件 → 空结果 → `matches[0]` **越界崩溃** | `GrepFileSource.inMemory` 已把 `src/a.py` 与 `/workspace/src/a.py` 两种 key 归一化；写夹具不必记挂载点前缀 |
+| **T12** | 大小写不敏感匹配时手写 `line.lowercased()` 再取下标 → 某些字符 lower 后长度变化会导致**下标错位** | 用 Foundation 的 `range(of:options:.caseInsensitive)`，下标记在原串上（`GrepEngine.countMatches` 已如此） |
 
 ---
 
@@ -224,24 +241,29 @@ D:\项目\ios平台agent\          （构建时请用 C:\Users\MSI-NB\rune-ws）
 │  └─ 附录A / 附录B          渠道事实表 / 技术选型核实表
 ├─ research/                 取证材料（465 份，非交付物）
 └─ Packages/
-   └─ RuneKernel/            ✅ 零依赖核心（122 测试全绿）
-      ├─ Package.swift       （仅供 macOS 使用；本机走 rune.ps1）
-      ├─ Sources/RuneKernel/
-      │   ├─ JSONValue.swift      手写 JSON 解析 + 确定性序列化
-      │   ├─ SHA256.swift         纯 Swift SHA-256 + 三种指纹
-      │   ├─ Trust.swift          信任级 / 污点 / 人类专属区
-      │   ├─ Content.swift        消息/内容块/制品/用量/成本/流式事件
-      │   ├─ Tool.swift           工具规格/schema/错误/全部工具名常量
-      │   ├─ Capability.swift     VFSPath（安全边界）/ 出口规则 / 能力令牌
-      │   ├─ Errors.swift         统一错误模型
-      │   ├─ Plan.swift           结构化计划 + Goal 阻塞纪律
-      │   ├─ Event.swift          事件枚举 + 信封 + 哈希链
-      │   └─ TextPatch.swift      ⭐ 补丁引擎（双格式解析 + 模糊匹配 + 原子性）
-      └─ Tests/RuneKernelTests/
-          ├─ JSONAndHashingTests.swift
-          ├─ SecurityTests.swift
-          ├─ RuntimeModelTests.swift
-          └─ PatchTests.swift     ⭐ 37 项补丁引擎测试
+   ├─ RuneKernel/            ✅ 零依赖核心（172 测试全绿）
+   │  ├─ Package.swift       （仅供 macOS 使用；本机走 rune.ps1）
+   │  ├─ Sources/RuneKernel/
+   │  │   ├─ JSONValue.swift      手写 JSON 解析 + 确定性序列化
+   │  │   ├─ SHA256.swift         纯 Swift SHA-256 + 三种指纹
+   │  │   ├─ Trust.swift          信任级 / 污点 / 人类专属区
+   │  │   ├─ Content.swift        消息/内容块/制品/用量/成本/流式事件
+   │  │   ├─ Tool.swift           工具规格/schema/错误/全部工具名常量
+   │  │   ├─ Capability.swift     VFSPath（安全边界）/ 出口规则 / 能力令牌
+   │  │   ├─ Errors.swift         统一错误模型
+   │  │   ├─ Plan.swift           结构化计划 + Goal 阻塞纪律
+   │  │   ├─ Event.swift          事件枚举 + 信封 + 哈希链
+   │  │   ├─ TextPatch.swift      ⭐ 补丁引擎
+   │  │   ├─ GlobMatcher.swift    ⭐ 通配匹配
+   │  │   ├─ IgnoreRules.swift    ⭐ gitignore 语义 + 两层 PathFilter
+   │  │   └─ GrepEngine.swift     ⭐ 搜索核心（预筛 / 二进制跳过 / 预算截断）
+   │  └─ Tests/RuneKernelTests/
+   │      ├─ JSONAndHashingTests.swift
+   │      ├─ SecurityTests.swift
+   │      ├─ RuntimeModelTests.swift
+   │      ├─ PatchTests.swift         37 项补丁引擎测试
+   │      └─ SearchTests.swift        50 项检索测试
+   └─ Rune{Net,Store,VM,Bench,Gateway,Context,Core,Tools,MCP,UI}/   ⬜ 骨架（含实现清单）
 ```
 
 ---
