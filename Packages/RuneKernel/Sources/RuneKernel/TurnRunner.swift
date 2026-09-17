@@ -165,9 +165,15 @@ public struct TurnState: Sendable, Codable, Hashable {
     public var messages: [Message]
     /// 本 Turn 已执行的步骤
     public var steps: [StepRecord]
-    /// 模型本轮提出、尚未处理的工具调用
+    /// 模型本轮提出、**尚未进入任何波次**的工具调用
     public var queuedCalls: [ToolCall]
-    /// 意图已落盘、结果未知的调用
+    /// 当前波次中**尚未写意图**的调用（写一个就移出一个）
+    public var currentWave: [ToolCall]
+    /// 当前波次的全部调用（写意图后仍保留，用于"波次是否结束"与检查点判定）
+    public var waveCalls: [ToolCall]
+    /// 波次序号（从 1 开始；用于事件与 UI 显示"第 N 批"）
+    public var waveIndex: Int
+    /// 意图已落盘、结果未知的调用（**同一个波次里可能同时有多个**）
     public var pendingIntents: [PendingToolIntent]
     /// 最近一次检查点
     public var lastCheckpoint: Checkpoint?
@@ -200,6 +206,9 @@ public struct TurnState: Sendable, Codable, Hashable {
         messages: [Message] = [],
         steps: [StepRecord] = [],
         queuedCalls: [ToolCall] = [],
+        currentWave: [ToolCall] = [],
+        waveCalls: [ToolCall] = [],
+        waveIndex: Int = 0,
         pendingIntents: [PendingToolIntent] = [],
         lastCheckpoint: Checkpoint? = nil,
         toolCallCount: Int = 0,
@@ -218,6 +227,9 @@ public struct TurnState: Sendable, Codable, Hashable {
         self.messages = messages
         self.steps = steps
         self.queuedCalls = queuedCalls
+        self.currentWave = currentWave
+        self.waveCalls = waveCalls
+        self.waveIndex = waveIndex
         self.pendingIntents = pendingIntents
         self.lastCheckpoint = lastCheckpoint
         self.toolCallCount = toolCallCount
@@ -305,11 +317,12 @@ public enum TurnRunner {
         public var now: @Sendable () -> Date
         /// 成本记账（由网关实现；测试可给零成本）
         public var costOfRound: @Sendable (TokenUsage) -> CostBreakdown
-        /// 从工具参数里取出**受影响的路径**，交给策略引擎做范围判定。
+        /// 从工具参数里取出**受影响的全部路径**。
         ///
-        /// ⚠️ 不用这个的话，`PolicyEngine` 的路径级检查（能力令牌范围）会形同虚设——
-        /// 因为调用里只有 JSON 参数，策略引擎看不到路径。
-        public var pathOfCall: @Sendable (ToolCall, ToolSpec) -> VFSPath?
+        /// ⚠️ 必须是"全部"而不是"第一个"：
+        ///   ① 策略引擎要对**每一个**路径做范围判定——只查第一个会让多文件补丁绕过授权；
+        ///   ② 调度器要用全部路径做冲突检测。
+        public var pathsOfCall: ToolScheduler.PathExtractor
 
         public init(
             modelEvents: @escaping @Sendable (TurnState) -> [ModelEvent],
@@ -320,7 +333,7 @@ public enum TurnRunner {
             costOfRound: @escaping @Sendable (TokenUsage) -> CostBreakdown = { usage in
                 CostBreakdown(usage: usage, microUSD: 0, providerID: "mock", modelID: "mock")
             },
-            pathOfCall: @escaping @Sendable (ToolCall, ToolSpec) -> VFSPath? = TurnRunner.defaultPathExtractor
+            pathsOfCall: @escaping ToolScheduler.PathExtractor = ToolScheduler.defaultPaths
         ) {
             self.modelEvents = modelEvents
             self.executor = executor
@@ -328,23 +341,14 @@ public enum TurnRunner {
             self.policyContext = policyContext
             self.now = now
             self.costOfRound = costOfRound
-            self.pathOfCall = pathOfCall
+            self.pathsOfCall = pathsOfCall
         }
     }
 
-    /// 默认的路径提取：从参数里找常见键名。
+    /// 默认的路径提取：从参数里找常见键名 + 解析补丁正文（多文件补丁会返回多条）。
     ///
-    /// 真实工具应在 `ToolSpec` 里显式声明路径参数名（M1 的事）；这里给出一个够用的默认实现，
-    /// 让 M0 的验收就能跑通**路径级授权**。
-    public static let defaultPathExtractor: @Sendable (ToolCall, ToolSpec) -> VFSPath? = { call, _ in
-        guard let obj = try? call.arguments().objectValue else { return nil }
-        for key in ["path", "file", "file_path", "target", "source"] {
-            if let raw = obj[key]?.stringValue, let path = VFSPath.parseOrNil(raw) {
-                return path
-            }
-        }
-        return nil
-    }
+    /// 真实工具应在 `ToolSpec` 里显式声明路径参数名（M2 的事）；这里给出一个够用的默认实现。
+    public static let defaultPathExtractor: ToolScheduler.PathExtractor = ToolScheduler.defaultPaths
 
     /// 推进一件事之后的结果
     public struct StepOutcome: Sendable {
@@ -420,36 +424,55 @@ public enum TurnRunner {
         if state.wasRestored {
             state.wasRestored = false
 
-            if let pending = state.pendingIntents.first {
-                if pending.isIdempotent {
-                    state.recoveryNote = "任务上次在「\(pending.call.name)」执行中途被打断；该操作可安全重做，已自动重做。"
-                    record(.recovered, "恢复：重做幂等调用 \(pending.call.name)")
-                    emit(.turnRecovered, ["call": .string(pending.call.name), "action": .string("redo")])
-                    state.status = .executing
-                    return StepOutcome(state: state, newEvents: events, didAdvance: true)
-                } else {
-                    // ⚠️ 非幂等：结果未知，**必须问用户**
-                    state.status = .awaitingApproval
-                    let request = ApprovalRequest(
-                        call: pending.call,
-                        requirement: .showDetails,
-                        reason: """
-                        任务上次在「\(pending.call.name)」执行中途被打断，**这一步是否已经生效无法确定**。
-                        该操作不可自动重做（可能造成重复副作用，例如重复推送/重复付款）。
-                        请选择：重新执行 / 视为已完成 / 回滚到之前的检查点。
-                        """,
-                        risk: pending.riskLevel
-                    )
-                    record(.approvalRequested, "恢复：\(pending.call.name) 结果未知，需用户确认")
-                    emit(.turnRecovered, ["call": .string(pending.call.name), "action": .string("askUser")])
-                    return StepOutcome(state: state, newEvents: events, didAdvance: false, pendingApproval: request)
-                }
+            // ⚠️ 悬空意图可能**不止一个**：波次调度下，一波里的多个调用会先后写下意图，
+            //    因此一次崩溃可能留下整批"已写意图、结果未知"的调用。
+            let unknowns = state.pendingIntents
+            let nonIdempotent = unknowns.filter { !$0.isIdempotent }
+
+            if !nonIdempotent.isEmpty {
+                // 只要有非幂等的，就必须问用户——**不能因为其他的能重做就先把它们做了**，
+                // 因为重做会改变工作区，可能让用户无法判断那个不可逆操作到底发生了什么。
+                state.status = .awaitingApproval
+                let names = nonIdempotent.map { "「\($0.call.name)」" }.joined(separator: "、")
+                let request = ApprovalRequest(
+                    call: nonIdempotent[0].call,
+                    requirement: .showDetails,
+                    reason: """
+                    任务上次被打断，有 \(unknowns.count) 个操作**是否已经生效无法确定**，其中 \(nonIdempotent.count) 个不可自动重做：\(names)。
+                    这些操作可能造成重复副作用（例如重复推送 / 重复付款）。
+                    请选择：重新执行 / 视为已完成 / 回滚到之前的检查点。
+                    """,
+                    risk: nonIdempotent.map(\.riskLevel).max(by: { rank($0) < rank($1) }) ?? .dangerous
+                )
+                record(.approvalRequested, "恢复：\(nonIdempotent.count) 个不可重做操作结果未知，需用户确认")
+                emit(.turnRecovered, [
+                    "action": .string("askUser"),
+                    "count": .int(nonIdempotent.count),
+                    "tools": .array(nonIdempotent.map { .string($0.call.name) }),
+                ])
+                return StepOutcome(state: state, newEvents: events, didAdvance: false, pendingApproval: request)
+            }
+
+            if !unknowns.isEmpty {
+                let names = unknowns.map(\.call.name).joined(separator: "、")
+                state.recoveryNote = "任务上次在 \(names) 执行中途被打断；这些操作可安全重做，已自动重做。"
+                record(.recovered, "恢复：重做 \(unknowns.count) 个幂等调用（\(names)）")
+                emit(.turnRecovered, [
+                    "action": .string("redo"),
+                    "count": .int(unknowns.count),
+                    "tools": .array(unknowns.map { .string($0.call.name) }),
+                ])
+                state.status = .executing
+                return StepOutcome(state: state, newEvents: events, didAdvance: true)
             }
 
             // 没有悬空意图 → 只是普通的重启继续
-            state.recoveryNote = "已从检查点恢复（没有未完成的工具调用）。"
+            // （此时 `currentWave` 里可能还有"尚未写意图"的调用 —— 那些**确定没执行过**，
+            //   直接回到派发流程即可，不需要任何确认。）
+            state.recoveryNote = "已从检查点恢复（没有结果未知的操作）。"
             record(.recovered, "恢复：从检查点继续")
             emit(.turnRecovered, ["action": .string("continue")])
+            if state.status == .executing { state.status = .dispatching }
             return StepOutcome(state: state, newEvents: events, didAdvance: true)
         }
 
@@ -534,15 +557,51 @@ public enum TurnRunner {
             }
 
             state.queuedCalls = calls
+            // 新一轮从零开始排队：清掉上一轮残留的波次状态（正常情况下本来就该是空的）
+            state.currentWave = []
+            state.waveCalls = []
+            state.waveIndex = 0
+            state.pendingIntents = []
             state.status = .dispatching
             return StepOutcome(state: state, newEvents: events, didAdvance: true)
 
         // ---------- 派发（写意图 / 拒绝） ----------
         case .dispatching:
-            guard !state.queuedCalls.isEmpty else {
+            // ---------- 波次管理（**必须在任何早返回之前**） ----------
+            //
+            // 波次 = "可以并行执行的一批调用"。调度器（M1-1）负责分波，运行器负责**边界语义**：
+            //   * 波内调用按顺序**逐个写意图**（每个都是一次独立的崩溃窗口）
+            //   * 波**结束后**才打一个检查点 —— 见 `takeWaveCheckpoint`
+            //
+            // ⚠️ 这里曾经写错过一次：波次管理被放在"队列空就回模型"的早返回**之后**，
+            //    结果最后一波完成时直接跳过了检查点。**收尾逻辑不能被早返回挡住。**
+            if state.currentWave.isEmpty && state.pendingIntents.isEmpty {
+                // 上一波刚结束（`waveCalls` 非空说明确实跑过一波）→ 打波次检查点
+                if !state.waveCalls.isEmpty {
+                    if let checkpoint = takeWaveCheckpoint(&state, config: config, now: deps.now()) {
+                        emit(.checkpointCreated, [
+                            "label": .string(checkpoint.label),
+                            "kind": .string(checkpoint.kind.rawValue),
+                            "wave": .int(state.waveIndex),
+                            "restorable": .bool(checkpoint.isRestorable),
+                        ])
+                    }
+                    state.waveCalls = []
+                }
+
                 // 队列空了 → 回到模型，让它基于工具结果继续
-                state.status = .reasoning
-                return StepOutcome(state: state, newEvents: events, didAdvance: true)
+                guard !state.queuedCalls.isEmpty else {
+                    state.status = .reasoning
+                    return StepOutcome(state: state, newEvents: events, didAdvance: true)
+                }
+                let waveDescription = startNextWave(&state, config: config)
+                emit(.modelCallStreaming, [      // 复用"流式进行中"作为进度信号；真正的结构在 payload 里
+                    "phase": .string("wave"),
+                    "wave": .int(state.waveIndex),
+                    "size": .int(state.waveCalls.count),
+                    "parallel": .bool(waveDescription?.contains("并行") ?? false),
+                ])
+                record(.toolIntent, "波次 \(state.waveIndex)（\(state.waveCalls.count) 个）：\(waveDescription ?? "")")
             }
 
             if state.toolCallCount >= config.maxToolCalls {
@@ -554,7 +613,7 @@ public enum TurnRunner {
                 )
             }
 
-            let call = state.queuedCalls.removeFirst()
+            let call = state.currentWave.removeFirst()
             let spec = config.toolRegistry[call.name]
 
             // 工具不存在 → 回灌"工具名幻觉"的可执行错误，让模型自己改
@@ -569,26 +628,20 @@ public enum TurnRunner {
                 appendToolResult(&state, call: call, result: .failure(callID: call.id, error: error))
                 emit(.toolCallDenied, ["tool": .string(call.name), "reason": .string("unknownTool")])
                 record(.toolDenied, "未知工具 \(call.name)")
+                if state.currentWave.isEmpty && state.pendingIntents.isEmpty { state.status = .dispatching }
                 return StepOutcome(state: state, newEvents: events, didAdvance: true)
             }
 
-            // 从参数里取出路径，让策略引擎能做**范围级**判定（而不是只知道工具名）
-            let callPath = deps.pathOfCall(call, spec)
+            // 取**全部**受影响路径：策略引擎要对每一个做范围判定
+            let callPaths = deps.pathsOfCall(call, spec)
             let callAccess: PathScope.Access =
                 spec.requirements.contains(.fsDelete) ? .delete
                 : (spec.requirements.contains(.fsWrite) ? .write : .readOnly)
 
-            let invocation = PolicyEngine.Invocation(
-                tool: spec,
-                path: callPath,
-                access: callAccess,
-                egressHost: nil,
-                runtime: nil,
-                nativeAPI: nil,
-                gitRemote: nil,
-                taint: nil
+            let decision = evaluatePolicy(
+                spec: spec, paths: callPaths, access: callAccess,
+                call: call, policy: deps.policy, context: deps.policyContext
             )
-            let decision = deps.policy.evaluate(invocation, context: deps.policyContext)
 
             switch decision {
             case .humanOnly(let zone):
@@ -600,6 +653,7 @@ public enum TurnRunner {
                 appendToolResult(&state, call: call, result: .failure(callID: call.id, error: error))
                 emit(.humanOnlyZoneTouched, ["tool": .string(call.name)])
                 record(.toolDenied, "人类专属区 \(call.name)")
+                if state.currentWave.isEmpty && state.pendingIntents.isEmpty { state.status = .dispatching }
                 return StepOutcome(state: state, newEvents: events, didAdvance: true)
 
             case .denied(let reason, let suggestion):
@@ -607,14 +661,22 @@ public enum TurnRunner {
                 appendToolResult(&state, call: call, result: .failure(callID: call.id, error: error))
                 emit(.capabilityDenied, ["tool": .string(call.name), "reason": .string(reason)])
                 record(.toolDenied, "被拒绝 \(call.name)")
+                if state.currentWave.isEmpty && state.pendingIntents.isEmpty { state.status = .dispatching }
                 return StepOutcome(state: state, newEvents: events, didAdvance: true)
 
             case .requiresApproval(let reason, let risk):
+                let invocation = PolicyEngine.Invocation(
+                    tool: spec, path: callPaths.first, access: callAccess
+                )
                 let requirement = deps.policy.approvalRequirement(for: invocation, context: deps.policyContext)
-                // 把调用放回队列头，等用户决定
-                state.queuedCalls.insert(call, at: 0)
+                // 把调用放回**当前波次**队头，等用户决定
+                state.currentWave.insert(call, at: 0)
                 state.status = .awaitingApproval
-                emit(.toolApprovalRequested, ["tool": .string(call.name), "risk": .string(risk.rawValue)])
+                emit(.toolApprovalRequested, [
+                    "tool": .string(call.name),
+                    "risk": .string(risk.rawValue),
+                    "requirement": .string(requirement.rawValue),
+                ])
                 record(.approvalRequested, "待审批 \(call.name)")
                 return StepOutcome(
                     state: state, newEvents: events, didAdvance: false,
@@ -635,8 +697,10 @@ public enum TurnRunner {
                     "tool": .string(call.name),
                     "id": .string(call.id),
                     "argsPreview": .string(call.argumentsPreview),
+                    "wave": .int(state.waveIndex),
+                    "waveSize": .int(state.waveCalls.count),
                 ])
-                record(.toolIntent, "准备执行 \(call.name)")
+                record(.toolIntent, "波次 \(state.waveIndex)：准备执行 \(call.name)")
                 return StepOutcome(state: state, newEvents: events, didAdvance: true)
             }
 
@@ -665,30 +729,16 @@ public enum TurnRunner {
             emit(.toolCallFinished, [
                 "tool": .string(intent.call.name),
                 "status": .string(result.status.rawValue),
+                "wave": .int(state.waveIndex),
                 "summary": .string(String(result.summary.prefix(300))),
             ])
             record(.toolExecuted, "\(intent.call.name) → \(result.status.rawValue)")
 
-            // 检查点（docs/04 §10.2：**每个成功修改文件的工具调用之后**都要有）
-            // 条件：成功的、非只读的调用；或任何产出了制品的调用。
-            let shouldCheckpoint = (result.status == .ok && intent.riskLevel != .safe)
-                || !result.artifacts.isEmpty
-            if shouldCheckpoint {
-                let checkpoint = Checkpoint(
-                    turnID: state.turnID,
-                    stepIndex: state.steps.count,
-                    eventSeq: state.eventSequence,
-                    label: "\(intent.call.name) 完成",
-                    kind: intent.riskLevel.alwaysRequiresHuman ? .preDangerous : .step,
-                    isRestorable: intent.isIdempotent,
-                    irrecoverableNote: intent.isIdempotent ? nil : "此操作可能产生外部副作用，无法完全回滚",
-                    createdAt: deps.now()
-                )
-                state.lastCheckpoint = checkpoint
-                emit(.checkpointCreated, ["label": .string(checkpoint.label), "kind": .string(checkpoint.kind.rawValue)])
+            // ⚠️ **检查点不在这里打**，而是等整个波次结束后统一打一个 —— 见 `takeWaveCheckpoint`。
+            //    理由：波内多个调用是同时在飞的，为每个调用各打一个会产出"不对应任何真实状态"的检查点。
+            if state.pendingIntents.isEmpty && state.currentWave.isEmpty {
+                state.status = .dispatching      // 波次结束，回到派发（由它打检查点并开下一波）
             }
-
-            state.status = .dispatching
             return StepOutcome(state: state, newEvents: events, didAdvance: true)
 
         // ---------- 稳定态：不再推进 ----------
@@ -732,6 +782,123 @@ public enum TurnRunner {
     }
 
     // MARK: 辅助
+
+    /// 从 `queuedCalls` 里取下一波（用 M1-1 的调度器分波），并从队列里移除它们。
+    /// 返回一句人类可读的说明（用于步骤记录与事件）。
+    @discardableResult
+    static func startNextWave(_ state: inout TurnState, config: Config) -> String? {
+        let schedule = ToolScheduler.schedule(calls: state.queuedCalls, specs: config.toolRegistry)
+        guard let wave = schedule.waves.first, !wave.calls.isEmpty else {
+            // 调度器一个都没排上（例如全是未知工具）→ 直接把它们当成一波，走"工具名幻觉"兜底
+            let fallback = Array(state.queuedCalls.prefix(1))
+            state.queuedCalls.removeFirst(min(1, state.queuedCalls.count))
+            state.currentWave = fallback
+            state.waveCalls = fallback
+            state.waveIndex += 1
+            return "无法调度，逐个尝试"
+        }
+
+        // 调度器按"并行/串行"分了波；这里取第一波，并从队列里移除它包含的调用
+        let waveIDs = Set(wave.calls.map(\.id))
+        state.queuedCalls.removeAll { waveIDs.contains($0.id) }
+        // 调度器可能把"需审批/未知工具"摘到 deferred 里 —— 那些调用要**放回队列**等下一轮处理
+        for deferred in schedule.deferred + schedule.approvalsNeeded where
+            !state.currentWave.contains(where: { $0.id == deferred.id }) {
+            // 已在队列里的不动；不在的补回队尾（保持"最终会被处理"）
+            if !state.queuedCalls.contains(where: { $0.id == deferred.id }) {
+                state.queuedCalls.append(deferred)
+            }
+        }
+
+        state.currentWave = wave.calls
+        state.waveCalls = wave.calls
+        state.waveIndex += 1
+        return wave.reason
+    }
+
+    /// **波次检查点**。
+    ///
+    /// 设计取舍（M1-3 的核心决策）：波内多个调用是**同时在飞**的，
+    /// 为每个调用各打一个检查点会产出"不对应任何真实状态"的检查点（时间戳几乎相同，但那些中间状态从未存在过）。
+    /// 因此**以波次为单位，在整波结束后打一个**。
+    ///
+    /// 触发条件（与 docs/04 §10.2 对齐）：
+    ///   * 本波里任一调用是非只读的（可能改了东西）→ 打点
+    ///   * 或本波里任一调用产出了制品 → 打点
+    ///   * 全是只读 → 不打点（只读操作不需要回滚点）
+    ///
+    /// `isRestorable`：只要本波里有**任何**非幂等调用，这个检查点就不能声称"完全可回滚"
+    /// ——因为那一步可能已经产生了外部副作用。
+    static func takeWaveCheckpoint(_ state: inout TurnState, config: Config, now: Date) -> Checkpoint? {
+        let specs = state.waveCalls.compactMap { config.toolRegistry[$0.name] }
+        let isReadOnlyWave = specs.allSatisfy { $0.riskLevel == .safe && !$0.requirements.contains(.fsWrite) }
+        guard !isReadOnlyWave else { return nil }
+
+        let hasNonIdempotent = specs.contains { !$0.isIdempotent }
+        let hasDangerous = specs.contains { $0.riskLevel.alwaysRequiresHuman }
+        let names = state.waveCalls.map(\.name).joined(separator: "、")
+
+        let checkpoint = Checkpoint(
+            turnID: state.turnID,
+            stepIndex: state.steps.count,
+            eventSeq: state.eventSequence,
+            label: state.waveCalls.count > 1
+                ? "第 \(state.waveIndex) 波完成（\(names)）"
+                : "\(names) 完成",
+            kind: hasDangerous ? .preDangerous : .step,
+            isRestorable: !hasNonIdempotent,
+            irrecoverableNote: hasNonIdempotent ? "本波含不可自动重做的操作，可能已产生外部副作用，无法完全回滚" : nil,
+            createdAt: now
+        )
+        state.lastCheckpoint = checkpoint
+        return checkpoint
+    }
+
+    /// 对一个调用的**全部受影响路径**做策略判定，取**最严格**的结果。
+    ///
+    /// ⚠️ 只查第一个路径是**错误**的：多文件补丁里只要有一个越权，整次调用就必须被拒。
+    static func evaluatePolicy(
+        spec: ToolSpec,
+        paths: [VFSPath],
+        access: PathScope.Access,
+        call: ToolCall,
+        policy: PolicyEngine,
+        context: PolicyEngine.Context
+    ) -> CapabilityDecision {
+        let targets: [VFSPath?] = paths.isEmpty ? [nil] : paths.map { Optional($0) }
+        var worst: CapabilityDecision = .allowed
+
+        for path in targets {
+            let decision = policy.evaluate(
+                PolicyEngine.Invocation(tool: spec, path: path, access: access),
+                context: context
+            )
+            if rank(decision) > rank(worst) { worst = decision }
+            if rank(worst) >= rank(.humanOnly(zone: .policyFile)) { break }  // 已是最严，无需继续
+        }
+        _ = call
+        return worst
+    }
+
+    /// 判定结果的严格程度（越大越严格；用于合并多个路径的判定）
+    static func rank(_ decision: CapabilityDecision) -> Int {
+        switch decision {
+        case .allowed: return 0
+        case .requiresApproval: return 1
+        case .denied: return 2
+        case .humanOnly: return 3
+        }
+    }
+
+    /// 风险等级的严格程度
+    static func rank(_ risk: ToolSpec.RiskLevel) -> Int {
+        switch risk {
+        case .safe: return 0
+        case .modifying: return 1
+        case .dangerous: return 2
+        case .irreversible: return 3
+        }
+    }
 
     private static func appendToolResult(_ state: inout TurnState, call: ToolCall, result: ToolResult) {
         let block = ContentBlock(kind: .toolResult(result), origin: .toolResultTrusted)
