@@ -170,7 +170,7 @@ struct ScenarioExecutor: ToolExecuting {
 
 // MARK: 场景夹具
 
-private enum Scenario {
+enum Scenario {
 
     static func workspace() -> ScenarioWorkspace {
         ScenarioWorkspace(files: [
@@ -743,6 +743,7 @@ struct AssemblerIntegrationTests {
         #expect(!assembly.dropped.contains { $0.id == "objective" })
     }
 }
+
 
 
 
