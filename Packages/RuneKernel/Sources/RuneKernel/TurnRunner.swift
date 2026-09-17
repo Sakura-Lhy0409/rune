@@ -698,13 +698,35 @@ public enum TurnRunner {
             }
 
             // 取**全部**受影响路径：策略引擎要对每一个做范围判定
-            let callPaths = deps.pathsOfCall(call, spec)
+            let extraction = deps.pathsOfCall(call, spec)
             let callAccess: PathScope.Access =
                 spec.requirements.contains(.fsDelete) ? .delete
                 : (spec.requirements.contains(.fsWrite) ? .write : .readOnly)
 
+            // ⚠️ **越出挂载点的路径必须直接拒绝，而不是当成"没有路径参数"。**
+            //
+            // 这里挡的是两类东西：
+            //   ① `/etc/passwd` 这种"绝对但挂载点不认识"的路径 —— 如果按相对路径处理，
+            //      它会被悄悄映射成 `/workspace/etc/passwd`，于是**被检查的路径和工具
+            //      实际操作的路径不是同一个**（典型的混淆代理漏洞）。
+            //   ② 模型想用 `..` 往工作区外走（`VFSPath.resolve` 会钳回来并置 `wasClamped`，
+            //      钳制本身是安全的，但我们要如实告诉它，而不是让它以为自己成功了）。
+            if !extraction.outsideMounts.isEmpty {
+                let list = extraction.outsideMounts.joined(separator: "、")
+                let error = ToolError(
+                    kind: .capabilityDenied,
+                    modelFacingMessage: "这些路径不在任何已授权的挂载点内：\(list)。工作区内的路径请写成相对形式（例如 `src/a.py`）。",
+                    suggestion: "改用工作区内的相对路径；如果确实需要处理工作区之外的目录，请先用 set_workspace 向用户申请。"
+                )
+                appendToolResult(&state, call: call, result: .failure(callID: call.id, error: error))
+                emit(.capabilityDenied, ["tool": .string(call.name), "reason": .string("outsideMounts")])
+                record(.toolDenied, "路径越出挂载点 \(call.name)：\(list)")
+                if state.currentWave.isEmpty && state.pendingIntents.isEmpty { state.status = .dispatching }
+                return StepOutcome(state: state, newEvents: events, didAdvance: true)
+            }
+
             let decision = evaluatePolicy(
-                spec: spec, paths: callPaths, access: callAccess,
+                spec: spec, paths: extraction.paths, access: callAccess,
                 call: call, policy: deps.policy, context: deps.policyContext
             )
 
@@ -731,7 +753,7 @@ public enum TurnRunner {
 
             case .requiresApproval(let reason, let risk):
                 let invocation = PolicyEngine.Invocation(
-                    tool: spec, path: callPaths.first, access: callAccess
+                    tool: spec, path: extraction.paths.first, access: callAccess
                 )
                 let requirement = deps.policy.approvalRequirement(for: invocation, context: deps.policyContext)
                 // 把调用放回**当前波次**队头，等用户决定

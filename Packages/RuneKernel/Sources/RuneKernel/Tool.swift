@@ -189,11 +189,20 @@ public struct ToolError: Sendable, Codable, Hashable, Error {
 
 public struct ToolSpec: Sendable, Codable, Hashable {
     public let name: String
-    /// 给模型看的描述。**必须回答四个问题**（docs/05 §... ）：
+    /// 给模型看的描述。**必须回答四个问题**（docs/05 §8）：
     ///   做什么 / 何时用 / **何时不要用** / 一个最小示例
     /// 实测经验："何时不要用"这一条比任何系统提示词优化都更能降低误调用率。
     public let description: String
     public let inputSchema: JSONSchema
+    /// ⚠️ **声明式**的路径参数名（例如 `["path"]` / `["source", "destination"]`）。
+    ///
+    /// 为什么必须显式声明，而不是继续猜键名：路径是**审批与授权的作用域单位**。
+    /// "记住这次选择"记的就是这些路径；猜错了（例如漏掉 `destination`）
+    /// 会让记住的范围**比用户以为的大得多** —— 那是一个静默的越权。
+    /// 见 `CallPaths.extract(from:spec:)`。
+    public let pathParameters: [String]
+    /// 给模型的一个**最小可用示例**（docs/05 §8 四问之一）
+    public let example: String?
     public let concurrency: Concurrency
     public let isIdempotent: Bool
     public let riskLevel: RiskLevel
@@ -206,6 +215,8 @@ public struct ToolSpec: Sendable, Codable, Hashable {
         name: String,
         description: String,
         inputSchema: JSONSchema,
+        pathParameters: [String] = [],
+        example: String? = nil,
         concurrency: Concurrency = .parallelSafe,
         isIdempotent: Bool = true,
         riskLevel: RiskLevel = .safe,
@@ -216,12 +227,25 @@ public struct ToolSpec: Sendable, Codable, Hashable {
         self.name = name
         self.description = description
         self.inputSchema = inputSchema
+        self.pathParameters = pathParameters
+        self.example = example
         self.concurrency = concurrency
         self.isIdempotent = isIdempotent
         self.riskLevel = riskLevel
         self.needsApproval = needsApproval
         self.outputShape = outputShape
         self.requirements = requirements
+    }
+
+    /// 是否会改动文件系统
+    public var mutatesFileSystem: Bool {
+        requirements.contains(.fsWrite) || requirements.contains(.fsDelete)
+    }
+
+    /// 是否会在对话里新增调用（元工具）。
+    /// 元工具不碰文件，但会影响运行时的控制流，风险判定要单独看。
+    public var isMetaTool: Bool {
+        requirements.isEmpty && !mutatesFileSystem
     }
 
     public enum Concurrency: String, Sendable, Codable, Hashable {
@@ -453,4 +477,36 @@ public enum ToolName {
     public static let memorySave = "memory_save"
     public static let memorySearch = "memory_search"
     public static let memoryReflect = "memory_reflect"
+
+    /// **全部已登记的工具名**。
+    ///
+    /// ⚠️ 它是覆盖率检查的依据：`ToolRegistry.coverageIssues()` 断言
+    /// 这里登记的每一个名字都在注册表里有对应的 `ToolSpec`。
+    /// 加工具名却忘了加 spec，会在测试里立刻暴露 —— 而不是等到运行时
+    /// 模型调用一个"存在但没说明书"的工具、被策略引擎当成未知工具拒掉。
+    public static let all: [String] = [
+        // 文件与工作区
+        listDir, readFile, readArtifact, writeFile, editFile, applyPatch, deletePath,
+        movePath, copyPath, statPath, makeDir, setWorkspace,
+        // 检索
+        glob, grepSearch, findSymbol, semanticSearch, outlineFile,
+        // 执行
+        runPython, runJavaScript, runShell, runWasm, runTests, runBuild,
+        startJob, jobStatus, jobOutput, jobKill, sandboxSnapshot, sandboxRestore,
+        // Git
+        gitStatus, gitDiff, gitLog, gitShow, gitAdd, gitCommit, gitBranch, gitCheckout,
+        gitStash, gitClone, gitFetch, gitPull, gitPush, createPullRequest,
+        // 网络
+        fetchURL, searchWeb, httpRequest, downloadFile, openURL,
+        // 数据与文档
+        readTable, writeTable, readPDF, readDocx, readPptx,
+        imageResize, imageConvert, ocrImage, describeImage, renderChart, hashFile,
+        // iOS 原生
+        photosSearch, cameraCapture, calendarRead, calendarWrite, remindersRead, remindersWrite,
+        locationCurrent, clipboardRead, clipboardWrite, speechTranscribe, notifyUser, shortcutsRun,
+        // 编排与元工具
+        todoWrite, useSkill, searchSkills, spawnSubagent, sendSubagentMessage, interruptSubagent,
+        createGoal, updateGoal, getGoalTool, runWorkflow, askUser, returnFile,
+        memorySave, memorySearch, memoryReflect,
+    ]
 }

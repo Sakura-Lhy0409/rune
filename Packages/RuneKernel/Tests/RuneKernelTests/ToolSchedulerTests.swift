@@ -225,7 +225,7 @@ struct ToolSchedulerTests {
         +n
         """
         let c = call(ToolName.applyPatch, ["patch": .string(patchText)])
-        let paths = ToolScheduler.defaultPaths(c, registry[ToolName.applyPatch]!)
+        let paths = ToolScheduler.defaultPaths(c, registry[ToolName.applyPatch]!).paths
         #expect(paths.count == 3)
         #expect(paths.map(\.description).contains("/workspace/src/b.py"))
     }
@@ -243,7 +243,7 @@ struct ToolSchedulerTests {
         +new
         """
         let c = call(ToolName.applyPatch, ["patch": .string(patchText)])
-        let paths = ToolScheduler.defaultPaths(c, registry[ToolName.applyPatch]!)
+        let paths = ToolScheduler.defaultPaths(c, registry[ToolName.applyPatch]!).paths
         let target = try! VFSPath.parse("/workspace/src/target.py")
         #expect(paths.contains { ToolScheduler.pathsOverlap($0, target) },
                 "必须能发现补丁影响了 target.py")
@@ -252,13 +252,13 @@ struct ToolSchedulerTests {
     @Test("常见路径键名都能提取（path/file/target/paths[]）")
     func commonPathKeysExtracted() {
         let spec = registry[ToolName.readFile]!
-        #expect(ToolScheduler.defaultPaths(call(ToolName.readFile, ["path": "/workspace/a"]), spec).count == 1)
-        #expect(ToolScheduler.defaultPaths(call(ToolName.readFile, ["file": "/workspace/b"]), spec).count == 1)
-        #expect(ToolScheduler.defaultPaths(call(ToolName.readFile, ["file_path": "/workspace/c"]), spec).count == 1)
+        #expect(ToolScheduler.defaultPaths(call(ToolName.readFile, ["path": "/workspace/a"]), spec).paths.count == 1)
+        #expect(ToolScheduler.defaultPaths(call(ToolName.readFile, ["file": "/workspace/b"]), spec).paths.count == 1)
+        #expect(ToolScheduler.defaultPaths(call(ToolName.readFile, ["file_path": "/workspace/c"]), spec).paths.count == 1)
         let multi = ToolScheduler.defaultPaths(
             call(ToolName.readFile, ["paths": .array([.string("/workspace/x"), .string("/workspace/y")])]), spec
         )
-        #expect(multi.count == 2)
+        #expect(multi.paths.count == 2)
     }
 
     @Test("没有路径参数的调用不会误判为冲突")
@@ -373,3 +373,4 @@ struct ToolSchedulerTests {
         ))
     }
 }
+

@@ -264,7 +264,10 @@ public struct ApprovalBroker: Sendable {
         workspaceID: UUID? = nil,
         now: Date
     ) -> ApprovalTicket {
-        let resolvedPaths = paths ?? CallPaths.extract(from: call)
+        // ⚠️ 缺省必须**自动提取路径**：不提取的话，"记住选择"会退化成
+        //    对这个工具在整个工作区里的白名单 —— 比用户以为的范围大得多。
+        //    越出挂载点的路径不进 `paths`（那种调用在策略层就被拒了，走不到这里）。
+        let resolvedPaths = paths ?? CallPaths.extract(from: call).paths
         var ticket = ApprovalTicket(
             call: call,
             requirement: requirement,

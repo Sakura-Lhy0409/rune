@@ -47,13 +47,11 @@ public enum ToolScheduler {
     ///
     /// ⚠️ 必须返回**全部**路径，而不是第一个：`apply_patch` 一次可能改多个文件，
     /// 漏掉其中任何一个都会让冲突检测失效。
-    public typealias PathExtractor = @Sendable (ToolCall, ToolSpec) -> [VFSPath]
+    public typealias PathExtractor = @Sendable (ToolCall, ToolSpec) -> PathExtraction
 
-    /// 默认提取器：查常见键名 + 解析补丁正文
-    ///
-    /// 注意它**不需要 ToolSpec**（真正用到的是参数本身），所以拆出了 `CallPaths` 供其他模块复用。
-    public static let defaultPaths: PathExtractor = { call, _ in
-        CallPaths.extract(from: call)
+    /// 默认提取器：按 `ToolSpec` 声明的参数名 + 解析补丁正文
+    public static let defaultPaths: PathExtractor = { call, spec in
+        CallPaths.extract(from: call, spec: spec)
     }
 
     // MARK: 结果
@@ -95,7 +93,7 @@ public enum ToolScheduler {
     ) -> Schedule {
         var diagnostics: [String] = []
         var approvals: [ToolCall] = []
-        var runnable: [(call: ToolCall, spec: ToolSpec, paths: [VFSPath])] = []
+        var runnable: [(call: ToolCall, spec: ToolSpec, paths: PathExtraction)] = []
         var deferred: [ToolCall] = []
         var unknown: [ToolCall] = []
 
@@ -123,7 +121,7 @@ public enum ToolScheduler {
 
         // ---------- 第 2 步：预算截断 ----------
         var budgetLeft = config.maxCallsPerWave
-        var admitted: [(call: ToolCall, spec: ToolSpec, paths: [VFSPath])] = []
+        var admitted: [(call: ToolCall, spec: ToolSpec, paths: PathExtraction)] = []
         for item in runnable {
             if budgetLeft <= 0 {
                 deferred.append(item.call)
@@ -138,7 +136,7 @@ public enum ToolScheduler {
 
         // ---------- 第 3 步：分波 ----------
         var waves: [Wave] = []
-        var currentWave: [(call: ToolCall, spec: ToolSpec, paths: [VFSPath])] = []
+        var currentWave: [(call: ToolCall, spec: ToolSpec, paths: PathExtraction)] = []
 
         func flushWave() {
             guard !currentWave.isEmpty else { return }
@@ -198,12 +196,15 @@ public enum ToolScheduler {
     ///   3. **执行类工具与任何写操作冲突**（边跑测试边改文件 = 假失败）
     ///   4. 两个执行类工具互相冲突（同时跑两个脚本会争抢 CPU / 相互影响产物）
     static func conflicts(
-        _ a: (call: ToolCall, spec: ToolSpec, paths: [VFSPath]),
-        _ b: (call: ToolCall, spec: ToolSpec, paths: [VFSPath]),
+        _ a: (call: ToolCall, spec: ToolSpec, paths: PathExtraction),
+        _ b: (call: ToolCall, spec: ToolSpec, paths: PathExtraction),
         config: Config
     ) -> Bool {
         // 1. 并发属性
         guard a.spec.concurrency == .parallelSafe, b.spec.concurrency == .parallelSafe else { return true }
+
+        // ⚠️ 有"越出挂载点"的路径 → 保守起见当作冲突（它会走拒绝流程，不该被并行调度掩盖）
+        if !a.paths.outsideMounts.isEmpty || !b.paths.outsideMounts.isEmpty { return true }
 
         let aWrites = a.spec.requirements.contains(.fsWrite) || a.spec.requirements.contains(.fsDelete)
         let bWrites = b.spec.requirements.contains(.fsWrite) || b.spec.requirements.contains(.fsDelete)
@@ -219,8 +220,8 @@ public enum ToolScheduler {
 
         // 4. 路径重叠
         if aWrites || bWrites {
-            for pa in a.paths {
-                for pb in b.paths where pathsOverlap(pa, pb) { return true }
+            for pa in a.paths.paths {
+                for pb in b.paths.paths where pathsOverlap(pa, pb) { return true }
             }
         }
 
@@ -240,36 +241,140 @@ public enum ToolScheduler {
 // 三处用不同的实现会出问题——尤其审批代理：
 // **忘了传路径会让"记住选择"退化成整个工具的白名单**（比用户以为的范围大得多）。
 
+/// 一次调用的路径提取结果。
+///
+/// ⚠️ 为什么需要 `outsideMounts` 而不是只返回一个 `[VFSPath]`：
+///
+/// 模型写的路径有两种形态 —— `/workspace/src/a.py`（绝对，带挂载点）和 `src/a.py`（相对）。
+/// 而**相对路径才是绝大多数**。早期实现直接用 `VFSPath.parseOrNil` 解析，
+/// 相对路径一律解析失败 → 返回空数组 → 上层看到的是"这次调用不涉及任何路径"。
+/// 后果是**静默的**：
+///   * 策略引擎跳过路径范围判定（`path == nil` 等于"没有路径参数"），越权写入被放行；
+///   * "记住选择"退化成整个工具的白名单；
+///   * 冲突检测失效。
+///
+/// 另一类更微妙：`/etc/passwd` 这种"绝对但挂载点不认识"的路径，
+/// 如果按相对路径处理会被悄悄映射成 `/workspace/etc/passwd` —— 检查的路径和工具实际
+/// 操作的路径不是同一个，那是典型的**混淆代理**漏洞。
+/// 所以它必须被单独标成"越出挂载点"，由上层**直接拒绝**。
+public struct PathExtraction: Sendable, Hashable {
+    /// 落在某个挂载点内的路径（相对路径已按工作区根解析）
+    public var paths: [VFSPath]
+    /// 越出所有挂载点的路径原文（**必须被拒**，不能当作"没有路径参数"）
+    public var outsideMounts: [String]
+    /// 是否发生了 `..` 钳制（模型想往工作区外走，被拉回来了）
+    public var wasClamped: Bool
+
+    public init(paths: [VFSPath] = [], outsideMounts: [String] = [], wasClamped: Bool = false) {
+        self.paths = paths
+        self.outsideMounts = outsideMounts
+        self.wasClamped = wasClamped
+    }
+
+    public var isEmpty: Bool { paths.isEmpty && outsideMounts.isEmpty }
+
+    /// 去重（同一个路径出现两次不必检查两遍）
+    public var deduped: PathExtraction {
+        var seen = Set<String>()
+        let unique = paths.filter { seen.insert($0.description).inserted }
+        var seenOutside = Set<String>()
+        let uniqueOutside = outsideMounts.filter { seenOutside.insert($0).inserted }
+        return PathExtraction(paths: unique, outsideMounts: uniqueOutside, wasClamped: wasClamped)
+    }
+}
+
 public enum CallPaths {
 
-    /// 常见路径参数键名
+    /// 常见路径参数键名（**兜底用**：真实工具应当在 `ToolSpec.pathParameters` 里显式声明）
     public static let pathKeys = ["path", "file", "file_path", "target", "source", "destination", "to"]
     /// 数组形式的路径参数键名
     public static let pathArrayKeys = ["paths", "files", "targets"]
 
-    /// 提取**全部**受影响路径（不需要 ToolSpec）
-    public static func extract(from call: ToolCall) -> [VFSPath] {
-        guard let obj = try? call.arguments().objectValue else { return [] }
-        var paths: [VFSPath] = []
+    /// **唯一的路径提取实现。**
+    ///
+    /// - Parameters:
+    ///   - spec: 有它就用它声明的参数名（精确）；没有就退回猜常见键名（兜底）
+    ///   - base: 相对路径的解析基准，默认工作区根
+    public static func extract(
+        from call: ToolCall,
+        spec: ToolSpec? = nil,
+        base: VFSPath = VFSPath(mount: .workspace)
+    ) -> PathExtraction {
+        guard let obj = try? call.arguments().objectValue else { return PathExtraction() }
 
-        for key in pathKeys {
-            if let raw = obj[key]?.stringValue, let p = VFSPath.parseOrNil(raw) {
-                paths.append(p)
-            }
-        }
-        for key in pathArrayKeys {
-            if let arr = obj[key]?.arrayValue {
-                for item in arr {
-                    if let raw = item.stringValue, let p = VFSPath.parseOrNil(raw) {
-                        paths.append(p)
-                    }
+        // ---------- 参数名：优先走声明 ----------
+        let declaredKeys: [String]
+        let declaredArrayKeys: [String]
+        if let spec, !spec.pathParameters.isEmpty {
+            declaredKeys = spec.pathParameters
+            var arrays = spec.pathParameters.filter { pathArrayKeys.contains($0) }
+            for key in spec.pathParameters where !arrays.contains(key) {
+                if let schema = propertySchema(spec.inputSchema, key), case .array = schema {
+                    arrays.append(key)
                 }
             }
+            declaredArrayKeys = arrays
+        } else {
+            declaredKeys = pathKeys + pathArrayKeys
+            declaredArrayKeys = pathArrayKeys
         }
-        // 补丁正文里的文件段（**这是最容易被漏掉的一类**）
+
+        var raw: [String] = []
+        for key in declaredKeys where !declaredArrayKeys.contains(key) {
+            if let value = obj[key]?.stringValue { raw.append(value) }
+        }
+        for key in declaredArrayKeys {
+            if let array = obj[key]?.arrayValue {
+                raw.append(contentsOf: array.compactMap(\.stringValue))
+            }
+        }
+
+        // ---------- 补丁正文里的文件段（**最容易被漏掉的一类**） ----------
         if let patchText = obj["patch"]?.stringValue, let patch = try? Patch.parse(patchText) {
-            paths.append(contentsOf: patch.files.map(\.path))
+            raw.append(contentsOf: patch.files.map(\.path.description))
         }
-        return paths
+
+        return resolve(raw, base: base)
+    }
+
+    /// 把一批原始路径解析成"挂载点内 + 越界"两部分
+    public static func resolve(_ raw: [String], base: VFSPath = VFSPath(mount: .workspace)) -> PathExtraction {
+        var paths: [VFSPath] = []
+        var outside: [String] = []
+        var clamped = false
+
+        for text in raw where !text.isEmpty {
+            // 绝对路径且挂载点认识 → 直接用
+            if text.hasPrefix("/"), let absolute = VFSPath.parseOrNil(text) {
+                paths.append(absolute)
+                continue
+            }
+            // 绝对但挂载点不认识（`/etc/passwd`）→ **越界，交给上层拒绝**
+            if text.hasPrefix("/") {
+                outside.append(text)
+                continue
+            }
+            // 相对路径 → 按基准解析，`..` 被钳制在挂载点内
+            let resolved = VFSPath.resolve(base: base, relative: text)
+            if resolved.clamped { clamped = true }
+            paths.append(resolved.path)
+        }
+
+        return PathExtraction(paths: paths, outsideMounts: outside, wasClamped: clamped).deduped
+    }
+
+    /// schema 里某个属性的类型（用于判断它是不是数组）
+    static func propertySchema(_ schema: JSONSchema, _ key: String) -> JSONSchema? {
+        guard case .object(let props, _, _) = schema else { return nil }
+        return props[key]
+    }
+
+    /// 便捷：只要挂载点内的路径（供调度器的冲突检测等使用）
+    public static func paths(
+        from call: ToolCall,
+        spec: ToolSpec? = nil,
+        base: VFSPath = VFSPath(mount: .workspace)
+    ) -> [VFSPath] {
+        extract(from: call, spec: spec, base: base).paths
     }
 }
