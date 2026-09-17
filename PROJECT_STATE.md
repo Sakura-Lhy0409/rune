@@ -65,7 +65,7 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 
 | 包 | 状态 | 本机可测 |
 |---|---|---|
-| `RuneKernel` | ✅ **27 个源文件 / 540 测试** | ✅ |
+| `RuneKernel` | ✅ **28 个源文件 / 540 测试** | ✅ |
 | `RuneNet` `RuneStore` `RuneVM` `RuneBench` `RuneGateway` `RuneContext` `RuneCore` `RuneTools` `RuneMCP` `RuneUI` | ⬜ 骨架（`Package.swift` + 带实现清单的占位文件） | 部分 |
 
 ---
@@ -165,7 +165,7 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 
 ### ⚠️ 现状：Windows 上能做的纯逻辑已经做完
 
-`RuneKernel` 现在有 **27 个源文件、540 项测试**，覆盖：值类型与协议、补丁引擎、检索、
+`RuneKernel` 现在有 **28 个源文件、540 项测试**，覆盖：值类型与协议、补丁引擎、检索、
 网关（协议适配 + 流拼装 + 成本）、策略引擎、Turn 循环与崩溃恢复、波次调度、
 计划引擎、审批代理、目标引擎、**修正性重试与协议不变式**。
 
@@ -267,7 +267,7 @@ D:\项目\ios平台agent\          （构建时请用 C:\Users\MSI-NB\rune-ws）
 │  └─ 附录A / 附录B          渠道事实表 / 技术选型核实表
 ├─ research/                 取证材料（465 份，非交付物，**刻意入库**）
 └─ Packages/
-   ├─ RuneKernel/            ✅ 零依赖核心（27 源文件 / 540 测试全绿）
+   ├─ RuneKernel/            ✅ 零依赖核心（28 源文件 / 540 测试全绿）
    │  ├─ Package.swift       仅供 macOS 使用；本机走 rune.ps1
    │  ├─ Sources/RuneKernel/        ← 25 个 .swift（清单见下）
    │  └─ Tests/RuneKernelTests/     ← 13 个 .swift
@@ -281,11 +281,11 @@ D:\项目\ios平台agent\          （构建时请用 C:\Users\MSI-NB\rune-ws）
 | 值类型与安全 | `JSONValue` `SHA256` `Trust` `Content` `Tool` `Capability` `Errors` |
 | 编辑与检索 | `TextPatch` `GlobMatcher` `IgnoreRules` `GrepEngine` |
 | 网关 | `ChatRequest` `StreamParsing` `ProtocolEncoders` `ProtocolDecoders` `ToolCallAssembler` `ProviderQuirks` |
-| 运行时 | `TurnRunner` `ToolScheduler` `PolicyEngine` `Plan` `Event` `Correction` |
+| 运行时 | `TurnRunner` `ToolScheduler` `PolicyEngine` `Plan` `Event` `Correction` `Context` `ToolRegistry` |
 | 编排 | `PlanEngine` `ApprovalBroker` `GoalEngine` |
 
 **测试文件**：`JSONAndHashing` `Security` `RuntimeModel` `Patch` `Search` `Gateway` `Policy`
-`TurnRunner` `ToolScheduler` `Protocol` `Planning` `GoalEngine` `Correction`
+`TurnRunner` `ToolScheduler` `Protocol` `Planning` `GoalEngine` `Correction` `Context` `ToolRegistry`
 ---
 
 ## 11. 里程碑验收标准（摘录自 [14](docs/14-工程路线图与测试策略.md)）
