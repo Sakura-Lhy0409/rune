@@ -245,9 +245,8 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 
 ```
 执行        ❌ fork/exec/posix_spawn   ❌ JIT   ❌ dlopen 下载的 dylib
-文件        ✅ 仅容器内 + 用户显式授权的目录（security-scoped bookmark）
-后台        ⏱ BGAppRefresh 30s · 静默推送 30s/每小时2-3条 · 延续处理任务"数分钟或更久"
-            ⏱ Live Activity 最长 12 小时
+文件        ✅ 仅容器内 + 用户显式授权的目录（security-scoped bookmark）。⚠️ iOS 文件名**大小写不敏感**（T34）
+后台        ⏱ BGAppRefresh 30s · 静默推送 30s/每小时2-3条 · 延续处理任务"数分钟或更久" · Live Activity ≤12h
 端侧模型    4096 token/会话（含指令与工具 schema）· 建议工具 ≤3-5 个 · 内存实测约 3.1GB（6GB 机型）
 存储        ❌ unicode61 分词   ✅ CJK tokenizer / trigram   ⚠️ sqlite-vec 需静态注册
 体积        内嵌 CPython ⇒ App 约 1-2GB（不可优化，只能接受）
