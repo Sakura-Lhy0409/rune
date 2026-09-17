@@ -32,17 +32,17 @@
 |---|---|
 | **更新日期** | 2026-09-17 |
 | **当前阶段** | **M0 地基** |
-| **当前里程碑** | M0-4：`RuneGateway` 纯逻辑（`ToolCallAssembler` + quirks + 缓存记账） |
-| **上一个完成的里程碑** | ✅ **M0-3：检索子系统（glob/ignore/grep）+ 10 个包骨架**（172 测试全绿） |
-| **已完成里程碑** | ✅ M0-1 Kernel 核心（85）→ ✅ M0-2 补丁引擎（122）→ ✅ M0-3 检索子系统（**172**） |
+| **当前里程碑** | M0-5：`PolicyEngine` 策略引擎（纯逻辑） |
+| **上一个完成的里程碑** | ✅ **M0-4：网关纯逻辑（ToolCallAssembler + JSONRepair + ProviderQuirks + 成本计算）**（212 测试全绿） |
+| **已完成里程碑** | ✅ M0-1 Kernel（85）→ ✅ M0-2 补丁引擎（122）→ ✅ M0-3 检索（172）→ ✅ M0-4 网关纯逻辑（**212**） |
 | **阻塞项** | 无 |
-| **本机可验证范围** | ✅ 平台无关的 Swift 代码（Kernel / 补丁引擎 / 检索 / 网关逻辑 / 策略引擎）<br>❌ iOS 专属（UI / Live Activity / Core ML / VFS 真实文件系统 / 沙箱 / GRDB）—— 需 macOS |
+| **本机可验证范围** | ✅ 平台无关的 Swift 代码（Kernel / 补丁 / 检索 / 网关逻辑 / 策略引擎）<br>❌ iOS 专属（UI / Live Activity / Core ML / VFS 真实文件系统 / 沙箱 / GRDB）—— 需 macOS |
 
 ### 进度条
 
 ```
 设计文档      ████████████████████ 100%
-M0 地基       █████████████░░░░░░░  65%   ← 当前
+M0 地基       █████████████████░░░  85%   ← 当前
 M1 可用内核   ░░░░░░░░░░░░░░░░░░░░░   0%
 M2 移动体验   ░░░░░░░░░░░░░░░░░░░░░   0%
 M3 多渠道     ░░░░░░░░░░░░░░░░░░░░░   0%
@@ -143,6 +143,11 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 | C5.3 | ├ `PathFilter`（两层忽略 + include/exclude） | 同上 | 项目规则一律生效；**内置默认在显式 include 时让位** |
 | C5.4 | └ `GrepEngine`（搜索核心） | `GrepEngine.swift` | 字面量/正则、整词、**字面量预筛**、二进制跳过、上下文行、三种输出模式、**预算截断且如实告知**、确定性排序、中文定位 |
 | C6 | ✅ **10 个包的骨架** | `Packages/Rune{Net,Store,VM,Bench,Gateway,Context,Core,Tools,MCP,UI}/` | 每个含正确的 `Package.swift`（依赖声明已校验）+ 带**实现清单**的占位文件 |
+| C7 | ✅ **网关纯逻辑** | `ToolCallAssembler.swift` · `ProviderQuirks.swift` | **40 项新测试**（累计 212 全绿） |
+| C7.1 | ├ `JSONRepair`（修复模型给的坏 JSON） | 同上 | 截断/未闭合/尾逗号/悬空键/尾转义/中文标点；**修不好返回 nil**（交由修正性重试） |
+| C7.2 | ├ `ToolCallAssembler`（分片拼装） | 同上 | 四种协议形态；**并行 index 交错**；7 种脏情况；**绝不重复产出**；诊断可观测 |
+| C7.3 | ├ `ProviderQuirks`（渠道差异声明） | `ProviderQuirks.swift` | 协议族 / 思考链字段 / **回传策略** / 缓存风格 / 流式用量 / 坑清单（UI 可展示） |
+| C7.4 | └ `CostCalculator`（缓存经济学） | 同上 | 缓存读 0.1× / 写 1.25× / 低谷折扣 / 长上下文倍率 / **省下多少钱**（正反馈） |
 
 ---
 
@@ -150,30 +155,33 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 
 | 项 | 状态 | 备注 |
 |---|---|---|
-| M0-4 网关纯逻辑 | 🚧 即将开始 | 见 §7 第 1 项（本机可测，价值最高） |
-| M0-5 策略引擎 | ⬜ 未开始 | 见 §7 第 2 项 |
+| M0-5 策略引擎 | 🚧 即将开始 | 见 §7 第 1 项（M0 的最后一块纯逻辑） |
+| M0 出口验收 | ⬜ 未开始 | 需要"模拟模型"（cassette 回放），见 §7 第 3 项 |
 
 ---
 
 ## 7. 下一步（按优先级，可直接执行）
 
-### 立即（M0-4，纯逻辑、本机可测，**设计文档里最容易写错的地方**）
-1. **`ToolCallAssembler`**（放在 `RuneKernel` 内，供 `RuneGateway` 使用）：
-   - 三种协议形态的参数拼装：OpenAI 标准分片（按 `index` 拼接 `arguments`）/ Anthropic blocks（`content_block_start` → `input_json_delta` → `stop`）/ Gemini 整块（`functionCall` 一次性给全）
-   - **7 种脏情况**：空参数、JSON 被截断（`finish_reason == length`）、`name` 多次出现且不同、工具名幻觉、参数不合 schema、流在工具调用中途断开、`finish_reason` 缺失
-   - JSON 修复（补括号、去尾逗号）
-2. **`ProviderQuirks` + 协议族枚举**：把"新渠道接入不改代码"变成数据结构（参考 `docs/附录A` §2.6 的三张映射表：思考链字段、鉴权形态、推理参数旋钮）。
-3. **缓存经济学记账**：写入 1.25× / 读取 0.1× / 省下多少钱；各厂商缓存机制差异（附录A §8 决策表）。
+### 立即（M0-5，纯逻辑、本机可测，**M0 的最后一块纯逻辑**）
+1. **`PolicyEngine`**（放在 `RuneKernel` 内）：
+   - `ToolSpec.requirements` × `CapabilityToken.scopes` → `CapabilityDecision`（allowed / requiresApproval / denied / humanOnly）
+   - **人类专属区**判定（策略文件 / 信任档 / 凭据 / 审计日志 → 任何来源都拒绝 + 记录安全事件）
+   - **污点规则**：不可信内容派生的动作（URL / 命令 / 路径）→ 强制确认，**即使该域名已在令牌内**
+   - 审批分级（低=内联允许 / 中=一键 / 高=展示细节 / 极高=生物识别 / 不可逆=生物识别 + 确认词）
+   - 出口校验（含 SSRF 防护：私有网段、DNS 重绑定、重定向链）
 
-### 随后（M0-5，纯逻辑、本机可测）
-4. **`PolicyEngine`**：能力令牌判定 + 人类专属区 + 污点规则 + 审批分级 + 出口白名单（`docs/09 §3–§4`）。
-5. **路由策略与降级链**：任务类型 → 模型；降级必须对用户可见。
+### 随后（M0 收尾）
+2. **路由策略与降级链**：任务类型 → 模型（`ProviderQuirks` 驱动）；**降级必须对用户可见**。
+3. **M0 出口验收**：在测试壳里跑通"模型自主修一个失败单测 + 中途被杀后正确恢复"。
+   ⚠️ 必须用**模拟模型（cassette 回放）**，不在 CI 里联网花钱。
+4. **设计与实现的一致性复核**：把实现中做出的新决策回写进对应设计文档
+   （已知待回写：**写权限不蕴含删除权限** → `docs/09`）。
 
 ### 需要 macOS 才能做（不要在 Windows 上浪费时间）
-6. `RuneStore`（GRDB + 迁移 + 哈希链落盘）—— ⚠️ FTS5 必须用 CJK 分词器或 `trigram`
-7. `RuneNet`（SSE 解析 + 断流重连 + 出口代理）
-8. `RuneBench`（VFS 真实文件系统映射 + security-scoped bookmark + 原生 CPython 集成）
-9. `RuneVM`（WasmKit 沙箱）
+5. `RuneStore`（GRDB + 迁移 + 哈希链落盘）—— ⚠️ FTS5 必须用 CJK 分词器或 `trigram`
+6. `RuneNet`（SSE 解析 + 断流重连 + 出口代理）
+7. `RuneBench`（VFS 真实文件系统映射 + security-scoped bookmark + 原生 CPython 集成）
+8. `RuneVM`（WasmKit 沙箱）
 10. 任何 SwiftUI / Live Activity / Core ML
 
 ---
@@ -208,6 +216,10 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 | **T10** | ⚠️ **Swift 原生字符串 `#"…"#` 的定界符是 `"#`（引号在前）**，写成 `#"a\(#"` 会被认为是**未闭合**（因为 `\(` 后面是 `#` 再 `"`，顺序反了） | 写正则字面量用普通字符串 + 双反斜杠（`"return round\\("`），别用 `#"…"#` 混排转义 |
 | **T11** | 测试夹具的字典 key 与虚拟路径不一致 → 读不到文件 → 空结果 → `matches[0]` **越界崩溃** | `GrepFileSource.inMemory` 已把 `src/a.py` 与 `/workspace/src/a.py` 两种 key 归一化；写夹具不必记挂载点前缀 |
 | **T12** | 大小写不敏感匹配时手写 `line.lowercased()` 再取下标 → 某些字符 lower 后长度变化会导致**下标错位** | 用 Foundation 的 `range(of:options:.caseInsensitive)`，下标记在原串上（`GrepEngine.countMatches` 已如此） |
+| **T13** | ⚠️ `dict[i]?.x = cond ? dict[i]?.x : y` 会触发 **ExclusivityViolation**（同一表达式既读又写同一下标） | 先把旧值取到局部变量，再赋值 |
+| **T14** | `#expect(x.contains(where: \.isFatal))` 在测试宏里被当成可能抛错 → 编译失败 | 写 `#expect(x.contains { $0.isFatal })` |
+| **T15** | 把诊断信息追加到**局部副本**却忘了写回结构体 → 返回值里有、`allIssues`/`diagnostics` 里没有 | 修 bug 后追加诊断时，务必 `partial.issues = issues` 再写回容器（`ToolCallAssembler.emit` 已如此） |
+| **T16** | 尾逗号可能出现在**闭合括号之前**（`{"a":1,}`），只看字符串末尾会漏掉 | 单遍扫描 + 向后跳过空白判断下一个非空白字符是否为 `}`/`]` |
 
 ---
 
@@ -256,13 +268,16 @@ D:\项目\ios平台agent\          （构建时请用 C:\Users\MSI-NB\rune-ws）
    │  │   ├─ TextPatch.swift      ⭐ 补丁引擎
    │  │   ├─ GlobMatcher.swift    ⭐ 通配匹配
    │  │   ├─ IgnoreRules.swift    ⭐ gitignore 语义 + 两层 PathFilter
-   │  │   └─ GrepEngine.swift     ⭐ 搜索核心（预筛 / 二进制跳过 / 预算截断）
+   │  │   ├─ GrepEngine.swift     ⭐ 搜索核心（预筛 / 二进制跳过 / 预算截断）
+   │  │   ├─ ToolCallAssembler.swift ⭐ 流式工具调用拼装 + JSON 修复
+   │  │   └─ ProviderQuirks.swift    ⭐ 渠道差异声明 + 价格与成本计算
    │  └─ Tests/RuneKernelTests/
    │      ├─ JSONAndHashingTests.swift
    │      ├─ SecurityTests.swift
    │      ├─ RuntimeModelTests.swift
    │      ├─ PatchTests.swift         37 项补丁引擎测试
-   │      └─ SearchTests.swift        50 项检索测试
+   │      ├─ SearchTests.swift        50 项检索测试
+   │      └─ GatewayTests.swift       40 项网关测试
    └─ Rune{Net,Store,VM,Bench,Gateway,Context,Core,Tools,MCP,UI}/   ⬜ 骨架（含实现清单）
 ```
 
