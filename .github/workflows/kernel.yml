@@ -1,0 +1,64 @@
+# RuneKernel —— 跨平台构建与测试
+#
+# ⚠️ 这一条 CI 的意义不只是"跑测试"，而是**把一句架构承诺变成断言**：
+#
+#   RuneKernel 只依赖 Foundation 与标准库，**不得 import 任何 Apple 专属框架**
+#   （见 docs/03 §3；CryptoKit 是 Apple 专有的，所以我们自己实现了 SHA-256）
+#
+# 在 ubuntu-latest 上构建，就让这句话**可被自动守住** ——
+# 谁在里面写了 `import UIKit` 或 `import CryptoKit`，这一条立刻红。
+# 在没有 Mac 的开发环境里，这是唯一能自动守住它的地方（见 docs/16）。
+
+name: kernel
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Packages/RuneKernel/**'
+      - '.github/workflows/kernel.yml'
+  pull_request:
+    paths:
+      - 'Packages/RuneKernel/**'
+      - '.github/workflows/kernel.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: kernel-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ---------- 纯逻辑：两个平台都要过 ----------
+  test:
+    name: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false          # 一个平台失败不要掩盖另一个平台的结果
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 显示 Swift 版本
+        run: swift --version
+
+      # ⚠️ 这里刻意用**标准 SwiftPM**，而不是本机那个 Tools/rune.ps1。
+      #    rune.ps1 是因为本机 SwiftPM 的子进程执行层坏了才存在的（PROJECT_STATE §3 E1）；
+      #    在真正的 macOS / Linux 上，标准命令才是该被验证的那条路径。
+      #    也就是说：**这一条同时验证了 Package.swift 本身是对的。**
+      # ⚠️ 走 `Tools/ci.sh`（同一个脚本在本地也能跑），而不是把命令抄一份到这里。
+      #    命令抄两遍就一定会分叉：CI 绿但本地红、或者反过来。
+      - name: 构建与测试
+        run: bash Tools/ci.sh kernel
+
+  # ---------- 零依赖审计 ----------
+  dependency-audit:
+    name: 零依赖审计
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # ⚠️ 审计逻辑只有一份实现（`Tools/ci.sh audit`）——
+      #    它在本机（用 git 自带的 bash）也跑得起来，所以"CI 到底检查了什么"是可本地复核的。
+      - name: 零依赖审计
+        run: bash Tools/ci.sh audit

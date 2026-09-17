@@ -1,0 +1,126 @@
+# Rune iOS App —— XcodeGen 工程定义
+#
+# ⚠️ 为什么用 XcodeGen 而不是把 .xcodeproj 提交进仓库：
+#   1. project.pbxproj 是**没法人工解冲突**的格式。两个人各加一个文件，
+#      合并时会变成一段谁也不敢改的乱码。
+#   2. 在没有 Mac 的开发环境里（见 docs/16），工程文件是**在 CI 上生成**的 ——
+#      仓库里只留这份能读、能 review、能 diff 的 YAML。
+#
+# 生成：`cd Apps/Rune && xcodegen generate`
+
+name: Rune
+options:
+  bundleIdPrefix: dev.rune
+  deploymentTarget:
+    # ⚠️ iOS 18 是硬下限：WasmKit 的 Package.swift 声明 platforms: [.iOS(.v18)]
+    #    （见 docs/附录B §11.1）。若将来要下沉到 iOS 16/17，必须退回 wasm3。
+    iOS: '18.0'
+  createIntermediateGroups: true
+  # 少生成一堆没人看的注释与空组
+  generateEmptyDirectories: false
+
+settings:
+  base:
+    SWIFT_VERSION: '6.0'
+    # Swift 6 语言模式：并发安全是编译期强制的，不靠自觉
+    SWIFT_STRICT_CONCURRENCY: complete
+    # 手机上的体积与启动时间都靠它
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+    DEAD_CODE_STRIPPING: YES
+    # 关掉只对 Xcode 预览/调试有用的东西，Release 构建更快
+    SWIFT_COMPILATION_MODE: wholemodule
+
+packages:
+  RuneKernel:
+    path: ../../Packages/RuneKernel
+  RuneCore:
+    path: ../../Packages/RuneCore
+  RuneStore:
+    path: ../../Packages/RuneStore
+  RuneNet:
+    path: ../../Packages/RuneNet
+  RuneGateway:
+    path: ../../Packages/RuneGateway
+  RuneContext:
+    path: ../../Packages/RuneContext
+  RuneBench:
+    path: ../../Packages/RuneBench
+  RuneTools:
+    path: ../../Packages/RuneTools
+  RuneVM:
+    path: ../../Packages/RuneVM
+  RuneMCP:
+    path: ../../Packages/RuneMCP
+  RuneUI:
+    path: ../../Packages/RuneUI
+
+targets:
+  Rune:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sources
+    dependencies:
+      # ⚠️ 只依赖到已经真的能跑的那一层。
+      #    先把内核装到手机上跑通，再一层一层往上接 ——
+      #    在没有 Mac、每次验证都要走 CI 的情况下，
+      #    "一次接十个包"意味着"一次有十个地方可能错"。
+      - package: RuneKernel
+    info:
+      path: Info.plist
+      properties:
+        CFBundleDisplayName: Rune
+        CFBundleShortVersionString: '0.1.0'
+        CFBundleVersion: '1'
+        UILaunchScreen:
+          UIColorName: ''
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        # ⚠️ 权限描述必须**在第一次用到之前**就写全。
+        #    少一条的表现是**运行到那一步直接崩**，而且模拟器上常常不崩、只有真机崩。
+        #    现在 App 还用不到这些，但提前写清楚比装到手机上才发现要好。
+        NSPhotoLibraryUsageDescription: Rune 需要读取你选中的照片作为任务输入。
+        NSPhotoLibraryAddUsageDescription: Rune 需要把生成的图片保存到你的相册。
+        NSCameraUsageDescription: Rune 需要拍照作为任务输入。
+        NSMicrophoneUsageDescription: Rune 需要录音并做端侧语音转写。
+        NSSpeechRecognitionUsageDescription: Rune 需要把你说的内容转成文字。
+        NSLocationWhenInUseUsageDescription: Rune 需要在你明确要求时获取位置。
+        NSCalendarsUsageDescription: Rune 需要读取或创建日程。
+        NSRemindersUsageDescription: Rune 需要读取或创建提醒事项。
+        NSContactsUsageDescription: Rune 需要在你明确要求时检索通讯录。
+        # ⚠️ ITSAppUsesNonExemptEncryption：不用它就要每次上传都被问一遍
+        ITSAppUsesNonExemptEncryption: false
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.rune.agent
+        TARGETED_DEVICE_FAMILY: '1,2'    # iPhone + iPad
+        SUPPORTS_MACCATALYST: NO
+        # 前台跑测试/构建时不要带调试符号进 Release
+        SWIFT_ACTIVE_COMPILATION_CONDITIONS: $(inherited)
+
+  RuneUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: UITests
+    dependencies:
+      - target: Rune
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.rune.agent.uitests
+        TEST_TARGET_NAME: Rune
+
+schemes:
+  Rune:
+    build:
+      targets:
+        Rune: all
+        RuneUITests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - RuneUITests

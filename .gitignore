@@ -11,6 +11,22 @@ ModuleCache/
 # 由 rune.ps1 生成的测试入口（每次构建重新生成）
 TestRunner.swift
 
+# ---------- iOS App（由 CI 上的 XcodeGen 生成，见 docs/16）----------
+#
+# ⚠️ `Rune.xcodeproj` 是**生成物**，不进仓库。
+#    理由：project.pbxproj 是没法人工解冲突的格式；两个人各加一个文件，
+#    合并时会变成一段谁也不敢改的乱码。真相源是 `Apps/Rune/project.yml`。
+Apps/Rune/Rune.xcodeproj/
+Apps/Rune/Info.plist          # 由 project.yml 的 info: 段生成
+Apps/Rune/build/
+Apps/Rune/ipa/
+Apps/Rune/*.ipa
+Apps/Rune/TestResults.xcresult
+*.xcuserdatad/
+xcuserdata/
+DerivedData/
+*.xcresult
+
 # 编辑器 / 系统
 .DS_Store
 Thumbs.db

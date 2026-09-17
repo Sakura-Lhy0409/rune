@@ -1,0 +1,174 @@
+# Rune —— iOS 构建、测试与"可直接装机"的产物
+#
+# 设计依据见 docs/16-无Mac开发与验证路径.md。
+#
+# 这条流程解决的是"没有 Mac 怎么做出能装到 iPhone 上的 App"：
+#   1. 在 macOS 运行器上构建全部包并跑测试（真正的 Apple SDK）
+#   2. 用 XcodeGen 从 project.yml 生成 .xcodeproj（仓库里不存二进制工程文件）
+#   3. **未签名**构建 App，包成 .ipa → 下载到 Windows → 用 Sideloadly 签名装机
+#
+# ⚠️ 为什么是"未签名"而不是"签好名"：
+#   免费 Apple ID 的签名是**按设备+按人**的，没有第二台 Mac 就拿不到那个证书。
+#   所以 CI 只负责产出**干净的可执行产物**，签名交给 Windows 上的 Sideloadly
+#   （它用你自己的 Apple ID 在本地重签）。带错误签名的 IPA 反而会装不上。
+
+name: ios
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ios-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # ⚠️ Xcode 版本**应当固定**：macos-latest 会随 GitHub 升级而换 Xcode，
+  #    某天构建突然挂了却找不到原因 —— 那是这类流水线最常见的"灵异事件"。
+  #
+  #    做法：先在仓库 Settings → Variables 里设一个 `XCODE_VERSION`（例如 `16.4`），
+  #    没设时退化成 `latest-stable`（这样第一次跑不会因为"固定到了一个 runner 上没有的版本"而失败）。
+  #    等第一次绿了之后，把它设成那个具体版本，之后就只会因为**我们的**改动而红。
+  XCODE_VERSION: ${{ vars.XCODE_VERSION || 'latest-stable' }}
+  SCHEME: Rune
+  BUNDLE_ID: dev.rune.agent
+
+jobs:
+  # ---------- 1. 全部包：构建 + 测试 ----------
+  packages:
+    name: 包构建与测试
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 选择 Xcode ${{ env.XCODE_VERSION }}
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: ${{ env.XCODE_VERSION }}
+
+      - name: 环境信息
+        run: |
+          swift --version
+          xcodebuild -version
+          xcrun simctl list devices available | head -30
+
+      # ⚠️ 逐个包构建，而不是搞一个汇总的 Package.swift：
+      #    汇总 package 一旦 manifest 有错，是"整个依赖图加载失败"这种没法定位的报错；
+      #    逐个包则能直接指出"哪个包的 Package.swift 有问题"。
+      #    （这些 manifest 是在 Windows 上手写的，从未被真正的 SwiftPM 解析过 ——
+      #      本机 SwiftPM 的子进程执行层是坏的，见 PROJECT_STATE §3 E1。）
+      # 与本地同一条命令（`Tools/ci.sh`），避免"CI 绿本地红"这种分叉
+      - name: 构建并测试所有包
+        run: bash Tools/ci.sh all
+
+  # ---------- 2. App：生成工程 → 构建 → 打包成可侧载的 ipa ----------
+  app:
+    name: App 构建与打包
+    runs-on: macos-latest
+    needs: packages
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 选择 Xcode ${{ env.XCODE_VERSION }}
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: ${{ env.XCODE_VERSION }}
+
+      # XcodeGen 把 project.yml（人能读、能 review、能解冲突）变成 .xcodeproj。
+      # 仓库里因此**不需要存** project.pbxproj —— 那玩意儿的冲突是没法人工解决的。
+      - name: 安装 XcodeGen
+        run: brew install xcodegen
+
+      - name: 生成 Xcode 工程
+        working-directory: Apps/Rune
+        run: xcodegen generate
+
+      - name: 构建 App（未签名）
+        working-directory: Apps/Rune
+        run: |
+          xcodebuild build \
+            -project Rune.xcodeproj \
+            -scheme "$SCHEME" \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY=""
+
+      # 未签名 .app → Payload/Rune.app → zip 成 .ipa。
+      # Sideloadly 认这个结构，并会用自己的证书重签。
+      - name: 打包成 .ipa
+        working-directory: Apps/Rune
+        run: |
+          set -euo pipefail
+          APP=$(find build/Build/Products/Release-iphoneos -maxdepth 1 -name '*.app' | head -1)
+          if [ -z "$APP" ]; then echo "::error::没有找到 .app 产物"; exit 1; fi
+          echo "产物：$APP"
+          mkdir -p ipa/Payload
+          cp -R "$APP" ipa/Payload/
+          # 侧载前把自己带的签名清掉：Sideloadly 要签的是"干净的产物"，
+          # 带着一段无效签名的 App 反而会在重签时报错。
+          rm -rf ipa/Payload/*.app/_CodeSignature ipa/Payload/*.app/embedded.mobileprovision || true
+          (cd ipa && zip -qry "../Rune-unsigned.ipa" Payload)
+          ls -lh ../Rune-unsigned.ipa
+
+      - name: 上传 ipa（这就是你要下载去侧载的东西）
+        uses: actions/upload-artifact@v4
+        with:
+          name: Rune-unsigned-ipa
+          path: Apps/Rune/Rune-unsigned.ipa
+          if-no-files-found: error
+          retention-days: 30
+
+  # ---------- 3. 模拟器 UI 冒烟测试 + 截图 ----------
+  #
+  # ⚠️ 这一条是**非阻塞**的（continue-on-error）。
+  #    理由：没有 Mac 就没法先在本地点一遍 UI，第一次跑必然会暴露问题；
+  #    但它不该挡住"能装机的 ipa"这条主线 —— 那是两件事的优先级不同。
+  #    等它稳定之后再把它变成阻塞的。
+  simulator:
+    name: 模拟器冒烟测试
+    runs-on: macos-latest
+    needs: app
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 选择 Xcode ${{ env.XCODE_VERSION }}
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: ${{ env.XCODE_VERSION }}
+
+      - name: 安装 XcodeGen
+        run: brew install xcodegen
+
+      - name: 生成工程
+        working-directory: Apps/Rune
+        run: xcodegen generate
+
+      - name: 跑 UI 测试
+        working-directory: Apps/Rune
+        run: |
+          # ⚠️ 这里**不吞错**：整条 job 是 continue-on-error，
+          #    所以失败会如实显示在报告里（我们要的就是看到它失败在哪里），
+          #    只是不会挡住"能装机的 ipa"那条主线。
+          xcodebuild test \
+            -project Rune.xcodeproj \
+            -scheme "$SCHEME" \
+            -destination 'platform=iOS Simulator,name=iPhone 16' \
+            -derivedDataPath build \
+            -resultBundlePath TestResults.xcresult
+
+      - name: 上传测试结果与截图
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: simulator-results
+          path: |
+            Apps/Rune/TestResults.xcresult
+          if-no-files-found: warn
+          retention-days: 14
+

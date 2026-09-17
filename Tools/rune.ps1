@@ -136,6 +136,27 @@ $commonFlags = @(
 )
 
 # 把参数写进一个 .bat，由 cmd 在 vcvars 环境下执行（pwsh 无法 source .bat）
+# ---------- 源码体检 ----------
+#
+# ⚠️ 为什么在编译**之前**跑：这个检查抓的是"中文文案里手打了 ASCII 双引号"。
+# 那种错的编译器报错是 `expected ',' separator` 与 `cannot find '...' in scope` ——
+# 和真实原因毫不相干，每次都要往回数引号才能看出来（本项目为此浪费过五次编译往返）。
+# python 版本几十毫秒就能给出**指到行**的提示，比等 swiftc 报一句谜语划算得多。
+function Invoke-Lint {
+    $lint = Join-Path $PSScriptRoot 'lint_quotes.py'
+    if (-not (Test-Path -LiteralPath $lint)) { return 0 }
+    $python = Get-Command python -ErrorAction SilentlyContinue
+    if (-not $python) {
+        Write-Host "（跳过引号体检：没找到 python）" -ForegroundColor DarkGray
+        return 0
+    }
+    # ⚠️ `| Out-Host` 不能省：不写的话 python 的每一行输出都会变成
+    #    **函数的返回值的一部分**，于是 `(Invoke-Lint) -ne 0` 拿一个数组去比 0 —— 永远为真、
+    #    每次都判失败。这是 PowerShell 里最经典的坑之一（函数的"输出"就是它的返回值）。
+    & $python.Source $lint | Out-Host
+    return $LASTEXITCODE
+}
+
 function Invoke-Build([string]$batBody, [string]$label) {
     $bat = Join-Path $outRoot "rune-$label.bat"
     # chcp 65001 + 用 UTF-8 写 bat：即使路径里混入非 ASCII（例如通过 junction 之外的路径调用），
@@ -149,6 +170,10 @@ function Invoke-Build([string]$batBody, [string]$label) {
 switch ($Command) {
 
     'build' {
+        if ((Invoke-Lint) -ne 0) {
+            Write-Host "❌ 源码体检未通过，已停止编译" -ForegroundColor Red
+            exit 1
+        }
         $libOut = Join-Path $outRoot "$Package.lib"
         $modOut = Join-Path $modDir "$Package.swiftmodule"
         $swiftFiles = ($sources | ForEach-Object { "`"$_`"" }) -join ' '
@@ -169,6 +194,10 @@ switch ($Command) {
     }
 
     'test' {
+        if ((Invoke-Lint) -ne 0) {
+            Write-Host "❌ 源码体检未通过，已停止测试编译" -ForegroundColor Red
+            exit 1
+        }
         if (-not (Test-Path $testPath)) { throw "找不到测试目录：$testPath" }
         $testSources = Get-ChildItem -Recurse -Path $testPath -Filter *.swift |
                        Sort-Object FullName | Select-Object -ExpandProperty FullName
@@ -250,3 +279,4 @@ struct RuneTestRunner {
         exit $code
     }
 }
+
