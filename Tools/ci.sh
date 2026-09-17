@@ -14,7 +14,7 @@
 # 用法：
 #   Tools/ci.sh build            # 构建所有包
 #   Tools/ci.sh test             # 测试所有包（有 Tests/ 的）
-#   Tools/ci.sh audit            # 零依赖审计（不 import Apple 框架、不声明外部依赖）
+#   Tools/ci.sh audit            # 零依赖审计（不 import Apple 框架、不声明外部依赖）+ 文档链接检查
 #   Tools/ci.sh ios              # 生成 Xcode 工程并构建 App（需要 macOS + XcodeGen）
 #   Tools/ci.sh ipa              # 构建并打包成可侧载的未签名 ipa（需要 macOS）
 #   Tools/ci.sh all              # build + test + audit
@@ -28,6 +28,9 @@ cd "$ROOT"
 bold() { printf '\033[1m%s\033[0m\n' "$*"; }
 ok()   { printf '  \033[32m✅ %s\033[0m\n' "$*"; }
 bad()  { printf '  \033[31m❌ %s\033[0m\n' "$*"; }
+# ⚠️ 「跳过了」既不是通过也不是失败。没有这一档的话，被跳过的检查
+#    会安静地消失，而报告上看起来一切正常 —— 那是最坏的一种"绿"。
+warn() { printf '  \033[33m⚠️  %s\033[0m\n' "$*"; }
 
 # ---------- 构建 ----------
 
@@ -99,6 +102,19 @@ cmd_audit() {
     failed=1
   else
     ok "没有 Process"
+  fi
+
+  # 文档链接也归这里管：坏链接意味着**新会话读不到该读的东西**，
+  # 而这恰恰是续接机制最怕的失败（一次"查过了"不会自己保持）。
+  if command -v python3 >/dev/null || command -v python >/dev/null; then
+    local py; py="$(command -v python3 || command -v python)"
+    if "$py" Tools/check_docs.py; then
+      ok "文档内部链接可达"
+    else
+      failed=1
+    fi
+  else
+    warn "没有 python，跳过文档链接检查"
   fi
 
   return $failed
