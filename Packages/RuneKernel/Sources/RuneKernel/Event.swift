@@ -89,6 +89,13 @@ public enum EventKind: String, Sendable, Codable, Hashable, CaseIterable {
     case humanOnlyZoneTouched = "HumanOnlyZoneTouched"
 
     // 预算
+    /// ⭐ **花掉的每一分钱都要落账**。`TurnProjection.costMicroUSD` 就是靠它累加出来的。
+    ///
+    /// ⚠️ 为什么金额必须进事件日志（而不是只放在运行时内存里）：
+    ///    熔断的依据是"这个 Turn 一共花了多少"，而崩溃恢复后这个数字要从**唯一真相源**重建。
+    ///    只存在内存里的话，崩一次就归零 —— 上限于是再也拦不住任何东西，
+    ///    而用户看到的界面仍然显示"有上限"（最坏的那种失败：保护看起来在，其实不在）。
+    case costRecorded = "CostRecorded"
     case budgetWarning = "BudgetWarning"
     case budgetExceeded = "BudgetExceeded"
     case turnPaused = "TurnPaused"
@@ -255,6 +262,8 @@ public struct RuntimeEvent: Sendable, Codable, Hashable, Identifiable {
         case .artifactCreated:    return "生成产物"
         case .egressBlocked:      return "阻止外发"
         case .injectionSuspected: return "疑似提示注入"
+        case .costRecorded:       return "记账"
+        case .budgetWarning:      return "预算将尽"
         case .budgetExceeded:     return "超出预算"
         case .turnPaused:         return "任务暂停"
         case .turnResumed:        return "任务恢复"

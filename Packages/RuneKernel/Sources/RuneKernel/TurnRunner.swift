@@ -155,6 +155,40 @@ public struct PendingToolIntent: Sendable, Codable, Hashable {
 
 // MARK: - Turn 状态
 
+/// 因为**钱**而停下时的完整说明。
+///
+/// 设计依据（docs/04 §14）：熔断时**不要弹报错框，要给可执行的选项**。
+/// 所以这里带的是 `options`（`RuneError.BudgetSuggestion` 那三选一），不是一句"超预算了"。
+///
+/// ⚠️ 为什么把"数字"也带上：用户要判断的是"再给多少钱"，而不是"要不要继续"。
+///    只说"超预算"，等于让他自己去翻账单 —— 那是桌面 Agent 的通病，手机上更不可接受。
+public struct BudgetStop: Sendable, Codable, Hashable {
+    public var spentMicroUSD: Int
+    public var ceilingMicroUSD: Int
+    public var options: [RuneError.BudgetSuggestion]
+    public var reason: String
+
+    public init(
+        spentMicroUSD: Int,
+        ceilingMicroUSD: Int,
+        options: [RuneError.BudgetSuggestion],
+        reason: String
+    ) {
+        self.spentMicroUSD = spentMicroUSD
+        self.ceilingMicroUSD = ceilingMicroUSD
+        self.options = options
+        self.reason = reason
+    }
+
+    /// 卡片上那句话（金额一律走整数微美元 → 只在显示时变小数）
+    public var userFacingText: String {
+        String(format: "这一轮已经花了 $%.4f，超过了你设的上限 $%.4f。\n%@",
+               Double(spentMicroUSD) / 1_000_000,
+               Double(ceilingMicroUSD) / 1_000_000,
+               reason)
+    }
+}
+
 /// 一个 Turn 的完整可持久化状态。**它是唯一真相的载体**（事件日志是它的投影来源）。
 public struct TurnState: Sendable, Codable, Hashable {
     public var turnID: UUID
@@ -221,6 +255,22 @@ public struct TurnState: Sendable, Codable, Hashable {
     /// 一个复用了旧 id 的、参数完全不同的调用会被**自动放行** —— 那是提权。
     public var approvedFingerprints: Set<String>
 
+    // ---- 成本（这些字段存在的唯一理由是：**别把用户的钱花超**）----
+    //
+    // 为什么在这里而不是在网关里：网关知道"这一轮多少钱"，但它不知道"这个 Turn 一共批了多少"。
+
+    /// 本 Turn 已花的钱（**整数微美元**）。
+    /// ⚠️ 它是**事实**，必须随检查点活下来 —— 崩一次就忘了花过多少钱，等于熔断不存在。
+    public var spentMicroUSD: Int
+    /// 本 Turn 的**有效**成本上限（`nil` = 用 `Config.maxCostMicroUSD`）。
+    /// ⚠️ 用户中途选"提高上限继续"改的是**这个值**：它必须在状态里，
+    ///    否则那句"我再给你 $2"推进一轮就没了，卡片会再弹一次。
+    public var costCeilingMicroUSD: Int?
+    /// 因超预算停下时的完整说明（UI 直接渲染，不用自己拼话）
+    public var budgetStop: BudgetStop?
+    /// 预警是否已发过。**只发一次** —— 每轮都提醒等于没有提醒。
+    public var budgetWarningEmitted: Bool
+
     public init(
         turnID: UUID = UUID(),
         sessionID: UUID = UUID(),
@@ -244,7 +294,11 @@ public struct TurnState: Sendable, Codable, Hashable {
         steerNotes: [String] = [],
         corrections: CorrectionLedger = CorrectionLedger(),
         pendingCorrectionResolution: CorrectionResolution? = nil,
-        approvedFingerprints: Set<String> = []
+        approvedFingerprints: Set<String> = [],
+        spentMicroUSD: Int = 0,
+        costCeilingMicroUSD: Int? = nil,
+        budgetStop: BudgetStop? = nil,
+        budgetWarningEmitted: Bool = false
     ) {
         self.turnID = turnID
         self.sessionID = sessionID
@@ -269,6 +323,10 @@ public struct TurnState: Sendable, Codable, Hashable {
         self.corrections = corrections
         self.pendingCorrectionResolution = pendingCorrectionResolution
         self.approvedFingerprints = approvedFingerprints
+        self.spentMicroUSD = spentMicroUSD
+        self.costCeilingMicroUSD = costCeilingMicroUSD
+        self.budgetStop = budgetStop
+        self.budgetWarningEmitted = budgetWarningEmitted
     }
 
     /// 是否还能继续推进。
@@ -574,6 +632,25 @@ public enum TurnRunner {
                 )
             }
 
+            // ⚠️ **成本检查也必须在调用之前。** 放在"烧完钱之后"检查的熔断不叫熔断，
+            //    叫账单 —— 用户的钱已经花出去了。
+            if let stop = budgetStop(state: state, config: config) {
+                state.status = .pausedBudget
+                state.budgetStop = stop
+                record(.finalized, "超出成本上限：已花 \(GatewayRouter.money(stop.spentMicroUSD))")
+                emit(.budgetExceeded, [
+                    "reason": .string(stop.reason),
+                    "spent_micro_usd": .int(stop.spentMicroUSD),
+                    "ceiling_micro_usd": .int(stop.ceilingMicroUSD),
+                    "options": .array(stop.options.map { .string(Self.describe($0)) }),
+                ])
+                emit(.turnPaused, ["reason": .string("超预算")])
+                return StepOutcome(
+                    state: state, newEvents: events, didAdvance: true,
+                    terminalReason: stop.userFacingText
+                )
+            }
+
             let rawEvents = deps.modelEvents(state)
 
             // 用拼装器处理分片（**这里就复用了 M0-4 的成果**）
@@ -598,6 +675,38 @@ public enum TurnRunner {
 
             state.round += 1
             state.usage = state.usage + usage
+
+            // ---- 记账 ----
+            // ⚠️ `deps.costOfRound` 曾经是一个**声明了却从没被调用**的依赖：
+            //    熔断要用的数字根本没人算，于是"上限"永远拦不住任何东西（T48 的同类病）。
+            let roundCost = deps.costOfRound(usage)
+            if roundCost.microUSD > 0 {
+                state.spentMicroUSD += roundCost.microUSD
+                emit(.costRecorded, [
+                    "micro_usd": .int(roundCost.microUSD),
+                    "total_micro_usd": .int(state.spentMicroUSD),
+                    "input_tokens": .int(usage.inputTokens),
+                    "output_tokens": .int(usage.outputTokens),
+                    "cache_savings_micro_usd": .int(roundCost.cacheSavingsMicroUSD),
+                    "provider": .string(roundCost.providerID),
+                    "model": .string(roundCost.modelID),
+                ])
+            }
+
+            // ⚠️ 预警的判据不是"花了 80%"这种拍脑袋的比例，而是**可预测的那一个**：
+            //    「再跑一轮（按同样规模）就会超」。这句话对用户是有信息量的，
+            //    而"已用 80%"只会让人紧张却不知道该做什么。
+            if !state.budgetWarningEmitted,
+               let ceiling = effectiveCeiling(state: state, config: config), ceiling > 0,
+               state.spentMicroUSD <= ceiling,
+               state.spentMicroUSD + roundCost.microUSD > ceiling {
+                state.budgetWarningEmitted = true
+                emit(.budgetWarning, [
+                    "reason": .string("再跑一轮就会超过上限"),
+                    "spent_micro_usd": .int(state.spentMicroUSD),
+                    "ceiling_micro_usd": .int(ceiling),
+                ])
+            }
 
             if let providerError, !providerError.isRetryable {
                 state.status = .failed
@@ -964,6 +1073,106 @@ public enum TurnRunner {
         case .awaitingApproval, .pausedBudget, .completed, .failed, .interrupted:
             return StepOutcome(state: state, newEvents: events, didAdvance: false)
         }
+    }
+
+    // MARK: 成本账本与熔断（M1-18）
+
+    /// 本 Turn 的**有效**成本上限。`nil` = 不限。
+    ///
+    /// ⚠️ 顺序是"用户中途改过的值 > 配置默认值"，而不是反过来：
+    ///    用户点"提高上限继续"之后，配置还是原来那个（调用方每步都传同一个 config），
+    ///    只有状态里的这个值变了。反过来读的话，卡片会**无限弹**（同 T30 那类死循环）。
+    public static func effectiveCeiling(state: TurnState, config: Config) -> Int? {
+        let ceiling = state.costCeilingMicroUSD ?? config.maxCostMicroUSD
+        return ceiling > 0 ? ceiling : nil
+    }
+
+    /// 该不该因为钱停下（返回 nil = 可以继续）。
+    ///
+    /// ⚠️ 语义取「**超过**上限才停」，而不是「达到就停」：`$0.30` 的上限允许刚好花到 `$0.30`，
+    ///    否则用户设的数和实际能用的量对不上，而他会以为我们算错了。
+    public static func budgetStop(state: TurnState, config: Config) -> BudgetStop? {
+        guard let ceiling = effectiveCeiling(state: state, config: config),
+              state.spentMicroUSD > ceiling else { return nil }
+        return BudgetStop(
+            spentMicroUSD: state.spentMicroUSD,
+            ceilingMicroUSD: ceiling,
+            options: budgetOptions(spent: state.spentMicroUSD, ceiling: ceiling),
+            reason: "可以再给一个额度继续，或只看当前成果。"
+        )
+    }
+
+    /// 熔断时给用户的三选一（docs/04 §14：不要弹报错框，要给**可执行的选项**）。
+    ///
+    /// ⚠️ 只给**算得出来**的选项：`switchToCheaperModel` 需要另一家的报价，
+    ///    内核拿不到，所以**不编**一个预计金额填进去 —— 编出来的数字会让用户做错决定。
+    ///    降价方案由网关在有真实价格表时补上（`BudgetSuggestion` 那个 case 留着）。
+    static func budgetOptions(spent: Int, ceiling: Int) -> [RuneError.BudgetSuggestion] {
+        // "再给一个上限的量"：比"当前花费 × 2"更直观 —— 用户是按"一轮多少钱"来想的
+        [.raiseLimit(newLimitMicroUSD: spent + ceiling), .deliverSoFar]
+    }
+
+    /// 把一条建议渲染成一行（事件 payload 用；UI 也可以直接用）
+    static func describe(_ suggestion: RuneError.BudgetSuggestion) -> String {
+        switch suggestion {
+        case .raiseLimit(let micro):
+            return "提高上限到 \(GatewayRouter.money(micro)) 继续"
+        case .switchToCheaperModel(let micro):
+            return "换成更便宜的模型继续（预计 \(GatewayRouter.money(micro))）"
+        case .deliverSoFar:
+            return "只交付当前成果"
+        }
+    }
+
+    /// 用户选择"提高上限继续"后的**唯一**入口。
+    ///
+    /// ⚠️ 与 `approve` / `resolve` 同一条纪律：调用方**不要自己去改 `status`**，
+    ///    否则"用户批了多少额度"这件事就查不到出处了（事件日志里没有 `turnResumed`）。
+    public static func raiseBudget(
+        _ state: TurnState,
+        to newLimitMicroUSD: Int,
+        deps: Dependencies,
+        config: Config
+    ) -> StepOutcome {
+        var state = state
+        var events: [RuntimeEvent] = []
+
+        func emit(_ kind: EventKind, _ payload: JSONValue = .object([:])) {
+            state.eventSequence += 1
+            let event = RuntimeEvent(
+                sequence: state.eventSequence,
+                sessionID: state.sessionID,
+                turnID: state.turnID,
+                kind: kind,
+                payload: payload,
+                originTrust: .toolResultTrusted,
+                createdAt: deps.now(),
+                previousHash: state.lastEventHash
+            )
+            state.lastEventHash = event.hash
+            events.append(event)
+        }
+
+        guard state.status == .pausedBudget, let previous = state.budgetStop else {
+            // 不在预算暂停态：什么也不做（**不要**顺手把状态改成能跑，那会绕过审批等其它闸门）
+            return StepOutcome(state: state, newEvents: [], didAdvance: false)
+        }
+        // 新上限必须真的比之前大，否则下一轮立刻又停 —— 那会让用户以为按钮坏了
+        guard newLimitMicroUSD > previous.ceilingMicroUSD else {
+            return StepOutcome(state: state, newEvents: [], didAdvance: false)
+        }
+
+        state.costCeilingMicroUSD = newLimitMicroUSD
+        state.budgetStop = nil
+        state.budgetWarningEmitted = false
+        state.status = .reasoning
+        state.steps.append(StepRecord(
+            index: state.steps.count,
+            kind: .recovered,
+            summary: "上限提高到 \(GatewayRouter.money(newLimitMicroUSD))，继续"
+        ))
+        emit(.turnResumed, ["new_ceiling_micro_usd": .int(newLimitMicroUSD)])
+        return StepOutcome(state: state, newEvents: events, didAdvance: true)
     }
 
     // MARK: 连续推进

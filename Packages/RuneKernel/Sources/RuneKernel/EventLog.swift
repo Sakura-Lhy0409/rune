@@ -628,6 +628,11 @@ public enum EventProjector {
             turn.deniedToolCalls += 1
         case .modelSelfCorrected:
             turn.correctedOnce = true
+        case .costRecorded:
+            // ⭐ 账本从事件重建 —— 崩溃后"这个 Turn 花了多少"仍与不中断时一致。
+            turn.costMicroUSD += payload.value(at: ["micro_usd"])?.intValue ?? 0
+            turn.inputTokens += payload.value(at: ["input_tokens"])?.intValue ?? 0
+            turn.outputTokens += payload.value(at: ["output_tokens"])?.intValue ?? 0
         case .correctionEscalated:
             turn.escalations += 1
         case .turnRecovered:

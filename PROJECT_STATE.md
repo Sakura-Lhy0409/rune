@@ -28,8 +28,8 @@
 |---|---|
 | **更新日期** | 2026-09-19 |
 | **当前阶段** | **M1 内核完成 95% → 转入 M2/M3 的"接真实 IO"阶段（走 CI 验证）** |
-| **当前里程碑** | ✅ **M1-17 按协议族分组历史（多工具结果 / Gemini 交替 / 工具结果形态）**（934 测试全绿）—— 下一步见 §6 |
-| **已完成里程碑** | ✅ M0 全部（…→**258 出口验收达成**）→ ✅ M1-1 ToolScheduler（282）→ ✅ M1-2 协议适配器（328）→ ✅ M1-3 波次调度（341）→ ✅ M1-4 计划与审批（379）→ ✅ M1-5 GoalEngine（405）→ ✅ M1-6 修正性重试（447）→ ✅ M1-7 上下文装配器（487）→ ✅ M1-8 工具注册表（540）→ ✅ M1-9 技能库 + 场景测试（608）→ ✅ M1-10 Workflow 引擎（657）→ ✅ M1-11 VFS 层（705）→ ✅ M1-12 自研 shell 解释器（775）→ ✅ M1-13 沙箱层（877）→ ✅ M1-14 无 Mac 开发路径（CI + 装机 + 最小 App）→ ✅ M1-15 文件与检索工具（C28，877）→ ✅ **M1-16 渠道网关（C29，912）** → ✅ **M1-17 按协议族分组历史（C30，934）** |
+| **当前里程碑** | ✅ **M1-18 成本账本与熔断（上限真的会拦住钱）**（947 测试全绿）—— 下一步见 §6 |
+| **已完成里程碑** | ✅ M0 全部（…→**258 出口验收达成**）→ ✅ M1-1 ToolScheduler（282）→ ✅ M1-2 协议适配器（328）→ ✅ M1-3 波次调度（341）→ ✅ M1-4 计划与审批（379）→ ✅ M1-5 GoalEngine（405）→ ✅ M1-6 修正性重试（447）→ ✅ M1-7 上下文装配器（487）→ ✅ M1-8 工具注册表（540）→ ✅ M1-9 技能库 + 场景测试（608）→ ✅ M1-10 Workflow 引擎（657）→ ✅ M1-11 VFS 层（705）→ ✅ M1-12 自研 shell 解释器（775）→ ✅ M1-13 沙箱层（877）→ ✅ M1-14 无 Mac 开发路径（CI + 装机 + 最小 App）→ ✅ M1-15 文件与检索工具（C28，877）→ ✅ **M1-16 渠道网关（C29，912）** → ✅ **M1-17 按协议族分组历史（C30，934）** → ✅ **M1-18 成本账本与熔断（C31，947）** |
 | **阻塞项** | 无 |
 | **本机可验证范围** | ✅ 平台无关的 Swift 代码（Kernel / 补丁 / 检索 / 网关 / 策略 / **Turn 循环**）<br>❌ iOS 专属（UI / Live Activity / Core ML / VFS 真实文件系统 / 沙箱 / GRDB / JSC）—— 需 macOS |
 
@@ -38,7 +38,7 @@
 ```
 设计文档      ████████████████████ 100%
 M0 地基       ████████████████████ 100%   ✅ 出口验收已达成
-M1 可用内核   ███████████████████  98%   ← 内核 38 源文件 / 934 测试全绿，**只差真实 IO 与 UI（都要 macOS）**
+M1 可用内核   ████████████████████  99%   ← 内核 38 源文件 / 947 测试全绿，**只差真实 IO 与 UI（都要 macOS）**
 M2 移动体验   ░░░░░░░░░░░░░░░░░░░░░   0%
 M3 多渠道     ░░░░░░░░░░░░░░░░░░░░░   0%
 M4 端侧+记忆  ░░░░░░░░░░░░░░░░░░░░░   0%
@@ -58,7 +58,7 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 
 ### 包结构现状
 
-**包结构**：`RuneKernel` ✅ **38 源文件 / 934 测试**（本机可测）；`RuneNet` `RuneStore` `RuneVM` `RuneBench` `RuneGateway` `RuneContext` `RuneCore` `RuneTools` `RuneMCP` `RuneUI` ⬜ 骨架（`Package.swift` + 实现清单）。
+**包结构**：`RuneKernel` ✅ **38 源文件 / 947 测试**（本机可测）；`RuneNet` `RuneStore` `RuneVM` `RuneBench` `RuneGateway` `RuneContext` `RuneCore` `RuneTools` `RuneMCP` `RuneUI` ⬜ 骨架（`Package.swift` + 实现清单）。
 
 ---
 
@@ -139,12 +139,13 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 | C28 | ✅ **文件与检索工具的真实实现**（877 测试） | `ToolHandlers.swift` · `LocalToolExecutor` | ⭐ 14 个工具（list/read/write/edit/apply_patch/delete/move/copy/stat/mkdir/glob/grep/outline/hash）**真的能干活了**，且因为走 VFS 而**能在本机完整验证**；⚠️ **先按 schema 校验再动手**（否则参数写错的 delete 会先删再报错）；⚠️ `apply_patch` 一处失败则**一个文件都不改**；⚠️ 大输出**必须给制品句柄**，否则"截断"等于"丢数据" |
 | C29 | ✅ **渠道网关：多渠道路由 / 降级 / 重试 / 去重 / 中转站**（912 测试） | `Gateway.swift` · `GatewayRouterTests` | ⭐ 用户最关心的两件事（**接入主流模型** + **支持中转站**）在这一层闭环，三条硬规则各有测试守着：① **禁止静默降级**（`DegradationPlan.isVisibleToUser` 永远是 true；思考链支持变了还必须**重建上下文**、窗口变小必须**压缩**）② **`verify` 必须换模型**（同模型自我验证 ≈ 没验证）③ **敏感项目里中转/局域网渠道直接不进候选**（并解释原因，而不是"用了再提醒"）；⚠️ 鉴权**只存 `keyRef`**（配置可随手复制、编码进 JSON 也不泄密，泄密面缩到 Keychain 一处）；⚠️ 被排除的候选**必须带原因**（"为什么没用那个渠道"是用户第一疑问），但**解析不到的别名不算拒绝**（没配那个渠道是正常的，别刷屏）；⚠️ 429 退避 3 次、5xx 只 2 次就换渠道、**配置问题一次都不重试**（重试只会让用户反复看到失败） |
 | C30 | ✅ **按协议族分组历史 —— 修掉 3 个「用户第一次用就会炸」的错**（934 测试） | `HistoryGrouping.swift` | ⭐ ① **多工具结果的分组属于协议、不属于运行时**（OpenAI 要求每个结果各自一条、Anthropic/Gemini 要求合成一条，Gemini 相邻同角色直接 `INVALID_ARGUMENT`）② Gemini 的 `functionResponse.name` 从硬编码 `"tool"` 改成**从配对的 toolCall 里找回真名** ③ Anthropic 失败的工具结果补上 `is_error: true`（不补的话「权限被拒」在模型看来与一次成功输出无异）；⚠️ **合并必须先丢空条目再合并**（空条目会成为假的角色隔断：`[user, 空, user]` 过滤后反而变成相邻同角色）；⚠️ **合并永不提权**（信任级取更保守的，否则运行时的引导语会因合并获得「用户授权」身份） |
+| C31 | ✅ **成本账本与熔断 —— 上限真的会拦住钱**（947 测试） | `TurnRunner` · `Event` · `CostLedgerTests` | ⭐ 修的是一个**整块「声明了但从不生效」的安全闸门**：`Config.maxCostMicroUSD` 声明过、有默认值、**从没被读过**；`Dependencies.costOfRound` 能注入、**从没被调用过**；`TurnStatus.pausedBudget` 是**永远到不了的状态**；`BudgetWarning`/`TurnPaused`/`TurnResumed` 三个事件**从没被发出过**；`TurnProjection.costMicroUSD` 三个字段**从没被填过**。界面写着「上限 $0.30」，而那行代码对行为没有任何影响 —— 保护**看起来在**，其实不在；⚠️ 修法：① 成本检查放在**调用之前**（烧完再查叫账单不叫熔断）② 账本进**事件日志**（`costRecorded`）并喂给投影，崩溃恢复后「花了多少」不会归零 ③ 上限存**状态**里（`costCeilingMicroUSD`），否则用户点「提高上限」下一轮卡片又弹（同 T30 死循环） ④ 熔断给的是**可执行的三选一**，不是一句「超预算了」⑤ `raiseBudget` 只能从 `.pausedBudget` 进入（不能拿钱包撬开审批） |
 
 ---
 
 ## 6. 下一步
 
-### ⚠️ 现状：Windows 上能做的纯逻辑基本做完（934 测试）
+### ⚠️ 现状：Windows 上能做的纯逻辑基本做完（947 测试）
 
 **⚠️ 待 macOS 验证的风险点**（未验证，不是"已完成"）：
 ① **L3 主模型压缩只有"报告"**（装配器给了候选 id，但"谁去花这笔钱、谁落事件"还没接）；
@@ -152,11 +153,11 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 ③ 86 个工具里**14 个已实现**（C28）；其余 72 个分三类，都要 macOS：执行（CPython/JSC/WASM）、网络（URLSession + 出口代理）、iOS 原生（相册/日历/定位…）。
 （原先的①「多工具结果在 Anthropic/Gemini 下是连续同角色消息」已由 **C30 从结构上解决**，但真实渠道仍要压一次。）
 
-`RuneKernel` 有 **38 个源文件、934 项测试**，覆盖：值类型与协议、补丁引擎、检索、
-**渠道网关（配置 / 路由 / 降级 / 重试 / 去重 / 按协议族分组历史）**、策略引擎、
-Turn 循环与崩溃恢复、波次调度、计划引擎、审批代理、目标引擎、修正性重试与协议不变式、
-上下文预算制装配、86 个工具契约、技能与渐进式披露、Workflow 批处理编排、
-**VFS（真实文件系统 + 内存两份实现）**、**自研 shell 解释器**、**沙箱层**。
+`RuneKernel` 有 **38 个源文件、947 项测试**，覆盖：值类型与协议、补丁引擎、检索、
+**渠道网关（配置 / 路由 / 降级 / 重试 / 去重 / 按协议族分组历史）**、**成本账本与熔断**、
+策略引擎、Turn 循环与崩溃恢复、波次调度、计划引擎、审批代理、目标引擎、
+修正性重试与协议不变式、上下文预算制装配、86 个工具契约、技能与渐进式披露、
+Workflow 批处理编排、**VFS（真实文件系统 + 内存两份实现）**、**自研 shell 解释器**、**沙箱层**。
 **并且有一条端到端场景测试证明它们拼得起来。**
 
 **⭐ 路线 A（现在的正路，不需要 Mac）—— 见 [`docs/16`](docs/16-无Mac开发与验证路径.md)**
@@ -237,6 +238,7 @@ Turn 循环与崩溃恢复、波次调度、计划引擎、审批代理、目标
 | **T46** | ⚠️ **三家对「多工具结果」的要求是相反的**（OpenAI 每个结果各自一条 `tool` 消息；Anthropic/Gemini 必须合成一条，Gemini 相邻同角色直接 `INVALID_ARGUMENT`）。而运行时的历史是「一个结果一条 `.tool` 消息」——让运行时去迁就某一家，另外两家就错 | **分组规则属于协议，不属于运行时**：编码期按 `MessageGrouping.applying(协议族, to:)` 处理。⚠️ 别指望「服务端会替我合并」——Gemini 那条**用户第一次用就会炸**，而它只要写测试就能提前抓到 |
 | **T47** | ⚠️ 编码器里的**占位值**：`functionResponse.name` 与 OpenAI `requiresToolResultName` 都曾写死成字面量 `"tool"` —— 那是一个**不存在的函数名**。宽松端点静默通过、严格端点报「函数响应与调用不匹配」，而它偏偏只在那一小撮端点上暴露，是最难联调的一类错 | 真值能从历史里找回来就别用占位：`ToolResult` 只带 `callID`，名字要用 `MessageGrouping.toolNames(in:)` 从配对的 `toolCall` 里查。**占位只能作为「查不到时的最后兜底」**，且必须写清它为什么存在 |
 | **T48** | ⚠️ **声明式的规则表如果只有测试引用、编码器不经过它，那它是文档不是契约**：`HistoryGrouping.forFamily` 一度没人调用，编码器各自无条件 `merge` —— 于是「表里写不合并」与「实际行为」是两回事，**而规则表那几条断言照样全绿**（它们在测表，不在测行为）。破坏性验证时才暴露：把表改坏，行为测试一条都没红 | 给规则表一个**唯一执行入口**（`MessageGrouping.applying`），编码器只走它。⚠️ 与 T26 是同一类病（「看上去是对的」比「明显是错的」更危险）：**判断这类问题的唯一办法是故意破坏它，看有没有测试变红** |
+| **T49** | ⚠️ **一整块安全闸门可以只以「声明」的形式存在**：上限常量、可注入的依赖、专用状态、三个事件、投影字段 —— 全都写好了、编译通过、注释齐全，而**没有任何一行代码读它**。它比「没有这个功能」更危险：设置页会显示「上限 $0.30」，于是用户以为被保护着。⚠️ 还有一个特征信号：**消费端接好了、生产端没接**（`EventProjector` 会处理 `TurnPaused`，却没有任何地方**发**它） | 判据是**grep 它该读的那个标识符**：如果它只出现在自己的声明与初始化里，那就没接上。更硬的判据是**破坏性验证**：把闸门改成永不触发，看有没有测试变红（本轮：25 条断言变红）。⚠️ 与 T48 同源 —— 本项目已经在这上面栽过两次，新增任何「上限/阈值/白名单」时先问：**谁读它？** |
 
 ---
 
@@ -251,6 +253,7 @@ Turn 循环与崩溃恢复、波次调度、计划引擎、审批代理、目标
 体积        内嵌 CPython ⇒ App 约 1-2GB（不可优化，只能接受）
 审核        2.5.2 + ADPLA §3.3.1(B) · 1.2（过滤必须在二进制内）· 5.1.2(i)（第三方 AI 需显式许可）
 本机构建    必须走 Tools\rune.ps1；swift build/test 不可用。⚠️ 用 Out-File 看编译输出（内联 Select-String 会超时）
+成本        每一次模型调用**之前**必须查成本上限；每一轮都必须落 costRecorded。上限存在 TurnState 里（用户中途改过的是它）
 ```
 
 ---
@@ -269,7 +272,7 @@ D:\项目\ios平台agent\          （构建时请用 C:\Users\MSI-NB\rune-ws）
 │  └─ 附录A / 附录B          渠道事实表 / 技术选型核实表
 ├─ research/                 取证材料（465 份，非交付物，**刻意入库**）
 └─ Packages/
-   ├─ RuneKernel/            ✅ 零依赖核心（38 源文件 / 934 测试全绿；Sources 38 个 .swift、Tests 26 个）
+   ├─ RuneKernel/            ✅ 零依赖核心（38 源文件 / 947 测试全绿；Sources 38 个 .swift、Tests 27 个）
    └─ Rune{Net,Store,VM,Bench,Gateway,Context,Core,Tools,MCP,UI}/   ⬜ 骨架（含实现清单）
 ```
 
@@ -284,7 +287,7 @@ D:\项目\ios平台agent\          （构建时请用 C:\Users\MSI-NB\rune-ws）
 | 运行时 | `TurnRunner` `ToolScheduler` `PolicyEngine` `Plan` `Event` `Correction` `Context` `ToolRegistry` `EventLog` |
 | 编排 | `PlanEngine` `ApprovalBroker` `GoalEngine` `Skill` `SkillLibrary` `Workflow` |
 
-**测试文件**（26 个 / 934 项）：`JSONAndHashing` `Security` `RuntimeModel` `Patch` `Search` `Gateway` `GatewayRouter` `Policy` `TurnRunner` `ToolScheduler` `Protocol` `HistoryGrouping` `Planning` `GoalEngine` `Correction` `Context` `ToolRegistry` `Skill` `Workflow` `VFS` `Shell` `Sandbox` `EventLog` `Scenario` `ToolHandlers`
+**测试文件**（27 个 / 947 项）：`JSONAndHashing` `Security` `RuntimeModel` `Patch` `Search` `Gateway` `GatewayRouter` `Policy` `TurnRunner` `ToolScheduler` `Protocol` `HistoryGrouping` `Planning` `GoalEngine` `Correction` `Context` `ToolRegistry` `Skill` `Workflow` `VFS` `Shell` `Sandbox` `EventLog` `Scenario` `ToolHandlers` `CostLedger`
 ---
 
 ## 10. 里程碑验收标准（摘录自 [14](docs/14-工程路线图与测试策略.md)）
