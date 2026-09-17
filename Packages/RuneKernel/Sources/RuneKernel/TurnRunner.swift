@@ -57,6 +57,8 @@ public struct StepRecord: Sendable, Codable, Hashable {
         case toolExecuted
         case toolDenied
         case approvalRequested
+        /// 修正机会用尽 → 停下来问用户（docs/04 §4.4）
+        case correctionEscalated
         case finalized
         case recovered
     }
@@ -196,6 +198,18 @@ public struct TurnState: Sendable, Codable, Hashable {
     public var wasRestored: Bool
     /// 用户中途追加的要求（转向）
     public var steerNotes: [String]
+    /// 修正性重试的记账（docs/04 §4.4）。
+    ///
+    /// ⚠️ 为什么它必须**随状态一起持久化**：手机上"一次 Turn 被中途结束"是常态
+    /// （切后台、内存回收、用户插话）。不落盘的话，用户切回来之后 Agent 会
+    /// 从零开始**烧同一批 token 犯同一个错** —— 而那正是最让人恼火的一种浪费。
+    public var corrections: CorrectionLedger
+    /// 用户对「修正失败」做出的选择（**待消费**）。
+    ///
+    /// 由运行时写入，由 `.awaitingUser` 这一步消费并落盘成事件。
+    /// 之所以不让运行时直接改状态：用户点的那个按钮会决定往模型上下文里注入什么话，
+    /// 那必须和工具调用一样可审计（谁在什么时候决定了什么）。
+    public var pendingCorrectionResolution: CorrectionResolution?
 
     public init(
         turnID: UUID = UUID(),
@@ -217,7 +231,9 @@ public struct TurnState: Sendable, Codable, Hashable {
         lastEventHash: Data? = nil,
         recoveryNote: String? = nil,
         wasRestored: Bool = false,
-        steerNotes: [String] = []
+        steerNotes: [String] = [],
+        corrections: CorrectionLedger = CorrectionLedger(),
+        pendingCorrectionResolution: CorrectionResolution? = nil
     ) {
         self.turnID = turnID
         self.sessionID = sessionID
@@ -239,12 +255,18 @@ public struct TurnState: Sendable, Codable, Hashable {
         self.recoveryNote = recoveryNote
         self.wasRestored = wasRestored
         self.steerNotes = steerNotes
+        self.corrections = corrections
+        self.pendingCorrectionResolution = pendingCorrectionResolution
     }
 
-    /// 是否还能继续推进
-    public var canAdvance: Bool {
-        !status.isTerminal && status != .awaitingApproval && status != .awaitingUser && status != .pausedBudget
-    }
+    /// 是否还能继续推进。
+    ///
+    /// ⚠️ 定义就是「当前不是稳定态」，而不是把几个状态列出来减掉。
+    ///    这里曾经是手写枚举（`!= .awaitingApproval && != .awaitingUser && != .pausedBudget`），
+    ///    结果 **`.interrupted` 被漏掉了**：它是稳定态但不是终态，
+    ///    于是 `run()` 会对着一个已经中断的 Turn 空转 `maxSteps`（一万次）什么都不做。
+    ///    用 `isStable` 定义就不可能有这种漏 —— 新增状态时只需要回答"它稳不稳"这一个问题。
+    public var canAdvance: Bool { !status.isStable }
 }
 
 // MARK: - 依赖注入
@@ -288,6 +310,8 @@ public enum TurnRunner {
         public var maxCostMicroUSD: Int
         /// 同一个工具调用失败后最多自我修正几次
         public var maxSelfCorrections: Int
+        /// 连续多少次工具失败（任何一次成功都清零）就认为模型在乱试
+        public var maxConsecutiveFailures: Int
         /// 工具说明书（用于策略判定与幂等性查询）
         public var toolRegistry: [String: ToolSpec]
 
@@ -296,13 +320,22 @@ public enum TurnRunner {
             maxToolCalls: Int = 24,
             maxCostMicroUSD: Int = 300_000,
             maxSelfCorrections: Int = 2,
+            maxConsecutiveFailures: Int = 5,
             toolRegistry: [String: ToolSpec] = [:]
         ) {
             self.maxRounds = maxRounds
             self.maxToolCalls = maxToolCalls
             self.maxCostMicroUSD = maxCostMicroUSD
             self.maxSelfCorrections = maxSelfCorrections
+            self.maxConsecutiveFailures = maxConsecutiveFailures
             self.toolRegistry = toolRegistry
+        }
+
+        var correctionLimits: Correction.Limits {
+            Correction.Limits(
+                maxSelfCorrections: maxSelfCorrections,
+                maxConsecutiveFailures: maxConsecutiveFailures
+            )
         }
     }
 
@@ -358,6 +391,8 @@ public enum TurnRunner {
         public var didAdvance: Bool
         /// 需要用户决策时的说明
         public var pendingApproval: ApprovalRequest?
+        /// 需要用户对"修正失败"做选择时的说明（**不是审批**：这里是模型改不过来，不是权限问题）
+        public var pendingCorrection: Correction.Escalation?
         /// 终态说明
         public var terminalReason: String?
 
@@ -366,12 +401,14 @@ public enum TurnRunner {
             newEvents: [RuntimeEvent],
             didAdvance: Bool,
             pendingApproval: ApprovalRequest? = nil,
+            pendingCorrection: Correction.Escalation? = nil,
             terminalReason: String? = nil
         ) {
             self.state = state
             self.newEvents = newEvents
             self.didAdvance = didAdvance
             self.pendingApproval = pendingApproval
+            self.pendingCorrection = pendingCorrection
             self.terminalReason = terminalReason
         }
     }
@@ -487,6 +524,34 @@ public enum TurnRunner {
 
         // ---------- 模型轮次 ----------
         case .reasoning:
+            // ---------- ① 先守住协议不变式（**必须在调用模型之前，且无条件执行**） ----------
+            //
+            // 只要我们要把对话发给模型，历史里每一个 `toolCall` 就必须有对应结果。
+            // 把这件事放在 `.reasoning` 入口（而不是散落在各处早返回里）是一个刻意的选择：
+            // **`reasoning` 是唯一一处会调用模型的地方**，所以"在它之前修好"就等价于
+            // "不可能发出一条不合法的请求" —— 不变式由构造保证，而不是靠每个分支记得处理。
+            let reaped = reapOrphanCalls(&state, reason: "上一轮在这里结束了，它没有被执行")
+            if reaped > 0 {
+                emit(.orphanCallsReaped, ["count": .int(reaped)])
+                record(.recovered, "补记了 \(reaped) 个未执行的工具调用（维持协议完整）")
+            }
+
+            // ---------- ② 把用户中途转向喂给模型 ----------
+            //
+            // ⚠️ 这里曾经是个**哑掉的功能**：`steerNotes` 一直被持久化，却从没有人把它送进请求。
+            //    用户在 Agent 干活干到一半时说"顺便也改一下文档"，界面上显示了，模型却完全不知道。
+            //    转向必须走"运行时引导语"（来源 `.runtimeGuidance`），而不是伪造成用户新消息
+            //    —— 前者不能驱动危险动作，后者能。
+            if !state.steerNotes.isEmpty {
+                let text = state.steerNotes.map { "· \($0)" }.joined(separator: "\n")
+                injectGuidance(&state, text: """
+                用户在你执行过程中追加了要求（**以它为准**，原有目标里与它冲突的部分作废）：
+                \(text)
+                请把它并入你接下来的做法，不需要从头再来。
+                """, reason: "用户转向")
+                state.steerNotes = []
+            }
+
             // 预算检查（在**调用之前**，不是在烧完钱之后）
             if state.round >= config.maxRounds {
                 state.status = .failed
@@ -725,7 +790,22 @@ public enum TurnRunner {
             // ⭐ 三步协议第 3 步：**再写事实**
             state.pendingIntents.removeFirst()
             state.toolCallCount += 1
-            appendToolResult(&state, call: intent.call, result: result)
+
+            // ---------- 修正性重试的记账（docs/04 §4.4） ----------
+            //
+            // ⚠️ 顺序很关键：**先记账，再落盘结果**。
+            //    因为"最后一根稻草"提示要挂进回灌正文（`Correction.delivered`），
+            //    而正文**只能写一次** —— 结果一旦进了对话历史，就再也不能补话
+            //    （补一条新消息会夹在 assistant 的 tool_call 和 tool_result 之间 = 协议违规）。
+            let spec = config.toolRegistry[intent.call.name]
+            let decision = state.corrections.record(
+                call: intent.call,
+                result: result,
+                spec: spec,
+                limits: config.correctionLimits
+            )
+            appendToolResult(&state, call: intent.call, result: Correction.delivered(result, decision: decision))
+
             emit(.toolCallFinished, [
                 "tool": .string(intent.call.name),
                 "status": .string(result.status.rawValue),
@@ -734,6 +814,43 @@ public enum TurnRunner {
             ])
             record(.toolExecuted, "\(intent.call.name) → \(result.status.rawValue)")
 
+            // 运行时往上下文里补了话 → 必须在事件日志里留痕（否则回放时会出现"无人说过"的文本）
+            if decision.injectsGuidance {
+                emit(.guidanceInjected, [
+                    "reason": .string("修正性重试"),
+                    "tool": .string(intent.call.name),
+                ])
+            }
+
+            switch decision {
+            case .progress(let isRecovery) where isRecovery:
+                // 它在自己修 —— 这是**要让用户看见**的信任信号，不是噪音
+                emit(.modelSelfCorrected, [
+                    "tool": .string(intent.call.name),
+                    "total": .int(state.corrections.recoveredCount),
+                ])
+                record(.recovered, "模型自行改好了 \(intent.call.name)（累计 \(state.corrections.recoveredCount) 次）")
+
+            case .escalate(let escalation):
+                // 该停下来问人了。⚠️ 这里**不清理** `pendingIntents` 与 `currentWave`：
+                // 那些调用的意图已经落盘，恢复时会正常执行；现在把它们悄悄丢掉才是 bug。
+                state.status = .awaitingUser
+                emit(.correctionEscalated, [
+                    "cause": .string(escalation.cause.rawValue),
+                    "tool": .string(escalation.toolName),
+                    "failures": .int(escalation.failureCount),
+                    "options": .array(escalation.options.map { .string($0.action.rawValue) }),
+                ])
+                record(.correctionEscalated, "修正失败：\(escalation.headline)")
+                return StepOutcome(
+                    state: state, newEvents: events, didAdvance: false,
+                    pendingCorrection: escalation
+                )
+
+            default:
+                break
+            }
+
             // ⚠️ **检查点不在这里打**，而是等整个波次结束后统一打一个 —— 见 `takeWaveCheckpoint`。
             //    理由：波内多个调用是同时在飞的，为每个调用各打一个会产出"不对应任何真实状态"的检查点。
             if state.pendingIntents.isEmpty && state.currentWave.isEmpty {
@@ -741,8 +858,50 @@ public enum TurnRunner {
             }
             return StepOutcome(state: state, newEvents: events, didAdvance: true)
 
-        // ---------- 稳定态：不再推进 ----------
-        case .awaitingApproval, .awaitingUser, .pausedBudget, .completed, .failed, .interrupted:
+        // ---------- 稳定态 ----------
+        case .awaitingUser:
+            // 「修正失败」的选择是**通过状态机消费**的，而不是由运行时直接改状态。
+            //
+            // 为什么值得多这一层：用户在卡片上点的那个按钮，会决定"往模型的上下文里注入什么话"。
+            // 这属于"影响模型看到什么"的动作，必须和工具调用一样落在事件日志里 ——
+            // 否则事后回放这段对话时，会看到一段没人说过、也查不到来源的文本。
+            guard let resolution = state.pendingCorrectionResolution else {
+                return StepOutcome(state: state, newEvents: events, didAdvance: false)
+            }
+            state.pendingCorrectionResolution = nil
+            let escalation = state.corrections.lastEscalation
+            emit(.correctionResolved, [
+                "action": .string(resolution.action.rawValue),
+                "tool": .string(escalation?.toolName ?? ""),
+                "cause": .string(escalation?.cause.rawValue ?? ""),
+            ])
+            state.corrections.clearEscalation()
+
+            if resolution.action == .stop {
+                // ⚠️ 停下也必须维持协议不变式：把没执行的调用补上结果，
+                //    否则用户过一会儿说"那继续吧"，会话立刻 400。
+                let reaped = reapOrphanCalls(&state, reason: "你选择在这里停下")
+                state.corrections.recordAbandon()
+                state.status = .interrupted
+                record(.finalized, "已按你的选择停下（补记 \(reaped) 个未执行的调用）")
+                return StepOutcome(
+                    state: state, newEvents: events, didAdvance: true,
+                    terminalReason: "已在你的要求下停止。已完成的部分都在，随时可以继续。"
+                )
+            }
+
+            if let nudge = resolution.nudge, !nudge.isEmpty {
+                injectGuidance(&state, text: nudge, reason: "修正失败后的定向提示")
+                emit(.guidanceInjected, ["action": .string(resolution.action.rawValue)])
+            }
+            state.corrections.resetForNewDirection()
+            // ⚠️ 回到 `.dispatching` 而不是 `.reasoning`：当前波次里可能还有**已经写好意图**的调用，
+            //    那些调用必须被执行完，否则又会被兜底逻辑补成"未执行"，白干一次。
+            state.status = .dispatching
+            record(.recovered, "按你的选择继续（\(resolution.action.rawValue)）")
+            return StepOutcome(state: state, newEvents: events, didAdvance: true)
+
+        case .awaitingApproval, .pausedBudget, .completed, .failed, .interrupted:
             return StepOutcome(state: state, newEvents: events, didAdvance: false)
         }
     }
@@ -779,6 +938,114 @@ public enum TurnRunner {
         guard state.status == .awaitingApproval else { return state }
         state.status = state.queuedCalls.isEmpty ? .dispatching : .dispatching
         return state
+    }
+
+    // MARK: 协议不变式
+
+    /// 把"已经出现在对话里、但从未执行"的工具调用补上结果，返回补了几个。
+    ///
+    /// ## 为什么这是**必须有**的，而不是锦上添花
+    ///
+    /// 三家协议都要求：assistant 消息里的每一个工具调用，都必须在紧随其后的消息里有**对应结果**
+    /// （Anthropic 的 `tool_result` / OpenAI 的 `role: tool` / Gemini 的 `functionResponse`）。
+    /// 只要漏掉一个，**下一次请求就 400**，而且报错信息通常与真正的原因隔了十万八千里
+    /// （"messages: roles must alternate" / "tool_call_id not found"），极难排查。
+    ///
+    /// 而在手机上，"一次 Turn 没跑完就结束了"根本不是边缘情况，是**主路径**：
+    /// 切后台被系统挂起、内存回收、用户插话、预算熔断、审批等待、被上面这条修正熔断…
+    /// 每一条早返回路径都可能留下孤儿调用。
+    ///
+    /// 所以这里不试图在十几个分支里逐个处理（那是必然漏的写法），
+    /// 而是**在唯一的模型调用点之前统一兜底** —— 见 `.reasoning` 分支。
+    @discardableResult
+    static func reapOrphanCalls(_ state: inout TurnState, reason: String) -> Int {
+        // ⚠️ 判定依据必须是**对话历史**，而不是 `pendingIntents` / `currentWave` / `queuedCalls`。
+        //
+        //    这里踩过一次：最初按队列字段来判断，结果"预算熔断 → 用户点继续"这条最常见的路径
+        //    完全兜不住 —— 新的一轮只带着 `messages` 历史进来，队列字段是空的，
+        //    于是那两个孤儿的 tool_call 永远等不到结果，会话从此一发请求就 400。
+        //
+        //    历史才是"要发给模型的东西"，所以不变式就该读历史。
+        var answered = Set<String>()
+        for message in state.messages {
+            for block in message.blocks {
+                if let result = block.toolResultValue { answered.insert(result.callID) }
+            }
+        }
+
+        var rebuilt: [Message] = []
+        var reaped = 0
+        for message in state.messages {
+            rebuilt.append(message)
+            for block in message.blocks {
+                guard let call = block.toolCallValue, !answered.contains(call.id) else { continue }
+                // ⚠️ 补记的结果必须**紧跟在那条助手消息之后**，不能统统一股脑追加到历史末尾：
+                //    三家协议要求的配对是"相邻"的（OpenAI 的 tool 消息必须紧跟带 tool_calls 的 assistant）。
+                let error = ToolError(
+                    kind: .other,
+                    modelFacingMessage: "这次对 `\(call.name)` 的调用没有执行：\(reason)。",
+                    suggestion: "如果这一步仍然需要，请重新发起它；如果不再需要，就直接继续下一步。"
+                )
+                rebuilt.append(Message(
+                    role: .tool,
+                    blocks: [ContentBlock(kind: .toolResult(.failure(callID: call.id, error: error)),
+                                          origin: .toolResultTrusted)],
+                    origin: .toolResultTrusted
+                ))
+                answered.insert(call.id)
+                reaped += 1
+            }
+        }
+        state.messages = rebuilt
+
+        // 队列字段一律清空：它们描述的是"接下来还要做什么"，
+        // 而既然我们已经决定回到模型，继续执行旧队列只会绕过模型的判断。
+        state.pendingIntents = []
+        state.currentWave = []
+        state.waveCalls = []
+        state.queuedCalls = []
+        return reaped
+    }
+
+    /// 把一段**运行时引导语**放进对话，返回它所在的消息 id。
+    ///
+    /// ⚠️ 三条约束同时成立才敢这么做：
+    ///   1. **协议合法性**：不能凭空造一个"模型发出的工具调用"（见 `Correction.swift` 文件头）。
+    ///      引导只能以文本形式出现；
+    ///   2. **权限**：来源是 `.runtimeGuidance`，**不是** `.userInstruction`。
+    ///      运行时替模型补充它看不到的事实，不等于替用户下命令 ——
+    ///      否则运行时就能伪造用户授权去驱动危险动作；
+    ///   3. **顺序**：必须紧跟在工具结果之后、下一轮模型调用之前。
+    ///      放晚了模型会把提示对应到错误的对象上，比不给还糟。
+    @discardableResult
+    static func injectGuidance(_ state: inout TurnState, text: String, reason: String) -> UUID {
+        let block = ContentBlock(kind: .text(text), origin: .runtimeGuidance)
+        let message = Message(role: .user, blocks: [block], origin: .runtimeGuidance)
+        state.messages.append(message)
+        return message.id
+    }
+
+    /// 用户在"修正失败"卡片上做出选择之后继续。
+    ///
+    /// ⚠️ 唯一的入口，且**必须走状态机**：它会把选择落成 `CorrectionResolved` 事件，
+    /// 并（在选择 `nudge` / `askUser` 时）注入一段来源为 `.runtimeGuidance` 的引导语。
+    /// 运行时不要自己去改 `status` —— 那样这段"没人说过的话"就查不到出处了。
+    ///
+    /// ```swift
+    /// let outcome = TurnRunner.resolve(state, .init(action: .changeApproach, nudge: option.nudgeText), deps: deps, config: config)
+    /// ```
+    public static func resolve(
+        _ state: TurnState,
+        _ resolution: CorrectionResolution,
+        deps: Dependencies,
+        config: Config
+    ) -> StepOutcome {
+        var state = state
+        guard state.status == .awaitingUser, state.corrections.needsUserDecision else {
+            return StepOutcome(state: state, newEvents: [], didAdvance: false)
+        }
+        state.pendingCorrectionResolution = resolution
+        return step(state, deps: deps, config: config)
     }
 
     // MARK: 辅助

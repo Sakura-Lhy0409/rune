@@ -42,6 +42,16 @@ public enum EventKind: String, Sendable, Codable, Hashable, CaseIterable {
     case toolCallFinished = "ToolCallFinished"
     case toolCallFailed = "ToolCallFailed"
     case toolCallDenied = "ToolCallDenied"
+    /// 模型自己把上一个错误改好了（**这是我们想展示给用户的信任信号**：它在自己修，不用管）
+    case modelSelfCorrected = "ModelSelfCorrected"
+    /// 修正机会用尽 / 逐字重复 / 在乱试 → 停下来问用户（docs/04 §4.4）
+    case correctionEscalated = "CorrectionEscalated"
+    /// 运行时往对话里补了一段引导语（来源标记为 runtimeGuidance，**不是**用户指令）
+    case guidanceInjected = "GuidanceInjected"
+    /// 用户对「修正失败」做出了选择（继续 / 换方案 / 自己给参数 / 停下）
+    case correctionResolved = "CorrectionResolved"
+    /// 已出现在对话里、但从未执行的工具调用被补上了结果（**维持协议不变式**）
+    case orphanCallsReaped = "OrphanCallsReaped"
 
     // 沙箱
     case sandboxStarted = "SandboxStarted"
@@ -129,7 +139,8 @@ public enum EventKind: String, Sendable, Codable, Hashable, CaseIterable {
         switch self {
         case .planApproved, .planRevised, .checkpointCreated, .checkpointRestored,
              .gitCommit, .gitPushSucceeded, .prCreated, .artifactCreated,
-             .jobFinished, .subagentFinished, .workflowFinished:
+             .jobFinished, .subagentFinished, .workflowFinished,
+             .correctionEscalated:
             return true
         default:
             return false
@@ -230,6 +241,10 @@ public struct RuntimeEvent: Sendable, Codable, Hashable, Identifiable {
         case .toolCallFinished:   return "工具完成"
         case .toolCallFailed:     return "工具失败"
         case .toolCallDenied:     return "已被拦截"
+        case .modelSelfCorrected: return "模型自行修正"
+        case .correctionEscalated: return "需要你决定"
+        case .correctionResolved: return "已按你的选择继续"
+        case .orphanCallsReaped:  return "补记未执行的调用"
         case .patchApplied:       return "应用补丁"
         case .patchRejected:      return "拒绝补丁"
         case .checkpointCreated:  return "创建检查点"

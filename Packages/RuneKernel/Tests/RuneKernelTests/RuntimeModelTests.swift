@@ -433,7 +433,22 @@ struct ToolTests {
         let err = ToolError(kind: .pathNotFound, modelFacingMessage: "找不到 a.swift", suggestion: "试试 b.swift")
         let failure = ToolResult.failure(callID: "c2", error: err)
         #expect(failure.status == .error)
-        #expect(failure.summary == "找不到 a.swift")
+        // ⚠️ 断言的是「回灌正文里必须带上建议」，而不是「正文等于 message」。
+        //    只送 message 会让 suggestion / candidates 永远到不了模型 ——
+        //    那样「修正性重试」就是空转的（见 ToolError.modelFacingText 的注释）。
+        #expect(failure.summary.contains("找不到 a.swift"))
+        #expect(failure.summary.contains("试试 b.swift"))
+
+        let withCandidates = ToolError(
+            kind: .unknownTool,
+            modelFacingMessage: "没有名为 `read_files` 的工具。",
+            suggestion: "你是不是想用 `read_file`？",
+            candidates: ["read_file"]
+        )
+        let text = withCandidates.modelFacingText
+        #expect(text.contains("read_files"))
+        #expect(text.contains("read_file"))
+        #expect(text.contains("候选"))
     }
 
     @Test("JSONSchema 生成合法的 schema JSON")

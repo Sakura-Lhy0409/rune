@@ -30,11 +30,11 @@
 
 | 项 | 值 |
 |---|---|
-| **更新日期** | 2026-09-17 |
+| **更新日期** | 2026-09-18 |
 | **当前阶段** | **M0 已完成 ✅ → 进入 M1 可用内核** |
-| **当前里程碑** | ⚠️ **Windows 上能做的纯逻辑已全部完成** —— 下一步需要 macOS（Store/VFS/沙箱/UI）或插入式工作（见 §7） |
-| **上一个完成的里程碑** | ✅ **M1-1：ToolScheduler**（并行分桶 + 冲突检测 + 预算）（282 测试全绿） |
-| **已完成里程碑** | ✅ M0 全部（…→**258 出口验收达成**）→ ✅ M1-1 ToolScheduler（282）→ ✅ M1-2 协议适配器（328）→ ✅ M1-3 波次调度（341）→ ✅ M1-4 计划与审批（379）→ ✅ **M1-5 GoalEngine（405）** |
+| **当前里程碑** | ✅ **M1-6 修正性重试与协议不变式**（447 测试全绿）—— Windows 上的纯逻辑告一段落，下一步需要 macOS（Store/VFS/沙箱/UI）或继续插入式工作（见 §7） |
+| **上一个完成的里程碑** | ✅ **M1-6：修正性重试策略层 + 对话历史协议不变式**（447 测试全绿） |
+| **已完成里程碑** | ✅ M0 全部（…→**258 出口验收达成**）→ ✅ M1-1 ToolScheduler（282）→ ✅ M1-2 协议适配器（328）→ ✅ M1-3 波次调度（341）→ ✅ M1-4 计划与审批（379）→ ✅ M1-5 GoalEngine（405）→ ✅ **M1-6 修正性重试 + 协议不变式（447）** |
 | **阻塞项** | 无 |
 | **本机可验证范围** | ✅ 平台无关的 Swift 代码（Kernel / 补丁 / 检索 / 网关 / 策略 / **Turn 循环**）<br>❌ iOS 专属（UI / Live Activity / Core ML / VFS 真实文件系统 / 沙箱 / GRDB / JSC）—— 需 macOS |
 
@@ -43,7 +43,7 @@
 ```
 设计文档      ████████████████████ 100%
 M0 地基       ████████████████████ 100%   ✅ 出口验收已达成
-M1 可用内核   ████████████░░░░░░░  60%   ← 纯逻辑部分已完成，其余需 macOS
+M1 可用内核   ██████████████░░░░░  70%   ← 纯逻辑部分已完成（含修正性重试/协议不变式），其余需 macOS
 M2 移动体验   ░░░░░░░░░░░░░░░░░░░░░   0%
 M3 多渠道     ░░░░░░░░░░░░░░░░░░░░░   0%
 M4 端侧+记忆  ░░░░░░░░░░░░░░░░░░░░░   0%
@@ -65,7 +65,7 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 
 | 包 | 状态 | 本机可测 |
 |---|---|---|
-| `RuneKernel` | ✅ **24 个源文件 / 405 测试** | ✅ |
+| `RuneKernel` | ✅ **25 个源文件 / 447 测试** | ✅ |
 | `RuneNet` `RuneStore` `RuneVM` `RuneBench` `RuneGateway` `RuneContext` `RuneCore` `RuneTools` `RuneMCP` `RuneUI` | ⬜ 骨架已建（`Package.swift` + 带实现清单的占位文件） | 部分 |
 
 ---
@@ -86,11 +86,10 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 
 ### ⚠️ `swift build` / `swift test` 在本机**不可用**
 
-**症状**：能加载 manifest、能生成构建图，但在真正调用 swiftc 编译目标时**静默退出（exit 1，无任何错误信息）**。
-**已排除的原因**：中文路径、工具链损坏、管道被禁、batch mode、索引库、`--use-integrated-swift-driver`、ASCII junction。
+**症状**：能加载 manifest、能生成构建图，但真正调用 swiftc 编译目标时**静默退出（exit 1，零错误信息）**。
+**已排除**：中文路径、工具链损坏、管道被禁、batch mode、索引库、`--use-integrated-swift-driver`、ASCII junction。
 **结论**：SwiftPM 在本环境的**子进程执行层**有问题，**与我们写的代码无关**（同一条 swiftc 命令手动执行完全成功）。
-**对策**：`Tools/rune.ps1` 自己用 swiftc 驱动构建与测试（RuneKernel 零依赖，因此很简单）。
-**在 macOS 上开发时可改回标准 `swift build` / `swift test`；本机请一律走 `rune.ps1`。**
+**对策**：`Tools/rune.ps1` 自己用 swiftc 驱动构建与测试。**上 macOS 后可改回标准 `swift build/test`；本机一律走 `rune.ps1`。**
 
 ---
 
@@ -126,98 +125,30 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 
 ## 5. 已完成清单（✅ = 有验证方式）
 
-| # | 项 | 产出 | 验证 |
+> 逐条细节见 [`docs/进度日志.md`](docs/进度日志.md)。这里只保留**「做过了、别再做一遍」**这一层信息；
+> ⚠️ 标记的是**容易被后人改回去**的关键设计点。
+
+| # | 项 | 产出 | 关键点（⚠️ = 必须保持） |
 |---|---|---|---|
-| D1 | ✅ 设计文档集（18 份，6785 行） | `README.md`、`docs/01`–`15`、`docs/附录A/B` | 内部链接校验通过；事实均带出处 |
-| D2 | ✅ 事实取证归档 | `research/`（465 份）+ `research/README.md` | — |
-| C1 | ✅ 续接机制 | `PROJECT_STATE.md`、`docs/进度日志.md` | 本文件 |
-| C2 | ✅ **本机构建/测试闭环** | `Tools/rune.ps1` | `rune.ps1 info` / `build` / `test` 均可用 |
-| C3 | ✅ **`RuneKernel` 零依赖核心**（9 个源文件） | `Packages/RuneKernel/Sources/RuneKernel/` | **85 个测试全绿** |
-| C3.1 | ├ `JSONValue` + 手写 JSON 解析器 | `JSONValue.swift` | 解析/转义/代理对/canonical 确定性/错误偏移/深度限制/Codable 往返 |
-| C3.2 | ├ `SHA256` + 指纹（请求/执行/事件链） | `SHA256.swift` | NIST 向量、流式=一次性、指纹顺序无关 |
-| C3.3 | ├ 信任模型与污点传播 | `Trust.swift` | 指令性判定、污点标记、人类专属区 |
-| C3.4 | ├ 内容块 / 消息 / 制品 / 用量 / 成本 | `Content.swift` | 工厂方法、成本整数累加、估算标记 |
-| C3.5 | ├ 工具规格 / 错误 / 全部工具名常量 | `Tool.swift` | 自我修正性判定、schema 序列化、风险分级 |
-| C3.6 | ├ `VFSPath` + 出口规则 + 能力令牌 | `Capability.swift` | **`..` 逃逸拒绝、组件级 `isWithin`、域名后缀点边界、令牌过期、写不蕴含删** |
-| C3.7 | ├ 统一错误模型 | `Errors.swift` | 静默性判定、熔断三选一、沙箱中文提示 |
-| C3.8 | ├ 计划 / 目标（含阻塞纪律） | `Plan.swift` | **偏离判定（改目标/新增危险步骤/超支 150%）、连续 3 轮才可标阻塞** |
-| C3.9 | └ 事件与哈希链 | `Event.swift` | **篡改可检测、键序无关、Codable 往返** |
-| C4 | ✅ **`apply_patch` 补丁引擎 + `edit_file` 引擎** | `TextPatch.swift` | **37 项新测试**（累计 122 全绿） |
-| C4.1 | ├ 双格式解析：Rune 原生 + **标准 unified diff** | 同上 | 相对路径、`a/`/`b/` 前缀、`/dev/null` 语义、`\ No newline`、元数据行 |
-| C4.2 | ├ 四级模糊匹配 + 唯一性强制 | 同上 | 行尾空白 / 缩进 / 全部空白；**匹配多处必须拒绝并给出全部候选行号** |
-| C4.3 | ├ **原子性**（失败即整体不落地） | 同上 | 一个 hunk 失败 → 其他文件也不改 |
-| C4.4 | ├ 换行保真（CRLF / LF / 无末行换行） | 同上 | 三向测试；替换文本的换行风格跟随目标文件 |
-| C4.5 | ├ 诊断可执行（供模型自我修正） | 同上 | 找不到 → 给最近位置；歧义 → 给全部候选；重叠 → 提示合并 |
-| C4.6 | └ `TextEdit.replaceUnique` | 同上 | 唯一才替换；多处/找不到都拒绝（**绝不悄悄全改**） |
-| C5 | ✅ **检索子系统** | `GlobMatcher.swift` · `IgnoreRules.swift` · `GrepEngine.swift` | **50 项新测试**（累计 172 全绿） |
-| C5.1 | ├ `GlobPattern`（通配匹配） | `GlobMatcher.swift` | `**` 跨层、`?`、`[a-z]`/`[!x]`、`{a,b}`、锚定、目录专用、**默认大小写不敏感** |
-| C5.2 | ├ `IgnoreRules`（gitignore 语义） | `IgnoreRules.swift` | 注释/空行、`!` 取反、**最后匹配胜出**、祖先级联忽略、**内置默认清单**、带得出"是哪条规则" |
-| C5.3 | ├ `PathFilter`（两层忽略 + include/exclude） | 同上 | 项目规则一律生效；**内置默认在显式 include 时让位** |
-| C5.4 | └ `GrepEngine`（搜索核心） | `GrepEngine.swift` | 字面量/正则、整词、**字面量预筛**、二进制跳过、上下文行、三种输出模式、**预算截断且如实告知**、确定性排序、中文定位 |
-| C6 | ✅ **10 个包的骨架** | `Packages/Rune{Net,Store,VM,Bench,Gateway,Context,Core,Tools,MCP,UI}/` | 每个含正确的 `Package.swift`（依赖声明已校验）+ 带**实现清单**的占位文件 |
-| C7 | ✅ **网关纯逻辑** | `ToolCallAssembler.swift` · `ProviderQuirks.swift` | **40 项新测试**（累计 212 全绿） |
-| C7.1 | ├ `JSONRepair`（修复模型给的坏 JSON） | 同上 | 截断/未闭合/尾逗号/悬空键/尾转义/中文标点；**修不好返回 nil**（交由修正性重试） |
-| C7.2 | ├ `ToolCallAssembler`（分片拼装） | 同上 | 四种协议形态；**并行 index 交错**；7 种脏情况；**绝不重复产出**；诊断可观测 |
-| C7.3 | ├ `ProviderQuirks`（渠道差异声明） | `ProviderQuirks.swift` | 协议族 / 思考链字段 / **回传策略** / 缓存风格 / 流式用量 / 坑清单（UI 可展示） |
-| C7.4 | └ `CostCalculator`（缓存经济学） | 同上 | 缓存读 0.1× / 写 1.25× / 低谷折扣 / 长上下文倍率 / **省下多少钱**（正反馈） |
-| C8 | ✅ **`PolicyEngine` 策略引擎** | `PolicyEngine.swift` | **37 项新测试**（累计 249 全绿） |
-| C8.1 | ├ `TrustDial`（信任刻度盘五档） | 同上 | 能力边界递增、**每档自带"允许做什么"说明**、人类专属 |
-| C8.2 | ├ `ApprovalRequirement`（审批分级） | 同上 | 无需/内联/一键/看细节/生物识别/生物识别+确认词；**哪些可"记住"** |
-| C8.3 | ├ `HumanOnlyZoneDetector` | 同上 | 凭据/策略/审计/信任档/哈希锚点；**任何信任档都拒绝写**；拒绝说明可执行 |
-| C8.4 | ├ `EgressGuard`（SSRF 防护） | 同上 | 私有网段（含 **169.254.169.254 云元数据**）/ scheme 白名单 / **重定向链逐跳校验** |
-| C8.5 | └ `PolicyEngine.evaluate`（六层判定） | 同上 | 人类专属区 → 信任档 → 能力令牌 → SSRF → **污点** → 风险分级审批 |
-| C9 | ✅ **最小 Turn 循环（M0 出口验收达成）** | `TurnRunner.swift` | **9 项验收测试**（累计 258 全绿） |
-| C9.1 | ├ `TurnStatus` / `TurnState` / `StepRecord` / `Checkpoint` / `PendingToolIntent` | 同上 | 全部 Codable（可持久化）；状态可判定"是否稳定可挂起" |
-| C9.2 | ├ **步进式状态机**（`step()` 推进恰好一件事） | 同上 | 任意两步之间被杀都能恢复；`start → reasoning → dispatching → executing → …` |
-| C9.3 | ├ **三步落盘协议**（写意图 → 执行 → 写事实） | 同上 | 恢复时按幂等性决定"重做"或"问用户" |
-| C9.4 | ├ **显式恢复标记** `wasRestored` | 同上 | ⚠️ 仅凭状态无法区分"正常下一步"与"崩溃残留"，必须由运行时显式告知 |
-| C9.5 | ├ 预算熔断（轮次 / 工具数 / 成本） | 同上 | **在调用之前**检查，而不是烧完钱之后 |
-| C9.6 | ├ 工具名幻觉兜底 + 可执行错误回灌 | 同上 | 相似度不足时**不猜**（宁可不给建议，也不要给错建议） |
-| C9.7 | └ 路径提取 → 策略引擎 | 同上 | ⚠️ 不做这一步，能力令牌的**路径级授权形同虚设** |
-| C10 | ✅ **`ToolScheduler` 工具调度器** | `ToolScheduler.swift` | **22 项新测试**（累计 282 全绿） |
-| C10.1 | ├ 分波（wave）：波内并行、波间串行 | 同上 | 只读并行；serialPerPath 保守串行；xclusive 单独成波 |
-| C10.2 | ├ **路径冲突检测**（含多文件补丁的全部路径） | 同上 | ⚠️ 只取第一个路径就漏检；目录与其子文件也算冲突 |
-| C10.3 | ├ ⚠️ **执行类工具与写操作冲突** | 同上 | 边跑 
-un_tests 边 pply_patch → 测试读到半成品 → **假失败** |
-| C10.4 | ├ 审批项批量摘出 | 同上 | 手机上一次弹一个审批是灾难；审批不阻塞只读操作 |
-| C10.5 | ├ 预算延后（不静默丢弃） | 同上 | 超出单轮上限的调用进 deferred 并在诊断里说明 |
-| C10.6 | └ 不重排模型给出的顺序 | 同上 | 模型有时依赖"先建目录再写文件" |
-| C11 | ✅ **协议适配器** | `ChatRequest.swift` · `StreamParsing.swift` · `ProtocolEncoders.swift` · `ProtocolDecoders.swift` | **46 项新测试**（累计 328 全绿） |
-| C11.1 | ├ 请求模型（`ChatRequest` / `SystemBlock` / `ToolChoice` / `ReasoningRequest`） | `ChatRequest.swift` | 系统提示按**稳定性分层**（层 1+2 字节稳定 = 缓存命中的前提） |
-| C11.2 | ├ `SSEParser`（增量 + 容错） | `StreamParsing.swift` | 跨包断开、**UTF-8 多字节被切断**、CRLF、注释/心跳、多行 data、残留缓冲、`[DONE]` |
-| C11.3 | ├ `NDJSONParser`（Ollama 原生端点） | 同上 | ⚠️ Ollama 原生是 **NDJSON 不是 SSE**，别搞混 |
-| C11.4 | ├ 四种请求序列化 | `ProtocolEncoders.swift` | OpenAI Chat / Responses / Anthropic / Gemini；`maxTokensField` 因厂商而异 |
-| C11.5 | ├ 思考链回传策略 | 同上 | ⚠️ 判据是**请求级**（请求带 tools），不是消息级；Anthropic 的 thinking 必须排在最前且必须有签名 |
-| C11.6 | ├ 四种流解码 | `ProtocolDecoders.swift` | 命名事件 / 语义化事件 / parts / NDJSON → 归一化 `ModelEvent` |
-| C11.7 | └ `CachePlanner` 缓存断点 | `ChatRequest.swift` | 只断在**稳定层**且取"每层最后一个块"（前缀越长命中越多）；Anthropic 上限 4 |
-| C12 | ✅ **波次调度接入 `TurnRunner`** | `TurnRunner.swift` | **13 项新测试**（累计 341 全绿） |
-| C12.1 | ├ 波次边界语义 | 同上 | 调度器（M1-1）分波，运行器负责"波内逐个写意图、波后统一收尾" |
-| C12.2 | ├ ⭐ **检查点以波次为单位** | 同上 | 波内调用同时在飞 → **为每个调用各打一个会产出"不对应任何真实状态"的检查点** |
-| C12.3 | ├ ⚠️ **多路径授权**（全部路径都查，取最严） | 同上 | 多文件补丁里第二个文件越权 → 整次调用被拒（只查第一个会**绕过授权**） |
-| C12.4 | ├ ⚠️ **多悬空意图恢复** | 同上 | 一次崩溃可能留下整批；只要有一个不可重做就**整批问用户**（不能先把能做的做了） |
-| C12.5 | └ 事件携带波次信息 | 同上 | `wave` / `waveSize` 供 UI 显示"第 2 批 · 3 个并行中" |
-| C13 | ✅ **`PlanEngine` 计划引擎** | `PlanEngine.swift` | **38 项新测试**（累计 379 全绿） |
-| C13.1 | ├ 结构化计划解析与校验 | 同上 | 严格（必须有目标与步骤、上限 20 步）；宽容（kind 缺省、未知工具只警告） |
-| C13.2 | ├ ⭐ **计划 → 一次性权限请求** | 同上 | 按计划**声明的路径**精确授权（不是整个工作区）；路径去重；删除单独列出 |
-| C13.3 | ├ ⚠️ 网络出口**不预先授权** | 同上 | 计划阶段不知道会访问哪些域名，预授权等于空白支票 → 仍逐次确认 |
-| C13.4 | ├ 偏离检测（重大 / 轻微） | 同上 | 改目标、新增危险步骤、超支 150% → 必须重新确认；其余自动继续但留痕 |
-| C13.5 | ├ 状态推进带合法性校验 | 同上 | 不能从 pending 直接跳 done；终态不可再变 |
-| C13.6 | └ 批准摘要（UI 直接用） | 同上 | 目标 + 假设 + 步骤 + 权限清单 + 仍需逐次确认项 + 成本 |
-| C14 | ✅ **`ApprovalBroker` 审批代理** | `ApprovalBroker.swift` | 同上 |
-| C14.1 | ├ 票据与批量展示 | 同上 | 同一轮多个待批项合并成一次；单批上限 6，超出延后并如实计数 |
-| C14.2 | ├ ⚠️ 分级：只有「内联允许」自动通过 | 同上 | 「点击确认」及以上**必须有人真的点一下** |
-| C14.3 | ├ ⚠️ 超时 = **拒绝**（失败关闭） | 同上 | 绝不因为"用户没看见"就默认允许 |
-| C14.4 | ├ ⚠️ 「全部允许」先全量校验再应用 | 同上 | 否则会出现"声称整批失败、实际批准了半批" |
-| C14.5 | ├ ⚠️ 「记住选择」范围精确到路径 | 同上 | 缺省自动提取路径；收敛到所在目录；危险/不可逆不可记住；可撤销可过期 |
-| C14.6 | └ `PolicyOverride`（宽松授权记录） | 同上 | 可审计、可撤销、可过期、限定工作区 |
-| C15 | ✅ **`GoalEngine` 目标引擎** | `GoalEngine.swift` | **26 项新测试**（累计 405 全绿） |
-| C15.1 | ├ 一轮结果的记账与决策 | 同上 | 继续 / 等唤醒 / 受阻 / 完成 / 熔断 / 中止；用户中止**不计入轮次** |
-| C15.2 | ├ ⚠️ **阻塞纪律** | 同上 | 同一条件连续 3 轮才可受阻；换理由即重置；受阻报告缺项会被驳回 |
-| C15.3 | ├ ⚠️ **无进展熔断** | 同上 | 连续 3 轮没有产出 → 暂停并问用户（与受阻**独立计数**） |
-| C15.4 | ├ 交付条件判定（5 种） | 同上 | 制品产出 / 命令成功 / 用户确认 / 全部步骤完成 / 自然语言判定 |
-| C15.5 | ├ ⚠️ **条件门禁**（热 / 僵尸 / 开关 / 预算 / 电量 / 离线） | 同上 | **只拦自动续跑**，不拦用户手动发起；.critical 过热无条件拦 |
-| C15.6 | ├ 僵尸任务防护 | 同上 | 距上次活动 > 24h 不自动续跑（防"任务自己半夜跑起来"） |
-| C15.7 | └ 目标创建上限与成果卡 | 同上 | 最多 5 个活跃目标；完成时生成成果卡（轮次/耗时/花费/产出） |
+| D1 | ✅ 设计文档集（18 份，6785 行） | `README.md`、`docs/01`–`15`、`附录A/B` | 内部链接已校验；事实均带出处 |
+| D2 | ✅ 事实取证归档 | `research/`（465 份） | 已 `-text -diff` 标记，**刻意入库** |
+| C1 | ✅ 续接机制 | `PROJECT_STATE.md`、`docs/进度日志.md` | 就是本文件 |
+| C2 | ✅ 构建/测试闭环 | `Tools/rune.ps1` | ⚠️ `swift build/test` 在本机不可用（E1） |
+| C3 | ✅ `RuneKernel` 零依赖核心（9 文件 / 85 测试） | `JSONValue` `SHA256` `Trust` `Content` `Tool` `Capability` `Errors` `Plan` `Event` | ⚠️ CryptoKit 是 Apple 专有 → **自实现 SHA-256**；⚠️ `canonicalString` 键序稳定才有指纹去重；⚠️ `VFSPath` 的 `..` 逃逸必须拒；⚠️ **写不蕴含删**；⚠️ 事件哈希链使篡改可检测 |
+| C4 | ✅ 补丁引擎（37 测试） | `TextPatch.swift` | ⚠️ **CRLF 是单个字素簇**（T8/T9）；⚠️ 匹配多处**必须拒绝**、绝不猜；⚠️ 一个 hunk 失败 → 整次不落地；诊断必须可执行 |
+| C5 | ✅ 检索子系统（50 测试） | `GlobMatcher` `IgnoreRules` `GrepEngine` | gitignore **最后匹配胜出**；内置默认清单在显式 include 时让位；**预算截断要如实告知** |
+| C6 | ✅ 10 个包骨架 | `Packages/Rune{Net,Store,VM,Bench,Gateway,Context,Core,Tools,MCP,UI}/` | 依赖声明已校验；占位文件里放的是实现清单 |
+| C7 | ✅ 网关纯逻辑（40 测试） | `ToolCallAssembler` `ProviderQuirks` | ⚠️ `JSONRepair` **修不好就返回 nil**（交给修正性重试）；⚠️ 并行 index 交错；⚠️ 诊断要写回结构体（T15） |
+| C8 | ✅ `PolicyEngine`（37 测试） | `PolicyEngine.swift` | 六层判定：人类专属区 → 信任档 → 令牌 → SSRF → **污点** → 风险分级；⚠️ SSRF 含云元数据地址与**重定向逐跳**校验 |
+| C9 | ✅ **最小 Turn 循环（M0 出口达成）**（258 测试） | `TurnRunner.swift` | ⚠️ **步进式**（一次推进一件事）；⚠️ **三步落盘协议**（写意图→执行→写事实）；⚠️ `wasRestored` 必须由运行时**显式**置位 |
+| C10 | ✅ 运行时/存储/App 层设计 | `docs/10`–`15` | — |
+| C11 | ✅ 协议适配器（328 测试） | `ProtocolEncoders` `ProtocolDecoders` `StreamParsing` | ⚠️ DeepSeek reasoning 回传按**请求**判定（不是按消息）；⚠️ Gemini 的 `finishReason` 会单独成帧 —— 漏了会**静默丢工具调用** |
+| C12 | ✅ 波次调度（341 测试） | `ToolScheduler` + `.dispatching` 边界语义 | ⚠️ **检查点以波次为单位**（波内同时在飞）；⚠️ 多路径**全部查、取最严**；⚠️ 多个悬空意图要**整批**问用户 |
+| C13 | ✅ `PlanEngine`（379 测试） | `PlanEngine.swift` | ⚠️ 按计划**声明的路径**精确授权（不是整个工作区）；⚠️ 网络出口**不预授权**；偏离检测：改目标 / 新增危险步骤 / 超支 150% |
+| C14 | ✅ `ApprovalBroker` | `ApprovalBroker.swift` | ⚠️ 超时 = **拒绝**（失败关闭）；⚠️「全部允许」先全量校验再应用；⚠️「记住选择」**缺省必须自动提取路径**，否则退化成整个工具的白名单 |
+| C15 | ✅ `GoalEngine`（405 测试） | `GoalEngine.swift` | ⚠️ 受阻需同一条件连续 3 轮；⚠️ **无进展**与受阻是**两个独立计数**；⚠️ 预算/电量门禁**只拦自动续跑**，不拦用户手动发起 |
+| C16 | ✅ 修正性重试策略层（447 测试） | `Correction.swift` | ⚠️ 编码器**只发 `summary`** → 建议与候选必须拼进去（T17）；⚠️ 按**根因**分桶；⚠️ 逐字重复立刻止损；⚠️「模型改不了」的错误不记账；⚠️ 运行时引导语 ≠ 用户指令（T20） |
+| C17 | ✅ 对话历史协议不变式 | `TurnRunner.reapOrphanCalls` | ⚠️ 漏一个配对结果 → 会话**后续全部 400**（T18）；⚠️ 兜底只在 `.reasoning` 入口做；⚠️ 判定读**历史**不是队列；⚠️ 运行时**不能伪造工具调用**（T19） |
 
 ---
 
@@ -225,32 +156,40 @@ un_tests 边 pply_patch → 测试读到半成品 → **假失败** |
 
 | 项 | 状态 | 备注 |
 |---|---|---|
-| M1 纯逻辑收尾 | ✅ 已完成 | Kernel 全部纯逻辑（405 测试） |
+| M1 纯逻辑 | ✅ 已完成 | Kernel 全部纯逻辑（447 测试）。**Windows 上没有更多阻塞项了** |
+| ⚠️ 待 macOS 验证的风险点 | 🔶 未验证 | ①「多工具结果在 Anthropic/Gemini 下是**连续同角色消息**，依赖服务端合并」—— 上 macOS 后必须用真实渠道压一次；② `ToolSpec` 里 45 个工具的**路径参数名**尚未逐一声明（目前靠 `CallPaths` 猜键名） |
 
 ---
 
-## 7. 下一步（M1 可用内核）
+## 7. 下一步
 
-**M1 的目标（docs/14）**：完整 AgentRuntime（计划、并行调度、预算、修正性重试）+ 工具集扩到 25 个 + 审批机制 + SwiftUI 最小可用。
-**在 Windows 上能做的**（按优先级）：
+### ⚠️ 现状：Windows 上能做的纯逻辑已经做完
 
-### 立即（M1-3，纯逻辑、本机可测）
-1. **把 `ToolScheduler` 接进 `TurnRunner`**：目前 runner 是逐个调度的，应改为按波次调度
-   （并在事件里记录波次结构，供 UI 显示"3 个只读操作并行中"）。
-   ✅ **已解决**：检查点以**波次**为单位（波内调用同时在飞，逐个打点会产出不对应真实状态的检查点）。
-2. **修正性重试**：把 `ToolError.isSelfCorrectable` 接进循环（同一次调用最多重试 2 次）。
+`RuneKernel` 现在有 **25 个源文件、447 项测试**，覆盖：值类型与协议、补丁引擎、检索、
+网关（协议适配 + 流拼装 + 成本）、策略引擎、Turn 循环与崩溃恢复、波次调度、
+计划引擎、审批代理、目标引擎、**修正性重试与协议不变式**。
 
-### 随后（M1-3 / M1-4）
-3. **`PlanEngine` + `ApprovalBroker`**：计划生成、偏离检测（`Plan.requiresUserConfirmation` 已就位）、
-   审批请求的批量与"记住选择"。
-4. **`GoalEngine`**：跨轮推进 + 阻塞纪律（`Goal` 类型已就位，缺驱动器）。
+**接下来只有两条路**：
 
-### 需要 macOS 才能做（不要在 Windows 上浪费时间）
-6. `RuneStore`（GRDB + 迁移 + 哈希链落盘）—— ⚠️ FTS5 必须用 CJK 分词器或 `trigram`
-7. `RuneNet`（真实 URLSession + SSE 传输 + 出口代理）
-8. `RuneBench`（VFS 真实文件系统映射 + security-scoped bookmark + 原生 CPython 集成）
-9. `RuneVM`（WasmKit 沙箱）
-10. 任何 SwiftUI / Live Activity / Core ML
+**路线 A（推荐）：把所有需要 macOS 的部分集中做掉。**
+在 macOS 上按此顺序：`RuneStore`（GRDB + 事件落盘）→ `RuneNet`（真实 URLSession +
+SSE 传输 + 出口代理）→ `RuneBench`（VFS + security-scoped bookmark + 原生 CPython 垫片）→
+`RuneTools`（45 个工具）→ `RuneCore`（把 Kernel 的纯逻辑接上真实 IO）→ `RuneUI`。
+⚠️ 不要在 Windows 上做这些 —— 无法验证。
+
+**路线 B（在 Windows 上继续插入式工作，都有价值但优先级低于 A）**：
+1. **上下文装配器**（`RuneContext` 的纯逻辑部分）：预算制分配、三级压缩、装配后自检
+   （"当前目标 / 未完成 todo / 最近失败必须在上下文里"）。
+2. **混合检索的融合层**：FTS5 BM25 + 向量的 RRF 融合排序（纯算法）。
+3. **ToolSpec 全量声明**：45 个工具的 schema + 路径参数名 + 幂等性 + 风险级 + 审批策略
+   （这能顺手消掉 §6 里的风险点 ②）。
+4. **Skill 注册表与渐进式披露**（L0 目录截断、L1 按需加载）。
+5. **Workflow 脚本的纯逻辑**：编排脚本的解析与校验（执行需要 JSC → macOS）。
+6. **`RuneMCP` 的协议编解码**（纯 JSON-RPC 部分）。
+7. **cassette 回放夹具**：目前验收用的是测试内脚本闭包，应改成录制的真实会话夹具。
+
+**建议**：如果目标是尽快跑起一个真实的端到端 Agent，走 A；如果暂时没有 macOS 环境，
+走 B 里的 1、2、3 项。
 
 ---
 
@@ -288,6 +227,11 @@ un_tests 边 pply_patch → 测试读到半成品 → **假失败** |
 | **T14** | `#expect(x.contains(where: \.isFatal))` 在测试宏里被当成可能抛错 → 编译失败 | 写 `#expect(x.contains { $0.isFatal })` |
 | **T15** | 把诊断信息追加到**局部副本**却忘了写回结构体 → 返回值里有、`allIssues`/`diagnostics` 里没有 | 修 bug 后追加诊断时，务必 `partial.issues = issues` 再写回容器（`ToolCallAssembler.emit` 已如此） |
 | **T16** | 尾逗号可能出现在**闭合括号之前**（`{"a":1,}`），只看字符串末尾会漏掉 | 单遍扫描 + 向后跳过空白判断下一个非空白字符是否为 `}`/`]` |
+| **T17** | ⚠️ **编码器只发 `ToolResult.summary`**。任何"结构化错误"（建议、候选、字段名）若不拼进 `summary`，就等于**从没存在过** | 回灌内容统一走 `ToolError.modelFacingText`；给错误加字段时先问"它到底会不会被发出去" |
+| **T18** | ⚠️ **assistant 里的每个 tool_call 都必须有配对结果**（Anthropic/OpenAI/Gemini 三家一致），否则**后续所有请求 400**，且报错信息与真实原因完全不沾边 | `TurnRunner.reapOrphanCalls` 在 `.reasoning` 入口无条件兜底；判定读**历史**而非队列字段 |
+| **T19** | ⚠️ **运行时不能伪造工具调用**（凭空造 `tool_use` 会让会话彻底 400） | "重试"只能靠回灌精确错误；运行时写的话只能是文本 + `.runtimeGuidance` 信任级 |
+| **T20** | ⚠️ **运行时写的话不能标成 `.userInstruction`** | 否则运行时可以伪造用户授权驱动危险动作（提权）。用 `.runtimeGuidance`（`canDriveDangerousAction == false`） |
+| **T21** | ⚠️ 用**手写枚举**减出"非稳定态"一定会漏（`.interrupted` 就这么漏掉的，导致 `run()` 空转 10000 次） | `canAdvance` 直接定义为 `!status.isStable`；新增状态只需回答"它稳不稳" |
 
 ---
 
@@ -313,43 +257,32 @@ un_tests 边 pply_patch → 测试读到半成品 → **假失败** |
 D:\项目\ios平台agent\          （构建时请用 C:\Users\MSI-NB\rune-ws）
 ├─ PROJECT_STATE.md          ⭐ 本文件（最先读）
 ├─ README.md                 设计文档入口
-├─ Tools/
-│  └─ rune.ps1               ⭐ 构建/测试驱动（唯一可用的构建入口）
+├─ Tools/rune.ps1            ⭐ 构建/测试驱动（**本机唯一可用**的构建入口）
 ├─ docs/
-│  ├─ 进度日志.md            ⭐ 追加式时间线
+│  ├─ 进度日志.md            ⭐ 追加式时间线（细节都在这）
 │  ├─ 01 … 15                设计文档（01 产品定位 … 15 风险登记册）
 │  └─ 附录A / 附录B          渠道事实表 / 技术选型核实表
-├─ research/                 取证材料（465 份，非交付物）
+├─ research/                 取证材料（465 份，非交付物，**刻意入库**）
 └─ Packages/
-   ├─ RuneKernel/            ✅ 零依赖核心（**249 测试全绿**）
-   │  ├─ Package.swift       （仅供 macOS 使用；本机走 rune.ps1）
-   │  ├─ Sources/RuneKernel/
-   │  │   ├─ JSONValue.swift      手写 JSON 解析 + 确定性序列化
-   │  │   ├─ SHA256.swift         纯 Swift SHA-256 + 三种指纹
-   │  │   ├─ Trust.swift          信任级 / 污点 / 人类专属区
-   │  │   ├─ Content.swift        消息/内容块/制品/用量/成本/流式事件
-   │  │   ├─ Tool.swift           工具规格/schema/错误/全部工具名常量
-   │  │   ├─ Capability.swift     VFSPath（安全边界）/ 出口规则 / 能力令牌
-   │  │   ├─ Errors.swift         统一错误模型
-   │  │   ├─ Plan.swift           结构化计划 + Goal 阻塞纪律
-   │  │   ├─ Event.swift          事件枚举 + 信封 + 哈希链
-   │  │   ├─ TextPatch.swift      ⭐ 补丁引擎
-   │  │   ├─ GlobMatcher.swift    ⭐ 通配匹配
-   │  │   ├─ IgnoreRules.swift    ⭐ gitignore 语义 + 两层 PathFilter
-   │  │   ├─ GrepEngine.swift     ⭐ 搜索核心（预筛 / 二进制跳过 / 预算截断）
-   │  │   ├─ ToolCallAssembler.swift ⭐ 流式工具调用拼装 + JSON 修复
-   │  │   ├─ ProviderQuirks.swift    ⭐ 渠道差异声明 + 价格与成本计算
-   │  │   └─ PolicyEngine.swift      ⭐ 信任刻度盘 + 审批分级 + SSRF + 人类专属区
-   │  └─ Tests/RuneKernelTests/
-   │      ├─ JSONAndHashingTests.swift
-   │      ├─ SecurityTests.swift
-   │      ├─ RuntimeModelTests.swift
-   │      ├─ PatchTests.swift         37 项补丁引擎测试
-   │      ├─ SearchTests.swift        50 项检索测试
-   │      ├─ GatewayTests.swift       40 项网关测试
-   │      └─ PolicyTests.swift        37 项策略引擎测试
+   ├─ RuneKernel/            ✅ 零依赖核心（25 源文件 / 447 测试全绿）
+   │  ├─ Package.swift       仅供 macOS 使用；本机走 rune.ps1
+   │  ├─ Sources/RuneKernel/        ← 25 个 .swift（清单见下）
+   │  └─ Tests/RuneKernelTests/     ← 13 个 .swift
    └─ Rune{Net,Store,VM,Bench,Gateway,Context,Core,Tools,MCP,UI}/   ⬜ 骨架（含实现清单）
 ```
+
+**`RuneKernel` 源文件一览**（找一个能力在哪，先看这里）：
+
+| 分组 | 文件 |
+|---|---|
+| 值类型与安全 | `JSONValue` `SHA256` `Trust` `Content` `Tool` `Capability` `Errors` |
+| 编辑与检索 | `TextPatch` `GlobMatcher` `IgnoreRules` `GrepEngine` |
+| 网关 | `ChatRequest` `StreamParsing` `ProtocolEncoders` `ProtocolDecoders` `ToolCallAssembler` `ProviderQuirks` |
+| 运行时 | `TurnRunner` `ToolScheduler` `PolicyEngine` `Plan` `Event` `Correction` |
+| 编排 | `PlanEngine` `ApprovalBroker` `GoalEngine` |
+
+**测试文件**：`JSONAndHashing` `Security` `RuntimeModel` `Patch` `Search` `Gateway` `Policy`
+`TurnRunner` `ToolScheduler` `Protocol` `Planning` `GoalEngine` `Correction`
 
 ---
 
@@ -363,13 +296,3 @@ D:\项目\ios平台agent\          （构建时请用 C:\Users\MSI-NB\rune-ws）
 | **M3** | 切换任意两家渠道，同一任务成功率差异 <15% |
 | **M4** | 飞行模式下完成"改函数 + 跑测试 + 写 commit"全流程 |
 | **M5** | 注入套件 0 越权 + 性能基准全达标 + 审核材料齐备 |
-
-
-
-
-
-
-
-
-
-

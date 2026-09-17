@@ -20,6 +20,15 @@ public enum TrustLevel: String, Sendable, Codable, CaseIterable, Hashable {
     case modelOutput
     /// 我们自己的原生工具返回的结构化结果（如 git status）
     case toolResultTrusted
+    /// **运行时替模型补充的信息**：修正性重试的定向提示、恢复说明、用户转向的转述。
+    ///
+    /// ⚠️ 它必须与 `.userInstruction` 分开，理由不是洁癖，是**权限**：
+    /// 运行时的角色是"替模型补充它看不到的事实"，不是"替用户下命令"。
+    /// 如果把运行时写的话标成用户指令，就等于运行时可以**伪造用户授权**去驱动危险动作
+    /// （`canDriveDangerousAction` 会放行）—— 那是提权，不是便利。
+    /// 所以它 `isInstruction == false` 且 `canDriveDangerousAction == false`：
+    /// 它能让模型改对参数，但**永远不能**让一次推送/外发/删除免除审批。
+    case runtimeGuidance
     /// 网页、issue、克隆来的仓库文件、邮件、PDF、MCP 返回、图片 OCR
     case untrustedContent
 
@@ -27,7 +36,7 @@ public enum TrustLevel: String, Sendable, Codable, CaseIterable, Hashable {
     public var isInstruction: Bool {
         switch self {
         case .userInstruction, .projectInstruction: return true
-        case .modelOutput, .toolResultTrusted, .untrustedContent: return false
+        case .modelOutput, .toolResultTrusted, .runtimeGuidance, .untrustedContent: return false
         }
     }
 
@@ -38,8 +47,12 @@ public enum TrustLevel: String, Sendable, Codable, CaseIterable, Hashable {
     ///
     /// 人类专属区（策略文件、信任档、凭据、审计日志）**任何**来源都不可写；
     /// 而"推送/外发/删除"这类高危动作，模型输出可以**提议**，但不可信内容不可以**直接驱动**。
+    /// 运行时引导语同样不能直接驱动 —— 它只是提示，不是授权。
     public var canDriveDangerousAction: Bool {
-        self != .untrustedContent
+        switch self {
+        case .untrustedContent, .runtimeGuidance: return false
+        case .userInstruction, .projectInstruction, .modelOutput, .toolResultTrusted: return true
+        }
     }
 
     /// 序列化给模型看时的边界标签。见 docs/09 §4.3。
@@ -49,6 +62,7 @@ public enum TrustLevel: String, Sendable, Codable, CaseIterable, Hashable {
         case .projectInstruction: return "project"
         case .modelOutput: return "model"
         case .toolResultTrusted: return "tool"
+        case .runtimeGuidance: return "runtime"
         case .untrustedContent: return "untrusted"
         }
     }

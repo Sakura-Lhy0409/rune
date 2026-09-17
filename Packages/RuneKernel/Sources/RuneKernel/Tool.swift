@@ -104,7 +104,11 @@ public struct ToolResult: Sendable, Codable, Hashable {
     }
 
     public static func failure(callID: String, error: ToolError) -> ToolResult {
-        ToolResult(callID: callID, status: .error, summary: error.modelFacingMessage, error: error)
+        // ⚠️ 必须用 `modelFacingText`（含建议与候选）而不是 `modelFacingMessage`：
+        //    `summary` 是**唯一**会被发给模型的字段（见 ProtocolEncoders），
+        //    只送 message 等于把 `suggestion` / `candidates` 直接丢掉 ——
+        //    那样「修正性重试」整条设计就是空转的。
+        ToolResult(callID: callID, status: .error, summary: error.modelFacingText, error: error)
     }
 }
 
@@ -153,6 +157,23 @@ public struct ToolError: Sendable, Codable, Hashable, Error {
         self.modelFacingMessage = modelFacingMessage
         self.suggestion = suggestion
         self.candidates = candidates
+    }
+
+    /// **真正回灌给模型**的完整错误文本。
+    ///
+    /// ⚠️ 这个属性存在的唯一理由是修一个「看着像做了、其实全丢了」的洞：
+    /// 三家协议编码器都只发 `ToolResult.summary`，而 `summary` 原先只填了
+    /// `modelFacingMessage` —— 于是模型看到的永远是「参数不合 schema」，
+    /// 既看不到**错在哪个字段**，也看不到我们辛苦算出来的最接近工具名与相似路径候选。
+    /// 结果是：设计文档里写得很漂亮的「修正性重试」，实际退化成"让模型再猜一次"。
+    ///
+    /// `suggestion` 与 `candidates` 是运行时**确定知道**的信息（schema、真实目录、工具表），
+    /// 把它们送到模型面前，是"把长任务成功率从看运气变成看工程质量"最便宜的一步。
+    public var modelFacingText: String {
+        var lines = [modelFacingMessage]
+        if let suggestion, !suggestion.isEmpty { lines.append("👉 \(suggestion)") }
+        if !candidates.isEmpty { lines.append("候选：\(candidates.joined(separator: "、"))") }
+        return lines.joined(separator: "\n")
     }
 
     /// 是否值得让模型自己改一次参数再试
