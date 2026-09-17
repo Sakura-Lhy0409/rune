@@ -588,6 +588,22 @@ public enum TurnRunner {
         // ---------- 启动 ----------
         case .start:
             record(.turnStarted, "开始：\(state.objective)")
+            // ⚠️ **目标必须进对话历史，不能只发一条事件。**
+            //
+            //    这里原来只 `emit(.userMessage)`，而 `state.messages` 是空的 —— 后果有两层：
+            //      ① 三家协议都要求 `messages` / `contents` **至少有一条**，
+            //         一个只有 system、没有 messages 的请求**根本发不出去**（直接 400）；
+            //      ② 就算发出去了，模型也不知道自己要干什么。
+            //    而"漏掉当前目标"正是装配器那条硬性断言里排第一位的失败原因（docs/07 §1.2）。
+            //
+            //    幂等：只在历史里还没有用户发言时补 —— 恢复/重放再走到这里不会把目标记两遍。
+            if !state.messages.contains(where: { $0.role == .user }) {
+                state.messages.append(Message(
+                    role: .user,
+                    blocks: [.text(state.objective, origin: .userInstruction)],
+                    origin: .userInstruction
+                ))
+            }
             emit(.userMessage, ["objective": .string(state.objective)], trust: .userInstruction)
             state.status = .reasoning
             return StepOutcome(state: state, newEvents: events, didAdvance: true)

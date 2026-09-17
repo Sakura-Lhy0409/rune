@@ -27,9 +27,9 @@
 | 项 | 值 |
 |---|---|
 | **更新日期** | 2026-09-19 |
-| **当前阶段** | **M1 内核完成 95% → 转入 M2/M3 的"接真实 IO"阶段（走 CI 验证）** |
-| **当前里程碑** | ✅ **M1-19 结构化压缩（保住可执行性）**（978 测试全绿）—— 下一步见 §6 |
-| **已完成里程碑** | ✅ M0 全部（…→**258 出口验收达成**）→ ✅ M1-1 ToolScheduler（282）→ ✅ M1-2 协议适配器（328）→ ✅ M1-3 波次调度（341）→ ✅ M1-4 计划与审批（379）→ ✅ M1-5 GoalEngine（405）→ ✅ M1-6 修正性重试（447）→ ✅ M1-7 上下文装配器（487）→ ✅ M1-8 工具注册表（540）→ ✅ M1-9 技能库 + 场景测试（608）→ ✅ M1-10 Workflow 引擎（657）→ ✅ M1-11 VFS 层（705）→ ✅ M1-12 自研 shell 解释器（775）→ ✅ M1-13 沙箱层（877）→ ✅ M1-14 无 Mac 开发路径（CI + 装机 + 最小 App）→ ✅ M1-15 文件与检索工具（C28，877）→ ✅ **M1-16 渠道网关（C29，912）** → ✅ **M1-17 按协议族分组历史（C30，934）** → ✅ **M1-18 成本账本与熔断（C31，947）** → ✅ **M1-19 结构化压缩（C32，978）** |
+| **当前阶段** | **M1 内核完成 99% → 只差「接真实 IO」这一层（要 macOS / CI 验证）** |
+| **当前里程碑** | ✅ **M1-20 出站请求的构建与体检（顺带修掉「模型不知道目标」）**（1001 测试全绿）—— 下一步见 §6 |
+| **已完成里程碑** | ✅ M0 全部（…→**258 出口验收达成**）→ ✅ M1-1 ToolScheduler（282）→ ✅ M1-2 协议适配器（328）→ ✅ M1-3 波次调度（341）→ ✅ M1-4 计划与审批（379）→ ✅ M1-5 GoalEngine（405）→ ✅ M1-6 修正性重试（447）→ ✅ M1-7 上下文装配器（487）→ ✅ M1-8 工具注册表（540）→ ✅ M1-9 技能库 + 场景测试（608）→ ✅ M1-10 Workflow 引擎（657）→ ✅ M1-11 VFS 层（705）→ ✅ M1-12 自研 shell 解释器（775）→ ✅ M1-13 沙箱层（877）→ ✅ M1-14 无 Mac 开发路径（CI + 装机 + 最小 App）→ ✅ M1-15 文件与检索工具（C28，877）→ ✅ **M1-16 渠道网关（C29，912）** → ✅ **M1-17 按协议族分组历史（C30，934）** → ✅ **M1-18 成本账本与熔断（C31，947）** → ✅ **M1-19 结构化压缩（C32，978）** → ✅ **M1-20 出站构建与体检（C33，1001）** |
 | **阻塞项** | 无 |
 | **本机可验证范围** | ✅ 平台无关的 Swift 代码（Kernel / 补丁 / 检索 / 网关 / 策略 / **Turn 循环**）<br>❌ iOS 专属（UI / Live Activity / Core ML / VFS 真实文件系统 / 沙箱 / GRDB / JSC）—— 需 macOS |
 
@@ -38,7 +38,7 @@
 ```
 设计文档      ████████████████████ 100%
 M0 地基       ████████████████████ 100%   ✅ 出口验收已达成
-M1 可用内核   ████████████████████  99%   ← 内核 39 源文件 / 978 测试全绿，**只差真实 IO 与 UI（都要 macOS）**
+M1 可用内核   ████████████████████  99%   ← 内核 40 源文件 / 1001 测试全绿，**只差真实 IO 与 UI（都要 macOS）**
 M2 移动体验   ░░░░░░░░░░░░░░░░░░░░░   0%
 M3 多渠道     ░░░░░░░░░░░░░░░░░░░░░   0%
 M4 端侧+记忆 / M5 上架准备   ░░░░░░░░░░░░░░░░░░░░░   0%
@@ -57,7 +57,7 @@ M4 端侧+记忆 / M5 上架准备   ░░░░░░░░░░░░░░�
 
 ### 包结构现状
 
-**包结构**：`RuneKernel` ✅ **39 源文件 / 978 测试**（本机可测）；`RuneNet` `RuneStore` `RuneVM` `RuneBench` `RuneGateway` `RuneContext` `RuneCore` `RuneTools` `RuneMCP` `RuneUI` ⬜ 骨架（`Package.swift` + 实现清单）。
+**包结构**：`RuneKernel` ✅ **40 源文件 / 1001 测试**（本机可测）；`RuneNet` `RuneStore` `RuneVM` `RuneBench` `RuneGateway` `RuneContext` `RuneCore` `RuneTools` `RuneMCP` `RuneUI` ⬜ 骨架（`Package.swift` + 实现清单）。
 
 ---
 
@@ -140,12 +140,13 @@ M4 端侧+记忆 / M5 上架准备   ░░░░░░░░░░░░░░�
 | C30 | ✅ **按协议族分组历史 —— 修掉 3 个「用户第一次用就会炸」的错**（934 测试） | `HistoryGrouping.swift` | ⭐ ① **多工具结果的分组属于协议、不属于运行时**（OpenAI 要求每个结果各自一条、Anthropic/Gemini 要求合成一条，Gemini 相邻同角色直接 `INVALID_ARGUMENT`）② Gemini 的 `functionResponse.name` 从硬编码 `"tool"` 改成**从配对的 toolCall 里找回真名** ③ Anthropic 失败的工具结果补上 `is_error: true`（不补的话「权限被拒」在模型看来与一次成功输出无异）；⚠️ **合并必须先丢空条目再合并**（空条目会成为假的角色隔断：`[user, 空, user]` 过滤后反而变成相邻同角色）；⚠️ **合并永不提权**（信任级取更保守的，否则运行时的引导语会因合并获得「用户授权」身份） |
 | C31 | ✅ **成本账本与熔断 —— 上限真的会拦住钱**（947 测试） | `TurnRunner` · `Event` · `CostLedgerTests` | ⭐ 修的是一个**整块「声明了但从不生效」的安全闸门**：`Config.maxCostMicroUSD` 声明过、有默认值、**从没被读过**；`Dependencies.costOfRound` 能注入、**从没被调用过**；`TurnStatus.pausedBudget` 是**永远到不了的状态**；`BudgetWarning`/`TurnPaused`/`TurnResumed` 三个事件**从没被发出过**；`TurnProjection.costMicroUSD` 三个字段**从没被填过**。界面写着「上限 $0.30」，而那行代码对行为没有任何影响 —— 保护**看起来在**，其实不在；⚠️ 修法：① 成本检查放在**调用之前**（烧完再查叫账单不叫熔断）② 账本进**事件日志**（`costRecorded`）并喂给投影，崩溃恢复后「花了多少」不会归零 ③ 上限存**状态**里（`costCeilingMicroUSD`），否则用户点「提高上限」下一轮卡片又弹（同 T30 死循环） ④ 熔断给的是**可执行的三选一**，不是一句「超预算了」⑤ `raiseBudget` 只能从 `.pausedBudget` 进入（不能拿钱包撬开审批） |
 | C32 | ✅ **结构化压缩 —— 保住可执行性，不是写散文**（978 测试） | `Compaction.swift` · `CompactionTests` | ⭐ 按 docs/07 §5 把「压缩」做成**结构化摘要**（目标 / 带证据的事实 / 决定 / 制品 / 未完成 / **失败路径** / 不可信来源）：⚠️ 散文摘要丢的是**可执行性** —— 模型读完只知道「大概发生过什么」，于是会把已经失败过的路再走一遍；`rejected_paths` 因此必须渲染成「**不要再试**」的**指令**而不只是一条记录；⚠️ 事实没有证据就**不可用**（编出来的断言会在压缩后继续被当成事实用）；不可信内容必须带出处并被边界标记包住（否则压缩这一步把提示注入的防线拆了）；⚠️ 渲染必须**逐字节确定**（缓存命中率直接决定用户付多少钱）；⚠️ 选级别遵守「**能端侧压就端侧压**」—— 端侧可用时即使装配器建议 L3 也走端侧，因为手机上的钱是用户自己的；估不出成本就**不擅自花钱**，先用结构性裁剪顶着；⚠️ **压缩永不删除事件**（摘要用 `sourceRange` 记住自己覆盖了哪一段） |
+| C33 | ✅ **出站请求构建 + 协议体检（顺带修掉一个致命 bug）**（1001 测试） | `RequestBuilder.swift` · `RequestBuilderTests` | ⭐⭐ 第一次把「历史 → 真正发出去的请求」这一段建起来，它当场抓到：**`.start` 从来没有把目标写进 `state.messages`，只发了一条事件** —— 于是模型根本不知道要干什么，而且三家协议都要求 `messages`/`contents` **至少有一条**，「只有 system、没有 messages」的请求**发都发不出去**（整个 App 一行都跑不了）；⚠️ 根因是这一层此前**不存在**：谁来编请求、工具按什么顺序放、发之前检查什么，没有任何地方回答；⚠️ **工具顺序由构建器排序定死**（`Dictionary` 迭代顺序**跨进程不稳定** → 顺序一变请求指纹与 Prompt Cache 全失效，而用户为此多付的钱**不会有任何报错**）；⚠️ 体检给出的是**三种不同的改法**（结果没记 → 去补记；记了但没紧跟 → 挪回调用后面；多出来的 → 对应关系串了），只报错不给路的诊断等于没诊断；⚠️ **失败关闭**：体检不过就**不返回**请求，而不是「发出去试试」 |
 
 ---
 
 ## 6. 下一步
 
-### ⚠️ 现状：Windows 上能做的纯逻辑基本做完（978 测试）
+### ⚠️ 现状：Windows 上能做的纯逻辑基本做完（1001 测试）
 
 **⚠️ 待 macOS 验证的风险点**（未验证，不是"已完成"）：
 ① **L3 压缩已有「该压到哪一级 + 产物格式 + 解析」，但运行时那一次**付费调用**还没接**（装配器只报告，C32 补上了决策与产物）；
@@ -153,8 +154,9 @@ M4 端侧+记忆 / M5 上架准备   ░░░░░░░░░░░░░░�
 ③ 86 个工具里**14 个已实现**（C28）；其余 72 个分三类，都要 macOS：执行（CPython/JSC/WASM）、网络（URLSession + 出口代理）、iOS 原生（相册/日历/定位…）。
 （原先两条已从结构上解决：多工具结果的同角色消息 → **C30**；真实渠道仍要各压一次。）
 
-`RuneKernel` 有 **39 个源文件、978 项测试**，覆盖：值类型与协议、补丁引擎、检索、
+`RuneKernel` 有 **40 个源文件、1001 项测试**，覆盖：值类型与协议、补丁引擎、检索、
 **渠道网关（配置 / 路由 / 降级 / 重试 / 去重 / 按协议族分组历史）**、**成本账本与熔断**、**结构化压缩**、
+**出站请求构建与协议体检**、
 策略引擎、Turn 循环与崩溃恢复、波次调度、计划引擎、审批代理、目标引擎、
 修正性重试与协议不变式、上下文预算制装配、86 个工具契约、技能与渐进式披露、
 Workflow 批处理编排、**VFS（真实文件系统 + 内存两份实现）**、**自研 shell 解释器**、**沙箱层**。
@@ -162,18 +164,14 @@ Workflow 批处理编排、**VFS（真实文件系统 + 内存两份实现）**�
 
 **⭐ 路线 A（现在的正路，不需要 Mac）—— 见 [`docs/16`](docs/16-无Mac开发与验证路径.md)**
 
-> **用户没有 macOS 机器**，而这件事**有解**：GH Actions 的 **macOS 运行器负责编译测试**，
-> Windows 上的 **Sideloadly 负责签名装机**。唯一真正做不到的是**交互式**调试
-> （断点 / Instruments / 手动点模拟器）→ 工作方式变成「写测试 → 推 CI → 看报告」。
-> ⚠️ 免费 Apple ID 签名只有 **7 天**（$99/年去掉限制并开 TestFlight）；
-> ⚠️ **第一次 CI 失败是正常的** —— `Package.swift` 从未被真正的 SwiftPM 解析过（E1）。
+> **用户没有 macOS 机器**，而这件事**有解**：GH Actions 的 **macOS 运行器负责编译测试**，Windows 上的 **Sideloadly 负责签名装机**。
+> 唯一真正做不到的是**交互式**调试（断点 / Instruments / 手动点模拟器）→ 工作方式变成「写测试 → 推 CI → 看报告」。
+> ⚠️ 免费 Apple ID 签名只有 **7 天**（$99/年去掉限制并开 TestFlight）；⚠️ **第一次 CI 失败是正常的**（`Package.swift` 从未被真正的 SwiftPM 解析过，E1）。
 > 已就位：`.github/workflows/{kernel,ios}.yml`、`Tools/{ci.sh,check_ci.py,lint_quotes.py,check_docs.py}`、`Apps/Rune/`。
 
 **路线 A 的实现顺序**（CI 就绪之后）：`RuneStore`（GRDB + 事件落盘）→ `RuneNet`（URLSession + SSE + 出口代理）→ `RuneBench`（VFS 落地 + bookmark + CPython 垫片）→ `RuneTools`（86 个工具）→ `RuneCore`（接真实 IO）→ `RuneUI`（docs/08 那套交互）。**每层都要带测试**，因为验证只能走 CI。
 
 **路线 B（Windows 上纯粹逻辑性的收尾）**：剩下检索融合（RRF）、MCP 编解码、cassette 回放夹具。**价值远低于路线 A，不要用它们填时间。**
-
----
 
 ## 7. 已知陷阱（不要重复踩）
 
@@ -240,6 +238,7 @@ Workflow 批处理编排、**VFS（真实文件系统 + 内存两份实现）**�
 | **T48** | ⚠️ **声明式的规则表如果只有测试引用、编码器不经过它，那它是文档不是契约**：`HistoryGrouping.forFamily` 一度没人调用，编码器各自无条件 `merge` —— 于是「表里写不合并」与「实际行为」是两回事，**而规则表那几条断言照样全绿**（它们在测表，不在测行为）。破坏性验证时才暴露：把表改坏，行为测试一条都没红 | 给规则表一个**唯一执行入口**（`MessageGrouping.applying`），编码器只走它。⚠️ 与 T26 是同一类病（「看上去是对的」比「明显是错的」更危险）：**判断这类问题的唯一办法是故意破坏它，看有没有测试变红** |
 | **T49** | ⚠️ **一整块安全闸门可以只以「声明」的形式存在**：上限常量、可注入的依赖、专用状态、三个事件、投影字段 —— 全都写好了、编译通过、注释齐全，而**没有任何一行代码读它**。它比「没有这个功能」更危险：设置页会显示「上限 $0.30」，于是用户以为被保护着。⚠️ 还有一个特征信号：**消费端接好了、生产端没接**（`EventProjector` 会处理 `TurnPaused`，却没有任何地方**发**它） | 判据是**grep 它该读的那个标识符**：如果它只出现在自己的声明与初始化里，那就没接上。更硬的判据是**破坏性验证**：把闸门改成永不触发，看有没有测试变红（本轮：25 条断言变红）。⚠️ 与 T48 同源 —— 本项目已经在这上面栽过两次，新增任何「上限/阈值/白名单」时先问：**谁读它？** |
 | **T50** | ⚠️ **「只输出 JSON」是一句模型经常不听的指令**：它会包 ``` 围栏、前后加寒暄，还会在说明里写**占位对象**（「下面这种 `{}` 是空对象：真正的在下面」）。只认纯 JSON 的解析路径于是 **100% 失败** —— 而表现得像「模型不会做这件事」，不是像「我们的解析器太窄」 | 解析器必须 ① 先把 JSON **抠出来**（括号配平要**感知字符串与转义**，否则含 `if (a) { b }` 的字符串会在中间就以为配平）② **只抠第一块不够** —— 诱饵 `{}` 也是合法 JSON，所以要由调用方**按形状挑**（「第一个带 `goal` 的对象」）。⚠️ 修完要回归一条：纯 JSON **不能**被判成「修过」，否则「模型给的参数有多不准」这个统计就废了 |
+| **T51** | ⚠️⚠️ **「病史」的中间态本来就不合法，所以校验只能长在「要发出去的那一刻」**：三步落盘协议（写意图 → 执行 → 写事实）保证了一个窗口 —— 模型刚给出 `tool_calls`、结果还没写出来的那一瞬，历史里就是「调用没有配对结果」。若把「每个 tool_call 必须有结果」当成**每一步**的前置条件去断言/拦截，运行时会被**判死** | 闸门长在 `RequestBuilder`（唯一的发送路径），**不是**长在状态机的每一步上。写测试时也要注意：**只在 `.reasoning`（下一步就会调模型）的状态上体检** —— 「每一步都体检」写出来的第一版就因为这个原因红了。⚠️ 推论：任何「历史级」的不变式，都要先问清楚**它在哪个时间点才必须成立** |
 
 ---
 
@@ -273,22 +272,22 @@ D:\项目\ios平台agent\          （构建时请用 C:\Users\MSI-NB\rune-ws）
 │  └─ 附录A / 附录B          渠道事实表 / 技术选型核实表
 ├─ research/                 取证材料（465 份，非交付物，**刻意入库**）
 └─ Packages/
-   ├─ RuneKernel/            ✅ 零依赖核心（39 源文件 / 978 测试全绿；Sources 39 个 .swift、Tests 28 个）
+   ├─ RuneKernel/            ✅ 零依赖核心（40 源文件 / 1001 测试全绿；Sources 40 个 .swift、Tests 29 个）
    └─ Rune{Net,Store,VM,Bench,Gateway,Context,Core,Tools,MCP,UI}/   ⬜ 骨架（含实现清单）
 ```
 
-**`RuneKernel` 源文件一览**（39 个 .swift）：
+**`RuneKernel` 源文件一览**（40 个 .swift）：
 | 分组 | 文件 |
 |---|---|
 | 值类型与安全 | `JSONValue` `SHA256` `Trust` `Content` `Tool` `Capability` `Errors` |
 | 编辑与检索 | `TextPatch` `GlobMatcher` `IgnoreRules` `GrepEngine` |
 | 文件系统与执行 | `VFS` `Shell` `Sandbox` `ToolHandlers` |
-| 协议与组装 | `ChatRequest` `StreamParsing` `ProtocolEncoders` `ProtocolDecoders` `ToolCallAssembler` `ProviderQuirks` `HistoryGrouping` |
+| 协议与组装 | `ChatRequest` `StreamParsing` `ProtocolEncoders` `ProtocolDecoders` `ToolCallAssembler` `ProviderQuirks` `HistoryGrouping` `RequestBuilder` |
 | 渠道网关 | `Gateway`（渠道配置 / 路由 / 降级 / 重试 / 去重） |
 | 运行时 | `TurnRunner` `ToolScheduler` `PolicyEngine` `Plan` `Event` `Correction` `Context` `Compaction` `ToolRegistry` `EventLog` |
 | 编排 | `PlanEngine` `ApprovalBroker` `GoalEngine` `Skill` `SkillLibrary` `Workflow` |
 
-**测试文件**（28 个 / 978 项）：`JSONAndHashing` `Security` `RuntimeModel` `Patch` `Search` `Gateway` `GatewayRouter` `Policy` `TurnRunner` `ToolScheduler` `Protocol` `HistoryGrouping` `Planning` `GoalEngine` `Correction` `Context` `ToolRegistry` `Skill` `Workflow` `VFS` `Shell` `Sandbox` `EventLog` `Scenario` `ToolHandlers` `CostLedger` `Compaction`
+**测试文件**（29 个 / 1001 项）：`JSONAndHashing` `Security` `RuntimeModel` `Patch` `Search` `Gateway` `GatewayRouter` `Policy` `TurnRunner` `ToolScheduler` `Protocol` `HistoryGrouping` `Planning` `GoalEngine` `Correction` `Context` `ToolRegistry` `Skill` `Workflow` `VFS` `Shell` `Sandbox` `EventLog` `Scenario` `ToolHandlers` `CostLedger` `Compaction` `RequestBuilder`
 ---
 
 ## 10. 里程碑验收标准（摘录自 [14](docs/14-工程路线图与测试策略.md)）
