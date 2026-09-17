@@ -58,7 +58,7 @@ struct RootView: View {
         VStack(alignment: .leading, spacing: 6) {
             Text("完全在设备上运行的 Agent")
                 .font(.headline)
-            Text("这一版证明内核能在 iPhone 上构建、运行，并且事件日志是真的。")
+            Text("这一版证明内核能在 iPhone 上构建、运行、真的改设备上的文件，并且事件日志是真的。")
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
         }
@@ -68,8 +68,9 @@ struct RootView: View {
         VStack(alignment: .leading, spacing: 10) {
             Text("点上面的按钮，它会：").font(.footnote).foregroundStyle(.secondary)
             ForEach([
-                "列目录 → 读文件 → 写出一个新文件",
+                "列目录 → 读 notes.md → 改掉一行 → 复读确认",
                 "每一步都走真正的 TurnRunner / 策略引擎 / 工具注册表",
+                "文件是真的被改的（在 App 的 Documents/RuneDemo 下）",
                 "把全过程写成事件日志，并校验哈希链",
             ], id: \.self) { line in
                 Label(line, systemImage: "circle.fill")
@@ -77,7 +78,7 @@ struct RootView: View {
                     .font(.footnote)
                     .foregroundStyle(.secondary)
             }
-            Text("（暂时没有联网：真的模型客户端要等 RuneNet 接上。）")
+            Text("（暂时没有联网：真的模型客户端要等 RuneNet 接上。跑完可以用「文件」App 打开 Documents/RuneDemo 看结果。）")
                 .font(.caption2)
                 .foregroundStyle(.tertiary)
         }
@@ -123,7 +124,13 @@ struct RootView: View {
 
     private func files(_ report: RunReport) -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("工作区").font(.caption).foregroundStyle(.secondary).textCase(.uppercase)
+            Text("工作区（磁盘上的真实内容）").font(.caption).foregroundStyle(.secondary).textCase(.uppercase)
+            if !report.workspacePath.isEmpty {
+                Text(report.workspacePath)
+                    .font(.caption2)
+                    .foregroundStyle(.tertiary)
+                    .textSelection(.enabled)
+            }
             ForEach(report.files.keys.sorted(), id: \.self) { path in
                 DisclosureGroup {
                     Text(report.files[path] ?? "")
@@ -140,3 +147,5 @@ struct RootView: View {
         .background(.quaternary.opacity(0.4), in: RoundedRectangle(cornerRadius: 12))
     }
 }
+
+

@@ -38,10 +38,20 @@ final class RuneSmokeTests: XCTestCase {
         XCTAssertTrue(app.staticTexts["链校验通过"].waitForExistence(timeout: 10),
                       "事件哈希链校验未通过")
 
-        // ⑤ 截一张图作为产物 —— 没有 Mac 的话，这是唯一能"看到"界面的方式
+        // ⑤ ⭐ 磁盘上的文件**真的被改了** —— 这是"Agent 能改设备上的文件"的运行时证据
+        //    （上面那条只证明它跑完了；这条证明它真的动了文件。）
+        XCTAssertTrue(app.staticTexts["工作区（磁盘上的真实内容）"].waitForExistence(timeout: 10),
+                      "没有看到工作区面板")
+        XCTAssertTrue(app.staticTexts.containing(
+            NSPredicate(format: "label CONTAINS %@", "这一行是 Agent 自己勾上的")
+        ).firstMatch.waitForExistence(timeout: 10),
+                      "notes.md 里被改的那一行没有出现在界面上 —— 文件可能没真的被改")
+
+        // ⑥ 截一张图作为产物 —— 没有 Mac 的话，这是唯一能"看到"界面的方式
         let screenshot = XCTAttachment(screenshot: app.screenshot())
         screenshot.name = "rune-after-run"
         screenshot.lifetime = .keepAlways
         add(screenshot)
     }
 }
+

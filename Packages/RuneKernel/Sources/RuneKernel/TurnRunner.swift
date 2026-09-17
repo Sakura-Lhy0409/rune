@@ -1263,14 +1263,29 @@ public enum TurnRunner {
     }
 
     /// 工具名幻觉的兜底：给出最接近的可用工具名（docs/04 §4.4）
+    ///
+    /// ⚠️ 这里原来用的是"**最长公共前缀**"，而它太弱了：
+    /// `reed_file` 与 `read_file` 的公共前缀只有 `re`（2），够不到阈值 4 ——
+    /// 于是模型打错一个字母就得不到任何提示，只能再猜一次。
+    /// 改成**编辑距离**（拼写错误正是它的强项），公共前缀降级为同距离时的排序依据。
     static func nearestToolName(to name: String, in available: [String]) -> String? {
-        var best: (name: String, score: Int)?
+        let wanted = name.lowercased()
+        var best: (name: String, distance: Int, prefix: Int)?
         for candidate in available {
-            let score = sharedPrefix(name.lowercased(), candidate.lowercased())
-            if score > (best?.score ?? 0) { best = (candidate, score) }
+            let lowered = candidate.lowercased()
+            let distance = SkillSearch.editDistance(wanted, lowered)
+            let prefix = sharedPrefix(wanted, lowered)
+            let better: Bool
+            if let current = best {
+                better = distance < current.distance
+                    || (distance == current.distance && prefix > current.prefix)
+            } else {
+                better = true
+            }
+            if better { best = (candidate, distance, prefix) }
         }
-        // 相似度太低就不猜（宁可不给建议，也不要给错建议）
-        guard let best, best.score >= 4 else { return nil }
+        // 差太远就不猜：宁可不说，也不要把一个毫不相干的工具名推给模型
+        guard let best, best.distance <= max(2, wanted.count / 2) else { return nil }
         return best.name
     }
 
