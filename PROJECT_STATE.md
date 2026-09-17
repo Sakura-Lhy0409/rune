@@ -29,9 +29,9 @@
 |---|---|
 | **更新日期** | 2026-09-18 |
 | **当前阶段** | **M0 已完成 ✅ → 进入 M1 可用内核** |
-| **当前里程碑** | ✅ **M1-11 VFS 层（真实文件系统 + 内存，同一套 conformance 断言）**（705 测试全绿）—— 下一步见 §7 |
-| **上一个完成的里程碑** | ✅ **M1-11：VFS 层（两份实现 + 一致性断言 + 沙箱边界）**（705 测试全绿） |
-| **已完成里程碑** | ✅ M0 全部（…→**258 出口验收达成**）→ ✅ M1-1 ToolScheduler（282）→ ✅ M1-2 协议适配器（328）→ ✅ M1-3 波次调度（341）→ ✅ M1-4 计划与审批（379）→ ✅ M1-5 GoalEngine（405）→ ✅ M1-6 修正性重试（447）→ ✅ M1-7 上下文装配器（487）→ ✅ M1-8 工具注册表（540）→ ✅ M1-9 技能库 + 场景测试（608）→ ✅ M1-10 Workflow 引擎（657）→ ✅ **M1-11 VFS 层（705）** |
+| **当前里程碑** | ✅ **M1-12 自研 shell 解释器（词法/语法/校验/执行）**（775 测试全绿）—— 下一步见 §7 |
+| **上一个完成的里程碑** | ✅ **M1-12：自研 shell 解释器（"不支持什么"比"支持什么"更重要）**（775 测试全绿） |
+| **已完成里程碑** | ✅ M0 全部（…→**258 出口验收达成**）→ ✅ M1-1 ToolScheduler（282）→ ✅ M1-2 协议适配器（328）→ ✅ M1-3 波次调度（341）→ ✅ M1-4 计划与审批（379）→ ✅ M1-5 GoalEngine（405）→ ✅ M1-6 修正性重试（447）→ ✅ M1-7 上下文装配器（487）→ ✅ M1-8 工具注册表（540）→ ✅ M1-9 技能库 + 场景测试（608）→ ✅ M1-10 Workflow 引擎（657）→ ✅ M1-11 VFS 层（705）→ ✅ **M1-12 自研 shell 解释器（775）** |
 | **阻塞项** | 无 |
 | **本机可验证范围** | ✅ 平台无关的 Swift 代码（Kernel / 补丁 / 检索 / 网关 / 策略 / **Turn 循环**）<br>❌ iOS 专属（UI / Live Activity / Core ML / VFS 真实文件系统 / 沙箱 / GRDB / JSC）—— 需 macOS |
 
@@ -60,8 +60,7 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 
 ### 包结构现状
 
-**包结构**：`RuneKernel` ✅ **32 个源文件 / 705 测试**（本机可测）；
-`RuneNet` `RuneStore` `RuneVM` `RuneBench` `RuneGateway` `RuneContext` `RuneCore` `RuneTools` `RuneMCP` `RuneUI` ⬜ 骨架（`Package.swift` + 带实现清单的占位文件）。
+**包结构**：`RuneKernel` ✅ **33 源文件 / 775 测试**（本机可测）；`RuneNet` `RuneStore` `RuneVM` `RuneBench` `RuneGateway` `RuneContext` `RuneCore` `RuneTools` `RuneMCP` `RuneUI` ⬜ 骨架（`Package.swift` + 实现清单）。
 
 ---
 
@@ -124,8 +123,7 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 |---|---|---|---|
 | D1 | ✅ 设计文档集（18 份，6785 行） | `README.md`、`docs/01`–`15`、`附录A/B` | 内部链接已校验；事实均带出处 |
 | D2 | ✅ 事实取证归档 | `research/`（465 份） | 已 `-text -diff` 标记，**刻意入库** |
-| C1 | ✅ 续接机制 | `PROJECT_STATE.md`、`docs/进度日志.md` | 就是本文件 |
-| C2 | ✅ 构建/测试闭环 | `Tools/rune.ps1` | ⚠️ `swift build/test` 在本机不可用（E1） |
+| C1/C2 | ✅ 续接机制 + 构建/测试闭环 | `PROJECT_STATE.md`、`docs/进度日志.md`、`Tools/rune.ps1` | ⚠️ `swift build/test` 在本机不可用（E1） |
 | C3 | ✅ `RuneKernel` 零依赖核心（9 文件 / 85 测试） | `JSONValue` `SHA256` `Trust` `Content` `Tool` `Capability` `Errors` `Plan` `Event` | ⚠️ CryptoKit 是 Apple 专有 → **自实现 SHA-256**；⚠️ `canonicalString` 键序稳定才有指纹去重；⚠️ `VFSPath` 的 `..` 逃逸必须拒；⚠️ **写不蕴含删**；⚠️ 事件哈希链使篡改可检测 |
 | C4 | ✅ 补丁引擎（37 测试） | `TextPatch.swift` | ⚠️ **CRLF 是单个字素簇**（T8/T9）；⚠️ 匹配多处**必须拒绝**、绝不猜；⚠️ 一个 hunk 失败 → 整次不落地；诊断必须可执行 |
 | C5 | ✅ 检索子系统（50 测试） | `GlobMatcher` `IgnoreRules` `GrepEngine` | gitignore **最后匹配胜出**；内置默认清单在显式 include 时让位；**预算截断要如实告知** |
@@ -146,13 +144,14 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 | C20 | ✅ 技能库 + 渐进式披露（608 测试） | `Skill.swift` `SkillLibrary.swift` | ⚠️ **L1 正文永不自动加载**（API 上就不提供「取全部正文」）；⚠️ 中文 L0 成本是英文的 ~2 倍（设计文档的 15 token 是英文尺子 → 实测改 40，T29）；⚠️ token 预算必须把标题行算进去；⚠️ 技能只能**申请**权限、且必须在加载正文**之前**就位；12 个内置技能各带验证清单 |
 | C21 | ✅ 端到端场景测试（定位→读→补丁→跑测试→提交） | `ScenarioTests.swift` | ⭐ **它挖出两个致命 bug**：① `.dispatching` 在「恢复非幂等意图 + 用户批准」后 `removeFirst()` **越界崩 App**（T31）；② **审批路径是死循环** —— `PolicyEngine` 是纯函数，批准后重新派发又算出「需要确认」，于是**任何需要审批的工具永远执行不了**（推送/删除/Shortcuts 全瘫痪）（T30）。修法：`approve` 按相位路由 + `.dispatching` 防御分支 + `approvedFingerprints`（按**指纹**不按 callID，防复用 id 提权） |
 | C22 | ✅ Workflow 引擎（657 测试） | `Workflow.swift` | ⚠️ 引擎**不执行任何东西**（只回答"下一步跑哪些"，因此完全确定 + 天然可恢复）；⚠️ `pipeline` 的无屏障语义靠**深度降序**调度（按书写顺序会退化成三级屏障）；⚠️ 上游 `null` **整条链短路**，且 `skipped` 与 `failed` 在三处（状态/汇总/看板）都必须区分；⚠️ **`addSteps` 必须先"重新打开"已 completed 的运行**，否则脚本的第二阶段静默消失（T32）；⚠️ 脚本关键字扫描**不是安全边界**（真正的边界是宿主不暴露那些全局，T33） |
-| C23 | ✅ VFS 层（705 测试） | `VFS.swift` | ⚠️ **两份实现跑同一套 conformance 断言** —— 一上来就抓到 4 处不一致（二进制检测/候选提示/回收站语义/末尾换行）；⚠️ **读出来必须能原样写回去**（切片曾丢掉 `endsWithNewline` → 每次往返都在改文件）；⚠️ iOS 真正咬人的是**大小写不敏感**（`README.md` 在 iOS 上就是 `readme.md`，T34）；⚠️ **`==` 在"要比字节形式"的地方是陷阱**（两处静默失效，T35）；⚠️ 快照在手机上很贵，`clonefile` 待 macOS |
+| C23 | ✅ VFS 层（775 测试） | `VFS.swift` | ⚠️ **两份实现跑同一套 conformance 断言** —— 一上来就抓到 4 处不一致（二进制检测/候选提示/回收站语义/末尾换行）；⚠️ **读出来必须能原样写回去**（切片曾丢掉 `endsWithNewline` → 每次往返都在改文件）；⚠️ iOS 真正咬人的是**大小写不敏感**（`README.md` 在 iOS 上就是 `readme.md`，T34）；⚠️ **`==` 在"要比字节形式"的地方是陷阱**（两处静默失效，T35）；⚠️ 快照在手机上很贵，`clonefile` 待 macOS |
+| C24 | ✅ 自研 shell 解释器（775 测试） | `Shell.swift` | ⚠️ **"不支持什么"比"支持什么"更重要** —— 每条不支持的语法都要给**可执行的替代**（否则模型只是换个写法再试，来回烧 token）；⚠️ **裸 `$VAR` 必须被拒**（放过去会得到静默的错误答案：命令收到字面量 `$HOME`，然后以看不懂的方式失败；双引号里也一样，T36）；⚠️ **管道中间环节的 stdout 不算可见输出**（否则模型会看到 `hello` 与 `HELLO`，以为跑了两遍，T37）；⚠️ 默认**失败即停且 `;` 也不例外**，但 `||` 后面那条必须照跑 |
 
 ---
 
 ## 6. 下一步
 
-### ⚠️ 现状：Windows 上能做的纯逻辑已经做完（705 测试）
+### ⚠️ 现状：Windows 上能做的纯逻辑已经做完（775 测试）
 
 **⚠️ 待 macOS 验证的风险点**（未验证，不是"已完成"）：
 ①「多工具结果在 Anthropic/Gemini 下是**连续同角色消息**，依赖服务端合并」—— 上 macOS 后必须用真实渠道压一次；
@@ -160,9 +159,10 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 ③ **Workflow 的 JSC 宿主不存在**（脚本 → DAG 的编译层是 macOS 的活）；
 ④ 86 个工具只有**契约**、没有实现（VFS 已就绪，实现只剩"接线"）。
 
-`RuneKernel` 有 **32 个源文件、705 项测试**，覆盖：值类型与协议、补丁引擎、检索、网关、
+`RuneKernel` 有 **33 个源文件、775 项测试**，覆盖：值类型与协议、补丁引擎、检索、网关、
 策略引擎、Turn 循环与崩溃恢复、波次调度、计划引擎、审批代理、目标引擎、修正性重试与协议不变式、
-上下文预算制装配、86 个工具契约、技能与渐进式披露、Workflow 批处理编排、**VFS（真实文件系统 + 内存两份实现）**。
+上下文预算制装配、86 个工具契约、技能与渐进式披露、Workflow 批处理编排、
+**VFS（真实文件系统 + 内存两份实现）**、**自研 shell 解释器**。
 **并且有一条端到端场景测试证明它们拼得起来。**
 
 **路线 A（推荐）—— 把所有需要 macOS 的部分集中做掉**，按此顺序：
@@ -234,6 +234,8 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 | **T33** | ⚠️ 把「关键字黑名单」当成安全边界（`this["fet"+"ch"]` 一行就绕过） | 真正的边界是**宿主不暴露那个能力**；扫描只用于可用性提示与纵深防御，注释里必须写清"命中 ≠ 攻击、不命中 ≠ 安全" |
 | **T34** | ⚠️ **iOS 上文件名大小写不敏感**：`README.md` 与 `readme.md` 是**同一个文件**（APFS 默认），而 Windows/Linux 上是两个 → 模型"新建"实际是**覆盖**，不可撤销。**反向陷阱**：NFC/NFD 在 Swift+APFS 上**基本不是问题**（Swift `==` 与 APFS 都规范化不敏感）—— 别按错的前提写代码 | 把"文件系统怎么比较文件名"做成**显式可注入**的属性（`FilenameComparison`），并提供 `collidingEntry`：写之前先查有没有只有大小写不同的同名文件 |
 | **T35** | ⚠️ **`==` / `contains` / `!=` 在"要比不同字节形式"的地方是陷阱**：Swift 字符串比较按 Unicode 规范等价，所以 `forms.contains(decomposed)` 对 NFC 形式**永远为真** → 备选形式永远加不进列表，兜底逻辑静默失效（一次踩了两处） | 凡是"我要的是不同字节"就按 `Array(s.utf8)` 比；写测试时断言**字节数/字节数组**，不要断言字符串相等 |
+| **T36** | ⚠️ shell 里**裸 `$VAR` 不能放过去**：不展开却也不报错 → 命令收到字面量 `$HOME` → 以一种完全看不懂的方式失败。**双引号里同样**（POSIX 会展开，我们不展开） | 词法阶段就拒绝并说明"没有变量"；要字面量 `$` 就用单引号（POSIX 语义：单引号内一切字面） |
+| **T37** | ⚠️ **管道中间环节的 stdout 会被当成"可见输出"** → 模型同时看到 `hello` 与 `HELLO`，以为命令跑了两遍，还白占输出预算 | `ShellCommandOutput.isPiped` + `visibleStdout`（中间环节对模型返回空，但仍保留在记录里供排查） |
 
 ---
 
@@ -265,7 +267,7 @@ D:\项目\ios平台agent\          （构建时请用 C:\Users\MSI-NB\rune-ws）
 │  └─ 附录A / 附录B          渠道事实表 / 技术选型核实表
 ├─ research/                 取证材料（465 份，非交付物，**刻意入库**）
 └─ Packages/
-   ├─ RuneKernel/            ✅ 零依赖核心（32 源文件 / 705 测试全绿）
+   ├─ RuneKernel/            ✅ 零依赖核心（33 源文件 / 775 测试全绿）
    │  ├─ Package.swift       仅供 macOS 使用；本机走 rune.ps1
    │  ├─ Sources/RuneKernel/        ← 25 个 .swift（清单见下）
    │  └─ Tests/RuneKernelTests/     ← 13 个 .swift
@@ -279,7 +281,7 @@ D:\项目\ios平台agent\          （构建时请用 C:\Users\MSI-NB\rune-ws）
 | 值类型与安全 | `JSONValue` `SHA256` `Trust` `Content` `Tool` `Capability` `Errors` |
 | 编辑与检索 | `TextPatch` `GlobMatcher` `IgnoreRules` `GrepEngine` |
 | 网关 | `ChatRequest` `StreamParsing` `ProtocolEncoders` `ProtocolDecoders` `ToolCallAssembler` `ProviderQuirks` |
-| 运行时 | `TurnRunner` `ToolScheduler` `PolicyEngine` `Plan` `Event` `Correction` `Context` `ToolRegistry` `Skill` `SkillLibrary` `Workflow` `VFS` |
+| 运行时 | `TurnRunner` `ToolScheduler` `PolicyEngine` `Plan` `Event` `Correction` `Context` `ToolRegistry` `Skill` `SkillLibrary` `Workflow` `VFS` `Shell` |
 | 编排 | `PlanEngine` `ApprovalBroker` `GoalEngine` |
 
 **测试文件**：`JSONAndHashing` `Security` `RuntimeModel` `Patch` `Search` `Gateway` `Policy`
@@ -296,4 +298,3 @@ D:\项目\ios平台agent\          （构建时请用 C:\Users\MSI-NB\rune-ws）
 | **M3** | 切换任意两家渠道，同一任务成功率差异 <15% |
 | **M4** | 飞行模式下完成"改函数 + 跑测试 + 写 commit"全流程 |
 | **M5** | 注入套件 0 越权 + 性能基准全达标 + 审核材料齐备 |
-
