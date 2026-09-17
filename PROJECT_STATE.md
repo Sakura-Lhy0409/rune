@@ -32,9 +32,9 @@
 |---|---|
 | **更新日期** | 2026-09-17 |
 | **当前阶段** | **M0 已完成 ✅ → 进入 M1 可用内核** |
-| **当前里程碑** | M1-2：协议适配器（请求序列化 + SSE/NDJSON 解析 → ModelEvent） |
+| **当前里程碑** | M1-3：把 `ToolScheduler` 接进 `TurnRunner`（按波次调度） |
 | **上一个完成的里程碑** | ✅ **M1-1：ToolScheduler**（并行分桶 + 冲突检测 + 预算）（282 测试全绿） |
-| **已完成里程碑** | ✅ M0 全部（85→122→172→212→249→**258 出口验收达成**）→ ✅ **M1-1 ToolScheduler（282）** |
+| **已完成里程碑** | ✅ M0 全部（…→**258 出口验收达成**）→ ✅ M1-1 ToolScheduler（282）→ ✅ **M1-2 协议适配器（328）** |
 | **阻塞项** | 无 |
 | **本机可验证范围** | ✅ 平台无关的 Swift 代码（Kernel / 补丁 / 检索 / 网关 / 策略 / **Turn 循环**）<br>❌ iOS 专属（UI / Live Activity / Core ML / VFS 真实文件系统 / 沙箱 / GRDB / JSC）—— 需 macOS |
 
@@ -43,7 +43,7 @@
 ```
 设计文档      ████████████████████ 100%
 M0 地基       ████████████████████ 100%   ✅ 出口验收已达成
-M1 可用内核   ████░░░░░░░░░░░░░░░░░  20%   ← 当前
+M1 可用内核   ██████░░░░░░░░░░░░░░░  30%   ← 当前
 M2 移动体验   ░░░░░░░░░░░░░░░░░░░░░   0%
 M3 多渠道     ░░░░░░░░░░░░░░░░░░░░░   0%
 M4 端侧+记忆  ░░░░░░░░░░░░░░░░░░░░░   0%
@@ -65,7 +65,7 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 
 | 包 | 状态 | 本机可测 |
 |---|---|---|
-| `RuneKernel` | ✅ **18 个源文件 / 282 测试** | ✅ |
+| `RuneKernel` | ✅ **21 个源文件 / 328 测试** | ✅ |
 | `RuneNet` `RuneStore` `RuneVM` `RuneBench` `RuneGateway` `RuneContext` `RuneCore` `RuneTools` `RuneMCP` `RuneUI` | ⬜ 骨架已建（`Package.swift` + 带实现清单的占位文件） | 部分 |
 
 ---
@@ -181,6 +181,14 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 | C10.4 | ├ 审批项批量摘出 | 同上 | 手机上一次弹一个审批是灾难；审批不阻塞只读操作 |
 | C10.5 | ├ 预算延后（不静默丢弃） | 同上 | 超出单轮上限的调用进 deferred 并在诊断里说明 |
 | C10.6 | └ 不重排模型给出的顺序 | 同上 | 模型有时依赖"先建目录再写文件" |
+| C11 | ✅ **协议适配器** | `ChatRequest.swift` · `StreamParsing.swift` · `ProtocolEncoders.swift` · `ProtocolDecoders.swift` | **46 项新测试**（累计 328 全绿） |
+| C11.1 | ├ 请求模型（`ChatRequest` / `SystemBlock` / `ToolChoice` / `ReasoningRequest`） | `ChatRequest.swift` | 系统提示按**稳定性分层**（层 1+2 字节稳定 = 缓存命中的前提） |
+| C11.2 | ├ `SSEParser`（增量 + 容错） | `StreamParsing.swift` | 跨包断开、**UTF-8 多字节被切断**、CRLF、注释/心跳、多行 data、残留缓冲、`[DONE]` |
+| C11.3 | ├ `NDJSONParser`（Ollama 原生端点） | 同上 | ⚠️ Ollama 原生是 **NDJSON 不是 SSE**，别搞混 |
+| C11.4 | ├ 四种请求序列化 | `ProtocolEncoders.swift` | OpenAI Chat / Responses / Anthropic / Gemini；`maxTokensField` 因厂商而异 |
+| C11.5 | ├ 思考链回传策略 | 同上 | ⚠️ 判据是**请求级**（请求带 tools），不是消息级；Anthropic 的 thinking 必须排在最前且必须有签名 |
+| C11.6 | ├ 四种流解码 | `ProtocolDecoders.swift` | 命名事件 / 语义化事件 / parts / NDJSON → 归一化 `ModelEvent` |
+| C11.7 | └ `CachePlanner` 缓存断点 | `ChatRequest.swift` | 只断在**稳定层**且取"每层最后一个块"（前缀越长命中越多）；Anthropic 上限 4 |
 
 ---
 
@@ -188,7 +196,7 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 
 | 项 | 状态 | 备注 |
 |---|---|---|
-| M1-2 协议适配器 | 🚧 即将开始 | 请求序列化 + SSE/NDJSON 解析 → ModelEvent（本机可测） |
+| M1-3 波次调度接入 | 🚧 即将开始 | 把 ToolScheduler 接进 TurnRunner（本机可测） |
 | M1-3 计划与审批 | ⬜ 未开始 | PlanEngine + ApprovalBroker |
 | M1-4 Goal 引擎 | ⬜ 未开始 | 跨轮推进 + 阻塞纪律 |
 
@@ -199,15 +207,12 @@ M5 上架准备   ░░░░░░░░░░░░░░░░░░░░�
 **M1 的目标（docs/14）**：完整 AgentRuntime（计划、并行调度、预算、修正性重试）+ 工具集扩到 25 个 + 审批机制 + SwiftUI 最小可用。
 **在 Windows 上能做的**（按优先级）：
 
-### 立即（M1-2，纯逻辑、本机可测，**M3 的地基**）
-1. **协议适配器**（`RuneGateway` 的核心）：
-   - 请求侧：归一化 `ChatRequest` → OpenAI Chat / OpenAI Responses / Anthropic Messages / Gemini 四种请求体
-   - 响应侧：四种 SSE 事件流 + Ollama NDJSON → 归一化 `ModelEvent`
-   - **思考链回传**：按 `ProviderQuirks.reasoningReplay` 决定是否回传（写错直接 400）
-   - **缓存断点规划**：层 1+2 字节稳定 + Anthropic 最多 4 个断点 + OpenAI 必须显式打点
-   - 全部用**录制的真实响应**做夹具（docs/06 §13.1 的 cassette 清单：10 类必测样本）
-2. **把 `ToolScheduler` 接进 `TurnRunner`**：目前 runner 是逐个调度的，应改为按波次调度
+### 立即（M1-3，纯逻辑、本机可测）
+1. **把 `ToolScheduler` 接进 `TurnRunner`**：目前 runner 是逐个调度的，应改为按波次调度
    （并在事件里记录波次结构，供 UI 显示"3 个只读操作并行中"）。
+   ⚠️ 并行执行会引入一个新的幂等性问题：**同一波里多个调用同时写文件时，检查点如何取？**
+   需要先想清楚再写（很可能是"波次为单位打一个检查点"）。
+2. **修正性重试**：把 `ToolError.isSelfCorrectable` 接进循环（同一次调用最多重试 2 次）。
 
 ### 随后（M1-3 / M1-4）
 3. **`PlanEngine` + `ApprovalBroker`**：计划生成、偏离检测（`Plan.requiresUserConfirmation` 已就位）、
@@ -332,6 +337,8 @@ D:\项目\ios平台agent\          （构建时请用 C:\Users\MSI-NB\rune-ws）
 | **M3** | 切换任意两家渠道，同一任务成功率差异 <15% |
 | **M4** | 飞行模式下完成"改函数 + 跑测试 + 写 commit"全流程 |
 | **M5** | 注入套件 0 越权 + 性能基准全达标 + 审核材料齐备 |
+
+
 
 
 
