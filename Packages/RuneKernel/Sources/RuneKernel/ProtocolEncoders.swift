@@ -81,9 +81,14 @@ public enum RequestEncoder {
         //    DeepSeek 的规则是"请求带 tools 时，历史每一轮的 reasoning_content 都必须回传，否则 400"。
         let requestHasTools = !request.tools.isEmpty
 
+        // 需要 `name` 的端点要求这个名字与 `tool_calls[].function.name` 一致 ——
+        // 而 `ToolResult` 只带 `callID`，名字得从配对的 `toolCall` 里找回来（同 Gemini 那条）。
+        let toolNames = MessageGrouping.toolNames(in: request.messages)
+
         for message in request.messages {
             messages.append(contentsOf: openAIMessages(
-                message, quirks: quirks, context: context, requestHasTools: requestHasTools
+                message, quirks: quirks, context: context,
+                requestHasTools: requestHasTools, toolNames: toolNames
             ))
         }
 
@@ -125,7 +130,8 @@ public enum RequestEncoder {
         _ message: Message,
         quirks: ProviderQuirks,
         context: RequestEncodingContext,
-        requestHasTools: Bool
+        requestHasTools: Bool,
+        toolNames: [String: String] = [:]
     ) -> [JSONValue] {
         switch message.role {
 
@@ -176,9 +182,12 @@ public enum RequestEncoder {
                     "tool_call_id": .string(result.callID),
                     "content": .string(result.summary),
                 ]
-                // 部分兼容端点要求带 name（拿不到名字时用一个占位，避免整个请求 400）
+                // 部分兼容端点要求带 name，且**必须与该次调用的函数名一致**。
+                // 原来这里写的是字面量 `"tool"` —— 那是一个不存在的函数名，
+                // 端点校验严的时候会直接拒（而且这种错只在那一小撮端点上才暴露，最难查）。
+                // 真的找不到配对（正常运行时不出现）才退回占位，避免整个请求 400。
                 if quirks.requiresToolResultName {
-                    dict["name"] = .string("tool")
+                    dict["name"] = .string(toolNames[result.callID] ?? "tool")
                 }
                 return .object(dict)
             }
@@ -343,10 +352,15 @@ public enum RequestEncoder {
         }
 
         var messages: [JSONValue] = []
-        for message in request.messages {
-            if let encoded = anthropicMessage(message, quirks: quirks, context: context) {
-                messages.append(encoded)
-            }
+        // ⚠️ Anthropic 只有 user / assistant 两种角色，而运行时的历史是"一个工具结果一条
+        //    `.tool` 消息" → 不合并就会出现连续多条 `user`。
+        //    Anthropic 服务端会替我们合并，但**中转站不保证**，而且这本来就是我们该做对的事。
+        let entries = request.messages.compactMap { message -> (role: String, payload: [JSONValue])? in
+            let content = anthropicContent(message, quirks: quirks, context: context)
+            return (MessageGrouping.effectiveRole(message.role, family: .anthropicMessages), content)
+        }
+        for entry in MessageGrouping.applying(.anthropicMessages, to: entries) {
+            messages.append(.object(["role": .string(entry.role), "content": .array(entry.payload)]))
         }
 
         var body: [String: JSONValue] = [
@@ -403,11 +417,15 @@ public enum RequestEncoder {
         return .object(body)
     }
 
-    static func anthropicMessage(
+    /// 把一条归一化消息编码成 Anthropic 的 `content` 块数组（**不含角色**）。
+    ///
+    /// ⚠️ 拆出"只出 content"这一步是为了让**分组**发生在角色层面（见 `MessageGrouping`）：
+    ///    合并必须基于"这条消息到底有没有内容"，而空内容只能在算完之后才知道。
+    static func anthropicContent(
         _ message: Message,
         quirks: ProviderQuirks,
         context: RequestEncodingContext
-    ) -> JSONValue? {
+    ) -> [JSONValue] {
         var content: [JSONValue] = []
         let hasTools = !message.blocks.compactMap(\.toolCallValue).isEmpty
 
@@ -450,16 +468,33 @@ public enum RequestEncoder {
                     "input": (try? call.arguments()) ?? .object([:]),
                 ]))
             case .toolResult(let result):
-                content.append(.object([
+                var dict: [String: JSONValue] = [
                     "type": .string("tool_result"),
                     "tool_use_id": .string(result.callID),
                     "content": .string(result.summary),
-                ]))
+                ]
+                // ⚠️ 失败/被拒的结果必须带 `is_error: true`。
+                //    不带的话，模型读到的是一段普通文本 ——「权限被拒，请换方案」看起来
+                //    跟一次成功的工具输出没有区别，于是它会以为那一步做完了。
+                //    `.truncated` 不算错误：调用成功了，只是输出太长转了制品。
+                if result.status != .ok, result.status != .truncated {
+                    dict["is_error"] = .bool(true)
+                }
+                content.append(.object(dict))
             default:
                 break
             }
         }
 
+        return content
+    }
+
+    static func anthropicMessage(
+        _ message: Message,
+        quirks: ProviderQuirks,
+        context: RequestEncodingContext
+    ) -> JSONValue? {
+        let content = anthropicContent(message, quirks: quirks, context: context)
         guard !content.isEmpty else { return nil }
         let role = message.role == .assistant ? "assistant" : "user"
         return .object(["role": .string(role), "content": .array(content)])
@@ -473,54 +508,23 @@ public enum RequestEncoder {
         quirks: ProviderQuirks,
         context: RequestEncodingContext
     ) -> JSONValue {
+        // ⚠️ `functionResponse` 要用**函数名**与 `functionCall` 对上，而 `ToolResult`
+        //    只带 `callID` —— 名字得从配对的那条 `toolCall` 里找回来。
+        let toolNames = MessageGrouping.toolNames(in: request.messages)
+
+        let entries = request.messages.compactMap { message -> (role: String, payload: [JSONValue])? in
+            let parts = geminiParts(message, quirks: quirks, context: context, toolNames: toolNames)
+            return (MessageGrouping.effectiveRole(message.role, family: .geminiGenerate), parts)
+        }
+
+        // ⚠️ Gemini 的 `contents` **必须 user / model 交替**，相邻同角色直接 INVALID_ARGUMENT。
+        //    运行时的历史很容易给出相邻同角色：`[tool, tool, tool]`（同一次波次的结果各一条）
+        //    或 `[tool…, user]`（运行时引导语 `injectGuidance` 也是 `.user`）。
+        //    两个 gemini 协议族共用同一条规则（规则表测试守着这一点），这里用 `.geminiGenerate`
+        //    作代表；哪天两者分叉，那条测试会先失败并把这里指出来。
         var contents: [JSONValue] = []
-        for message in request.messages {
-            var parts: [JSONValue] = []
-
-            // thoughtSignature 必须**按原顺序**回传，否则报 "at least one thought signature missing"
-            if quirks.reasoningReplay.shouldReplay(hasTools: !request.tools.isEmpty) {
-                for block in message.blocks {
-                    if case .reasoning(let text, let signature) = block.kind {
-                        var part: [String: JSONValue] = [:]
-                        if !text.isEmpty { part["text"] = .string(text) }
-                        part["thought"] = .bool(true)
-                        if let signature { part["thoughtSignature"] = .string(signature.base64EncodedString()) }
-                        if !part.isEmpty { parts.append(.object(part)) }
-                    }
-                }
-            }
-
-            for block in message.blocks {
-                switch block.kind {
-                case .text(let text):
-                    guard !text.isEmpty else { continue }
-                    parts.append(.object(["text": .string(text)]))
-                case .image(let ref, _):
-                    if let resolved = context.resolveImage(ref) {
-                        parts.append(.object(["inlineData": .object([
-                            "mimeType": .string(resolved.mime),
-                            "data": .string(resolved.data.base64EncodedString()),
-                        ])]))
-                    }
-                case .toolCall(let call):
-                    parts.append(.object(["functionCall": .object([
-                        "name": .string(call.name),
-                        "args": (try? call.arguments()) ?? .object([:]),
-                    ])]))
-                case .toolResult(let result):
-                    parts.append(.object(["functionResponse": .object([
-                        "name": .string("tool"),
-                        "response": .object(["content": .string(result.summary)]),
-                    ])]))
-                default:
-                    break
-                }
-            }
-
-            guard !parts.isEmpty else { continue }
-            // Gemini 只有 user / model 两种角色
-            let role = message.role == .assistant ? "model" : "user"
-            contents.append(.object(["role": .string(role), "parts": .array(parts)]))
+        for entry in MessageGrouping.applying(.geminiGenerate, to: entries) {
+            contents.append(.object(["role": .string(entry.role), "parts": .array(entry.payload)]))
         }
 
         var body: [String: JSONValue] = ["contents": .array(contents)]
@@ -546,6 +550,73 @@ public enum RequestEncoder {
 
         removeUnsupported(&body, quirks: quirks)
         return .object(body)
+    }
+
+    /// 把一条归一化消息编码成 Gemini 的 `parts` 数组（**不含角色**）。
+    ///
+    /// ⚠️ 拆出这一步的理由同 Anthropic（见 `anthropicContent`）：合并要基于
+    ///    "这条消息到底有没有内容"，而空内容只有算完才知道。
+    static func geminiParts(
+        _ message: Message,
+        quirks: ProviderQuirks,
+        context: RequestEncodingContext,
+        toolNames: [String: String]
+    ) -> [JSONValue] {
+        var parts: [JSONValue] = []
+
+        // thoughtSignature 必须**按原顺序**回传，否则报 "at least one thought signature missing"
+        if quirks.reasoningReplay.shouldReplay(hasTools: !message.blocks.compactMap(\.toolCallValue).isEmpty) {
+            for block in message.blocks {
+                if case .reasoning(let text, let signature) = block.kind {
+                    var part: [String: JSONValue] = [:]
+                    if !text.isEmpty { part["text"] = .string(text) }
+                    part["thought"] = .bool(true)
+                    if let signature { part["thoughtSignature"] = .string(signature.base64EncodedString()) }
+                    if !part.isEmpty { parts.append(.object(part)) }
+                }
+            }
+        }
+
+        for block in message.blocks {
+            switch block.kind {
+            case .text(let text):
+                guard !text.isEmpty else { continue }
+                parts.append(.object(["text": .string(text)]))
+            case .image(let ref, _):
+                if let resolved = context.resolveImage(ref) {
+                    parts.append(.object(["inlineData": .object([
+                        "mimeType": .string(resolved.mime),
+                        "data": .string(resolved.data.base64EncodedString()),
+                    ])]))
+                }
+            case .toolCall(let call):
+                parts.append(.object(["functionCall": .object([
+                    "name": .string(call.name),
+                    "args": (try? call.arguments()) ?? .object([:]),
+                ])]))
+            case .toolResult(let result):
+                // ⚠️ 名字必须与 `functionDeclarations` 里声明的函数名一致。
+                //    原来这里硬编码成 `"tool"` —— 那是一个**不存在的函数**，
+                //    与调用配不上（新版 API 对"函数响应与调用不匹配"会直接报错）。
+                //    找不到配对时**宁可不给名字**：缺字段最多是少一层校验，
+                //    给一个错名字会让上游把它配到别的地方去。
+                var response: [String: JSONValue] = [:]
+                if result.status == .ok || result.status == .truncated {
+                    response["content"] = .string(result.summary)
+                } else {
+                    // 失败/被拒：用 `error` 而不是 `content`。
+                    // 否则「权限被拒，请换方案」在模型看来与一次成功输出没有区别。
+                    response["error"] = .string(result.summary)
+                }
+                var dict: [String: JSONValue] = ["response": .object(response)]
+                if let name = toolNames[result.callID] { dict["name"] = .string(name) }
+                parts.append(.object(["functionResponse": .object(dict)]))
+            default:
+                break
+            }
+        }
+
+        return parts
     }
 
     // MARK: - 公共清理
