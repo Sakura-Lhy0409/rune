@@ -312,7 +312,7 @@ func assertMakeDirectory(_ vfs: any VFS) throws {
 
 func assertSnapshotRestore(_ vfs: any VFS) throws {
     let snapshot = try vfs.snapshot(label: "重构前", now: Date(timeIntervalSince1970: 1_700_000_000))
-    #expect(snapshot.fileCount >= 4)
+    #expect(snapshot.fileCount >= 4, "快照至少要装下 4 个文件，实际 \(snapshot.fileCount)")
     let originalReadme = try vfs.read(path("/workspace/README.md")).text
 
     // 搞破坏
@@ -321,7 +321,11 @@ func assertSnapshotRestore(_ vfs: any VFS) throws {
     #expect(try vfs.exists(path("/workspace/新文件.txt")))
 
     try vfs.restore(snapshot)
-    #expect(try vfs.read(path("/workspace/README.md")).text == originalReadme, "回滚后原内容应当恢复")
+    let restored = try vfs.read(path("/workspace/README.md")).text
+    // ⚠️ 失败信息必须带上**实际值**：这条断言在 macOS 上失败过、而在 Linux/Windows 上通过，
+    //    而"某某 != 某某"这种信息量太小的失败，会让人只能靠猜（见 T54 那一类教训）。
+    #expect(restored == originalReadme,
+            "回滚后应当是「\(originalReadme)」，实际「\(restored)」；快照装了 \(snapshot.fileCount) 个文件")
 }
 
 func assertBinaryRejected(_ vfs: any VFS) throws {
