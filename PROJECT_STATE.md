@@ -35,16 +35,13 @@
 ### 进度条
 
 ```
-设计文档      ████████████████████ 100%
-M0 地基       ████████████████████ 100%   ✅ 出口验收已达成
+设计文档 / M0 地基   ████████████████████ 100%   ✅ 出口验收已达成
 M1 可用内核   ████████████████████  99%   ← 内核 41 源文件 / 1032 测试全绿，**只差真实 IO 与 UI（都要 macOS）**
 M2 移动体验 / M3 多渠道      ░░░░░░░░░░░░░░░░░░░░░   0%
 M4 端侧+记忆 / M5 上架准备   ░░░░░░░░░░░░░░░░░░░░░   0%
 ```
 
 ### 🎯 M0 出口标准达成情况（docs/14 §2）
-
-> 原文：「在测试壳里，模型能自主完成"修一个简单的失败单测"，并在中途被杀后正确恢复。」
 
 | 验收项 | 结果 |
 |---|---|
@@ -138,6 +135,7 @@ M4 端侧+记忆 / M5 上架准备   ░░░░░░░░░░░░░░�
 | C34 | ✅ **线路级验证：真的编码 → 真的解字节 → 又抓出 3 个真 bug**（1018 测试） | `WireLevelTests.swift` · `ProviderError.classify` | ⭐⭐ 建了一条「线路级假模型」：`历史 → RequestBuilder → RequestEncoder →（脚本化 SSE 字节）→ SSEParser → StreamDecoder → [ModelEvent]`，只把网络换掉，两头全是真实实现。它第一次跑就抓出三个 bug：① **三个解码器把所有中途错误一律写成 `.transient`** —— 而它是「值得重试」：401/402/403 会被**反复重试**，更糟的是**余额不足不算失败**，用户钱包空了 Agent 却报了个成功（修法：`ProviderError.classify` 作唯一分类入口 + `userFacing` 给出下一步）；② **`PolicyEngine.evaluate` 与四个 `authorize*` 都默认读真实时钟** → 过期判定不确定，冻结时钟的测试会**静默失去全部授权**，还把原因误报成「不在授权范围内」（诊断骗人）；③ **Anthropic 的错误体没有状态码**（只有 `type`）→ 不映射就只能一律当可重试，于是「密钥错了」与「服务过载」被当成同一件事；⚠️ 它还暴露了**前面几组测试是「假绿」**：授权被拒后工具**一次都没执行**，而它们只断言了「有配对结果」—— 补记的空结果也满足那一条 |
 | C35 | ✅ **模型调用客户端：网关那一层真的被接上了**（1032 测试） | `ModelClient.swift` · `ModelClientTests` | ⭐⭐⭐ 修的是**目前最大的一次「声明式子系统」**：`GatewayRouter.route` / `RetryPolicy.decide` / `Degradation.plan` / `HealthTracker.record*` 在 `Sources/` 里**零调用点** —— 913 行有测试的代码没有任何东西会执行它。于是 Rune 的真实行为是：**不路由、不重试（一次 429 就把这一轮打死）、不记健康（挂掉的渠道永远留着）、不降级、不去重**；⚠️ 修法是给它**唯一执行入口** `ModelClient`（路由 → 去重 → 编码 → 发送 → 解码 → 按 `RetryPolicy` 决定 → 记健康 → 生成**可见的**降级说明）；⚠️ 传输层抽象成**同步协议** `ModelTransport`，于是整条链路能在没有网络、没有 macOS 的条件下被完整验证（脚本化传输返回真实字节），真正的 URLSession 实现留给 `RuneNet`；⚠️ 鉴权真值只从 `credentials`（Keychain）来，**配置里只有引用**，所以日志里永远不会有密钥；⚠️ 顺带记一条**测试纪律**：`#expect` **不中断执行**，断言之后还要用下标就必须先 `guard` —— 否则越界会让整个测试进程崩掉（Windows 上表现成 `0xC000001D`，看起来像环境问题，不是一条干净的失败） |
 | C36 | ✅⭐ **首次 CI 全绿：macOS 上真的产出可侧载的 .ipa** | `.github/workflows/` · `VFS.swift` · 仓库 <https://github.com/Sakura-Lhy0409/rune> | ⭐⭐ 这是「没有 Mac 也能做 iPhone App」从**计划**变成**事实**的一步：`kernel` 在 ubuntu + macOS 上都跑通了 `Package.swift`（**它此前从未被真正的 SwiftPM 解析过**），`ios` 的「App 构建与打包」产出了 1.8MB 的 `Rune-unsigned.ipa`（`Payload/Rune.app/{Rune,Info.plist,PkgInfo}`，结构正确、可直接 Sideloadly 签名）；⚠️ **首次 CI 抓到两个真 bug**：① VFS 快照回滚在 macOS 上**根本没生效**（Linux/Windows 通过）—— `restore` 自己切字符串算相对路径，而 macOS 上同一目录有 `/var/…` 与 `/private/var/…` 两种写法，切出垃圾，`try?` 又把错误**完全吞掉**（回滚「成功」了却一个字没变）；改成 `subpathsOfDirectory` + 一律 `try`；② `ios.yml` 打包那步 `ls` 多写一个 `..`；⚠️ 修 VFS 那条时**先把断言改成会打印实际值**才拿到真相 —— 「某某 != 某某」这种失败信息只能靠猜 |
+| C37 | ✅ **模拟器冒烟测试真的跑起来了**（并修掉挡路的三处） | `.github/workflows/ios.yml` · `Apps/Rune/{project.yml,UITests}` | ⭐ 从「跑不到」到「**App 在真 iOS 模拟器上完整跑通内核**」：dump 出来的界面证明 **4 次工具调用 · 20 条事件 · 哈希链校验通过**，步骤 `list_dir → read_file → edit_file（创建检查点）→ read_file`，工作区面板指着真实的 `Documents/RuneDemo`；⚠️ 三处修复：① destination **不能写死机型**（`name=iPhone 16` 撞上镜像换机型）→ 运行时挑可用的 iPhone 并打印选中项；② **测试 target 也要 Info.plist**（`GENERATE_INFOPLIST_FILE: YES`，Xcode 报错里就推荐了）；③ UI 测试的 dump 辅助函数要 `@MainActor` 且**不能用 `map(\.label)`**（主线程隔离属性不能取 key path）；⚠️ 唯一还失败的断言是「工作区面板要显示被改的那一行」—— 面板只列文件名、不显示内容（§6 的第一步就是修它） |
 
 ---
 
@@ -173,7 +171,7 @@ Turn 循环与崩溃恢复、波次调度、计划引擎、审批代理、目标
 > `gh` 已登录（账号 `Sakura-Lhy0409`，含 `repo` + `workflow` scope），**推代码 = 跑 CI**，不需要再问。
 
 **路线 B（纯逻辑收尾，价值低）**：检索融合（RRF）、MCP 编解码、cassette 回放夹具。
-**路线 A 的实现顺序**：修模拟器 destination → `RuneStore`（GRDB + 事件落盘）→ `RuneNet`（URLSession + SSE + 出口代理）→ `RuneBench`（VFS 落地 + bookmark + CPython 垫片）→ `RuneTools`（86 个工具）→ `RuneCore`（接真实 IO）→ `RuneUI`（docs/08 那套交互）。**每层都要带测试**，因为验证只能走 CI。
+**路线 A 的实现顺序**：让工作区面板显示每个文件的前几行（模拟器测试最后一条断言就等它）→ `RuneStore`（GRDB + 事件落盘）→ `RuneNet`（URLSession + SSE + 出口代理）→ `RuneBench`（VFS 落地 + bookmark + CPython 垫片）→ `RuneTools`（86 个工具）→ `RuneCore`（接真实 IO）→ `RuneUI`（docs/08 那套交互）。**每层都要带测试**，因为验证只能走 CI。
 
 ## 7. 已知陷阱（不要重复踩）
 
@@ -243,6 +241,7 @@ Turn 循环与崩溃恢复、波次调度、计划引擎、审批代理、目标
 | **T53** | ⚠️ **时钟没注入 = 授权静默失效，理由还是骗人的**：`CapabilityToken.isExpired(asOf:)` 与 `authorizeFile` 等的 `asOf` 默认 `Date()`，`PolicyEngine.evaluate` 也没收 `now` —— 于是把时钟冻结在过去的测试**全部授权都会失败**，而报出来的原因是「不在本次授权范围内」（真实原因是过期）。排查代价很高：现象是「工具一次都没被执行」，看起来像策略引擎或工具实现坏了 | 凡是**读时钟做判定**的地方都要收 `now`（`evaluate(_:context:now:)` 已补），并且**先判过期再判范围** —— 两者给用户的下一步完全不同。⚠️ 推论：发现一个「默认 `Date()`」就发现了一个**不确定性入口**，也是「测试假绿」的常见来源 |
 | **T54** | ⚠️⚠️ **一个完整的子系统可以只以「声明 + 测试」的形式存在**：913 行、几十项测试、注释齐全、每条规则都「验证过」—— 而 `GatewayRouter.route` / `RetryPolicy.decide` / `Degradation.plan` / `HealthTracker.record*` 在 `Sources/` 里**零调用点**。这类缺陷的可怕之处在于**测试全绿反而加强了错觉**：测试在测模块自己的行为，从没测过「它被调用」 | ① 每个模块要有**唯一执行入口**，规则表/策略只能从那里经过（`ModelClient` 之于网关）；② 定期做一次**调用点普查**：对每个公开入口 grep 一次「它在本文件之外出现过吗」——本次就是靠这一招一次性挖出五个（路由/重试/降级/健康/去重）；③ 端到端测试必须断言**可观测的行为变化**（发了几枪、打到哪个 URL、健康是否被摘掉），而不只是「结果对」。⚠️ 与 T48/T49 同源，本项目已经栽过三次 —— **新增任何一层「能力」时先问：谁调它？** |
 | **T55** | ⚠️ **平台差异最会藏的地方是「同一个目录的两种写法」**：macOS 上 `/var/…` 与 `/private/var/…` 指同一个目录（临时目录真实位置在 `/private/var` 下），于是任何「用字符串切前缀算相对路径」的代码在 macOS 上会切出垃圾，而在 Linux/Windows 上**一路正常** | 相对路径**交给文件系统给**（`subpathsOfDirectory`），不要自己切字符串。⚠️ 更狠的是：**`try?` 会把这类错误变成静默的成功** —— 一个「看起来回滚了、其实一个字没变」的回滚比直接报错危险得多。判据：凡是「失败也没关系」的地方都要问一句「失败了用户会以为发生了什么」 |
+| **T56** | ⚠️ **UI 测试的失败细节默认是「读不到」的**：`xcodebuild test` 把断言消息、界面层级、截图都塞进 `.xcresult` bundle，而那个格式在 **Windows 上读不了** —— 没有 Mac 的开发路径下，等于每次失败都只能猜 | **主动把要诊断的东西 `print` 到 stdout**（CI 日志能读）：界面上有哪些文字、哪些按钮、导航栏标识符。本次就是靠这个一眼看出「面板只列文件名、不显示内容」。⚠️ 与「断言失败信息必须带实际值」同源：**可观测性要在写代码时就设计进去** |
 
 ---
 
