@@ -171,10 +171,10 @@ public struct GitToolExecutor: ToolExecuting {
             let oldID = oldSide[path]
             let newID = newSide[path]
             if oldID == newID { continue }
-            let oldBytes = try oldID.flatMap { try? store.object($0).body }
+            let oldBytes = oldID.flatMap { try? store.object($0).body }
             let newBytes: [UInt8]?
             if staged {
-                newBytes = try newID.flatMap { try? store.object($0).body }
+                newBytes = newID.flatMap { try? store.object($0).body }
             } else {
                 // 未暂存时新侧是**磁盘上的文件**，不是对象
                 newBytes = try? readWorkingFile(store: store, relativePath: path)
@@ -298,8 +298,8 @@ public struct GitToolExecutor: ToolExecuting {
         let maxBytes = 256 * 1024
         for path in Set(currentFlat.keys).union(parentFlat.keys).sorted() {
             if currentFlat[path] == parentFlat[path] { continue }
-            let oldBytes = try parentFlat[path].flatMap { try? store.object($0).body }
-            let newBytes = try currentFlat[path].flatMap { try? store.object($0).body }
+            let oldBytes = parentFlat[path].flatMap { try? store.object($0).body }
+            let newBytes = currentFlat[path].flatMap { try? store.object($0).body }
             let text = GitObjectStore.blobDiff(old: oldBytes, new: newBytes,
                                                oldLabel: "a/\(path)", newLabel: "b/\(path)",
                                                options: diffOptions)

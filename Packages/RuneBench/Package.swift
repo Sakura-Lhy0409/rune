@@ -29,5 +29,10 @@ let package = Package(
             dependencies: ["RuneKernel", "RuneVM"],
             swiftSettings: [.swiftLanguageMode(.v6)]
         ),
+        .testTarget(
+            name: "RuneBenchTests",
+            dependencies: ["RuneBench", "RuneKernel"],
+            swiftSettings: [.swiftLanguageMode(.v6)]
+        ),
     ]
 )
