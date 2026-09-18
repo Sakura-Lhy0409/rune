@@ -41,3 +41,19 @@ Thumbs.db
 
 # 说明：research/ 是**故意提交**的（465 份事实取证件，见 research/README.md）。
 # 它是设计文档里每条"已核实"结论的证据链，不是构建产物，请不要加进 .gitignore。
+
+# XcodeGen 生成的扩展元数据；真相源为 Apps/Rune/project.yml
+Apps/Rune/Rune.entitlements
+Apps/Rune/Widgets/Info.plist
+Apps/Rune/ShareExtension/Info.plist
+Apps/Rune/ShareExtension/RuneShare.entitlements
+
+# PinAI 凭据只留在本机；图标方案与提示词可以入库。
+.env.pinai
+.venv-imagegen/
+
+# 本机界面验收截图
+DesignReview/
+
+# 本机构建的分发包
+output/releases/*.ipa

@@ -5,11 +5,7 @@ import PackageDescription
 //
 // 📄 设计依据：docs/05-工具系统与执行沙箱.md §2
 // 🖥 平台：需 macOS
-// 📌 状态：⬜ 骨架（尚未实现；实现清单见 PROJECT_STATE.md §7）
-//
-// ⚠️ 本机（Windows）**不要**用 swift build（SwiftPM 在本环境的执行层不可用，
-//    见 PROJECT_STATE.md §3）。纯逻辑部分请在 RuneKernel 内实现并用 Tools/rune.ps1 测试；
-//    本文件供 macOS 上使用 Xcode / 标准 SwiftPM。
+// 📌 状态：端侧 PDF、OCR、CSV/TSV 工具；文件工具复用 RuneKernel。
 let package = Package(
     name: "RuneTools",
     platforms: [
@@ -29,5 +25,6 @@ let package = Package(
             dependencies: ["RuneKernel", "RuneBench"],
             swiftSettings: [.swiftLanguageMode(.v6)]
         ),
+        .testTarget(name: "RuneToolsTests", dependencies: ["RuneTools", "RuneKernel"], swiftSettings: [.swiftLanguageMode(.v6)]),
     ]
 )

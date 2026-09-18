@@ -1,0 +1,10 @@
+Use case: logo-brand
+Asset type: final production iPhone/iPad app icon for Rune, a private on-device workbench.
+Primary request: one minimalist, exceptionally tasteful app icon. Contemporary native iOS glass material, rendered with the restraint of industrial design, not flashy concept art. Convey a quiet, precise, trustworthy tool.
+Subject: a single bespoke rune-shaped R made from continuous structural strokes: one upright spine, a triangular upper shoulder, and a diagonal lower leg. Preserve a strong simple silhouette and open counter-space, legible at 32 pixels.
+Scene/backdrop: an opaque warm ivory square, approximately #F0F0E5, edge to edge. Extremely subtle soft surface shading, no vignette drama.
+Materials: the R is deep, smoky forest-green glass. Translucent edges reveal a warmer mineral interior; a slim polished rim catches soft light. Broad subdued faces, shallow physical relief, refined micro-bevels and a restrained contact shadow. Rich but not shiny.
+Composition: orthographic straight-on view, optically centered, monogram height about 57 percent of canvas. Generous negative space, immaculate proportions. One symbol only.
+Lighting: diffused studio daylight from upper-left; low-key and tactile. No glowing outlines, no dramatic spotlight.
+Constraints: 1024 by 1024 full square icon artwork with no alpha. Do not mask or round the outside corners; the operating system handles them. No background beyond the square, no floating tile mockup, no outer border, no typography, no watermark, no Apple logo, no collage.
+Avoid: AI sparkle motifs, robot eyes, neural networks, purple or cyan neon, rainbow gradients, toy-like glossy blobs, metallic sci-fi, exaggerated 3D, visual noise, decorative runic flourishes.

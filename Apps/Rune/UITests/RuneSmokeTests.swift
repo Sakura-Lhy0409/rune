@@ -1,84 +1,171 @@
 import XCTest
 
-// MARK: - UI 冒烟测试
-//
-// ⚠️ 为什么只做"冒烟"：
-// 在没有 Mac 的环境里（docs/16），UI 测试是**唯一**能自动回答
-// "App 在真的 iOS 运行时里起来了、而且真的跑通了内核"这件事的东西。
-// 真机上装不上、启动就崩、或者内核在 iOS 上行为不同 —— 这三种失败
-// 都只有"在 iOS 上真的跑一次"才能发现。
-//
-// 所以它不测界面长什么样（那会随设计变），只测**它能不能起来并跑完一次内核运行**。
-
 final class RuneSmokeTests: XCTestCase {
-
-    override func setUp() {
+    @MainActor private func launch(onboarding: Bool = false) -> XCUIApplication {
         continueAfterFailure = false
-    }
-
-    /// 把界面上此刻的文字打出来。
-    ///
-    /// ⚠️ 为什么这件事必须做：CI 跑在 GitHub 的 macOS 上，而我们手边**没有 Mac** ——
-    ///    失败细节都在 `.xcresult` 里，而那个 bundle 在 Windows 上读不了。
-    ///    **而 CI 日志是能读的。** 所以"屏幕上到底有什么"必须主动打到 stdout 去，
-    ///    否则每修一次都要靠猜（这和修 VFS 那个 macOS bug 时是同一个教训：
-    ///    断言失败信息里必须有**实际值**）。
-    // ⚠️ 必须 `@MainActor`，而且**不能用 `map(\.label)` 这种 key path**：
-    //    `label` / `identifier` 是主线程隔离的属性，Swift 6 严格并发下
-    //    "cannot form key path to main actor-isolated property"（就是这么红过一次）。
-    @MainActor
-    private func dumpVisibleText(_ app: XCUIApplication, _ stage: String) {
-        let texts = app.staticTexts.allElementsBoundByIndex.prefix(60).map { $0.label }.filter { !$0.isEmpty }
-        print("=== [\(stage)] 界面文字（\(texts.count) 条）===")
-        for text in texts { print("  · \(text)") }
-        let buttons = app.buttons.allElementsBoundByIndex.prefix(20).map { $0.label }.filter { !$0.isEmpty }
-        print("=== [\(stage)] 按钮：\(buttons.joined(separator: " ｜ "))")
-        let bars = app.navigationBars.allElementsBoundByIndex.map { $0.identifier }
-        print("=== [\(stage)] 导航栏：\(bars.joined(separator: " ｜ "))")
-    }
-
-    @MainActor
-    func testAppLaunchesAndRunsTheKernel() throws {
         let app = XCUIApplication()
+        app.launchArguments = ["--uitesting", "--reset-ui"] + (onboarding ? [] : ["--skip-onboarding"])
         app.launch()
-
-        // ① App 起来了，标题在
-        let bar = app.navigationBars["Rune"].waitForExistence(timeout: 30)
-        if !bar { dumpVisibleText(app, "启动后（没等到导航栏）") }
-        XCTAssertTrue(bar, "App 没起来（或者启动就崩了）")
-        dumpVisibleText(app, "启动后")
-
-        // ② 能触发一次运行
-        let runButton = app.buttons["在设备上跑一遍内核"]
-        if !runButton.waitForExistence(timeout: 10) { dumpVisibleText(app, "找不到运行按钮") }
-        XCTAssertTrue(runButton.exists, "找不到运行按钮")
-        runButton.tap()
-
-        // ③ 跑完之后能看到时间轴 —— 这一条同时证明了：
-        //    TurnRunner 跑完了、工具执行器被调用了、事件日志写进去了。
-        let timeline = app.staticTexts["时间轴（来自事件日志）"].waitForExistence(timeout: 60)
-        if !timeline { dumpVisibleText(app, "点完之后（没等到时间轴）") }
-        XCTAssertTrue(timeline, "内核没有跑完 —— 可能卡住了，或者在 iOS 上崩了")
-        dumpVisibleText(app, "跑完之后")
-
-        // ④ 哈希链校验通过（"事件日志是唯一真相源"这句话的运行时证据）
-        XCTAssertTrue(app.staticTexts["链校验通过"].waitForExistence(timeout: 10),
-                      "事件哈希链校验未通过")
-
-        // ⑤ ⭐ 磁盘上的文件**真的被改了** —— 这是"Agent 能改设备上的文件"的运行时证据
-        //    （上面那条只证明它跑完了；这条证明它真的动了文件。）
-        XCTAssertTrue(app.staticTexts["工作区（磁盘上的真实内容）"].waitForExistence(timeout: 10),
-                      "没有看到工作区面板")
-        XCTAssertTrue(app.staticTexts.containing(
-            NSPredicate(format: "label CONTAINS %@", "这一行是 Agent 自己勾上的")
-        ).firstMatch.waitForExistence(timeout: 10),
-                      "notes.md 里被改的那一行没有出现在界面上 —— 文件可能没真的被改")
-
-        // ⑥ 截一张图作为产物 —— 没有 Mac 的话，这是唯一能"看到"界面的方式
-        let screenshot = XCTAttachment(screenshot: app.screenshot())
-        screenshot.name = "rune-after-run"
-        screenshot.lifetime = .keepAlways
-        add(screenshot)
+        return app
     }
-}
+    @MainActor private func screenshot(_ app: XCUIApplication, _ name: String) {
+        let attachment = XCTAttachment(screenshot: app.screenshot()); attachment.name = name; attachment.lifetime = .keepAlways; add(attachment)
+    }
+    @MainActor func testOnboardingAndHome() {
+        let app = launch(onboarding: true)
+        for _ in 0..<3 { XCTAssertTrue(app.buttons["onboarding-next"].waitForExistence(timeout: 10)); app.buttons["onboarding-next"].tap() }
+        XCTAssertTrue(app.buttons["start-demo"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.tabBars.buttons["工作台"].exists)
+        screenshot(app, "01-today")
+    }
+    @MainActor func testReviewApplyAndUndo() {
+        let app = launch()
+        app.buttons["start-demo"].tap()
+        XCTAssertTrue(app.buttons["review-change"].waitForExistence(timeout: 15))
+        screenshot(app, "02-conversation-approval")
+        app.buttons["review-change"].tap()
+        XCTAssertTrue(app.buttons["apply-change"].waitForExistence(timeout: 5))
+        screenshot(app, "03-diff-review")
+        app.buttons["apply-change"].tap()
+        app.buttons["confirm-apply"].firstMatch.tap()
+        XCTAssertTrue(app.buttons["undo-change"].waitForExistence(timeout: 10))
+        app.buttons["undo-change"].tap()
+        app.buttons["confirm-undo"].firstMatch.tap()
+        XCTAssertTrue(app.staticTexts["已撤销"].waitForExistence(timeout: 5))
+        app.buttons["open-timeline"].tap()
+        XCTAssertTrue(app.navigationBars["时间轴"].waitForExistence(timeout: 5))
+        screenshot(app, "04-timeline")
+    }
+    @MainActor func testRejectKeepsOriginalFile() {
+        let app = launch()
+        app.buttons["start-demo"].tap()
+        XCTAssertTrue(app.buttons["reject-change"].waitForExistence(timeout: 15))
+        app.buttons["reject-change"].tap()
+        XCTAssertTrue(app.staticTexts["已保留原文件"].waitForExistence(timeout: 5))
+        app.buttons["close-conversation"].tap()
+        app.tabBars.buttons["工作台"].tap()
+        app.buttons["open-files"].tap()
+        app.buttons["file-notes.md"].tap()
+        XCTAssertTrue(app.staticTexts["file-content"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["file-content"].label.contains("[ ] 完成第一次文件审阅"))
+    }
+    @MainActor func testTaskCreationAndPersistence() {
+        let app = launch()
+        app.buttons["new-task"].tap()
+        let field = app.textFields["task-prompt"]
+        XCTAssertTrue(field.waitForExistence(timeout: 5)); field.tap(); field.typeText("Test task")
+        app.buttons["submit-task"].tap()
+        XCTAssertTrue(app.buttons["close-conversation"].waitForExistence(timeout: 8))
+        XCTAssertTrue(app.staticTexts.containing(NSPredicate(format: "label CONTAINS %@", "任务已保存在本机")).firstMatch.exists)
+        app.terminate(); app.launchArguments = ["--uitesting", "--skip-onboarding"]; app.launch()
+        app.tabBars.buttons["会话"].tap()
+        XCTAssertTrue(app.buttons.containing(NSPredicate(format: "label CONTAINS %@", "Test task")).firstMatch.waitForExistence(timeout: 5))
+        screenshot(app, "05-conversations")
+    }
+    @MainActor func testFileEditing() {
+        let app = launch()
+        app.tabBars.buttons["工作台"].tap()
+        screenshot(app, "06-workbench")
+        app.buttons["open-files"].tap()
+        app.buttons["file-notes.md"].tap()
+        app.buttons["edit-file"].tap()
+        let editor = app.textViews["file-editor"]
+        XCTAssertTrue(editor.waitForExistence(timeout: 5)); editor.tap(); editor.typeText("Saved locally.\n")
+        app.buttons["save-file"].tap()
+        XCTAssertTrue(app.staticTexts["file-content"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["file-content"].label.contains("Saved locally."))
+    }
+    @MainActor func testProviderFormAndLiveActivitySettings() {
+        let app = launch()
+        app.buttons["open-settings"].tap()
+        app.buttons["settings-providers"].tap()
+        app.buttons["add-provider"].tap()
+        XCTAssertFalse(app.buttons["save-provider"].isEnabled)
+        app.textFields["provider-name"].tap(); app.textFields["provider-name"].typeText("My endpoint")
+        app.textFields["provider-model"].tap(); app.textFields["provider-model"].typeText("test-model")
+        XCTAssertTrue(app.buttons["save-provider"].isEnabled)
+        app.buttons["save-provider"].tap()
+        XCTAssertTrue(app.staticTexts["My endpoint"].waitForExistence(timeout: 5))
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+        app.buttons["settings-live"].tap()
+        XCTAssertTrue(app.staticTexts["布局预览"].waitForExistence(timeout: 5))
+        screenshot(app, "07-live-activity")
+    }
+    @MainActor func testCreateReusableSkill() {
+        let app = launch()
+        app.tabBars.buttons["工作台"].tap()
+        app.buttons["open-skills"].tap()
+        app.buttons["new-note"].tap()
+        app.textFields["note-title"].tap(); app.textFields["note-title"].typeText("My skill")
+        app.textViews["note-body"].tap(); app.textViews["note-body"].typeText("Read before editing.")
+        app.buttons["save-note"].tap()
+        XCTAssertTrue(app.staticTexts["My skill"].waitForExistence(timeout: 5))
+    }
+    @MainActor func testGoalChecklistAndCommands() {
+        let app = launch()
+        app.buttons["command-palette"].tap()
+        XCTAssertTrue(app.navigationBars["快捷操作"].waitForExistence(timeout: 5))
+        app.buttons["完成"].tap()
+        app.tabBars.buttons["工作台"].tap()
+        app.buttons["open-goals"].tap()
+        app.buttons["new-goal"].tap()
+        app.alerts.textFields.firstMatch.typeText("Prepare release")
+        app.alerts.buttons["创建"].tap()
+        app.buttons.containing(NSPredicate(format: "label CONTAINS %@", "Prepare release")).firstMatch.tap()
+        app.textFields["goal-step-input"].tap(); app.textFields["goal-step-input"].typeText("Review files")
+        app.buttons["add-goal-step"].tap()
+        XCTAssertTrue(app.buttons["goal-step-0"].waitForExistence(timeout: 5))
+        app.buttons["goal-step-0"].tap()
+        XCTAssertTrue(app.staticTexts["1/1"].exists)
+        screenshot(app, "08-goal")
+    }
+    @MainActor func testLiveActivityOnSpringBoard() {
+        let app = launch()
+        app.buttons["start-demo"].tap()
+        XCTAssertTrue(app.buttons["review-change"].waitForExistence(timeout: 15))
+        XCTAssertTrue(app.staticTexts["live-activity-active"].waitForExistence(timeout: 5), "ActivityKit 没有成功创建活动")
+        XCUIDevice.shared.press(.home)
+        let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
+        XCTAssertTrue(springboard.wait(for: .runningForeground, timeout: 5))
+        let iconReady = expectation(for: NSPredicate(format: "hittable == true"), evaluatedWith: springboard.icons["Rune"].firstMatch)
+        wait(for: [iconReady], timeout: 8)
+        let attachment = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
+        attachment.name = "09-live-island-system"; attachment.lifetime = .keepAlways; add(attachment)
+        springboard.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.04)).press(forDuration: 1.1)
+        XCTAssertTrue(springboard.staticTexts["完成第一次文件审阅"].waitForExistence(timeout: 5))
+        let expanded = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
+        expanded.name = "10-live-island-expanded"; expanded.lifetime = .keepAlways; add(expanded)
+        let open = springboard.buttons["审阅变更"].firstMatch
+        if open.exists { open.tap() } else { app.activate() }
+        XCTAssertTrue(app.buttons["review-change"].waitForExistence(timeout: 5))
+    }
 
+    @MainActor func testRuntimeApprovalSurvivesRelaunchAndWritesFile() {
+        let app = XCUIApplication()
+        continueAfterFailure = false
+        app.launchArguments = ["--uitesting", "--reset-ui", "--skip-onboarding", "--runtime-fixture"]
+        app.launch()
+        app.buttons["new-task"].tap()
+        let input = app.textFields["task-prompt"]
+        XCTAssertTrue(input.waitForExistence(timeout: 5)); input.tap(); input.typeText("Runtime verification")
+        app.buttons["submit-task"].tap()
+        XCTAssertTrue(app.buttons["start-live-task"].waitForExistence(timeout: 8))
+        app.buttons["start-live-task"].tap()
+        XCTAssertTrue(app.buttons["approve-live-change"].waitForExistence(timeout: 15))
+        app.terminate()
+        app.launchArguments = ["--uitesting", "--skip-onboarding", "--runtime-fixture"]
+        app.launch()
+        app.buttons["open-active-task"].tap()
+        XCTAssertTrue(app.buttons["approve-live-change"].waitForExistence(timeout: 10))
+        app.buttons["approve-live-change"].tap()
+        XCTAssertTrue(app.staticTexts.containing(NSPredicate(format: "label CONTAINS %@", "真实工具执行与落盘")).firstMatch.waitForExistence(timeout: 15))
+        app.buttons["close-conversation"].tap()
+        app.tabBars.buttons["工作台"].tap()
+        app.buttons["open-files"].tap()
+        app.buttons["file-notes.md"].tap()
+        XCTAssertTrue(app.staticTexts["file-content"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["file-content"].label.contains("Runtime verified"))
+        screenshot(app, "11-runtime-file-proof")
+    }
+
+}

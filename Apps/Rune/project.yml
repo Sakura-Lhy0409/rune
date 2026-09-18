@@ -60,18 +60,45 @@ targets:
     platform: iOS
     sources:
       - path: Sources
+      - path: Shared
+      - path: Assets.xcassets
     dependencies:
       # ⚠️ 只依赖到已经真的能跑的那一层。
       #    先把内核装到手机上跑通，再一层一层往上接 ——
       #    在没有 Mac、每次验证都要走 CI 的情况下，
       #    "一次接十个包"意味着"一次有十个地方可能错"。
       - package: RuneKernel
+      - package: RuneUI
+      - package: RuneNet
+      - package: RuneCore
+      - package: RuneStore
+      - target: RuneWidgets
+        embed: true
+      - target: RuneShare
+        embed: true
+    entitlements:
+      path: Rune.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.dev.rune.agent
     info:
       path: Info.plist
       properties:
         CFBundleDisplayName: Rune
-        CFBundleShortVersionString: '0.1.0'
-        CFBundleVersion: '1'
+        NSSupportsLiveActivities: true
+        NSLocalNetworkUsageDescription: Rune 仅在你启用局域网渠道时连接所选的本地模型服务。
+        NSAppTransportSecurity:
+          NSAllowsLocalNetworking: true
+        UIBackgroundModes: [processing]
+        BGTaskSchedulerPermittedIdentifiers:
+          - dev.rune.agent.continued.*
+        UIFileSharingEnabled: true
+        LSSupportsOpeningDocumentsInPlace: true
+        CFBundleURLTypes:
+          - CFBundleURLName: dev.rune.agent
+            CFBundleURLSchemes: [rune]
+        CFBundleShortVersionString: '0.2.0'
+        CFBundleVersion: '2'
         UILaunchScreen:
           UIColorName: ''
         UISupportedInterfaceOrientations:
@@ -95,10 +122,65 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: dev.rune.agent
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         TARGETED_DEVICE_FAMILY: '1,2'    # iPhone + iPad
         SUPPORTS_MACCATALYST: NO
         # 前台跑测试/构建时不要带调试符号进 Release
         SWIFT_ACTIVE_COMPILATION_CONDITIONS: $(inherited)
+
+  RuneWidgets:
+    type: app-extension
+    platform: iOS
+    dependencies:
+      - package: RuneUI
+    sources:
+      - path: Widgets
+      - path: Shared/RuneActivityAttributes.swift
+    info:
+      path: Widgets/Info.plist
+      properties:
+        CFBundleDisplayName: Rune
+        CFBundleShortVersionString: '0.2.0'
+        CFBundleVersion: '2'
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.rune.agent.widgets
+        APPLICATION_EXTENSION_API_ONLY: YES
+        SKIP_INSTALL: YES
+
+  RuneShare:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: ShareExtension
+      - path: Shared/RuneActivityAttributes.swift
+    entitlements:
+      path: ShareExtension/RuneShare.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.dev.rune.agent
+    info:
+      path: ShareExtension/Info.plist
+      properties:
+        CFBundleDisplayName: 存入 Rune
+        CFBundleShortVersionString: '0.2.0'
+        CFBundleVersion: '2'
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.share-services
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).ShareViewController
+          NSExtensionAttributes:
+            NSExtensionActivationRule:
+              NSExtensionActivationSupportsText: true
+              NSExtensionActivationSupportsWebURLWithMaxCount: 5
+              NSExtensionActivationSupportsFileWithMaxCount: 5
+              NSExtensionActivationSupportsImageWithMaxCount: 5
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.rune.agent.share
+        APPLICATION_EXTENSION_API_ONLY: YES
+        SKIP_INSTALL: YES
 
   RuneUITests:
     type: bundle.ui-testing

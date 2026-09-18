@@ -1,0 +1,16 @@
+{
+  "file": "output/releases/Rune-0.1.0-preview-20260918-unsigned.ipa",
+  "version": "0.1.0",
+  "build": "1",
+  "platform": "iphoneos",
+  "minimum_ios": "18.0",
+  "extensions": [
+    "Payload/Rune.app/PlugIns/RuneWidgets.appex/Info.plist",
+    "Payload/Rune.app/PlugIns/RuneShare.appex/Info.plist"
+  ],
+  "bytes": 7480088,
+  "sha256": "d0baaf8acd08721b9343655ee752c2d29733fb6d98e75ab4e6c6cc523354f03c",
+  "signed": false,
+  "qq_sent": false,
+  "delivery_blocker": "Current computer-use connection does not expose native-app APIs."
+}

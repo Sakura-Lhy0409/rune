@@ -1,0 +1,266 @@
+import Foundation
+import Testing
+import RuneKernel
+import RuneStore
+@testable import RuneCore
+
+final class FixtureTransport: ModelTransport, @unchecked Sendable {
+    private let lock = NSLock()
+    private var responses: [ModelHTTPResponse]
+    private var sent: [ModelHTTPRequest] = []
+    init(_ bodies: [String]) { responses = bodies.map { .init(statusCode: 200, body: Data($0.utf8)) } }
+    var requests: [ModelHTTPRequest] { lock.lock(); defer { lock.unlock() }; return sent }
+    func send(_ request: ModelHTTPRequest) throws -> ModelHTTPResponse {
+        lock.lock(); defer { lock.unlock() }
+        sent.append(request)
+        guard !responses.isEmpty else { throw ProviderError(kind: .request, providerID: "test", message: "fixture exhausted", userFacingMessage: "fixture exhausted") }
+        return responses.removeFirst()
+    }
+}
+private func text(_ value: String) -> String {
+    "data: " + JSONValue.object(["choices": .array([.object(["delta": .object(["content": .string(value)]), "finish_reason": .string("stop")])])]).canonicalString() + "\n\ndata: [DONE]\n\n"
+}
+private func call(_ name: String, _ args: JSONValue, id: String = "call-1") -> String {
+    "data: " + JSONValue.object(["choices": .array([.object(["delta": .object(["tool_calls": .array([.object(["index": .int(0), "id": .string(id), "function": .object(["name": .string(name), "arguments": .string(args.canonicalString())])])])]), "finish_reason": .string("tool_calls")])])]).canonicalString() + "\n\ndata: [DONE]\n\n"
+}
+private struct Fixture {
+    let directory: URL
+    let config: RuntimeConfiguration
+    let store: RuneEventStore
+    init() throws {
+        directory = FileManager.default.temporaryDirectory.appendingPathComponent("core-" + UUID().uuidString)
+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        try "before\n".write(to: directory.appendingPathComponent("notes.md"), atomically: true, encoding: .utf8)
+        store = try RuneEventStore(inMemory: true)
+        let provider = ProviderConfig(id: "fixture", displayName: "测试", protocolFamily: .openAIChat,
+                                      baseURL: "https://fixture.example/v1", auth: .bearer(keyRef: "test"), models: [])
+        config = .init(sessionID: UUID(), workspaceID: UUID(), workspaceURL: directory,
+                       artifactsURL: directory.appendingPathComponent("artifacts"), provider: provider, modelID: "test", secret: "fixture-secret")
+    }
+    func remove() { try? FileManager.default.removeItem(at: directory) }
+    func content() throws -> String { try String(contentsOf: directory.appendingPathComponent("notes.md"), encoding: .utf8) }
+}
+private func finish(_ stream: AsyncThrowingStream<RuntimeUpdate, Error>) async throws -> RuntimeSnapshot {
+    var final: RuntimeSnapshot?
+    for try await update in stream { if case .snapshot(let snapshot) = update { final = snapshot } }
+    return try #require(final)
+}
+@Suite("真实运行时接线")
+struct AgentRuntimeTests {
+    @Test("模型读取文件，结果回传后完成；事件与状态真实存储")
+    func readAndFinish() async throws {
+        let f = try Fixture(); defer { f.remove() }
+        let transport = FixtureTransport([call(ToolName.readFile, ["path": .string("notes.md")]), text("已经读到 before")])
+        let runtime = try AgentRuntime(configuration: f.config, objective: "读文件", store: f.store, transport: transport)
+        let result = try await finish(runtime.run())
+        #expect(result.state.status == .completed)
+        #expect(result.state.toolCallCount == 1)
+        #expect(transport.requests.count == 2)
+        #expect(String(decoding: transport.requests[1].body, as: UTF8.self).contains("before"))
+        #expect(try f.store.eventLog(sessionID: f.config.sessionID).verify(full: true).isOK)
+        #expect(try f.store.loadRuntime(sessionID: f.config.sessionID)?.state.status == .completed)
+    }
+    @Test("修改必须先审批，重建运行时后批准能继续且不丢上下文")
+    func approvalAndRecovery() async throws {
+        let f = try Fixture(); defer { f.remove() }
+        let transport = FixtureTransport([call(ToolName.editFile, ["path": .string("notes.md"), "old_string": .string("before"), "new_string": .string("after")]), text("已完成")])
+        let runtime = try AgentRuntime(configuration: f.config, objective: "改文件", store: f.store, transport: transport)
+        let paused = try await finish(runtime.run())
+        #expect(paused.state.status == .awaitingApproval)
+        #expect(try f.content() == "before\n")
+        let approval = try #require(paused.metadata.approval)
+        #expect(approval.changes.first?.after == "after\n")
+        let recovered = try AgentRuntime(configuration: f.config, objective: "改文件", store: f.store, transport: transport)
+        let done = try await finish(recovered.run(.approve(callID: approval.call.id)))
+        #expect(done.state.status == .completed)
+        #expect(try f.content() == "after\n")
+        #expect(done.metadata.changes.first?.applied == true)
+    }
+    @Test("拒绝不会写文件，而且工具结果仍与调用配对")
+    func rejection() async throws {
+        let f = try Fixture(); defer { f.remove() }
+        let transport = FixtureTransport([call(ToolName.writeFile, ["path": .string("notes.md"), "content": .string("replace")]), text("保留原文件")])
+        let runtime = try AgentRuntime(configuration: f.config, objective: "改文件", store: f.store, transport: transport)
+        let pending = try await finish(runtime.run())
+        let approval = try #require(pending.metadata.approval)
+        let done = try await finish(runtime.run(.reject(callID: approval.call.id)))
+        #expect(done.state.status == .completed)
+        #expect(try f.content() == "before\n")
+        #expect(OutboundCheck.review(done.state.messages, family: .openAIChat).isSendable)
+    }
+    @Test("审阅期间文件变化必须阻止旧变更")
+    func externalChange() async throws {
+        let f = try Fixture(); defer { f.remove() }
+        let transport = FixtureTransport([call(ToolName.writeFile, ["path": .string("notes.md"), "content": .string("replace")])])
+        let runtime = try AgentRuntime(configuration: f.config, objective: "改文件", store: f.store, transport: transport)
+        let pending = try await finish(runtime.run())
+        try "user edit".write(to: f.directory.appendingPathComponent("notes.md"), atomically: true, encoding: .utf8)
+        await #expect(throws: RuntimeFailure.self) { try await finish(runtime.run(.approve(callID: "call-1"))) }
+        #expect(pending.metadata.approval != nil)
+        #expect(try f.content() == "user edit")
+    }
+    @Test("正常结束后追加问题会复用历史并保持事件链连续")
+    func followUp() async throws {
+        let f = try Fixture(); defer { f.remove() }
+        let transport = FixtureTransport([text("第一轮完成"), text("第二轮完成")])
+        let runtime = try AgentRuntime(configuration: f.config, objective: "第一个问题", store: f.store, transport: transport)
+        _ = try await finish(runtime.run())
+        let done = try await finish(runtime.run(.followUp("第二个问题")))
+        #expect(done.state.status == .completed)
+        #expect(String(decoding: transport.requests.last!.body, as: UTF8.self).contains("第一轮完成"))
+        #expect(try f.store.eventLog(sessionID: f.config.sessionID).verify(full: true).isOK)
+    }
+    @Test("错误响应不能伪装成完成")
+    func failure() async throws {
+        let f = try Fixture(); defer { f.remove() }
+        let runtime = try AgentRuntime(configuration: f.config, objective: "失败", store: f.store, transport: FixtureTransport(["data: {\"error\":{\"code\":401,\"message\":\"bad key\"}}\n\n"]))
+        let result = try await finish(runtime.run())
+        #expect(result.state.status == .failed)
+        #expect(result.metadata.failure != nil)
+    }
+}
+
+@Suite("恢复、取消与凭据隔离")
+struct RuntimeRecoveryTests {
+    @Test("修改意图已提交而结果未知，目标内容已存在时不重复写")
+    func interruptedWrite() throws {
+        let f = try Fixture(); defer { f.remove() }
+        let vfs = ModelWorkspace(base: FileManagerVFS(baseURL: f.directory))
+        let args = JSONValue.object(["path": .string("notes.md"), "old_string": .string("before"), "new_string": .string("after")])
+        let call = ToolCall(id: "recovered", name: ToolName.editFile, argumentsJSON: Data(args.canonicalString().utf8))
+        _ = try vfs.write(try VFSPath.parse("/workspace/notes.md"), content: "after\n")
+        let guarded = ReviewedToolExecutor(base: LocalToolExecutor(vfs: vfs), vfs: vfs,
+            changes: [.init(callID: call.id, path: "/workspace/notes.md", before: "before\n", after: "after\n")])
+        let result = try guarded.execute(call)
+        #expect(result.status == .ok)
+        #expect(result.summary.contains("未重复写入"))
+        #expect(try f.content() == "after\n")
+    }
+    @Test("凭据不能被读取、列出或复制到普通文件")
+    func credentialIsolation() throws {
+        let f = try Fixture(); defer { f.remove() }
+        try "DO_NOT_SEND".write(to: f.directory.appendingPathComponent(".env"), atomically: true, encoding: .utf8)
+        let vfs = ModelWorkspace(base: FileManagerVFS(baseURL: f.directory))
+        let credential = try VFSPath.parse("/workspace/.env")
+        #expect(throws: ToolError.self) { try vfs.read(credential) }
+        #expect(!vfs.exists(credential))
+        try FileManager.default.createSymbolicLink(at: f.directory.appendingPathComponent("ordinary.txt"), withDestinationURL: f.directory.appendingPathComponent(".env"))
+        #expect(throws: ToolError.self) { try vfs.read(VFSPath(mount: .workspace, components: ["ordinary.txt"])) }
+
+        #expect(try !vfs.listAll(includeHidden: true).contains { $0.name == ".env" })
+        #expect(throws: ToolError.self) { try vfs.copy(credential, to: VFSPath(mount: .workspace, components: ["out.txt"]), overwrite: false) }
+    }
+    @Test("暂停期间可取消，关闭重开也不继续调用模型")
+    func cancelPersistedApproval() async throws {
+        let f = try Fixture(); defer { f.remove() }
+        let transport = FixtureTransport([call(ToolName.writeFile, ["path": .string("notes.md"), "content": .string("after")])])
+        let runtime = try AgentRuntime(configuration: f.config, objective: "修改", store: f.store, transport: transport)
+        _ = try await finish(runtime.run())
+        let cancelled = try await finish(runtime.run(.cancel))
+        #expect(cancelled.metadata.cancelled)
+        #expect(try f.content() == "before\n")
+        let reloaded = try AgentRuntime(configuration: f.config, objective: "修改", store: f.store, transport: transport)
+        await #expect(throws: RuntimeFailure.self) { try await finish(reloaded.run(.resume)) }
+        #expect(transport.requests.count == 1)
+    }
+    @Test("撤销新建文件会删除文件且写入审计，不留空壳文件")
+    func undoNewFile() async throws {
+        let f = try Fixture(); defer { f.remove() }
+        let transport = FixtureTransport([call(ToolName.writeFile, ["path": .string("new.md"), "content": .string("new")]), text("完成")])
+        let runtime = try AgentRuntime(configuration: f.config, objective: "新建", store: f.store, transport: transport)
+        _ = try await finish(runtime.run())
+        let done = try await finish(runtime.run(.approve(callID: "call-1")))
+        let change = try #require(done.metadata.changes.first)
+        let reverted = try await finish(runtime.run(.undo(changeID: change.id)))
+        #expect(!FileManager.default.fileExists(atPath: f.directory.appendingPathComponent("new.md").path))
+        #expect(reverted.metadata.changes.first?.reverted == true)
+        #expect(try f.store.eventLog(sessionID: f.config.sessionID).verify(full: true).isOK)
+    }
+    @Test("取消等待立即唤醒，后续请求不会发出")
+    func interruptibleDelay() async throws {
+        let control = RuntimeControl()
+        let started = Date()
+        let worker = Task.detached { try control.wait(seconds: 30) }
+        control.stop(cancel: false)
+        await #expect(throws: CancellationError.self) { try await worker.value }
+        #expect(Date().timeIntervalSince(started) < 1)
+    }
+}
+
+@Suite("预算和网络崩溃边界")
+struct RuntimeBudgetTests {
+    @Test("下一次请求预留超过预算时，一次 HTTP 都不能发送")
+    func reserveBeforeSending() async throws {
+        let f = try Fixture(); defer { f.remove() }
+        let priced = RuntimeConfiguration(sessionID: f.config.sessionID, workspaceID: f.config.workspaceID,
+            workspaceURL: f.config.workspaceURL, artifactsURL: f.config.artifactsURL, provider: f.config.provider,
+            modelID: f.config.modelID, secret: f.config.secret,
+            price: .init(inputMicroPerMTok: 10_000_000, outputMicroPerMTok: 30_000_000), budgetMicroUSD: 1)
+        let transport = FixtureTransport([text("done")])
+        let runtime = try AgentRuntime(configuration: priced, objective: "test", store: f.store, transport: transport)
+        let snapshot = try await finish(runtime.run())
+        #expect(snapshot.state.status == .pausedBudget)
+        #expect(snapshot.metadata.suggestedBudgetMicroUSD ?? 0 > 1)
+        #expect(transport.requests.isEmpty)
+        let raised = try await finish(runtime.run(.raiseBudget(1_000_000)))
+        #expect(raised.state.status == .completed)
+        #expect(transport.requests.count == 1)
+    }
+    @Test("进程终止在网络调用窗口，恢复必须提示可能重复计费")
+    func recoverInFlightModel() throws {
+        let f = try Fixture(); defer { f.remove() }
+        let state = TurnState(sessionID: f.config.sessionID, objective: "test", status: .reasoning)
+        var metadata = RuntimeMetadata(workspaceID: f.config.workspaceID, providerID: f.config.provider.id, modelID: f.config.modelID)
+        metadata.inFlightModel = true
+        _ = try f.store.commitRuntime(state: state, metadata: JSONEncoder().encode(metadata), events: [], expectedRevision: 0)
+        let restored = try #require(try AgentRuntime.snapshot(sessionID: state.sessionID, store: f.store))
+        #expect(restored.metadata.paused)
+        #expect(restored.metadata.interruptedRequest)
+    }
+    @Test("无法预览的大文件停在可拒绝的审批，而不是直接写入")
+    func oversizedPreview() async throws {
+        let f = try Fixture(); defer { f.remove() }
+        try String(repeating: "x", count: 300_000).write(to: f.directory.appendingPathComponent("notes.md"), atomically: true, encoding: .utf8)
+        let transport = FixtureTransport([call(ToolName.writeFile, ["path": .string("notes.md"), "content": .string("bad")]), text("未修改")])
+        let runtime = try AgentRuntime(configuration: f.config, objective: "test", store: f.store, transport: transport)
+        let pending = try await finish(runtime.run())
+        #expect(pending.metadata.approval?.reviewError != nil)
+        await #expect(throws: RuntimeFailure.self) { try await finish(runtime.run(.approve(callID: "call-1"))) }
+        let denied = try await finish(runtime.run(.reject(callID: "call-1")))
+        #expect(denied.state.status == .completed)
+        #expect(try f.content().count == 300_000)
+    }
+}
+
+@Suite("真实 TCP 到运行时的完整链路")
+struct RuntimeHTTPIntegrationTests {
+    @Test("真实 URLSession 传输经过审批和文件写入，再从 SQLite 验链")
+    func actualNetworkLoop() async throws {
+        let f = try Fixture(); defer { f.remove() }
+        let server = try LoopbackServer { request in
+            let response = String(decoding: request.body, as: UTF8.self).contains("tool_call_id")
+                ? text("已完成")
+                : call(ToolName.editFile, ["path": .string("notes.md"), "old_string": .string("before"), "new_string": .string("after")])
+            return .init(chunks: [Data(response.utf8)], chunked: true)
+        }
+        try await server.start(); defer { server.stop() }
+        var provider = f.config.provider; provider.baseURL = server.origin
+        let config = RuntimeConfiguration(sessionID: f.config.sessionID, workspaceID: f.config.workspaceID,
+            workspaceURL: f.config.workspaceURL, artifactsURL: f.config.artifactsURL, provider: provider,
+            modelID: "test", secret: "fixture-only", allowPrivateNetwork: true)
+        let runtime = try AgentRuntime(configuration: config, objective: "执行真实网络测试", store: f.store)
+        let pending = try await finish(runtime.run())
+        #expect(pending.state.status == .awaitingApproval)
+        #expect(try f.content() == "before\n")
+        let result = try await finish(runtime.run(.approve(callID: "call-1")))
+        #expect(result.state.status == .completed)
+        #expect(try f.content() == "after\n")
+        #expect(server.requests.count == 2)
+        #expect(server.requests.first?.headers["authorization"] == "Bearer fixture-only")
+        let events = try f.store.loadAll(sessionID: config.sessionID)
+        #expect(events.contains { $0.kind == .egressAudited })
+        #expect(try f.store.eventLog(sessionID: config.sessionID).verify(full: true).isOK)
+        let encoded = String(decoding: try JSONEncoder().encode(events), as: UTF8.self)
+        #expect(!encoded.contains("fixture-only"))
+    }
+}

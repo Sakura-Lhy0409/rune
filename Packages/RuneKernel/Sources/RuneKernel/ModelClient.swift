@@ -119,9 +119,13 @@ public struct ModelClient: Sendable {
     /// 健康状态（跨轮次累积，所以要由调用方持有）
     public var health: HealthTracker
     public var dedupe: RequestDeduplicator
+    private var cachedEvents: [Data: [ModelEvent]] = [:]
     public let transport: any ModelTransport
     /// 每次调用最多打几枪（含换渠道）；超过就如实告诉用户
     public var maxAttempts: Int
+    /// 同步客户端的等待点。真实调用在工作队列运行；测试可注入虚拟时钟。
+    /// 抛错表示取消等待，不得继续发送下一枪。
+    public var waitBeforeRetry: @Sendable (Int) throws -> Void
 
     public init(
         transport: any ModelTransport,
@@ -130,7 +134,10 @@ public struct ModelClient: Sendable {
         credentials: [String: String] = [:],
         health: HealthTracker = HealthTracker(),
         dedupe: RequestDeduplicator = RequestDeduplicator(),
-        maxAttempts: Int = 4
+        maxAttempts: Int = 4,
+        waitBeforeRetry: @escaping @Sendable (Int) throws -> Void = { seconds in
+            Thread.sleep(forTimeInterval: Double(seconds))
+        }
     ) {
         self.transport = transport
         self.channels = channels
@@ -139,6 +146,7 @@ public struct ModelClient: Sendable {
         self.health = health
         self.dedupe = dedupe
         self.maxAttempts = max(1, maxAttempts)
+        self.waitBeforeRetry = waitBeforeRetry
     }
 
     /// 发一次请求。**这是网关那一层唯一的执行入口。**
@@ -188,19 +196,20 @@ public struct ModelClient: Sendable {
                 .encode(request, family: channel.protocolFamily, model: modelID, quirks: channel.quirks)
                 .canonicalString().utf8)
             let fingerprint = dedupe.begin(providerID: channel.id, modelID: modelID, body: encodedBody)
-            if let answeredBy = dedupe.cachedResponder(for: fingerprint) {
+            if let answeredBy = dedupe.cachedResponder(for: fingerprint), let replay = cachedEvents[fingerprint] {
                 report.wasDeduplicated = true
                 report.attempts.append(.init(providerID: answeredBy.providerID, modelID: answeredBy.modelID,
                                              statusCode: nil, error: nil,
                                              action: "命中缓存，没有再发一次（省一次计费）"))
-                // 缓存里只有"谁答的"，没有重放内容 —— 这里明确交代清楚，
-                // 由上层决定是重放还是重发（不假装成功）
-                return ModelCallOutcome(events: [], report: report, error: nil)
+                // 缓存重放不产生新用量，不能再次扣费。
+                let events = replay.filter { if case .usage = $0 { return false }; return true }
+                return ModelCallOutcome(events: events, report: report, error: nil)
             }
 
             // ③ 真的发出去
             let httpRequest = buildHTTPRequest(channel: channel, model: modelID, body: encodedBody)
             var response: ModelHTTPResponse?
+            var decoded: [ModelEvent] = []
             var failure: ProviderError?
 
             do {
@@ -215,7 +224,19 @@ public struct ModelClient: Sendable {
                         userFacingMessage: ProviderError.userFacing(kind: kind, statusCode: sent.statusCode, raw: raw),
                         retryAfterSeconds: sent.retryAfterSeconds
                     )
+                } else {
+                    decoded = decode(sent.body, channel: channel, model: modelID)
+                    failure = decoded.compactMap { event -> ProviderError? in
+                        if case .providerError(let error) = event { return error }; return nil
+                    }.first
+                    if decoded.isEmpty {
+                        failure = ProviderError(kind: .request, providerID: channel.id,
+                            message: "响应没有可识别的模型事件", userFacingMessage: "渠道返回了空响应或不匹配的协议，请检查渠道协议配置。")
+                    }
                 }
+            } catch let error as ProviderError {
+                // 真实传输已经分类的出口/配置错误不能被重新归为瞬时错误并重试。
+                failure = error
             } catch {
                 failure = ProviderError(
                     kind: .transient, providerID: channel.id,
@@ -236,12 +257,21 @@ public struct ModelClient: Sendable {
                 let action = describe(retry.action)
 
                 switch retry.action {
-                case .retrySameChannel:
+                case .retrySameChannel(let seconds):
                     report.attempts.append(.init(providerID: channel.id, modelID: modelID,
                                                  statusCode: failure.statusCode,
                                                  error: failure.userFacingMessage, action: action))
+                    // 最后一枪失败后没有下一次发送，也不应该白等一次退避。
+                    if attempt < maxAttempts {
+                        do { try waitBeforeRetry(seconds) }
+                        catch {
+                            let stopped = ProviderError(kind: .unknown, providerID: channel.id,
+                                message: "重试等待已取消", userFacingMessage: "已停止重试，没有再次发送请求。")
+                            return ModelCallOutcome(events: [.providerError(stopped)], report: report, error: stopped)
+                        }
+                    }
                     attempt += 1
-                    continue     // 同渠道再来一枪（退避秒数由真实传输/调度层落实）
+                    continue
 
                 case .switchChannel, .recompressAndRetry:
                     report.attempts.append(.init(providerID: channel.id, modelID: modelID,
@@ -267,9 +297,12 @@ public struct ModelClient: Sendable {
 
             // ④ 成功：解码（**真的把字节解回来**）
             guard let response else { break }
-            var events = decode(response.body, channel: channel, model: modelID)
+            var events = decoded
             health.recordSuccess(channel.id, latencyMS: response.latencyMS, now: now)
             dedupe.record(fingerprint: fingerprint, answeredBy: current)
+            if cachedEvents.count >= 32 { cachedEvents.removeAll(); dedupe.reset(); dedupe.record(fingerprint: fingerprint, answeredBy: current) }
+            cachedEvents[fingerprint] = events
+
             report.attempts.append(.init(providerID: channel.id, modelID: modelID,
                                          statusCode: response.statusCode, error: nil, action: "成功"))
 

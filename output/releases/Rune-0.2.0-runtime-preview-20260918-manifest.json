@@ -1,0 +1,22 @@
+{
+  "file": "Rune-0.2.0-runtime-preview-20260918-unsigned.ipa",
+  "version": "0.2.0",
+  "build": "2",
+  "bytes": 9233831,
+  "sha256": "286bb7cd0674259045ff9a890908d89b8e3ed4eba668aba02dbbb0f4ea732d26",
+  "signed": false,
+  "minimum_ios": "18.0",
+  "extensions": [
+    "Payload/Rune.app/PlugIns/RuneWidgets.appex/Info.plist",
+    "Payload/Rune.app/PlugIns/RuneShare.appex/Info.plist"
+  ],
+  "tests": {
+    "swiftpm": 1101,
+    "ui_full": 10,
+    "core_tsan": 14
+  },
+  "cloud_inference_verified": false,
+  "cloud_blocker": "PinAI upstream rejects gpt-5.4-mini, gpt-5.4 and gpt-5.2 for the configured account",
+  "whole_project_complete": false,
+  "remaining_scope": "docs/19-真实运行时与验收.md section 5"
+}

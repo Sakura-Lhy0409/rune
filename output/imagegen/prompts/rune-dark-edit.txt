@@ -1,0 +1,6 @@
+Use case: lighting-weather
+Asset type: dark-appearance iOS application icon, final production square.
+Input image: edit target and exact identity reference.
+Keep the exact R/rune monogram silhouette, proportions, position, counter-space, and orthographic framing from the supplied image. Keep the quiet industrial-design finish. Do not add any object or typography.
+Change only the color/material treatment and background for a coordinated dark variant: make the entire square background opaque, smooth, deep pine green approximately #253E31, with almost no gradient. Turn the same monogram into softly frosted pale-jade glass, approximately #DDE8D2. Use a restrained thin highlight and shallow internal depth, not an illuminated object. Keep broad front faces calm and matte-translucent. Remove yellow/gold highlights. No glow, no halo, no haze around the glyph, no floating effect.
+The image must be a complete fully opaque square with colored pixels covering all four corners. Absolutely no alpha channel or transparent background. No rounded outside corners, border, external drop shadow, or icon mockup. The operating system applies its own mask. At small sizes the pale monogram must read clearly against the green background.

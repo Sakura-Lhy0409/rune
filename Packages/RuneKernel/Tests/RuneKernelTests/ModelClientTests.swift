@@ -105,7 +105,7 @@ private func client(_ transport: ScriptedTransport,
                                                      "keychain://backup": "sk-backup"],
                     maxAttempts: Int = 4) -> ModelClient {
     ModelClient(transport: transport, channels: channels, rules: rules,
-                credentials: credentials, maxAttempts: maxAttempts)
+                credentials: credentials, maxAttempts: maxAttempts, waitBeforeRetry: { _ in })
 }
 
 private func texts(_ events: [ModelEvent]) -> String {
@@ -345,6 +345,9 @@ struct ModelClientDedupTests {
 
         let second = c.call(chatRequest(), task: .code, now: t0)
         #expect(second.report.wasDeduplicated, "第二次必须认出这是同一个请求")
+        #expect(texts(second.events) == texts(first.events))
+        #expect(!second.events.contains { if case .usage = $0 { return true }; return false })
+
         #expect(transport.requestCount == 1, "不该真的再发一次（实际 \(transport.requestCount) 次）")
     }
 
@@ -431,4 +434,54 @@ private struct StubEchoReader: ToolExecuting {
     func execute(_ call: ToolCall) throws -> ToolResult {
         .ok(callID: call.id, summary: "notes.md: 部署步骤 1. 构建 2. 上传")
     }
+}
+
+@Suite("真实传输接入后的重试边界")
+struct ModelClientTransportBoundaryTests {
+    @Test("传输已经分类的配置错误不能被改成瞬时错误重试")
+    func preserveFailureClassification() {
+        let failure = ProviderError(kind: .configuration, providerID: "network",
+                                    message: "出口未授权", userFacingMessage: "请配置渠道出口")
+        let transport = ScriptedTransport([.failure(failure)])
+        var c = client(transport)
+        let outcome = c.call(chatRequest(), task: .code, now: t0)
+        #expect(outcome.error == failure)
+        #expect(transport.requestCount == 1)
+    }
+
+    @Test("重试必须经过等待点，且最后一次失败不再空等")
+    func invokesDelay() {
+        let transport = ScriptedTransport([
+            .success(ModelHTTPResponse(statusCode: 429, body: Data(), retryAfterSeconds: 7)),
+            .success(ModelHTTPResponse(statusCode: 429, body: Data(), retryAfterSeconds: 9)),
+        ])
+        let delays = RetryDelays()
+        var c = client(transport, maxAttempts: 2)
+        c.waitBeforeRetry = { delays.record($0) }
+        let outcome = c.call(chatRequest(), task: .code, now: t0)
+        #expect(!outcome.succeeded)
+        #expect(delays.values == [7])
+        #expect(transport.requestCount == 2)
+    }
+
+    @Test("等待被取消时不能继续发请求")
+    func cancelledDelay() {
+        let transport = ScriptedTransport([
+            .success(ModelHTTPResponse(statusCode: 429, body: Data())),
+            .success(ModelHTTPResponse(statusCode: 200, body: Data(okOpenAI.utf8))),
+        ])
+        var c = client(transport)
+        c.waitBeforeRetry = { _ in throw CancellationError() }
+        let outcome = c.call(chatRequest(), task: .code, now: t0)
+        #expect(!outcome.succeeded)
+        #expect(outcome.error?.kind == .unknown)
+        #expect(transport.requestCount == 1)
+    }
+}
+
+private final class RetryDelays: @unchecked Sendable {
+    private let lock = NSLock()
+    private var delays: [Int] = []
+    func record(_ value: Int) { lock.lock(); delays.append(value); lock.unlock() }
+    var values: [Int] { lock.lock(); defer { lock.unlock() }; return delays }
 }

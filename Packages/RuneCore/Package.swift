@@ -5,11 +5,7 @@ import PackageDescription
 //
 // 📄 设计依据：docs/04-Agent运行时核心.md
 // 🖥 平台：需 macOS（含 iOS 生命周期）
-// 📌 状态：⬜ 骨架（尚未实现；实现清单见 PROJECT_STATE.md §7）
-//
-// ⚠️ 本机（Windows）**不要**用 swift build（SwiftPM 在本环境的执行层不可用，
-//    见 PROJECT_STATE.md §3）。纯逻辑部分请在 RuneKernel 内实现并用 Tools/rune.ps1 测试；
-//    本文件供 macOS 上使用 Xcode / 标准 SwiftPM。
+// 📌 状态：真实运行时、逐步持久化、审批、取消与恢复；测试已覆盖接口组合。
 let package = Package(
     name: "RuneCore",
     platforms: [
@@ -18,9 +14,12 @@ let package = Package(
     ],
     products: [
         .library(name: "RuneCore", targets: ["RuneCore"]),
+        .executable(name: "RuneValidation", targets: ["RuneValidation"]),
     ],
     dependencies: [
         .package(path: "../RuneKernel"),
+        .package(path: "../RuneNet"),
+        .package(path: "../RuneTools"),
         .package(path: "../RuneGateway"),
         .package(path: "../RuneContext"),
         .package(path: "../RuneBench"),
@@ -29,8 +28,10 @@ let package = Package(
     targets: [
         .target(
             name: "RuneCore",
-            dependencies: ["RuneKernel", "RuneGateway", "RuneContext", "RuneBench", "RuneStore"],
+            dependencies: ["RuneKernel", "RuneGateway", "RuneContext", "RuneBench", "RuneStore", "RuneNet", "RuneTools"],
             swiftSettings: [.swiftLanguageMode(.v6)]
         ),
+        .executableTarget(name: "RuneValidation", dependencies: ["RuneCore", "RuneKernel", "RuneStore"], swiftSettings: [.swiftLanguageMode(.v6)]),
+        .testTarget(name: "RuneCoreTests", dependencies: ["RuneCore", "RuneKernel", "RuneStore"], swiftSettings: [.swiftLanguageMode(.v6)]),
     ]
 )

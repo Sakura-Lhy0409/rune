@@ -1,0 +1,10 @@
+Use case: logo-brand
+Asset type: final production iPhone/iPad app icon for Rune, a private on-device workbench.
+Primary request: a single exceptionally refined app icon, with a modern iOS Liquid Glass material sensibility and a quiet independent software identity. A human art-directed, disciplined design, not generic AI branding.
+Subject: one original rune-like R monogram. A straight vertical spine connects to an angular triangular upper shoulder and one clean diagonal lower leg. The silhouette must remain immediately recognizable at 32 pixels. It should feel like a small, precisely crafted object rather than a typed letter.
+Scene/backdrop: edge-to-edge opaque deep pine green square, approximately #304D3D, with extremely subtle tonal depth. No scene outside the icon.
+Materials: the monogram is warm translucent mineral glass / polished pale jade, approximately #EDF0DB. Broad calm front faces, very restrained bevels, subtle internal refraction and a thin precise edge highlight. A small amount of believable relief and a barely visible contact shadow. No neon glow.
+Composition: orthographic front view, optically centered. Symbol occupies about 57 percent of canvas height and 38 percent of canvas width, with generous breathing room. One clear symbol, one background; no supporting decoration.
+Lighting: a large soft light above-left, quiet highlights and controlled contrast. Material detail should disappear elegantly when reduced to small sizes; the silhouette should become stronger.
+Constraints: 1024 by 1024 full square artwork, fully opaque, full bleed to all four edges. The OS will apply its own icon mask: do not draw rounded outer corners, an external frame, a border, a tile floating in a scene, or a shadow outside the square. No words, no captions, no watermark, no Apple logo, no screenshots, no multiple-icon presentation board.
+Avoid: robot faces, brains, sparkle stars, magic wands, infinity loops, rainbow chrome, purple-blue gradients, excessive highlights, droplets, lens flares, liquid splashes, plastic toy rendering, gaming badges, generic SaaS symbols, ornate rune decorations.

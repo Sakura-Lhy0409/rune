@@ -174,13 +174,17 @@ cmd_ipa() {
   mkdir -p Apps/Rune/ipa/Payload
   cp -R "$app" Apps/Rune/ipa/Payload/
   # 清掉自带的（无效）签名：Sideloadly 要签的是干净产物
-  rm -rf Apps/Rune/ipa/Payload/*.app/_CodeSignature \
-         Apps/Rune/ipa/Payload/*.app/embedded.mobileprovision || true
-  (cd Apps/Rune/ipa && zip -qry ../Rune-unsigned.ipa Payload)
+  find Apps/Rune/ipa/Payload -type d -name _CodeSignature -prune -exec rm -rf {} +
+  find Apps/Rune/ipa/Payload -type f -name embedded.mobileprovision -delete
+  # zip 更新现有文件不会删除旧条目；必须从空归档生成，避免把上个版本的资源带回来。
+  local archive_dir
+  archive_dir=$(mktemp -d "$ROOT/Apps/Rune/build/ipa-XXXXXX")
+  (cd Apps/Rune/ipa && zip -qry "$archive_dir/Rune-unsigned.ipa" Payload)
+  mv "$archive_dir/Rune-unsigned.ipa" Apps/Rune/Rune-unsigned.ipa
+  rmdir "$archive_dir"
   ok "Apps/Rune/Rune-unsigned.ipa"
   echo
-  echo "下一步（Windows）：用 Sideloadly 加载这个 ipa，用你的 Apple ID 签名后装到手机上。"
-  echo "⚠️ 免费 Apple ID 的签名有效期是 7 天，到期需要重签。详见 docs/16。"
+  echo "这是未签名的预览包；真机安装前需使用开发者签名，Widget 与分享扩展也要一起签名。"
 }
 
 # ---------- 入口 ----------

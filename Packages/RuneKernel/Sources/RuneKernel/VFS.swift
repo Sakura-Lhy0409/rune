@@ -764,6 +764,27 @@ public final class FileManagerVFS: VFS, @unchecked Sendable {
         self.trashRetentionDays = max(1, trashRetentionDays)
     }
 
+    /// 供上层策略核对实际目标，防止工作区内的链接把普通文件名指向凭据文件。
+    public func resolvedPath(_ path: VFSPath) throws -> VFSPath {
+        vfsPath(for: try url(for: path, mustExist: true))
+    }
+
+    /// 文档/图像工具的有限二进制入口，沿用同一套根目录与符号链接校验。
+    public func readData(_ path: VFSPath, maxBytes: Int) throws -> Data {
+        guard maxBytes > 0, maxBytes <= 64 * 1024 * 1024 else {
+            throw VFSFailure(kind: .isBinary, path: path, detail: "无效的二进制读取预算。")
+        }
+        let target = try url(for: path, mustExist: true)
+        let values = try target.resourceValues(forKeys: [.isRegularFileKey, .fileSizeKey])
+        guard values.isRegularFile == true else { throw VFSFailure(kind: .isBinary, path: path, detail: "只能读取普通文件。") }
+        guard (values.fileSize ?? 0) <= maxBytes else { throw VFSFailure(kind: .isBinary, path: path, detail: "文件超过此次读取预算。") }
+        let handle = try FileHandle(forReadingFrom: target)
+        defer { try? handle.close() }
+        let bytes = try handle.read(upToCount: maxBytes + 1) ?? Data()
+        guard bytes.count <= maxBytes else { throw VFSFailure(kind: .isBinary, path: path, detail: "文件在读取时超过预算。") }
+        return bytes
+    }
+
     // MARK: 路径映射（**全部安全逻辑都在这里**）
 
     /// 把 VFS 路径映射成真实 URL，并**再次确认**解析符号链接之后没有跑出根目录。

@@ -1,0 +1,26 @@
+{
+  "light": {
+    "source_size": [
+      1254,
+      1254
+    ],
+    "size": [
+      1024,
+      1024
+    ],
+    "mode": "RGB",
+    "sha256": "b01732d1baef29d26fe97655d0c7cf7fbd6677df644a51df9c92a14acf649fe6"
+  },
+  "dark": {
+    "source_size": [
+      1254,
+      1254
+    ],
+    "size": [
+      1024,
+      1024
+    ],
+    "mode": "RGB",
+    "sha256": "348cf23fe6cca02c72a5ca3bb2e6ed1d8bd515c2fa21d0ffda647d743fcbcd76"
+  }
+}

@@ -42,15 +42,10 @@ import RuneKernel
 /// 事件存储：唯一真相源的磁盘形态。
 public final class RuneEventStore: Sendable {
 
-    /// 当前 schema 版本（`PRAGMA user_version`）。
-    ///
-    /// ⚠️ C39 改过 v1 的 DDL（`seq` 单列主键 → `(session_id, seq)` 复合主键），**版本号刻意没有跳**：
-    ///    改之前这一片**从未在 CI 上跑绿过**，也就**没有任何真实数据库**是按旧 DDL 建的，
-    ///    所以不存在需要迁移的存量库。⚠️ 将来若真出现按旧 DDL 建的库，`CREATE TABLE IF NOT EXISTS`
-    ///    会**直接跳过建表**、把旧结构留在那里 —— 那时必须新开一版 v2 走重建，别改这一版。
-    public static let schemaVersion = 1
+    /// v1：事件表；v2：与事件同事务的运行状态检查点。已有 v1 数据库原位迁移。
+    public static let schemaVersion = 2
 
-    private let dbQueue: DatabaseQueue
+    let dbQueue: DatabaseQueue
 
     /// 打开（或新建）一个磁盘上的库。
     public init(path: String) throws {
@@ -108,6 +103,18 @@ public final class RuneEventStore: Sendable {
                 try db.execute(sql: "CREATE INDEX IF NOT EXISTS idx_event_turn ON event(turn_id, seq)")
                 try db.execute(sql: "CREATE INDEX IF NOT EXISTS idx_event_kind_time ON event(kind, created_at DESC)")
             }
+            if version < 2 {
+                try db.execute(sql: """
+                    CREATE TABLE runtime_checkpoint (
+                      session_id TEXT PRIMARY KEY NOT NULL,
+                      revision INTEGER NOT NULL,
+                      state_json BLOB NOT NULL,
+                      metadata BLOB NOT NULL,
+                      state_hash BLOB NOT NULL,
+                      updated_at REAL NOT NULL
+                    )
+                    """)
+            }
             try db.execute(sql: "PRAGMA user_version = \(Self.schemaVersion)")
         }
     }
@@ -147,7 +154,7 @@ public final class RuneEventStore: Sendable {
         try dbQueue.write { db in try Self.insert(db, event) }
     }
 
-    private static func insert(_ db: Database, _ event: RuntimeEvent) throws {
+    static func insert(_ db: Database, _ event: RuntimeEvent) throws {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .millisecondsSince1970
         let envelope = try encoder.encode(event)
@@ -216,7 +223,7 @@ public final class RuneEventStore: Sendable {
     ///
     /// 这个函数是"唯一真相源"这句话的落点：磁盘上的字节 → 内核的 `verify()`。
     public func eventLog(sessionID: UUID) throws -> EventLog {
-        var log = EventLog(sessionID: sessionID)
+        let log = EventLog(sessionID: sessionID)
         log.loadHistorical(try loadAll(sessionID: sessionID))
         return log
     }
