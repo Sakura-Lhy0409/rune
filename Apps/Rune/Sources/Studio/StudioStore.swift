@@ -464,7 +464,24 @@ enum ProviderSecrets {
             item[kSecAttrAccessible as String] = kSecAttrAccessibleWhenUnlockedThisDeviceOnly
             status = SecItemAdd(item as CFDictionary, nil)
         }
-        guard status == errSecSuccess else { throw StudioFailure("密钥无法保存到钥匙串（\(status)）。") }
+        guard status == errSecSuccess else {
+            // ⚠️ 报一个 `-34018` 给用户等于没报：它既没说清"发生了什么"，
+            //    也没说清"后果是什么"。而这里的后果很具体 ——
+            //    **密钥没存下来，这个渠道一旦真去跑任务就会鉴权失败**。
+            //    实测触发方式：模拟器里的**未签名**构建（缺 Keychain entitlement，
+            //    报 `errSecMissingEntitlement`）。真机用开发者证书签名后正常。
+            //
+            //    ⚠️ 另一条同样重要：**别说"已保存"**。测试连接用的是输入框里那份
+            //    内存中的密钥，所以它会成功 —— 用户很容易以为"测试通过 = 配置好了"，
+            //    然后在第一次真跑任务时撞上鉴权失败，且不知道原因。
+            // ⚠️ `-34018`（errSecMissingEntitlement）**不在公开头文件里**，
+            //    Swift 里拿不到这个符号（用了会编译失败），所以按数值比对。
+            //    数值来自实测：模拟器未签名构建建 Keychain 项时返回它。
+            let hint = status == -34018
+                ? "这个构建没有钥匙串权限（模拟器里的未签名运行常见）。真机用开发者证书签名安装后可以正常保存。"
+                : "请检查设备是否已解锁；若反复失败，重启 App 后再试。"
+            throw StudioFailure("密钥没能存进钥匙串（错误码 \(status)）。\(hint)\n\n⚠️ 注意：这个渠道的密钥**没有保存**，直接开始任务会因为鉴权失败而报错。")
+        }
     }
     static func read(_ id: UUID) -> String? {
         let query: [String: Any] = [kSecClass as String: kSecClassGenericPassword, kSecAttrService as String: "dev.rune.provider", kSecAttrAccount as String: id.uuidString, kSecReturnData as String: true, kSecMatchLimit as String: kSecMatchLimitOne]

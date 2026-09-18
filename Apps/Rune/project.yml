@@ -212,3 +212,11 @@ schemes:
       config: Debug
       targets:
         - RuneUITests
+      # ⚠️ 真渠道验收需要 API Key，而它**绝不能进仓库**。
+      #    这里只声明"从哪个环境变量继承"，值由运行测试的人在自己的 shell 里给：
+      #      RUNE_E2E_API_KEY=... xcodebuild test ...
+      #    XcodeGen 的 `environmentVariables` 支持 `value: $(VAR)` 形式从构建环境取。
+      environmentVariables:
+        RUNE_E2E_API_KEY: $(RUNE_E2E_API_KEY)
+        RUNE_E2E_BASE_URL: $(RUNE_E2E_BASE_URL)
+        RUNE_E2E_MODEL: $(RUNE_E2E_MODEL)
