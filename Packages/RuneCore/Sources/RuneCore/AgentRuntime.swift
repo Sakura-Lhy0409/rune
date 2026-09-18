@@ -107,10 +107,11 @@ public final class AgentRuntime: @unchecked Sendable {
                         audit: { networkAudit.append($0) }) : nil
                     let transport = ControlledTransport(live: live, injected: self.injected, control: control, preview: preview)
                     let model = RuntimeModel(transport: transport, config: self.config, tools: self.tools, control: control)
-                    let deps = self.dependencies(model: model)
+                    let (deps, capability) = self.dependencies(model: model)
                     let kernelConfig = TurnRunner.Config(maxRounds: self.config.maxRounds, maxToolCalls: 32,
                         maxCostMicroUSD: self.config.budgetMicroUSD, toolRegistry: self.tools)
                     try self.apply(action, deps: deps, kernelConfig: kernelConfig)
+                    try self.recordCapabilityGranted(capability)
                     continuation.yield(.snapshot(self.snapshot))
                     let started = Date()
                     while self.state.canAdvance && !self.metadata.paused && !self.metadata.cancelled {
@@ -331,17 +332,42 @@ public final class AgentRuntime: @unchecked Sendable {
         }
     }
 
-    private func dependencies(model: RuntimeModel) -> TurnRunner.Dependencies {
+    /// 记下"这一轮被授予了什么能力"。
+    ///
+    /// ⚠️ 这是**半个审计的补全**：`capabilityDenied` 早就接了（`TurnRunner` 在策略拒绝时发），
+    ///    但**"授予"从来没有被记录过**。只记拒绝的审计是残缺的 ——
+    ///    用户能看到"它被拦了 3 次"，却看不到"它本来被允许做什么"，
+    ///    而项目的安全模型正是建立在"**能力**比权限更像安全模型"这条铁律上。
+    ///    审计要是只记一半，那条铁律就没有证据链。
+    ///
+    /// ⚠️ 记录的是**签发时的事实**（范围 / 过期时间 / 谁授的 / 为什么），
+    ///    不是一个"授权成功"的标志位 —— 过期时间尤其重要：
+    ///    用户最该知道的是"这个能力什么时候自己失效"。
+    private func recordCapabilityGranted(_ token: CapabilityToken) throws {
+        let scopes = token.scopes.map(\.auditText).sorted()   // ⚠️ 排序：事件 payload 必须确定性
+        try commit([event(.capabilityGranted, [
+            "token_id": .string(token.id.uuidString),
+            "scopes": .array(scopes.map { .string($0) }),
+            "granted_by": .string(token.grantedBy.rawValue),
+            "reason": .string(token.reason),
+            "requires_biometric": .bool(token.requiresBiometric),
+            "expires_at": .int(Int(token.expiresAt.timeIntervalSince1970)),
+            "ttl_seconds": .int(Int(token.expiresAt.timeIntervalSince(token.issuedAt))),
+        ])])
+    }
+
+    private func dependencies(model: RuntimeModel) -> (deps: TurnRunner.Dependencies, token: CapabilityToken) {
         let root = VFSPath(mount: .workspace)
         let token = CapabilityToken(issuedForTurn: state.turnID,
             scopes: [.fsRead(root), .fsWrite(root), .fsDelete(root)], expiresAt: Date().addingTimeInterval(600),
             grantedBy: .planApproval, reason: "用户选择的工作区；每个修改仍单独审批")
-        return .init(modelEvents: { model.events($0) }, executor: executor,
+        let deps = TurnRunner.Dependencies(modelEvents: { model.events($0) }, executor: executor,
             policyContext: .init(trustDial: config.trust, token: token, planApproved: false),
             costOfRound: { [config, price = metadata.price] usage in
                 if let price { return CostCalculator.cost(usage: usage, price: price, providerID: config.provider.id, modelID: config.modelID) }
                 return CostBreakdown(usage: usage, microUSD: 0, providerID: config.provider.id, modelID: config.modelID, isEstimated: true)
             })
+        return (deps, token)
     }
     private func preview(_ call: ToolCall) throws -> [RuntimeFileChange] {
         guard let spec = tools[call.name], spec.riskLevel != .safe else { return [] }

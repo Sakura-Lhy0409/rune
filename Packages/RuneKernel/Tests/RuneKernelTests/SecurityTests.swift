@@ -277,3 +277,83 @@ struct CapabilityTokenTests {
         }
     }
 }
+
+// MARK: - 能力作用域的可读审计文本（C59）
+//
+// ⚠️ 这组测试守的是一条很实际的纪律：**审计事件必须能被人读懂**。
+//    把 scope 的 `Debug` 描述塞进事件里，用户在审计面板上看到的是
+//    `fsWrite(RuneKernel.VFSPath(mount: ..., components: [...]))` —— 那等于没有审计。
+//    项目的安全模型建立在"**能力**比权限更像安全模型"这条铁律上，
+//    而那条铁律需要**证据链**：用户得看得见"它被允许做什么"。
+
+@Suite("能力作用域 —— 审计文本必须可读")
+struct CapabilityAuditTextTests {
+
+    @Test("⭐ 文件类作用域要说清「哪个目录、哪种操作」")
+    func fileScopesAreReadable() {
+        let root = VFSPath(mount: .workspace)
+        let src = VFSPath(mount: .workspace, components: ["src"])
+        #expect(CapabilityToken.Scope.fsRead(root).auditText == "读取 /workspace")
+        #expect(CapabilityToken.Scope.fsWrite(src).auditText == "写入 /workspace/src")
+        #expect(CapabilityToken.Scope.fsDelete(root).auditText == "删除 /workspace")
+    }
+
+    @Test("⭐⭐ 出口规则必须说清「发到哪个域名、什么方法」")
+    func egressScopeNamesTheHost() {
+        // ⚠️ 这是用户最想知道的一件事：**它能把我的数据发到哪**。
+        //    只写"网络出口"等于没审计。
+        let exact = EgressRule(host: "api.openai.com", hostSuffix: nil,
+                              methods: ["POST"], maxBytes: nil, reason: "模型调用")
+        let text = CapabilityToken.Scope.egress(exact).auditText
+        #expect(text.contains("api.openai.com"), "必须点名主机，实际：\(text)")
+        #expect(text.contains("POST"), "必须说清方法，实际：\(text)")
+
+        // 后缀规则要显示成通配形式（让用户看出"这是一大片域名"）
+        let suffix = EgressRule(host: nil, hostSuffix: ".example.com",
+                                methods: ["POST"], maxBytes: nil, reason: "测试")
+        let suffixText = CapabilityToken.Scope.egress(suffix).auditText
+        #expect(suffixText.contains("*.example.com"), "后缀规则要显示成通配，实际：\(suffixText)")
+
+        // 都没给 → 必须**明说**"任意主机"，不能含糊过去
+        let any = EgressRule(host: nil, hostSuffix: nil, methods: ["POST"], maxBytes: nil, reason: "测试")
+        #expect(CapabilityToken.Scope.egress(any).auditText.contains("任意主机"),
+                "没有限制时必须明说 —— 含糊的审计比没有审计更危险")
+    }
+
+    @Test("⚠️ 执行 / 原生 / MCP / Git 作用域都要能读懂（不能是 Debug 描述）")
+    func otherScopesAreReadable() {
+        let texts = [
+            CapabilityToken.Scope.exec(runtime: .javascript).auditText,
+            CapabilityToken.Scope.native(.photos).auditText,
+            CapabilityToken.Scope.mcp(server: "files", tool: "list").auditText,
+            CapabilityToken.Scope.gitWrite(remote: "origin").auditText,
+            CapabilityToken.Scope.gitWrite(remote: nil).auditText,
+        ]
+        for text in texts {
+            #expect(!text.isEmpty)
+            // ⚠️ 关键：不能含 Swift 的类型前缀（那就是把 Debug 描述漏出来了）
+            #expect(!text.contains("RuneKernel."), "审计文本里混进了类型名：\(text)")
+            #expect(!text.contains("VFSPath("), "审计文本里混进了构造器：\(text)")
+            #expect(!text.contains("Scope."), "审计文本里混进了枚举名：\(text)")
+        }
+        #expect(texts[0].contains("javascript"), "执行类要点名是哪个沙箱")
+        #expect(texts[2].contains("files"), "MCP 要点名是哪个 server")
+        #expect(texts[4].contains("Git"), "本地 Git 写操作也要有说明")
+    }
+
+    @Test("⚠️ 令牌的完整作用域列表要能渲染成一份可读清单")
+    func fullScopeListIsReadable() {
+        let token = CapabilityToken(
+            issuedForTurn: UUID(),
+            scopes: [.fsRead(VFSPath(mount: .workspace)), .fsWrite(VFSPath(mount: .workspace)),
+                     .fsDelete(VFSPath(mount: .workspace))],
+            expiresAt: Date(timeIntervalSince1970: 1_700_000_600),
+            grantedBy: .planApproval, reason: "用户选择的工作区")
+        let lines = token.scopes.map(\.auditText).sorted()
+        #expect(lines.count == 3)
+        // ⚠️ 排序必须确定：这段内容会进事件 payload，顺序一变哈希就变（C33 记过）
+        #expect(lines == token.scopes.map(\.auditText).sorted())
+        #expect(lines.contains("读取 /workspace"))
+        #expect(lines.contains("删除 /workspace"))
+    }
+}

@@ -591,3 +591,83 @@ struct AskUserWiringTests {
                 "要告诉模型这类问题为什么不行，实际：\(paired?.error?.modelFacingText ?? "无")")
     }
 }
+
+// MARK: - 能力授予的审计（C59）
+//
+// ⚠️ 补的是**半个审计**：`capabilityDenied` 早就接了，但"授予了什么能力"
+//    从来没有被记录过。用户能看到"它被拦了 3 次"，却看不到"它本来被允许做什么" ——
+//    而项目的安全模型建立在"能力比权限更像安全模型"这条铁律上，
+//    那条铁律需要**证据链**。
+
+@Suite("能力授予 —— 审计不能只记拒绝")
+struct CapabilityGrantAuditTests {
+
+    @Test("⭐⭐ 跑一轮之后必须留下 capabilityGranted 事件，且内容可读")
+    func grantIsRecorded() async throws {
+        let f = try Fixture()
+        defer { f.remove() }
+        let transport = FixtureTransport([text("做完了")])
+        let runtime = try AgentRuntime(configuration: f.config, objective: "随便做点什么",
+                                       store: f.store, transport: transport)
+        _ = try await finish(runtime.run())
+
+        let events = try f.store.loadAll(sessionID: f.config.sessionID)
+        let grants = events.filter { $0.kind == .capabilityGranted }
+        // ⚠️ 判据是**事件真的落了**（不是"文本里有没有某个词"，那是 T63 的假绿套路）
+        #expect(!grants.isEmpty, "必须记录授予了什么能力 —— 只记拒绝的审计是残缺的")
+        let payload = try #require(grants.first?.payload)
+
+        // 范围必须可读（不能是 Debug 描述）
+        let scopes = payload.value(at: ["scopes"])?.arrayValue?.compactMap(\.stringValue) ?? []
+        #expect(scopes.count >= 3, "工作区读写删三个作用域都该记上，实际：\(scopes)")
+        #expect(scopes.contains { $0.contains("读取 /workspace") }, "实际：\(scopes)")
+        #expect(scopes.contains { $0.contains("写入 /workspace") })
+        #expect(scopes.contains { $0.contains("删除 /workspace") })
+        for scope in scopes {
+            #expect(!scope.contains("RuneKernel."), "审计文本里混进了类型名：\(scope)")
+        }
+
+        // ⚠️ 过期时间必须记：用户最该知道的是"这个能力什么时候自己失效"
+        let ttl = payload.value(at: ["ttl_seconds"])?.intValue
+        #expect(ttl != nil && ttl! > 0, "必须记 TTL，实际：\(String(describing: ttl))")
+        #expect(payload.value(at: ["expires_at"])?.intValue != nil, "必须记绝对过期时刻")
+        #expect(payload.value(at: ["granted_by"])?.stringValue == "planApproval",
+                "要记清是谁授的")
+    }
+
+    @Test("⚠️ 事件 payload 必须**确定性**（顺序稳定，否则哈希链与缓存都不稳）")
+    func grantPayloadIsDeterministic() async throws {
+        let f = try Fixture()
+        defer { f.remove() }
+        let transport = FixtureTransport([text("好")])
+        let runtime = try AgentRuntime(configuration: f.config, objective: "测试确定性",
+                                       store: f.store, transport: transport)
+        _ = try await finish(runtime.run())
+        let first = try f.store.loadAll(sessionID: f.config.sessionID)
+            .first { $0.kind == .capabilityGranted }?.payload.canonicalString()
+
+        // 第二次跑（同一份配置）：scopes 的顺序必须一致
+        let f2 = try Fixture()
+        defer { f2.remove() }
+        let transport2 = FixtureTransport([text("好")])
+        let runtime2 = try AgentRuntime(configuration: f2.config, objective: "测试确定性",
+                                        store: f2.store, transport: transport2)
+        _ = try await finish(runtime2.run())
+        let second = try f2.store.loadAll(sessionID: f2.config.sessionID)
+            .first { $0.kind == .capabilityGranted }?.payload.canonicalString()
+
+        // ⚠️ 只比**作用域数组**：`token_id` 每次本来就该不同，
+        //    把它一起比进来会得到一个永远失败的断言（我第一版就是这么写的）。
+        let scopesOf = { (text: String?) -> [String] in
+            guard let text, let start = text.range(of: "\"scopes\":["),
+                  let end = text[start.upperBound...].firstIndex(of: "]") else { return [] }
+            return String(text[start.upperBound..<end])
+                .split(separator: ",").map { $0.trimmingCharacters(in: CharacterSet(charactersIn: "\"")) }
+        }
+        let firstScopes = scopesOf(first), secondScopes = scopesOf(second)
+        #expect(firstScopes.count == 3, "实际：\(firstScopes)")
+        #expect(firstScopes == secondScopes,
+                "作用域顺序必须稳定（代码里排过序）——\n第一次：\(firstScopes)\n第二次：\(secondScopes)")
+        #expect(firstScopes == firstScopes.sorted(), "而且必须是排好序的，不能靠偶然")
+    }
+}

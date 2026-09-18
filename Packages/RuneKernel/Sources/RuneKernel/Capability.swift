@@ -417,6 +417,29 @@ public struct CapabilityToken: Sendable, Codable, Hashable, Identifiable {
         case native(NativeAPI)
         case mcp(server: String, tool: String)
         case gitWrite(remote: String?)
+
+        /// 面向人与模型的说明。
+        ///
+        /// ⚠️ 审计事件必须**能被人读懂**：只把 scope 的 `Debug` 描述塞进事件里，
+        ///    用户在审计面板上看到的是 `fsWrite(RuneKernel.VFSPath(...))` ——
+        ///    那等于没有审计。这段话会进事件 payload，也会进"已授予能力清单"。
+        public var auditText: String {
+            switch self {
+            case .fsRead(let path):   return "读取 \(path.description)"
+            case .fsWrite(let path):  return "写入 \(path.description)"
+            case .fsDelete(let path): return "删除 \(path.description)"
+            case .exec(let runtime):  return "执行（\(runtime.rawValue) 沙箱）"
+            case .egress(let rule):
+                // ⚠️ 出口规则要报清"到哪、什么方法"：只写"网络出口"等于没审计 ——
+                //    用户最想知道的是**它能把数据发到哪个域名**。
+                let target = rule.host ?? (rule.hostSuffix.map { "*\($0)" } ?? "任意主机")
+                let methods = rule.methods.sorted().joined(separator: "/")
+                return "网络出口（\(target) \(methods)）"
+            case .native(let api):    return "原生能力（\(api.rawValue)）"
+            case .mcp(let server, let tool): return "MCP：\(server)/\(tool)"
+            case .gitWrite(let remote): return remote.map { "Git 写操作（推送到 \($0)）" } ?? "Git 本地写操作"
+            }
+        }
     }
 
     public func isExpired(asOf now: Date = Date()) -> Bool {
