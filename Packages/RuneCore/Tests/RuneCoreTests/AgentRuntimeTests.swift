@@ -9,6 +9,11 @@ final class FixtureTransport: ModelTransport, @unchecked Sendable {
     private var responses: [ModelHTTPResponse]
     private var sent: [ModelHTTPRequest] = []
     init(_ bodies: [String]) { responses = bodies.map { .init(statusCode: 200, body: Data($0.utf8)) } }
+    /// 脚本化状态码 —— 用来走**生产重试路径**（例如先一个 503、再一个 200）。
+    /// ⚠️ 没有它就只能测"一次成功"，而重试是用户最会问"为什么这么慢"的地方。
+    init(_ scripted: [(status: Int, body: String)]) {
+        responses = scripted.map { .init(statusCode: $0.status, body: Data($0.body.utf8)) }
+    }
     var requests: [ModelHTTPRequest] { lock.lock(); defer { lock.unlock() }; return sent }
     func send(_ request: ModelHTTPRequest) throws -> ModelHTTPResponse {
         lock.lock(); defer { lock.unlock() }
@@ -669,5 +674,95 @@ struct CapabilityGrantAuditTests {
         #expect(firstScopes == secondScopes,
                 "作用域顺序必须稳定（代码里排过序）——\n第一次：\(firstScopes)\n第二次：\(secondScopes)")
         #expect(firstScopes == firstScopes.sorted(), "而且必须是排好序的，不能靠偶然")
+    }
+}
+
+// MARK: - 模型调用报告（C61）
+//
+// ⚠️ 补的是「整份 `ModelCallReport` 被丢掉」这件事：`RuntimeModel.events()` 只取
+//    `outcome.events`，于是"重试了几次""为什么没用那个渠道""降级到哪了"全无痕迹。
+//    `modelDegraded` 事件也因此**永远不可能被发出**。
+//
+// ⚠️ 判据按 T63/T64：落在**事件真的落了 + 内容对**上，不查文本、不查"有没有发生过某件事"。
+
+@Suite("模型调用报告 —— 重试/降级/候选排除都要有痕迹")
+struct ModelCallReportAuditTests {
+
+    @Test("⭐⭐ 遇到 5xx 重试之后：必须留下重试记录（用户会问「为什么这么慢」）")
+    func retryIsRecorded() async throws {
+        let f = try Fixture()
+        defer { f.remove() }
+        // 第一枪 503（transient，运行时会退避重试），第二枪成功
+        let transport = FixtureTransport([
+            (status: 503, body: "{\"error\":{\"message\":\"overloaded\"}}"),
+            (status: 200, body: text("重试之后成功了")),
+        ])
+        let runtime = try AgentRuntime(configuration: f.config, objective: "跑一次会重试的调用",
+                                       store: f.store, transport: transport)
+        _ = try await finish(runtime.run())
+
+        let events = try f.store.loadAll(sessionID: f.config.sessionID)
+        let failures = events.filter { $0.kind == .modelCallFailed }
+        #expect(!failures.isEmpty, "重试过就必须有记录 —— 否则「为什么这么慢」无从回答")
+        let payload = try #require(failures.first?.payload)
+        let retries = payload.value(at: ["retries"])?.intValue
+        #expect(retries == 1, "重试次数应当是 1，实际：\(String(describing: retries))")
+        // 每一枪的细节都要在：渠道 / 模型 / 状态码 / 为什么没成 / 下一步决定
+        let attempts = payload.value(at: ["attempts"])?.arrayValue ?? []
+        #expect(attempts.count == 2, "两枪都要记，实际 \(attempts.count) 枪")
+        #expect(attempts.first?.value(at: ["status"])?.intValue == 503, "第一枪的状态码要记")
+        #expect(attempts.first?.value(at: ["error"])?.stringValue?.isEmpty == false, "第一枪的失败原因要记")
+        // ⚠️ 而且同一轮里**不该**悄悄重试却不告诉任何人
+        #expect(events.contains { $0.kind == .modelCallFinished }, "最终仍然成功")
+    }
+
+    @Test("⚠️ 没重试、没降级、没排除时**一条都不该记**（否则每轮都刷屏）")
+    func cleanCallRecordsNothing() async throws {
+        let f = try Fixture()
+        defer { f.remove() }
+        let transport = FixtureTransport([text("一次就成了")])
+        let runtime = try AgentRuntime(configuration: f.config, objective: "一次成功",
+                                       store: f.store, transport: transport)
+        _ = try await finish(runtime.run())
+
+        let events = try f.store.loadAll(sessionID: f.config.sessionID)
+        // ⚠️ 这是本轮最容易写错的一条：report 里每个字段都记一条会让事件日志
+        //    迅速膨胀，而事件日志是哈希链、**不能删**（docs/12）。
+        #expect(!events.contains { $0.kind == .modelCallFailed }, "没重试就不该记 modelCallFailed")
+        #expect(!events.contains { $0.kind == .modelDegraded }, "没降级就不该记 modelDegraded")
+    }
+
+    @Test("⭐⭐ 单渠道时不可能降级：不该凭空造出 modelDegraded")
+    func noDegradationWithSingleChannel() async throws {
+        let f = try Fixture()
+        defer { f.remove() }
+        let transport = FixtureTransport([text("单渠道")])
+        let runtime = try AgentRuntime(configuration: f.config, objective: "单渠道",
+                                       store: f.store, transport: transport)
+        _ = try await finish(runtime.run())
+        let events = try f.store.loadAll(sessionID: f.config.sessionID)
+        // ⚠️ 运行时只给 ModelClient 配了一个渠道，`DegradationPlan` **必然**是 nil。
+        //    如果这里出现了 modelDegraded，说明我在"没有降级"时也记了一条 —— 那是假信号。
+        #expect(!events.contains { $0.kind == .modelDegraded },
+                "只有一个渠道时记「降级」是假信号 —— 比不记更糟")
+    }
+
+    @Test("⚠️ 事件 payload 必须确定性（同一份 report 两次产出相同事件）")
+    func reportEventsAreDeterministic() {
+        // ⚠️ 直接测纯函数：payload 顺序会进哈希链，顺序一变恢复出的链就对不上。
+        var report = ModelCallReport()
+        report.attempts = [
+            .init(providerID: "p", modelID: "m", statusCode: 503, error: "overloaded", action: "retrySameChannel"),
+            .init(providerID: "p", modelID: "m", statusCode: 200, error: nil, action: "accept"),
+        ]
+        let first = AgentRuntime.modelReportEvents(report)
+        let second = AgentRuntime.modelReportEvents(report)
+        #expect(first.count == second.count)
+        for (a, b) in zip(first, second) {
+            #expect(a.kind == b.kind)
+            #expect(a.payload.canonicalString() == b.payload.canonicalString(),
+                    "同样输入必须产出同样的 payload（确定性）")
+        }
+        #expect(first.contains { $0.kind == .modelCallFailed })
     }
 }

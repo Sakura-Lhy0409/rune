@@ -64,8 +64,10 @@ final class RuntimeModel: @unchecked Sendable {
     private var client: ModelClient
     private let config: RuntimeConfiguration
     private let tools: [String: ToolSpec]
-    init(transport: any ModelTransport, config: RuntimeConfiguration, tools: [String: ToolSpec], control: RuntimeControl) {
-        self.config = config; self.tools = tools
+    private let audit: RuntimeModelAudit
+    init(transport: any ModelTransport, config: RuntimeConfiguration, tools: [String: ToolSpec],
+         control: RuntimeControl, audit: RuntimeModelAudit) {
+        self.config = config; self.tools = tools; self.audit = audit
         var provider = config.provider
         provider.models = [ModelDescriptor(id: config.modelID, alias: "runtime", contextWindow: 32_000)]
         let credentials = provider.auth.keyRef.map { [$0: config.secret] } ?? [:]
@@ -99,6 +101,9 @@ final class RuntimeModel: @unchecked Sendable {
             let request = try RequestBuilder.require(history: state.messages, systemBlocks: [system], toolRegistry: tools,
                                                      maxOutputTokens: config.maxOutputTokens, family: config.provider.protocolFamily)
             let outcome = client.call(request, task: .code, now: Date())
+            // ⚠️ 成败都要上报：失败那次的 report 里恰好有"重试了几次、每枪为什么没成"，
+            //    而那正是用户最需要看到的（"为什么这次这么慢/这么贵"）。
+            audit.append(outcome.report)
             if let error = outcome.error {
                 // 重试已经在网关耗尽；内核不能把最后的瞬时错误误判为任务成功。
                 return [.providerError(ProviderError(kind: .unknown, providerID: config.provider.id,
@@ -153,6 +158,23 @@ struct RuntimeToolExecutor: ToolExecuting {
         if JavaScriptToolExecutor.names.contains(call.name) { return try javascript.execute(call) }
         if TodoWriteToolExecutor.names.contains(call.name) { return try todos.execute(call) }
         return try local.execute(call)
+    }
+}
+
+/// 收集每一轮模型调用的 `ModelCallReport`。
+///
+/// ⚠️ 在此之前**整份 report 是被丢掉的** —— `RuntimeModel.events()` 只取了
+///    `outcome.events`。于是"这一轮重试了几次""为什么没用那个渠道""是不是走了缓存"
+///    全都没有痕迹，而 `modelDegraded` 事件也因此**永远不可能被发出**。
+///    这与 `RuntimeNetworkAudit` 是同一套模式：**产生事实的地方只收集，不落盘**；
+///    落盘由运行时统一做（能改事件顺序的地方越少越可审计）。
+final class RuntimeModelAudit: @unchecked Sendable {
+    private let lock = NSLock()
+    private var reports: [ModelCallReport] = []
+    func append(_ report: ModelCallReport) { lock.lock(); reports.append(report); lock.unlock() }
+    func take() -> [ModelCallReport] {
+        lock.lock(); defer { lock.unlock() }
+        let result = reports; reports = []; return result
     }
 }
 

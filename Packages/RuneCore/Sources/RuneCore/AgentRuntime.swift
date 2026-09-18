@@ -102,11 +102,13 @@ public final class AgentRuntime: @unchecked Sendable {
                 do {
                     let preview = RuntimePreview(provider: self.config.provider, model: self.config.modelID) { continuation.yield(.textPreview($0)) }
                     let networkAudit = RuntimeNetworkAudit()
+                    let modelAudit = RuntimeModelAudit()
                     let live = self.injected == nil ? try URLSessionModelTransport(
                         policy: .init(allowedOrigins: [self.config.provider.baseURL], allowPrivateNetwork: self.config.allowPrivateNetwork), onSSE: { preview.ingest($0) },
                         audit: { networkAudit.append($0) }) : nil
                     let transport = ControlledTransport(live: live, injected: self.injected, control: control, preview: preview)
-                    let model = RuntimeModel(transport: transport, config: self.config, tools: self.tools, control: control)
+                    let model = RuntimeModel(transport: transport, config: self.config, tools: self.tools,
+                                             control: control, audit: modelAudit)
                     let (deps, capability) = self.dependencies(model: model)
                     let kernelConfig = TurnRunner.Config(maxRounds: self.config.maxRounds, maxToolCalls: 32,
                         maxCostMicroUSD: self.config.budgetMicroUSD, toolRegistry: self.tools)
@@ -186,6 +188,7 @@ public final class AgentRuntime: @unchecked Sendable {
                         if self.state.status == .failed { self.metadata.failure = outcome.terminalReason ?? "任务未能完成，请查看过程。" }
                         var events = outcome.newEvents
                         events.append(contentsOf: networkAudit.take().map { self.event(.egressAudited, Self.networkPayload($0)) })
+                        events.append(contentsOf: modelAudit.take().flatMap { Self.modelReportEvents($0) }.map { self.event($0.kind, $0.payload) })
                         try self.commit(events)
                         continuation.yield(.snapshot(self.snapshot))
                         if !outcome.didAdvance { break }
@@ -354,6 +357,68 @@ public final class AgentRuntime: @unchecked Sendable {
             "expires_at": .int(Int(token.expiresAt.timeIntervalSince1970)),
             "ttl_seconds": .int(Int(token.expiresAt.timeIntervalSince(token.issuedAt))),
         ])])
+    }
+
+    /// 把一份 `ModelCallReport` 变成**值得说出来的**事件。
+    ///
+    /// ⚠️ 命名故意的「值得说出来」：report 里每个字段都记一条会让事件日志迅速膨胀，
+    ///    而事件日志是哈希链、**不能删**（docs/12）。所以只记三类用户真正会问的事：
+    ///
+    ///   ① **换过渠道/降级** → `modelDegraded`：用户会问"为什么这次回答风格变了"
+    ///   ② **重试过** → `modelCallFailed`：用户会问"为什么这次这么慢"
+    ///   ③ **被排除的候选** → 只在**真的排除了东西**时记：用户会问"为什么没用那个渠道"
+    ///
+    /// ⚠️ 一次性的、每轮都一样的字段（例如路由解释）**不逐轮记** ——
+    ///    它们每轮都相同，记 N 遍只是把日志撑大。
+    static func modelReportEvents(_ report: ModelCallReport) -> [(kind: EventKind, payload: JSONValue)] {
+        var out: [(EventKind, JSONValue)] = []
+
+        // ① 降级：**禁止静默降级**是项目的硬规则（C29），所以它必须可见
+        if let degradation = report.degradation {
+            out.append((.modelDegraded, [
+                "notice": .string(degradation.notice),
+                "visible": .bool(degradation.isVisibleToUser),
+                // ⚠️ 记**具体是哪个渠道的哪个模型**：只说"降级了"用户没法判断
+                //    这次回答质量变化是不是因为换了模型。`ModelRef` 的两个字段都给上。
+                "from": .string("\(degradation.from.providerID)/\(degradation.from.modelID)"),
+                "to": .string("\(degradation.to.providerID)/\(degradation.to.modelID)"),
+                // ⚠️ 上下文要不要重建/重压缩，直接影响这一轮的**费用与延迟** ——
+                //    降级不只是"换个模型"，它可能让缓存全部失效。
+                "must_rebuild_context": .bool(degradation.mustRebuildContext),
+                "must_recompress": .bool(degradation.mustRecompress),
+                "capability_changed": .bool(degradation.capabilityChanged),
+            ]))
+        }
+
+        // ② 重试：只在**真的重试过**时记（retryCount > 0），否则每轮都记一条空事件
+        if report.retryCount > 0 {
+            out.append((.modelCallFailed, [
+                "retries": .int(report.retryCount),
+                "attempts": .array(report.attempts.map { attempt in
+                    .object([
+                        "provider": .string(attempt.providerID),
+                        "model": .string(attempt.modelID),
+                        // ⚠️ 没有状态码时记 -1 而不是省略：省略会让字段时有时无，
+                        //    下游按固定形状解析就会踩空。
+                        "status": .int(attempt.statusCode ?? -1),
+                        "error": attempt.error.map { JSONValue.string($0) } ?? .null,
+                        "action": .string(attempt.action),
+                    ])
+                }),
+            ]))
+        }
+
+        // ③ 被排除的候选：**"为什么没用那个渠道"是用户第一疑问**（C29）
+        //    ⚠️ 但只在非空时记 —— 没配那个渠道是正常的，不该每轮刷屏。
+        if !report.rejections.isEmpty {
+            out.append((.modelSelected, [
+                "rejected": .array(report.rejections.map { rejection in
+                    .object(["ref": .string(rejection.ref),
+                             "reason": .string(rejection.reason)])
+                }),
+            ]))
+        }
+        return out
     }
 
     private func dependencies(model: RuntimeModel) -> (deps: TurnRunner.Dependencies, token: CapabilityToken) {

@@ -77,6 +77,15 @@ public struct ModelCallReport: Sendable {
         public var error: String?
         /// 打完这一枪之后决定做什么
         public var action: String
+
+        public init(providerID: String, modelID: String, statusCode: Int?,
+                    error: String?, action: String) {
+            self.providerID = providerID
+            self.modelID = modelID
+            self.statusCode = statusCode
+            self.error = error
+            self.action = action
+        }
     }
 
     public var attempts: [Attempt] = []
@@ -88,6 +97,19 @@ public struct ModelCallReport: Sendable {
     public var wasDeduplicated = false
     /// 一个候选都没有时的解释
     public var routingExplanation: String = ""
+
+    /// ⚠️ 显式公开构造器：`ModelCallReport` 是**跨层的审计对象**
+    ///    （内核产出、运行时落事件、UI 渲染），没有公开构造器的话
+    ///    上层只能靠"跑一次真实调用"才能拿到一份来测 —— 那让审计逻辑变得不可单测。
+    public init(attempts: [Attempt] = [], rejections: [RoutingDecision.Rejection] = [],
+                degradation: DegradationPlan? = nil, wasDeduplicated: Bool = false,
+                routingExplanation: String = "") {
+        self.attempts = attempts
+        self.rejections = rejections
+        self.degradation = degradation
+        self.wasDeduplicated = wasDeduplicated
+        self.routingExplanation = routingExplanation
+    }
 
     public var didDegrade: Bool { degradation != nil }
     public var retryCount: Int { max(0, attempts.count - 1) }
