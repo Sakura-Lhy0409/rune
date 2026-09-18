@@ -60,3 +60,4 @@ DesignReview/
 
 # 本机构建的分发包
 output/releases/*.ipa
+output/*.ipa
