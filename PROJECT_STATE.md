@@ -27,8 +27,8 @@
 |---|---|
 | **更新日期** | 2026-09-19 |
 | **当前阶段** | **M1 内核完成 99% → 只差「接真实 IO」这一层（要 macOS / CI 验证）** |
-| **当前里程碑** | ✅ **M1-21 线路级验证（真的编码/真的解字节）—— 又抓出 3 个真 bug**（1018 测试全绿）—— 下一步见 §6 |
-| **已完成里程碑** | ✅ M0 全部（…→**258 出口验收达成**）→ ✅ M1-1 ToolScheduler（282）→ ✅ M1-2 协议适配器（328）→ ✅ M1-3 波次调度（341）→ ✅ M1-4 计划与审批（379）→ ✅ M1-5 GoalEngine（405）→ ✅ M1-6 修正性重试（447）→ ✅ M1-7 上下文装配器（487）→ ✅ M1-8 工具注册表（540）→ ✅ M1-9 技能库 + 场景测试（608）→ ✅ M1-10 Workflow 引擎（657）→ ✅ M1-11 VFS 层（705）→ ✅ M1-12 自研 shell 解释器（775）→ ✅ M1-13 沙箱层（877）→ ✅ M1-14 无 Mac 开发路径（CI + 装机 + 最小 App）→ ✅ M1-15 文件与检索工具（C28，877）→ ✅ **M1-16 渠道网关（C29，912）** → ✅ **M1-17 按协议族分组历史（C30，934）** → ✅ **M1-18 成本账本与熔断（C31，947）** → ✅ **M1-19 结构化压缩（C32，978）** → ✅ **M1-20 出站构建与体检（C33，1001）** → ✅ **M1-21 线路级验证（C34，1018）** |
+| **当前里程碑** | ✅ **M1-22 模型调用客户端：路由/重试/降级/健康/去重**真的**被接上了**（1032 测试全绿）—— 下一步见 §6 |
+| **已完成里程碑** | ✅ M0 全部（…→**258 出口验收达成**）→ ✅ M1-1 ToolScheduler（282）→ ✅ M1-2 协议适配器（328）→ ✅ M1-3 波次调度（341）→ ✅ M1-4 计划与审批（379）→ ✅ M1-5 GoalEngine（405）→ ✅ M1-6 修正性重试（447）→ ✅ M1-7 上下文装配器（487）→ ✅ M1-8 工具注册表（540）→ ✅ M1-9 技能库 + 场景测试（608）→ ✅ M1-10 Workflow 引擎（657）→ ✅ M1-11 VFS 层（705）→ ✅ M1-12 自研 shell 解释器（775）→ ✅ M1-13 沙箱层（877）→ ✅ M1-14 无 Mac 开发路径（CI + 装机 + 最小 App）→ ✅ M1-15 文件与检索工具（C28，877）→ ✅ **M1-16 渠道网关（C29，912）** → ✅ **M1-17 按协议族分组历史（C30，934）** → ✅ **M1-18 成本账本与熔断（C31，947）** → ✅ **M1-19 结构化压缩（C32，978）** → ✅ **M1-20 出站构建与体检（C33，1001）** → ✅ **M1-21 线路级验证（C34，1018）** → ✅ **M1-22 网关接线（C35，1032）** |
 | **阻塞项** | 无 |
 | **本机可验证范围** | ✅ 平台无关的 Swift 代码（Kernel / 补丁 / 检索 / 网关 / 策略 / **Turn 循环**）<br>❌ iOS 专属（UI / Live Activity / Core ML / VFS 真实文件系统 / 沙箱 / GRDB / JSC）—— 需 macOS |
 
@@ -37,7 +37,7 @@
 ```
 设计文档      ████████████████████ 100%
 M0 地基       ████████████████████ 100%   ✅ 出口验收已达成
-M1 可用内核   ████████████████████  99%   ← 内核 40 源文件 / 1018 测试全绿，**只差真实 IO 与 UI（都要 macOS）**
+M1 可用内核   ████████████████████  99%   ← 内核 41 源文件 / 1032 测试全绿，**只差真实 IO 与 UI（都要 macOS）**
 M2 移动体验 / M3 多渠道      ░░░░░░░░░░░░░░░░░░░░░   0%
 M4 端侧+记忆 / M5 上架准备   ░░░░░░░░░░░░░░░░░░░░░   0%
 ```
@@ -55,7 +55,7 @@ M4 端侧+记忆 / M5 上架准备   ░░░░░░░░░░░░░░�
 
 ### 包结构现状
 
-**包结构**：`RuneKernel` ✅ **40 源文件 / 1018 测试**（本机可测）；`RuneNet` `RuneStore` `RuneVM` `RuneBench` `RuneGateway` `RuneContext` `RuneCore` `RuneTools` `RuneMCP` `RuneUI` ⬜ 骨架（`Package.swift` + 实现清单）。
+**包结构**：`RuneKernel` ✅ **41 源文件 / 1032 测试**（本机可测）；`RuneNet` `RuneStore` `RuneVM` `RuneBench` `RuneGateway` `RuneContext` `RuneCore` `RuneTools` `RuneMCP` `RuneUI` ⬜ 骨架（`Package.swift` + 实现清单）。
 
 ---
 
@@ -140,12 +140,13 @@ M4 端侧+记忆 / M5 上架准备   ░░░░░░░░░░░░░░�
 | C32 | ✅ **结构化压缩 —— 保住可执行性，不是写散文**（978 测试） | `Compaction.swift` · `CompactionTests` | ⭐ 按 docs/07 §5 把「压缩」做成**结构化摘要**（目标 / 带证据的事实 / 决定 / 制品 / 未完成 / **失败路径** / 不可信来源）：⚠️ 散文摘要丢的是**可执行性** —— 模型读完只知道「大概发生过什么」，于是会把已经失败过的路再走一遍；`rejected_paths` 因此必须渲染成「**不要再试**」的**指令**而不只是一条记录；⚠️ 事实没有证据就**不可用**（编出来的断言会在压缩后继续被当成事实用）；不可信内容必须带出处并被边界标记包住（否则压缩这一步把提示注入的防线拆了）；⚠️ 渲染必须**逐字节确定**（缓存命中率直接决定用户付多少钱）；⚠️ 选级别遵守「**能端侧压就端侧压**」—— 端侧可用时即使装配器建议 L3 也走端侧，因为手机上的钱是用户自己的；估不出成本就**不擅自花钱**，先用结构性裁剪顶着；⚠️ **压缩永不删除事件**（摘要用 `sourceRange` 记住自己覆盖了哪一段） |
 | C33 | ✅ **出站请求构建 + 协议体检（顺带修掉一个致命 bug）**（1001 测试） | `RequestBuilder.swift` · `RequestBuilderTests` | ⭐⭐ 第一次把「历史 → 真正发出去的请求」这一段建起来，它当场抓到：**`.start` 从来没有把目标写进 `state.messages`，只发了一条事件** —— 于是模型根本不知道要干什么，而且三家协议都要求 `messages`/`contents` **至少有一条**，「只有 system、没有 messages」的请求**发都发不出去**（整个 App 一行都跑不了）；⚠️ 根因是这一层此前**不存在**：谁来编请求、工具按什么顺序放、发之前检查什么，没有任何地方回答；⚠️ **工具顺序由构建器排序定死**（`Dictionary` 迭代顺序**跨进程不稳定** → 顺序一变请求指纹与 Prompt Cache 全失效，而用户为此多付的钱**不会有任何报错**）；⚠️ 体检给出的是**三种不同的改法**（结果没记 → 去补记；记了但没紧跟 → 挪回调用后面；多出来的 → 对应关系串了），只报错不给路的诊断等于没诊断；⚠️ **失败关闭**：体检不过就**不返回**请求，而不是「发出去试试」 |
 | C34 | ✅ **线路级验证：真的编码 → 真的解字节 → 又抓出 3 个真 bug**（1018 测试） | `WireLevelTests.swift` · `ProviderError.classify` | ⭐⭐ 建了一条「线路级假模型」：`历史 → RequestBuilder → RequestEncoder →（脚本化 SSE 字节）→ SSEParser → StreamDecoder → [ModelEvent]`，只把网络换掉，两头全是真实实现。它第一次跑就抓出三个 bug：① **三个解码器把所有中途错误一律写成 `.transient`** —— 而它是「值得重试」：401/402/403 会被**反复重试**，更糟的是**余额不足不算失败**，用户钱包空了 Agent 却报了个成功（修法：`ProviderError.classify` 作唯一分类入口 + `userFacing` 给出下一步）；② **`PolicyEngine.evaluate` 与四个 `authorize*` 都默认读真实时钟** → 过期判定不确定，冻结时钟的测试会**静默失去全部授权**，还把原因误报成「不在授权范围内」（诊断骗人）；③ **Anthropic 的错误体没有状态码**（只有 `type`）→ 不映射就只能一律当可重试，于是「密钥错了」与「服务过载」被当成同一件事；⚠️ 它还暴露了**前面几组测试是「假绿」**：授权被拒后工具**一次都没执行**，而它们只断言了「有配对结果」—— 补记的空结果也满足那一条 |
+| C35 | ✅ **模型调用客户端：网关那一层真的被接上了**（1032 测试） | `ModelClient.swift` · `ModelClientTests` | ⭐⭐⭐ 修的是**目前最大的一次「声明式子系统」**：`GatewayRouter.route` / `RetryPolicy.decide` / `Degradation.plan` / `HealthTracker.record*` 在 `Sources/` 里**零调用点** —— 913 行有测试的代码没有任何东西会执行它。于是 Rune 的真实行为是：**不路由、不重试（一次 429 就把这一轮打死）、不记健康（挂掉的渠道永远留着）、不降级、不去重**；⚠️ 修法是给它**唯一执行入口** `ModelClient`（路由 → 去重 → 编码 → 发送 → 解码 → 按 `RetryPolicy` 决定 → 记健康 → 生成**可见的**降级说明）；⚠️ 传输层抽象成**同步协议** `ModelTransport`，于是整条链路能在没有网络、没有 macOS 的条件下被完整验证（脚本化传输返回真实字节），真正的 URLSession 实现留给 `RuneNet`；⚠️ 鉴权真值只从 `credentials`（Keychain）来，**配置里只有引用**，所以日志里永远不会有密钥；⚠️ 顺带记一条**测试纪律**：`#expect` **不中断执行**，断言之后还要用下标就必须先 `guard` —— 否则越界会让整个测试进程崩掉（Windows 上表现成 `0xC000001D`，看起来像环境问题，不是一条干净的失败） |
 
 ---
 
 ## 6. 下一步
 
-### ⚠️ 现状：Windows 上能做的纯逻辑基本做完（1018 测试）
+### ⚠️ 现状：Windows 上能做的纯逻辑基本做完（1032 测试）
 
 **⚠️ 待 macOS 验证的风险点**（未验证，不是"已完成"）：
 ① **L3 压缩已有「该压到哪一级 + 产物格式 + 解析」，但运行时那一次**付费调用**还没接**（装配器只报告，C32 补上了决策与产物）；
@@ -153,9 +154,9 @@ M4 端侧+记忆 / M5 上架准备   ░░░░░░░░░░░░░░�
 ③ 86 个工具里**14 个已实现**（C28）；其余 72 个分三类，都要 macOS：执行（CPython/JSC/WASM）、网络（URLSession + 出口代理）、iOS 原生（相册/日历/定位…）。
 （多工具结果的分组 → **C30**；请求真的编得出去 → **C33/C34 已用真实字节验过**；⚠️ **真实渠道**仍要各压一次。）
 
-`RuneKernel` 有 **40 个源文件、1018 项测试**，覆盖：值类型与协议、补丁引擎、检索、
+`RuneKernel` 有 **41 个源文件、1032 项测试**，覆盖：值类型与协议、补丁引擎、检索、
 **渠道网关（配置 / 路由 / 降级 / 重试 / 去重 / 按协议族分组历史）**、**成本账本与熔断**、**结构化压缩**、
-**出站请求构建与协议体检**、
+**出站请求构建与协议体检**、**模型调用客户端（路由/重试/降级/健康/去重真的生效）**、
 策略引擎、Turn 循环与崩溃恢复、波次调度、计划引擎、审批代理、目标引擎、
 修正性重试与协议不变式、上下文预算制装配、86 个工具契约、技能与渐进式披露、
 Workflow 批处理编排、**VFS（真实文件系统 + 内存两份实现）**、**自研 shell 解释器**、**沙箱层**。
@@ -240,6 +241,7 @@ Workflow 批处理编排、**VFS（真实文件系统 + 内存两份实现）**�
 | **T51** | ⚠️⚠️ **「病史」的中间态本来就不合法，所以校验只能长在「要发出去的那一刻」**：三步落盘协议（写意图 → 执行 → 写事实）保证了一个窗口 —— 模型刚给出 `tool_calls`、结果还没写出来的那一瞬，历史里就是「调用没有配对结果」。若把「每个 tool_call 必须有结果」当成**每一步**的前置条件去断言/拦截，运行时会被**判死** | 闸门长在 `RequestBuilder`（唯一的发送路径），**不是**长在状态机的每一步上。写测试时也要注意：**只在 `.reasoning`（下一步就会调模型）的状态上体检** —— 「每一步都体检」写出来的第一版就因为这个原因红了。⚠️ 推论：任何「历史级」的不变式，都要先问清楚**它在哪个时间点才必须成立** |
 | **T52** | ⚠️⚠️ **把「值得重试」当兜底分类，等于把「谁来处理」这一整套设计抹掉**：三个流式解码器原来都写 `kind: .transient`，于是 **401（密钥错）/ 402（余额不足）/ 403 全都被重试**；而更坏的是运行时只判 `!isRetryable` 才决定要不要失败 —— **余额不足于是不算失败**，Agent 继续往下跑并报了个「成功」，用户在账单上才发现 | 分类必须看**状态码**（`ProviderError.classify` 是唯一入口），面向用户的话要说清「怎么了 + 下一步做什么」。⚠️ Anthropic 的错误体**没有状态码**、只有 `type` → 必须有一张 `type → status` 映射表，否则只能一律 transient。⚠️ 通用教训：**兜底分支要选最保守的那一个**。`.transient` 看着无害，实际含义是「继续花钱重试」—— 兜底选它，等于把决定权交给运气 |
 | **T53** | ⚠️ **时钟没注入 = 授权静默失效，理由还是骗人的**：`CapabilityToken.isExpired(asOf:)` 与 `authorizeFile` 等的 `asOf` 默认 `Date()`，`PolicyEngine.evaluate` 也没收 `now` —— 于是把时钟冻结在过去的测试**全部授权都会失败**，而报出来的原因是「不在本次授权范围内」（真实原因是过期）。排查代价很高：现象是「工具一次都没被执行」，看起来像策略引擎或工具实现坏了 | 凡是**读时钟做判定**的地方都要收 `now`（`evaluate(_:context:now:)` 已补），并且**先判过期再判范围** —— 两者给用户的下一步完全不同。⚠️ 推论：发现一个「默认 `Date()`」就发现了一个**不确定性入口**，也是「测试假绿」的常见来源 |
+| **T54** | ⚠️⚠️ **一个完整的子系统可以只以「声明 + 测试」的形式存在**：913 行、几十项测试、注释齐全、每条规则都「验证过」—— 而 `GatewayRouter.route` / `RetryPolicy.decide` / `Degradation.plan` / `HealthTracker.record*` 在 `Sources/` 里**零调用点**。这类缺陷的可怕之处在于**测试全绿反而加强了错觉**：测试在测模块自己的行为，从没测过「它被调用」 | ① 每个模块要有**唯一执行入口**，规则表/策略只能从那里经过（`ModelClient` 之于网关）；② 定期做一次**调用点普查**：对每个公开入口 grep 一次「它在本文件之外出现过吗」——本次就是靠这一招一次性挖出五个（路由/重试/降级/健康/去重）；③ 端到端测试必须断言**可观测的行为变化**（发了几枪、打到哪个 URL、健康是否被摘掉），而不只是「结果对」。⚠️ 与 T48/T49 同源，本项目已经栽过三次 —— **新增任何一层「能力」时先问：谁调它？** |
 
 ---
 
@@ -273,7 +275,7 @@ D:\项目\ios平台agent\          （构建时请用 C:\Users\MSI-NB\rune-ws）
 │  └─ 附录A / 附录B          渠道事实表 / 技术选型核实表
 ├─ research/                 取证材料（465 份，非交付物，**刻意入库**）
 └─ Packages/
-   ├─ RuneKernel/            ✅ 零依赖核心（40 源文件 / 1018 测试全绿；Sources 40 个 .swift、Tests 30 个）
+   ├─ RuneKernel/            ✅ 零依赖核心（41 源文件 / 1032 测试全绿；Sources 41 个 .swift、Tests 31 个）
    └─ Rune{Net,Store,VM,Bench,Gateway,Context,Core,Tools,MCP,UI}/   ⬜ 骨架（含实现清单）
 ```
 
@@ -284,11 +286,11 @@ D:\项目\ios平台agent\          （构建时请用 C:\Users\MSI-NB\rune-ws）
 | 编辑与检索 | `TextPatch` `GlobMatcher` `IgnoreRules` `GrepEngine` |
 | 文件系统与执行 | `VFS` `Shell` `Sandbox` `ToolHandlers` |
 | 协议与组装 | `ChatRequest` `StreamParsing` `ProtocolEncoders` `ProtocolDecoders` `ToolCallAssembler` `ProviderQuirks` `HistoryGrouping` `RequestBuilder` |
-| 渠道网关 | `Gateway`（渠道配置 / 路由 / 降级 / 重试 / 去重） |
+| 渠道网关 | `Gateway`（渠道配置 / 路由 / 降级 / 重试 / 去重）`ModelClient`（**唯一的执行入口**：路由 → 编码 → 发送 → 解码 → 重试 → 降级 → 记账） |
 | 运行时 | `TurnRunner` `ToolScheduler` `PolicyEngine` `Plan` `Event` `Correction` `Context` `Compaction` `ToolRegistry` `EventLog` |
 | 编排 | `PlanEngine` `ApprovalBroker` `GoalEngine` `Skill` `SkillLibrary` `Workflow` |
 
-**测试文件**（30 个 / 1018 项）：`JSONAndHashing` `Security` `RuntimeModel` `Patch` `Search` `Gateway` `GatewayRouter` `Policy` `TurnRunner` `ToolScheduler` `Protocol` `HistoryGrouping` `Planning` `GoalEngine` `Correction` `Context` `ToolRegistry` `Skill` `Workflow` `VFS` `Shell` `Sandbox` `EventLog` `Scenario` `ToolHandlers` `CostLedger` `Compaction` `RequestBuilder` `WireLevel`
+**测试文件**（31 个 / 1032 项）：`JSONAndHashing` `Security` `RuntimeModel` `Patch` `Search` `Gateway` `GatewayRouter` `Policy` `TurnRunner` `ToolScheduler` `Protocol` `HistoryGrouping` `Planning` `GoalEngine` `Correction` `Context` `ToolRegistry` `Skill` `Workflow` `VFS` `Shell` `Sandbox` `EventLog` `Scenario` `ToolHandlers` `CostLedger` `Compaction` `RequestBuilder` `WireLevel` `ModelClient`
 ## 10. 里程碑验收标准（摘录自 [14](docs/14-工程路线图与测试策略.md)）
 
 | 里程碑 | 出口标准 |
