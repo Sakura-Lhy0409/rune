@@ -113,7 +113,12 @@ jobs:
           # 带着一段无效签名的 App 反而会在重签时报错。
           rm -rf ipa/Payload/*.app/_CodeSignature ipa/Payload/*.app/embedded.mobileprovision || true
           (cd ipa && zip -qry "../Rune-unsigned.ipa" Payload)
-          ls -lh ../Rune-unsigned.ipa
+          # ⚠️ 这里是 `Rune-unsigned.ipa` 而**不是** `../Rune-unsigned.ipa`：
+          #    `zip` 是在 `ipa/` 里跑的，所以 `../X` 相对的是 `ipa/`，
+          #    落地位置就是当前工作目录（`Apps/Rune/`）—— 下面上传用的也是这个路径。
+          #    写成 `../` 会让这一步找不到文件而失败（第一次 CI 就是这么挂的），
+          #    而真正的原因只是路径多了一个 `..`。
+          ls -lh Rune-unsigned.ipa
 
       - name: 上传 ipa（这就是你要下载去侧载的东西）
         uses: actions/upload-artifact@v4
