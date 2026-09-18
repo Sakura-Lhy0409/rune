@@ -81,6 +81,55 @@ public enum Inflate {
         return out
     }
 
+    /// 从 `input` 的**某个偏移**开始解压一个 zlib 流，并报告**消耗了多少字节**。
+    ///
+    /// ⚠️ 这个 API 是给 **packfile** 用的，而且它必须是流式的：
+    ///    `.pack` 里所有对象**首尾相接**，没有长度前缀、没有分隔符。
+    ///    要找到下一个对象，唯一办法就是"解到流结束为止，看吃掉多少字节" ——
+    ///    所以必须在**块边界**停下来，而不是把整个尾部缓冲喂进去。
+    ///    同时必须**只喂到流结束**：把后面的对象字节也喂进去，解码器会读到"垃圾块头"。
+    public static func zlibStream(_ input: [UInt8], from offset: Int,
+                                  outputLimit: Int = defaultOutputLimit) throws -> (output: [UInt8], consumed: Int) {
+        guard offset >= 0, offset + 6 <= input.count else { throw InflateError.truncated }
+        let cmf = UInt32(input[offset]), flg = UInt32(input[offset + 1])
+        guard cmf & 0x0F == 8, (cmf << 8 | flg) % 31 == 0 else { throw InflateError.badZlibHeader }
+        guard flg & 0x20 == 0 else { throw InflateError.badZlibHeader }
+
+        // 先把流的位置找出来，再一次性解压 —— 这样 rawDeflate 可以复用同一份实现。
+        //
+        // ⚠️ 探测**必须真的解码一遍**：DEFLATE 流没有长度前缀，只有解到 BFINAL 块
+        //    结束才知道它在哪里结束。所以这里解一次（丢结果）拿到 consumed，
+        //    再用调用方给的上限正式解一次。多解一遍是"定位流尾"的必然代价。
+        // ⚠️ 探测用的上限是 defaultOutputLimit 而不是 0：给 0 的话第一段输出就抛错，
+        //    连流尾都走不到。
+        var probe = BitReader(Array(input[(offset + 2)...]))
+        var scratch: [UInt8] = []
+        while true {
+            let isFinal = try probe.bits(1) == 1
+            let type = try probe.bits(2)
+            switch type {
+            case 0: try copyStored(&probe, into: &scratch, limit: defaultOutputLimit)
+            case 1: try inflateBlock(fixedLiteralTable, fixedDistanceTable, &probe, &scratch, defaultOutputLimit)
+            case 2:
+                let (literal, distance) = try readDynamicTables(&probe)
+                try inflateBlock(literal, distance, &probe, &scratch, defaultOutputLimit)
+            default: throw InflateError.invalidBlockType
+            }
+            if isFinal { break }
+        }
+        let deflateBytes = probe.bytesConsumed
+        let total = 2 + deflateBytes + 4
+        guard offset + total <= input.count else { throw InflateError.truncated }
+
+        let end = offset + total
+        let expected = UInt32(input[end - 4]) << 24 | UInt32(input[end - 3]) << 16
+            | UInt32(input[end - 2]) << 8 | UInt32(input[end - 1])
+        let out = try rawDeflate(Array(input[(offset + 2)..<(end - 4)]), outputLimit: outputLimit)
+        let actual = adler32(out)
+        guard expected == actual else { throw InflateError.checksumMismatch(expected: expected, actual: actual) }
+        return (out, total)
+    }
+
     /// 解压裸 DEFLATE 数据（无 zlib 头与校验和）。
     public static func rawDeflate(_ input: [UInt8], outputLimit: Int = defaultOutputLimit) throws -> [UInt8] {
         var reader = BitReader(input)
@@ -306,6 +355,13 @@ struct BitReader {
     private var position = 0      // 已消耗的位数
 
     init(_ input: [UInt8]) { self.input = input }
+
+    /// 已消耗的**整字节**数（向上取整到字节边界）。
+    ///
+    /// ⚠️ 给 packfile 用：zlib 流尾部 4 字节 Adler-32 紧跟在**字节对齐之后**，
+    ///    所以必须向上取整，不能直接用 `position / 8`（那会少算一个字节，
+    ///    于是"下一个对象"从流中间开始读，报出来的错会像"pack 损坏"）。
+    var bytesConsumed: Int { (position + 7) / 8 }
 
     /// 读 n 位（1...24），低位在前。
     mutating func bits(_ count: Int) throws -> Int {

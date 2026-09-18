@@ -186,10 +186,46 @@ public struct GitObjectStore: Sendable {
     /// ⚠️ 校验不是可选项：`.git` 里的字节可能被改过（用户手改、磁盘损坏、同步冲突）。
     ///    不校验的话，我们会拿着"ID 说是 A、内容是 B"的对象继续往下算，
     ///    最后给出的 diff / log 全是错的，而且**不报任何错**。
+    ///
+    /// ⚠️ 查找顺序：**先松散对象，再 pack**。反过来的话，一个刚 `git add` 进来的对象
+    ///    会被 pack 里的旧版本盖住 —— 那正是"模型刚改完、我们却看到旧内容"这类最难查的错。
     public func object(_ id: SHA1) throws -> GitObject {
+        if let loose = try? looseObject(id) { return loose }
+        if let packed = try? packedObject(id) { return packed }
+        throw GitError.objectNotFound(id)
+    }
+
+    /// 读松散对象（`.git/objects/xx/yyyy…`）。
+    func looseObject(_ id: SHA1) throws -> GitObject {
         let raw = try compressedObjectBytes(id)
         let inflated = try Inflate.zlib(raw, outputLimit: Self.maxObjectBytes)
         return try Self.parseObject(inflated, expecting: id)
+    }
+
+    /// 从 `.git/objects/pack/*.pack` 里读 —— **clone 下来的仓库对象几乎全在这**。
+    func packedObject(_ id: SHA1) throws -> GitObject {
+        for pack in packs() where pack.contains(id) {
+            return try pack.object(id) { [self] base in try looseObject(base) }
+        }
+        throw GitError.objectNotFound(id)
+    }
+
+    /// 仓库里的 pack 列表。
+    ///
+    /// ⚠️ 每次调用都重新枚举目录，**刻意不缓存**：`git fetch` 之后会新增 pack 文件，
+    ///    缓存住的话新拉下来的对象会"看不见"，而用户会以为 fetch 失败了。
+    ///    枚举一个目录的代价，远小于排查这类问题。
+    public func packs() -> [GitPack] {
+        let directory = gitDirectoryURL.appendingPathComponent("objects/pack")
+        guard let names = try? FileManager.default.contentsOfDirectory(atPath: directory.path) else { return [] }
+        var result: [GitPack] = []
+        for name in names.sorted() where name.hasSuffix(".idx") {
+            let indexURL = directory.appendingPathComponent(name)
+            let packURL = directory.appendingPathComponent(String(name.dropLast(4)) + ".pack")
+            guard FileManager.default.fileExists(atPath: packURL.path) else { continue }
+            if let pack = try? GitPack(packURL: packURL, indexURL: indexURL) { result.append(pack) }
+        }
+        return result
     }
 
     /// 只读松散对象文件（不解压）。
