@@ -154,6 +154,37 @@ jobs:
         working-directory: Apps/Rune
         run: xcodegen generate
 
+      # ⚠️ destination **不能写死机型名**。
+      #    macOS 镜像会换模拟器阵容（第一次 CI 就撞上了：
+      #    `Unable to find a device matching the provided destination specifier`），
+      #    而写死一个名字意味着"镜像一升级，测试就红，且看起来像代码坏了"。
+      #    这里改成**运行时挑一个可用的 iPhone**，并把挑中的那个打印出来 ——
+      #    将来再出问题，日志第一行就告诉你是谁。
+      - name: 挑一个可用的模拟器
+        id: sim
+        run: |
+          set -euo pipefail
+          UDID=$(xcrun simctl list devices available -j | python3 -c '
+          import json, sys
+          data = json.load(sys.stdin)["devices"]
+          # 运行时按名字倒序 = 新的 iOS 排在前面
+          for runtime in sorted(data, reverse=True):
+              if "iOS" not in runtime:
+                  continue
+              for device in data[runtime]:
+                  if device.get("isAvailable") and device["name"].startswith("iPhone"):
+                      print(device["udid"] + "|" + device["name"] + "|" + runtime)
+                      sys.exit(0)
+          sys.exit(1)
+          ')
+          if [ -z "$UDID" ]; then
+            echo "::error::这个镜像上找不到任何可用的 iPhone 模拟器"
+            xcrun simctl list devices available | head -40
+            exit 1
+          fi
+          echo "选中：$UDID"
+          echo "udid=${UDID%%|*}" >> "$GITHUB_OUTPUT"
+
       - name: 跑 UI 测试
         working-directory: Apps/Rune
         run: |
@@ -163,7 +194,7 @@ jobs:
           xcodebuild test \
             -project Rune.xcodeproj \
             -scheme "$SCHEME" \
-            -destination 'platform=iOS Simulator,name=iPhone 16' \
+            -destination "platform=iOS Simulator,id=${{ steps.sim.outputs.udid }}" \
             -derivedDataPath build \
             -resultBundlePath TestResults.xcresult
 
