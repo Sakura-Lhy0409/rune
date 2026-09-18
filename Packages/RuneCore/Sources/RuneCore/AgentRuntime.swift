@@ -3,6 +3,7 @@ import RuneKernel
 import RuneStore
 import RuneNet
 import RuneTools
+import RuneBench
 
 /// 可恢复的真实运行时。可变状态仅在专用串行队列访问；取消由线程安全的 control 送达。
 /// 每一步提交成功后才推进下一步，因此副作用前的工具意图已经在 SQLite 里。
@@ -15,6 +16,9 @@ public final class AgentRuntime: @unchecked Sendable {
         // ⚠️ 只接了**只读**四个；git_add/git_commit 等写操作的风险级是 modifying/dangerous，
         //    需要单独的审批语义，不在这一片（别顺手加进来）。
         + Array(GitToolExecutor.names).sorted()
+        // JS 执行宿主（C55 宿主 + C56 接线）：风险级 modifying，需要 .exec 能力，
+        // 审批语义由 PolicyEngine 按 spec 决定 —— 这一层只管"能不能执行"。
+        + Array(JavaScriptToolExecutor.names).sorted()
     private let queue = DispatchQueue(label: "RuneCore.runtime", qos: .userInitiated)
     private let lock = NSLock()
     private var active: RuntimeControl?
@@ -46,7 +50,8 @@ public final class AgentRuntime: @unchecked Sendable {
         //    将来若换成内存工作区，Git 工具会如实报告"不可用"，而不是给出错答案。
         executor = RuntimeToolExecutor(local: LocalToolExecutor(vfs: workspace, registry: tools, artifacts: artifacts),
             documents: DocumentToolExecutor(read: { try workspace.readData($0, maxBytes: $1) }, artifacts: artifacts),
-            git: GitToolExecutor(resolver: GitWorkspaceResolver(base: workspace.base)))
+            git: GitToolExecutor(resolver: GitWorkspaceResolver(base: workspace.base)),
+            javascript: JavaScriptToolExecutor(host: JavaScriptHost(), artifacts: artifacts))
         if let saved = try store.loadRuntime(sessionID: configuration.sessionID) {
             state = saved.state; state.wasRestored = !saved.state.status.isTerminal
             metadata = try JSONDecoder().decode(RuntimeMetadata.self, from: saved.metadata)

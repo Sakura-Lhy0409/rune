@@ -334,3 +334,53 @@ struct GitToolWiringTests {
         #expect(!payload.contains("secret-token"), "凭据内容绝不能出现在事件里")
     }
 }
+
+// MARK: - run_javascript 接线（C56）
+
+@Suite("JS 工具接线 —— 从 AgentRuntime 真的调用")
+struct JavaScriptToolWiringTests {
+
+    @Test("⭐⭐ 模型调 run_javascript：真的执行 JSC 宿主，而不是报「未知工具」")
+    func javascriptIsReachableFromRuntime() async throws {
+        let f = try Fixture()
+        defer { f.remove() }
+        let transport = FixtureTransport([
+            call(ToolName.runJavaScript, .object(["code": .string("console.log('from-js')")])),
+            text("done"),
+        ])
+        let runtime = try AgentRuntime(configuration: f.config, objective: "跑一段 JS",
+                                       store: f.store, transport: transport)
+        // ⚠️ `run_javascript` 的 risk 是 `.modifying`、`approval: .perProject`，
+        //    所以**第一次一定停在审批门**（这是设计，不是失败）。
+        //    第一版测试直接断言"执行完成"，被审批门挡下 —— 那条断言本身是错的。
+        let pending = try await finish(runtime.run())
+        #expect(pending.state.status == .awaitingApproval, "modifying 工具必须先过审批，实际：\(pending.state.status)")
+        let approval = try #require(pending.metadata.approval)
+        let result = try await finish(runtime.run(.approve(callID: approval.call.id)))
+
+        let events = try f.store.loadAll(sessionID: f.config.sessionID)
+        let payload = String(decoding: try JSONEncoder().encode(events.map(\.payload)), as: UTF8.self)
+        // ⚠️⚠️ 这一条我第一版写错了，值得记下来：
+        //    原来断言的是「`toolCallFinished` 恰好一条」。但**工具失败时也会发这个事件**
+        //    （`toolCallFailed` 是另一个 kind，而"执行过一次"这件事两者都满足）——
+        //    于是把 JS 路由整个摘掉（模型收到"未知工具"）时，那条断言**照样绿**。
+        //    破坏性验证当场暴露了它：摘掉路由 → 18 条测试一条都没红。
+        //    正确的判据是**可观测的行为变化**：JS 真的跑过 → 它的输出必然出现在事件里。
+        // ⚠️⚠️ 判据必须落在**工具结果的状态**上，而不是"输出文本里有 from-js"。
+        //    我第二版就是查文本，结果仍然是假绿：因为 `argsPreview` 里**回显了模型传的 code**，
+        //    所以 "from-js" 在"真的执行了"和"根本没接上"两种状态下**都出现**。
+        //    这是"断言了一个不区分两种状态的东西"——比没有断言更危险，因为它看着像在检查。
+        //    正确的判据（破坏性验证过）：
+        //      * 接上了 → `ToolCallFinished` 的 status 是 ok，summary 是 JS 的输出
+        //      * 没接上 → status 是 error，summary 是"不属于本机文件/检索工具集"
+        let finished = events.filter { $0.kind == .toolCallFinished }
+        #expect(finished.count == 1, "审批后必须真的产生一条工具结果，实际 \(finished.count) 条")
+        let status = finished.first?.payload.value(at: ["status"])?.stringValue
+        #expect(status == "ok", "工具结果状态应当是 ok，实际：\(status ?? "无")（没接上时会退到 local 并报 error）")
+        let summary = finished.first?.payload.value(at: ["summary"])?.stringValue ?? ""
+        #expect(!summary.contains("不属于本机文件"), "run_javascript 没有被接上，实际输出：\(summary)")
+        #expect(summary.contains("from-js"), "summary 里应当是 JS 的真实输出，实际：\(summary)")
+        #expect(!events.contains { $0.kind == .toolCallFailed }, "接上了就不该有工具失败事件")
+        #expect(result.state.status == .completed)
+    }
+}

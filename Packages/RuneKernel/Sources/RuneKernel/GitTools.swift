@@ -83,8 +83,14 @@ public struct GitToolExecutor: ToolExecuting {
                 modelFacingMessage: "Git 操作失败：\(error.description)",
                 suggestion: "确认仓库状态与 revision 写法；`git_log` 不依赖 revision，可以先看历史。"))
         } catch {
+            // ⚠️ 兜底分支**必须给出可执行的建议**，不能只说"失败了"。
+            //    模型看到没有下一步的错误，只会原样重发 —— 而 `git_log` 不需要 revision，
+            //    是它在 Git 工具里唯一"一定能跑"的那个，所以把它作为建议给出。
             return .failure(callID: call.id, error: ToolError(
-                kind: .other, modelFacingMessage: "Git 操作失败：\(error)"))
+                kind: .other,
+                modelFacingMessage: "Git 操作失败：\(error)",
+                suggestion: "先用 `git_log(limit: 5)` 确认仓库能读、HEAD 指向哪里；"
+                    + "再检查路径是否在仓库内、revision 是否是 `HEAD` / `HEAD~1` / 分支名 / ≥4 位 SHA。"))
         }
     }
 
