@@ -23,13 +23,18 @@ final class RuneSmokeTests: XCTestCase {
     ///    **而 CI 日志是能读的。** 所以"屏幕上到底有什么"必须主动打到 stdout 去，
     ///    否则每修一次都要靠猜（这和修 VFS 那个 macOS bug 时是同一个教训：
     ///    断言失败信息里必须有**实际值**）。
+    // ⚠️ 必须 `@MainActor`，而且**不能用 `map(\.label)` 这种 key path**：
+    //    `label` / `identifier` 是主线程隔离的属性，Swift 6 严格并发下
+    //    "cannot form key path to main actor-isolated property"（就是这么红过一次）。
+    @MainActor
     private func dumpVisibleText(_ app: XCUIApplication, _ stage: String) {
-        let texts = app.staticTexts.allElementsBoundByIndex.prefix(60).map(\.label).filter { !$0.isEmpty }
+        let texts = app.staticTexts.allElementsBoundByIndex.prefix(60).map { $0.label }.filter { !$0.isEmpty }
         print("=== [\(stage)] 界面文字（\(texts.count) 条）===")
         for text in texts { print("  · \(text)") }
-        let buttons = app.buttons.allElementsBoundByIndex.prefix(20).map(\.label).filter { !$0.isEmpty }
+        let buttons = app.buttons.allElementsBoundByIndex.prefix(20).map { $0.label }.filter { !$0.isEmpty }
         print("=== [\(stage)] 按钮：\(buttons.joined(separator: " ｜ "))")
-        print("=== [\(stage)] 导航栏：\(app.navigationBars.allElementsBoundByIndex.map(\.identifier).joined(separator: " ｜ "))")
+        let bars = app.navigationBars.allElementsBoundByIndex.map { $0.identifier }
+        print("=== [\(stage)] 导航栏：\(bars.joined(separator: " ｜ "))")
     }
 
     @MainActor
