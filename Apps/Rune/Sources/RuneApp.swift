@@ -132,19 +132,51 @@ struct RootView: View {
                     .textSelection(.enabled)
             }
             ForEach(report.files.keys.sorted(), id: \.self) { path in
+                VStack(alignment: .leading, spacing: 3) {
+                    Label(path, systemImage: "doc.text").font(.footnote)
+                    // ⚠️ 预览**必须直接可见**，不能只塞进折叠区里。
+                    //    两个理由：
+                    //      ① 产品上：这个面板的标题是「磁盘上的真实内容」，
+                    //         而只有文件名的话它是名不副实的 —— 用户得展开才知道内容。
+                    //      ② 测试上：折叠区里的文字**不在辅助功能树里**，
+                    //         所以 UI 测试断言"被改的那一行出现在界面上"会永远失败
+                    //         （模拟器冒烟测试最后一条断言就是卡在这里）。
+                    Text(Self.preview(report.files[path] ?? ""))
+                        .font(.system(.caption2, design: .monospaced))
+                        .foregroundStyle(.secondary)
+                        .textSelection(.enabled)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.leading, 4)
+                }
                 DisclosureGroup {
                     Text(report.files[path] ?? "")
                         .font(.system(.caption, design: .monospaced))
                         .frame(maxWidth: .infinity, alignment: .leading)
                 } label: {
-                    Label(path, systemImage: "doc.text")
-                        .font(.footnote)
+                    Label("展开全文（\(report.files[path]?.count ?? 0) 字符）", systemImage: "text.alignleft")
+                        .font(.caption2)
+                        .foregroundStyle(.tertiary)
                 }
+                .padding(.leading, 4)
             }
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(.quaternary.opacity(0.4), in: RoundedRectangle(cornerRadius: 12))
+    }
+
+    /// 文件内容的一小段预览：短文件全给，长文件给前几行并说明被截断了。
+    ///
+    /// ⚠️ 短文件必须**整段**给出，不要"一律只给 3 行" ——
+    ///    演示工作区里的文件本来就只有几行，截断会让"改掉的那一行"看不见，
+    ///    于是面板看起来还是什么都没证明。
+    static func preview(_ content: String, limit: Int = 600, lines: Int = 12) -> String {
+        guard !content.isEmpty else { return "（空文件）" }
+        if content.count <= limit { return content }
+        let head = content.split(separator: "\n", omittingEmptySubsequences: false)
+            .prefix(lines)
+            .joined(separator: "\n")
+        return head + "\n…（还有 \(content.count - head.count) 个字符，展开看全文）"
     }
 }
 
