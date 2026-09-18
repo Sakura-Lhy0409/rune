@@ -21,8 +21,8 @@
 
 | 项 | 值 |
 |---|---|
-| **更新日期** | 2026-09-18（C58 ask_user） |
-| **当前阶段** | ▶️ **真实模型端到端跑通（C46）+ Git 引擎（C47–C54）+ JS 执行宿主 + `todo_write` + `ask_user`（C55–C58）** —— **1262 包测试全绿**。整项目未完工 |
+| **更新日期** | 2026-09-18（C59 能力审计） |
+| **当前阶段** | ▶️ **真实模型端到端跑通（C46）+ Git 引擎（C47–C54）+ JS 执行宿主 + `todo_write` + `ask_user` + 能力审计（C55–C59）** —— **1268 包测试全绿**。整项目未完工 |
 | **当前里程碑** | ✅ **M0 出口标准·云端版（C46）** —— 真实模型（`gpt-5.5`）自主完成「读 → 改 → 复读确认」，途中经审批门与崩溃恢复校验。⚠️ 此前「C45 云推理被账户拒绝」是**选题错误造成的假结论** |
 | **已完成里程碑** | ✅ M0 全部（…→**258**）→ ✅ M1-1…M1-15（→877）→ ✅ M1-16…M1-23（→1032）→ ✅ **M1-24 模拟器冒烟** → ✅ **M1-25 交接 macOS** → ✅ **M1-26 RuneStore 跑绿（C39）** → ✅ **M1-27 RuneNet（C41）** → ✅ **M2-2 真实运行时接线（C45）** → ✅ **M0 云端出口验收（C46）** → ✅ **M3-1 Git 引擎（C47–C54）** → 🔨 **M3-2 执行宿主（C55/C56 JS 已通；WASM/CPython 待做）+ M2-3 交互工具（C57 todo / C58 ask_user）** |
 | **阻塞项** | **云推理阻塞已解除（C46）**。仍缺：真机签名 + iOS 27 SDK、执行宿主（CPython/WASM/JSC）、Git 引擎、MCP、记忆检索/L3 压缩 —— 见 [docs/19 §5](docs/19-真实运行时与验收.md#5-距离整个项目完成的剩余项) |
@@ -47,7 +47,7 @@ M4 端侧+记忆 / M5 上架准备   ░░░░░░░░░░░░░░�
 
 ### 包结构现状
 
-**包结构**：Kernel **1167** / Net **24** / Store **14** / Core **24** / **Bench 20** / Tools **7** / UI **6** 测试，共 **1262**。Core 有真实运行时、Tools 有 PDF/OCR/CSV、Bench 有 JS 宿主、Store schema v2 含原子检查点；其余 4 包（Context/Gateway/MCP/VM）仍是骨架。11 包可构建。
+**包结构**：Kernel **1171** / Net **24** / Store **14** / Core **26** / **Bench 20** / Tools **7** / UI **6** 测试，共 **1268**。Core 有真实运行时、Tools 有 PDF/OCR/CSV、Bench 有 JS 宿主、Store schema v2 含原子检查点；其余 4 包（Context/Gateway/MCP/VM）仍是骨架。11 包可构建。
 ---
 
 ## 3. 环境事实（本机 = **macOS**，C39 起）
@@ -149,8 +149,8 @@ M4 端侧+记忆 / M5 上架准备   ░░░░░░░░░░░░░░�
 | C55 | ✅ **JS 执行宿主（JavaScriptCore）—— 并诚实处理「杀不掉死循环」这个平台限制** | `RuneBench/JavaScriptHost.swift` · `JavaScriptHostTests` | 继 Git 之后的下一块平台能力。选 JSC 而非 CPython 的理由很实际：**JSC 是 iOS 自带的**（零包体代价），CPython 要背 1–2GB。⚠️ 放在 `RuneBench` 而非 `RuneKernel`：零依赖审计**禁止**内核 import `JavaScriptCore`（内核要能在 ubuntu 构建）。⚠️⚠️ **本层最需要说清的是它做不到什么**：设计文档写着"资源限额与强杀"，但 **JSC 没有公开的中断 API**（`JSContextGroupSetExecutionTimeLimit` 既不在公开头文件、**也不在动态库导出符号里**，已实测）—— 而用私有 API 会撞 App Store 红线（docs/11 的 2.5.2）。**所以没做「假装能强杀」的设计**，改成三层可兑现的防线：① **隔离**（每次执行独立 `JSVirtualMachine` + 独立线程，上一次的全局变量看不到）② **配额**（墙钟/输出字节/栈深）③ **挂死检测 + 拒绝**（超时即标"中毒"，后续调用直接拒绝并如实告知）—— 这比"继续接调用、每次再挂一个线程"安全得多，后者在手机上表现为 App 越来越卡直到被 jetsam 杀掉（T38）。⚠️ 抓到自己一个真 bug：结果值里的 `"undefined"` 被当成"没有值"过滤掉，于是 **`typeof fetch` 的结果在输出里消失** —— 「值是 undefined」与「根本没有值」是两件事 |
 | C56 | ✅ **`run_javascript` 工具接线**（229 → 见 §2 计数） | `RuneBench/JavaScriptToolExecutor.swift` · `AgentRuntime` 路由 | 上轮落地的宿主这一步才真正"存在"。⚠️ 分两片提交（上片只动 RuneBench、本片动 Bench+Core），任何一半坏了都能一眼定位。要点：`timeout_sec` **收窄到 60 秒上限并说明被收窄**（静默收窄会让模型以为参数没生效、反复加大数值）；宿主中毒时**拒绝并说清原因**（别让模型以为"这次代码写错了"而反复重试）；大输出复用内核同一个 `OutputBudget` 走制品。⚠️⚠️ **主要收获是一个假绿测试（连错两版断言）→ 完整记录见 T63**：判据必须是**工具结果的 `status`**，不是「有没有发生过某件事」，也不是查输出文本（`argsPreview` 会回显参数）。破坏性验证（摘掉路由）现在能抓住 → 3 条红。⚠️ 另修上轮自己写的真问题：`GitToolExecutor` 兜底 `catch` 只报「失败了」、没给下一步 → 补上可执行建议 |
 | C57 | ✅ **`todo_write`：补上一个「声明了但没接上」的洞**（1245 测试） | `Todo.swift` · `TodoList` · `AgentRuntime.syncTodos` | `Context` 里**早就有** `.openTodos` 角色与 `openTodosPresent` 自检（含「⚠️ 有未完成 todo 却没进上下文」的警告），但 `TurnState` **从来没有 todos 字段**、素材池里也永远不会出现 `openTodos` —— **那条自检永远不可能触发**（T48/T49/T54 同源）。补上 `TodoItem`/`TodoList`/`TodoWriteToolExecutor`，并写回状态 + 随检查点持久化。⚠️ 四个刻意设计：① `todos` **可选**而非 `[TodoItem] = []`（旧状态 JSON 没这个键，非可选会让 `Codable` 解码任何历史状态时抛错 = 旧会话全恢复不了，有测试守）；② **同时最多一条 `in_progress` 是硬拒绝**而非警告（两条同时进行中时模型实际没在做任何一个，而「不跑偏」正是这工具的存在理由）；③ **渲染逐字节确定**（一变就换请求指纹、Cache 失效，用户只从账单发现）；④ 工具**不改 TurnState**，写回由运行时统一做 |
-| C58 | ✅ **`ask_user`：补上第六个「声明了但没接上」的洞**（1262 测试） | `UserQuestion.swift` · `TurnRunner` 派发相位拦截 · `RuntimeAction.answer` | 盘出来的是**第六个**同源缺陷（完整枚举见 T65）：契约、`awaitingUser` 状态、`.askUser` 动作、`askUser` 恢复动作四处齐备，**但没有一行代码会进入那个状态**。⚠️ 关键设计：它**不是普通工具而是挂起** —— 由 `TurnRunner` 在**派发相位、策略判定之前**拦截（执行器只能返回结果、改不了 TurnState；放在策略前是因为"问用户"本身就是交互，**再叠一张审批卡要去点两次**）。⚠️ **挂起前必须先补配对结果**（T18：漏了后续所有请求 400，且报错与真实原因不沾边；破坏性验证过）。⚠️ **回答的信任级是 `.userInstruction`**（真实的人说的话可以驱动危险动作；降级成 `runtimeGuidance` 会让 Agent 收到回答却不敢执行）—— 反面同样重要：**绝不能把这个级别用在运行时自己写的话上**（T20）。⚠️ 新增事件 kind `userInputRequested`，与 `toolApprovalRequested` **分开**（冷启动分诊时前者重放审批卡、后者重放问题）。⚠️ **废话问题硬拒绝且不挂起**（"要不要我继续"这类把决定权推回用户却没给新信息，原来只是文档提示、模型经常不听） |
----
+| C58 | ✅ **`ask_user`：补上第六个「声明了但没接上」的洞**（1262 测试） | `UserQuestion.swift` · `TurnRunner` 派发相位拦截 · `RuntimeAction.answer` | 盘出来的是**第六个**同源缺陷（见 T65）：契约、`awaitingUser`、`.askUser`、`askUser` 恢复动作四处齐备，**但没有一行代码会进入那个状态**。⚠️ 关键设计：它**不是普通工具而是挂起** —— 由 `TurnRunner` 在**派发相位、策略判定之前**拦截（执行器只能返回结果、改不了 TurnState；放在策略前是因为"问用户"本身就是交互，**再叠一张审批卡要去点两次**）。⚠️ **挂起前必须先补配对结果**（T18：漏了后续所有请求 400，且报错与真实原因不沾边；破坏性验证过）。⚠️ **回答的信任级是 `.userInstruction`**（真实的人说的话可以驱动危险动作；降级成 `runtimeGuidance` 会让 Agent 收到回答却不敢执行）—— 反面同样重要：**绝不能把这个级别用在运行时自己写的话上**（T20）。⚠️ 新增事件 kind `userInputRequested`，与 `toolApprovalRequested` **分开**（冷启动分诊时前者重放审批卡、后者重放问题）。⚠️ **废话问题硬拒绝且不挂起**（"要不要我继续"这类把决定权推回用户却没给新信息，原来只是文档提示、模型经常不听） |
+| C59 | ✅ **能力审计补全：记录「授予了什么」，而不只是「拒绝了什么」**（1268 测试） | `Capability.Scope.auditText` · `AgentRuntime.recordCapabilityGranted` | ⚠️ 用 **T65 判据**找到的：84 个 `EventKind` 里 **43 个从未 emit**，但死值**不等于都要做** —— 要挑的是**功能已实现却没审计痕迹**的那一类。`capabilityGranted` 就是：`capabilityDenied` **早就接了**，而令牌系统本身**真的在跑**（每轮 mint 工作区读写删 + 600 秒 TTL，`PolicyEngine` 真的在读它判定）。⚠️ 这算缺陷而非待办：用户看得到"被拦了 3 次"，看不到"**本来被允许做什么**"，而安全模型的第三条铁律是"**能力**比权限更像安全模型"—— 那条铁律需要**证据链**，审计只记一半就没有证据。⚠️ `Scope.auditText` 不是装饰：直接用 `Debug` 描述的话，审计面板上显示 `fsWrite(RuneKernel.VFSPath(...))` = 没有审计（有测试断言文本里**不能出现** `RuneKernel.`/`VFSPath(`/`Scope.`）；出口作用域必须点名**域名与方法**，无限制时**明说"任意主机"**（含糊的审计比没有更危险）。⚠️ 记的是**签发事实**（范围/过期时刻/TTL/谁授的/为什么）而非"授权成功"标志位；作用域必须 `.sorted()` —— `Set` 迭代序跨进程不稳定，而 payload 顺序会进哈希链 |
 
 ## 6. 下一步
 **主线现状**：C46 打通真实云端推理；**C47–C54 把 Git 引擎从零做到了「模型可用」** —— iOS 无 fork/exec ⇒ 没有系统 git，Rune 自己读 `.git`（zlib inflate → SHA-1/对象寻址 → 松散对象 + packfile/delta → index/三方状态/revision/历史 → 统一 diff → 四个只读工具接通 AgentRuntime）。⚠️ **下一步**：git 写操作（add/commit，需审批语义）、执行宿主（CPython/WASM/JSC）、MCP、记忆检索/L3 压缩与真机验收，**不可把本轮当成全项目完成**。
