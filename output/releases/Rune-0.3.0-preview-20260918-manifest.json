@@ -1,0 +1,30 @@
+{
+  "file": "Rune-0.3.0-preview-20260918-unsigned.ipa",
+  "version": "0.3.0",
+  "build": "3",
+  "bytes": 9396749,
+  "sha256": "ffef3aced4ea41ab57813b44bcb07235568a7af4d8d55ccfad1b207bc785d8a7",
+  "signed": false,
+  "minimum_ios": "18.0",
+  "extensions": [
+    "Payload/Rune.app/PlugIns/RuneWidgets.appex/Info.plist",
+    "Payload/Rune.app/PlugIns/RuneShare.appex/Info.plist"
+  ],
+  "commit": "2091735909c8",
+  "branch": "main",
+  "worktree_clean": false,
+  "tests": {
+    "swiftpm": null,
+    "ui_full": 10,
+    "note": "本次跳过了测试（--skip-tests），未重新计数"
+  },
+  "cloud_inference_verified": true,
+  "cloud_inference_detail": "PinAI / gpt-5.5（C46 端到端验收：真实模型 → 工具 → 审批 → 改盘 → 落盘验链）",
+  "whole_project_complete": false,
+  "remaining_scope": "PROJECT_STATE.md §6（下一步）；docs/19 §5 是完整的剩余项清单",
+  "how_to_install": [
+    "用 Sideloadly（Windows/macOS）加载这个 ipa，用自己的 Apple ID 签名",
+    "免费 Apple ID 的签名有效期是 7 天，到期需要重签",
+    "首次启动需要在「设置 → 渠道与模型」里添加渠道并填入 API Key（密钥只存本机钥匙串）"
+  ]
+}
