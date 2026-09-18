@@ -22,13 +22,19 @@ private func fixtureBytes(_ name: String) throws -> [UInt8] {
 private func temporaryRepository() throws -> URL {
     // ⚠️ 必须 resolvingSymlinksInPath：macOS 的临时目录真实位置在 /private/var 下，
     //    而 URL 可能写着 /var/… —— 两者是同一个目录但字符串不同（项目记过的 T55）。
-    let source = URL(fileURLWithPath: #filePath)
+    let base = URL(fileURLWithPath: #filePath)
         .deletingLastPathComponent()
-        .appendingPathComponent("Fixtures/loose-repo")
+        .appendingPathComponent("Fixtures/loose-dotgit")
         .resolvingSymlinksInPath()
     let target = FileManager.default.temporaryDirectory
         .appendingPathComponent("rune-git-\(UUID().uuidString)")
-    try FileManager.default.copyItem(at: source, to: target)
+    try FileManager.default.createDirectory(at: target, withIntermediateDirectories: true)
+    // ⚠️ 夹具里那层目录**故意不叫 `.git`**：叫 `.git` 的话，这个夹具目录本身
+    //    就是一个嵌套仓库 —— git 只会记一个 gitlink 占位，**CI 上全新 clone
+    //    拿不到里面的对象文件**，这些测试会全挂（而且只在 clone 后才暴露）。
+    //    所以夹具里叫 `git`，拷贝时才改名成 `.git`。
+    try FileManager.default.copyItem(at: base.appendingPathComponent("git"),
+                                     to: target.appendingPathComponent(".git"))
     // ⚠️ 夹具入库时可能是只读的（git 只记可执行位，但打包工具可能改权限）。
     //    测试要改文件，所以显式把整个拷贝树变成可写 —— 不改源夹具。
     if let enumerator = FileManager.default.enumerator(at: target, includingPropertiesForKeys: [.isDirectoryKey]) {
