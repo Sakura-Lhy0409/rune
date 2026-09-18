@@ -163,7 +163,13 @@ public enum EventKind: String, Sendable, Codable, Hashable, CaseIterable {
 /// —— 这是事件溯源在移动端的关键工程优势（schema 演进成本极低）。
 /// 强类型访问通过下面的 `Payload` 便捷构造 + 各模块自己的解码器完成。
 public struct RuntimeEvent: Sendable, Codable, Hashable, Identifiable {
-    /// 全局单调序号（数据库自增），**不是**数组下标
+    /// **会话内**单调序号（从 1 开始），**不是**数组下标、也不是全局单调。
+    ///
+    /// ⚠️ 这句话原来写的是「全局单调（数据库自增）」，与实现不符：`EventLog` 是
+    ///    **每个会话一个实例**，序号由 `events.count + 1` 得到，所以两个会话各有一条 `sequence == 1`。
+    ///    全部消费方也都是按会话内序号读它的（`verify()` 定位锚点、`EventProjector.lastSequence`、
+    ///    `turn.lastCheckpointSeq`）—— 没有任何一处需要跨会话可比。
+    ///    落库时主键因此必须是 `(session_id, seq)`；写成单列 `seq` 会让开第二个会话直接撞唯一约束。
     public let sequence: Int64
     public let id: UUID
     public let sessionID: UUID

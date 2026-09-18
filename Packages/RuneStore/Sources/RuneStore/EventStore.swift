@@ -23,6 +23,18 @@ import RuneKernel
 //    （事件是真相源，投影是它的函数）。这时打开外键强制，只会让"写第一条事件"直接失败。
 //    等投影写入接上，再把外键补上（那时它们才有意义）。
 //
+// ③ **主键是 `(session_id, seq)`，不是单列 `seq`**（docs/12 的 DDL 原本写的是 `seq INTEGER PRIMARY KEY`）。
+//    理由：序号是**按会话**算的，两个会话各有一条 `seq = 1` →
+//    单列主键会让「开第二个会话」直接撞 UNIQUE 约束。
+//    ⚠️ 这不是推测，是 `chainsArePerSession` 当场抓出来的：
+//       写第二个会话的第一条事件时得到 `UNIQUE constraint failed: event.seq`。
+//    根因是 **`docs/12` 那句「全局单调」与内核实现不符** ——
+//    内核里 `EventLog` 是**每个会话一个实例**（`EventLog(sessionID:)`），
+//    `verify()` 按会话内序号定位锚点，`EventProjector.lastSequence`、
+//    `turn.lastCheckpointSeq` 也全是会话内的值。
+//    也就是说：**全部消费方都按「会话内序号」读它**，没有任何一处需要跨会话单调。
+//    所以对的是内核、过时的是文档（docs/12 已同步修正）。
+//
 // ⚠️ 只用 GRDB 里最稳的那层 API（`execute` / `Row.fetchAll` / 手写迁移），
 //    不用 `Record`/`Codable` 那套 —— 在没有 Mac、每次验证都要走 CI 的条件下，
 //    **少一个 API 面就少一类要在 CI 上迭代的错误**。
@@ -31,6 +43,11 @@ import RuneKernel
 public final class RuneEventStore: Sendable {
 
     /// 当前 schema 版本（`PRAGMA user_version`）。
+    ///
+    /// ⚠️ C39 改过 v1 的 DDL（`seq` 单列主键 → `(session_id, seq)` 复合主键），**版本号刻意没有跳**：
+    ///    改之前这一片**从未在 CI 上跑绿过**，也就**没有任何真实数据库**是按旧 DDL 建的，
+    ///    所以不存在需要迁移的存量库。⚠️ 将来若真出现按旧 DDL 建的库，`CREATE TABLE IF NOT EXISTS`
+    ///    会**直接跳过建表**、把旧结构留在那里 —— 那时必须新开一版 v2 走重建，别改这一版。
     public static let schemaVersion = 1
 
     private let dbQueue: DatabaseQueue
@@ -59,11 +76,19 @@ public final class RuneEventStore: Sendable {
             guard version < Self.schemaVersion else { return }
             if version < 1 {
                 // 列与 docs/12 §2 的 DDL 一致（除了刻意的 envelope_json，见文件头 ①）
+                // ⚠️ 主键是 **(session_id, seq)** 而不是 `seq` 单列 —— 这一条是被测试逼出来的：
+                //    序号是**按会话**算的（`EventLog.append` 用的是 `events.count + 1`），
+                //    所以两个会话各有一条 `seq = 1`。写成 `seq INTEGER PRIMARY KEY` 时，
+                //    第二个会话的"第一条事件"会直接撞上 UNIQUE 约束 —— 报错是
+                //    `UNIQUE constraint failed: event.seq`，而它真正的含义是
+                //    「本地库根本存不下第二个会话」（用户开第二个会话就炸）。
+                //    另注：SQLite 里 `INTEGER PRIMARY KEY` 是 rowid 的别名，**不能**加列，
+                //    所以这里用表级 `PRIMARY KEY (...)`（非 INTEGER 主键，不占 rowid 别名）。
                 try db.execute(sql: """
                     CREATE TABLE IF NOT EXISTS event (
-                      seq           INTEGER PRIMARY KEY AUTOINCREMENT,
-                      id            TEXT NOT NULL UNIQUE,
                       session_id    TEXT NOT NULL,
+                      seq           INTEGER NOT NULL,
+                      id            TEXT NOT NULL UNIQUE,
                       turn_id       TEXT,
                       goal_id       TEXT,
                       subagent_id   TEXT,
@@ -75,7 +100,8 @@ public final class RuneEventStore: Sendable {
                       created_at    INTEGER NOT NULL,
                       prev_hash     BLOB,
                       hash          BLOB NOT NULL,
-                      envelope_json TEXT NOT NULL
+                      envelope_json TEXT NOT NULL,
+                      PRIMARY KEY (session_id, seq)
                     )
                     """)
                 try db.execute(sql: "CREATE INDEX IF NOT EXISTS idx_event_session ON event(session_id, seq)")

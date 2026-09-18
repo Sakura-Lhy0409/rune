@@ -142,7 +142,26 @@ def main() -> int:
     root = Path(__file__).resolve().parent.parent
     targets: list[Path] = []
     for pattern in ("Packages/*/Sources/**/*.swift", "Packages/*/Tests/**/*.swift", "Apps/**/*.swift"):
-        targets.extend(sorted(root.glob(pattern)))
+        for path in sorted(root.glob(pattern)):
+            # ⚠️ 两道过滤，缺一不可（C39 抓到的真 bug，见 T59）：
+            #
+            # ① `is_file()` —— `**` 可以匹配**零个**路径段，所以 `Apps/**/*.swift`
+            #    会匹配到 `Apps/Rune/build/SourcePackages/checkouts/GRDB.swift` 这个**目录**
+            #    （依赖的 checkout 目录恰好叫 `GRDB.swift`）。目录传给 `read_text()` 直接
+            #    `IsADirectoryError` 崩掉 —— 于是这个「编译前几十毫秒就能指到行」的守门人
+            #    反而在最需要它的时候把整个 build 打断。
+            #
+            # ② 跳过构建产物 —— 跑过一次 `Tools/ci.sh ios` 之后，`Apps/Rune/build/` 下会有
+            #    479 个第三方 .swift 文件（GRDB 的 checkout）。它们**不是本项目源码**，
+            #    既不该被检查（中文引号规则只约束我们自己的文案），
+            #    也会让"检查了 N 个文件"这个数字变成一句谎话（86 → 565）。
+            if not path.is_file():
+                continue
+            rel = path.relative_to(root)
+            # 排除构建产物：`.build/`（SwiftPM）与 `Apps/Rune/build/`（xcodebuild）
+            if ".build" in rel.parts or "build" in rel.parts:
+                continue
+            targets.append(path)
 
     if not targets:
         print("没有找到 .swift 文件")

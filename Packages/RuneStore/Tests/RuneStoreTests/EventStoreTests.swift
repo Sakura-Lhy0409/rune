@@ -129,7 +129,8 @@ struct EventStoreTamperTests {
         let store = try RuneEventStore(path: path)
         for index in 0..<3 {
             _ = try store.append(sessionID: sessionA, kind: .fileRead,
-                                 payload: ["path": .string("/workspace/\(index).md")],
+                                 payload: ["path": .string("/workspace/\(index).md"),
+                                           "note": .string("原始正文")],
                                  createdAt: t0.addingTimeInterval(Double(index)))
         }
         #expect(try store.eventLog(sessionID: sessionA).verify(full: true).isOK)
@@ -137,19 +138,36 @@ struct EventStoreTamperTests {
         // ⚠️ 绕过 store 的 API，**直接在 SQL 层**改一条事件的正文 ——
         //    这正是"有人（或某个 bug）动了数据库文件"的样子。
         //    改的是 envelope_json（读回时解码的就是它）。
+        //
+        // ⚠️⚠️ 这里**故意改 `note` 而不是 `path`**：`path` 里全是 `/`，而
+        //    Foundation 的 `JSONEncoder` **默认把 `/` 转义成 `\/`**（T45）——
+        //    于是 `replacingOccurrences(of: "/workspace/1.md")` 在磁盘上的字节里
+        //    **一次都匹配不到**，UPDATE 什么也没改，链自然照样校验通过。
+        //    第一版就是这么写的：测试**假装检查过了**（对应 T45「永远为真的安全检查」）。
+        //    改一个不含 `/` 的字段，是为了把「链能不能发现篡改」与
+        //    「JSON 怎么转义斜杠」这两件事解耦 —— 后者不该由这条测试来承担。
         let queue = try DatabaseQueue(path: path)
-        try queue.write { db in
+        let changed = try queue.write { db -> Int in
             let row = try Row.fetchOne(db, sql: "SELECT envelope_json FROM event WHERE seq = 2")
             let json = (row?["envelope_json"] as? String) ?? ""
-            let tampered = json.replacingOccurrences(of: "/workspace/1.md", with: "/etc/passwd")
+            let tampered = json.replacingOccurrences(of: "原始正文", with: "被改过的正文")
+            // ⚠️ 没有这一句，上面那次替换一旦静默失配，下面整条测试就会变成假绿
             #expect(tampered != json, "测试本身要真的改到东西")
             try db.execute(sql: "UPDATE event SET envelope_json = ? WHERE seq = 2", arguments: [tampered])
+            return db.changesCount
         }
+        // 连「到底改到几行」也要断言：UPDATE 静默影响 0 行同样是上面的假绿
+        #expect(changed == 1, "必须恰好改到 1 行，实际 \(changed) 行")
 
         let log = try store.eventLog(sessionID: sessionA)
         let verdict = log.verify(full: true)
-        #expect(!verdict.isOK, "被改过的内容必须让链校验失败")
+        #expect(!verdict.isOK, "被改过的内容必须让链校验失败，实际：\(verdict)")
         #expect(verdict.outcome != .ok)
+        // ⚠️ 只断言"不 OK"太弱：判成 `brokenLink`（衔接断了）也是"不 OK"，
+        //    但那条的真实含义是"中间被插入/删除过"，与本次篡改的形态不符。
+        //    这里改的是**某一条自身的正文**，所以必须是 `tampered`。
+        #expect(verdict.outcome == .tampered, "改正文必须报「内容被改」，实际：\(verdict.outcome)")
+        #expect(verdict.firstBadSequence == 2, "应当精确指到被改的第 2 条，实际：\(String(describing: verdict.firstBadSequence))")
     }
 }
 

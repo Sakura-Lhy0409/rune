@@ -113,8 +113,36 @@ cmd_audit() {
     else
       failed=1
     fi
+
+    # ⚠️ 引号体检（T28/T42）必须**长在这里**，而它原来只挂在 `Tools/rune.ps1` 上。
+    #    那是 Windows 专用脚本 —— 也就是说**迁移到 macOS 的那一刻，这个关卡就静默消失了**：
+    #    谁也不会注意到一个"从来没报过错"的检查不再运行。
+    #    而它恰恰是最省时间的一个：中文文案里手打 ASCII 引号会截断 Swift 字面量，
+    #    编译器报的却是 `expected ',' separator` —— 与真实原因毫不相干（本项目为此
+    #    浪费过 5+ 次编译往返）。它几十毫秒就能指到行，所以必须跟着 `ci.sh` 走：
+    #    本地 `ci.sh audit` 与 CI 的审计 job 跑的是同一个脚本，改一处两边都生效。
+    if "$py" Tools/lint_quotes.py; then
+      ok "中文引号体检通过"
+    else
+      failed=1
+    fi
+
+    # ⚠️ `check_ci.py` 也要在这里被调用，否则它是**第三个孤儿**：
+    #    它校验 workflow 的结构（runs-on / 步骤非空 / action 锁版本 / needs 指向存在的 job），
+    #    但此前只能靠人手动跑 —— 一个没人跑的检查，价值等于零。
+    #    ⚠️ 它需要 pyyaml：**缺依赖时只算「跳过」，不算失败**。
+    #    把"环境没装东西"判成"你的代码有问题"，会训练人忽略红灯。
+    if "$py" -c "import yaml" 2>/dev/null; then
+      if "$py" Tools/check_ci.py; then
+        ok "CI 配置结构合法"
+      else
+        failed=1
+      fi
+    else
+      warn "没有 pyyaml，跳过 CI 配置结构检查"
+    fi
   else
-    warn "没有 python，跳过文档链接检查"
+    warn "没有 python，跳过文档链接与引号检查"
   fi
 
   return $failed

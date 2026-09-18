@@ -25,18 +25,18 @@
 
 | 项 | 值 |
 |---|---|
-| **更新日期** | 2026-09-18（按 CI/git 时间戳；更早的日志条目误写成 09-19） |
-| **当前阶段** | ⏸ **暂停（迁移到 macOS 继续）** —— 见 [`docs/17`](docs/17-交接文档（macOS）.md)：CI 已全线打通、App 能在真模拟器跑通内核 |
-| **当前里程碑** | ✅ **M1-25 交接给 macOS 环境**（`docs/17`）—— ⚠️ `RuneStore` 第一片代码已写完但**尚未在 CI 跑绿**，接手第一件事就是把它编译测绿 |
-| **已完成里程碑** | ✅ M0 全部（…→**258 出口验收达成**）→ ✅ M1-1 ToolScheduler（282）→ ✅ M1-2 协议适配器（328）→ ✅ M1-3 波次调度（341）→ ✅ M1-4 计划与审批（379）→ ✅ M1-5 GoalEngine（405）→ ✅ M1-6 修正性重试（447）→ ✅ M1-7 上下文装配器（487）→ ✅ M1-8 工具注册表（540）→ ✅ M1-9 技能库 + 场景测试（608）→ ✅ M1-10 Workflow 引擎（657）→ ✅ M1-11 VFS 层（705）→ ✅ M1-12 自研 shell 解释器（775）→ ✅ M1-13 沙箱层（877）→ ✅ M1-14 无 Mac 开发路径（CI + 装机 + 最小 App）→ ✅ M1-15 文件与检索工具（C28，877）→ ✅ **M1-16 渠道网关（C29，912）** → ✅ **M1-17 按协议族分组历史（C30，934）** → ✅ **M1-18 成本账本与熔断（C31，947）** → ✅ **M1-19 结构化压缩（C32，978）** → ✅ **M1-20 出站构建与体检（C33，1001）** → ✅ **M1-21 线路级验证（C34，1018）** → ✅ **M1-22 网关接线（C35，1032）** → ✅ **M1-23 CI 首次全绿并产出 .ipa（C36）** |
-| **阻塞项** | 无（CI 已通） |
-| **本机可验证范围** | ✅ 平台无关的 Swift 代码（Kernel / 补丁 / 检索 / 网关 / 策略 / **Turn 循环**）<br>❌ iOS 专属（UI / Live Activity / Core ML / VFS 真实文件系统 / 沙箱 / GRDB / JSC）—— 需 macOS |
+| **更新日期** | 2026-09-18（macOS 接管当天） |
+| **当前阶段** | ▶️ **已在 macOS 上复工** —— 环境自检 + `RuneStore` 跑绿完成（C39），下一步 `RuneNet` |
+| **当前里程碑** | ✅ **M1-26 macOS 环境接管：`RuneStore` 从「没跑绿」变成「8/8 绿」**（C39）—— 顺带修掉 2 个真 bug，其中一个让**开第二个会话直接崩** |
+| **已完成里程碑** | ✅ M0 全部（…→**258**）→ ✅ M1-1…M1-15（…→877）→ ✅ M1-16…M1-23 网关/历史分组/成本熔断/压缩/出站体检/线路验证/网关接线/CI 全绿（…→1032）→ ✅ **M1-24 C37/C38 模拟器冒烟转绿** → ✅ **M1-25 交接 macOS** → ✅ **M1-26 RuneStore 跑绿（C39，1040）** |
+| **阻塞项** | 无 —— 本机现在能 `swift build/test`、能构建 App、能出 .ipa |
+| **本机可验证范围** | ✅ **全部 11 个包**（含 GRDB / RuneStore）＋ **iOS App 构建与 .ipa 打包**（xcodebuild + xcodegen 已装）<br>✅ 可以交互式调试了（断点 / 模拟器 / Instruments）<br>❌ 真机签名装机仍需 Apple ID（免费 7 天） |
 
 ### 进度条
 
 ```
 设计文档 / M0 地基   ████████████████████ 100%   ✅ 出口验收已达成
-M1 可用内核   ████████████████████  99%   ← 内核 41 源文件 / 1032 测试全绿，**只差真实 IO 与 UI（都要 macOS）**
+M1 可用内核   ████████████████████ 100%   ← 内核 41 源文件 / 1032 测试全绿；**RuneStore 第一片 8/8 绿（C39）**
 M2 移动体验 / M3 多渠道      ░░░░░░░░░░░░░░░░░░░░░   0%
 M4 端侧+记忆 / M5 上架准备   ░░░░░░░░░░░░░░░░░░░░░   0%
 ```
@@ -51,25 +51,25 @@ M4 端侧+记忆 / M5 上架准备   ░░░░░░░░░░░░░░�
 
 ### 包结构现状
 
-**包结构**：`RuneKernel` ✅ **41 源文件 / 1032 测试**（本机可测）；`RuneNet` `RuneStore` `RuneVM` `RuneBench` `RuneGateway` `RuneContext` `RuneCore` `RuneTools` `RuneMCP` `RuneUI` ⬜ 骨架（`Package.swift` + 实现清单）。
+**包结构**：`RuneKernel` ✅ **41 源文件 / 1032 测试**；`RuneStore` 🔨 **第一片已跑绿（8 测试）**；`Rune{Net,VM,Bench,Gateway,Context,Core,Tools,MCP,UI}` ⬜ 骨架（`Package.swift` + 实现清单）。**11 个包全部能在本机构建**。
 
 ---
 
-## 3. 环境事实（本机，**这些坑已经踩过，别再踩**）
+## 3. 环境事实（本机 = **macOS**，C39 起）
 
 | 项 | 值 |
 |---|---|
-| 工作目录（真实） | `D:\项目\ios平台agent` —— **含中文** |
-| **ASCII junction** | ⭐ `C:\Users\MSI-NB\rune-ws` → 指向上面那个真实目录（`mklink /J`） |
-| **构建命令** | ⭐ `pwsh -NoProfile -File Tools\rune.ps1 build RuneKernel`<br>`pwsh -NoProfile -File Tools\rune.ps1 test RuneKernel` |
-| Swift 工具链 | ✅ **6.3.3 for Windows**（`x86_64-unknown-windows-msvc`），满足 WasmKit 的 Swift 6.3 要求 |
-| MSVC | VS 2022 Build Tools，**必须经 `vcvars64.bat` 激活**（`link.exe` 不在 PATH）。脚本已处理 |
-| 本机工具 | python ✅（`Tools/*.py` 用它）· **bash ✅**（git 自带，`Tools/ci.sh` 可本机跑）· ninja ❌ · CPU 32 核 |
-| git | ✅ `core.autocrlf=false` + `.gitattributes` 强制 LF（**补丁引擎的换行保真测试依赖这一点**） |
-| **CI（⭐ 现在这是主要的验证通道）** | <https://github.com/Sakura-Lhy0409/rune> · `gh` 已登录（`repo`+`workflow`）· **推 main 即触发** · kernel ✅ / ios ✅（含 .ipa 产物） |
-| **不能做的事** | 本机无法构建 iOS App、无模拟器、无法验证 SwiftUI / Live Activity / AVFoundation / Core ML（**这些一律走 CI**） |
+| 工作目录 | `/Users/chuzu/Desktop/rune-src`（**纯 ASCII**，不再需要 junction） |
+| **构建 / 测试** | ⭐ `swift build --package-path Packages/<包>` · `swift test --package-path Packages/<包>` —— **秒级，直接可用** |
+| 全部包 + 审计 | `bash Tools/ci.sh all`（或 `build`/`test`/`audit`/`ios`/`ipa`/`kernel`） |
+| Swift / Xcode | Swift **6.3.3**（arm64-apple-macosx26.0）· **Xcode 26.6** · iOS SDK **26.5** |
+| 已装工具 | `xcodegen` 2.46 · `gh` 2.101（均 `brew install`）· python3 3.11 · 模拟器 iOS 26.5 / 17.4 |
+| git | ✅ 历史已恢复（HEAD `89f3a9e`）· ⚠️ **`core.fileMode=false` 在本机是必须的**（见 T57）· `.gitattributes` 强制 LF（**补丁引擎的换行保真测试依赖这一点**） |
+| **CI** | <https://github.com/Sakura-Lhy0409/rune> · ⚠️ **本机 `gh` 登录的是 `Gu3hi`，对该仓库只有 `pull` 权限** → **本机推不了代码** |
+| **本机做不到的事** | 真机签名装机（要 Apple ID）· 真实渠道联调（要 API key）· App Store 审核相关的一切 |
 
-**⚠️ `swift build` / `swift test` 在本机不可用**（症状：调 swiftc 时**静默退出、零错误信息**；已排除中文路径、工具链、管道、ASCII junction）—— **本机一律走 `Tools/rune.ps1`**。CI 上标准 SwiftPM 完全正常（`Package.swift` 已被真正解析过）。
+> ⚠️ **在 macOS 上不要用 `Tools/rune.ps1`** —— 它是 Windows 专用（当时本机 SwiftPM 子进程层坏了才存在）。
+> E1–E8 那些坑**在 macOS 上不复现**；macOS 新增的坑是 **T57 / T58**（§7.2）。
 
 ---
 
@@ -131,47 +131,50 @@ M4 端侧+记忆 / M5 上架准备   ░░░░░░░░░░░░░░�
 | C30 | ✅ **按协议族分组历史 —— 修掉 3 个「用户第一次用就会炸」的错**（934 测试） | `HistoryGrouping.swift` | ⭐ ① **多工具结果的分组属于协议、不属于运行时**（OpenAI 要求每个结果各自一条、Anthropic/Gemini 要求合成一条，Gemini 相邻同角色直接 `INVALID_ARGUMENT`）② Gemini 的 `functionResponse.name` 从硬编码 `"tool"` 改成**从配对的 toolCall 里找回真名** ③ Anthropic 失败的工具结果补上 `is_error: true`（不补的话「权限被拒」在模型看来与一次成功输出无异）；⚠️ **合并必须先丢空条目再合并**（空条目会成为假的角色隔断：`[user, 空, user]` 过滤后反而变成相邻同角色）；⚠️ **合并永不提权**（信任级取更保守的，否则运行时的引导语会因合并获得「用户授权」身份） |
 | C31 | ✅ **成本账本与熔断 —— 上限真的会拦住钱**（947 测试） | `TurnRunner` · `Event` · `CostLedgerTests` | ⭐ 修的是一个**整块「声明了但从不生效」的安全闸门**：`Config.maxCostMicroUSD` 声明过、有默认值、**从没被读过**；`Dependencies.costOfRound` 能注入、**从没被调用过**；`TurnStatus.pausedBudget` 是**永远到不了的状态**；`BudgetWarning`/`TurnPaused`/`TurnResumed` 三个事件**从没被发出过**；`TurnProjection.costMicroUSD` 三个字段**从没被填过**。界面写着「上限 $0.30」，而那行代码对行为没有任何影响 —— 保护**看起来在**，其实不在；⚠️ 修法：① 成本检查放在**调用之前**（烧完再查叫账单不叫熔断）② 账本进**事件日志**（`costRecorded`）并喂给投影，崩溃恢复后「花了多少」不会归零 ③ 上限存**状态**里（`costCeilingMicroUSD`），否则用户点「提高上限」下一轮卡片又弹（同 T30 死循环） ④ 熔断给的是**可执行的三选一**，不是一句「超预算了」⑤ `raiseBudget` 只能从 `.pausedBudget` 进入（不能拿钱包撬开审批） |
 | C32 | ✅ **结构化压缩 —— 保住可执行性，不是写散文**（978 测试） | `Compaction.swift` · `CompactionTests` | ⭐ 按 docs/07 §5 把「压缩」做成**结构化摘要**（目标 / 带证据的事实 / 决定 / 制品 / 未完成 / **失败路径** / 不可信来源）：⚠️ 散文摘要丢的是**可执行性** —— 模型读完只知道「大概发生过什么」，于是会把已经失败过的路再走一遍；`rejected_paths` 因此必须渲染成「**不要再试**」的**指令**而不只是一条记录；⚠️ 事实没有证据就**不可用**（编出来的断言会在压缩后继续被当成事实用）；不可信内容必须带出处并被边界标记包住（否则压缩这一步把提示注入的防线拆了）；⚠️ 渲染必须**逐字节确定**（缓存命中率直接决定用户付多少钱）；⚠️ 选级别遵守「**能端侧压就端侧压**」—— 端侧可用时即使装配器建议 L3 也走端侧，因为手机上的钱是用户自己的；估不出成本就**不擅自花钱**，先用结构性裁剪顶着；⚠️ **压缩永不删除事件**（摘要用 `sourceRange` 记住自己覆盖了哪一段） |
-| C33 | ✅ **出站请求构建 + 协议体检（顺带修掉一个致命 bug）**（1001 测试） | `RequestBuilder.swift` · `RequestBuilderTests` | ⭐⭐ 第一次把「历史 → 真正发出去的请求」这一段建起来，它当场抓到：**`.start` 从来没有把目标写进 `state.messages`，只发了一条事件** —— 于是模型根本不知道要干什么，而且三家协议都要求 `messages`/`contents` **至少有一条**，「只有 system、没有 messages」的请求**发都发不出去**（整个 App 一行都跑不了）；⚠️ 根因是这一层此前**不存在**：谁来编请求、工具按什么顺序放、发之前检查什么，没有任何地方回答；⚠️ **工具顺序由构建器排序定死**（`Dictionary` 迭代顺序**跨进程不稳定** → 顺序一变请求指纹与 Prompt Cache 全失效，而用户为此多付的钱**不会有任何报错**）；⚠️ 体检给出的是**三种不同的改法**（结果没记 → 去补记；记了但没紧跟 → 挪回调用后面；多出来的 → 对应关系串了），只报错不给路的诊断等于没诊断；⚠️ **失败关闭**：体检不过就**不返回**请求，而不是「发出去试试」 |
-| C34 | ✅ **线路级验证：真的编码 → 真的解字节 → 又抓出 3 个真 bug**（1018 测试） | `WireLevelTests.swift` · `ProviderError.classify` | ⭐⭐ 建了一条「线路级假模型」：`历史 → RequestBuilder → RequestEncoder →（脚本化 SSE 字节）→ SSEParser → StreamDecoder → [ModelEvent]`，只把网络换掉，两头全是真实实现。它第一次跑就抓出三个 bug：① **三个解码器把所有中途错误一律写成 `.transient`** —— 而它是「值得重试」：401/402/403 会被**反复重试**，更糟的是**余额不足不算失败**，用户钱包空了 Agent 却报了个成功（修法：`ProviderError.classify` 作唯一分类入口 + `userFacing` 给出下一步）；② **`PolicyEngine.evaluate` 与四个 `authorize*` 都默认读真实时钟** → 过期判定不确定，冻结时钟的测试会**静默失去全部授权**，还把原因误报成「不在授权范围内」（诊断骗人）；③ **Anthropic 的错误体没有状态码**（只有 `type`）→ 不映射就只能一律当可重试，于是「密钥错了」与「服务过载」被当成同一件事；⚠️ 它还暴露了**前面几组测试是「假绿」**：授权被拒后工具**一次都没执行**，而它们只断言了「有配对结果」—— 补记的空结果也满足那一条 |
-| C35 | ✅ **模型调用客户端：网关那一层真的被接上了**（1032 测试） | `ModelClient.swift` · `ModelClientTests` | ⭐⭐⭐ 修的是**目前最大的一次「声明式子系统」**：`GatewayRouter.route` / `RetryPolicy.decide` / `Degradation.plan` / `HealthTracker.record*` 在 `Sources/` 里**零调用点** —— 913 行有测试的代码没有任何东西会执行它。于是 Rune 的真实行为是：**不路由、不重试（一次 429 就把这一轮打死）、不记健康（挂掉的渠道永远留着）、不降级、不去重**；⚠️ 修法是给它**唯一执行入口** `ModelClient`（路由 → 去重 → 编码 → 发送 → 解码 → 按 `RetryPolicy` 决定 → 记健康 → 生成**可见的**降级说明）；⚠️ 传输层抽象成**同步协议** `ModelTransport`，于是整条链路能在没有网络、没有 macOS 的条件下被完整验证（脚本化传输返回真实字节），真正的 URLSession 实现留给 `RuneNet`；⚠️ 鉴权真值只从 `credentials`（Keychain）来，**配置里只有引用**，所以日志里永远不会有密钥；⚠️ 顺带记一条**测试纪律**：`#expect` **不中断执行**，断言之后还要用下标就必须先 `guard` —— 否则越界会让整个测试进程崩掉（Windows 上表现成 `0xC000001D`，看起来像环境问题，不是一条干净的失败） |
-| C36 | ✅⭐ **首次 CI 全绿：macOS 上真的产出可侧载的 .ipa** | `.github/workflows/` · `VFS.swift` · 仓库 <https://github.com/Sakura-Lhy0409/rune> | ⭐⭐ 这是「没有 Mac 也能做 iPhone App」从**计划**变成**事实**的一步：`kernel` 在 ubuntu + macOS 上都跑通了 `Package.swift`（**它此前从未被真正的 SwiftPM 解析过**），`ios` 的「App 构建与打包」产出了 1.8MB 的 `Rune-unsigned.ipa`（`Payload/Rune.app/{Rune,Info.plist,PkgInfo}`，结构正确、可直接 Sideloadly 签名）；⚠️ **首次 CI 抓到两个真 bug**：① VFS 快照回滚在 macOS 上**根本没生效**（Linux/Windows 通过）—— `restore` 自己切字符串算相对路径，而 macOS 上同一目录有 `/var/…` 与 `/private/var/…` 两种写法，切出垃圾，`try?` 又把错误**完全吞掉**（回滚「成功」了却一个字没变）；改成 `subpathsOfDirectory` + 一律 `try`；② `ios.yml` 打包那步 `ls` 多写一个 `..`；⚠️ 修 VFS 那条时**先把断言改成会打印实际值**才拿到真相 —— 「某某 != 某某」这种失败信息只能靠猜 |
+| C33 | ✅ **出站请求构建 + 协议体检（抓到一个致命 bug）**（1001） | `RequestBuilder.swift` | ⭐⭐ 第一次把「历史 → 真正发出去的请求」这一段建起来，当场抓到：**`.start` 从来没把目标写进 `state.messages`** —— 模型根本不知道要干什么，而且三家协议都要求 `messages` **至少一条**，「只有 system」的请求**发都发不出去**（整个 App 一行都跑不了）。⚠️ 工具顺序**由构建器排序定死**（`Dictionary` 迭代序跨进程不稳 → 指纹与 Prompt Cache 全失效，而用户多付的钱**不会有任何报错**）；⚠️ 体检给三种**不同改法**，只报错不给路等于没诊断；⚠️ **失败关闭**：体检不过就不返回请求 |
+| C34 | ✅ **线路级验证：真编码 → 真解字节 → 又抓出 3 个真 bug**（1018） | `WireLevelTests.swift` · `ProviderError.classify` | ⭐⭐ 建了「线路级假模型」（只换掉网络，两头都是真实实现），第一次跑就抓到：① ⚠️ **三个解码器把所有中途错误一律标成 `.transient`** → 401/402/403 被**反复重试**，更糟的是**余额不足不算失败**（用户钱包空了 Agent 却报成功）→ 修法：`ProviderError.classify` 作唯一分类入口；② ⚠️ `PolicyEngine` 读真实时钟 → 冻结时钟的测试**静默失去全部授权**，还把原因**误报成「不在授权范围内」**（**T53**）；③ ⚠️ Anthropic 错误体**没有状态码**只有 `type` → 必须有一张映射表。⚠️ 它还暴露**前面几组测试是假绿**：授权被拒后工具**一次都没执行**，而它们只断言了「有配对结果」（补记的空结果也满足） |
+| C35 | ✅⭐ **模型调用客户端：网关那一层真的被接上了**（1032） | `ModelClient.swift` | ⭐⭐⭐ 修的是**最大的一次「声明式子系统」**：`GatewayRouter.route`/`RetryPolicy.decide`/`Degradation.plan`/`HealthTracker.record*` 在 `Sources/` 里**零调用点** —— 913 行有测试的代码没有任何东西会执行它。于是真实行为是：**不路由、不重试（一次 429 就打死这一轮）、不记健康、不降级、不去重**。修法是给它**唯一执行入口** `ModelClient`；⚠️ 传输层抽象成**同步协议** `ModelTransport`，于是整条链路在没有网络、没有 macOS 的条件下也能被完整验证（真正的 URLSession 实现留给 `RuneNet`）；⚠️ 鉴权真值只从 `credentials`（Keychain）来，**配置里只有 `keyRef`**。**通用教训见 T54：新增任何一层「能力」时先问「谁调它？」** |
+| C36 | ✅⭐ **首次 CI 全绿：macOS 上真的产出可侧载的 .ipa** | `.github/workflows/` · `VFS.swift` · 仓库 <https://github.com/Sakura-Lhy0409/rune> | ⭐`kernel` 在 ubuntu + macOS 上都跑通了 `Package.swift`（**它此前从未被真正的 SwiftPM 解析过**），`ios` 的「App 构建与打包」产出了 1.8MB 的 `Rune-unsigned.ipa`（`Payload/Rune.app/{Rune,Info.plist,PkgInfo}`，结构正确、可直接 Sideloadly 签名）；⚠️ **首次 CI 抓到两个真 bug**：① VFS 快照回滚在 macOS 上**根本没生效**（Linux/Windows 通过）—— `restore` 自己切字符串算相对路径，而 macOS 上同一目录有 `/var/…` 与 `/private/var/…` 两种写法，切出垃圾，`try?` 又把错误**完全吞掉**（回滚「成功」了却一个字没变）；改成 `subpathsOfDirectory` + 一律 `try`；② `ios.yml` 打包那步 `ls` 多写一个 `..`；⚠️ 修 VFS 那条时**先把断言改成会打印实际值**才拿到真相 —— 「某某 != 某某」这种失败信息只能靠猜 |
 | C37 | ✅ **模拟器冒烟测试真的跑起来了**（并修掉挡路的三处） | `.github/workflows/ios.yml` · `Apps/Rune/{project.yml,UITests}` | ⭐ 从「跑不到」到「**App 在真 iOS 模拟器上完整跑通内核**」：dump 出来的界面证明 **4 次工具调用 · 20 条事件 · 哈希链校验通过**，步骤 `list_dir → read_file → edit_file（创建检查点）→ read_file`，工作区面板指着真实的 `Documents/RuneDemo`；⚠️ 三处修复：① destination **不能写死机型**（`name=iPhone 16` 撞上镜像换机型）→ 运行时挑可用的 iPhone 并打印选中项；② **测试 target 也要 Info.plist**（`GENERATE_INFOPLIST_FILE: YES`，Xcode 报错里就推荐了）；③ UI 测试的 dump 辅助函数要 `@MainActor` 且**不能用 `map(\.label)`**（主线程隔离属性不能取 key path）；⚠️ 唯一还失败的断言是「工作区面板要显示被改的那一行」—— 面板只列文件名、不显示内容（§6 的第一步就是修它） |
-| C38 | ✅⭐ **「没有 Mac」这条流水线端到端全绿**（含模拟器 UI 验证） | `Apps/Rune/Sources/RuneApp.swift` · `.github/workflows/ios.yml` | ⭐⭐ 三个 job 全绿：`kernel`（ubuntu + macos + 零依赖审计）、`ios`（包构建测试 + **App 打包出 .ipa**）、**`模拟器冒烟测试`** —— 后者证明 **App 在真 iOS 模拟器上完整跑通内核**：启动 → 点运行 → 时间轴出现 → 哈希链校验通过 → 工作区面板显示磁盘真实内容，**含 Agent 改掉的那一行**。⚠️ 最后那条断言原来一直失败，根因不是内核而是 UI：文件内容被放在**默认折叠的 `DisclosureGroup`** 里，而**折叠区的文字不在辅助功能树里** —— 既让测试看不见，也让「磁盘上的真实内容」这个标题名不副实；改成直接显示内容预览（短文件给全文）后转绿；⚠️ 同时把这条 job 从 `continue-on-error` 改成**阻塞**：只会「报告失败」的测试拦不住任何回归 |
+| C38 | ✅⭐ **「没有 Mac」这条流水线端到端全绿**（含模拟器 UI 验证） | `Apps/Rune/Sources/RuneApp.swift` · `.github/workflows/ios.yml` | ⭐⭐ `kernel`（ubuntu + macos + 零依赖审计）、`ios`（包测试 + **出 .ipa**）、**`模拟器冒烟测试`** 三个 job 全绿，后者证明 **App 在真模拟器上跑通内核**（时间轴 · 哈希链通过 · 工作区显示磁盘真实内容，含 Agent 改的那一行）。⚠️ 那条断言原来失败，根因不在内核而在 UI：内容放在**默认折叠的 `DisclosureGroup`** 里，而**折叠区的文字不在辅助功能树里**；⚠️ 同时把该 job 从 `continue-on-error` 改成**阻塞**；⚠️ 诊断细节在 `.xcresult` 里（Windows 读不了）→ 主动 `print` 到 stdout（T56） |
+| C39 | ✅⭐ **macOS 环境接管 + `RuneStore` 真的跑绿了**（1040 测试） | `Packages/RuneStore/Sources/RuneStore/EventStore.swift` · `Tests/…/EventStoreTests.swift` · `docs/12` · `RuneKernel/Event.swift` | ⭐⭐ 交接文档 §5 悬着的那件事**做完了**：`RuneStore` 编译通过、**8/8 测试绿**，并当场抓出两个真 bug：① ⚠️⚠️ **事件表主键写成单列 `seq` → 开第二个会话直接 `UNIQUE constraint failed: event.seq`**。根因是**文档与内核不符**：`docs/12` 写 `seq` 全局单调、主键单列，而内核 `EventLog` 是**每会话一个实例**、序号 `events.count + 1`（**全部消费方**——`verify()` 定锚点、`EventProjector.lastSequence`、`turn.lastCheckpointSeq`——都按会话内序号读它）。**对的是内核，过时的是文档**；改法：主键改 `(session_id, seq)`、`docs/12` 与 `RuntimeEvent.sequence` 注释同步改正（⚠️ SQLite 的 `INTEGER PRIMARY KEY` 是 rowid 别名**不能加列**，必须用表级 `PRIMARY KEY (...)`）② ⚠️ **篡改检测测试是假绿**：它 `replacingOccurrences(of: "/workspace/1.md")`，而 `JSONEncoder` 默认把 `/` 转义成 `\/`（**T45**）→ 磁盘字节里一次都匹配不到 → UPDATE 改 0 行 → 链照样"通过"。改法：改一个**不含 `/`** 的字段让两件事解耦，并补两条守卫（`tampered != json`、`db.changesCount == 1`）；⚠️ 顺带把断言从"不 OK"收紧到"必须恰好是 `.tampered` 且 `firstBadSequence == 2`"（只断言"不 OK"的话判成 `brokenLink` 也过，而那是另一种损坏）。两条都做过**破坏性验证**：还原原始主键 → `chainsArePerSession` 变红；让篡改空转 → 篡改测试变红。③ ⚠️⚠️ **顺带发现两个「守门人」在迁移那一刻静默下岗**：`Tools/lint_quotes.py` 与 `Tools/check_ci.py` **只挂在 Windows 专用的 `Tools/rune.ps1` 上**（`PROJECT_STATE` 里「已接入 CI」是假的）—— 一个没人再跑的检查，与一个一直在通过的检查**看起来完全一样**（T54 的又一次应验）。引号体检本身还带一个只在「先跑过一次 iOS 构建」后才暴露的崩溃：`Apps/**/*.swift` 会匹配到 **目录** `…/checkouts/GRDB.swift`（`**` 可匹配零段）→ `IsADirectoryError`；同时它虚报「检查了 86 个文件」（实为 565，其中 479 个是 GRDB 第三方源码）。修法：`is_file()` 过滤 + 排除构建产物，**并把两个检查都挂进 `Tools/ci.sh audit`** —— CI 的审计 job 跑的就是它，本地与 CI 从此改一处两边生效 |
 
 ---
 
 ## 6. 下一步
 
-### ⭐ CI 已经通了：**Linux 与 macOS 上全绿，并且真的产出了 .ipa**（C36）
+### ⭐ macOS 环境已经接管（C39）：**秒级反馈回来了，不用再靠推 CI 猜**
 
-**仓库**：<https://github.com/Sakura-Lhy0409/rune>（公开；macOS 运行器对公开仓库免费）
-**首次 CI（2026-09-18）**：`kernel` ✅（ubuntu + macos + 零依赖审计）、`ios` ✅ —— 「App 构建与打包」**真的产出可侧载的 `Rune-unsigned.ipa`**（1.8MB，`Payload/Rune.app/{Rune,Info.plist,PkgInfo}`）。「没有 Mac 也能做出能装机的 App」**已经跑通一次**，不再是计划。
+| 事情 | 命令 |
+|---|---|
+| 构建 / 测试某个包 | `swift build --package-path Packages/RuneKernel` · `swift test --package-path …` |
+| 全部包 + 审计 | `bash Tools/ci.sh all`（或 `build`/`test`/`audit`/`ios`/`ipa`/`kernel`） |
+| 生成工程 / 构建 App / 打 ipa | `xcodegen generate`（在 `Apps/Rune`）· `bash Tools/ci.sh ios` · `bash Tools/ci.sh ipa` |
 
-**首次 CI 抓到两个真 bug 并已修掉**（VFS 快照回滚在 macOS 上根本没生效 · `ios.yml` 的 `ls` 多一个 `..`）—— 细节见 C36。⚠️ 这说明 CI 的价值**不是"跑一遍测试"，是让"从来没被跑过的路径"没法继续躲着**。
+✅ **本机已实测**：11 个包全构建通过 · `RuneKernel` 1032 绿 · `RuneStore` 8/8 绿 · **App 构建成功** · **`Rune-unsigned.ipa` 1.85MB 产出**（`Payload/Rune.app/{Rune,Info.plist,PkgInfo}`）。
+⚠️ `Tools/rune.ps1` 是 **Windows 专用**（本机 SwiftPM 子进程层坏了才存在），macOS 上**不要用**。
 
 **⚠️ 仍未验证的风险点**（不是「已完成」）：
 ① **L3 压缩**只有「该压到哪一级 + 产物格式 + 解析」，运行时那一次**付费调用**还没接；
 ② **Workflow 的 JSC 宿主不存在**（脚本 → DAG 的编译层）；
 ③ 86 个工具里**14 个已实现**（C28）；其余 72 个分三类：执行（CPython/JSC/WASM）、网络（URLSession + 出口代理）、iOS 原生（相册/日历/定位…）；
-（多工具结果的分组 → **C30**；请求真的编得出去 → **C33/C34 已用真实字节验过**；⚠️ **真实渠道**仍要各压一次。）
+④ **真实渠道一次都没联调过**（全是「真实编码 + 真实解字节 + 脚本化响应」）；
+⑤ `RuneStore` 只有事件表（**没有投影表 / 检查点表 / FTS5**）。
+（多工具结果分组 → **C30**；请求编得出去 → **C33/C34 用真实字节验过**。）
 
 `RuneKernel` 有 **41 个源文件、1032 项测试**，覆盖：值类型与协议、补丁引擎、检索、
-**渠道网关（路由 / 降级 / 重试 / 去重 / 按协议族分组历史）**、**成本账本与熔断**、**结构化压缩**、
+**渠道网关（路由/降级/重试/去重/按协议族分组历史）**、**成本账本与熔断**、**结构化压缩**、
 **出站请求构建与协议体检**、**模型调用客户端（五个策略真的生效）**、策略引擎、
 Turn 循环与崩溃恢复、波次调度、计划引擎、审批代理、目标引擎、修正性重试与协议不变式、
 上下文预算制装配、86 个工具契约、技能与渐进式披露、Workflow 批处理编排、
-**VFS（真实文件系统 + 内存两份实现）**、**自研 shell 解释器**、**沙箱层**。
+**VFS（真实 FS + 内存两份实现）**、**自研 shell 解释器**、**沙箱层**；
 **并且有一条端到端场景测试证明它们拼得起来。**
 
-**⭐ 路线 A（现在的正路）—— 见 [`docs/16`](docs/16-无Mac开发与验证路径.md)**
+**⭐ 交接文档**：[`docs/17`](docs/17-交接文档（macOS）.md) 的 §4 是完整工作清单、§5 是交接时的未完成态（**已解决，见 C39**）、§6 是会咬人的坑。
+**仓库**：<https://github.com/Sakura-Lhy0409/rune>（公开；macOS 运行器对公开仓库免费）。
+⚠️ **本机这个 `gh` 登录的是 `Gu3hi` 且对该仓库只有 `pull` 权限** → **本机推不了代码**；要跑 CI 得先换成有写权限的账号（或仍由原来的 Windows 侧推）。
 
-> **用户没有 macOS 机器**，而这件事**已经有解且已经跑通**：GH Actions 的 **macOS 运行器负责编译测试并产出 .ipa**，
-> Windows 上的 **Sideloadly 负责签名装机**。唯一真正做不到的是**交互式**调试（断点 / Instruments / 手动点模拟器）
-> → 工作方式就是「写测试 → 推 CI → 看报告」。
-> ⚠️ 免费 Apple ID 签名只有 **7 天**（$99/年去掉限制并开 TestFlight）。
-> `gh` 已登录（账号 `Sakura-Lhy0409`，含 `repo` + `workflow` scope），**推代码 = 跑 CI**，不需要再问。
-
-**路线 A 的实现顺序**：`RuneStore`（把它编译测绿，见 docs/17 §5）（GRDB + 事件落盘）→ `RuneNet`（URLSession + SSE + 出口代理）→ `RuneBench`（VFS 落地 + bookmark + CPython 垫片）→ `RuneTools`（86 个工具）→ `RuneCore`（接真实 IO）→ `RuneUI`（docs/08 那套交互）。**每层都要带测试**，因为验证只能走 CI。
+**实现顺序**：~~`RuneStore` 编译测绿~~（✅ C39）→ **`RuneNet`（URLSession 版 `ModelTransport` + SSE + 出口代理）** ← 下一步 → `RuneBench`（VFS 落地 + bookmark + CPython 垫片）→ `RuneTools`（其余 72 个工具）→ `RuneCore`（接真实 IO，替掉 `ScriptedModel`）→ `RuneUI`（docs/08 那套交互）。**每层都要带测试。**
 
 ## 7. 已知陷阱（不要重复踩）
 
@@ -185,6 +188,8 @@ Turn 循环与崩溃恢复、波次调度、计划引擎、审批代理、目标
 | E4/E5 | **本机跑测试 exe 的两个坑** | 报 `0xC0000135`（静默退出 = STATUS_DLL_NOT_FOUND）／`Testing.__swiftPMEntryPoint` **两个重载**报 ambiguous | PATH 必须含 **Swift Runtimes\6.3.3\usr\bin** 与 **Testing-6.3.3\usr\bin64**（是 `bin64`，不是 `x86_64`）；入口要显式类型标注 `let code: CInt = await ...` |
 | E7 | `data as [UInt8]` 在跨平台下不可靠 | `cannot convert value of type 'Data' to type '[UInt8]'` | 用 `data.withUnsafeBytes { update($0) }` |
 | E8 | 内联管道看编译输出会**超时**（`pwsh ... \| Select-String` 120s 无输出） | 命令超时、exit 1，但实际在编译 | 改成 `\| Out-File $env:TEMP\x.log` 再读，或 `run_in_background: true` |
+
+> ⚠️ **E1–E8 全部是 Windows 时期的坑，在 macOS 上不复现**（保留是为了以后有人在 Windows 上接手时不必重新踩）。C39 另记两条 macOS 环境坑，见 7.2 的 **T57 / T58**。
 
 ### 7.2 项目本身的陷阱（来自设计文档核实）
 
@@ -242,6 +247,10 @@ Turn 循环与崩溃恢复、波次调度、计划引擎、审批代理、目标
 | **T54** | ⚠️⚠️ **一个完整的子系统可以只以「声明 + 测试」的形式存在**：913 行、几十项测试、注释齐全、每条规则都「验证过」—— 而 `GatewayRouter.route` / `RetryPolicy.decide` / `Degradation.plan` / `HealthTracker.record*` 在 `Sources/` 里**零调用点**。这类缺陷的可怕之处在于**测试全绿反而加强了错觉**：测试在测模块自己的行为，从没测过「它被调用」 | ① 每个模块要有**唯一执行入口**，规则表/策略只能从那里经过（`ModelClient` 之于网关）；② 定期做一次**调用点普查**：对每个公开入口 grep 一次「它在本文件之外出现过吗」——本次就是靠这一招一次性挖出五个（路由/重试/降级/健康/去重）；③ 端到端测试必须断言**可观测的行为变化**（发了几枪、打到哪个 URL、健康是否被摘掉），而不只是「结果对」。⚠️ 与 T48/T49 同源，本项目已经栽过三次 —— **新增任何一层「能力」时先问：谁调它？** |
 | **T55** | ⚠️ **平台差异最会藏的地方是「同一个目录的两种写法」**：macOS 上 `/var/…` 与 `/private/var/…` 指同一个目录（临时目录真实位置在 `/private/var` 下），于是任何「用字符串切前缀算相对路径」的代码在 macOS 上会切出垃圾，而在 Linux/Windows 上**一路正常** | 相对路径**交给文件系统给**（`subpathsOfDirectory`），不要自己切字符串。⚠️ 更狠的是：**`try?` 会把这类错误变成静默的成功** —— 一个「看起来回滚了、其实一个字没变」的回滚比直接报错危险得多。判据：凡是「失败也没关系」的地方都要问一句「失败了用户会以为发生了什么」 |
 | **T56** | ⚠️ **UI 测试的失败细节默认是「读不到」的**：`xcodebuild test` 把断言消息、界面层级、截图都塞进 `.xcresult` bundle，而那个格式在 **Windows 上读不了** —— 没有 Mac 的开发路径下，等于每次失败都只能猜 | **主动把要诊断的东西 `print` 到 stdout**（CI 日志能读）：界面上有哪些文字、哪些按钮、导航栏标识符。本次就是靠这个一眼看出「面板只列文件名、不显示内容」。⚠️ 与「断言失败信息必须带实际值」同源：**可观测性要在写代码时就设计进去** |
+| **T57** | ⚠️ **从 Windows 拷过来的源码目录没有 `.git`，且 git 会把「权限位差异」报成「594 个文件被修改」**：① 目录是打包拷来的 → `git status` 直接 `not a git repository`，**续接机制依赖的提交历史一夜之间没了**；② 补上 `.git` 之后，Windows 打包丢掉了可执行位，而 APFS 上 `core.filemode=true` → 594 个文件全被报成 `100644 → 100755`（内容一个字没变）。**此时任何 `git checkout .` / `git stash` 都会把工作区改动一起抹掉** | ① 缺历史就 `git clone` 一份，比对 `diff -rq`（排除 `.git`/`.build`）确认内容一致后把 `.git` 拷进工作目录 —— **先比对再拷**；② 用 `git diff --stat` 分辨「内容变了」还是「只有 mode 变了」（后者是 `0 insertions(+), 0 deletions(-)`）：纯权限位差异用 `git config core.fileMode false` 修，**不要**用 checkout 修。⚠️ 判据：`git status` 说全改了、而 `diff -rq` 说没差别 —— **先查 `.gitattributes`/`core.autocrlf`/`fileMode`，别急着 checkout**（本项目补丁引擎的换行保真测试依赖 LF，误 checkout 会静默毁掉那组夹具） |
+| **T58** | ⚠️ **`swift build` 卡在 `Fetching <依赖>` 上十几分钟、0 字节进展，看起来像"环境坏了"**：`swift build` 首次解析 GRDB 时会做 `git clone --mirror`（要拉**全部**历史，比 `--depth 1` 重得多），在国内网络下可能**长时间无输出**。⚠️ 误判成"卡死"而杀掉它，就会进入"每次都从头重来"的循环 | ① 先验证网络本身没问题：`git clone --depth 1 <同一个 URL>` 能成就说明**不是网**；② 看真实进度 **不要看 stdout**（SwiftPM 只打印一行 `Fetching …` 就不动了），去看缓存目录大小：`du -sh ~/Library/Caches/org.swift.swiftpm/repositories/<pkg>-*` —— 它在涨就是在下载（本次观察到 50M → 229M 后完成）；③ 只有**确认真的不涨**才杀掉重来。⚠️ 通用教训：**"没有输出"不等于"没有进展"**，给长任务找一个可观测的进度指标（文件大小/进程 IO）再决定要不要杀 |
+| **T59** | ⚠️ **守门人自己被构建产物绊倒，而且方式是「崩溃」不是「误报」**：`Tools/lint_quotes.py` 用 `Apps/**/*.swift` 找文件，而 **`**` 可以匹配零个路径段** —— 于是它匹配到 `Apps/Rune/build/SourcePackages/checkouts/GRDB.swift` 这个**目录**（依赖 checkout 目录恰好以 `.swift` 结尾），传给 `read_text()` 直接 `IsADirectoryError` 崩。⚠️ **触发条件是「先跑过一次 iOS 构建」**，所以它在一台从没构建过的机器上**永远是绿的** —— 这类"只在特定顺序下才暴露"的缺陷，跑一次测试是发现不了的 | ① glob 的结果一律先 `is_file()` 过滤（**"匹配到了"不等于"是个文件"**）；② 同时排除构建产物（`.build/`、`Apps/Rune/build/`）—— 否则"检查了 N 个文件"会从 **86** 变成 **565**，其中 479 个是 GRDB 第三方源码：**数字变成谎话比崩溃更隐蔽**（你会以为它一直在替你看着那些文件）；③ 通用教训：**一个检查工具的可信度，取决于它检查的东西是不是它声称的那些** —— CI 里每个守门脚本都该问一句「你现在到底在看什么？」。⚠️ 与 T48/T49/T54 同源：**"看起来在守"与"真的在守"是两件事** |
+| **T60** | ⚠️ **`.gitignore` 不支持行尾注释，而写成行尾注释时它不报错、只是永远匹配不到**：`Apps/Rune/Info.plist          # 由 project.yml 的 info: 段生成` —— 整行（含 `#` 与后面的中文）都被当成模式，那条规则**形同虚设**，而它看上去"已经写了"。后果：XcodeGen 生成的 `Info.plist` 会被 `git add .` 悄悄收进仓库（生成物入库 → 下次生成冲突） | 注释**独占一行**（`.gitattributes` 同理）。⚠️ 判据不是"把 .gitignore 读一遍"，而是**实测**：`git check-ignore -v <路径>` **打出匹配到的行号**才算真的生效 —— C39 就是靠它发现这条规则一直没生效 |
 
 ---
 
@@ -263,34 +272,25 @@ Turn 循环与崩溃恢复、波次调度、计划引擎、审批代理、目标
 ## 9. 文件地图
 
 ```
-D:\项目\ios平台agent\          （构建时请用 C:\Users\MSI-NB\rune-ws）
+/Users/chuzu/Desktop/rune-src/
 ├─ PROJECT_STATE.md          ⭐ 本文件（最先读）
 ├─ README.md                 设计文档入口
 ├─ .github/workflows/        ⭐ kernel.yml（Linux+macOS）/ ios.yml（Mac 构建 + 出未签名 ipa）
 ├─ Apps/Rune/                iOS App（XcodeGen project.yml + SwiftUI 源码 + UI 冒烟测试）
-├─ Tools/  rune.ps1(本机唯一入口) · ci.sh(与 CI 同一套检查) · check_ci.py · lint_quotes.py · check_docs.py
+├─ Tools/  ci.sh(本机唯一入口) · check_ci.py · lint_quotes.py · check_docs.py · rune.ps1(Windows 专用，勿用)
 ├─ docs/
 │  ├─ 进度日志.md            ⭐ 追加式时间线（细节都在这）
 │  ├─ 17-交接文档（macOS）.md  ⭐ **迁移到 macOS 时先读它**（命令行、未完成态、坑、检查单）
 │  └─ 01 … 16 + 附录A/B      设计文档（01 产品定位 … 16 无 Mac 路径）/ 渠道事实表 / 技术选型核实表
 ├─ research/                 取证材料（465 份，非交付物，**刻意入库**）
 └─ Packages/
-   ├─ RuneKernel/            ✅ 零依赖核心（41 源文件 / 1032 测试全绿；Sources 41 个 .swift、Tests 31 个）
-   └─ Rune{Net,Store,VM,Bench,Gateway,Context,Core,Tools,MCP,UI}/   ⬜ 骨架（含实现清单）
+   ├─ RuneKernel/   ✅ 零依赖核心（41 源文件 / 1032 测试全绿；Tests 31 个）
+   ├─ RuneStore/    🔨 GRDB 依赖（唯一非零依赖包）· event 表落盘，第一片 8 测试绿（C39）
+   └─ Rune{Net,VM,Bench,Gateway,Context,Core,Tools,MCP,UI}/   ⬜ 骨架（含实现清单）
 ```
 
-**`RuneKernel` 源文件一览**（40 个 .swift）：
-| 分组 | 文件 |
-|---|---|
-| 值类型与安全 | `JSONValue` `SHA256` `Trust` `Content` `Tool` `Capability` `Errors` |
-| 编辑与检索 | `TextPatch` `GlobMatcher` `IgnoreRules` `GrepEngine` |
-| 文件系统与执行 | `VFS` `Shell` `Sandbox` `ToolHandlers` |
-| 协议与组装 | `ChatRequest` `StreamParsing` `ProtocolEncoders` `ProtocolDecoders` `ToolCallAssembler` `ProviderQuirks` `HistoryGrouping` `RequestBuilder` |
-| 渠道网关 | `Gateway`（渠道配置 / 路由 / 降级 / 重试 / 去重）`ModelClient`（**唯一的执行入口**：路由 → 编码 → 发送 → 解码 → 重试 → 降级 → 记账） |
-| 运行时 | `TurnRunner` `ToolScheduler` `PolicyEngine` `Plan` `Event` `Correction` `Context` `Compaction` `ToolRegistry` `EventLog` |
-| 编排 | `PlanEngine` `ApprovalBroker` `GoalEngine` `Skill` `SkillLibrary` `Workflow` |
+**文件清单不用背**：`ls Packages/RuneKernel/Sources/RuneKernel/` 一秒就有；本文件只保留「做过什么」与「别踩什么」。
 
-**测试文件**（31 个 / 1032 项）：`JSONAndHashing` `Security` `RuntimeModel` `Patch` `Search` `Gateway` `GatewayRouter` `Policy` `TurnRunner` `ToolScheduler` `Protocol` `HistoryGrouping` `Planning` `GoalEngine` `Correction` `Context` `ToolRegistry` `Skill` `Workflow` `VFS` `Shell` `Sandbox` `EventLog` `Scenario` `ToolHandlers` `CostLedger` `Compaction` `RequestBuilder` `WireLevel` `ModelClient`
 ## 10. 里程碑验收标准（摘录自 [14](docs/14-工程路线图与测试策略.md)）
 
 | 里程碑 | 出口标准 |

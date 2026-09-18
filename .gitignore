@@ -17,7 +17,11 @@ TestRunner.swift
 #    理由：project.pbxproj 是没法人工解冲突的格式；两个人各加一个文件，
 #    合并时会变成一段谁也不敢改的乱码。真相源是 `Apps/Rune/project.yml`。
 Apps/Rune/Rune.xcodeproj/
-Apps/Rune/Info.plist          # 由 project.yml 的 info: 段生成
+# ⚠️ 注释必须**独占一行**：gitignore 不支持行尾注释，写成
+#    `Apps/Rune/Info.plist   # 由 project.yml 生成` 的话，整行（含 `#` 与后面的字）都是模式，
+#    于是它**永远匹配不到任何文件** —— 生成物照旧会被 `git add .` 收进仓库，
+#    而规则看上去"已经写了"。C39 实测 `git check-ignore` 才发现的。
+Apps/Rune/Info.plist
 Apps/Rune/build/
 Apps/Rune/ipa/
 Apps/Rune/*.ipa
