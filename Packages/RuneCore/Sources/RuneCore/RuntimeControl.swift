@@ -140,8 +140,13 @@ struct ReviewedToolExecutor: ToolExecuting {
 struct RuntimeToolExecutor: ToolExecuting {
     let local: LocalToolExecutor
     let documents: DocumentToolExecutor
+    let git: GitToolExecutor
     func execute(_ call: ToolCall) throws -> ToolResult {
+        // ⚠️ 路由顺序无所谓（三组名字不相交），但**必须都在这里**：
+        //    漏掉一组的话，那些工具会退到 `local` 去执行，而 `local` 不认识它们
+        //    —— 表现是模型收到"未知工具"，然后它换个名字再试一遍（T54 那类"没接上"）。
         if DocumentToolExecutor.names.contains(call.name) { return try documents.execute(call) }
+        if GitToolExecutor.names.contains(call.name) { return try git.execute(call) }
         return try local.execute(call)
     }
 }

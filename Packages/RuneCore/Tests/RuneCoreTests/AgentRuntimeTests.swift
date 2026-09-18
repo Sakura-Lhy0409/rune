@@ -264,3 +264,73 @@ struct RuntimeHTTPIntegrationTests {
         #expect(!encoded.contains("fixture-only"))
     }
 }
+
+// MARK: - Git 工具接线（C54）
+//
+// ⚠️ 这条测试存在的唯一理由：**"模块全绿"不等于"它被调用了"**。
+//    项目在这上面栽过四次（T48/T49/T54/T59 —— 规则表、安全闸门、整个网关子系统、
+//    守门脚本，全都是"写好了、测过了、没人调"）。
+//    所以这里不走 `GitToolExecutor` 单测，而是**从 AgentRuntime 真的执行一次工具调用**，
+//    断言模型拿到的那段文本里有 git_status 的结果。
+
+@Suite("Git 工具接线 —— 从 AgentRuntime 真的调用")
+struct GitToolWiringTests {
+
+    @Test("⭐⭐ 模型调 git_status：真的执行自研 Git 引擎，而不是报「未知工具」")
+    func gitStatusIsReachableFromRuntime() async throws {
+        let f = try Fixture()
+        defer { f.remove() }
+        // 把工作区变成一个真实 git 仓库（用 git 命令行不方便，直接手搓最小结构：
+        // 只建 .git 目录，`git_status` 在"没有 HEAD、没有 index"的空仓库上也应当工作）
+        let gitDir = f.directory.appendingPathComponent(".git")
+        try FileManager.default.createDirectory(at: gitDir.appendingPathComponent("refs/heads"),
+                                                withIntermediateDirectories: true)
+        try "ref: refs/heads/main\n".write(to: gitDir.appendingPathComponent("HEAD"),
+                                           atomically: true, encoding: .utf8)
+
+        let transport = FixtureTransport([
+            call(ToolName.gitStatus, .object([:])),
+            text("done"),
+        ])
+        let runtime = try AgentRuntime(configuration: f.config, objective: "看看工作区状态",
+                                       store: f.store, transport: transport)
+        let result = try await finish(runtime.run())
+
+        let events = try f.store.loadAll(sessionID: f.config.sessionID)
+        let completed = events.filter { $0.kind == .toolCallFinished }
+        #expect(completed.count == 1, "git_status 必须真的被执行一次，实际完成 \(completed.count) 次")
+        // ⚠️ 关键断言：**不能是"未知工具"**。工具没接上时模型收到的正是那个错误，
+        //    而它看起来像"模型用错了工具"，很容易被误判成模型的问题。
+        let payload = String(decoding: try JSONEncoder().encode(events.map(\.payload)), as: UTF8.self)
+        #expect(!payload.contains("未知工具") && !payload.contains("没有名为"),
+                "git_status 没有被接上（模型收到「未知工具」）")
+        #expect(result.state.status == .completed)
+    }
+
+    @Test("⚠️ 模型不能借 git 工具读 .git 里的内容（凭据防线不能被绕开）")
+    func gitToolsCannotReachIntoDotGit() async throws {
+        let f = try Fixture()
+        defer { f.remove() }
+        let gitDir = f.directory.appendingPathComponent(".git")
+        try FileManager.default.createDirectory(at: gitDir.appendingPathComponent("refs/heads"),
+                                                withIntermediateDirectories: true)
+        try "ref: refs/heads/main\n".write(to: gitDir.appendingPathComponent("HEAD"),
+                                           atomically: true, encoding: .utf8)
+        // 放一个"凭据"在 .git 里：如果解析器漏了拦截，它就会变成 git 仓库根
+        try "secret-token\n".write(to: gitDir.appendingPathComponent("config"),
+                                   atomically: true, encoding: .utf8)
+
+        let transport = FixtureTransport([
+            call(ToolName.gitStatus, .object(["path": .string(".git")])),
+            text("done"),
+        ])
+        let runtime = try AgentRuntime(configuration: f.config, objective: "试图进 .git",
+                                       store: f.store, transport: transport)
+        _ = try await finish(runtime.run())
+
+        let events = try f.store.loadAll(sessionID: f.config.sessionID)
+        let payload = String(decoding: try JSONEncoder().encode(events.map(\.payload)), as: UTF8.self)
+        // 要么被解析器拒（拿不到路径），要么被当成"不是仓库"——但绝不能真的把 .git 当仓库读
+        #expect(!payload.contains("secret-token"), "凭据内容绝不能出现在事件里")
+    }
+}

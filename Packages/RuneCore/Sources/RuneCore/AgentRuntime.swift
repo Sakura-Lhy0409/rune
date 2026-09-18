@@ -9,7 +9,12 @@ import RuneTools
 public final class AgentRuntime: @unchecked Sendable {
     public static let toolNames = [ToolName.listDir, ToolName.readFile, ToolName.readArtifact, ToolName.writeFile,
         ToolName.editFile, ToolName.applyPatch, ToolName.deletePath, ToolName.movePath, ToolName.copyPath,
-        ToolName.statPath, ToolName.makeDir, ToolName.glob, ToolName.grepSearch, ToolName.outlineFile, ToolName.hashFile] + DocumentToolExecutor.names
+        ToolName.statPath, ToolName.makeDir, ToolName.glob, ToolName.grepSearch, ToolName.outlineFile, ToolName.hashFile]
+        + DocumentToolExecutor.names
+        // Git 只读工具（C54）：iOS 上没有系统 git，这一层是自研 Git 引擎的出口。
+        // ⚠️ 只接了**只读**四个；git_add/git_commit 等写操作的风险级是 modifying/dangerous，
+        //    需要单独的审批语义，不在这一片（别顺手加进来）。
+        + Array(GitToolExecutor.names).sorted()
     private let queue = DispatchQueue(label: "RuneCore.runtime", qos: .userInitiated)
     private let lock = NSLock()
     private var active: RuntimeControl?
@@ -36,8 +41,12 @@ public final class AgentRuntime: @unchecked Sendable {
         }
         let artifacts = try DiskArtifactStore(directory: configuration.artifactsURL)
         let workspace = vfs
+        // ⚠️ Git 工具需要**真实文件系统路径**（`.git` 在磁盘上），而 `workspace` 是
+        //    `FileManagerVFS`（真实目录）—— 所以这里能给出解析器。
+        //    将来若换成内存工作区，Git 工具会如实报告"不可用"，而不是给出错答案。
         executor = RuntimeToolExecutor(local: LocalToolExecutor(vfs: workspace, registry: tools, artifacts: artifacts),
-            documents: DocumentToolExecutor(read: { try workspace.readData($0, maxBytes: $1) }, artifacts: artifacts))
+            documents: DocumentToolExecutor(read: { try workspace.readData($0, maxBytes: $1) }, artifacts: artifacts),
+            git: GitToolExecutor(resolver: GitWorkspaceResolver(base: workspace.base)))
         if let saved = try store.loadRuntime(sessionID: configuration.sessionID) {
             state = saved.state; state.wasRestored = !saved.state.status.isTerminal
             metadata = try JSONDecoder().decode(RuntimeMetadata.self, from: saved.metadata)

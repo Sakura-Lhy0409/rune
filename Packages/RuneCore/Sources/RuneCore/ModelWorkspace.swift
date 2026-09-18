@@ -41,3 +41,29 @@ struct ModelWorkspace: VFS {
     func snapshot(label: String, now: Date) throws -> VFSSnapshot { throw RuntimeFailure("模型不能直接创建全目录快照。") }
     func restore(_ snapshot: VFSSnapshot) throws { throw RuntimeFailure("恢复快照需要运行时与用户共同确认。") }
 }
+
+/// Git 工具的路径解析器。
+///
+/// ⚠️ 它**刻意不复用 `ModelWorkspace` 的 `permitted`**，而是只做一件事：
+///    把**工作区内的目录**映射到磁盘 URL，好让自研 Git 引擎去读 `.git`。
+///
+/// ⚠️ 为什么这道门不能照搬：`ModelWorkspace` 明确禁止模型触碰 `.git`
+///    （"凭据与受管目录不可读"），而 Git 工具**就是要读 `.git`**。
+///    两条规则看起来冲突，实际上不冲突 —— 因为**模型的入口不同**：
+///      * 文件工具（read_file/grep）拿到的是模型给的任意路径 → 必须挡住 `.git`
+///      * Git 工具拿到的是**仓库根**，它自己去读 `.git` → 那是它唯一的工作方式
+///    所以这里仍然显式拒绝任何**指向 `.git` / `.rune` / `.ssh` 的路径**：
+///    模型不能通过 `git_status(path: ".git/config")` 把凭据读出来。
+struct GitWorkspaceResolver: GitWorkspaceResolving {
+    let base: FileManagerVFS
+    private static let forbidden = [".git", ".rune", ".ssh"]
+    func fileSystemURL(for path: VFSPath) -> URL? {
+        guard path.mount == .workspace else { return nil }
+        // 反向路径（`..`）一律拒 —— 放过去等于让模型用相对路径逃出工作区（T24/T25）
+        guard !path.components.contains("..") else { return nil }
+        // ⚠️ 只拒绝**最后一段**是受管名（那才是"进到 .git 里面去"）；
+        //    中间段出现同样要拒，避免 `foo/.git/config` 这种绕法。
+        guard !path.components.contains(where: { Self.forbidden.contains($0.lowercased()) }) else { return nil }
+        return base.fileSystemURL(for: path)
+    }
+}
