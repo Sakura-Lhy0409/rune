@@ -1125,24 +1125,32 @@ public final class FileManagerVFS: VFS, @unchecked Sendable {
     public func snapshot(label: String, now: Date) throws -> VFSSnapshot {
         let id = "snap-\(Int(now.timeIntervalSince1970))"
         let directory = baseURL.appendingPathComponent(".rune/snapshots/\(id)", isDirectory: true)
-        try? fileManager.createDirectory(at: directory, withIntermediateDirectories: true)
+        try fileManager.createDirectory(at: directory, withIntermediateDirectories: true)
 
         var count = 0
-        if let enumerator = fileManager.enumerator(at: baseURL, includingPropertiesForKeys: [.isDirectoryKey]) {
-            for case let item as URL in enumerator {
-                let relative = vfsPath(for: item).components
-                if Set(relative).contains(".rune") { continue }
-                let destination = directory.appendingPathComponent(relative.joined(separator: "/"))
-                var isDirectory: ObjCBool = false
-                _ = fileManager.fileExists(atPath: item.path, isDirectory: &isDirectory)
-                if isDirectory.boolValue {
-                    try? fileManager.createDirectory(at: destination, withIntermediateDirectories: true)
-                } else {
-                    try? fileManager.createDirectory(at: destination.deletingLastPathComponent(),
-                                                     withIntermediateDirectories: true)
-                    try? fileManager.copyItem(at: item, to: destination)
-                    count += 1
-                }
+        // ⚠️ **相对路径必须由文件系统自己给，不要去切字符串。**
+        //
+        //    这里原来是 `item.path.dropFirst(directory.path.count)` —— 两个路径**各自推导**，
+        //    只要其中一侧的写法与另一侧不同，切出来的就是垃圾。
+        //    而 macOS 上恰好就有这种"同一个目录的两种写法"：`/var/...` 与 `/private/var/...`
+        //    （临时目录的真实位置在 `/private/var` 下）。CI 在 macOS 上抓到的就是这个：
+        //    切错之后文件被复制到了**别的地方**，而 `try?` 让整件事**完全静默**。
+        //    `subpathsOfDirectory` 直接返回相对路径，从根上消除这类错。
+        for relative in try fileManager.subpathsOfDirectory(atPath: baseURL.path) {
+            // 快照自己不能被装进快照里
+            if relative == ".rune" || relative.hasPrefix(".rune/") { continue }
+            let source = baseURL.appendingPathComponent(relative)
+            let destination = directory.appendingPathComponent(relative)
+            var isDirectory: ObjCBool = false
+            guard fileManager.fileExists(atPath: source.path, isDirectory: &isDirectory) else { continue }
+            if isDirectory.boolValue {
+                try fileManager.createDirectory(at: destination, withIntermediateDirectories: true)
+            } else {
+                try fileManager.createDirectory(at: destination.deletingLastPathComponent(),
+                                                withIntermediateDirectories: true)
+                try? fileManager.removeItem(at: destination)
+                try fileManager.copyItem(at: source, to: destination)
+                count += 1
             }
         }
         return VFSSnapshot(id: id, label: label, createdAt: now,
@@ -1157,22 +1165,23 @@ public final class FileManagerVFS: VFS, @unchecked Sendable {
         guard fileManager.fileExists(atPath: directory.path) else {
             throw VFSFailure(kind: .notFound, detail: "快照内容已不存在：\(snapshot.id)")
         }
-        guard let enumerator = fileManager.enumerator(at: directory, includingPropertiesForKeys: [.isDirectoryKey]) else {
-            throw VFSFailure(kind: .ioError, detail: "无法遍历快照 \(snapshot.id)")
-        }
-        for case let item as URL in enumerator {
-            let relative = item.path.dropFirst(directory.path.count).trimmingCharacters(in: CharacterSet(charactersIn: "/"))
-            guard !relative.isEmpty else { continue }
+
+        // ⚠️ **回滚不许静默失败。**
+        //    一个"看起来成功了、其实一个字都没回滚"的回滚，比一个直接报错的回滚危险得多 ——
+        //    用户会以为工作区已经安全了，然后继续在上面干活。
+        //    所以这里一律 `try`（原来全是 `try?`，正是它把上面那个路径 bug 掩盖了）。
+        for relative in try fileManager.subpathsOfDirectory(atPath: directory.path) {
+            let source = directory.appendingPathComponent(relative)
             let destination = baseURL.appendingPathComponent(relative)
             var isDirectory: ObjCBool = false
-            _ = fileManager.fileExists(atPath: item.path, isDirectory: &isDirectory)
+            guard fileManager.fileExists(atPath: source.path, isDirectory: &isDirectory) else { continue }
             if isDirectory.boolValue {
-                try? fileManager.createDirectory(at: destination, withIntermediateDirectories: true)
+                try fileManager.createDirectory(at: destination, withIntermediateDirectories: true)
             } else {
-                try? fileManager.createDirectory(at: destination.deletingLastPathComponent(),
-                                                 withIntermediateDirectories: true)
+                try fileManager.createDirectory(at: destination.deletingLastPathComponent(),
+                                                withIntermediateDirectories: true)
                 try? fileManager.removeItem(at: destination)
-                try? fileManager.copyItem(at: item, to: destination)
+                try fileManager.copyItem(at: source, to: destination)
             }
         }
     }
