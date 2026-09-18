@@ -111,6 +111,12 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: dev.rune.agent.uitests
         TEST_TARGET_NAME: Rune
+        # ⚠️ **测试 target 也要有 Info.plist。**
+        #    原来只有 App target 写了 `info:` 段，于是 CI 在构建测试 bundle 时报
+        #    `Cannot code sign because the target does not have an Info.plist file`
+        #    —— 模拟器冒烟测试第一次跑就撞在这上面。
+        #    测试 bundle 没有任何自定义键，交给 Xcode 自动生成即可（报错信息里的推荐做法）。
+        GENERATE_INFOPLIST_FILE: YES
 
 schemes:
   Rune:
