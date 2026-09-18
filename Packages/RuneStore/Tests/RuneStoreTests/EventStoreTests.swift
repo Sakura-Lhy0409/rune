@@ -44,7 +44,7 @@ struct EventStoreRoundTripTests {
 
         let loaded = try store.loadAll(sessionID: sessionA)
         #expect(loaded.count == 2)
-        #expect(loaded[0].kind == .turnStarted)
+        #expect(loaded[0].kind == .userMessage)
         #expect(loaded[0].payload.value(at: ["objective"]) == .string("修退款 bug"))
         #expect(loaded[0].originTrust == .userInstruction)
         #expect(loaded[0].turnID == turn)
