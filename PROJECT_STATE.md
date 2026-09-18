@@ -21,10 +21,10 @@
 
 | 项 | 值 |
 |---|---|
-| **更新日期** | 2026-09-18（C54 Git 只读工具接通） |
-| **当前阶段** | ▶️ **真实模型端到端跑通（C46）+ Git 引擎从零做到「模型可用」（C47–C54）** —— **1208 包测试全绿**。整项目未完工 |
+| **更新日期** | 2026-09-18（C55 JS 执行宿主） |
+| **当前阶段** | ▶️ **真实模型端到端跑通（C46）+ Git 引擎（C47–C54）+ JS 执行宿主（C55）** —— **1220 包测试全绿**。整项目未完工 |
 | **当前里程碑** | ✅ **M0 出口标准·云端版（C46）** —— 真实模型（`gpt-5.5`）自主完成「读 → 改 → 复读确认」，途中经审批门与崩溃恢复校验。⚠️ 此前「C45 云推理被账户拒绝」是**选题错误造成的假结论** |
-| **已完成里程碑** | ✅ M0 全部（…→**258**）→ ✅ M1-1…M1-15（→877）→ ✅ M1-16…M1-23（→1032）→ ✅ **M1-24 模拟器冒烟** → ✅ **M1-25 交接 macOS** → ✅ **M1-26 RuneStore 跑绿（C39）** → ✅ **M1-27 RuneNet（C41）** → ✅ **M2-2 真实运行时接线（C45）** → ✅ **M0 云端出口验收（C46）** → ✅ **M3-1 Git 引擎（C47–C53 引擎 4/4 + C54 四个只读工具接通模型）** |
+| **已完成里程碑** | ✅ M0 全部（…→**258**）→ ✅ M1-1…M1-15（→877）→ ✅ M1-16…M1-23（→1032）→ ✅ **M1-24 模拟器冒烟** → ✅ **M1-25 交接 macOS** → ✅ **M1-26 RuneStore 跑绿（C39）** → ✅ **M1-27 RuneNet（C41）** → ✅ **M2-2 真实运行时接线（C45）** → ✅ **M0 云端出口验收（C46）** → ✅ **M3-1 Git 引擎（C47–C54）** → 🔨 **M3-2 执行宿主（C55 JS 已落地；WASM/CPython 待做）** |
 | **阻塞项** | **云推理阻塞已解除（C46）**。仍缺：真机签名 + iOS 27 SDK、执行宿主（CPython/WASM/JSC）、Git 引擎、MCP、记忆检索/L3 压缩 —— 见 [docs/19 §5](docs/19-真实运行时与验收.md#5-距离整个项目完成的剩余项) |
 | **本机可验证范围** | ✅ **全部 11 个包**（含 GRDB / RuneStore）＋ **iOS App 构建与 .ipa 打包**（xcodebuild + xcodegen 已装）<br>✅ 可以交互式调试了（断点 / 模拟器 / Instruments）<br>❌ 真机签名装机仍需 Apple ID（免费 7 天） |
 
@@ -47,7 +47,7 @@ M4 端侧+记忆 / M5 上架准备   ░░░░░░░░░░░░░░�
 
 ### 包结构现状
 
-**包结构**：Kernel **1140** / Net **24** / Store **14** / Core **17** / Tools **7** / UI **6** 测试，共 **1208**。Core 已有真实运行时，Tools 有 PDF/OCR/CSV，Store schema v2 含原子检查点；其余 5 包仍是骨架。11 包可构建。
+**包结构**：Kernel **1140** / Net **24** / Store **14** / Core **17** / **Bench 12** / Tools **7** / UI **6** 测试，共 **1220**。Core 有真实运行时、Tools 有 PDF/OCR/CSV、Bench 有 JS 宿主、Store schema v2 含原子检查点；其余 4 包（Context/Gateway/MCP/VM）仍是骨架。11 包可构建。
 ---
 
 ## 3. 环境事实（本机 = **macOS**，C39 起）
@@ -147,12 +147,12 @@ M4 端侧+记忆 / M5 上架准备   ░░░░░░░░░░░░░░�
 | C51 | ✅ **Git 引擎 4/4：packfile + delta 解析** | `Packfile.swift` · `PackfileTests` | ⚠️ **不能跳的一片**：`git clone` 下来的对象**几乎全在** `.pack` 里，只支持松散对象的话 `git_log` 在真实仓库上直接报「对象不存在」。实现 `.idx` v2（fanout + 有序 SHA + 偏移 + 大偏移表）、变长对象头、`ofs-delta`（负偏移 MBZ）/`ref-delta`、delta 指令流，**按需读取**（绝不把整个 pack 解进内存，T38）。⚠️ 四处「错一字节就全错」：① `ofs-delta` 变长负偏移**每步 +1**（破坏性验证：去掉 → 4 条测试红，报「不是合法 zlib 流」）② **delta 类型继承基对象**（delta 只描述「怎么改字节」；写死成 blob → delta 化的 tree 变 blob，被「哈希==ID」断言抓到）③ 拷贝 size 全 0 表示 **65536** ④ delta 链**必须有深度上限**（循环链会打爆栈）。最硬的断言：**全部 23 个对象**还原后重算 `SHA1("<type> <len>\0"+正文)` 必须等于索引里的 ID —— 一次覆盖 pack 头/zlib 边界/delta/类型继承整条链路 |
 | C52 | ✅ **Git 读取路径：index + 三方状态 + revision + 历史** | `GitIndex.swift` · `GitWorktree.swift` · `GitHistory.swift` · `GitStatusTests` | `git_status`/`git_diff`/`git_log`/`git_show` 的数据面。⚠️ 核心是**三方比较**（HEAD ↔ index ↔ 工作区）：「文件被改了」与「改动已暂存」是两件独立的事，**分不清模型就会重复 add 或以为已提交**（夹具刻意造成三方各不相同，逐条钉死）。⚠️ 三处「不猜」：缩写 SHA **有歧义必须拒**（取第一个只在某个仓库某天给出错误提交，最难归因）；不认识的 revision 语法明确拒绝；根提交上 `HEAD~2` 报错而不是「就是它自己」。⚠️ 抓到自己一个真 bug（**T55 变体**）：扫描工作区时对文件也调 `resolvingSymlinksInPath()`，于是 `link.md -> README.md` 的相对路径被算成 `README.md` —— 链接自己消失还覆盖了真 README，`git_status` 报 ` D link.md`。**解析软链只该用于判断「在不在仓库里」，不能用于得出「它叫什么名字」**。另：判断文件类型不能用 `url.resourceValues`（会跟随链接），要用 `attributesOfItem` |
 | C53 | ✅ **统一 diff 渲染：自研行级 LCS + hunk 折叠** | `GitDiff.swift` · `GitDiffTests` | ⚠️ 两个刻意选择：**自己算 LCS**（零依赖承诺，只需行级不需 Myers 完整优化）；**给模型统一 diff 文本**而非自定义 JSON（它见过几十亿行统一 diff，先验远强于任何自定义结构）。⚠️ 钉住四件事：① **`@@` 行号必须精确**（模型照着它定位改文件，偏一行就**静默改错地方**）—— 专门测了「两处远隔 → 两个独立 hunk，各自行号正确」② **空侧起始行号按 git 约定写 0**（新文件 `@@ -0,0`；写 1 时文本「看起来没错」但任何按 git 约定解析的工具都会算偏一行 —— 这条是我写错被测试抓出来的）③ **CRLF 必须先归一化**（Swift 把 `\r\n` 当单个字素簇，不归一化则整文件被当成一行 → diff 变整文件替换，T8）④ **大文件降级必须明说**（LCS 是 O(n·m)，3000×3000 就 36MB；静默降级比降级本身更糟）。判据只有一处实现，生产消费共用 |
-| C54 | ✅⭐ **Git 只读工具接通模型** | `GitTools.swift` · `GitToolsTests` · `RuneCore/GitWorkspaceResolver` | 引擎到**模型可见能力**的最后一段：`git_status`/`git_diff`/`git_log`/`git_show` 接进 `AgentRuntime`。⚠️ ① **只接只读四个**（写操作风险级 modifying/dangerous，要单独的审批语义，不顺手加）② **错误返回 `.failure` 结果而非抛异常**（抛出去模型看不到原因与建议，只会换个参数再试，白烧 token）③ `staged` 决定比哪两侧（搞反会让模型提交错东西）。⚠️ **`GitWorkspaceResolver` 这道门**：`ModelWorkspace` 禁止模型碰 `.git`，而 Git 工具就是要读 `.git` —— 看似冲突实则不冲突（**入口不同**：文件工具拿任意路径必须挡，Git 工具拿仓库根自己去读）。解析器仍拒绝任何含 `.git`/`.rune`/`.ssh` **段**的路径（含中间段，防 `foo/.git/config`），并有测试往 `.git/config` 放假 token 断言它绝不进事件。⚠️ 接线测试**从 AgentRuntime 真的发一次调用**，断言模型收到的不是「未知工具」—— 项目在「模块全绿但没被调用」上栽过**四次**（T48/T49/T54/T59） |
+| C54 | ✅⭐ **Git 只读工具接通模型** | `GitTools.swift` · `GitToolsTests` · `RuneCore/GitWorkspaceResolver` | 引擎到**模型可见能力**的最后一段：`git_status`/`git_diff`/`git_log`/`git_show` 接进 `AgentRuntime`。⚠️ ① **只接只读四个**（写操作风险级 modifying/dangerous，要单独的审批语义，不顺手加）② **错误返回 `.failure` 结果而非抛异常**（抛出去模型看不到原因与建议，只会换个参数再试，白烧 token）③ `staged` 决定比哪两侧（搞反会让模型提交错东西）。⚠️ **`GitWorkspaceResolver` 这道门**：`ModelWorkspace` 禁止模型碰 `.git`，而 Git 工具就是要读 `.git` —— 看似冲突实则不冲突（**入口不同**：文件工具拿任意路径必须挡，Git 工具拿仓库根自己去读）。解析器仍拒绝任何含 `.git`/`.rune`/`.ssh` **段**的路径（含中间段，防 `foo/.git/config`），并有测试往 `.git/config` 放假 token 断言它绝不进事件。⚠️ 接线测试**从 AgentRuntime 真的发一次调用**，断言模型收到的不是「未知工具」—— 项目在「模块全绿但没被调用」上栽过**四次** |
+| C55 | ✅ **JS 执行宿主（JavaScriptCore）—— 并诚实处理「杀不掉死循环」这个平台限制** | `RuneBench/JavaScriptHost.swift` · `JavaScriptHostTests` | 继 Git 之后的下一块平台能力。选 JSC 而非 CPython 的理由很实际：**JSC 是 iOS 自带的**（零包体代价），CPython 要背 1–2GB。⚠️ 放在 `RuneBench` 而非 `RuneKernel`：零依赖审计**禁止**内核 import `JavaScriptCore`（内核要能在 ubuntu 构建）。⚠️⚠️ **本层最需要说清的是它做不到什么**：设计文档写着"资源限额与强杀"，但 **JSC 没有公开的中断 API**（`JSContextGroupSetExecutionTimeLimit` 既不在公开头文件、**也不在动态库导出符号里**，已实测）—— 而用私有 API 会撞 App Store 红线（docs/11 的 2.5.2）。**所以没做「假装能强杀」的设计**，改成三层可兑现的防线：① **隔离**（每次执行独立 `JSVirtualMachine` + 独立线程，上一次的全局变量看不到）② **配额**（墙钟/输出字节/栈深）③ **挂死检测 + 拒绝**（超时即标"中毒"，后续调用直接拒绝并如实告知）—— 这比"继续接调用、每次再挂一个线程"安全得多，后者在手机上表现为 App 越来越卡直到被 jetsam 杀掉（T38）。⚠️ 沙箱边界**由测试守**（逐个断言 `fetch`/`require`/`setTimeout`/`process`/`fs` 是 undefined；破坏性验证：顺手注入一个 `fetch` → 立刻变红）。⚠️ 抓到自己一个真 bug：结果值里的 `"undefined"` 被当成"没有值"过滤掉，于是 **`typeof fetch` 的结果在输出里消失** —— 「值是 undefined」与「根本没有值」是两件事 |
 ---
 
 ## 6. 下一步
 **主线现状**：C46 打通真实云端推理；**C47–C54 把 Git 引擎从零做到了「模型可用」** —— iOS 无 fork/exec ⇒ 没有系统 git，Rune 自己读 `.git`（zlib inflate → SHA-1/对象寻址 → 松散对象 + packfile/delta → index/三方状态/revision/历史 → 统一 diff → 四个只读工具接通 AgentRuntime）。⚠️ **下一步**：git 写操作（add/commit，需审批语义）、执行宿主（CPython/WASM/JSC）、MCP、记忆检索/L3 压缩与真机验收，**不可把本轮当成全项目完成**。
-（C43 图标已接入 AppIcon，见 [icon-brief](docs/design/icon-brief.md)；Key 只在被忽略的 `.env.pinai`，勿输出。）
 ### ⭐ macOS 环境已经接管（C39）：**秒级反馈回来了，不用再靠推 CI 猜**
 
 | 事情 | 命令 |
@@ -166,8 +166,8 @@ M4 端侧+记忆 / M5 上架准备   ░░░░░░░░░░░░░░�
 
 **⚠️ 仍未验证的风险点**（不是「已完成」）：
 ① **L3 压缩**只有「该压到哪一级 + 产物格式 + 解析」，运行时那一次**付费调用**还没接；
-② **Workflow 的 JSC 宿主不存在**（脚本 → DAG 的编译层）；
-③ 工具 **87 个注册 / 22 个已实现**（C54 后：文件检索 15 + 文档 3 + Git 只读 4）；剩余最大一块是 **Git 写操作**、执行宿主（CPython/JSC/WASM）、网络工具壳、iOS 原生（相册/日历/定位…）；
+② **Workflow 的 JSC 宿主**已就绪（C55 的 `JavaScriptHost`），但**脚本 → DAG 的编译层**还没接；
+③ 工具 **87 个注册 / 22 个已实现**（文件检索 15 + 文档 3 + Git 只读 4）；⚠️ `run_javascript` 的宿主已就绪（C55）但**工具接线还没做**；剩余最大一块是 **Git 写操作**、WASM/CPython 宿主、网络工具壳、iOS 原生（相册/日历/定位…）；
 ④ ~~C45 真实 PinAI 文本联调被上游拒绝~~ → **C46 已推翻**：那 3 个型号是**上游按模型逐个拒绝**（`not supported when using Codex with a ChatGPT account`），不是账户被封；`gpt-5.5`/`gpt-5.6`/`gpt-6-astra`/`codex-auto-review` 两个端点都通，且已跑通真实工具循环验收（见 §5 C46）。
 
 `RuneKernel`（49 源文件 / 1140 测试）覆盖：值类型与协议、补丁、检索、渠道网关、成本熔断、结构化压缩、出站构建与体检、模型调用客户端、策略引擎、Turn 循环与崩溃恢复、波次调度、计划/审批/目标、修正性重试与协议不变式、上下文装配、86 工具契约、技能库、Workflow、VFS、自研 shell、沙箱层 —— **并有端到端场景测试证明它们拼得起来**。
@@ -175,7 +175,7 @@ M4 端侧+记忆 / M5 上架准备   ░░░░░░░░░░░░░░�
 **仓库**：<https://github.com/Sakura-Lhy0409/rune>（公开；macOS 运行器对公开仓库免费）。
 ✅ **C40 已复核仓库 API 权限：`pull/push/admin=true`**，此前只读结论已过时；本轮未提交/推送。
 
-**实现顺序**：Store/Net/UI/图标 ✅ → RuneCore 接线 ✅ → **Git 引擎 ✅ C47–C54** → Git 写操作（需审批）→ 执行宿主（CPython/WASM/JSC）→ MCP → 记忆检索/L3 压缩 → 真机验收。
+**实现顺序**：Store/Net/UI/图标 ✅ → RuneCore 接线 ✅ → Git 引擎 ✅ → **JS 宿主 ✅ C55** → `run_javascript` 接线 → Git 写操作（需审批）→ WASM/CPython 宿主 → MCP → 记忆检索/L3 压缩 → 真机验收。
 
 ## 7. 已知陷阱（不要重复踩）
 
