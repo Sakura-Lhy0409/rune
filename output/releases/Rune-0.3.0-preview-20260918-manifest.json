@@ -1,7 +1,7 @@
 {
   "file": "Rune-0.3.0-preview-20260918-unsigned.ipa",
   "version": "0.3.0",
-  "build": "3",
+  "build": "4",
   "bytes": 9396749,
   "sha256": "ffef3aced4ea41ab57813b44bcb07235568a7af4d8d55ccfad1b207bc785d8a7",
   "signed": false,
@@ -10,16 +10,16 @@
     "Payload/Rune.app/PlugIns/RuneWidgets.appex/Info.plist",
     "Payload/Rune.app/PlugIns/RuneShare.appex/Info.plist"
   ],
-  "commit": "696612aba157",
+  "commit": "4c1e853adaa7",
   "branch": "main",
-  "worktree_clean": true,
+  "worktree_clean": false,
   "tests": {
     "swiftpm": null,
     "ui_full": 10,
     "note": "本次跳过了测试（--skip-tests），未重新计数"
   },
   "cloud_inference_verified": true,
-  "cloud_inference_detail": "PinAI / gpt-5.5（C46 端到端验收：真实模型 → 工具 → 审批 → 改盘 → 落盘验链）",
+  "cloud_inference_detail": "PinAI（中转站） / gpt-5.5 · DeepSeek 官方 / deepseek-v4-pro · DeepSeek 官方 / deepseek-flash（判据 LIVE_VALIDATION_PASSED：真实模型 → 工具 → 审批 → 改盘 → 落盘验链）",
   "whole_project_complete": false,
   "remaining_scope": "PROJECT_STATE.md §6（下一步）；docs/19 §5 是完整的剩余项清单",
   "how_to_install": [

@@ -74,17 +74,40 @@ def git_facts() -> dict[str, str]:
     return facts
 
 
-def channel_facts() -> tuple[bool, str | None]:
-    """真实渠道联调到底验过没有 —— **看 `.env.pinai` 在不在，且记下验过的模型**。
+def verified_channels() -> list[str]:
+    """从 `docs/20` **读**已验渠道，而不是在代码里硬编码。
 
-    ⚠️ 这里不能写死 true：`cloud_inference_verified` 上一版写的是 false（已过时），
-       但"改成 true"也不对 —— 它只被**一个**渠道（PinAI）的一个模型验过。
-       所以如实写清"验过什么、没验什么"。
+    ⚠️ 硬编码必然腐烂：上一版 manifest 的 `cloud_inference_verified: false`
+       写的时候是对的，后来打通了没人回头改。
+       而 `docs/20-真实渠道压测记录.md` 是**唯一**记"真的打通过哪些"的地方
+       （每条带日期），所以这里直接解析它 —— 文档更新了，manifest 自动跟上。
     """
-    env_file = ROOT / ".env.pinai"
-    if env_file.exists():
-        return True, "PinAI / gpt-5.5（C46 端到端验收：真实模型 → 工具 → 审批 → 改盘 → 落盘验链）"
-    return False, None
+    path = ROOT / "docs" / "20-真实渠道压测记录.md"
+    if not path.exists():
+        return []
+    found: list[str] = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        # 表格行形如：| 2026-09-18 | DeepSeek 官方 | `deepseek-v4-pro` | ✅ 通过 | ... |
+        if not line.startswith("|") or "✅" not in line:
+            continue
+        cells = [c.strip() for c in line.strip("|").split("|")]
+        if len(cells) < 3 or not cells[0][:4].isdigit():
+            continue
+        channel, model = cells[1], cells[2].replace("`", "")
+        found.append(f"{channel} / {model}")
+    return found
+
+
+def channel_facts() -> tuple[bool, str | None]:
+    """真实渠道联调到底验过什么 —— **从 docs/20 读，不硬编码**。
+
+    ⚠️ 也不能简单写 true：它只被**少数**渠道与模型验过，
+       写 true 是夸大，写 false 是过时。所以如实列出"验过哪些"。
+    """
+    channels = verified_channels()
+    if not channels:
+        return False, None
+    return True, " · ".join(channels) + "（判据 LIVE_VALIDATION_PASSED：真实模型 → 工具 → 审批 → 改盘 → 落盘验链）"
 
 
 def main() -> int:
