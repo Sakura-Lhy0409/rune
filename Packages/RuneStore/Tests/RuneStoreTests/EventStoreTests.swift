@@ -36,7 +36,7 @@ struct EventStoreRoundTripTests {
         let goal = UUID()
 
         _ = try store.append(sessionID: sessionA, turnID: turn, goalID: goal,
-                             kind: .turnStarted, payload: ["objective": .string("修退款 bug")],
+                             kind: .userMessage, payload: ["objective": .string("修退款 bug")],
                              originTrust: .userInstruction, createdAt: t0)
         _ = try store.append(sessionID: sessionA, turnID: turn,
                              kind: .toolCallRequested, payload: ["tool": .string("read_file")],
@@ -73,8 +73,8 @@ struct EventStoreRoundTripTests {
     @Test("⭐ 链是按**会话**串的：两个会话各写各的，互不干扰")
     func chainsArePerSession() throws {
         let store = try store()
-        _ = try store.append(sessionID: sessionA, kind: .turnStarted, createdAt: t0)
-        let firstOfB = try store.append(sessionID: sessionB, kind: .turnStarted, createdAt: t0)
+        _ = try store.append(sessionID: sessionA, kind: .userMessage, createdAt: t0)
+        let firstOfB = try store.append(sessionID: sessionB, kind: .userMessage, createdAt: t0)
         #expect(firstOfB.previousHash == nil, "另一个会话的第一条不该接在别人的链上")
         #expect(firstOfB.sequence == 1, "序号也是按会话算的")
 
@@ -111,7 +111,7 @@ struct EventStoreRoundTripTests {
     @Test("⭐ `lastHash` 能当锚点用 —— 锚点要存在 Agent 够不到的地方，而它就是那个值")
     func lastHashSupportsAnchors() throws {
         let store = try store()
-        let last = try store.append(sessionID: sessionA, kind: .turnFinished, createdAt: t0)
+        let last = try store.append(sessionID: sessionA, kind: .artifactCreated, createdAt: t0)
         #expect(try store.lastHash(sessionID: sessionA) == last.hash)
         #expect(try store.lastHash(sessionID: sessionB) == nil, "没有事件的会话没有锚点")
     }
@@ -140,7 +140,7 @@ struct EventStoreTamperTests {
         let queue = try DatabaseQueue(path: path)
         try queue.write { db in
             let row = try Row.fetchOne(db, sql: "SELECT envelope_json FROM event WHERE seq = 2")
-            let json = (row?["envelope_json"] as String) ?? ""
+            let json = (row?["envelope_json"] as? String) ?? ""
             let tampered = json.replacingOccurrences(of: "/workspace/1.md", with: "/etc/passwd")
             #expect(tampered != json, "测试本身要真的改到东西")
             try db.execute(sql: "UPDATE event SET envelope_json = ? WHERE seq = 2", arguments: [tampered])
@@ -170,7 +170,7 @@ struct EventStoreMigrationTests {
 
         // 表结构就是 docs/12 §2 那一列不差（除了刻意的 envelope_json）
         let columns = try queue.read { db in
-            try Row.fetchAll(db, sql: "PRAGMA table_info(event)").map { $0["name"] as String }
+            try Row.fetchAll(db, sql: "PRAGMA table_info(event)").map { ($0["name"] as? String) ?? "" }
         }
         for expected in ["seq", "id", "session_id", "turn_id", "goal_id", "subagent_id",
                          "kind", "payload_json", "payload_ref", "origin_trust", "tainted",
@@ -185,7 +185,7 @@ struct EventStoreMigrationTests {
         let turn = UUID()
         _ = try store.append(sessionID: sessionA, turnID: turn, kind: .planApproved, createdAt: t0)
         _ = try store.append(sessionID: sessionA, turnID: turn, kind: .toolCallRequested, createdAt: t0)
-        _ = try store.append(sessionID: sessionA, kind: .turnFinished, createdAt: t0)
+        _ = try store.append(sessionID: sessionA, kind: .artifactCreated, createdAt: t0)
 
         let all = try store.loadAll(sessionID: sessionA)
         #expect(all.filter { $0.turnID == turn }.count == 2)

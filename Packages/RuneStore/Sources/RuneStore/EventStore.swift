@@ -180,7 +180,7 @@ public final class RuneEventStore: Sendable {
                 arguments: [sessionID.uuidString]
             )
             return try rows.map { row in
-                let json = row["envelope_json"] as String
+                let json = (row["envelope_json"] as? String) ?? ""
                 return try decoder.decode(RuntimeEvent.self, from: Data(json.utf8))
             }
         }
