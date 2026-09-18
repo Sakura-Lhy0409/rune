@@ -267,6 +267,14 @@ public struct TurnState: Sendable, Codable, Hashable {
     ///    于是重复劳动，或者漏掉后几步（那正是 todo 想解决的问题本身）。
     public var todos: [TodoItem]?
 
+    /// 模型提出、**等待用户回答**的问题（`ask_user` 的产物）。
+    ///
+    /// ⚠️ 为什么它必须在状态里、而且随检查点持久化：
+    ///    用户在手机上答一个问题可能隔很久（切后台、锁屏、甚至第二天）。
+    ///    不落盘的话，进程被回收后**问题就消失了** —— 而 Turn 还停在 `.awaitingUser`，
+    ///    于是用户回来只看到一个"卡住"的任务，连它想问什么都不知道。
+    public var pendingQuestion: UserQuestion?
+
     // ---- 成本（这些字段存在的唯一理由是：**别把用户的钱花超**）----
     //
     // 为什么在这里而不是在网关里：网关知道"这一轮多少钱"，但它不知道"这个 Turn 一共批了多少"。
@@ -308,6 +316,7 @@ public struct TurnState: Sendable, Codable, Hashable {
         pendingCorrectionResolution: CorrectionResolution? = nil,
         approvedFingerprints: Set<String> = [],
         todos: [TodoItem]? = nil,
+        pendingQuestion: UserQuestion? = nil,
         spentMicroUSD: Int = 0,
         costCeilingMicroUSD: Int? = nil,
         budgetStop: BudgetStop? = nil,
@@ -337,6 +346,7 @@ public struct TurnState: Sendable, Codable, Hashable {
         self.pendingCorrectionResolution = pendingCorrectionResolution
         self.approvedFingerprints = approvedFingerprints
         self.todos = todos
+        self.pendingQuestion = pendingQuestion
         self.spentMicroUSD = spentMicroUSD
         self.costCeilingMicroUSD = costCeilingMicroUSD
         self.budgetStop = budgetStop
@@ -477,6 +487,8 @@ public enum TurnRunner {
         public var pendingApproval: ApprovalRequest?
         /// 需要用户对"修正失败"做选择时的说明（**不是审批**：这里是模型改不过来，不是权限问题）
         public var pendingCorrection: Correction.Escalation?
+        /// 停下来等用户回答的问题（`ask_user`）
+        public var pendingQuestion: UserQuestion?
         /// 终态说明
         public var terminalReason: String?
 
@@ -486,6 +498,7 @@ public enum TurnRunner {
             didAdvance: Bool,
             pendingApproval: ApprovalRequest? = nil,
             pendingCorrection: Correction.Escalation? = nil,
+            pendingQuestion: UserQuestion? = nil,
             terminalReason: String? = nil
         ) {
             self.state = state
@@ -493,6 +506,7 @@ public enum TurnRunner {
             self.didAdvance = didAdvance
             self.pendingApproval = pendingApproval
             self.pendingCorrection = pendingCorrection
+            self.pendingQuestion = pendingQuestion
             self.terminalReason = terminalReason
         }
     }
@@ -861,6 +875,71 @@ public enum TurnRunner {
                 record(.toolDenied, "未知工具 \(call.name)")
                 if state.currentWave.isEmpty && state.pendingIntents.isEmpty { state.status = .dispatching }
                 return StepOutcome(state: state, newEvents: events, didAdvance: true)
+            }
+
+            // ---------- `ask_user`：停下来问用户（**在策略判定与执行之前**） ----------
+            //
+            // ⚠️ 为什么它必须在这里拦，而不是做成一个普通工具执行器：
+            //    `ask_user` **不执行任何东西**，它的语义是"把 Turn 挂起"。而普通工具
+            //    执行器只能返回一个 ToolResult，改不了 Turn 状态 —— 让执行器去改状态
+            //    会破坏"能改状态的地方越少越可审计"这条纪律。
+            //
+            // ⚠️ 为什么在**策略判定之前**：`ask_user` 的 spec 是 `risk: .safe` +
+            //    `approval: .never`，它本来就不该进审批路径。而"问用户"这件事本身
+            //    就是一次交互 —— 再叠一张审批卡是荒谬的（用户要点两次才能回答一个问题）。
+            if call.name == ToolName.askUser {
+                // ⚠️ 这里就地解析参数：`call.arguments()` 抛错时给的是"参数不合法"，
+                //    与下面 `parse` 返回 nil 走的是同一条回灌路径（都让模型自己改）。
+                let questionArguments = (try? call.arguments()) ?? .null
+                guard let question = UserQuestion.parse(questionArguments, callID: call.id) else {
+                    // 解析不了 → 回灌可执行的错误，让模型自己改（与未知工具同一套路）
+                    let error = ToolError(
+                        kind: .invalidArguments,
+                        modelFacingMessage: "`ask_user` 缺少 `question`（或者它是空的）。",
+                        suggestion: #"写清要让用户决定什么，例如 ask_user(question: "用哪个币种的精度？", options: [{"label": "跟随订单币种"}], default: "跟随订单币种")"#
+                    )
+                    appendToolResult(&state, call: call, result: .failure(callID: call.id, error: error))
+                    emit(.toolCallDenied, ["tool": .string(call.name), "reason": .string("invalidQuestion")])
+                    record(.toolDenied, "ask_user 参数不合法")
+                    if state.currentWave.isEmpty && state.pendingIntents.isEmpty { state.status = .dispatching }
+                    return StepOutcome(state: state, newEvents: events, didAdvance: true)
+                }
+                if let problem = UserQuestion.validate(question) {
+                    let error = ToolError(
+                        kind: .invalidArguments,
+                        modelFacingMessage: "这个问题不该问：\(problem)",
+                        suggestion: "把 question 改成一件**具体要用户决定**的事；能自己查证的先自己查（grep / read）。"
+                    )
+                    appendToolResult(&state, call: call, result: .failure(callID: call.id, error: error))
+                    emit(.toolCallDenied, ["tool": .string(call.name), "reason": .string("invalidQuestion")])
+                    record(.toolDenied, "ask_user 的问题不合格")
+                    if state.currentWave.isEmpty && state.pendingIntents.isEmpty { state.status = .dispatching }
+                    return StepOutcome(state: state, newEvents: events, didAdvance: true)
+                }
+
+                // ⚠️ 先补上**配对结果**再挂起：
+                //    三家协议都要求 assistant 里每个 tool_call 都有配对结果（T18），
+                //    否则后续所有请求 400。挂起时这条调用已经"发生"了 ——
+                //    它的结果就是"已向用户提问，等待回答"。
+                appendToolResult(&state, call: call, result: .ok(
+                    callID: call.id,
+                    summary: "已向用户提问，等待回答：\n\(question.displayText)"))
+                state.pendingQuestion = question
+                state.status = .awaitingUser
+                emit(.userInputRequested, [
+                    "question": .string(question.question),
+                    "options": .array(question.options.map { .object([
+                        "label": .string($0.label),
+                        "detail": $0.detail.map { JSONValue.string($0) } ?? .null,
+                    ]) }),
+                    "default": question.defaultValue.map { JSONValue.string($0) } ?? .null,
+                    "why": question.why.map { JSONValue.string($0) } ?? .null,
+                    "callID": .string(call.id),
+                ])
+                record(.approvalRequested, "等用户回答：\(question.question)")
+                // ⚠️ `didAdvance: false` —— 这是稳定态，运行时到此为止（与 awaitingApproval 一致）
+                return StepOutcome(state: state, newEvents: events, didAdvance: false,
+                                   pendingQuestion: question)
             }
 
             // 取**全部**受影响路径：策略引擎要对每一个做范围判定
@@ -1257,6 +1336,37 @@ public enum TurnRunner {
             // 恢复时的「结果未知」确认 → 重新执行那个调用（它已经在 `pendingIntents` 里）
             state.status = .executing
         }
+        return state
+    }
+
+    /// 用户回答了 `ask_user` 的问题 → 把回答注入历史并继续。
+    ///
+    /// ⚠️ 回答的信任级是 `.userInstruction`（**不是** `.runtimeGuidance`）：
+    ///    这是真实的人说的话，它**可以**驱动危险动作 —— 用户的回答本身就可能是
+    ///    "就按你说的做，删掉它"。把它降级成运行时引导语会让 Agent 收到回答却不敢执行，
+    ///    那是比不提问更糟的体验（用户答了，它还在犹豫）。
+    ///    ⚠️ 反过来说：**绝不能把这个级别用在运行时自己写的话上**（T20）——
+    ///    所以这段文本必须逐字来自用户，我们只负责包一层"这是对哪个问题的回答"。
+    ///
+    /// ⚠️ 必须**先清 `pendingQuestion` 再改状态**：否则进程在这两步之间被杀，
+    ///    恢复后会看到一个"已回答但问题还在"的状态 —— 而那张卡片会再弹一次。
+    public static func answer(_ state: TurnState, text: String, deps: Dependencies) -> TurnState {
+        var state = state
+        guard state.status == .awaitingUser else { return state }
+        let question = state.pendingQuestion
+        state.pendingQuestion = nil
+
+        // ⚠️ 把「回答的是哪个问题」一起写进历史：模型可能同时问过好几轮，
+        //    只给一段光秃秃的回答，它会不知道这是对哪一问的回应。
+        var body = ""
+        if let question {
+            body += "（回答你刚才的问题：\(question.question)）\n"
+        }
+        body += text
+        state.messages.append(Message(role: .user, blocks: [
+            ContentBlock(kind: .text(body), origin: .userInstruction),
+        ], origin: .userInstruction))
+        state.status = .reasoning
         return state
     }
 

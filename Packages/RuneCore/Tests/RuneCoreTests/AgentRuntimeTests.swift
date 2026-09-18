@@ -453,3 +453,141 @@ struct TodoToolWiringTests {
         #expect(result.state.todos == nil, "被拒的清单绝不能写进状态（否则模型以为它生效了）")
     }
 }
+
+// MARK: - ask_user 接线（C58）
+//
+// ⚠️ 判据按 T63/T64 的教训：**落在可观测的行为差异上** ——
+//    状态真的变成 `.awaitingUser`、问题真的出现在 metadata 里、回答真的进了历史。
+//    不是"有没有发过某个事件"（失败时也发），也不是查输出文本。
+
+@Suite("ask_user 接线 —— 从 AgentRuntime 完整走一遍")
+struct AskUserWiringTests {
+
+    private func questionArguments(_ text: String) -> JSONValue {
+        .object([
+            "question": .string(text),
+            "options": .array([
+                .object(["label": .string("跟随订单币种"), "detail": .string("美元 2 位、日元 0 位")]),
+                .object(["label": .string("固定两位小数")]),
+            ]),
+            "default": .string("跟随订单币种"),
+            "why": .string("选错会导致退款金额有偏差"),
+        ])
+    }
+
+    @Test("⭐⭐⭐ 提问 → metadata 里能拿到 → 回答 → 继续（完整闭环）")
+    func fullAskAnswerRoundTrip() async throws {
+        let f = try Fixture()
+        defer { f.remove() }
+        let transport = FixtureTransport([
+            call(ToolName.askUser, questionArguments("用哪个币种的精度？")),
+            text("明白了，按跟随订单币种处理。"),
+        ])
+        let runtime = try AgentRuntime(configuration: f.config, objective: "改退款逻辑",
+                                       store: f.store, transport: transport)
+
+        // ① 第一步必须**停在等回答**，而不是继续跑
+        let pending = try await finish(runtime.run())
+        #expect(pending.state.status == .awaitingUser,
+                "提问后必须停下等用户，实际：\(pending.state.status)")
+        let question = try #require(pending.metadata.question, "问题必须出现在 metadata 里（UI 靠它渲染提问卡）")
+        #expect(question.question == "用哪个币种的精度？")
+        #expect(question.options.count == 2)
+        #expect(question.why?.contains("退款") == true)
+
+        // ② 用户回答 → 继续推进到完成
+        let result = try await finish(runtime.run(.answer("跟随订单币种")))
+        #expect(result.state.status == .completed, "回答之后应当能跑完，实际：\(result.state.status)")
+        #expect(result.metadata.question == nil, "回答后问题必须清掉（否则卡片会再弹）")
+
+        // ③ 回答必须进了历史，而且标明是"回答哪一问"
+        let history = result.state.messages
+        let userTexts = history.filter { $0.origin == .userInstruction }.flatMap { message in
+            message.blocks.compactMap { block -> String? in
+                if case .text(let value) = block.kind { return value }
+                return nil
+            }
+        }
+        #expect(userTexts.contains { $0.contains("用哪个币种的精度？") && $0.contains("跟随订单币种") },
+                "回答必须带上「回答的是哪个问题」，实际历史：\(userTexts)")
+    }
+
+    @Test("⚠️ 待答问题必须随状态落盘（用户可能隔很久才回答）")
+    func questionSurvivesReload() async throws {
+        let f = try Fixture()
+        defer { f.remove() }
+        let transport = FixtureTransport([
+            call(ToolName.askUser, questionArguments("选哪个？")),
+            text("好"),
+        ])
+        let runtime = try AgentRuntime(configuration: f.config, objective: "提问",
+                                       store: f.store, transport: transport)
+        _ = try await finish(runtime.run())
+
+        // 从磁盘重新读一次（模拟进程被回收后重开）
+        let reloaded = try f.store.loadRuntime(sessionID: f.config.sessionID)
+        #expect(reloaded?.state.pendingQuestion?.question == "选哪个？",
+                "问题必须随检查点持久化，否则用户回来只看到「卡住」")
+        #expect(reloaded?.state.status == .awaitingUser)
+
+        // ⚠️ 而且要在**不重新跑一遍**的前提下还能从磁盘恢复出那个问题
+        //    （UI 重开 App 后要直接渲染它，而不是要求用户先点一次"继续"）
+        let reopened = try #require(try AgentRuntime.snapshot(sessionID: f.config.sessionID, store: f.store))
+        #expect(reopened.metadata.question?.question == "选哪个？",
+                "重开后 metadata 里也该有那个问题（UI 直接渲染它）")
+        #expect(reopened.state.status == .awaitingUser)
+    }
+
+    @Test("⚠️ 不在等回答时调 answer 要报错，而不是静默忽略")
+    func answerWithoutQuestionIsRejected() async throws {
+        let f = try Fixture()
+        defer { f.remove() }
+        let transport = FixtureTransport([text("直接做完了")])
+        let runtime = try AgentRuntime(configuration: f.config, objective: "不用提问",
+                                       store: f.store, transport: transport)
+        _ = try await finish(runtime.run())
+
+        do {
+            _ = try await finish(runtime.run(.answer("随便答")))
+            Issue.record("没有待答问题时 answer 应当报错")
+        } catch {
+            #expect(String(describing: error).contains("没有等待回答"),
+                    "错误信息要说清原因，实际：\(error)")
+        }
+    }
+
+    @Test("⚠️「要不要我继续」这类废话要被拒，而且**不停下来**")
+    func fillerQuestionDoesNotSuspend() async throws {
+        let f = try Fixture()
+        defer { f.remove() }
+        let transport = FixtureTransport([
+            call(ToolName.askUser, .object(["question": .string("要不要我继续")])),
+            text("那我直接做完。"),
+        ])
+        let runtime = try AgentRuntime(configuration: f.config, objective: "废话提问",
+                                       store: f.store, transport: transport)
+        let result = try await finish(runtime.run())
+
+        #expect(result.state.status == .completed, "废话问题不该把任务卡住，实际：\(result.state.status)")
+        #expect(result.metadata.question == nil, "不该产生待答问题")
+        // 而且模型必须收到可执行的纠正
+        // ⚠️ 判据落在**事件 kind + 工具结果**上，不是"payload 文本里有没有某个词"
+        //    （那是 T63 记过的假绿套路）。
+        let events = try f.store.loadAll(sessionID: f.config.sessionID)
+        #expect(events.contains { $0.kind == .toolCallDenied }, "被拒必须落一条 toolCallDenied 事件")
+        // 而且模型必须收到**可执行的纠正**（否则它只会原样再问一遍）
+        let denied = events.first { $0.kind == .toolCallDenied }
+        #expect(denied?.payload.value(at: ["reason"])?.stringValue == "invalidQuestion",
+                "拒绝原因要标成 invalidQuestion，实际：\(String(describing: denied?.payload))")
+        // 工具结果本身也要带上"该怎么改"
+        var paired: ToolResult?
+        for message in result.state.messages {
+            for block in message.blocks {
+                if case .toolResult(let r) = block.kind, r.callID == "call-1" { paired = r }
+            }
+        }
+        #expect(paired?.status != .ok, "废话问题必须回一个失败结果")
+        #expect(paired?.error?.modelFacingText.contains("没有信息量") == true,
+                "要告诉模型这类问题为什么不行，实际：\(paired?.error?.modelFacingText ?? "无")")
+    }
+}

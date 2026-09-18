@@ -21,6 +21,11 @@ public final class AgentRuntime: @unchecked Sendable {
         + Array(JavaScriptToolExecutor.names).sorted()
         // 可见任务清单（C57）：`turnRunner` 只回文本，**状态由运行时写回**（见 syncTodos）
         + Array(TodoWriteToolExecutor.names).sorted()
+        // 主动提问（C58）：**不经过工具执行器** —— 它由 TurnRunner 在派发相位拦截，
+        // 因为"挂起 Turn"不是任何执行器能做的事（执行器只能返回结果、改不了状态）。
+        // ⚠️ 但它**必须在这里**：不在的话运行时会把它当未知工具，
+        //    于是模型想提问却得到一个"未知工具"错误，然后要么猜、要么卡住。
+        + [ToolName.askUser]
     private let queue = DispatchQueue(label: "RuneCore.runtime", qos: .userInitiated)
     private let lock = NSLock()
     private var active: RuntimeControl?
@@ -161,6 +166,14 @@ public final class AgentRuntime: @unchecked Sendable {
                                     recovery: !self.state.pendingIntents.isEmpty, changes: [], reviewError: error.localizedDescription)
                             }
                         }
+                        if let question = outcome.pendingQuestion {
+                            // ⚠️ 提问与审批是**两条并行通道**：同一时刻只可能有一条在等
+                            //    （挂起是稳定态，不会再往下走），所以这里可以简单地覆盖另一个。
+                            self.metadata.question = question
+                            self.metadata.approval = nil
+                        } else if outcome.pendingApproval != nil {
+                            self.metadata.question = nil
+                        }
                         if previousStatus == .executing {
                             for i in self.metadata.changes.indices where !self.metadata.changes[i].applied && self.metadata.changes[i].reverted != true {
                                 let change = self.metadata.changes[i]
@@ -253,7 +266,7 @@ public final class AgentRuntime: @unchecked Sendable {
             }
             metadata.changes.append(contentsOf: approval.changes)
             state = TurnRunner.approve(state, deps: deps)
-            metadata.approval = nil; metadata.paused = false
+            metadata.approval = nil; metadata.question = nil; metadata.paused = false
             try commit([event(.toolApprovalDecided, ["call_id": .string(callID), "decision": .string("approved")])])
         case .reject(let callID):
             guard state.status == .awaitingApproval, let approval = metadata.approval, approval.call.id == callID else { throw RuntimeFailure("当前没有这项审批。") }
@@ -272,6 +285,17 @@ public final class AgentRuntime: @unchecked Sendable {
             state = TurnState(sessionID: state.sessionID, objective: text, messages: history, eventSequence: state.eventSequence,
                               lastEventHash: state.lastEventHash, spentMicroUSD: state.spentMicroUSD, costCeilingMicroUSD: state.costCeilingMicroUSD)
             metadata.paused = false; metadata.failure = nil; metadata.approval = nil
+        case .answer(let text):
+            // ⚠️ 只在 `.awaitingUser` 有效 —— 与 `followUp` 的区别正在这里：
+            //    `followUp` 是用户主动追加要求（终止态也能用），
+            //    `answer` 是**回答一个已经在等你的问题**（不在等就不能答）。
+            guard state.status == .awaitingUser else {
+                throw RuntimeFailure("现在没有等待回答的问题。")
+            }
+            state = TurnRunner.answer(state, text: text, deps: deps)
+            metadata.question = nil
+            metadata.paused = false
+            metadata.failure = nil
         case .raiseBudget(let limit):
             let outcome = TurnRunner.raiseBudget(state, to: limit, deps: deps, config: kernelConfig)
             state = outcome.state; metadata.paused = false; metadata.failure = nil

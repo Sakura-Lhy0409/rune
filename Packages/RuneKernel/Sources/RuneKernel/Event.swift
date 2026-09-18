@@ -38,6 +38,11 @@ public enum EventKind: String, Sendable, Codable, Hashable, CaseIterable {
     case toolCallRequested = "ToolCallRequested"
     case toolApprovalRequested = "ToolApprovalRequested"
     case toolApprovalDecided = "ToolApprovalDecided"
+    /// 模型主动向用户提问（`ask_user`）—— 与「审批」是两件事：
+    /// 审批是「我要做这件危险的事，你允许吗」，提问是「我拿不准，你希望怎样」。
+    /// ⚠️ 分开记的理由很实际：冷启动分诊时，前者要重放审批卡，后者要重放问题 ——
+    /// 用同一个 kind 就分不出来了。
+    case userInputRequested = "UserInputRequested"
     case toolCallStarted = "ToolCallStarted"
     case toolCallFinished = "ToolCallFinished"
     case toolCallFailed = "ToolCallFailed"
@@ -254,6 +259,7 @@ public struct RuntimeEvent: Sendable, Codable, Hashable, Identifiable {
         case .toolCallFinished:   return "工具完成"
         case .toolCallFailed:     return "工具失败"
         case .toolCallDenied:     return "已被拦截"
+        case .userInputRequested: return "等你回答"
         case .modelSelfCorrected: return "模型自行修正"
         case .correctionEscalated: return "需要你决定"
         case .correctionResolved: return "已按你的选择继续"

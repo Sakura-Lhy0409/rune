@@ -24,6 +24,10 @@ public struct RuntimeMetadata: Codable, Sendable {
     public var paused = false
     public var cancelled = false
     public var approval: RuntimeApproval?
+    /// 模型主动提出的问题（`ask_user`）。**必须随 metadata 落盘**：
+    /// 用户在手机上可能隔很久才回答（切后台、锁屏），不落盘的话流程被回收后
+    /// 问题就消失了 —— 用户回来只看到一个「卡住」的任务，连它想问什么都不知道。
+    public var question: UserQuestion?
     public var changes: [RuntimeFileChange] = []
     public var failure: String?
     public var partialText = ""
@@ -49,6 +53,10 @@ public enum RuntimeAction: Sendable {
     case approve(callID: String)
     case reject(callID: String)
     case followUp(String)
+    /// 回答 `ask_user` 提出的问题（与 `followUp` 分开：那个是用户主动追加要求，
+    /// 这个是**回答一个已经在等你的问题** —— 两者在 UI 上是不同的动作，
+    /// 而在状态机里前者可能被拒（不在合适的状态），后者只在 `.awaitingUser` 有效）。
+    case answer(String)
     case raiseBudget(Int)
 }
 public struct RuntimeConfiguration: Sendable {
