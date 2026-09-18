@@ -559,3 +559,81 @@ struct M0AcceptanceTests {
         #expect(ws.executions[ToolName.grepSearch] == 1)
     }
 }
+
+// MARK: - 模型已选定（`modelSelected`）—— 一个被 `default: break` 丢掉的审计
+
+@Suite("modelSelected —— 模型选择必须留下痕迹")
+struct ModelSelectedAuditTests {
+
+    /// 造一个"会报自己是谁"的模型脚本（三家解码器都通过 `startIfNeeded` 发 `.started`）。
+    private func modelEvents(_ model: String, provider: String) -> @Sendable (TurnState) -> [ModelEvent] {
+        { _ in
+            [.started(modelID: model, providerID: provider),
+             .textDelta("做完了"),
+             .finished(reason: .stop)]
+        }
+    }
+
+    @Test("⭐⭐ 模型报了身份就必须落一条 modelSelected（否则审计里看不到「调的是哪个模型」）")
+    func selectionIsRecorded() {
+        let ws = Fixture.workspace()
+        let deps = TurnRunner.Dependencies(
+            modelEvents: modelEvents("gpt-5.5", provider: "pinai"),
+            executor: FakeToolExecutor(workspace: ws),
+            policy: PolicyEngine(), policyContext: Fixture.policyContext(),
+            now: { Date(timeIntervalSince1970: 1_700_000_000) })
+
+        let (_, events, _) = TurnRunner.run(Fixture.initialState(), deps: deps, config: Fixture.config())
+        let selected = events.filter { $0.kind == .modelSelected }
+        // ⚠️ 判据是**事件真的落了**（不是"有没有发生过某件事"，那是 T63 的假绿套路）
+        #expect(!selected.isEmpty, "必须记录选定了哪个模型 —— 多渠道路由是产品第一条承诺")
+        #expect(selected.first?.payload.value(at: ["model"])?.stringValue == "gpt-5.5")
+        #expect(selected.first?.payload.value(at: ["provider"])?.stringValue == "pinai")
+        #expect(selected.first?.payload.value(at: ["round"])?.intValue == 1)
+    }
+
+    @Test("⚠️ 模型没报身份时**不该**记一条空模型名（那比不记更糟）")
+    func emptyModelIsNotRecorded() {
+        let ws = Fixture.workspace()
+        let deps = TurnRunner.Dependencies(
+            // 服务端有时不回 model 字段 → 解码器发出空串
+            modelEvents: modelEvents("", provider: "pinai"),
+            executor: FakeToolExecutor(workspace: ws),
+            policy: PolicyEngine(), policyContext: Fixture.policyContext(),
+            now: { Date(timeIntervalSince1970: 1_700_000_000) })
+
+        let (_, events, _) = TurnRunner.run(Fixture.initialState(), deps: deps, config: Fixture.config())
+        // ⚠️ 记一条 `model: ""` 看起来"记录了"，实际什么也没说明，
+        //    还会让人以为模型名就是空的 —— 宁可什么都不记。
+        #expect(!events.contains { $0.kind == .modelSelected },
+                "空模型名不该产生 modelSelected 事件")
+    }
+
+    @Test("⚠️ 多轮时每轮都要记一条（不然看不清中途换过什么）")
+    func everyRoundIsRecorded() {
+        let ws = Fixture.workspace()
+        let deps = TurnRunner.Dependencies(
+            // ⚠️ 用 `state.round` 而不是闭包外部的计数器：`modelEvents` 是 `@Sendable`，
+            //    Swift 6 不允许在里面改捕获的可变变量（那本来就是数据竞争）。
+            //    而且按状态决定"该吐什么"正是这个 API 的设计意图（注释里写着）。
+            modelEvents: { state in
+                // 第一轮要一个工具调用（迫使进第二轮），之后直接结束
+                if state.round == 0 {
+                    return [.started(modelID: "gpt-5.5", providerID: "pinai")]
+                        + ModelScript.toolCall(index: 0, id: "call-1", name: ToolName.grepSearch,
+                                               arguments: ["pattern": .string("x")])
+                }
+                return [.started(modelID: "gpt-5.5", providerID: "pinai"),
+                        .textDelta("好了"), .finished(reason: .stop)]
+            },
+            executor: FakeToolExecutor(workspace: ws),
+            policy: PolicyEngine(), policyContext: Fixture.policyContext(),
+            now: { Date(timeIntervalSince1970: 1_700_000_000) })
+
+        let (_, events, _) = TurnRunner.run(Fixture.initialState(), deps: deps, config: Fixture.config())
+        let rounds = events.filter { $0.kind == .modelSelected }
+            .compactMap { $0.payload.value(at: ["round"])?.intValue }
+        #expect(rounds.count >= 2, "跑了两轮就该有两条，实际：\(rounds)")
+        #expect(rounds == rounds.sorted(), "轮次应当递增：\(rounds)")
+    }
+}

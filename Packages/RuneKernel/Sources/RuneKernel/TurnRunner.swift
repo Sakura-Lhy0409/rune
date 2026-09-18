@@ -704,6 +704,13 @@ public enum TurnRunner {
             var usage = TokenUsage.zero
             var finish: FinishReason = .unknown
             var providerError: ProviderError?
+            // ⚠️ `.started` 曾经被 `default: break` **静默丢掉** —— 而它正是
+            //    `modelSelected` 事件唯一的数据来源（三家解码器的 `startIfNeeded`
+            //    都会发它，且保证只发一次）。丢掉它的后果很具体：
+            //    用户与审计面板**永远看不到"这一轮调的是哪个模型"**，
+            //    而多渠道路由/降级恰恰是产品第一条可插拔承诺的核心。
+            var startedProvider: String?
+            var startedModel: String?
 
             for event in rawEvents {
                 switch event {
@@ -711,6 +718,9 @@ public enum TurnRunner {
                 case .usage(let u): usage = u
                 case .providerError(let e): providerError = e
                 case .finished(let r): finish = r
+                case .started(let modelID, let providerID):
+                    startedProvider = providerID
+                    startedModel = modelID
                 default: break
                 }
                 calls.append(contentsOf: assembler.ingest(event).map(\.call))
@@ -719,6 +729,17 @@ public enum TurnRunner {
 
             state.round += 1
             state.usage = state.usage + usage
+
+            // ⚠️ 只解码器**真的报了模型**时才记：它可能给出空串（例如服务端没回 model 字段），
+            //    而记一条 `model: ""` 的审计是比不记更糟的 —— 它看起来"记录了"，
+            //    实际什么也没说明，还会让人以为模型名就是空的。
+            if let startedModel, !startedModel.isEmpty {
+                emit(.modelSelected, [
+                    "model": .string(startedModel),
+                    "provider": .string(startedProvider ?? "unknown"),
+                    "round": .int(state.round),
+                ])
+            }
 
             // ---- 记账 ----
             // ⚠️ `deps.costOfRound` 曾经是一个**声明了却从没被调用**的依赖：
