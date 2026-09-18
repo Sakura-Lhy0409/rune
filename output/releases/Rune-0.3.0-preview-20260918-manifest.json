@@ -10,13 +10,13 @@
     "Payload/Rune.app/PlugIns/RuneWidgets.appex/Info.plist",
     "Payload/Rune.app/PlugIns/RuneShare.appex/Info.plist"
   ],
-  "commit": "34a4ad366427",
+  "commit": "3105bdff166a",
   "branch": "main",
   "worktree_clean": true,
   "tests": {
-    "swiftpm": null,
+    "swiftpm": 1275,
     "ui_full": 10,
-    "note": "本次跳过了测试（--skip-tests），未重新计数"
+    "note": null
   },
   "cloud_inference_verified": true,
   "cloud_inference_detail": "PinAI（中转站） / gpt-5.5 · DeepSeek 官方 / deepseek-v4-pro · DeepSeek 官方 / deepseek-flash（判据 LIVE_VALIDATION_PASSED：真实模型 → 工具 → 审批 → 改盘 → 落盘验链）",
