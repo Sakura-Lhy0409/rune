@@ -50,6 +50,9 @@ Apps/Rune/ShareExtension/RuneShare.entitlements
 
 # PinAI 凭据只留在本机；图标方案与提示词可以入库。
 .env.pinai
+.env.deepseek
+# ⚠️ 通配更稳：以后加任何 .env.* 都不会漏（漏一次就是密钥进仓库）
+.env.*
 .venv-imagegen/
 
 # 本机界面验收截图
