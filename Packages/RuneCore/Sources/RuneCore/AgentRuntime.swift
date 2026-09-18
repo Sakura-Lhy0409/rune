@@ -19,6 +19,8 @@ public final class AgentRuntime: @unchecked Sendable {
         // JS 执行宿主（C55 宿主 + C56 接线）：风险级 modifying，需要 .exec 能力，
         // 审批语义由 PolicyEngine 按 spec 决定 —— 这一层只管"能不能执行"。
         + Array(JavaScriptToolExecutor.names).sorted()
+        // 可见任务清单（C57）：`turnRunner` 只回文本，**状态由运行时写回**（见 syncTodos）
+        + Array(TodoWriteToolExecutor.names).sorted()
     private let queue = DispatchQueue(label: "RuneCore.runtime", qos: .userInitiated)
     private let lock = NSLock()
     private var active: RuntimeControl?
@@ -51,7 +53,8 @@ public final class AgentRuntime: @unchecked Sendable {
         executor = RuntimeToolExecutor(local: LocalToolExecutor(vfs: workspace, registry: tools, artifacts: artifacts),
             documents: DocumentToolExecutor(read: { try workspace.readData($0, maxBytes: $1) }, artifacts: artifacts),
             git: GitToolExecutor(resolver: GitWorkspaceResolver(base: workspace.base)),
-            javascript: JavaScriptToolExecutor(host: JavaScriptHost(), artifacts: artifacts))
+            javascript: JavaScriptToolExecutor(host: JavaScriptHost(), artifacts: artifacts),
+            todos: TodoWriteToolExecutor())
         if let saved = try store.loadRuntime(sessionID: configuration.sessionID) {
             state = saved.state; state.wasRestored = !saved.state.status.isTerminal
             metadata = try JSONDecoder().decode(RuntimeMetadata.self, from: saved.metadata)
@@ -145,6 +148,7 @@ public final class AgentRuntime: @unchecked Sendable {
                             break
                         }
                         self.state = outcome.state
+                        self.syncTodos()
                         self.metadata.inFlightModel = false
                         self.metadata.partialText = ""
                         if let approval = outcome.pendingApproval {
@@ -276,6 +280,33 @@ public final class AgentRuntime: @unchecked Sendable {
         if state.wasRestored && state.status == .awaitingApproval { state.wasRestored = false }
         try commit()
     }
+    /// 把 `todo_write` 的结果同步进 `TurnState`。
+    ///
+    /// ⚠️ 为什么**不**让工具执行器自己改状态：
+    ///    能改 TurnState 的地方越少，"这个状态是从哪来的"就越可审计（与 ApprovalBroker 同一立场）。
+    ///    工具只负责**校验并回一段人可读的清单**，状态写回由运行时统一做。
+    ///
+    /// ⚠️ 为什么在**每一步之后**都扫一遍，而不是只看"刚才那一步"：
+    ///    一条 turn 里可能连续多次 `todo_write`，而崩溃恢复后我们是从历史重建的 ——
+    ///    扫历史能同时覆盖"正常推进"与"恢复后补记"两种路径，不需要两套逻辑。
+    ///
+    /// ⚠️ 只认**最后一条成功的** `todo_write`：清单是整体替换语义，
+    ///    更早的那些已经被覆盖，再拿它们去覆盖状态就是回退。
+    private func syncTodos() {
+        for message in state.messages.reversed() {
+            for block in message.blocks.reversed() {
+                switch block.kind {
+                case .toolCall(let call) where call.name == ToolName.todoWrite:
+                    guard let items = TodoList.items(from: (try? call.arguments()) ?? .null) else { return }
+                    state.todos = items
+                    return
+                default:
+                    break
+                }
+            }
+        }
+    }
+
     private func dependencies(model: RuntimeModel) -> TurnRunner.Dependencies {
         let root = VFSPath(mount: .workspace)
         let token = CapabilityToken(issuedForTurn: state.turnID,

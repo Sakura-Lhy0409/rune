@@ -384,3 +384,72 @@ struct JavaScriptToolWiringTests {
         #expect(result.state.status == .completed)
     }
 }
+
+// MARK: - todo_write 接线（C57）
+//
+// ⚠️ 判据按 T63 的教训写：**落在可观测的行为差异上**（工具结果的 status + 状态真的被写回），
+//    不是"有没有发生过某件事"（失败时也会发 toolCallFinished），
+//    也不是查输出文本（argsPreview 会回显参数）。
+
+@Suite("todo_write 接线 —— 从 AgentRuntime 真的调用")
+struct TodoToolWiringTests {
+
+    @Test("⭐⭐ 模型调 todo_write：清单必须**写回 TurnState**，而不只是回一段文本")
+    func todoIsPersistedIntoState() async throws {
+        let f = try Fixture()
+        defer { f.remove() }
+        let arguments = JSONValue.object(["items": .array([
+            .object(["text": .string("读 notes.md"), "status": .string("done")]),
+            .object(["text": .string("改成 after"), "status": .string("in_progress")]),
+        ])])
+        let transport = FixtureTransport([
+            call(ToolName.todoWrite, arguments),
+            text("done"),
+        ])
+        let runtime = try AgentRuntime(configuration: f.config, objective: "列个清单",
+                                       store: f.store, transport: transport)
+        let result = try await finish(runtime.run())
+
+        let events = try f.store.loadAll(sessionID: f.config.sessionID)
+        let finished = events.filter { $0.kind == .toolCallFinished }
+        #expect(finished.count == 1, "实际 \(finished.count) 条工具结果")
+        let status = finished.first?.payload.value(at: ["status"])?.stringValue
+        // 没接上时会退到 local 并报 error
+        #expect(status == "ok", "工具结果状态应当是 ok，实际：\(status ?? "无")")
+
+        // ⚠️ 真正的证据：清单进了 TurnState（这是"接线"与"工具能跑"的分界）
+        let todos = try #require(result.state.todos, "todo_write 之后 TurnState.todos 不该是 nil")
+        #expect(todos.count == 2, "实际 \(todos.count) 条")
+        #expect(todos[0].text == "读 notes.md")
+        #expect(todos[0].status == .done)
+        #expect(todos[1].status == .inProgress)
+
+        // 且随状态一起**落盘**（切后台再回来不该忘掉自己列过哪几步）
+        let reloaded = try f.store.loadRuntime(sessionID: f.config.sessionID)
+        #expect(reloaded?.state.todos?.count == 2, "清单必须随检查点持久化")
+    }
+
+    @Test("⚠️ 不合法的清单不该污染状态（被拒时 TurnState 保持原样）")
+    func invalidListDoesNotPolluteState() async throws {
+        let f = try Fixture()
+        defer { f.remove() }
+        // 两条 in_progress → 必须被工具拒绝
+        let arguments = JSONValue.object(["items": .array([
+            .object(["text": .string("A"), "status": .string("in_progress")]),
+            .object(["text": .string("B"), "status": .string("in_progress")]),
+        ])])
+        let transport = FixtureTransport([
+            call(ToolName.todoWrite, arguments),
+            text("done"),
+        ])
+        let runtime = try AgentRuntime(configuration: f.config, objective: "列个坏清单",
+                                       store: f.store, transport: transport)
+        let result = try await finish(runtime.run())
+
+        let finished = try f.store.loadAll(sessionID: f.config.sessionID)
+            .filter { $0.kind == .toolCallFinished }
+        #expect(finished.first?.payload.value(at: ["status"])?.stringValue != "ok",
+                "非法清单必须被拒")
+        #expect(result.state.todos == nil, "被拒的清单绝不能写进状态（否则模型以为它生效了）")
+    }
+}

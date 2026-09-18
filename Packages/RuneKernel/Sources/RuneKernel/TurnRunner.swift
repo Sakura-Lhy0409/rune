@@ -255,6 +255,18 @@ public struct TurnState: Sendable, Codable, Hashable {
     /// 一个复用了旧 id 的、参数完全不同的调用会被**自动放行** —— 那是提权。
     public var approvedFingerprints: Set<String>
 
+    /// 模型维护的**可见任务清单**（`todo_write` 的产物，整体替换语义）。
+    ///
+    /// ⚠️ 为什么是**可选**而不是 `[TodoItem] = []`：
+    ///    已落盘的 `TurnState` JSON 里没有这个键，而非可选数组会让 `Codable` 合成
+    ///    在解码旧检查点时**直接抛错** —— 那等于所有历史会话都恢复不了。
+    ///    可选 + 默认 nil 能让新旧两种状态都被解出来（`todos ?? []` 就地兜底）。
+    ///
+    /// ⚠️ 为什么它必须**随状态一起持久化**：todo 是"我打算做什么"的唯一外部记录。
+    ///    不落盘的话，用户切回后台再回来，Agent 会忘记自己列过哪几步 ——
+    ///    于是重复劳动，或者漏掉后几步（那正是 todo 想解决的问题本身）。
+    public var todos: [TodoItem]?
+
     // ---- 成本（这些字段存在的唯一理由是：**别把用户的钱花超**）----
     //
     // 为什么在这里而不是在网关里：网关知道"这一轮多少钱"，但它不知道"这个 Turn 一共批了多少"。
@@ -295,6 +307,7 @@ public struct TurnState: Sendable, Codable, Hashable {
         corrections: CorrectionLedger = CorrectionLedger(),
         pendingCorrectionResolution: CorrectionResolution? = nil,
         approvedFingerprints: Set<String> = [],
+        todos: [TodoItem]? = nil,
         spentMicroUSD: Int = 0,
         costCeilingMicroUSD: Int? = nil,
         budgetStop: BudgetStop? = nil,
@@ -323,6 +336,7 @@ public struct TurnState: Sendable, Codable, Hashable {
         self.corrections = corrections
         self.pendingCorrectionResolution = pendingCorrectionResolution
         self.approvedFingerprints = approvedFingerprints
+        self.todos = todos
         self.spentMicroUSD = spentMicroUSD
         self.costCeilingMicroUSD = costCeilingMicroUSD
         self.budgetStop = budgetStop

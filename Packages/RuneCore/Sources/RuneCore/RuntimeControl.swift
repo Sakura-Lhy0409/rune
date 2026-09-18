@@ -143,6 +143,7 @@ struct RuntimeToolExecutor: ToolExecuting {
     let documents: DocumentToolExecutor
     let git: GitToolExecutor
     let javascript: JavaScriptToolExecutor
+    let todos: TodoWriteToolExecutor
     func execute(_ call: ToolCall) throws -> ToolResult {
         // ⚠️ 路由顺序无所谓（四组名字不相交），但**必须都在这里**：
         //    漏掉一组的话，那些工具会退到 `local` 去执行，而 `local` 不认识它们
@@ -150,6 +151,7 @@ struct RuntimeToolExecutor: ToolExecuting {
         if DocumentToolExecutor.names.contains(call.name) { return try documents.execute(call) }
         if GitToolExecutor.names.contains(call.name) { return try git.execute(call) }
         if JavaScriptToolExecutor.names.contains(call.name) { return try javascript.execute(call) }
+        if TodoWriteToolExecutor.names.contains(call.name) { return try todos.execute(call) }
         return try local.execute(call)
     }
 }
