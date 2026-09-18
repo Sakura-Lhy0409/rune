@@ -136,6 +136,7 @@ M4 端侧+记忆 / M5 上架准备   ░░░░░░░░░░░░░░�
 | C35 | ✅ **模型调用客户端：网关那一层真的被接上了**（1032 测试） | `ModelClient.swift` · `ModelClientTests` | ⭐⭐⭐ 修的是**目前最大的一次「声明式子系统」**：`GatewayRouter.route` / `RetryPolicy.decide` / `Degradation.plan` / `HealthTracker.record*` 在 `Sources/` 里**零调用点** —— 913 行有测试的代码没有任何东西会执行它。于是 Rune 的真实行为是：**不路由、不重试（一次 429 就把这一轮打死）、不记健康（挂掉的渠道永远留着）、不降级、不去重**；⚠️ 修法是给它**唯一执行入口** `ModelClient`（路由 → 去重 → 编码 → 发送 → 解码 → 按 `RetryPolicy` 决定 → 记健康 → 生成**可见的**降级说明）；⚠️ 传输层抽象成**同步协议** `ModelTransport`，于是整条链路能在没有网络、没有 macOS 的条件下被完整验证（脚本化传输返回真实字节），真正的 URLSession 实现留给 `RuneNet`；⚠️ 鉴权真值只从 `credentials`（Keychain）来，**配置里只有引用**，所以日志里永远不会有密钥；⚠️ 顺带记一条**测试纪律**：`#expect` **不中断执行**，断言之后还要用下标就必须先 `guard` —— 否则越界会让整个测试进程崩掉（Windows 上表现成 `0xC000001D`，看起来像环境问题，不是一条干净的失败） |
 | C36 | ✅⭐ **首次 CI 全绿：macOS 上真的产出可侧载的 .ipa** | `.github/workflows/` · `VFS.swift` · 仓库 <https://github.com/Sakura-Lhy0409/rune> | ⭐⭐ 这是「没有 Mac 也能做 iPhone App」从**计划**变成**事实**的一步：`kernel` 在 ubuntu + macOS 上都跑通了 `Package.swift`（**它此前从未被真正的 SwiftPM 解析过**），`ios` 的「App 构建与打包」产出了 1.8MB 的 `Rune-unsigned.ipa`（`Payload/Rune.app/{Rune,Info.plist,PkgInfo}`，结构正确、可直接 Sideloadly 签名）；⚠️ **首次 CI 抓到两个真 bug**：① VFS 快照回滚在 macOS 上**根本没生效**（Linux/Windows 通过）—— `restore` 自己切字符串算相对路径，而 macOS 上同一目录有 `/var/…` 与 `/private/var/…` 两种写法，切出垃圾，`try?` 又把错误**完全吞掉**（回滚「成功」了却一个字没变）；改成 `subpathsOfDirectory` + 一律 `try`；② `ios.yml` 打包那步 `ls` 多写一个 `..`；⚠️ 修 VFS 那条时**先把断言改成会打印实际值**才拿到真相 —— 「某某 != 某某」这种失败信息只能靠猜 |
 | C37 | ✅ **模拟器冒烟测试真的跑起来了**（并修掉挡路的三处） | `.github/workflows/ios.yml` · `Apps/Rune/{project.yml,UITests}` | ⭐ 从「跑不到」到「**App 在真 iOS 模拟器上完整跑通内核**」：dump 出来的界面证明 **4 次工具调用 · 20 条事件 · 哈希链校验通过**，步骤 `list_dir → read_file → edit_file（创建检查点）→ read_file`，工作区面板指着真实的 `Documents/RuneDemo`；⚠️ 三处修复：① destination **不能写死机型**（`name=iPhone 16` 撞上镜像换机型）→ 运行时挑可用的 iPhone 并打印选中项；② **测试 target 也要 Info.plist**（`GENERATE_INFOPLIST_FILE: YES`，Xcode 报错里就推荐了）；③ UI 测试的 dump 辅助函数要 `@MainActor` 且**不能用 `map(\.label)`**（主线程隔离属性不能取 key path）；⚠️ 唯一还失败的断言是「工作区面板要显示被改的那一行」—— 面板只列文件名、不显示内容（§6 的第一步就是修它） |
+| C38 | ✅⭐ **「没有 Mac」这条流水线端到端全绿**（含模拟器 UI 验证） | `Apps/Rune/Sources/RuneApp.swift` · `.github/workflows/ios.yml` | ⭐⭐ 三个 job 全绿：`kernel`（ubuntu + macos + 零依赖审计）、`ios`（包构建测试 + **App 打包出 .ipa**）、**`模拟器冒烟测试`** —— 后者证明 **App 在真 iOS 模拟器上完整跑通内核**：启动 → 点运行 → 时间轴出现 → 哈希链校验通过 → 工作区面板显示磁盘真实内容，**含 Agent 改掉的那一行**。⚠️ 最后那条断言原来一直失败，根因不是内核而是 UI：文件内容被放在**默认折叠的 `DisclosureGroup`** 里，而**折叠区的文字不在辅助功能树里** —— 既让测试看不见，也让「磁盘上的真实内容」这个标题名不副实；改成直接显示内容预览（短文件给全文）后转绿；⚠️ 同时把这条 job 从 `continue-on-error` 改成**阻塞**：只会「报告失败」的测试拦不住任何回归 |
 
 ---
 
@@ -171,7 +172,7 @@ Turn 循环与崩溃恢复、波次调度、计划引擎、审批代理、目标
 > `gh` 已登录（账号 `Sakura-Lhy0409`，含 `repo` + `workflow` scope），**推代码 = 跑 CI**，不需要再问。
 
 **路线 B（纯逻辑收尾，价值低）**：检索融合（RRF）、MCP 编解码、cassette 回放夹具。
-**路线 A 的实现顺序**：让工作区面板显示每个文件的前几行（模拟器测试最后一条断言就等它）→ `RuneStore`（GRDB + 事件落盘）→ `RuneNet`（URLSession + SSE + 出口代理）→ `RuneBench`（VFS 落地 + bookmark + CPython 垫片）→ `RuneTools`（86 个工具）→ `RuneCore`（接真实 IO）→ `RuneUI`（docs/08 那套交互）。**每层都要带测试**，因为验证只能走 CI。
+**路线 A 的实现顺序**：`RuneStore`（GRDB + 事件落盘）→ `RuneNet`（URLSession + SSE + 出口代理）→ `RuneBench`（VFS 落地 + bookmark + CPython 垫片）→ `RuneTools`（86 个工具）→ `RuneCore`（接真实 IO）→ `RuneUI`（docs/08 那套交互）。**每层都要带测试**，因为验证只能走 CI。
 
 ## 7. 已知陷阱（不要重复踩）
 
