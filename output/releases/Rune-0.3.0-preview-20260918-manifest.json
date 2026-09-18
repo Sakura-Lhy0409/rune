@@ -10,9 +10,9 @@
     "Payload/Rune.app/PlugIns/RuneWidgets.appex/Info.plist",
     "Payload/Rune.app/PlugIns/RuneShare.appex/Info.plist"
   ],
-  "commit": "2091735909c8",
+  "commit": "696612aba157",
   "branch": "main",
-  "worktree_clean": false,
+  "worktree_clean": true,
   "tests": {
     "swiftpm": null,
     "ui_full": 10,
