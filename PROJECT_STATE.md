@@ -21,10 +21,10 @@
 
 | 项 | 值 |
 |---|---|
-| **更新日期** | 2026-09-18（C55 JS 执行宿主） |
-| **当前阶段** | ▶️ **真实模型端到端跑通（C46）+ Git 引擎（C47–C54）+ JS 执行宿主（C55）** —— **1220 包测试全绿**。整项目未完工 |
+| **更新日期** | 2026-09-18（C56 run_javascript 接线） |
+| **当前阶段** | ▶️ **真实模型端到端跑通（C46）+ Git 引擎（C47–C54）+ JS 执行宿主（C55/C56）** —— **1229 包测试全绿**。整项目未完工 |
 | **当前里程碑** | ✅ **M0 出口标准·云端版（C46）** —— 真实模型（`gpt-5.5`）自主完成「读 → 改 → 复读确认」，途中经审批门与崩溃恢复校验。⚠️ 此前「C45 云推理被账户拒绝」是**选题错误造成的假结论** |
-| **已完成里程碑** | ✅ M0 全部（…→**258**）→ ✅ M1-1…M1-15（→877）→ ✅ M1-16…M1-23（→1032）→ ✅ **M1-24 模拟器冒烟** → ✅ **M1-25 交接 macOS** → ✅ **M1-26 RuneStore 跑绿（C39）** → ✅ **M1-27 RuneNet（C41）** → ✅ **M2-2 真实运行时接线（C45）** → ✅ **M0 云端出口验收（C46）** → ✅ **M3-1 Git 引擎（C47–C54）** → 🔨 **M3-2 执行宿主（C55 JS 已落地；WASM/CPython 待做）** |
+| **已完成里程碑** | ✅ M0 全部（…→**258**）→ ✅ M1-1…M1-15（→877）→ ✅ M1-16…M1-23（→1032）→ ✅ **M1-24 模拟器冒烟** → ✅ **M1-25 交接 macOS** → ✅ **M1-26 RuneStore 跑绿（C39）** → ✅ **M1-27 RuneNet（C41）** → ✅ **M2-2 真实运行时接线（C45）** → ✅ **M0 云端出口验收（C46）** → ✅ **M3-1 Git 引擎（C47–C54）** → 🔨 **M3-2 执行宿主（C55 宿主 + C56 工具接线；WASM/CPython 待做）** |
 | **阻塞项** | **云推理阻塞已解除（C46）**。仍缺：真机签名 + iOS 27 SDK、执行宿主（CPython/WASM/JSC）、Git 引擎、MCP、记忆检索/L3 压缩 —— 见 [docs/19 §5](docs/19-真实运行时与验收.md#5-距离整个项目完成的剩余项) |
 | **本机可验证范围** | ✅ **全部 11 个包**（含 GRDB / RuneStore）＋ **iOS App 构建与 .ipa 打包**（xcodebuild + xcodegen 已装）<br>✅ 可以交互式调试了（断点 / 模拟器 / Instruments）<br>❌ 真机签名装机仍需 Apple ID（免费 7 天） |
 
@@ -47,7 +47,7 @@ M4 端侧+记忆 / M5 上架准备   ░░░░░░░░░░░░░░�
 
 ### 包结构现状
 
-**包结构**：Kernel **1140** / Net **24** / Store **14** / Core **17** / **Bench 12** / Tools **7** / UI **6** 测试，共 **1220**。Core 有真实运行时、Tools 有 PDF/OCR/CSV、Bench 有 JS 宿主、Store schema v2 含原子检查点；其余 4 包（Context/Gateway/MCP/VM）仍是骨架。11 包可构建。
+**包结构**：Kernel **1140** / Net **24** / Store **14** / Core **18** / **Bench 20** / Tools **7** / UI **6** 测试，共 **1229**。Core 有真实运行时、Tools 有 PDF/OCR/CSV、Bench 有 JS 宿主、Store schema v2 含原子检查点；其余 4 包（Context/Gateway/MCP/VM）仍是骨架。11 包可构建。
 ---
 
 ## 3. 环境事实（本机 = **macOS**，C39 起）
@@ -63,8 +63,6 @@ M4 端侧+记忆 / M5 上架准备   ░░░░░░░░░░░░░░�
 | **CI** | <https://github.com/Sakura-Lhy0409/rune> · ✅ **C40 API 实测 `pull/push/admin=true`**；未执行推送，分支保护另行检查 |
 | **待外部条件** | 真机签名/设备 · iOS 27 SDK · PinAI 实际可用文本模型线路（现有 Key 可生图，3 个文本型号被上游拒绝） |
 
-> ⚠️ **在 macOS 上不要用 `Tools/rune.ps1`** —— 它是 Windows 专用（当时本机 SwiftPM 子进程层坏了才存在）。
-> E1–E8 那些坑**在 macOS 上不复现**；macOS 新增的坑是 **T57 / T58**（§7.2）。
 ---
 
 ## 4. 已确定的决策（不要重新讨论）
@@ -148,7 +146,8 @@ M4 端侧+记忆 / M5 上架准备   ░░░░░░░░░░░░░░�
 | C52 | ✅ **Git 读取路径：index + 三方状态 + revision + 历史** | `GitIndex.swift` · `GitWorktree.swift` · `GitHistory.swift` · `GitStatusTests` | `git_status`/`git_diff`/`git_log`/`git_show` 的数据面。⚠️ 核心是**三方比较**（HEAD ↔ index ↔ 工作区）：「文件被改了」与「改动已暂存」是两件独立的事，**分不清模型就会重复 add 或以为已提交**（夹具刻意造成三方各不相同，逐条钉死）。⚠️ 三处「不猜」：缩写 SHA **有歧义必须拒**（取第一个只在某个仓库某天给出错误提交，最难归因）；不认识的 revision 语法明确拒绝；根提交上 `HEAD~2` 报错而不是「就是它自己」。⚠️ 抓到自己一个真 bug（**T55 变体**）：扫描工作区时对文件也调 `resolvingSymlinksInPath()`，于是 `link.md -> README.md` 的相对路径被算成 `README.md` —— 链接自己消失还覆盖了真 README，`git_status` 报 ` D link.md`。**解析软链只该用于判断「在不在仓库里」，不能用于得出「它叫什么名字」**。另：判断文件类型不能用 `url.resourceValues`（会跟随链接），要用 `attributesOfItem` |
 | C53 | ✅ **统一 diff 渲染：自研行级 LCS + hunk 折叠** | `GitDiff.swift` · `GitDiffTests` | ⚠️ 两个刻意选择：**自己算 LCS**（零依赖承诺，只需行级不需 Myers 完整优化）；**给模型统一 diff 文本**而非自定义 JSON（它见过几十亿行统一 diff，先验远强于任何自定义结构）。⚠️ 钉住四件事：① **`@@` 行号必须精确**（模型照着它定位改文件，偏一行就**静默改错地方**）—— 专门测了「两处远隔 → 两个独立 hunk，各自行号正确」② **空侧起始行号按 git 约定写 0**（新文件 `@@ -0,0`；写 1 时文本「看起来没错」但任何按 git 约定解析的工具都会算偏一行 —— 这条是我写错被测试抓出来的）③ **CRLF 必须先归一化**（Swift 把 `\r\n` 当单个字素簇，不归一化则整文件被当成一行 → diff 变整文件替换，T8）④ **大文件降级必须明说**（LCS 是 O(n·m)，3000×3000 就 36MB；静默降级比降级本身更糟）。判据只有一处实现，生产消费共用 |
 | C54 | ✅⭐ **Git 只读工具接通模型** | `GitTools.swift` · `GitToolsTests` · `RuneCore/GitWorkspaceResolver` | 引擎到**模型可见能力**的最后一段：`git_status`/`git_diff`/`git_log`/`git_show` 接进 `AgentRuntime`。⚠️ ① **只接只读四个**（写操作风险级 modifying/dangerous，要单独的审批语义，不顺手加）② **错误返回 `.failure` 结果而非抛异常**（抛出去模型看不到原因与建议，只会换个参数再试，白烧 token）③ `staged` 决定比哪两侧（搞反会让模型提交错东西）。⚠️ **`GitWorkspaceResolver` 这道门**：`ModelWorkspace` 禁止模型碰 `.git`，而 Git 工具就是要读 `.git` —— 看似冲突实则不冲突（**入口不同**：文件工具拿任意路径必须挡，Git 工具拿仓库根自己去读）。解析器仍拒绝任何含 `.git`/`.rune`/`.ssh` **段**的路径（含中间段，防 `foo/.git/config`），并有测试往 `.git/config` 放假 token 断言它绝不进事件。⚠️ 接线测试**从 AgentRuntime 真的发一次调用**，断言模型收到的不是「未知工具」—— 项目在「模块全绿但没被调用」上栽过**四次** |
-| C55 | ✅ **JS 执行宿主（JavaScriptCore）—— 并诚实处理「杀不掉死循环」这个平台限制** | `RuneBench/JavaScriptHost.swift` · `JavaScriptHostTests` | 继 Git 之后的下一块平台能力。选 JSC 而非 CPython 的理由很实际：**JSC 是 iOS 自带的**（零包体代价），CPython 要背 1–2GB。⚠️ 放在 `RuneBench` 而非 `RuneKernel`：零依赖审计**禁止**内核 import `JavaScriptCore`（内核要能在 ubuntu 构建）。⚠️⚠️ **本层最需要说清的是它做不到什么**：设计文档写着"资源限额与强杀"，但 **JSC 没有公开的中断 API**（`JSContextGroupSetExecutionTimeLimit` 既不在公开头文件、**也不在动态库导出符号里**，已实测）—— 而用私有 API 会撞 App Store 红线（docs/11 的 2.5.2）。**所以没做「假装能强杀」的设计**，改成三层可兑现的防线：① **隔离**（每次执行独立 `JSVirtualMachine` + 独立线程，上一次的全局变量看不到）② **配额**（墙钟/输出字节/栈深）③ **挂死检测 + 拒绝**（超时即标"中毒"，后续调用直接拒绝并如实告知）—— 这比"继续接调用、每次再挂一个线程"安全得多，后者在手机上表现为 App 越来越卡直到被 jetsam 杀掉（T38）。⚠️ 沙箱边界**由测试守**（逐个断言 `fetch`/`require`/`setTimeout`/`process`/`fs` 是 undefined；破坏性验证：顺手注入一个 `fetch` → 立刻变红）。⚠️ 抓到自己一个真 bug：结果值里的 `"undefined"` 被当成"没有值"过滤掉，于是 **`typeof fetch` 的结果在输出里消失** —— 「值是 undefined」与「根本没有值」是两件事 |
+| C55 | ✅ **JS 执行宿主（JavaScriptCore）—— 并诚实处理「杀不掉死循环」这个平台限制** | `RuneBench/JavaScriptHost.swift` · `JavaScriptHostTests` | 继 Git 之后的下一块平台能力。选 JSC 而非 CPython 的理由很实际：**JSC 是 iOS 自带的**（零包体代价），CPython 要背 1–2GB。⚠️ 放在 `RuneBench` 而非 `RuneKernel`：零依赖审计**禁止**内核 import `JavaScriptCore`（内核要能在 ubuntu 构建）。⚠️⚠️ **本层最需要说清的是它做不到什么**：设计文档写着"资源限额与强杀"，但 **JSC 没有公开的中断 API**（`JSContextGroupSetExecutionTimeLimit` 既不在公开头文件、**也不在动态库导出符号里**，已实测）—— 而用私有 API 会撞 App Store 红线（docs/11 的 2.5.2）。**所以没做「假装能强杀」的设计**，改成三层可兑现的防线：① **隔离**（每次执行独立 `JSVirtualMachine` + 独立线程，上一次的全局变量看不到）② **配额**（墙钟/输出字节/栈深）③ **挂死检测 + 拒绝**（超时即标"中毒"，后续调用直接拒绝并如实告知）—— 这比"继续接调用、每次再挂一个线程"安全得多，后者在手机上表现为 App 越来越卡直到被 jetsam 杀掉（T38）。⚠️ 抓到自己一个真 bug：结果值里的 `"undefined"` 被当成"没有值"过滤掉，于是 **`typeof fetch` 的结果在输出里消失** —— 「值是 undefined」与「根本没有值」是两件事 |
+| C56 | ✅ **`run_javascript` 工具接线**（229 → 见 §2 计数） | `RuneBench/JavaScriptToolExecutor.swift` · `AgentRuntime` 路由 | 上轮落地的宿主这一步才真正"存在"。⚠️ 分两片提交（上片只动 RuneBench、本片动 Bench+Core），任何一半坏了都能一眼定位。要点：`timeout_sec` **收窄到 60 秒上限并说明被收窄**（静默收窄会让模型以为参数没生效、反复加大数值）；宿主中毒时**拒绝并说清原因**（别让模型以为"这次代码写错了"而反复重试）；大输出复用内核同一个 `OutputBudget` 走制品。⚠️⚠️ **主要收获是一个假绿测试（连错两版断言）→ 完整记录见 T63**：判据必须是**工具结果的 `status`**，不是「有没有发生过某件事」，也不是查输出文本（`argsPreview` 会回显参数）。破坏性验证（摘掉路由）现在能抓住 → 3 条红。⚠️ 另修上轮自己写的真问题：`GitToolExecutor` 兜底 `catch` 只报「失败了」、没给下一步 → 补上可执行建议 |
 ---
 
 ## 6. 下一步
@@ -167,7 +166,7 @@ M4 端侧+记忆 / M5 上架准备   ░░░░░░░░░░░░░░�
 **⚠️ 仍未验证的风险点**（不是「已完成」）：
 ① **L3 压缩**只有「该压到哪一级 + 产物格式 + 解析」，运行时那一次**付费调用**还没接；
 ② **Workflow 的 JSC 宿主**已就绪（C55 的 `JavaScriptHost`），但**脚本 → DAG 的编译层**还没接；
-③ 工具 **87 个注册 / 22 个已实现**（文件检索 15 + 文档 3 + Git 只读 4）；⚠️ `run_javascript` 的宿主已就绪（C55）但**工具接线还没做**；剩余最大一块是 **Git 写操作**、WASM/CPython 宿主、网络工具壳、iOS 原生（相册/日历/定位…）；
+③ 工具 **87 个注册 / 22 个已实现**（文件检索 15 + 文档 3 + Git 只读 4）；剩余最大一块是 **Git 写操作**、WASM/CPython 宿主、网络工具壳、iOS 原生（相册/日历/定位…）；
 ④ ~~C45 真实 PinAI 文本联调被上游拒绝~~ → **C46 已推翻**：那 3 个型号是**上游按模型逐个拒绝**（`not supported when using Codex with a ChatGPT account`），不是账户被封；`gpt-5.5`/`gpt-5.6`/`gpt-6-astra`/`codex-auto-review` 两个端点都通，且已跑通真实工具循环验收（见 §5 C46）。
 
 `RuneKernel`（49 源文件 / 1140 测试）覆盖：值类型与协议、补丁、检索、渠道网关、成本熔断、结构化压缩、出站构建与体检、模型调用客户端、策略引擎、Turn 循环与崩溃恢复、波次调度、计划/审批/目标、修正性重试与协议不变式、上下文装配、86 工具契约、技能库、Workflow、VFS、自研 shell、沙箱层 —— **并有端到端场景测试证明它们拼得起来**。
@@ -180,6 +179,7 @@ M4 端侧+记忆 / M5 上架准备   ░░░░░░░░░░░░░░�
 ## 7. 已知陷阱（不要重复踩）
 
 ### 7.1 本机环境陷阱
+> ⚠️ **E1–E8 全部是 Windows 时期的坑，在 macOS 上不复现**（保留给以后在 Windows 上接手的人）。macOS 新增的坑见 §7.2 的 **T57 / T58**。
 
 | # | 陷阱 | 现象 | 解法 |
 |---|---|---|---|
@@ -187,8 +187,7 @@ M4 端侧+记忆 / M5 上架准备   ░░░░░░░░░░░░░░�
 | E2 | **路径含中文导致 swiftc 打不开文件** | `error opening input file 'D:\??Ŀ\ios??agent\…'` | **走 ASCII junction**；脚本已自动处理；生成 .bat 时用 `chcp 65001` + UTF-8 |
 | E3 | **`link.exe` 不在 PATH** | manifest 编译失败 | 所有 swiftc 调用都要先 `call vcvars64.bat`（脚本已处理） |
 | E4/E5 | **本机跑测试 exe 的两个坑** | 报 `0xC0000135`（静默退出 = STATUS_DLL_NOT_FOUND）／`Testing.__swiftPMEntryPoint` **两个重载**报 ambiguous | PATH 必须含 **Swift Runtimes\6.3.3\usr\bin** 与 **Testing-6.3.3\usr\bin64**（是 `bin64`，不是 `x86_64`）；入口要显式类型标注 `let code: CInt = await ...` |
-| E7 | `data as [UInt8]` 在跨平台下不可靠 | `cannot convert value of type 'Data' to type '[UInt8]'` | 用 `data.withUnsafeBytes { update($0) }` |
-| E8 | 内联管道看编译输出会**超时**（`pwsh ... \| Select-String` 120s 无输出） | 命令超时、exit 1，但实际在编译 | 改成 `\| Out-File $env:TEMP\x.log` 再读，或 `run_in_background: true` |
+| E7/E8 | `data as [UInt8]` 跨平台不可靠（用 `data.withUnsafeBytes { update($0) }`）· 内联管道看编译输出会**超时**（`pwsh … \| Select-String` 120s 无输出，实际在编译） | 前者报 `cannot convert value of type 'Data' to type '[UInt8]'`；后者命令超时 exit 1 | 前者改用 `withUnsafeBytes`；后者改成 `\| Out-File $env:TEMP\x.log` 再读，或 `run_in_background: true` |
 
 
 ### 7.2 项目本身的陷阱（来自设计文档核实）
@@ -253,6 +252,7 @@ M4 端侧+记忆 / M5 上架准备   ░░░░░░░░░░░░░░�
 | **T60** | ⚠️ **`.gitignore` 不支持行尾注释，而写成行尾注释时它不报错、只是永远匹配不到**：`Apps/Rune/Info.plist          # 由 project.yml 的 info: 段生成` —— 整行（含 `#` 与后面的中文）都被当成模式，那条规则**形同虚设**，而它看上去"已经写了"。后果：XcodeGen 生成的 `Info.plist` 会被 `git add .` 悄悄收进仓库（生成物入库 → 下次生成冲突） | 注释**独占一行**（`.gitattributes` 同理）。⚠️ 判据不是"把 .gitignore 读一遍"，而是**实测**：`git check-ignore -v <路径>` **打出匹配到的行号**才算真的生效 —— C39 就是靠它发现这条规则一直没生效 |
 | **T61** | SwiftPM 消费包缓存可能仍引用依赖包已删除的 Placeholder.swift → missing inputs | 对报错的消费包运行 `swift package --package-path Packages/<包> clean` 后重建；只清构建缓存，不恢复占位代码。见 C41 日志 |
 | **T62** | ⚠️⚠️ **「外部依赖被拒」这类阻塞，最危险的失败模式是「抽样选错了样本」**：C45 只试了 **1 个**模型（`gpt-5.4-mini`）被拒，就写下"上游账户拒绝，真实云推理无法验收"并当作**阻塞项**传给下一轮。真相是上游**按模型逐个拒绝**（`not supported when using Codex with a ChatGPT account`），同一账户下 `gpt-5.5`/`gpt-5.6`/`gpt-6-astra` **两个端点都 HTTP 200**。⚠️ 代价极大：一个不存在的阻塞项让整条主线**停摆**，而它写在续接文档里，后来者会**直接相信、不再复测** | ① 判定"外部服务不可用"前，**样本量必须 ≥ 可见项数**（`GET /models` 里每一个都试）—— 本次列表 17 个模型只试 1 个就下结论，是**方法错误**不是运气差；② 阻塞项必须写**证据边界**（"我试了哪几个、各报什么错"），不写"账户被拒"这种无法反驳的结论；③ 接手继承来的阻塞项时，**第一件事是复现它**而不是绕开它 —— C46 几分钟就推翻了它。⚠️ 与 T48/T49/T54/T59/T60 同源（"看起来堵住"≠"真的堵住"），但**这一条代价最大**：别的只是少一层保护，这条让整个项目停住 |
+| **T63** | ⚠️⚠️ **一个「在成功与失败两种状态下都为真」的断言，比没有断言更危险**：C56 的接线测试连错两版 —— ① 第一版断言「`toolCallFinished` 恰好一条」，但**工具失败时也会发这个事件**（失败是另一个 kind，而"执行过一次"两者都满足）→ 把工具路由**整个摘掉**（模型收到"未知工具"）时，断言**照样绿**；② 第二版改成查输出文本里的关键字 → **仍然假绿**，因为 `argsPreview` 里**回显了模型传的参数**，那个字符串在"真的执行了"和"根本没接上"两种状态下都出现。⚠️ 它比"没有断言"更危险：**它看着像在检查**，于是没人再去手工验一遍 | ① 接线/可达性断言的判据必须是**可观测的行为差异**（工具结果的 `status`、发了几枪、打到哪个 URL），不是"有没有发生过某件事"；② **写完断言立刻做破坏性验证**：把被检查的那条路径摘掉，看它**是否真的变红** —— 本次就是这么连抓两版假绿的；③ 参数回显（`argsPreview`）**不是证据**，它证明"请求发出去了"，不证明"被谁处理了"。⚠️ 与 T54（零调用点）同源但形态不同：T54 是"没人调"，T63 是"检查调用的手段自己不会失败" |
 ---
 
 ## 8. 硬约束速查（写代码前先看这一节）
