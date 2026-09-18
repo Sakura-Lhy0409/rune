@@ -890,7 +890,8 @@ public enum TurnRunner {
                 ? .allowed
                 : evaluatePolicy(
                     spec: spec, paths: extraction.paths, access: callAccess,
-                    call: call, policy: deps.policy, context: deps.policyContext
+                    call: call, policy: deps.policy, context: deps.policyContext,
+                    now: deps.now()
                 )
 
             switch decision {
@@ -1445,7 +1446,8 @@ public enum TurnRunner {
         access: PathScope.Access,
         call: ToolCall,
         policy: PolicyEngine,
-        context: PolicyEngine.Context
+        context: PolicyEngine.Context,
+        now: Date
     ) -> CapabilityDecision {
         let targets: [VFSPath?] = paths.isEmpty ? [nil] : paths.map { Optional($0) }
         var worst: CapabilityDecision = .allowed
@@ -1453,7 +1455,8 @@ public enum TurnRunner {
         for path in targets {
             let decision = policy.evaluate(
                 PolicyEngine.Invocation(tool: spec, path: path, access: access),
-                context: context
+                context: context,
+                now: now
             )
             if rank(decision) > rank(worst) { worst = decision }
             if rank(worst) >= rank(.humanOnly(zone: .policyFile)) { break }  // 已是最严，无需继续

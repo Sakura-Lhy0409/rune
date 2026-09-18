@@ -173,12 +173,16 @@ public struct OpenAIChatDecoder: StreamDecoding {
 
         // 顶层 error（OpenRouter 的中途错误就是这个形状）
         if let error = json.value(at: ["error"]) {
+            // ⚠️ 分类必须看状态码：一律 `.transient` 会让"余额不足"被重试、被当成没出事
+            let status = error.value(at: ["code"])?.intValue
+            let raw = error.value(at: ["message"])?.stringValue ?? "未知错误"
+            let kind = ProviderError.classify(statusCode: status, message: raw)
             out.append(.providerError(ProviderError(
-                kind: .transient,
+                kind: kind,
                 providerID: "openai-compatible",
-                statusCode: error.value(at: ["code"])?.intValue,
-                message: error.value(at: ["message"])?.stringValue ?? "未知错误",
-                userFacingMessage: error.value(at: ["message"])?.stringValue ?? "渠道返回了错误"
+                statusCode: status,
+                message: raw,
+                userFacingMessage: ProviderError.userFacing(kind: kind, statusCode: status, raw: raw)
             )))
             state.didFinish = true
             return out
@@ -336,9 +340,13 @@ public struct OpenAIResponsesDecoder: StreamDecoding {
         case "response.failed", "error":
             let message = json.value(at: ["response", "error", "message"])?.stringValue
                 ?? json.value(at: ["message"])?.stringValue ?? "请求失败"
+            let status = json.value(at: ["response", "error", "code"])?.intValue
+                ?? json.value(at: ["status"])?.intValue
+            let kind = ProviderError.classify(statusCode: status, message: message)
             out.append(.providerError(ProviderError(
-                kind: .transient, providerID: "openai-responses",
-                message: message, userFacingMessage: message
+                kind: kind, providerID: "openai-responses", statusCode: status,
+                message: message,
+                userFacingMessage: ProviderError.userFacing(kind: kind, statusCode: status, raw: message)
             )))
             state.didFinish = true
 
@@ -448,10 +456,16 @@ public struct AnthropicDecoder: StreamDecoding {
 
         case "error":
             let message = json.value(at: ["error", "message"])?.stringValue ?? "Anthropic 返回错误"
+            // ⚠️ `overloaded_error` 是 529（可重试），但 `invalid_request_error`、鉴权类
+            //    绝不能一律当 transient —— 见 `ProviderError.classify` 的注释
+            let type = json.value(at: ["error", "type"])?.stringValue
+            let status = json.value(at: ["error", "status"])?.intValue
+                ?? ProviderError.statusCode(forAnthropicType: type)
+            let kind = ProviderError.classify(statusCode: status, message: message)
             out.append(.providerError(ProviderError(
-                kind: .transient, providerID: "anthropic",
-                statusCode: json.value(at: ["error", "type"])?.stringValue == "overloaded_error" ? 529 : nil,
-                message: message, userFacingMessage: message
+                kind: kind, providerID: "anthropic", statusCode: status,
+                message: message,
+                userFacingMessage: ProviderError.userFacing(kind: kind, statusCode: status, raw: message)
             )))
             state.didFinish = true
 

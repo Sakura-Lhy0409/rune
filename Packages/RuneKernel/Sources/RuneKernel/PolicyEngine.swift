@@ -363,7 +363,11 @@ public struct PolicyEngine: Sendable {
     public init() {}
 
     /// 作出判定。**每个分支都必须能解释**——用户随时可以问"为什么这次被拦了"。
-    public func evaluate(_ invocation: Invocation, context: Context) -> CapabilityDecision {
+    ///
+    /// - Parameter now: 判定时刻。**由调用方注入**（运行时传 `Dependencies.now`）——
+    ///   唯一会用到它的地方是能力令牌的有效期，而"过期"是一次不可逆的拒绝，
+    ///   读真实时钟会让同一份输入在不同时刻得到不同结论。
+    public func evaluate(_ invocation: Invocation, context: Context, now: Date = Date()) -> CapabilityDecision {
 
         // ---------- 第 0 层：人类专属区（最高优先级，任何来源都拒绝） ----------
         if invocation.tool.requirements.contains(.humanOnly) {
@@ -429,14 +433,20 @@ public struct PolicyEngine: Sendable {
         let isRuntimeMetadataRead = invocation.path?.mount == .sys && invocation.access == .readOnly
 
         if let token = context.token, !isRuntimeMetadataRead {
-            if token.isExpired() {
+            // ⚠️ `now` 必须由调用方注入，不能默认读 `Date()`：
+            //    过期判定是不可逆的**拒绝**，而"读真实时钟"意味着
+            //    ① 同一个 Turn 的行为随现实时间漂移（不可复现）
+            //    ② 任何把时钟冻结在过去的测试都会**静默失去全部授权** ——
+            //       结果看起来像"策略引擎坏了"，其实是测试时钟与真实时钟不一致。
+            //    本项目其它地方（`Dependencies.now`）一律注入时钟，这里之前漏了。
+            if token.isExpired(asOf: now) {
                 return .denied(
                     reason: "本次授权已过期（能力令牌在 Turn 结束后即失效）。",
                     suggestion: "请重新发起这一步，让用户重新授权。"
                 )
             }
             if let path = invocation.path {
-                if !token.authorizeFile(path, need: invocation.access) {
+                if !token.authorizeFile(path, need: invocation.access, asOf: now) {
                     return .denied(
                         reason: "\(path.description) 不在本次授权范围内（需要 \(invocation.access.rawValue) 权限）。",
                         suggestion: "如需访问，请在计划里说明用途；若属于新目录，请让用户用文件选择器授权。"
@@ -444,20 +454,21 @@ public struct PolicyEngine: Sendable {
                 }
             }
             if let host = invocation.egressHost {
-                if !token.authorizeEgress(host: host, method: invocation.egressMethod, bytes: invocation.egressBytes) {
+                if !token.authorizeEgress(host: host, method: invocation.egressMethod,
+                                          bytes: invocation.egressBytes, asOf: now) {
                     return .denied(
                         reason: "\(host) 不在本次授权的出口白名单内。",
                         suggestion: "请说明为什么要访问该域名；若确有必要，请让用户在设置里加入白名单。"
                     )
                 }
             }
-            if let runtime = invocation.runtime, !token.authorizeExec(runtime: runtime) {
+            if let runtime = invocation.runtime, !token.authorizeExec(runtime: runtime, asOf: now) {
                 return .denied(
                     reason: "本次授权未包含 \(runtime.displayName) 运行时。",
                     suggestion: "请说明为什么需要该运行时，或改用已授权的方式。"
                 )
             }
-            if let api = invocation.nativeAPI, !token.authorizeNative(api) {
+            if let api = invocation.nativeAPI, !token.authorizeNative(api, asOf: now) {
                 return .denied(
                     reason: "本次授权未包含「\(api.displayName)」能力。",
                     suggestion: "请说明用途，让用户单独授权该能力。"

@@ -369,4 +369,83 @@ public struct ProviderError: Sendable, Codable, Hashable, Error {
         case .configuration, .request, .unknown: return false
         }
     }
+
+    /// 从 HTTP 状态码把错误分类（**唯一**的分类入口）。
+    ///
+    /// ⚠️ 这个函数存在的理由是一次真实的失败：三个流式解码器原来都把**所有**中途错误
+    ///    写成 `kind: .transient` —— 而 `.transient` 是"值得重试"。
+    ///    后果有两层：
+    ///      ① 401/402/403（密钥错、余额不足）会被**反复重试**，
+    ///         正是 `RetryPolicy` 特意要避免的"重试只会让用户看到反复失败"；
+    ///      ② 更糟的是余额不足**不算失败**：TurnRunner 看见"可重试"就继续往下走，
+    ///         于是用户的钱包已经空了，Agent 却像什么都没发生一样报了个成功。
+    ///    docs/03 §7 说得很清楚：**分类的唯一目的是决定"谁来处理"** ——
+    ///    而"一律 transient"等于把这个设计整个抹掉。
+    ///
+    /// 判据按"谁能修"来分：
+    ///   * **用户能修**（密钥 / 余额 / 权限）→ `.configuration`，**停下去让他改**
+    ///   * **等一等就好**（限流 / 过载 / 5xx）→ `.transient`
+    ///   * **上下文太长** → `.contextOverflow`（先压缩再试一次）
+    ///   * **请求本身有问题** → `.request`
+    public static func classify(statusCode: Int?, message: String) -> Kind {
+        let lowered = message.lowercased()
+        // 消息里能看出是"上下文超限"的，优先按它归类（有些端点用 400 表达）
+        let overflowHints = ["context length", "context_length", "too long", "maximum context",
+                             "context window", "max_tokens", "prompt is too long", "上下文"]
+        if overflowHints.contains(where: { lowered.contains($0) }) { return .contextOverflow }
+
+        switch statusCode {
+        case .some(401), .some(402), .some(403):
+            return .configuration
+        case .some(408), .some(409), .some(429):
+            return .transient
+        case .some(let code) where code >= 500:
+            return .transient
+        case .some(let code) where code >= 400:
+            return .request
+        case .none:
+            // 没有状态码（部分中转站就是这样）→ 从文案里再认一次
+            let configHints = ["insufficient", "quota", "balance", "credit", "unauthorized",
+                               "invalid api key", "authentication", "余额", "欠费", "鉴权"]
+            return configHints.contains(where: { lowered.contains($0) }) ? .configuration : .unknown
+        case .some:
+            return .unknown
+        }
+    }
+
+    /// Anthropic 的错误 `type` → 等价的状态码。
+    ///
+    /// 为什么要有这张表：Anthropic 的错误体里**没有状态码**，只有 `type`
+    /// （`overloaded_error` / `invalid_request_error` / `authentication_error` …）。
+    /// 不映射的话就只能靠"一律 transient"糊过去，而那会把
+    /// 「密钥错了」和「服务过载」当成同一件事 —— 前者重试一万次也不会好。
+    public static func statusCode(forAnthropicType type: String?) -> Int? {
+        switch type {
+        case "overloaded_error":        return 529
+        case "rate_limit_error":        return 429
+        case "authentication_error":    return 401
+        case "permission_error":        return 403
+        case "not_found_error":         return 404
+        case "request_too_large":       return 413
+        case "invalid_request_error":   return 400
+        case "api_error":               return 500
+        default:                        return nil
+        }
+    }
+
+    /// 按分类生成一句**面向用户**的话（金额/余额类要把"去充值"说出来）
+    public static func userFacing(kind: Kind, statusCode: Int?, raw: String) -> String {
+        switch kind {
+        case .configuration where statusCode == 402:
+            return "这个渠道的余额不足了：\(raw)\n\n请充值或换一个渠道，然后重新发起这一步。"
+        case .configuration:
+            return "渠道拒绝了这次请求（密钥或权限问题）：\(raw)\n\n请检查渠道配置里的密钥，然后重新发起这一步。"
+        case .transient:
+            return "渠道暂时不可用（限流或过载）：\(raw)\n\n稍等一下再试。"
+        case .contextOverflow:
+            return "上下文太长了：\(raw)\n\n可以先压缩历史，再继续这一步。"
+        default:
+            return raw
+        }
+    }
 }
